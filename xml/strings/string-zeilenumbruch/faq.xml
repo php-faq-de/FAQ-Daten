@@ -1,0 +1,7 @@
+<Faq alias="string-zeilenumbruch" author="Johannes Frömter">
+  <Question>Wie kann ich Zeilenumbrüche verarbeiten?</Question>
+  <Keywords>String, Zeilenumbruch, Zeile, Enter</Keywords>
+  <Editors>
+    <Editor name="Niels Braczek" lastedit="2008-08-12 00:00:00" />
+  </Editors>
+</Faq>

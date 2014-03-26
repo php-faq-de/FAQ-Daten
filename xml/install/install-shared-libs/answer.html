@@ -1,0 +1,143 @@
+<p>
+Übersetzt man PHP selbst und bindet dabei auch selbst installierte Module und Bibliotheken mit
+ein, kann es vorkommen, dass das Modul vom Apache nicht geladen wird, weil diese externen
+Bibliotheken nicht gefunden werden. Im folgenden wird erläutert, was es mit diesen Bibliotheken
+auf sich hat.
+</p>
+
+<pre>
+kris@valiant:~ > ldd /bin/ls
+        libc.so.6 => /lib/libc.so.6 (0x4001f000)
+        /lib/ld-linux.so.2 => /lib/ld-linux.so.2 (0x40000000)
+</pre>
+
+<p>
+Damit man das Kommando <tt>ls</tt> ausführen kann, müssen die Dateien <tt>ld-linux.so.2</tt> und
+<tt>libc.so.6</tt> vorhanden sein. Diese Dateien sucht mein System in den in <tt>/etc/ld.so.conf</tt>
+genannten Verzeichnissen. Damit dies schneller geht, legt das Kommando <tt>ldconfig</tt> einen Cache
+der Bibliotheken in diesen Verzeichnissen an. Mit diesen Caches wird ein Durchsuchen aller
+Verzeichnisse in <tt>/etc/ld.so.conf</tt> beim Start von Programmen vermieden. Stattdessen stehen in
+<tt>/etc/ld.so.cache</tt> Paare von Bibliotheksname und Pfadname, die sofort zugreifbar sind.
+</p>
+
+<p>
+Ein laufendes <tt>ls</tt> hat also <tt>/lib/ld-linux.so.2</tt> und
+<tt>/lib/libc.so.6</tt> geladen. Das kann man auch nachsehen:
+</p>
+
+<pre>
+kris@valiant:~ > sleep 3600 &
+[1] 27091
+kris@valiant:~ > cat /proc/27091/maps
+08048000-0804a000 r-xp 00000000 08:15 63535      /bin/sleep
+0804a000-0804b000 rw-p 00001000 08:15 63535      /bin/sleep
+40000000-40013000 r-xp 00000000 08:15 71682      /lib/ld-2.1.3.so
+40013000-40014000 rw-p 00012000 08:15 71682      /lib/ld-2.1.3.so
+4001e000-4001f000 rw-p 00000000 00:00 0
+4001f000-400f9000 r-xp 00000000 08:15 71690      /lib/libc.so.6
+400f9000-400fe000 rw-p 000d9000 08:15 71690      /lib/libc.so.6
+400fe000-40101000 rw-p 00000000 00:00 0
+bfffe000-c0000000 rwxp fffff000 00:00 0
+kris@valiant:~ > ldd `which sleep`
+        libc.so.6 => /lib/libc.so.6 (0x4001f000)
+        /lib/ld-linux.so.2 => /lib/ld-linux.so.2 (0x40000000)
+kris@valiant:~ > ls -l /lib/ld-linux.so.2
+lrwxrwxrwx   1 root     root       11 Apr 11 18:16 /lib/ld-linux.so.2
+                                                   -> ld-2.1.3.so
+kris@valiant:~ > kill %1
+kris@valiant:~ >
+[1]+  Terminated              sleep 3600
+</pre>
+
+<p>
+Tatsächlich gibt die Ausgabe der Memory-Map für den Prozess 27091 (sleep) an, dass <tt>/lib/ld-2.1.3.so</tt> aka
+<tt>/lib/ld-linux.so.2</tt> und <tt>/lib/libc.so.6</tt> geladen sind - man kann deutlich die schreibgeschützten
+Code-Segmente (<tt>r-xp</tt>) und die überschreibbaren, nicht ausführbaren Datensegmente (<tt>rw-p</tt>) dieser
+Bibliotheken erkennen.
+</p>
+
+<p>
+Will ich nun mein PHP4 starten, dann wird
+</p>
+
+<pre>
+kris@valiant:~ > ldd /usr/lib/apache/libphp4.so
+        libgdbm.so.2 => /usr/lib/libgdbm.so.2 (0x4015b000)
+        libpam.so.0 => /lib/libpam.so.0 (0x40162000)
+        librecode.so.0 => /usr/lib/librecode.so.0 (0x4016a000)
+        libdl.so.2 => /lib/libdl.so.2 (0x401e6000)
+        libsnmp.so => /usr/lib/libsnmp.so (0x401ea000)
+        libpdf.so.0 => /usr/lib/libpdf.so.0 (0x40225000)
+        libtiff.so.3 => /usr/lib/libtiff.so.3 (0x4024e000)
+        libldap.so.1 => /usr/lib/libldap.so.1 (0x40291000)
+        libttf.so.2 => /usr/lib/libttf.so.2 (0x402a6000)
+        libjpeg.so.62 => /usr/lib/libjpeg.so.62 (0x402cf000)
+        libpng.so.2 => /usr/lib/libpng.so.2 (0x402ee000)
+        libz.so.1 => /usr/lib/libz.so.1 (0x4030b000)
+        libresolv.so.2 => /lib/libresolv.so.2 (0x4031b000)
+        libm.so.6 => /lib/libm.so.6 (0x4032a000)
+        libcrypt.so.1 => /lib/libcrypt.so.1 (0x40347000)
+        libnsl.so.1 => /lib/libnsl.so.1 (0x40374000)
+        liblber.so.1 => /usr/lib/liblber.so.1 (0x4038b000)
+        libc.so.6 => /lib/libc.so.6 (0x40390000)
+        /lib/ld-linux.so.2 => /lib/ld-linux.so.2 (0x80000000)
+</pre>
+
+<p>
+geladen, d.h. ein
+</p>
+
+<pre>
+kris@valiant:~ > grep LoadModule /etc/httpd/httpd.conf | grep php
+LoadModule php4_module /usr/lib/apache/libphp4.so
+</pre>
+
+<p>
+in der Apache-Konfiguration kann nur dann gelingen, wenn all die o.a. Bibliotheken vorhanden sind. Sind
+sie es nicht, schlägt das Laden des Moduls fehl:
+</p>
+
+<pre>
+kris@valiant:~ > su -
+Password:
+valiant:~ # mv /usr/lib/libpng.so.2 /usr/lib/libpng.so.2.offline
+valiant:~ # ldd /usr/lib/apache/libphp4.so
+        libgdbm.so.2 => /usr/lib/libgdbm.so.2 (0x4015b000)
+        libpam.so.0 => /lib/libpam.so.0 (0x40162000)
+        librecode.so.0 => /usr/lib/librecode.so.0 (0x4016a000)
+        libdl.so.2 => /lib/libdl.so.2 (0x401e6000)
+        libsnmp.so => /usr/lib/libsnmp.so (0x401ea000)
+        libpdf.so.0 => /usr/lib/libpdf.so.0 (0x40225000)
+        libtiff.so.3 => /usr/lib/libtiff.so.3 (0x4024e000)
+        libldap.so.1 => /usr/lib/libldap.so.1 (0x40291000)
+        libttf.so.2 => /usr/lib/libttf.so.2 (0x402a6000)
+        libjpeg.so.62 => /usr/lib/libjpeg.so.62 (0x402cf000)
+
+<<<     libpng.so.2 => not found >>>
+
+        libz.so.1 => /usr/lib/libz.so.1 (0x402ee000)
+        libresolv.so.2 => /lib/libresolv.so.2 (0x402fe000)
+        libm.so.6 => /lib/libm.so.6 (0x4030d000)
+        libcrypt.so.1 => /lib/libcrypt.so.1 (0x4032a000)
+        libnsl.so.1 => /lib/libnsl.so.1 (0x40357000)
+        liblber.so.1 => /usr/lib/liblber.so.1 (0x4036e000)
+        libc.so.6 => /lib/libc.so.6 (0x40373000)
+        /lib/ld-linux.so.2 => /lib/ld-linux.so.2 (0x80000000)
+valiant:~ # mv /usr/lib/libpng.so.2.offline /usr/lib/libpng.so.2
+valiant:~ # logout
+kris@valiant:~ >
+</pre>
+
+<p>
+<em>Note:</em> Do not try this at home, kids! Wenn man das mit der falschen Bibliothek macht (ld-linux
+und libc sind gute Kandidaten), kann man schon mal die Rettungs-CD rauskramen und die Termine am
+Nachmittag absagen.
+</p>
+
+<p>
+Wenn die fehlende Bibliothek also nicht installiert ist, kann es nicht gehen. Wenn die fehlende
+Bibliothek nicht gefunden wird, dann ist <tt>/etc/ld.so.conf</tt> unvollständig und muss ergänzt
+werden. Wenn die fehlende Bibliothek nicht gefunden wird, aber installiert ist und in einem in
+<tt>/etc/ld.so.conf</tt> genannten Pfad installiert ist, dann muss <tt>ldconfig</tt> neu aufgerufen
+werden, damit <tt>/etc/ld.so.cache</tt> neu gebaut wird.
+</p>

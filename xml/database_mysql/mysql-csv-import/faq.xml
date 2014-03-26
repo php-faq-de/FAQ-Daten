@@ -1,0 +1,7 @@
+<Faq alias="mysql-csv-import" author="Kristian Köhntopp">
+  <Question>Wie kann ich eine CSV-Datei in MySQL importieren?</Question>
+  <Keywords>SQL, Datenbank, MySQL, CSV, Import, infile</Keywords>
+  <Editors>
+    <Editor name="Niels Braczek" lastedit="2008-08-12 00:00:00" />
+  </Editors>
+</Faq>

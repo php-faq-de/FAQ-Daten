@@ -1,0 +1,4 @@
+<Faq alias="web-server-client" author="Clemens Koppensteiner">
+  <Question>Was passiert, wenn ich eine PHP-Seite aufrufe?</Question>
+  <Keywords>Server, Client, Browser, Internet, HTTP, .php</Keywords>
+</Faq>

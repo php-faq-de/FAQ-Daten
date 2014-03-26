@@ -1,0 +1,38 @@
+<p>
+Wenn GET-Variablen Zeichen enthalten bzw. zur Laufzeit enthalten
+können, die nicht im Klartext in URLs auftauchen dürfen (Umlaute,
+Leerzeichen, Prozentzeichen etc.), muss man die Variablen mit
+<a href="http://www.php3.de/urlencode">urlencode()</a> codieren, bevor man sie an die URL
+anhängt. Um die Decodierung muss man sich im Normalfall nicht kümmern,
+das geschieht automatisch. Mit folgendem Script lassen sich mehrere
+Werte - übergeben als array(Variable =&gt; Wert) - bequem codieren:
+</p>
+
+<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+<span style="color: #000000; font-weight: bold;">function</span> req_url<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$url</span>, <span style="color: #0000ff;">$para</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+  <span style="color: #0000ff;">$sep</span> = <span style="color: #ff0000;">&quot;?&quot;</span>;
+&nbsp;
+  <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span>! <a href="http://www.php3.de/is_array"><span style="color: #000066;">is_array</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$para</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>
+    <span style="color: #b1b100;">return</span> <span style="color: #0000ff;">$url</span>;
+&nbsp;
+  <span style="color: #b1b100;">foreach</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$para</span> <span style="color: #b1b100;">as</span> <span style="color: #0000ff;">$k</span> =&gt; <span style="color: #0000ff;">$v</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+    <span style="color: #0000ff;">$url</span> .= <a href="http://www.php3.de/sprintf"><span style="color: #000066;">sprintf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;%s%s=%s&quot;</span>,
+      <span style="color: #0000ff;">$sep</span>,
+      <span style="color: #0000ff;">$k</span>,
+      <a href="http://www.php3.de/urlencode"><span style="color: #000066;">urlencode</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$v</span><span style="color: #000000;">&#41;</span>
+    <span style="color: #000000;">&#41;</span>;
+    <span style="color: #0000ff;">$sep</span> = <span style="color: #ff0000;">&quot;&amp;amp;&quot;</span>;
+  <span style="color: #000000;">&#125;</span>
+&nbsp;
+  <span style="color: #b1b100;">return</span> <span style="color: #0000ff;">$url</span>;
+<span style="color: #000000;">&#125;</span>
+&nbsp;
+<span style="color: #0000ff;">$p</span> = <a href="http://www.php3.de/array"><span style="color: #000066;">array</span></a><span style="color: #000000;">&#40;</span>
+  <span style="color: #ff0000;">&quot;a&quot;</span> =&gt; <span style="color: #ff0000;">&quot;b&quot;</span>,
+  <span style="color: #ff0000;">&quot;c&quot;</span> =&gt; <span style="color: #ff0000;">&quot;d&quot;</span>
+<span style="color: #000000;">&#41;</span>;
+&nbsp;
+<span style="color: #0000ff;">$url</span> = req_url<span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;beispiel.php&quot;</span>, <span style="color: #0000ff;">$p</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000; font-weight: bold;">?&gt;</span>
+Klicke auf das &lt;a href=<span style="color: #ff0000;">&quot;&lt;?php print $url ?&gt;&quot;</span>&gt;Beispiel&lt;/a&gt;.</pre>
+

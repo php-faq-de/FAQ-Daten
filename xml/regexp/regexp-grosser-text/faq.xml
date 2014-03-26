@@ -1,0 +1,4 @@
+<Faq alias="regexp-grosser-text" author="Kristian Köhntopp">
+  <Question>Wie isoliere ich Suchstrings aus einem größeren Text?</Question>
+  <Keywords>Tag, Grabbing, mehrzeilig, Modifier</Keywords>
+</Faq>

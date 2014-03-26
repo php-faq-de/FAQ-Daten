@@ -1,0 +1,47 @@
+<p>
+	Viele Browser-User haben in ihrem Browser die Cookies aus diversen
+	Gründen	deaktiviert, oder lassen sich jeden Cookie bestätigen. Sollte
+	ein Cookie auf dem lokalen Rechnersystem nicht gesetzt werden können,
+	muss ein Ersatzmechanismus her - ein sog. Fallback. In diesem Fall
+	ist der Fallback (Rückfall / Atavismus)	eine Ersatzmethode, die
+	die Übergabe der Session-ID an ein Folgescript ohne	Cookies erlaubt.
+</p>
+
+<p>
+	Man kann den Fallback dadurch realisieren, dass man dem Folgescript
+	die Session-ID quasi "manuell" bei jedem GET
+</p>
+
+<pre>&lt;a href=&quot;test.session.php?&lt;?php echo SID; ?&gt;&quot;&gt;</pre>
+
+<p>
+	oder POST - bei Formularen - mittels
+</p>
+
+<pre>&lt;input type  = &quot;hidden&quot;
+       name  = &quot;&lt;?php echo session_name(); ?&gt;&quot;
+       value = &quot;&lt;?php echo session_id(); ?&gt;&quot;&gt;</pre>
+
+<p>
+	übergibt. <em>ACHTUNG:</em> Das bedeutet, dass <em>jeder</em> Link und
+	<em>jedes</em> Formular	<em>innerhalb</em> einer Website mit einem
+	zusätzlichen Parameter versehen werden muss!	Wird die Session-ID
+	nicht korrekt übergeben, wird ein Folge-Script nicht auf die
+	Sessiondaten zugreifen können - diese Daten sind für dieses
+	Script "verloren".
+</p>
+
+<p>
+	PHP4 kann man auch mit dem <tt>--enable-trans-sid</tt>-Parameter
+	kompilieren. Dann hat dies zufolge, dass, wenn der Client (Browser)
+	keine Cookies annehmen kann/will, alle relativen Links einer Webpage
+	mit dem zusätzlichen <tt>SessionName=Session-ID</tt>
+	Parameter ergänzt werden. Dies klingt zunächst gut, aber man sollte
+	beachten, dass durch den zusätzlichen Aufwand, den der PHP-Parser
+	leisten muss, sich diese Technik nicht für High-Traffic-Websites
+	oder Server mit vielen Vhosts eignet. Auch wenn man Projekte
+	realisiert, die auf anderen Webservern laufen sollen,
+	kann man nicht davon ausgehen, dass das betreffende PHP mit
+	<tt>--enable-trans-sid</tt> kompiliert worden ist.
+</p>
+

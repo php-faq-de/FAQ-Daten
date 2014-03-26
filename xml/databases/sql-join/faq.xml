@@ -1,0 +1,7 @@
+<Faq alias="sql-join" author="Kristian Köhntopp">
+  <Question>Wie kann ich zwei Tabellen miteinander verknüpfen?</Question>
+  <Keywords>SQL, Datenbank, Tabelle, join, primary key, foreign key</Keywords>
+  <Editors>
+    <Editor name="Niels Braczek" lastedit="2008-08-12 00:00:00" />
+  </Editors>
+</Faq>

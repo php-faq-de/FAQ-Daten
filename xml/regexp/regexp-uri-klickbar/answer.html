@@ -1,0 +1,20 @@
+<p>
+Besten Dank an <a href="mailto:subjective@subjective.de">Thomas Weinert</a>, von
+dem die ursprüngliche RegExp stammt.
+</p>
+
+<p>
+Folgender regulärer Ausdruck ersetzt alle normalen URIs,
+das heißt zum Beispiel http://www.phpcenter.de/, news:de.comp.lang.php,
+mailto:bjoern@thinkphp.de oder ftp://ftp.suse.com/ durch HTML-Code,
+damit diese URIs für den Benutzer klickbar werden.
+</p>
+
+<pre><span style="color: #808080; font-style: italic;">/**
+* replace URIs with appropriate HTML code to be clickable.
+*/</span>
+<span style="color: #000000; font-weight: bold;">function</span> replace_uri<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$str</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+  <span style="color: #0000ff;">$pattern</span> = <span style="color: #ff0000;">'#(^|[^<span style="color: #000099; font-weight: bold;">\"</span>=]{1})(http://|ftp://|mailto:|news:)([^<span style="color: #000099; font-weight: bold;">\s</span>&lt;&gt;]+)([<span style="color: #000099; font-weight: bold;">\s</span><span style="color: #000099; font-weight: bold;">\n</span>&lt;&gt;]|$)#sm'</span>;
+  <span style="color: #b1b100;">return</span> <a href="http://www.php3.de/preg_replace"><span style="color: #000066;">preg_replace</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$pattern</span>,<span style="color: #ff0000;">&quot;<span style="color: #000099; font-weight: bold;">\\</span>1&lt;a href=<span style="color: #000099; font-weight: bold;">\&quot;</span><span style="color: #000099; font-weight: bold;">\\</span>2<span style="color: #000099; font-weight: bold;">\\</span>3<span style="color: #000099; font-weight: bold;">\&quot;</span>&gt;&lt;u&gt;<span style="color: #000099; font-weight: bold;">\\</span>2<span style="color: #000099; font-weight: bold;">\\</span>3&lt;/u&gt;&lt;/a&gt;<span style="color: #000099; font-weight: bold;">\\</span>4&quot;</span>,<span style="color: #0000ff;">$str</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000;">&#125;</span></pre>
+

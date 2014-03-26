@@ -1,0 +1,34 @@
+<p>
+Am günstigsten und sichersten versendet man Mail an viele
+Empfänger, indem man eine spezialisierte Software dafür
+verwendet. Empfehlenswert sind Mailinglisten-Server wie
+<a href="http://www.greatcircle.com/majordomo/">majordomo</a>,
+<a href="http://www.ezmlm.org/">ezmlm</a> oder
+<a href="http://www.ecartis.org/">Ecartis</a>.
+</p>
+
+<p>
+Alternativ kann man sich mit einer deutlich primitiveren Lösung
+in PHP behelfen, indem man gemäß den Beispielen oben zusätzliche
+Headerzeilen mit <tt>Bcc</tt>-Empfängern erzeugt. Auf diese Weise
+generiert man eine einzelne Mail an viele Empfänger, die vom
+Mailer sehr effizient verteilt werden kann. Gleichzeitig
+vermeidet man durch die Verwendung von <em>blind carbon copy</em>
+(BCC)-Empfängern, dass die Empfänger im Kopf der Mail mit
+aufgeführt werden und auf diese Weise ein Monsterheader
+entsteht.
+</p>
+
+<pre><span style="color: #808080; font-style: italic;"># Empfaengerliste</span>
+  <span style="color: #0000ff;">$empfaenger</span> = <a href="http://www.php3.de/array"><span style="color: #000066;">array</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;a@example.com&quot;</span>, <span style="color: #ff0000;">&quot;b@example.com&quot;</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+  <span style="color: #808080; font-style: italic;"># Bcc generieren</span>
+  <span style="color: #b1b100;">foreach</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$empfaenger</span> <span style="color: #b1b100;">as</span> <span style="color: #0000ff;">$k</span> =&gt; <span style="color: #0000ff;">$v</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+    <span style="color: #0000ff;">$bcc</span> .= <span style="color: #ff0000;">&quot;Bcc: $v<span style="color: #000099; font-weight: bold;">\r</span><span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
+  <span style="color: #000000;">&#125;</span>
+&nbsp;
+  <a href="http://www.php3.de/mail"><span style="color: #000066;">mail</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;em@pfaeng.er&quot;</span>,
+     <span style="color: #ff0000;">&quot;Testmail&quot;</span>,
+     <span style="color: #ff0000;">&quot;Dies ist nur eine Testnachricht.&quot;</span>,
+     <span style="color: #0000ff;">$bcc</span><span style="color: #000000;">&#41;</span>;</pre>
+

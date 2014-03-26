@@ -1,0 +1,82 @@
+<p>
+SMTP ist das <em>Simple</em> <em>Mail</em> <em>Transport</em> <em>Protocol</em>,
+das Protokoll, das im Internet verwendet wird, um Mail bei einem
+Mailserver einzuliefern und Mail zwischen zwei Mailservern
+auszutauschen. SMTP ist ein textorientiertes Protokoll, das auf
+dem TCP-Port 25 abgewickelt wird. Daher kann man es mit dem
+Kommando <tt>telnet</tt> leicht simulieren und debuggen.
+</p>
+
+<pre>
+kris@valiant:~ &gt; telnet mail 25
+Trying 193.102.57.5...
+Connected to white.koehntopp.de.
+Escape character is '^]'.
+220 white.koehntopp.de ESMTP Sendmail 8.9.3/8.9.3/SuSE Linux 8.9.3-0.1
+HELO valiant.koehntopp.de
+250 white.koehntopp.de Hello valiant.koehntopp.de [193.102.57.3], [..]
+MAIL FROM: kris@koehntopp.de
+250 kris@koehntopp.de... Sender ok
+RCPT TO: kris@koehntopp.de
+250 kris@koehntopp.de... Recipient ok
+DATA
+354 Enter mail, end with "." on a line by itself
+From: ab@sen.der
+To: Mailingliste der Empfaenger &lt;in@vali.de&gt;
+Subject: Testmail
+
+Text der Nachricht
+.
+250 LAA08243 Message accepted for delivery
+QUIT
+221 white.koehntopp.de closing connection
+Connection closed by foreign host.
+</pre>
+
+<p>
+Nachdem die Verbindung mit dem empfangenden Mailer hergestellt
+worden ist, identifiziert sich der absendende Rechner mit dem
+Kommando <tt>HELO</tt>. Falls dieser Rechner berechtigt ist,
+überhaupt Mail einzuliefern, antwortet der empfangende Rechner
+mit einem Statuscode (hier: 250) und einer Textmeldung.
+</p>
+
+<p>
+Der Absender nennt jetzt den tatsächlichen Absender (<tt>MAIL
+FROM</tt>) und den tatsächlichen Empfänger (<tt>RCPT TO</tt>, "Receipt
+to") der Mail. Nach dem Kommando <tt>DATA</tt> beginnt die
+Übertragung der eigentlichen Mailnachricht, die mit einem
+einfachen Punkt abgeschlossen wird (das Protokoll verlangt, dass
+Punkte am Anfang einer Zeile, die Teil der Nachricht sind,
+verdoppelt werden).
+</p>
+
+<p>
+Die Absender und Empfänger im Text der Mail sind bedeutungslos
+und werden vom Mailer nicht weiter ausgewertet: Entscheidend
+sind sie nur ganz am Anfang, wenn die Mail auf den Weg gebracht
+wird, ähnlich wie bei einem Brief, der in einen Umschlag getütet
+wird. Von Bedeutung sind nur die Absender und Empfänger im
+<tt>MAIL FROM</tt> und <tt>RCPT TO</tt>-Dialog. Diese beiden Adressen
+nennt man Envelope-From und Envelope-To, nach den Anschriften,
+die außen auf einem Briefumschlag (Envelope) stehen und für die
+Zustellung wichtig sind.
+</p>
+
+<p>
+Dies bewirkt zum Beispiel, dass die Empfänger einer Mailingliste
+nicht alle in der <tt>To:</tt>-Zeile des Headers aufgelistet sind:
+Im <tt>To:</tt> steht nur der Name der Liste, der Listenroboter
+(Mailexploder) expandiert diesen Namen jedoch zu einer Liste der
+Empfänger im Envelope. Der Envelope-From einer Nachricht ist
+nach der Auslieferung einer Mail in eine Mailbox als
+<tt>From</tt>-Header (From-Space im Gegensatz zu From-Doppelpunkt,
+dem Body-From) ganz am Anfang der Nachricht enthalten. Der
+Envelope-To ist verschwunden, weil er nicht mehr gebraucht wird
+- daher ist es nicht möglich, eine einzelne POP3-Mailbox nach
+dem Download mit Fetchmail oder anderen Werkzeugen korrekt im
+Hause weiter aufzuteilen: Der tatsächliche Empfänger steht nicht
+mehr zur Verfügung und die Body-To-Zeilen liefern nur
+Anhaltspunkte.
+</p>
+

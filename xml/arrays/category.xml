@@ -1,0 +1,12 @@
+<Category alias="arrays" name="Arrays und Arrayvariablen" keywords="PHP, Usenet, FAQ, dclp">
+  <!--Die FAQs sind hier noch mal redundant aufgelistet um die Reihenfolge vorzugeben.-->
+  <Faqs>
+    <Faq alias="arrays-einfuegen" />
+    <Faq alias="arrays-aufzaehlen" />
+    <Faq alias="arrays-loeschen" />
+    <Faq alias="arrays-mehrdimensional" />
+    <Faq alias="arrays-sortieren" />
+    <Faq alias="arrays-duplikate" />
+    <Faq alias="arrays-persistent" />
+  </Faqs>
+</Category>

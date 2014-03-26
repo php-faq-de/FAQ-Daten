@@ -1,0 +1,4 @@
+<Faq alias="fehler-maximum-time" author="Kristian Köhntopp">
+  <Question>Fatal error: Maximum execution time exceeded</Question>
+  <Keywords>Dauer, Abbruch, Maximum, Zeit, Ausfuehrung, set_time_limit, safe_mode</Keywords>
+</Faq>

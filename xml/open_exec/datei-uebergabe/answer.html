@@ -1,0 +1,30 @@
+<p>
+Gar nicht. Mittels <a href="http://www.php3.de/include">include()</a> oder
+<a href="http://www.php3.de/require">require()</a> in ein PHP-Programm importierte
+Scriptteile "erben" automatisch die Variablen, die an dieser Stelle
+des Scriptes vorhanden sind (siehe auch:
+<a href="http://www.php3.de/manual/language.variables.scope.php">Geltungsbereich von Variablen</a> im Manual).
+Einleuchtend wird dies, wenn man sich vergegenwärtigt, dass durch
+include() der einzubindende Scriptteil quasi an die Stelle des
+Befehls kopiert wird.
+</p>
+
+<pre><span style="color: #808080; font-style: italic;">// $var soll an script.php übergeben werden</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">// Funktioniert nicht</span>
+<span style="color: #b1b100;">include</span><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'script.php?var=test'</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;">// So geht das</span>
+<span style="color: #0000ff;">$_GET</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'var'</span><span style="color: #000000;">&#93;</span> = <span style="color: #ff0000;">'test'</span>; <span style="color: #808080; font-style: italic;">// oder bei altem script.php $var = 'test';</span>
+<span style="color: #b1b100;">include</span><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'script.php'</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;">// So geht's bei externen Dateien</span>
+<span style="color: #b1b100;">include</span><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'http://example.com/script.php?var=test'</span><span style="color: #000000;">&#41;</span>;</pre>
+
+<p>
+Versucht man bei <em>lokalen</em> Dateien eine Variablenübergabe
+wie bei HTTP (erstes Beispiel), meldet PHP, dass es die Datei
+<tt>script.php?var=test</tt> nicht finden kann - was auch völlig
+korrekt ist, da es eine Datei mit diesem Namen nicht gibt ...
+</p>
+

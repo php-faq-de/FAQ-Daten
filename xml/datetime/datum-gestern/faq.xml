@@ -1,0 +1,4 @@
+<Faq alias="datum-gestern" author="Kristian Köhntopp">
+  <Question>Wie kann ich das Datum des Vortages bestimmen?</Question>
+  <Keywords>Gestern, date, mktime</Keywords>
+</Faq>

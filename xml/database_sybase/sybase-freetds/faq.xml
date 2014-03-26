@@ -1,0 +1,7 @@
+<Faq alias="sybase-freetds" author="Timm Friebe">
+  <Question>FreeTDS</Question>
+  <Keywords>Sybase, Datenbank, TDS, FreeTDS, Tabular Data Streams</Keywords>
+  <Editors>
+    <Editor name="Niels Braczek" lastedit="2008-08-12 00:00:00" />
+  </Editors>
+</Faq>

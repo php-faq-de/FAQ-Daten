@@ -1,0 +1,22 @@
+<p>
+  Kommentare und Einrückungen schaden <em>nicht</em> der Performance!
+</p>
+<p>
+  PHP4 überspringt alle Kommentare und überflüssigen Leerzeichen (zum Beispiel
+  Einrückungsleerzeichen) bereits beim Parsen des Programms. Das geht selbst
+  bei extrem umfangreichen Kommentaren vernachlässigbar schnell.
+</p>
+<p>
+  Zur Laufzeit macht es für PHP dann keinen Unterschied mehr, ob im Quelltext
+  Kommentare standen oder nicht. Selbst in Schleifen wirken sich Kommentare
+  nicht nachteilig auf die Performance aus.
+</p>
+<p>
+  Der minimale Zeitverlust beim Programmstart ist kein Grund, auf eine gute
+  Kommentierung zu verzichten. Wer sein Script performanter machen möchte,
+  sollte sich eher darauf konzentrieren, Schleifen zu optimieren, bevorzugt
+  Variablen als Referenz zu übergeben oder schnellere Algorithmen zu finden.
+  Mit einem PHP-Profiler lassen sich besonders zeitintensive Programmabschnitte
+  schnell ausfindig machen.
+</p>
+

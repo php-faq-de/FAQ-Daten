@@ -1,0 +1,24 @@
+<p>
+In der folgenden Funktion <tt>bgcolor()</tt> kann man beliebig
+viele Farben im Array <tt>$col</tt> definieren, die bei jedem
+Aufruf der Reihe nach berücksichtigt werden. Optional kann die
+Funktion mit einem Integer-Wert aufgerufen werden
+(<tt>bgcolor(n)</tt>), um immer <tt>n</tt> aufeinander folgende
+Zeilen derselben Farbe zu erhalten.
+</p>
+
+<pre><span style="color: #000000; font-weight: bold;">function</span> bgcolor<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$row</span> = <span style="color: #cc66cc;">1</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+    <a href="http://www.php3.de/static"><span style="color: #000066;">static</span></a> <span style="color: #0000ff;">$i</span>;
+    <a href="http://www.php3.de/static"><span style="color: #000066;">static</span></a> <span style="color: #0000ff;">$col</span> = <a href="http://www.php3.de/array"><span style="color: #000066;">array</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'#FFDDDD'</span>,
+                        <span style="color: #ff0000;">'#DDFFDD'</span>,
+                        <span style="color: #ff0000;">'#DDDDFF'</span>
+                       <span style="color: #000000;">&#41;</span>; <span style="color: #808080; font-style: italic;">// etc.</span>
+    <span style="color: #0000ff;">$bg</span> = <span style="color: #0000ff;">$col</span><span style="color: #000000;">&#91;</span><span style="color: #000000;">&#40;</span>int<span style="color: #000000;">&#41;</span><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$i</span> + .<span style="color: #cc66cc;">00000001</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#93;</span>;
+    <span style="color: #0000ff;">$i</span> += <span style="color: #cc66cc;">1</span> / <span style="color: #0000ff;">$row</span>;
+    <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$i</span> &gt;= <a href="http://www.php3.de/count"><span style="color: #000066;">count</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$col</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span> <span style="color: #0000ff;">$i</span> = <span style="color: #cc66cc;">0</span>;
+    <span style="color: #b1b100;">return</span> <span style="color: #0000ff;">$bg</span>;
+<span style="color: #000000;">&#125;</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">// Ausgabe einer Tabellenzeile (in einer Schleife):</span>
+<a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;&lt;tr bgcolor='%s'&gt;&lt;td&gt;...&lt;/td&gt;&lt;/tr&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>, bgcolor<span style="color: #000000;">&#40;</span><span style="color: #cc66cc;">2</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>;</pre>
+

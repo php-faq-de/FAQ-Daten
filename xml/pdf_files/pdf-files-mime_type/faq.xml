@@ -1,0 +1,4 @@
+<Faq alias="pdf-files-mime_type" author="Kai Schröder">
+  <Question>Welchen MIME-Type muss ich für PDF-Dateien verwenden?</Question>
+  <Keywords>PDF, mime, header, Content-Type</Keywords>
+</Faq>

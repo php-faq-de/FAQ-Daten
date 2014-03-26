@@ -1,0 +1,4 @@
+<Faq alias="phpmyadmin-timestamp" author="Tobias Ratschiller">
+  <Question>Wieso werden TIMESTAMP-Felder nicht auf die aktuelle Zeit gesetzt, wenn ich eine neue Zeile einfüge?</Question>
+  <Keywords>MySQL, phpMyAdmin, timestamp, NULL, leer</Keywords>
+</Faq>

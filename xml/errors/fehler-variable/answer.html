@@ -1,0 +1,71 @@
+<h2>Ursachen</h2>
+
+<p>
+Möglicherweise erscheint diese Meldung bei Scripten, die bisher unter
+älteren PHP-Versionen liefen und jetzt unter PHP 4.1.0 oder neuer
+eingesetzt werden. Grund dafür ist häufig das ab dieser Version
+defaultmäßig strenger eingestellte
+<a href="http://de.php.net/manual/en/ref.errorfunc.php#ini.error-reporting">error_reporting</a>
+in der <tt>php.ini</tt>.
+</p>
+
+<p>
+Der Hinweis wird ausgegeben, weil mit einer nicht definierten
+Variablen hantiert wird, d. h. der Name der Variablen existiert nicht,
+ein konkreter Wert ist folglich auch nicht verfügbar.
+Durch die automatische Typ-Konvertierung wird der angenommene "Wert"
+<tt>NULL</tt> dann zwar in einen passenden Datentyp verwandelt - das
+ist aber nur ein "Notbehelf", damit das Script weiterlaufen kann.
+</p>
+
+<p>
+Wenn PHP mit <a href="http://de3.php.net/manual/en/ini.php">register_globals</a> <tt>= off</tt>
+konfiguriert ist, dann werden Variablen aus Formularen (oder aus dem
+Query-String im URL) nicht automatisch als <tt>$variable</tt>
+verfügbar gemacht. Diese Trennung zwischen Script-Variablen und
+Input-Variablen hat den Vorteil, dass nicht durch Aufruf von z. B.
+<tt>script.php?login=true</tt> die Script-interne Variable
+<tt>$login</tt> überschrieben wird.
+</p>
+
+<h2>Abhilfen</h2>
+
+<p>
+Handelt es sich um Variablen, die per GET oder POST übergeben werden,
+und PHP läuft mit der Einstellung <tt>register_globals = off</tt>,
+dann ist es aus Sicherheitsgründen zu empfehlen, das Script an die
+neuen Variablennamen anzupassen (<tt>$HTTP_GET_VARS/$HTTP_POST_VARS</tt>
+bzw. <tt>$_GET/$_POST</tt>, siehe:
+<a href="http://de.php.net/release_4_1_0.php">Release Notes zu PHP 4.1.0</a>).
+</p>
+
+<p>
+Handelt es sich um Script-interne Variablen, sollten diese vor der
+Verwendung definiert werden. Bevor man also <tt>$foo .= "bla";</tt>
+schreibt, um an <tt>$foo</tt> etwas anzuhängen, ist ein
+<tt>$foo = "";</tt> nötig, um die Variable zu definieren und ihr
+einen leeren String zuzuweisen.
+</p>
+
+<p>
+Möchte man optionale Variablen (z. B. Checkboxen aus einem Formular)
+abprüfen, sollte man <a href="http://www.php3.de/isset">isset()</a> verwenden, um auf
+die Existenz der Variablen zu testen:
+</p>
+
+<pre><span style="color: #808080; font-style: italic;">// Nicht empfohlene Schreibweisen</span>
+<span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$checkbox</span><span style="color: #000000;">&#41;</span>
+<span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$var</span> == <span style="color: #ff0000;">'wert'</span><span style="color: #000000;">&#41;</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">// Empfohlene Schreibweisen</span>
+<span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><a href="http://www.php3.de/isset"><span style="color: #000066;">isset</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$_POST</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'checkbox'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>
+<span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><a href="http://www.php3.de/isset"><span style="color: #000066;">isset</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$_POST</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'var'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span> &amp;&amp; <span style="color: #0000ff;">$_POST</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'var'</span><span style="color: #000000;">&#93;</span> == <span style="color: #ff0000;">'wert'</span><span style="color: #000000;">&#41;</span></pre>
+
+<p>
+Es ist zwar auch möglich, PHP auf einen niedrigeren Error reporting
+level zu konfigurieren (<tt>error_reporting = E_ALL &amp;
+~E_NOTICE;</tt>), aber das ist auf Dauer nicht empfehlenswert, da es
+nur die Ausgabe der Warnung unterdrückt, nicht aber die eigentliche
+Ursache des Problems beseitigt.
+</p>
+

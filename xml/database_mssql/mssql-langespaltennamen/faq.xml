@@ -1,0 +1,7 @@
+<Faq alias="mssql-langespaltennamen" author="Frank Staude">
+  <Question>Mein Spaltenname ist länger als 32 Zeichen und mssql_fetch_array liefert einen leeren String</Question>
+  <Keywords>SQL, Datenbank, MSSQL, Spaltenname, mssql_fetch_array</Keywords>
+  <Editors>
+    <Editor name="Niels Braczek" lastedit="2008-08-12 00:00:00" />
+  </Editors>
+</Faq>

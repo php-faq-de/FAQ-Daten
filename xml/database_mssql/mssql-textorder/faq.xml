@@ -1,0 +1,7 @@
+<Faq alias="mssql-textorder" author="Frank Staude">
+  <Question>Nach Textfeldern sortieren</Question>
+  <Keywords>SQL, Datenbank, MSSQL, Text, Sortorder</Keywords>
+  <Editors>
+    <Editor name="Niels Braczek" lastedit="2008-08-12 00:00:00" />
+  </Editors>
+</Faq>

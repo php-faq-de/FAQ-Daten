@@ -1,0 +1,4 @@
+<Faq alias="oracle-unsupported" author="Anton Bangratz">
+  <Question>Unix: Call to unsupported or undefined function: OCILogon()</Question>
+  <Keywords>Oracle, Datenbank, kompilieren, Unterstuetzung, Funktion, OCI, Client, Fehler</Keywords>
+</Faq>

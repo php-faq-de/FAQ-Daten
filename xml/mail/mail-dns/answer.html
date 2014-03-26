@@ -1,0 +1,124 @@
+<p>
+Das Domain Name System ist eine verteilte Datenbank, die Namen
+in Domainform (<tt>ein.wort.mit.punkten.darin</tt>) beliebige
+getypte textuelle Information zuordnen kann. Man kann dem Domain
+Name System Fragen stellen, die die Form <tt>(name, typ)</tt> haben
+und bekommt dann einen oder mehrere Ressource Records des
+passenden Typs als Antwort.
+</p>
+
+<p>
+Wichtige Ressource-Records sind A- und AAAA-Records, die die
+IP-Nummern von Rechnern darstellen, A-Records für IPv4-Adressen
+und AAAA-Records für IPv6-Adressen. Außerdem sind für die
+Mailzustellung MX-Records besonders wichtig, weil sie den für
+den Mailempfang zuständigen Rechner bezeichnen. Ebenfalls häufig
+findet man PTR-Records (Umwandlung von IP-Nummern zurück in
+Namen) und NS-Records (Finden von zuständigen Nameservern).
+</p>
+
+<p>
+Mit Hilfe des Werkzeuges <tt>nslookup</tt> kann man in Unix und
+Windows Anfragen an das DNS stellen, außerdem kann man bequemer
+das Unix-Programm <tt>dig</tt> verwenden.
+</p>
+
+<p>
+Ein Mailer wie das Unix-Programm <tt>sendmail</tt> richtet sich bei
+der Mailzustellung nach den MX-Records (MX steht für <em>mail
+exchanger</em>) einer Domain.
+</p>
+
+<pre>
+kris@valiant:~ &gt; nslookup
+Default Server:  nuki.netuse.de
+Address:  193.98.110.1
+
+&gt; set type=mx
+&gt; php.net.
+Server:  nuki.netuse.de
+Address:  193.98.110.1
+
+Non-authoritative answer:
+php.net mail exchanger = 10 synacor1.php.net.
+
+Authoritative answers can be found from:
+php.net nameserver = ns2.easydns.com.
+php.net nameserver = remote1.easydns.com.
+php.net nameserver = remote2.easydns.com.
+php.net nameserver = ns1.easydns.com.
+synacor1.php.net        internet address = 208.210.50.162
+ns1.easydns.com internet address = 216.220.40.243
+ns2.easydns.com internet address = 216.220.40.244
+remote1.easydns.com     internet address = 64.39.29.212
+&gt; ^D
+kris@valiant:~ &gt;
+
+kris@valiant:~ &gt; dig php.net mx
+
+; &lt;&lt;&gt;&gt; DiG 9.1.3 &lt;&lt;&gt;&gt; php.net mx
+;; global options:  printcmd
+;; Got answer:
+;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 864
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 4, ADDITIONAL: 4
+
+;; QUESTION SECTION:
+;php.net.                       IN      MX
+
+;; ANSWER SECTION:
+php.net.                21358   IN      MX      10 synacor1.php.net.
+
+;; AUTHORITY SECTION:
+php.net.                21358   IN      NS      ns2.easydns.com.
+php.net.                21358   IN      NS      remote1.easydns.com.
+php.net.                21358   IN      NS      remote2.easydns.com.
+php.net.                21358   IN      NS      ns1.easydns.com.
+
+;; ADDITIONAL SECTION:
+synacor1.php.net.       21358   IN      A       208.210.50.162
+ns1.easydns.com.        140984  IN      A       216.220.40.243
+ns2.easydns.com.        140984  IN      A       216.220.40.244
+remote1.easydns.com.    140984  IN      A       64.39.29.212
+
+;; Query time: 23 msec
+;; SERVER: 127.0.0.1#53(127.0.0.1)
+;; WHEN: Wed Apr 24 19:09:47 2002
+;; MSG SIZE  rcvd: 205
+</pre>
+
+<p>
+Im Beispiel mit <tt>nslookup</tt>, das so unter Unix und unter
+Windows NT funktioniert, kann man sehen, dass der lokale Domain
+Name Server als Datenquelle verwendet wird. Durch das Kommando
+<tt>set type=mx</tt> legen wir fest, dass wir Informationen über
+MX-Records haben möchten. Durch einfaches Eingeben eines Namens
+(hier: <tt>php.net</tt>) wird die Anfrage abgesendet und wir
+erhalten zwei Sorten von Informationen:
+</p>
+
+<ul>
+<li><p>
+Der lokale Server hat uns die nicht-abschließende
+Information geliefert, dass Mail an php.net an den Rechner
+synacor1.php.net ausgeliefert werden soll. Wenn wir also eine
+Mailzustellung an eine Adresse der Form <tt>bla@php.net</tt>
+vornehmen sollen, müssen wir uns mit <tt>synacor1.php.net</tt>, Port 25
+verbinden und die Mail dort abliefern.
+</p></li>
+
+<li><p>Diese Information ist jedoch nicht-abschließend, weil der
+lokale Nameserver nicht Eigentümer der Domain php.net ist. Wenn
+wir abschließende Information wünschen, müßten wir uns an einen
+der vier definitiven Nameserver für die Domain wenden, die uns
+genannt werden: <tt>ns1.easydns.com</tt>, <tt>ns2.easydns.com</tt>,
+<tt>remote1.easydns.com</tt> oder <tt>remote2.easydns.com</tt> und die
+Frage dort noch einmal stellen. Die Adressen dieser Server
+werden uns auch gleich mitgeliefert.
+</p></li>
+</ul>
+
+<p>
+Die Ausgabe von <tt>dig</tt> liefert diese Information noch einmal,
+nur in besser lesbarer und übersichtlicherer Form.
+</p>
+

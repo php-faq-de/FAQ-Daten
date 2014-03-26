@@ -1,0 +1,4 @@
+<Faq alias="fehler-mysql-result2" author="Johannes Frömter">
+  <Question>0 is not a MySQL result index</Question>
+  <Keywords>Fehler, SQL, Datenbank, MySQL, result index, mysql_query, mysql_fetch_array, mysql_fetch_row, mysql_error, mysql_errno</Keywords>
+</Faq>

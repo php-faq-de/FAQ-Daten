@@ -1,0 +1,7 @@
+<Faq alias="php-editoren" author="Matthias P. Wuerfl">
+  <Question>Welche Editoren sind für PHP geeignet?</Question>
+  <Keywords>Editor, Entwicklungsumgebung, Windows, Unix, Mac, Syntax, Projekt, Verwaltung, HTML, PHP, Debugger</Keywords>
+  <Editors>
+    <Editor name="Ulf Kadner" lastedit="2014-03-26 00:00:00" />
+  </Editors>
+</Faq>

@@ -1,0 +1,33 @@
+<p>
+PHP für Windows ist modular aufgebaut, einige Funktionen (z. B. die
+<a href="http://www.php3.de/ref.imap.php">IMAP</a>-, die
+<a href="http://www.php3.de/ref.ldap.php">LDAP</a>- oder die
+<a href="http://www.php3.de/ref.image.php">Grafik</a>-Funktionen)
+sind standardmäßig nicht vorhanden. Die verschiedenen Module liegen
+als DLL-Dateien vor und müssen geladen
+werden. Dies kann teilweise zur Laufzeit mit Hilfe der Funktion
+<a href="http://www.php3.de/dl">dl()</a> geschehen, oder aber durch die passenden
+Einträge im Abschnitt "Dynamic Extensions" in der
+<tt>php.ini</tt> (siehe auch: ""<a class="faq" href="http://php-faq.de/q-php-ini.html">Wo finde ich die php.ini?</a>""):
+</p>
+
+<pre class="ini"><span style="color: #666666; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #666666; font-style: italic;">; Dynamic Extensions ;</span>
+<span style="color: #666666; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #666666; font-style: italic;">; directory in which the loadable extensions (modules) reside</span>
+<span style="color: #000099;">extension_dir   </span>=<span style="color: #660066;">  d:\php4\extensions\</span>
+&nbsp;
+<span style="color: #666666; font-style: italic;">; if you wish to have an extension loaded automatically, use the</span>
+<span style="color: #666666; font-style: italic;">; following syntax:  extension=modulename.extension</span>
+<span style="color: #000099;">extension</span>=<span style="color: #660066;">php_imap.dll</span></pre>
+
+<p>
+Wird PHP als Webserver-Modul eingesetzt, muss der Webserver neu
+gestartet werden, um die Änderungen in der <tt>php.ini</tt>
+aktiv werden zu lassen. Sowohl in der Distribution von
+<a href="http://www.php4win.com/">php4win</a>
+als auch in den Windows-Binaries von
+<a href="http://de.php.net/downloads.php">PHP.net</a>
+sind zahlreiche Extensions enthalten.
+</p>
+

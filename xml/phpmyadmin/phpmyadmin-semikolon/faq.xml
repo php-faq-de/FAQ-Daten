@@ -1,0 +1,4 @@
+<Faq alias="phpmyadmin-semikolon" author="Tobias Ratschiller">
+  <Question>Wieso kann ich in phpMyAdmin mehrere durch Semikolon getrennte SQL-Statements ausführen, nicht aber mit normalen PHP-Funktionen?</Question>
+  <Keywords>MySQL, phpMyAdmin, SQL, Semikolon</Keywords>
+</Faq>

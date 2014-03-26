@@ -1,0 +1,179 @@
+<p>
+Man kann dies mit Hilfe einer JOIN-Operation tun. Diese ist im
+<a href="http://www.mysql.com/documentation/mysql/bychapter/manual_Reference.html#JOIN">Kapitel 7.20</a>
+des <a href="http://www.mysql.com/documentation/">MySQL-Handbuches</a>
+beschrieben.
+</p>
+
+<p>
+Wenn die Tabellen <tt>artikel</tt> und <tt>email</tt> als
+Primärschlüsselfelder <tt>artikel.KundenID</tt> und <tt>email.eid</tt>
+haben und <tt>artikel</tt> mit <tt>email</tt> über den Fremdschlüssel
+<tt>email.KundenID</tt> verknüpft ist, dann kann man einen Equi-JOIN
+mit dem folgenden Statement formulieren:
+</p>
+
+<pre>
+mysql&gt; select * from artikel;
++----------+
+| KundenID |
++----------+
+|        1 |
+|        2 |
+|        3 |
++----------+
+3 rows in set (0.00 sec)
+
+mysql&gt; select * from email;
++-----+----------+
+| eid | KundenID |
++-----+----------+
+|   1 |        1 |
+|   2 |        2 |
+|   3 |        3 |
++-----+----------+
+3 rows in set (0.00 sec)
+
+mysql&gt; select a.KundenID as aid,
+     &gt;        e.eid as eid,
+     &gt;        e.KundenID as e_aid
+     &gt;   from artikel as a,
+     &gt;     email as e
+     &gt; where a.KundenID = e.KundenID;
++-----+-----+-------+
+| aid | eid | e_aid |
++-----+-----+-------+
+|   1 |   1 |     1 |
+|   2 |   2 |     2 |
+|   3 |   3 |     3 |
++-----+-----+-------+
+3 rows in set (0.01 sec)
+</pre>
+
+<p>
+In keinem Fall können in den herangejointen Tabellen
+Nullwerte enthalten sein.
+</p>
+
+<p>
+Diese Operation ist dann effizient, wenn <tt>a.KundenID</tt> und
+<tt>t.KundenID</tt> denselben Typ haben, und auf auf <tt>a.KundenID</tt>
+und <tt>t.KundenID</tt> ein UNIQUE INDEX oder ein INDEX liegen. In
+MySQL ist ein PRIMARY KEY immer auch ein UNIQUE INDEX.
+</p>
+
+<p>
+Wenn man optionale Werte hat, dann kann man keinen symmetrischen
+Join (Equijoin) mehr machen, sondern muss einen asymmetrischen
+Join (Left Join) durchführen. Dadurch können auf der rechten
+Seite Nullwerte entstehen:
+</p>
+
+<pre>
+mysql&gt; select * from telefon;
++-----+----------+
+| tid | KundenID |
++-----+----------+
+|   1 |        1 |
+|   2 |        3 |
++-----+----------+
+2 rows in set (0.00 sec)
+</pre>
+
+<p>
+Equijoin (es fehlt KundenID 2, weil keine
+Telefonnummer definiert ist):
+</p>
+
+<pre>
+mysql&gt; select a.KundenID as aid,
+     &gt;        e.eid as eid,
+     &gt;        e.KundenID as e_aid,
+     &gt;        t.tid as tid,
+     &gt;        t.KundenID as t_aid
+     &gt;   from artikel as a,
+     &gt;        email as e,
+     &gt;        telefon as t
+     &gt; where a.KundenID = e.KundenID
+     &gt; and a.KundenID = t.KundenID;
++-----+-----+-------+-----+-------+
+| aid | eid | e_aid | tid | t_aid |
++-----+-----+-------+-----+-------+
+|   1 |   1 |     1 |   1 |     1 |
+|   3 |   3 |     3 |   2 |     3 |
++-----+-----+-------+-----+-------+
+2 rows in set (0.02 sec)
+</pre>
+
+<p>Left Join (generiert Nullwerte):</p>
+
+<pre>
+mysql&gt; select a.KundenID as aid,
+     &gt;        t.tid as tid,
+     &gt;        t.KundenID as t_aid
+     &gt;   from artikel as a left join telefon as t
+     &gt;        on a.KundenID = t.KundenID;
++-----+------+-------+
+| aid | tid  | t_aid |
++-----+------+-------+
+|   1 |    1 |     1 |
+|   2 | NULL |  NULL |
+|   3 |    2 |     3 |
++-----+------+-------+
+3 rows in set (0.00 sec)
+</pre>
+
+<p>Unterschiedliche Counts:</p>
+
+<pre>
+mysql&gt; select count(a.KundenID) as acount,
+     &gt;        count(t.KundenID) as tcount
+     &gt;   from artikel as a left join telefon as t
+     &gt;        on a.KundenID = t.KundenID;
++--------+--------+
+| acount | tcount |
++--------+--------+
+|      3 |      2 |
++--------+--------+
+1 row in set (0.01 sec)
+</pre>
+
+<p>
+Die Tabelle <tt>a</tt> ist hier die aufspannende Tabelle, die
+Tabelle <tt>t</tt> ist die aufgespannte Tabelle. An den Stellen, an
+denen <tt>t</tt> keine zu <tt>a</tt> passenden Werte hat, tauchen
+Nullwerte in <tt>t</tt> auf. Da die Relation nun nicht mehr
+symmetrisch ist, muss man zwischen <tt>a.KundenID</tt> und
+<tt>t.KundenID</tt> unterscheiden. Insbesondere sind die
+<tt>count()</tt>-Werte beider Spalten unterschiedlich.
+</p>
+
+<p>
+Da <tt>a.KundenID</tt> und <tt>t.KundenID</tt> unterschiedlich sind, muss
+man auch zwingend mit qualifizierten Namen arbeiten und kann
+nicht mehr einfach <tt>KundenID</tt> schreiben.
+</p>
+
+<p>
+Ein gemischter Join verwendet Equijoins und Left Joins, wie es
+gerade passt:
+</p>
+
+<pre>
+mysql&gt; select a.KundenID as aid,
+     &gt;        e.eid as eid, e.KundenID as e_aid,
+     &gt;        t.tid as tid, t.KundenID as t_aid
+     &gt;   from artikel as a,
+     &gt;        email as e left join telefon as t
+     &gt;        on a.KundenID = t.KundenID
+     &gt;  where a.KundenID = e.KundenID;
++-----+-----+-------+------+-------+
+| aid | eid | e_aid | tid  | t_aid |
++-----+-----+-------+------+-------+
+|   1 |   1 |     1 |    1 |     1 |
+|   2 |   2 |     2 | NULL |  NULL |
+|   3 |   3 |     3 |    2 |     3 |
++-----+-----+-------+------+-------+
+3 rows in set (0.01 sec)
+</pre>
+

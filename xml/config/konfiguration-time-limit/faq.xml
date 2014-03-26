@@ -1,0 +1,4 @@
+<Faq alias="konfiguration-time-limit" author="Kristian Köhntopp">
+  <Question>Warum funktioniert set_time_limit() nicht wie angepriesen?</Question>
+  <Keywords>set_time_limit, Dauer, Abbruch, Maximum, Zeit, Ausfuehrung</Keywords>
+</Faq>

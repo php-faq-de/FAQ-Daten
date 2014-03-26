@@ -1,0 +1,97 @@
+<p>
+Wenn CGI-PHP eingesetzt wird, bekommt der Interpreter den Pfad zum
+PHP-Script in der CGI-Variablen <tt>$_SERVER['PATH_INFO']</tt> übergeben. Der
+Aufruf eines PHP-Scriptes erfolgt also mit Hilfe einer URL der Form
+</p>
+
+<pre>
+http://www.example.com/cgi-bin/php/somedir/somescript.php
+</pre>
+
+<p>
+Der PHP-Interpreter wird dabei unter der URL
+<tt>http://www.example.com/cgi-bin/php</tt> erreicht und die
+Variable <tt>$_SERVER['PATH_INFO']</tt> erhält den Wert
+<tt>/somedir/somescript.php</tt>. Der PHP-Interpreter greift
+sich den Wert der Konfigurationsvariablen
+<a href="http://de3.php.net/manual/en/ini.php">document_root</a> aus der <tt>php.ini</tt> und setzt
+den Dateinamen des Scriptes aus dieser Variablen und
+<tt>$_SERVER['PATH_INFO']</tt> zusammen.
+</p>
+
+<p>
+Dies ist natürlich gefährlich, denn ein böswillger Anwender
+könnte jetzt anfangen, Scripte wie folgt aufzurufen:
+</p>
+
+<pre>
+http://www.example.com/cgi-bin/php/../../../../../etc/passwd
+</pre>
+
+<p>
+Der PHP-Interpreter würde nun anfangen, die passwd-Datei als
+Script zu laden und auszuführen, d.h. die Passwort-Datei
+auszugeben. Auf diese Weise kann man prinzipiell auf jede Datei
+im System zugreifen, sofern diese durch den Benutzer lesbar ist,
+unter dessen UID der Interpreter abläuft.
+</p>
+
+<p>
+Übersetzt man CGI-PHP mit der Konfigurationsoption
+<tt>enable-force-cgi-redirect</tt>, funktioniert dies nicht mehr.
+PHP startet in diesem Fall nur noch, wenn die
+CGI-Umgebungsvariable <tt>$_SERVER['REDIRECT_STATUS']</tt> gesetzt ist
+(der Wert der Variablen ist egal). Der Apache Server setzt diese
+Variable, wenn der Zugriff auf das CGI-Verzeichnis die Folge
+eines eines serverinternen Redirect ist. Üblicherweise
+konfiguriert man seinen Webserver dann so:
+</p>
+
+<pre class="ini">Action     php-script /cgi-bin/php
+  AddHandler php-script .php</pre>
+
+<p>
+Die Direktive <tt>AddHandler</tt> bildet die Endung <tt>.php</tt> auf
+den Handler <tt>php-script</tt> (der Name ist frei wählbar, solange
+er eindeutig ist) ab. Die Direktive <tt>Action</tt> deklariert eine
+externe Aktion, die durch ein CGI-Programm realisiert wird. In
+Kombination bewirken beide Direktiven, dass alle Zugriffe auf
+Dateien mit der Endung <tt>.php</tt> auf das CGI-Programm
+<tt>/cgi-bin/php</tt> redirected werden. Dies erzeugt als
+Nebenwirkung genau die benötigte
+<tt>$_SERVER['REDIRECT_STATUS']</tt>-Variable.
+</p>
+
+<p>
+Die beiden Apache-Konfigurationsdirektiven bewirken, dass Dateien
+mit der Endung <tt>.php</tt> im PHP-Interpreter landen und die
+Abfrage auf die <tt>$_SERVER['REDIRECT_STATUS']</tt>-Variable bewirkt,
+dass ein direkter Aufruf des PHP-Interpreters mit einem
+manipulierten <tt>$_SERVER['PATH_INFO']</tt> nicht mehr möglich ist. In
+Kombination stellen beide Mechanismen ein vernünftiges Maß an
+Sicherheit her.
+</p>
+
+<p>
+PHP berechnet nun den Wert der Variablen <tt>$_SERVER['PHP_SELF']</tt>
+auf andere Weise, falls <tt>enable-force-cgi-redirect</tt> in Kraft
+ist: In diesem Fall enthält die Variable wirklich nur den Namen
+des Scriptes ohne den Pfad zum PHP-Interpreter. Ist der
+Interpreter jedoch ohne diese Einstellung übersetzt worden, ist
+der Name des PHP-Interpreters Bestandteil von
+<tt>$_SERVER['PHP_SELF']</tt>. Dies ist ein Hinweis auf ein schweres
+Sicherheitsproblem. Der Interpreter sollte ausgetauscht werden
+durch eine Version, die mit <tt>enable-force-cgi-redirect</tt>
+übersetzt wurde.
+</p>
+
+<p>
+Manche Webserver sind nicht in der Lage, Endungen auf
+CGI-Programme zu mappen (beim Netscape Server kann man dies mit
+Hilfe eines Plugin-Modules nachrüsten) oder sie erzeugen keine
+<tt>$_SERVER['REDIRECT_STATUS']</tt>-Variable, wenn sie ein solches
+Mapping vorgenommen haben. In diesem Fall muss man ohne
+<tt>enable-force-cgi-redirect</tt> arbeiten und mit dem
+Sicherheitsloch leben oder - besser - den Webserver wechseln.
+</p>
+

@@ -1,0 +1,4 @@
+<Faq alias="regexp-ereg" author="Kristian Köhntopp">
+  <Question>Soll ich ereg() oder preg() verwenden?</Question>
+  <Keywords>POSIX, PCRE, ereg()</Keywords>
+</Faq>

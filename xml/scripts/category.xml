@@ -1,0 +1,16 @@
+<Category alias="scripts" name="Häufig nachgefragte Standardscripte" keywords="PHP, Usenet, FAQ, dclp">
+  <!--Die FAQs sind hier noch mal redundant aufgelistet um die Reihenfolge vorzugeben.-->
+  <Faqs>
+    <Faq alias="scripte-finden" />
+    <Faq alias="scripte-volltextsuche" />
+    <Faq alias="scripte-news" />
+    <Faq alias="scripte-shop" />
+    <Faq alias="scripte-foren" />
+    <Faq alias="scripte-webmailer" />
+    <Faq alias="scripte-portale" />
+    <Faq alias="scripte-diagramme" />
+    <Faq alias="scripte-mp3-tags" />
+    <Faq alias="scripte-whois" />
+    <Faq alias="scripte-groupware" />
+  </Faqs>
+</Category>

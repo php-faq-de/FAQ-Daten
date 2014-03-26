@@ -1,0 +1,7 @@
+<Faq alias="mysql-auto-increment" author="Daniel T. Gorski">
+  <Question>Wozu ist auto_increment nützlich? Wie erfahre ich den Wert des letzten Inkrements?</Question>
+  <Keywords>SQL, Datenbank, MySQL, ID, auto_increment, Nummer</Keywords>
+  <Editors>
+    <Editor name="Niels Braczek" lastedit="2008-08-12 00:00:00" />
+  </Editors>
+</Faq>

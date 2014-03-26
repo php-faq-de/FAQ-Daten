@@ -1,0 +1,4 @@
+<Faq alias="http-request" author="Kristian Köhntopp">
+  <Question>Wie kann ich auf den HTTP-Request-Header zugreifen?</Question>
+  <Keywords>Query-String, Request, http, Header, Variable</Keywords>
+</Faq>

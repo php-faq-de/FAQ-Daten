@@ -1,0 +1,17 @@
+<p>
+	In der <tt>php.ini</tt> wird der Name der Session in dem Parameter
+	<a href="http://www.php3.de/ref.session.php#session.configuration">session.name</a>
+	festgelegt - standardmäßig auf <tt>PHPSESSID</tt>.
+	Möchte man ohne Eingriff in die <tt>php.ini</tt> oder in die
+	Webserverkonfiguration diesen Namen ändern, steht die Funktion
+	<tt>session_name()</tt> zu Verfügung. Diese Funktion muss <em>vor</em>
+	dem (Re)initialisieren der Sessiondaten
+	(<a href="http://www.php3.de/session_start">session_start()</a>) ausgeführt werden.
+</p>
+
+<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+    <span style="color: #808080; font-style: italic;">// Einen anderen Namen für die Session festlegen</span>
+    <a href="http://www.php3.de/session_name"><span style="color: #000066;">session_name</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;meineSession&quot;</span><span style="color: #000000;">&#41;</span>;
+    @<a href="http://www.php3.de/session_start"><span style="color: #000066;">session_start</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+

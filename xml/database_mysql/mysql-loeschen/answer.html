@@ -1,0 +1,38 @@
+<p>Die betreffende Tabelle sollte ein Datumsfeld haben, etwa ein
+selbstaktualisierendes Feld vom Typ <tt>TIMESTAMP</tt> oder ein
+manuell aktualisiertes Feld vom Typ <tt>DATE</tt>. Die folgenden
+drei Queries löschen jeweils alle Datensätze, die älter als 30
+Tage sind, mit steigender Effizienz.</p>
+
+<ol>
+<li><pre class="sql"><span style="color: #993333; font-weight: bold;">DELETE</span>
+       <span style="color: #993333; font-weight: bold;">FROM</span> kalender <span style="color: #993333; font-weight: bold;">AS</span> k
+      <span style="color: #993333; font-weight: bold;">WHERE</span> <span style="color: #66cc66;">&#40;</span>to_days<span style="color: #66cc66;">&#40;</span>current_date<span style="color: #66cc66;">&#41;</span> - to_days<span style="color: #66cc66;">&#40;</span>k.datum<span style="color: #66cc66;">&#41;</span><span style="color: #66cc66;">&#41;</span> &gt; <span style="color: #cc66cc;">30</span></pre></li>
+
+<li><pre class="sql"><span style="color: #993333; font-weight: bold;">DELETE</span>
+       <span style="color: #993333; font-weight: bold;">FROM</span> kalender <span style="color: #993333; font-weight: bold;">AS</span> k
+      <span style="color: #993333; font-weight: bold;">WHERE</span> to_days<span style="color: #66cc66;">&#40;</span>k.datum<span style="color: #66cc66;">&#41;</span> &lt; to_days<span style="color: #66cc66;">&#40;</span>current_date<span style="color: #66cc66;">&#41;</span><span style="color: #cc66cc;">-30</span>;</pre></li>
+
+<li><pre class="sql"><span style="color: #993333; font-weight: bold;">DELETE</span>
+       <span style="color: #993333; font-weight: bold;">FROM</span> kalender <span style="color: #993333; font-weight: bold;">AS</span> k
+      <span style="color: #993333; font-weight: bold;">WHERE</span> k.datum &lt; date_add<span style="color: #66cc66;">&#40;</span>current_date, interval <span style="color: #cc66cc;">-30</span> day<span style="color: #66cc66;">&#41;</span></pre></li>
+</ol>
+<p>Die erste Query ist vergleichsweise langsam, denn hier ist die
+linke Seite der Query ein Ausdruck, der für jede Zeile berechnet
+werden muss. Der Spaltenname <tt>k.datum</tt> taucht auf der linken
+Seite in einer Funktionsanwendung auf, sodass keine Indizes
+angewendet werden können.</p>
+
+<p>Die zweite Query ist insofern optimiert, als dass der konstante
+Teil der Rechnung auf die rechte Zeit gebracht werden kann,
+sodass diese Seite der Ungleichung zu einer Konstanten optimiert
+werden kann. Die linke Seite der Query ist jedoch noch immer
+eine Funktionsanwendung, sodass ein <em>full table scan</em>
+notwendig ist.</p>
+
+<p>Die dritte Query ist durchoptimiert: Hier ist die linke
+Seite der Ungleichung ein reiner Spaltenausdruck, die rechte
+Seite zu einer Konstanten optimierbar. Wenn ein
+<tt>INDEX(k.datum)</tt> existiert, kann er in dieser Query
+angewendet werden, um den Zugriff zu beschleunigen.</p>
+

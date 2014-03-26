@@ -1,0 +1,43 @@
+<p>
+Innerhalb einer Funktion wie <tt>connect()</tt> muss auf die Variable
+<tt>Link_ID</tt> zugegriffen werden, um das Resultat eines
+Connect abzuspeichern. In <tt>connect()</tt> können wir nicht
+wissen, wie die Funktion nun gerade heißt, also ob ihr Name nun
+gerade <tt>$db1-&gt;connect()</tt> oder <tt>$db2-&gt;connect()</tt>
+ist und ob die Link-ID nun in <tt>$db1-&gt;Link_ID</tt> oder in
+<tt>$db2-&gt;Link_ID</tt> abgespeichert werden muss.
+</p>
+
+<p>
+Eigentlich ist das auch egal: Wir wollen ja nur auf unsere
+eigene Link-ID zugreifen. <tt>$this</tt> bezeichnet nun genau unser
+eigenes Objekt, also <tt>$db1</tt> innerhalb von <tt>$db1</tt> und
+<tt>$db2</tt> innerhalb von <tt>$db2</tt>. Man schreibt daher code wie
+</p>
+
+<pre><span style="color: #000000; font-weight: bold;">class</span> DB_MiniSQL <span style="color: #000000;">&#123;</span>
+  <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #0000ff;">$Link_ID</span> = <span style="color: #cc66cc;">0</span>;
+&nbsp;
+  <span style="color: #000000; font-weight: bold;">function</span> connect<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+    <span style="color: #0000ff;">$this</span>-&gt;<span style="color: #006600;">Link_ID</span> = <a href="http://www.php3.de/mysql_connect"><span style="color: #000066;">mysql_connect</span></a><span style="color: #000000;">&#40;</span>...<span style="color: #000000;">&#41;</span>;
+    ...
+  <span style="color: #000000;">&#125;</span>
+&nbsp;
+  ...
+<span style="color: #000000;">&#125;</span></pre>
+
+<p>oder</p>
+
+<pre><span style="color: #000000; font-weight: bold;">class</span> DB_MiniSQL <span style="color: #000000;">&#123;</span>
+  <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #0000ff;">$Link_ID</span> = <span style="color: #cc66cc;">0</span>;
+&nbsp;
+  <span style="color: #000000; font-weight: bold;">function</span> query<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$query</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+    <span style="color: #808080; font-style: italic;">// Wenn kein Datenbank-Link vorhanden ist, eines herstellen.</span>
+    <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span>!<span style="color: #0000ff;">$this</span>-&gt;<span style="color: #006600;">Link_ID</span><span style="color: #000000;">&#41;</span>
+      <span style="color: #0000ff;">$this</span>-&gt;<span style="color: #006600;">connect</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+    ...
+   <span style="color: #000000;">&#125;</span>
+  ...
+<span style="color: #000000;">&#125;</span></pre>
+

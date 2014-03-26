@@ -1,0 +1,4 @@
+<Faq alias="mail-absender" author="Johannes Frömter">
+  <Question>Wie kann ich den Absender meiner Mail festlegen?</Question>
+  <Keywords>mail, from, Absender, Return, Path, Envelope, bounce, unzustellbar, Server, Administrator, sendmail, Header, Adresse</Keywords>
+</Faq>

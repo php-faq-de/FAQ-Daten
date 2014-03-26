@@ -1,0 +1,35 @@
+<p>
+Da Oracle über kein Limit verfügt gestaltet sich die Abfrage etwas
+komplizierter (das Beispiel funktioniert erst ab Version
+8.1):</p>
+
+<pre class="sql"><span style="color: #993333; font-weight: bold;">SELECT</span> *
+  <span style="color: #993333; font-weight: bold;">FROM</span>
+   <span style="color: #66cc66;">&#40;</span><span style="color: #993333; font-weight: bold;">SELECT</span> ROWNUM rownum2, inline_view1.*
+      <span style="color: #993333; font-weight: bold;">FROM</span>
+       <span style="color: #66cc66;">&#40;</span><span style="color: #993333; font-weight: bold;">SELECT</span> ROWNUM rownum1, ename, hiredate
+          <span style="color: #993333; font-weight: bold;">FROM</span> emp
+          <span style="color: #993333; font-weight: bold;">ORDER</span> <span style="color: #993333; font-weight: bold;">BY</span> hiredate
+       <span style="color: #66cc66;">&#41;</span> inline_view1  <span style="color: #808080; font-style: italic;">-- zum Sortieren (ROWNUM hier noch ungeordnet)</span>
+   <span style="color: #66cc66;">&#41;</span> inline_view2      <span style="color: #808080; font-style: italic;">-- ROWNUM spiegelt jetzt die Sortierung wider</span>
+<span style="color: #993333; font-weight: bold;">WHERE</span> rownum2 <span style="color: #993333; font-weight: bold;">BETWEEN</span> <span style="color: #cc66cc;">5</span> <span style="color: #993333; font-weight: bold;">AND</span> <span style="color: #cc66cc;">7</span></pre>
+
+<p>
+Dies ist nicht sonderlich schnell, weil die innere Abfrage alle
+Zeilen auswählt. Für Versionen ab 8.1.6 geht auch folgendes:</p>
+
+<pre class="sql"><span style="color: #993333; font-weight: bold;">SELECT</span> *
+  <span style="color: #993333; font-weight: bold;">FROM</span>
+   <span style="color: #66cc66;">&#40;</span><span style="color: #993333; font-weight: bold;">SELECT</span> ROW_NUMBER<span style="color: #66cc66;">&#40;</span><span style="color: #66cc66;">&#41;</span>
+    OVER<span style="color: #66cc66;">&#40;</span><span style="color: #993333; font-weight: bold;">ORDER</span> <span style="color: #993333; font-weight: bold;">BY</span> hiredate<span style="color: #66cc66;">&#41;</span> rownum1, ename, hiredate
+      <span style="color: #993333; font-weight: bold;">FROM</span> emp
+   <span style="color: #66cc66;">&#41;</span> inline_view1
+<span style="color: #993333; font-weight: bold;">WHERE</span> rownum1 <span style="color: #993333; font-weight: bold;">BETWEEN</span> <span style="color: #cc66cc;">5</span> <span style="color: #993333; font-weight: bold;">AND</span> <span style="color: #cc66cc;">7</span>
+/</pre>
+
+<p>Will man lediglich n Zeilen ausgeben tuts auch dies:</p>
+
+<pre class="sql"><span style="color: #993333; font-weight: bold;">SELECT</span> * <span style="color: #993333; font-weight: bold;">FROM</span>
+  <span style="color: #66cc66;">&#40;</span><span style="color: #993333; font-weight: bold;">SELECT</span> ename, hiredate <span style="color: #993333; font-weight: bold;">FROM</span> emp <span style="color: #993333; font-weight: bold;">ORDER</span> <span style="color: #993333; font-weight: bold;">BY</span> hiredate<span style="color: #66cc66;">&#41;</span>
+<span style="color: #993333; font-weight: bold;">WHERE</span> ROWNUM &lt; <span style="color: #cc66cc;">6</span></pre>
+

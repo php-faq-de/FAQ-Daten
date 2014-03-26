@@ -1,0 +1,129 @@
+<p>
+Ein Upload-Formular muss ein Input-Element enthalten, das den Typ
+<tt>file</tt> hat. Da Dateien in einem Upload prinzipiell beliebig
+groß werden können, muss die Übermittlung des Formulares mit der
+Methode <tt>POST</tt> erfolgen. Außerdem muss ein bestimmter
+<tt>ENCTYPE</tt> für das Formular angegeben werden. Ein solches
+Formular kann von Netscape Navigator ab Version 3 und von
+Microsoft Internet Explorer ab Version 4 verarbeitet werden.
+</p>
+
+<pre>&lt;h1&gt;Hallo&lt;/h1&gt;
+&lt;form action=<span style="color: #ff0000;">&quot;/submit.php&quot;</span> method=<span style="color: #ff0000;">&quot;post&quot;</span>
+      enctype=<span style="color: #ff0000;">&quot;multipart/form-data&quot;</span>&gt;
+&lt;input type=<span style="color: #ff0000;">&quot;file&quot;</span> name=<span style="color: #ff0000;">&quot;probe&quot;</span> /&gt;
+&lt;input type=<span style="color: #ff0000;">&quot;submit&quot;</span> value=<span style="color: #ff0000;">&quot;los&quot;</span> /&gt;
+&lt;/form&gt;</pre>
+
+<p>
+Das empfangende PHP-Script bekommt das Resultat des
+Datei-Uploads als assoziatives Array mit dem Namen
+<tt>$_FILES['probe']</tt> (bzw. bei PHP 4.0.0 bis 4.0.6
+<tt>$HTTP_POST_FILES['probe']</tt>) übermittelt, weil das
+Input-Element im Formular diesen Namen hat.
+</p>
+
+<h2>$_FILES['probe']['tmp_name']</h2>
+<p>
+Diese Variable enthält den Namen der Datei in einem temporären
+Verzeichnis auf dem Server. Sie kann von dort mit einem
+<a href="http://www.php3.de/move_uploaded_file">move_uploaded_file()</a>-Aufruf abgeholt werden.
+Das ist auch notwendig, da die Originaldatei am Ende des Scriptes
+automatisch gelöscht wird.
+</p>
+
+<h2>$_FILES['probe']['name']</h2>
+<p>
+Diese Variable enthält den Namen der Datei auf dem System des
+Anwenders. Der genaue Dateiname mit evtl. vorhandenen
+Laufwerksbuchstaben, Pfadseparatoren und anderen Sonderzeichen
+ist betriebssystemabhängig und das empfangende Script sollte
+keine Annahmen hierüber machen.
+</p>
+
+<h2>$_FILES['probe']['size']</h2>
+<p>
+Diese Variable enthält die Länge der Datei auf dem Server in
+Bytes.
+</p>
+
+<h2>$_FILES['probe']['type']</h2>
+<p>
+Diese Variable enthält den MIME-Type der Datei, so wie er dem
+Server vom Browser übermittelt worden ist. Dieser Wert kann
+unter Umständen nicht richtig sein, je nach Einstellung des
+Browsers. Beim Ermitteln des Typs von hochgeladenen Grafiken
+sollte stattdessen die Funktion <a href="http://www.php3.de/getimagesize">getimagesize()</a>
+verwendet werden.
+</p>
+
+<h2>$_FILES['probe']['error']</h2>
+<p>
+Diese Variable wurde mit PHP 4.2.0 eingeführt und enthält den
+Status des Dateiuploads. Die möglichen Werte und dazugehörige
+Konstanten in neueren PHP-Versionen sind im
+<a href="http://www.php3.de/features.file-upload.errors.php">Handbuch</a>
+aufgeführt.
+</p>
+
+<p>
+Der Upload von Dateien wird durch die drei
+Konfigurationsparameter <a href="http://de3.php.net/manual/en/ini.php">file_uploads</a>,
+<a href="http://de3.php.net/manual/en/ini.php">upload_tmp_dir</a> und
+<a href="http://de3.php.net/manual/en/ini.php">upload_max_filesize</a> gesteuert. Außerdem
+relevant sind die drei Parameter <a href="http://de3.php.net/manual/en/ini.php">memory_limit</a>,
+<a href="http://de3.php.net/manual/en/ini.php">post_max_size</a> und
+<a href="http://de3.php.net/manual/en/ini.php">max_execution_time</a>. Der Pfad zu
+<tt>upload_tmp_dir</tt> muss absolut angegeben werden.
+</p>
+
+<p>
+PHP legt die temporäre Datei in dem angegebenen Verzeichnis an
+und löscht sie am Ende des Scriptes wieder. Die Datei darf
+maximal die angegebene Größe haben. Ein Einstellen der
+Größenbegrenzung begrenzt jedoch nicht wirklich den
+Plattenplatz, der auf dem Server von PHP durch Fileupload
+verbraucht wird: Aus technischen Gründen muss PHP die Datei
+zunächst empfangen und kann sie erst dann verwerfen, wenn sie zu
+groß ist. Es kann auch mehr als eine Datei pro Formular
+hochgeladen werden (siehe "<a class="faq" href="http://www.php-faq.de/q-formular-mehrfach-upload.html">Wie kann ich mehrere Dateien auf einmal uploaden?</a>").
+</p>
+
+<h2>Achtung:</h2>
+
+<p>
+Das Kopieren der hochgeladenen Datei mit Hilfe von
+<a href="http://www.php3.de/copy">copy()</a> und das Verwenden der alten, auf globalen
+Variablen beruhenden Version sollte wo möglich aus Sicherheitsgründen
+vermieden werden.
+</p>
+
+<p>Vollständiges Beispiel:</p>
+
+<pre>&lt;h1&gt;Upload&lt;/h1&gt;
+&nbsp;
+&lt;form
+  action=<span style="color: #ff0000;">&quot;&lt;?php echo $_SERVER['PHP_SELF']; ?&gt;&quot;</span>
+  method=<span style="color: #ff0000;">&quot;post&quot;</span>
+  enctype=<span style="color: #ff0000;">&quot;multipart/form-data&quot;</span>&gt;
+&lt;input type=<span style="color: #ff0000;">&quot;file&quot;</span> name=<span style="color: #ff0000;">&quot;probe&quot;</span> /&gt;
+&lt;input type=<span style="color: #ff0000;">&quot;submit&quot;</span> value=<span style="color: #ff0000;">&quot;Los!&quot;</span> /&gt;
+&lt;/form&gt;
+&lt;hr /&gt;
+<span style="color: #000000; font-weight: bold;">&lt;?php</span>
+  <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><a href="http://www.php3.de/isset"><span style="color: #000066;">isset</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$_FILES</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'probe'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span> and ! <span style="color: #0000ff;">$_FILES</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'probe'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'error'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+    <span style="color: #808080; font-style: italic;">// Alternativ:            and   $_FILES['probe']['size']</span>
+    <a href="http://www.php3.de/move_uploaded_file"><span style="color: #000066;">move_uploaded_file</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$_FILES</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'probe'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'tmp_name'</span><span style="color: #000000;">&#93;</span>, <span style="color: #ff0000;">&quot;./newfile.txt&quot;</span><span style="color: #000000;">&#41;</span>;
+    <a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Die Datei %s steht jetzt als &quot;</span> .
+          <span style="color: #ff0000;">&quot;newfile.txt zur Verfügung.&lt;br /&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>,
+      <span style="color: #0000ff;">$_FILES</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'probe'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'name'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span>;
+    <a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Sie ist %u Bytes groß und vom Typ %s.&lt;br /&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>,
+      <span style="color: #0000ff;">$_FILES</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'probe'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'size'</span><span style="color: #000000;">&#93;</span>, <span style="color: #0000ff;">$_FILES</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'probe'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'type'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span>;
+  <span style="color: #000000;">&#125;</span>
+ <span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+
+<p>
+Bei PHP3 muss über eine alternative Syntax auf die hochgelade Datei
+zugegriffen werden (siehe "<a class="faq" href="http://www.php-faq.de/q-formular-upload-php3.html">Wie funktioniert ein Datei-Upload über HTML-Formulare bei PHP 3?</a>").
+</p>
+

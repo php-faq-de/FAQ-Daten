@@ -1,0 +1,43 @@
+<p>
+PHP erzeugt wie Perl beim Start des Programms Bytecode und
+führt diesen dann aus. Dabei liegt PHP mit Perl
+geschwindigkeitsmäßig in etwa gleichauf. Ebenso wie Perl
+braucht auch PHP dafür eine größere Startup-Zeit, in der das
+Programm analysiert und übersetzt wird. Mit einem Bytecode-Cache
+kann man diese Zeit senken, indem man PHP Speicher zum
+Caching für Bytecode bereitstellt.
+</p>
+
+<p>
+Der Zend-Optimizer und viele andere Bytecode-Caches
+optimieren den PHP-Bytecode noch einmal und holen je nach
+Anwendung Geschwindigkeitsgewinne heraus. Diese
+Gewinne können in Benchmarks signifikant sein - ihre
+praktische Bedeutung wird ebenfalls merkbar sein, aber
+sicherlich nicht so extrem wie in den Benchmarks. Die Anwendung
+des Optimizers würde die Startup-Zeiten des PHP-Interpreters
+noch weiter erhöhen, deswegen werden sie in der Regel mit
+einem Bytecode-Cache zusammen verwendet. Der Zend-Optimizer 
+ist ein closed source Produkt, aber es existieren auch OSS-Alternativen.
+</p>
+
+<p>
+Ein Bytecode-Cache kann häufig verwendeten
+Bytecode erkennen und im Interpreter im Speicher halten. Der
+Interpreter braucht diesen Bytecode dann nicht mehr zu laden, zu
+analysieren und zu übersetzen, sondern kann ihn direkt aufrufen.
+Durch den Bytecode-Cache erhöht sich der Speicherverbrauch des
+Interpreters und bei unzureichendem Speicherausbau der
+Maschine kann sich das negativ auf die Performance des
+Gesamtsystems auswirken.
+</p>
+
+<p>
+Man sagt, dass PHP leichter zu erlernen sei als Perl
+und dass PHP-Code leichter zu lesen und damit billiger zu warten
+wäre als Perl-Code. Das ist sicherlich eine Frage der Übung -
+man kann in beiden Sprache nicht mehr wartbare Programme
+entwickeln bzw. in beiden Sprachen selbstdokumentierenden Code
+abliefern.
+</p>
+

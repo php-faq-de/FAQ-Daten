@@ -1,0 +1,16 @@
+<p>
+Wird das Formular mit <tt>POST</tt> übergeben, ist die Anzahl und
+Größe der Elemente möglicherweise begrenzt durch serverseitige
+Einstellungen (Apache: siehe <tt>LimitRequestBody</tt> und verwandte
+Direktiven).
+</p>
+
+<p>
+Wird das Formular mit <tt>GET</tt> übergeben, ist die Anzahl der
+Variablen begrenzt durch die maximale Länge der URL, die der
+Browser und der Webserver verarbeiten können. Beim Browser ist
+dies vom Browser und der Browserversion abhängig. Beim Webserver
+ist das Limit unter Umständen konfigurierbar (Apache: siehe
+<tt>LimitRequestLine</tt> (8190) und verwandte Direktiven).
+</p>
+

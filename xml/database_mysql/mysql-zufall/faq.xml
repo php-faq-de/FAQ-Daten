@@ -1,0 +1,7 @@
+<Faq alias="mysql-zufall" author="Martin Jansen">
+  <Question>Wie kann ich einen zufälligen Eintrag aus einer MySQL-Tabelle auswählen?</Question>
+  <Keywords>SQL, Datenbank, MySQL, Zufall, random</Keywords>
+  <Editors>
+    <Editor name="Niels Braczek" lastedit="2008-08-12 00:00:00" />
+  </Editors>
+</Faq>

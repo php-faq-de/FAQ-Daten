@@ -1,0 +1,30 @@
+<p>
+Zunächst sollte man überlegen, ob man überhaupt einen Reset-Button
+braucht - bei Formularen mit nur einem Eingabefeld ist er eher
+witzlos, bei umfangreichen Formularen ist er dagegen umso ärgerlicher,
+wenn er aus Versehen betätigt wurde!
+</p>
+
+<p>
+Bei einem HTML-Reset-Button (<tt>&lt;input type="reset"&gt;</tt>)
+setzt der Browser alle Eingabefelder auf den Anfangszustand zurück;
+da damit kein Request an den Server verbunden ist, kriegt PHP davon
+nichts mit. Möchte man einen Button realisieren, der Eingabeelemente
+mit <em>vordefinierten Inhalten</em> wirklich löscht, muss man einen
+Submit-Button nehmen:
+</p>
+
+<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+  <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><a href="http://www.php3.de/isset"><span style="color: #000066;">isset</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$_REQUEST</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'loeschen'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+      <a href="http://www.php3.de/unset"><span style="color: #000066;">unset</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$_REQUEST</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'eingabe'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span>;
+  <span style="color: #000000;">&#125;</span>
+<span style="color: #000000; font-weight: bold;">?&gt;</span>
+&nbsp;
+&lt;form action=<span style="color: #ff0000;">&quot;&lt;?php echo $SERVER['PHP_SELF']; ?&gt;&quot;</span> method=<span style="color: #ff0000;">&quot;post&quot;</span>&gt;
+&lt;input type=<span style="color: #ff0000;">&quot;text&quot;</span> name=<span style="color: #ff0000;">&quot;eingabe&quot;</span>
+       value=<span style="color: #ff0000;">&quot;&lt;?php @print $_REQUEST['eingabe']; ?&gt;&quot;</span>/&gt;
+&lt;input type=<span style="color: #ff0000;">&quot;submit&quot;</span> name=<span style="color: #ff0000;">&quot;submit&quot;</span> value=<span style="color: #ff0000;">&quot;Absenden&quot;</span>/&gt;
+&lt;input type=<span style="color: #ff0000;">&quot;reset&quot;</span> value=<span style="color: #ff0000;">&quot;Reset&quot;</span>/&gt;
+&lt;input type=<span style="color: #ff0000;">&quot;submit&quot;</span> name=<span style="color: #ff0000;">&quot;loeschen&quot;</span> value=<span style="color: #ff0000;">&quot;Löschen&quot;</span>/&gt;
+&lt;/form&gt;</pre>
+

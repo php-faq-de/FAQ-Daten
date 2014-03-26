@@ -1,0 +1,44 @@
+<p>
+In PHP können Strings sowohl von normalen Anführungszeichen
+(<tt>"</tt>) als auch von Hochkommata (<tt>'</tt>, auch genannt
+Apostroph, einfache Anführungszeichen, single quote, ASCII 39)
+eingefasst werden. Es gibt jedoch einen grundlegenden funktionalen
+Unterschied zwischen diesen beiden Zeichen: der Bereich zwischen
+Anführungszeichen wird von PHP ausgewertet, während alles, was
+zwischen Hochkommata steht, von PHP schnell übergangen wird.
+</p>
+
+<p>
+Diese Tatsache kann man natürlich nutzen, da man weniger escapen
+muss (z.B. bei Windows-Pfadangaben, s.u.), außerdem werden Strings in
+Hochkommata schneller verarbeitet. Allerdings werden dann Variablen
+nicht durch ihren Wert ersetzt ("interpoliert"), aber das kann ja
+durchaus auch gewollt sein. Die einzigen Zeichenfolgen, die innerhalb
+von Hochkommata eine besondere Bedeutung haben, sind <tt>\\</tt>
+(ergibt einen einzelnen Backslash) und <tt>\'</tt> (ergibt ein
+geschütztes Hochkomma). Beispiele:
+</p>
+
+<pre><a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">'Micro$oft'</span>;  <span style="color: #808080; font-style: italic;">// ergibt: Micro$oft</span>
+<a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;Micro$oft&quot;</span>;  <span style="color: #808080; font-style: italic;">// ergibt: Micro + Inhalt der Variable $oft</span>
+<a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;Micro<span style="color: #000099; font-weight: bold;">\$</span>oft&quot;</span>; <span style="color: #808080; font-style: italic;">// ergibt: Micro$oft</span>
+&nbsp;
+<a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">'c:<span style="color: #000099; font-weight: bold;">\t</span>emp'</span>;    <span style="color: #808080; font-style: italic;">// ergibt: c:\temp</span>
+<a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;c:<span style="color: #000099; font-weight: bold;">\t</span>emp&quot;</span>;    <span style="color: #808080; font-style: italic;">// ergibt: c: + Tabulator + emp</span>
+<a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;c:<span style="color: #000099; font-weight: bold;">\\</span>temp&quot;</span>;   <span style="color: #808080; font-style: italic;">// ergibt: c:\temp</span>
+<a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">'c:<span style="color: #000099; font-weight: bold;">\\</span>temp'</span>;   <span style="color: #808080; font-style: italic;">// ergibt: c:\temp</span>
+&nbsp;
+<a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">'Kein Hochkomma: <span style="color: #000099; font-weight: bold;">\x</span>27'</span>;  <span style="color: #808080; font-style: italic;">// ergibt: Kein Hochkomma: \x27</span>
+<a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;Ein Hochkomma:  <span style="color: #000099; font-weight: bold;">\x</span>27&quot;</span>;  <span style="color: #808080; font-style: italic;">// ergibt: Ein Hochkomma: '</span>
+<a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">'Ein Hochkomma: <span style="color: #000099; font-weight: bold;">\'</span>'</span>;     <span style="color: #808080; font-style: italic;">// ergibt: Ein Hochkomma: '</span>
+&nbsp;
+<a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;&lt;input name='foo' value='$bar'&gt;&quot;</span>;  <span style="color: #808080; font-style: italic;">// gültiges HTML</span></pre>
+
+<p>
+Die Benutzung von Hochkomma statt Anführungszeichen wie im letzten
+Beispiel ist in HTML erlaubt (siehe die
+<a href="http://www.w3.org/TR/html401/intro/sgmltut.html#h-3.2.2">HTML 4.01</a>
+bzw. <a href="http://www.w3.org/TR/2000/REC-xml-20001006#NT-AttValue">XML 1.0</a>
+Spezifikationen).
+</p>
+

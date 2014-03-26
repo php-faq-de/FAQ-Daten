@@ -1,0 +1,29 @@
+<p>
+	Laufen auf einer Maschine mehrere virtuelle Hosts (vhosts),
+	z.B. bei einem Hoster, muss der verantwortliche Administrator
+	dafür Sorge tragen, dass - wenn überhaupt - der Safe-Mode nur für
+	100% vertrauenswürdige vhost-Nutzer ausgeschaltet werden darf
+	(<a href="http://de3.php.net/manual/en/ini.php">safe_mode</a>=Off). Dies würde - neben anderen systemnahen
+	Eingriffen - erlauben, dass ein Script von einem anderen Vhost
+	folgenden Code ausführen darf:
+</p>
+
+<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+    <span style="color: #808080; font-style: italic;">// Inhalt von /tmp löschen</span>
+    <a href="http://www.php3.de/system"><span style="color: #000066;">system</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;rm -rf /tmp&quot;</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+
+<p>
+	Dies hätte in der PHP4-Standardeinstellung (aber mit
+	<a href="http://de3.php.net/manual/en/ini.php">safe_mode</a>=Off) zufolge, dass alle Sessiondaten anderer
+	Benutzer gelöscht worden wären.	Gegebenfalls sollte man sich
+	mit einer entsprechenden Anfrage an seinen Hoster wenden.
+</p>
+
+<p>
+	Eine andere Möglichkeit dies zu verhindern wäre es, für jeden Vhost
+	eine andere Einstellung des
+	<a href="http://www.php3.de/ref.session.php#session.configuration">session.save_path</a>-Parameters
+	zu wählen, wenn Sessiondaten in Files gespeichert werden.
+</p>
+

@@ -1,0 +1,4 @@
+<Faq alias="phpmyadmin-pmaabsoluteuri" author="Frank Wiegand">
+  <Question>&amp;quot;Das $cfg['PmaAbsoluteUri']-Verzeichnis MUSS in Ihrer Konfigurationsdatei angegeben werden!&amp;quot;</Question>
+  <Keywords>MySQL, phpMyAdmin, Fehler, PmaAbsoluteUri</Keywords>
+</Faq>

@@ -1,0 +1,31 @@
+<p>
+Es kann unter bestimmten Umständen vorkommen, dass PHP im
+Zusammenhang mit dem Befehl <a href="http://www.php3.de/fopen">fopen()</a> die Warnung
+"No error" oder "Success" ausgibt, was sich natürlich paradox
+anhört. Der Grund ist, dass beim Ausführen von fopen() zwar ein
+Problem auftrat, aber keine näheren Informationen über die Art
+des Problems vorliegen. Meist handelt es sich dabei um folgende
+HTTP-Status-Codes, die fopen() nicht verarbeiten kann:
+</p>
+
+<ul>
+ <li>
+  <p>Die angeforderte Ressource liegt in einem mittels HTTP Basic
+  Authentication geschützten Bereich (Status-Code 401)</p>
+ </li>
+
+ <li>
+  <p>Es erfolgt ein nicht RFC-konformer Redirect. Korrekte Redirects
+  mit absoluter URL kann fopen() jedoch handhaben (Status-Code 301
+  oder 302)</p>
+ </li>
+
+ <li>
+  <p>Die Ressource ist nicht vorhanden (Status-Code 404)</p>
+ </li>
+
+ <li>
+  <p>Der Zugriff ist verboten (Status-Code 403)</p>
+ </li>
+</ul>
+

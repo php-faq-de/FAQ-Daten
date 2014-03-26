@@ -1,0 +1,20 @@
+<p>
+Bis phpMyAdmin 2.0.6 können Sie den Inhalt einer Tabelle nur
+dann ändern, wenn ein Primärschlüssel in der Tabelle gesetzt
+ist. Ab 2.0.6 können Sie den Inhalt in allen Fällen editieren.
+Falls kein Primärschlüssel existiert, wird allerdings der Inhalt
+aller Zeilen mit zu der aktuellen Zeile äquivalenten Inhalten
+geändert, da es im relationalen Datenbankmodell unmöglich ist,
+diese Zeilen voneinander zu unterscheiden.
+</p>
+
+<p>
+Es ist gutes Datenbankdesign, wenn man für eine jede Tabelle
+eine Spalte (atomarer Primärschlüssel) oder eine Kombination von
+Spalten (zusammengesetzter Primärschlüssel) als Primärschlüssel
+deklariert, sodass keine zwei Zeilen existieren können, die in
+den als Primärschlüssel deklarierten Spalten dieselben Werte
+haben können. Alle Zeilen werden durch ihre Primärschlüsselwerte
+überhaupt erst unterscheidbar.
+</p>
+

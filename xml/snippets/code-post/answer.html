@@ -1,0 +1,47 @@
+<p>
+Das Script muss einen Socket mit der Funktion
+<a href="http://www.php3.de/fsockopen">fsockopen()</a> zum Zielserver öffnen und auf diesem
+Socket dann einen HTTP POST-Request simulieren.
+</p>
+
+<p>
+Anbei ein vollständiges Beispiel, das mit CGI-PHP auf der
+Unix-Kommandozeile verwendet werden kann. Das Script fälscht
+Einträge in einer Abstimmung auf dem Host
+<a href="http://www.linux.com/">www.linux.com</a>,
+wo es für PHP als beste Scriptsprache stimmt.
+</p>
+
+<pre><span style="color: #808080; font-style: italic;">#! ./php -q</span>
+<span style="color: #000000; font-weight: bold;">&lt;?php</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">function</span> PostToHost<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$host</span>, <span style="color: #0000ff;">$path</span>, <span style="color: #0000ff;">$referer</span>, <span style="color: #0000ff;">$data_to_send</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+  <span style="color: #0000ff;">$fp</span> = <a href="http://www.php3.de/fsockopen"><span style="color: #000066;">fsockopen</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$host</span>, <span style="color: #cc66cc;">80</span><span style="color: #000000;">&#41;</span>;
+  <a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Open!<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #000000;">&#41;</span>;
+  <a href="http://www.php3.de/fputs"><span style="color: #000066;">fputs</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span>, <span style="color: #ff0000;">&quot;POST $path HTTP/1.1<span style="color: #000099; font-weight: bold;">\r</span><span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #000000;">&#41;</span>;
+  <a href="http://www.php3.de/fputs"><span style="color: #000066;">fputs</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span>, <span style="color: #ff0000;">&quot;Host: $host<span style="color: #000099; font-weight: bold;">\r</span><span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #000000;">&#41;</span>;
+  <a href="http://www.php3.de/fputs"><span style="color: #000066;">fputs</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span>, <span style="color: #ff0000;">&quot;Referer: $referer<span style="color: #000099; font-weight: bold;">\r</span><span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #000000;">&#41;</span>;
+  <a href="http://www.php3.de/fputs"><span style="color: #000066;">fputs</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span>, <span style="color: #ff0000;">&quot;Content-type: application/x-www-form-urlencoded<span style="color: #000099; font-weight: bold;">\r</span><span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #000000;">&#41;</span>;
+  <a href="http://www.php3.de/fputs"><span style="color: #000066;">fputs</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span>, <span style="color: #ff0000;">&quot;Content-length: &quot;</span>. <a href="http://www.php3.de/strlen"><span style="color: #000066;">strlen</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$data_to_send</span><span style="color: #000000;">&#41;</span> .<span style="color: #ff0000;">&quot;<span style="color: #000099; font-weight: bold;">\r</span><span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #000000;">&#41;</span>;
+  <a href="http://www.php3.de/fputs"><span style="color: #000066;">fputs</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span>, <span style="color: #ff0000;">&quot;Connection: close<span style="color: #000099; font-weight: bold;">\r</span><span style="color: #000099; font-weight: bold;">\n</span><span style="color: #000099; font-weight: bold;">\r</span><span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #000000;">&#41;</span>;
+  <a href="http://www.php3.de/fputs"><span style="color: #000066;">fputs</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span>, <span style="color: #0000ff;">$data_to_send</span><span style="color: #000000;">&#41;</span>;
+  <a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Sent!<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #000000;">&#41;</span>;
+  <span style="color: #b1b100;">while</span><span style="color: #000000;">&#40;</span>!<a href="http://www.php3.de/feof"><span style="color: #000066;">feof</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+      <span style="color: #0000ff;">$res</span> .= <a href="http://www.php3.de/fgets"><span style="color: #000066;">fgets</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span>, <span style="color: #cc66cc;">128</span><span style="color: #000000;">&#41;</span>;
+  <span style="color: #000000;">&#125;</span>
+  <a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Done!<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #000000;">&#41;</span>;
+  <a href="http://www.php3.de/fclose"><span style="color: #000066;">fclose</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+  <span style="color: #b1b100;">return</span> <span style="color: #0000ff;">$res</span>;
+<span style="color: #000000;">&#125;</span>
+&nbsp;
+<span style="color: #0000ff;">$data</span> = <span style="color: #ff0000;">&quot;pid=14&amp;poll_vote_number=2&quot;</span>;
+&nbsp;
+<a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Go!<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #0000ff;">$x</span> = PostToHost<span style="color: #000000;">&#40;</span>
+              <span style="color: #ff0000;">&quot;www.linux.com&quot;</span>,
+              <span style="color: #ff0000;">&quot;/polls/index.phtml&quot;</span>,
+              <span style="color: #ff0000;">&quot;http://www.linux.com/polls/index.phtml?pid=14&quot;</span>,
+              <span style="color: #0000ff;">$data</span>
+<span style="color: #000000;">&#41;</span>;</pre>
+

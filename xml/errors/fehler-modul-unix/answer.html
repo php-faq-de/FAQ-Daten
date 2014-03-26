@@ -1,0 +1,37 @@
+<p>
+Höchstwahrscheinlich wurde das Modul bei der
+Installation von PHP nicht mitkompiliert ...
+</p>
+
+<p>
+Ein Blick in den entsprechenden Abschnitt im
+<a href="http://www.php3.de/funcref">PHP-Manual</a>
+verrät oft schnell, welche Einstellung man beim Kompilieren
+beachten sollte.
+</p>
+
+<p>Wenn ein Neukompilieren von PHP nicht möglich/erwünscht ist,
+kann man zur Laufzeit eine kompilierte shared PHP-Extensions (*.so)
+einbinden. Diese Extensions können mittels <tt>phpize</tt>
+erstellt werden:</p>
+
+<pre>
+# Beispiel: calendar-Extension
+$ cd php4/ext/calendar
+$ phpize
+Configuring for:
+  PHP Api Version:   20020918
+  Zend Module Api No:   20020429
+  Zend Extension Api No:   20021010
+$ ./configure
+...
+$ make
+...
+Libraries have been installed in:
+   /home/user/src/php4/ext/calendar/modules
+...
+</pre>
+
+<p>Mittels <a href="http://www.php3.de/dl">dl()</a> können diese Binaries dann in 
+Scripten eingebunden werden.</p>
+

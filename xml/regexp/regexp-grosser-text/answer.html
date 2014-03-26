@@ -1,0 +1,25 @@
+<p>
+Das folgende vollständige Beispiel zeigt, wie man den Inhalt des
+Body-Tags aus einer HTML-Datei isolieren kann.
+</p>
+
+<pre><span style="color: #0000ff;">$str</span> = <span style="color: #ff0000;">&quot;lalalala
+&lt;body bgcolor=#cccccc&gt;lang und weilig
+noch eine zeile
+&lt;h1&gt;Bla&lt;/h1&gt;
+&lt;/body&gt;
+tralalal&quot;</span>;
+  <a href="http://www.php3.de/preg_match_all"><span style="color: #000066;">preg_match_all</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;=&lt;body[^&gt;]*&gt;(.*)&lt;/body&gt;=siU&quot;</span>, <span style="color: #0000ff;">$str</span>, <span style="color: #0000ff;">$a</span><span style="color: #000000;">&#41;</span>;
+  <a href="http://www.php3.de/print"><span style="color: #000066;">print</span></a> <span style="color: #0000ff;">$a</span><span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">1</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #000000;">&#93;</span>;</pre>
+
+<p>
+Das Beispiel macht von den Optionen <tt>i</tt>, <tt>s</tt> und
+<tt>U</tt> der Perl Regular Expressions Gebrauch: Die Option
+<tt>i</tt> sorgt dafür, dass Groß- und Kleinschreibung keine
+Rolle spielen, die Option <tt>U</tt> sorgt dafür, dass Ungreedy
+gematched wird, d.h. der kürzest mögliche Match verwendet wird.
+Die Option <tt>s</tt> bewirkt, dass der Punktoperator auch
+Newlines mit matched. Dadurch ist es möglich, den regulären
+Ausdruck auf auf einen mehrzeiligen String anzuwenden.
+</p>
+

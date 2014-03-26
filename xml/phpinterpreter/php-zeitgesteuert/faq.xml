@@ -1,0 +1,4 @@
+<Faq alias="php-zeitgesteuert" author="Kristian Köhntopp">
+  <Question>Zeitgesteuerte PHP-Scripte und Shellscripte</Question>
+  <Keywords>cron, cronjob, crontab, CGI, CLI, Nachts, Regelmaessig, Zeit, ausfuehren, Script, at, Task</Keywords>
+</Faq>

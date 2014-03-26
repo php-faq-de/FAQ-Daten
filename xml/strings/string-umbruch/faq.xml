@@ -1,0 +1,4 @@
+<Faq alias="string-umbruch" author="Johannes Frömter">
+  <Question>Wie breche ich einen String nach x Zeichen um?</Question>
+  <Keywords>Zeilenumbruch, Zeilenlaenge</Keywords>
+</Faq>

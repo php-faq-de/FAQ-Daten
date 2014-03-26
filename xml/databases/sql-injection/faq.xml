@@ -1,0 +1,4 @@
+<Faq alias="sql-injection" author="Alex Kiesel">
+  <Question>Wie kann ich bösartigen Code in SQL-Abfragen unterbinden?</Question>
+  <Keywords>SQL, Injection, Quoting</Keywords>
+</Faq>

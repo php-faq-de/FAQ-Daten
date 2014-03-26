@@ -1,0 +1,60 @@
+<p>Man kann eine Datei manuell öffnen und Zeile für Zeile lesen:</p>
+
+<pre><span style="color: #0000ff;">$fp</span> = @<a href="http://www.php3.de/fopen"><span style="color: #000066;">fopen</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;datei&quot;</span>, <span style="color: #ff0000;">&quot;r&quot;</span><span style="color: #000000;">&#41;</span> or <a href="http://www.php3.de/die"><span style="color: #000066;">die</span></a> <span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Kann Datei nicht lesen.&quot;</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #b1b100;">while</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$line</span> = <a href="http://www.php3.de/fgets"><span style="color: #000066;">fgets</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span>, <span style="color: #cc66cc;">1024</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+  machwas<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$line</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000;">&#125;</span>
+<a href="http://www.php3.de/fclose"><span style="color: #000066;">fclose</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span><span style="color: #000000;">&#41;</span>;</pre>
+
+<p>
+Dies verwendet die Funktionen <a href="http://www.php3.de/fopen">fopen()</a> und
+<a href="http://www.php3.de/fgets">fgets()</a>. Wenn die gelesenen Zeilen sofort
+ausgegeben werden sollen, dann kann man dies kürzer mit
+<a href="http://www.php3.de/fpassthru">fpassthru()</a> oder gar
+<a href="http://www.php3.de/readfile">readfile()</a> schreiben:
+</p>
+
+<pre><span style="color: #0000ff;">$fp</span> = @<a href="http://www.php3.de/fopen"><span style="color: #000066;">fopen</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;datei&quot;</span>, <span style="color: #ff0000;">&quot;r&quot;</span><span style="color: #000000;">&#41;</span> or <a href="http://www.php3.de/die"><span style="color: #000066;">die</span></a> <span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Kann Datei nicht lesen.&quot;</span><span style="color: #000000;">&#41;</span>;
+<a href="http://www.php3.de/fpassthru"><span style="color: #000066;">fpassthru</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #808080; font-style: italic;">// fclose($fp); entfällt.</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">// Noch einfacher ist es mit readfile():</span>
+<a href="http://www.php3.de/readfile"><span style="color: #000066;">readfile</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;datei&quot;</span><span style="color: #000000;">&#41;</span>;</pre>
+
+<p>
+Will man stattdessen die Daten in der Datei in einem Array zur
+Verfügung haben, kann man <a href="http://www.php3.de/file">file()</a> verwenden.
+Will man die Daten in der Datei in einem einzigen String zur
+Verfügung haben, muss man dies mit <a href="http://www.php3.de/implode">implode()</a>
+kombinieren:
+</p>
+
+<pre><span style="color: #808080; font-style: italic;">// Einlesen in Array</span>
+<span style="color: #0000ff;">$avar</span> = <a href="http://www.php3.de/file"><span style="color: #000066;">file</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;datei&quot;</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;">// Einlesen in String</span>
+<span style="color: #0000ff;">$str</span> = <a href="http://www.php3.de/implode"><span style="color: #000066;">implode</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;&quot;</span>, <a href="http://www.php3.de/file"><span style="color: #000066;">file</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;datei&quot;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;">// Mit unterdrückten Meldungen</span>
+<span style="color: #0000ff;">$str</span> = <a href="http://www.php3.de/implode"><span style="color: #000066;">implode</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;&quot;</span>, @<a href="http://www.php3.de/file"><span style="color: #000066;">file</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;datei&quot;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>;</pre>
+
+<p>
+Ab PHP 4.3.0 kann man zum Einlesen in einen String auch die Funktion
+<a href="http://www.php3.de/file_get_contents">file_get_contents()</a> verwenden. Große Dateien
+sollte man allerdings häppchenweise mit <a href="http://www.php3.de/fopen">fopen()</a>
+und <a href="http://www.php3.de/fread">fread()</a> abarbeiten.
+</p>
+
+<p>
+In jedem Fall kann man den Funktionen wie üblich einen
+Klammeraffen voranstellen, um die
+<a href="http://www.php.net/manual/language.operators.errorcontrol.php">Fehlermeldungen zu unterdrücken</a>.
+Die häufigste Fehlermeldung bei <tt>fopen()</tt> &amp; Co. ist
+""<a class="faq" href="http://php-faq.de/q-fehler-file-handle.html">Warning: Supplied argument is not a valid File-Handle resource</a>"".
+</p>
+
+<p>
+Im <a href="http://de3.php.net/manual/en/ini.php">safe_mode</a> unterliegt das Lesen und Schreiben von
+Dateien weiteren Einschränkungen.
+</p>
+

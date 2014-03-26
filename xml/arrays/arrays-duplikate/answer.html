@@ -1,0 +1,18 @@
+<p>
+Seit PHP Version 4.0.1 gibt es die Funktion <a href="http://www.php3.de/array_unique">array_unique()</a>,
+um doppelte Einträge in Arrays zu eliminieren.
+</p>
+
+<p class="hint">
+Anmerkung:<tt>array_unique()</tt> behält die Indizes des Original-
+Arrays bei. Um auf die Elemente des Arrays mit fortlaufenden numerischen
+Indizes von <tt>0</tt> bis <tt>count()-1</tt> zugreifen zu können, verwende
+man
+<pre><span style="color: #0000ff;">$a</span> = <a href="http://www.php3.de/array_values"><span style="color: #000066;">array_values</span></a><span style="color: #000000;">&#40;</span><a href="http://www.php3.de/array_unique"><span style="color: #000066;">array_unique</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$a</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>;</pre>
+</p>
+
+<p>
+In PHP3 kann man sich z.B. mit folgender Konstruktion behelfen:
+"<a class="faq" href="http://www.php-faq.de/q-arrays-duplikate-php3.html">Wie kann ich mit PHP3 Duplikate aus einem Array entfernen?</a>"
+</p>
+

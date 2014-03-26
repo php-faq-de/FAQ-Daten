@@ -1,0 +1,27 @@
+<p>
+Die Funktion <tt>xy()</tt> erwartet eine andere Anzahl an
+Parametern, als ihr im Aufruf mitgegeben wurden. So erwartet
+z. B. die Funktion <a href="http://www.php3.de/date">date()</a> einen und
+optional einen zweiten Parameter, da sie wie folgt definiert ist:
+<tt>date (string format [, int timestamp])</tt>.
+Parameter in eckigen Klammern sind optional und können von rechts
+nach links weggelassen werden.
+D. h. sowohl <tt>date()</tt> (kein Parameter) als auch
+<tt>date('H:i', 1005698576, 15)</tt> (drei Parameter) erzeugen
+eine Warnung, weil die Zahl der Argumente nicht mit der
+Funktionsdefinition übereinstimmt. Gültig sind dagegen
+<tt>date('H:i')</tt> (ohne Timestamp) und
+<tt>date('H:i', 1005698576)</tt> (mit Timestamp).
+</p>
+
+<p>
+Selbst definierte
+<a href="http://de.php.net/manual/de/functions.php">Funktionen</a>
+reagieren nur allergisch, wenn sie mit <em>weniger</em> Parametern
+aufgerufen werden, als in der Funktionsdefinition vorgesehen.
+Optionale Parameter müssen mit einem Vorgabewert versehen werden,
+damit das funktioniert: <tt>function xy($var = "default")</tt>
+(Vorgabewerte sind nur bei Call-by-Value, nicht bei
+Call-by-Reference möglich).
+</p>
+

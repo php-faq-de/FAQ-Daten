@@ -1,0 +1,66 @@
+<p>
+PHP konvertiert Typen für manche Funktionen, ohne dass der Programmierer
+darauf Einfluss nehmen kann. Hier ein Beispiel, wie der Stringvergleich
+mit <a href="http://www.php3.de/strcmp">strcmp()</a> intern funktioniert:
+</p>
+
+<pre>
+  wenn is_numeric($a) und is_numeric($b),
+  dann vergleiche $a und $b als Zahlen, auch wenn die Variablen
+  den Typ String haben (und kein Cast der Welt kann das verhindern),
+    dabei verwende BC-Math wenn notwendig und vorhanden,
+    sonst float
+    sonst integer
+  sonst
+    mache einen Stringvergleich wie jedermann erwartet haette.
+</pre>
+
+<p>Also ist</p>
+
+<pre>
+kk@kris:~/Source/php4/Zend> php
+<?php
+  $a = "2";
+  $b = "10";
+  echo "a ist ".gettype($a)."\n";
+  echo "b ist ".gettype($b)."\n";
+  if ($a > $b)
+    echo "stringvergleich\n";
+  else
+    echo "numerischer vergleich\n";
+?>
+a ist string
+b ist string
+numerischer vergleich
+</pre>
+
+<p>
+Das ist nicht zu ändern. $a und $b sind Strings und werden als
+Zahlen verglichen, weil sie wie welche aussehen, und man kann
+es nicht verhindern, noch kann man die Zahldarstellung wählen,
+in der verglichen wird. Will man einen Stringvergleich erzwingen,
+muss man schreiben:
+</p>
+
+<pre>
+kk@kris:~/Source/php4/Zend> php
+<?php
+  $a = "2";
+  $b = "10";
+  echo "a ist ".gettype($a)."\n";
+  echo "b ist ".gettype($b)."\n";
+  if ("x$a" > "x$b")
+    echo "stringvergleich\n";
+  else
+    echo "numerischer vergleich\n";
+?>
+a ist string
+b ist string
+stringvergleich
+</pre>
+
+<p>
+Hier bewirken die führenden Buchstaben x, dass die Konvertierung in
+Zahldarstellung fehlschlägt und ein Stringvergleich wird erzwungen.
+</p>
+

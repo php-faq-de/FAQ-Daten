@@ -1,0 +1,4 @@
+<Faq alias="safe-password" author="Alex Kiesel">
+  <Question>Wie kann ich Passwörter sicher speichern?</Question>
+  <Keywords>Passwort, Authentifizierung, crypt, md5</Keywords>
+</Faq>

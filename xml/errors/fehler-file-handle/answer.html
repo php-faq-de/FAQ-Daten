@@ -1,0 +1,24 @@
+<p>
+Ein Script versucht mit einem Filehandle (<tt>$fp</tt>) zu arbeiten,
+welches das Resultat eines <a href="http://www.php3.de/fopen">fopen()</a> ist
+(<tt>$fp = fopen("..", "r")</tt> oder ähnlich). Dieses
+Filehandle ist ungültig, z. B. weil die Datei nicht existiert oder die
+Zugriffsrechte das Öffnen nicht gestatten.
+</p>
+
+<p>
+Das Script ist fehlerhaft, weil es nach dem <tt>fopen()</tt> nicht
+prüft, ob das <tt>fopen()</tt> erfolgreich war:
+</p>
+
+<pre><span style="color: #0000ff;">$fp</span> = <a href="http://www.php3.de/fopen"><span style="color: #000066;">fopen</span></a><span style="color: #000000;">&#40;</span>..., <span style="color: #ff0000;">&quot;r&quot;</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+        <span style="color: #808080; font-style: italic;">/* Das fehlt zum korrekten Code:  */</span>
+        <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span>!<span style="color: #0000ff;">$fp</span><span style="color: #000000;">&#41;</span>
+                <a href="http://www.php3.de/die"><span style="color: #000066;">die</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Kann Datei ... nicht oeffnen.<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+        <span style="color: #808080; font-style: italic;">/* Diese Anweisung macht dann Ärger */</span>
+        <span style="color: #b1b100;">while</span><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$line</span> = <a href="http://www.php3.de/fgets"><span style="color: #000066;">fgets</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span>, <span style="color: #cc66cc;">1000</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+        ...
+        <span style="color: #000000;">&#125;</span></pre>
+

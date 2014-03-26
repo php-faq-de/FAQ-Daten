@@ -1,0 +1,46 @@
+<p>
+Um im Mailprogramm des Empfängers einen bestimmten Absender
+anzuzeigen, muss in der Mail der <tt>From:</tt>-Header entsprechend
+gesetzt sein. Die Funktion <a href="http://www.php3.de/mail">mail()</a> nimmt im
+vierten Parameter solche Header-Angaben entgegen:
+</p>
+
+<pre><a href="http://www.php3.de/mail"><span style="color: #000066;">mail</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;empfaenger@example.org&quot;</span>,
+     <span style="color: #ff0000;">&quot;Betrefftext&quot;</span>,
+     <span style="color: #ff0000;">&quot;Hello world!&quot;</span>,
+     <span style="color: #ff0000;">&quot;From: Absender &lt;absender@example.com&gt;&quot;</span><span style="color: #000000;">&#41;</span>;</pre>
+
+<p>
+Eine Mailadresse mit Namen gibt man am besten in der Form
+<tt>Name &lt;Adresse&gt;</tt> an. Weitere Headerzeilen sind durch
+<tt>\r\n</tt> zu trennen.
+</p>
+
+<p>
+Durch diesen Header wird nur der Absender <em>in</em> der Mail,
+<em>nicht</em> jedoch der <tt>Envelope-From:</tt> - quasi die
+Absenderangabe auf dem "Briefumschlag" der Mail - festgelegt. Nicht
+zustellbare Mails gehen daher an den Serveradministrator, und
+nicht an den tatsächlichen Absender zurück.
+</p>
+
+<p>
+Seit PHP Version 4.0.5 kennt <tt>mail()</tt> hierzu einen fünften
+Parameter, dessen Inhalt direkt an das Mailprogramm weitergereicht wird.
+Im Falle des üblichen sendmail übergibt man den Absender für das
+<tt>Envelope-From:</tt> folgendermaßen:
+</p>
+
+<pre><a href="http://www.php3.de/mail"><span style="color: #000066;">mail</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;empfaenger@example.org&quot;</span>,
+     <span style="color: #ff0000;">&quot;Betrefftext&quot;</span>,
+     <span style="color: #ff0000;">&quot;Hello world!&quot;</span>,
+     <span style="color: #ff0000;">&quot;From: Absender &lt;absender@example.com&gt;&quot;</span>,
+     <span style="color: #ff0000;">&quot;-f absender@example.com&quot;</span><span style="color: #000000;">&#41;</span>;</pre>
+
+<p>
+Normalerweise fügt sendmail dann auch ein <tt>X-Authentication-Warning</tt> in den
+Header ein; um diese Warnung zu unterdrücken, sollte man den User, unter dessen
+Account der Webserver läuft, zu den "trusted users" in der sendmail-Konfiguration
+hinzufügen.
+</p>
+

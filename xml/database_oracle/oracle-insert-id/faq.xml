@@ -1,0 +1,4 @@
+<Faq alias="oracle-insert-id" author="Thomas Fromm">
+  <Question>Ich verwende das obige Beispiel. Wie kann ich nun mysql_insert_id() emulieren?</Question>
+  <Keywords>Oracle, Datenbank, MySQL, Ersatz, Zaehler, ID, letzter, Datensatz, mysql_insert_id</Keywords>
+</Faq>

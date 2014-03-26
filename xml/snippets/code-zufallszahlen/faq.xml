@@ -1,0 +1,7 @@
+<Faq alias="code-zufallszahlen" author="Guido Haeger">
+  <Question>Wie kann ich aus einem Zahlenbereich von x bis y zufällig n Zahlen auswählen, sodass keine Zahl doppelt vorkommt?</Question>
+  <Keywords>Zufall, Zahlen, Duplikat, einmalig</Keywords>
+  <Editors>
+    <Editor name="Niels Braczek" lastedit="2008-09-14 00:00:00" />
+  </Editors>
+</Faq>

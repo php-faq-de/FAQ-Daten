@@ -1,0 +1,4 @@
+<Faq alias="variable-parameter" author="Kristian Köhntopp">
+  <Question>Wie schreibe ich ein Script, das beliebige Parameter verarbeitet?</Question>
+  <Keywords>Argument, GET, POST</Keywords>
+</Faq>

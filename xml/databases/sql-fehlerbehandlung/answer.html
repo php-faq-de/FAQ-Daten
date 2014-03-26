@@ -1,0 +1,75 @@
+<h2>Fehlermeldungen</h2>
+<p>
+Als erster Anhaltspunkt sind die Fehlermeldungen der verwendeten 
+Datenbank gut geeignet. Für viele Datenbanken bietet PHP hierfür 
+eigene Funktionen. Dies sind zum Beispiel <a href="http://www.php3.de/mysql_error">mysql_error()</a>, <a href="http://www.php3.de/pg_last_error">pg_last_error()</a>,
+<a href="http://www.php3.de/ora_error">ora_error()</a>, <a href="http://www.php3.de/odbc_errormsg">odbc_errormsg()</a> und
+<a href="http://www.php3.de/sybase_get_last_message">sybase_get_last_message()</a>.
+</p>
+
+<p>
+Hier ein Beispiel für MySQL
+</p>
+<!-- Beispiel stammt von Guido Haeger, Frage "mysql-fehlerbehandlung" -->
+<pre><span style="color: #000000; font-weight: bold;">function</span> mysql_errorhandler<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$problem</span>, <span style="color: #0000ff;">$query</span> = <span style="color: #ff0000;">&quot;&quot;</span><span style="color: #000000;">&#41;</span>
+<span style="color: #000000;">&#123;</span>
+  <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;&lt;font color='#FF0000'&gt;&lt;b&gt;Datenbankfehler:&lt;/b&gt;&lt;/font&gt;&lt;br /&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
+  <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;Problem: $problem &lt;br /&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
+  <span style="color: #b1b100;">if</span><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$query</span> != <span style="color: #ff0000;">&quot;&quot;</span><span style="color: #000000;">&#41;</span>
+  <span style="color: #000000;">&#123;</span>
+    <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;Query: $query &lt;br /&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
+  <span style="color: #000000;">&#125;</span>
+  <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;MySQL: &quot;</span> . <a href="http://www.php3.de/mysql_errno"><span style="color: #000066;">mysql_errno</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> . <span style="color: #ff0000;">&quot; - &quot;</span> . <a href="http://www.php3.de/mysql_error"><span style="color: #000066;">mysql_error</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> . <span style="color: #ff0000;">&quot;&lt;br /&gt;&lt;br /&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
+<span style="color: #000000;">&#125;</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">// Verbindung zum Datenbankserver herstellen</span>
+<span style="color: #b1b100;">if</span><span style="color: #000000;">&#40;</span>!<span style="color: #0000ff;">$db</span> = @<a href="http://www.php3.de/mysql_connect"><span style="color: #000066;">mysql_connect</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;host&quot;</span>, <span style="color: #ff0000;">&quot;user&quot;</span>, <span style="color: #ff0000;">&quot;password&quot;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>
+<span style="color: #000000;">&#123;</span>
+  mysql_errorhandler<span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Verbindungsaufbau gescheitert.&quot;</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000;">&#125;</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">// Datenbank auswählen</span>
+<span style="color: #b1b100;">if</span><span style="color: #000000;">&#40;</span>!@<a href="http://www.php3.de/mysql_select_db"><span style="color: #000066;">mysql_select_db</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;database&quot;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>
+<span style="color: #000000;">&#123;</span>
+  mysql_errorhandler<span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Auswahl der Datenbank gescheitert.&quot;</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000;">&#125;</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">// Beispiel für ein SQL-Statement</span>
+<span style="color: #0000ff;">$query</span> = <span style="color: #ff0000;">&quot;SELECT * FROM table WHERE x = '$x'&quot;</span>;
+<span style="color: #0000ff;">$result</span> = @<a href="http://www.php3.de/mysql_query"><span style="color: #000066;">mysql_query</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$query</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+<span style="color: #b1b100;">if</span><span style="color: #000000;">&#40;</span>!<span style="color: #0000ff;">$result</span><span style="color: #000000;">&#41;</span>
+<span style="color: #000000;">&#123;</span>
+  mysql_errorhandler<span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Datenbankabfrage gescheitert&quot;</span>, <span style="color: #0000ff;">$query</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000;">&#125;</span></pre>
+
+<p>
+Klassen zur Datenbankabstraktion (z.B. <a href="http://pear.php.net/">PEAR</a>::<a href="http://pear.php.net/manual/en/package.database.php#package.database.db">DB</a>) können das Fehler-Handling wesentlich vereinfachen.
+</p>
+
+<h2>Reservierte Wörter</h2>
+
+<p>
+Bestimmte Wörter sollten nicht als Namen von Feldern vorkommen, da sie
+andere Bedeutungen haben. Diese "Reserved Words", oder auch "Keywords", 
+sollten im Handbuch der verwendeten Datenbank aufgelistet sein.
+</p><p>
+Bei MySQL und PostgreSQL kann man das Problem umgehen, indem man den 
+Feldnamen in Anführungszeichen einschließt:
+</p>
+<!-- Funktioniert dies bei allen Datenbanken? 
+     Nein: Sybase tut nicht -->
+
+<pre>SELECT * FROM users WHERE <span style="color: #ff0000;">'group'</span> = <span style="color: #cc66cc;">2</span></pre>
+
+<h2>Zuständige Newsgroups</h2>
+<p>
+Falls das alles nichts hilft, frage in den zuständigen Newsgroups nach.
+Das sind unter anderem 
+<a href="news:de.comp.datenbanken.misc">de.comp.datenbanken.misc</a>, 
+<a href="news:de.comp.datenbanken.mysql">de.comp.datenbanken.mysql</a>
+und die englischsprachigen Gruppen <tt>comp.databases.*</tt>
+</p>
+<!-- gibt es außer de.comp.datenbanken.ms-sql noch deutschsprachige
+Datenbankgruppen, die ich nicht aufgeführt habe? -->
+

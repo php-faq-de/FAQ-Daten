@@ -1,0 +1,4 @@
+<Faq alias="phpmyadmin-kein-admin" author="Tobias Ratschiller">
+  <Question>Ich bin kein MySQL-Administrator. Wie kann ich phpMyAdmin nur für mich selbst installieren?</Question>
+  <Keywords>MySQL, phpMyAdmin, Administrator, Benutzer, installieren</Keywords>
+</Faq>

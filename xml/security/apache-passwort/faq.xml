@@ -1,0 +1,7 @@
+<Faq alias="apache-passwort" author="Kristian Köhntopp">
+  <Question>Apache: Wie kann ich ein Verzeichnis mit einem Passwort schützen?</Question>
+  <Keywords>Passwort, htaccess, schuetzen, Authentifizierung, Apache, Verzeichnis, Login</Keywords>
+  <Editors>
+    <Editor name="Ulf Kadner" lastedit="2009-03-07 00:00:00" />
+  </Editors>
+</Faq>

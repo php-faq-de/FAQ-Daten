@@ -1,0 +1,7 @@
+<Faq alias="sql-aggregation" author="Kristian Köhntopp">
+  <Question>Was ist Aggregation? Was ist GROUP BY?</Question>
+  <Keywords>SQL, Datenbank, group by</Keywords>
+  <Editors>
+    <Editor name="Niels Braczek" lastedit="2008-08-12 00:00:00" />
+  </Editors>
+</Faq>

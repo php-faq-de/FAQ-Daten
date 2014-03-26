@@ -1,0 +1,4 @@
+<Faq alias="code-excel" author="Johannes Frömter">
+  <Question>Wie erzeuge ich Excel-Dateien mit PHP?</Question>
+  <Keywords>Excel, Download, CSV, Import</Keywords>
+</Faq>

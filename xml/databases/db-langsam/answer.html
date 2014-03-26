@@ -1,0 +1,14 @@
+<p>
+Eine Komponente Deines Netzes versucht, aus IP-Nummern per
+<a href="http://www.php3.de/gethostbyaddr">gethostbyaddr()</a> auf den Hostnamen zu schließen und findet
+keinen Domain Name Server (DNS). Die Verarbeitung des Requests wird
+erst nach dem DNS-Timeout fortgesetzt.
+</p>
+
+<p>
+Sorge dafür, dass ein DNS-Server mit korrektem Reverse Lookup
+verfügbar ist oder sorge dafür, dass keine Reverse Lookups
+gemacht werden. Dazu musst Du zunächst einmal die Komponente
+identifizieren, die die Lookups macht.
+</p>
+

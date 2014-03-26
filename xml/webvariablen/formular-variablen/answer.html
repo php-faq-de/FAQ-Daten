@@ -1,0 +1,33 @@
+<p>
+Gar nicht. Wenn das <tt>action=</tt>-Attribut eines Formulares ein
+PHP-Script ist, dann stehen die Variablen aus dem Formular und
+aus den Cookies automatisch als Elemente in einem von drei
+Arrays in PHP zur Verfügung: Je nach der Art der Übergabe stehen
+sie in <tt>$_GET</tt>,
+<tt>$_POST</tt> oder
+<tt>$_COOKIE</tt> bereit. Früher standen sie außerdem automatisch
+als globale Variablen bereit, aber dies ist ein Sicherheitsrisiko
+und seit PHP 4.2.x nicht mehr der Fall. Der Schalter
+<a href="http://de3.php.net/manual/en/ini.php">register_globals</a> kontrolliert dieses Verhalten
+und er steht seit PHP 4.2.x per Default auf <tt>off</tt> (siehe
+"<a class="faq" href="http://www.php-faq.de/q-formular-register-globals.html">Warum funktionieren meine Formulare nicht?</a>").
+</p>
+
+<p>
+Wenn die Quelle der Daten nicht bekannt ist (z.B. wenn das
+Formular über GET oder POST aufgerufen werden darf), kann auch
+das Array <tt>$_REQUEST</tt> verwendet werden, das die Daten der
+drei Arrays, die externe Daten enthalten, vereint. Wenn
+gleichzeitig gleichnamige Variablen über unterschiedliche
+Methoden übergeben werden (z.B. GET-Variable und Cookie), werden
+sie in der unter <a href="http://de3.php.net/manual/en/ini.php">variables_order</a> angegebenen
+Reihenfolge berücksichtigt bzw. überschrieben.
+</p>
+
+<p>
+Weil es sich bei diesen Arrays um superglobale Variablen
+handelt, sind sie in Funktionen automatisch sichtbar. Sie
+müssen nicht mit <a href="http://www.php3.de/global">global()</a> importiert
+werden.
+</p>
+

@@ -1,0 +1,33 @@
+<Category alias="errors" name="Häufige Fehlermeldungen" keywords="PHP, Usenet, FAQ, dclp">
+  <!--Die FAQs sind hier noch mal redundant aufgelistet um die Reihenfolge vorzugeben.-->
+  <Faqs>
+    <Faq alias="fehler-unterdruecken" />
+    <Faq alias="fehler-file-handle" />
+    <Faq alias="fehler-maximum-time" />
+    <Faq alias="fehler-mysql-result" />
+    <Faq alias="fehler-modul-windows" />
+    <Faq alias="fehler-modul-unix" />
+    <Faq alias="fehler-build" />
+    <Faq alias="fehler-mysql-away" />
+    <Faq alias="oracle-unsupported" />
+    <Faq alias="oracle-tns-name" />
+    <Faq alias="oracle-zeichensatz" />
+    <Faq alias="fehler-session-cookie" />
+    <Faq alias="fehler-header" />
+    <Faq alias="fehler-parameterzahl" />
+    <Faq alias="fehler-konstante" />
+    <Faq alias="fehler-variable" />
+    <Faq alias="fehler-include" />
+    <Faq alias="fehler-parse" />
+    <Faq alias="fehler-mysql-result2" />
+    <Faq alias="fehler-unbekannt" />
+    <Faq alias="fehler-connect" />
+    <Faq alias="fehler-session-datei" />
+    <Faq alias="fehler-no-file" />
+    <Faq alias="fehler-no-error" />
+    <Faq alias="fehler-no-data" />
+    <Faq alias="fehler-shorttags-xml" />
+    <Faq alias="fehler-class-redeclare" />
+    <Faq alias="fehler-function-redeclare" />
+  </Faqs>
+</Category>

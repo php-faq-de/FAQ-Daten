@@ -1,0 +1,234 @@
+<p>
+	Sessiondaten sind Daten, die z.B. von einem PHP-Script auf dem
+	Server gespeichert werden, und die meistens für die Dauer des
+	Besuchs (Session/Sitzung) auf mehreren Pages einer Website ihre
+	Gültigkeit behalten. Sessiondaten können z.B. dazu benutzt
+	werden, um dem Besucher restriktiven Zugriff (z.B. nach einem
+	Login) auf Teile einer Website zu erlauben - üblicherweise zu
+	einem Administrationsbereich.
+</p>
+
+<p>
+	In der PHP4-Standardeinstellung werden diese Daten als ASCII-
+	Dateien	im <tt>/tmp</tt>-Verzeichnis
+	(<tt>session.save_path</tt>)
+	des Servers	gespeichert. Diese Dateien enthalten das
+	serialsierte (<a href="http://www.php3.de/serialize">serialize()</a>) Abbild der
+	von einem Script gespeicherten Variablen. Der Name dieser
+	Dateien setzt sich aus dem Prefix <tt>sess_</tt> und einer
+	32-Zeichen langen, zufällig ausgewählten Zeichenkette
+	(der Session-ID) zusammen.
+</p>
+
+<p>
+	Die Manipulation dieser Daten bleibt nur dem serverseitig
+	ausgeführtem PHP-Script vorbehalten - der Client (Browser)
+	weiß nicht welche Daten	von dem Script gespeichert werden und
+	er kann keinen mittelbaren Einfluss auf diese Daten nehmen.
+	Ausnahme bildet hier die Änderung/Löschung dieser Daten durch
+	den Administrator oder durch ein Script mit entsprechenden
+	Rechten (siehe auch "<a class="faq" href="http://www.php-faq.de/q-sessions-schutz.html">Wie schütze ich Sessiondaten zusätzlich?</a>").
+</p>
+
+<p>
+	Unter diesen Voraussetzungen gelten die Sessiondaten bei einem
+	korrekt installierten Webserver, als sicher und durch den
+	Besucher nicht fakebar.
+</p>
+
+<p>
+	PHP4 stellt mehrere Funktionen zu Sessionverwaltung zu Verfügung
+	(siehe auch die <a href="http://www.php3.de/ref.session.php">Sessionsreferenz</a>, die grundlegenden seien hier kurz
+	vorgestellt:
+</p>
+
+<p>
+    Bei Verwendung dieser Funktionen ist zu beachten, dass eine neue
+    Session nur dann angelegt werden kann, wenn noch keine Ausgabe
+    stattgefunden hat. Mehr Informationen dazu finden sich im
+    Artikel "<a class="faq" href="http://www.php-faq.de/q-fehler-session-cookie.html">Warning: Cannot send session cookie - headers already sent ...</a>".
+</p>
+
+<h2>session_start()</h2>
+
+<p>
+	Session(datei) auf dem Server erstellen. Wurde eine gültige
+	Session-ID übergeben, werden die in den Sessiondaten gespeicherten
+	Werte in dem <tt>$_SESSION</tt>-Hash wiederhergestellt
+	und abhängig von der Einstellung der <a href="http://de3.php.net/manual/en/ini.php">register_globals</a>
+	auch als Variablen reinitialisiert.
+</p>
+
+<p>
+	Zusätzlich werden,
+	je nach Einstellung des	<tt>session.gc_probability</tt>
+	-Parameters, in diesem Augenblick die angehäuften und nicht
+	mehr benötigten Sessiondateien vom Server gelöscht. Wenn das
+	<a href="http://www.php3.de/error_reporting">error_reporting()</a> schärfer eingestellt
+	ist, gibt <a href="http://www.php3.de/session_start">session_start()</a> eine entsprechende
+	Notice aus. Da diese üblicherweise nicht erwünscht ist,
+	empfiehlt es sich vor die <a href="http://www.php3.de/session_start">session_start()</a>-Funktion
+	ein "<tt>@</tt>" zu schreiben, welches diese Warnung unterdrückt.
+</p>
+
+<p>
+	Also:
+</p>
+
+<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+    @<a href="http://www.php3.de/session_start"><span style="color: #000066;">session_start</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+
+<h2>Das <tt>$_SESSION</tt>-Hash</h2>
+
+<p>
+	Der Zugriff auf Sessionvariablen erfolgt seit PHP 4.1.0 über das
+	assoziative Array <tt>$_SESSION</tt>. Durch das erste Ansprechen
+	eines Arrayelements wird die Sessionvariable angelegt, durch ein
+	<a href="http://www.php3.de/unset">unset()</a> kann eine Variable gelöscht werden.
+	Bis PHP 4.0.6 hieß das entsprechende Array <tt>$HTTP_SESSION_VARS</tt>.
+    Wenn <a href="http://de3.php.net/manual/en/ini.php">register_globals</a> aktiviert ist, müssen bei
+    PHP Versionen, die älter als PHP 4.3 sind, die Sessionvariablen
+    mit <a href="http://www.php3.de/session_unregister">session_unregister()</a> aus der Session 
+    entfernt werden.
+</p>
+
+<h2>session_destroy()</h2>
+
+<p>
+	Die Funktion <a href="http://www.php3.de/session_destroy">session_destroy()</a> veranlasst
+	alle Variablen einer Session zu verwerfen und die Session(datei)
+	löschen.
+</p>
+
+<p>
+	Ein genauerer Einblick in die Funktionsweise dieser Funktionen
+	wird hier gewährt: "<a class="faq" href="http://www.php-faq.de/q-sessions-dateisystem.html">Was geschieht im Filesystem des Servers, wenn ich Sessions benutze?</a>".
+</p>
+
+<h2>Beispiel 1</h2>
+
+<h2>Beispiel 1: seite1.php</h2>
+
+<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+    <span style="color: #808080; font-style: italic;">// Falls nicht vorhanden, generiert eine Session(datei)</span>
+    <span style="color: #808080; font-style: italic;">// auf dem Server.</span>
+    <span style="color: #808080; font-style: italic;">// Falls bereits vorhanden, liest Sessiondaten wieder ein und</span>
+    <span style="color: #808080; font-style: italic;">// (re-)initialisiert die gespeicherten Variablen.</span>
+&nbsp;
+    @<a href="http://www.php3.de/session_start"><span style="color: #000066;">session_start</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+    <span style="color: #808080; font-style: italic;">// Erst wenn das Script terminiert(!), merkt PHP den Inhalt</span>
+    <span style="color: #808080; font-style: italic;">// der Variablen $s_userName und $s_userPermissions in</span>
+    <span style="color: #808080; font-style: italic;">// den Sessiondaten.</span>
+&nbsp;
+    <span style="color: #0000ff;">$_SESSION</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'userName'</span><span style="color: #000000;">&#93;</span>        =   <span style="color: #ff0000;">&quot;dtg&quot;</span>;
+    <span style="color: #0000ff;">$_SESSION</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'userPermissions'</span><span style="color: #000000;">&#93;</span> =   <span style="color: #ff0000;">&quot;keine :=(&quot;</span>;
+<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+
+<h2>Beispiel 1: seite2.php</h2>
+
+<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+    <span style="color: #808080; font-style: italic;">// Falls nicht vorhanden, generiert eine Session(datei)</span>
+    <span style="color: #808080; font-style: italic;">// auf dem Server.</span>
+    <span style="color: #808080; font-style: italic;">// Falls bereits vorhanden, liest Sessiondaten wieder ein und</span>
+    <span style="color: #808080; font-style: italic;">// (re-)initialisiert die gespeicherten Variablen.</span>
+&nbsp;
+    @<a href="http://www.php3.de/session_start"><span style="color: #000066;">session_start</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+    <span style="color: #808080; font-style: italic;">// Gibt den Inhalt der wiederhergestellten Variablen aus.</span>
+    <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;&lt;P&gt;Hallo &quot;</span> . <span style="color: #0000ff;">$_SESSION</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'userName'</span><span style="color: #000000;">&#93;</span> . <span style="color: #ff0000;">&quot;,&quot;</span>;
+    <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;&lt;P&gt;Du hast &quot;</span> . <span style="color: #0000ff;">$_SESSION</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'userPermissions'</span><span style="color: #000000;">&#93;</span> . <span style="color: #ff0000;">&quot; Zugriffsrechte.&quot;</span>;
+&nbsp;
+    <span style="color: #808080; font-style: italic;">// Wird in diesem Script kein unset() oder</span>
+    <span style="color: #808080; font-style: italic;">// session_destroy() ausgeführt, bleiben die Daten erhalten!</span>
+<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+
+<p>
+	Damit das Folgescript (<tt>seite2.php</tt>) weiß, in welcher Datei
+	auf dem Server die benötigten Daten zu finden sind, muss ihm die
+	sog. Session-ID übergeben werden. Diese Session-ID repräsentiert den
+	eindeutigen Namen der Session (es ist der bereits erwähnte
+	32-Zeichen lange String).
+</p>
+
+<p>
+	Um die Session-ID an eine andere Seite zu übergeben, benutzt PHP4 in
+	der Standardeinstellung Session-Cookies, welche nicht gespeichert werden
+	und mit dem Schließen des Browsers verfallen. In diesen Cookies wird
+	der Name der Session (z.B. <tt>PHPSESSID</tt>) und die zugehörige
+	Session-ID abgelegt. Bei einem Request auf ein Folgescript wird der
+	Cookieinhalt mitgeschickt, und PHP weiß damit in welcher Sessiondatei
+	die benötigten Daten gespeichert sind.
+</p>
+
+<p>
+	Dies passiert automatisch, ohne dass zusätzlicher Code
+	geschrieben werden muss.
+</p>
+
+<h2>Beispiel 2</h2>
+
+<p>
+	Hat man z.B. eine komplizierte Suchmaske z.B für eine Datenbank,
+	aus der man eine noch kompliziertere Query basteln muss, über
+	deren Ergebnisse man auf Folgeseiten browsen will,
+	kann es sich lohnen die Grund-Query einmalig zu generieren,
+	und sie dann weiter an das Ausgabe-/Browse-Script zu übergeben,
+	anstatt alle Eckparameter immerwieder zu übergeben und die
+	Query jedesmal neu zu generieren.
+</p>
+
+<p>
+	Dies darf natürlich <em>nicht</em> über die GET- oder POST-Methode
+	geschehen, denn der User könnte durch die Manipulation
+	dieser Parameter ohne Probleme "böse" Queries an die
+	Datenbank schicken. Ein Datenverlust ist dann vorprogrammiert.
+</p>
+
+<p>
+	Für diesen Einsatzzweck eignen sich Sessions auch, denn die
+	dynamisch erzeugte Query wird außerhalb der Reichweite
+	des Users auf dem Server gespeichert.
+</p>
+
+<h2>Beispiel 2: seite3.php (Formularseite)</h2>
+
+<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+    @<a href="http://www.php3.de/session_start"><span style="color: #000066;">session_start</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+    <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><a href="http://www.php3.de/isset"><span style="color: #000066;">isset</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$_POST</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'submit'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>
+        <span style="color: #000000;">&#123;</span>
+            <span style="color: #808080; font-style: italic;">// Hier prüfen, ob _alle_ benötigten Variablen,</span>
+            <span style="color: #808080; font-style: italic;">// die an dieses Script übermittelt wurden,</span>
+            <span style="color: #808080; font-style: italic;">// legal sind!</span>
+            <span style="color: #808080; font-style: italic;">// Hier nur fortfahren, wenn alles in Ordnung ist</span>
+&nbsp;
+            <span style="color: #808080; font-style: italic;">// Die Query wird anhand der Variablen,</span>
+            <span style="color: #808080; font-style: italic;">// die submitted wurden, erzeugt</span>
+            <span style="color: #0000ff;">$_SESSION</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'meineTolleQuery'</span><span style="color: #000000;">&#93;</span> = <span style="color: #ff0000;">&quot;SELECT ...&quot;</span>;
+&nbsp;
+            <span style="color: #808080; font-style: italic;">// HTTP-Redirect zu der Ausgabeseite</span>
+            <a href="http://www.php3.de/header"><span style="color: #000066;">header</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Location: http://&quot;</span> . <span style="color: #0000ff;">$_SERVER</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'SERVER_NAME'</span><span style="color: #000000;">&#93;</span>
+                                       . <span style="color: #ff0000;">&quot;/seite4.php&quot;</span><span style="color: #000000;">&#41;</span>;
+            <a href="http://www.php3.de/exit"><span style="color: #000066;">exit</span></a>;
+        <span style="color: #000000;">&#125;</span>
+<span style="color: #000000; font-weight: bold;">?&gt;</span>
+&nbsp;
+    &lt;FORM action=<span style="color: #ff0000;">&quot;&lt;?php=$_SERVER['PHP_SELF']?&gt;&quot;</span> method=<span style="color: #ff0000;">&quot;post&quot;</span>&gt;
+        &lt;!--
+            Hier ganz viele Radiobuttons, Checkboxen und Inputfelder
+        --&gt;
+       &lt;INPUT type=<span style="color: #ff0000;">&quot;submit&quot;</span> name=<span style="color: #ff0000;">&quot;submit&quot;</span>&gt;
+    &lt;/FORM&gt;</pre>
+
+<h2>Beispiel 2: seite4.php (Ausgabeseite)</h2>
+
+<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+    @<a href="http://www.php3.de/session_start"><span style="color: #000066;">session_start</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+    <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;&lt;P&gt;Diese Query wurde mir übermittelt: &quot;</span>
+             . <span style="color: #0000ff;">$_SESSION</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'meineTolleQuery'</span><span style="color: #000000;">&#93;</span>;
+    <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;&lt;P&gt;und jetzt mache ich was draus!&quot;</span>;
+<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+

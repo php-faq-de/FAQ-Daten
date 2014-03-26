@@ -1,0 +1,25 @@
+<p>
+Mit der Funktion <a href="http://www.php3.de/array_rand">array_rand()</a>. In PHP3 steht diese
+Funktion nicht zur Verfügung. Nachfolgende Funktion liefert hier bessere
+Ergebnisse, als <a href="http://www.php3.de/shuffle">shuffle()</a> auf das Array anzuwenden
+und dann die n Zahlen zu verwenden.
+</p>
+
+<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+<span style="color: #000000; font-weight: bold;">function</span> generate_numbers<span style="color: #000000;">&#40;</span> <span style="color: #0000ff;">$min</span>, <span style="color: #0000ff;">$max</span>, <span style="color: #0000ff;">$anz</span> <span style="color: #000000;">&#41;</span>
+<span style="color: #000000;">&#123;</span>
+    <span style="color: #0000ff;">$array</span> = <a href="http://www.php3.de/range"><span style="color: #000066;">range</span></a><span style="color: #000000;">&#40;</span> <span style="color: #0000ff;">$min</span>, <span style="color: #0000ff;">$max</span> <span style="color: #000000;">&#41;</span>;
+    <a href="http://www.php3.de/srand"><span style="color: #000066;">srand</span></a><span style="color: #000000;">&#40;</span> <span style="color: #000000;">&#40;</span>double<span style="color: #000000;">&#41;</span><a href="http://www.php3.de/microtime"><span style="color: #000066;">microtime</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> * <span style="color: #cc66cc;">1000000</span> <span style="color: #000000;">&#41;</span>;
+    <span style="color: #b1b100;">for</span> <span style="color: #000000;">&#40;</span> <span style="color: #0000ff;">$x</span>=<span style="color: #cc66cc;">0</span>; <span style="color: #0000ff;">$x</span>&lt;<span style="color: #0000ff;">$anz</span>; <span style="color: #0000ff;">$x</span>++ <span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+        <span style="color: #0000ff;">$i</span> = <a href="http://www.php3.de/rand"><span style="color: #000066;">rand</span></a><span style="color: #000000;">&#40;</span> <span style="color: #cc66cc;">1</span>, <a href="http://www.php3.de/count"><span style="color: #000066;">count</span></a><span style="color: #000000;">&#40;</span> <span style="color: #0000ff;">$array</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#41;</span> - <span style="color: #cc66cc;">1</span>;
+        <span style="color: #0000ff;">$erg</span><span style="color: #000000;">&#91;</span><span style="color: #000000;">&#93;</span> = <span style="color: #0000ff;">$array</span><span style="color: #000000;">&#91;</span><span style="color: #0000ff;">$i</span><span style="color: #000000;">&#93;</span>;
+        <a href="http://www.php3.de/array_splice"><span style="color: #000066;">array_splice</span></a><span style="color: #000000;">&#40;</span> <span style="color: #0000ff;">$array</span>, <span style="color: #0000ff;">$i</span>, <span style="color: #cc66cc;">1</span> <span style="color: #000000;">&#41;</span>;
+    <span style="color: #000000;">&#125;</span>
+    <span style="color: #b1b100;">return</span> <span style="color: #0000ff;">$erg</span>;
+<span style="color: #000000;">&#125;</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">// 5 eindeutige Zahlen im Bereich von 1 bis 100 ermitteln</span>
+<span style="color: #0000ff;">$zufalls_array</span> = generate_numbers<span style="color: #000000;">&#40;</span> <span style="color: #cc66cc;">1</span>, <span style="color: #cc66cc;">100</span>, <span style="color: #cc66cc;">5</span> <span style="color: #000000;">&#41;</span>;
+<a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <a href="http://www.php3.de/join"><span style="color: #000066;">join</span></a><span style="color: #000000;">&#40;</span> <span style="color: #ff0000;">'; '</span>, <span style="color: #0000ff;">$zufalls_array</span> <span style="color: #000000;">&#41;</span>;
+<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+

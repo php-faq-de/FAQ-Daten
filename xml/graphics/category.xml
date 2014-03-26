@@ -1,0 +1,9 @@
+<Category alias="graphics" name="Grafikfunktionen" keywords="PHP, Usenet, FAQ, dclp">
+  <!--Die FAQs sind hier noch mal redundant aufgelistet um die Reihenfolge vorzugeben.-->
+  <Faqs>
+    <Faq alias="grafik-webseite" />
+    <Faq alias="grafik-diagramme" />
+    <Faq alias="grafik-verkleinern" />
+    <Faq alias="grafik-farben" />
+  </Faqs>
+</Category>

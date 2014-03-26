@@ -1,0 +1,8 @@
+<Category alias="version3" name="PHP 3" keywords="PHP, Usenet, FAQ, dclp">
+  <!--Die FAQs sind hier noch mal redundant aufgelistet um die Reihenfolge vorzugeben.-->
+  <Faqs>
+    <Faq alias="formular-upload-php3" />
+    <Faq alias="konfiguration-php3-modul" />
+    <Faq alias="arrays-duplikate-php3" />
+  </Faqs>
+</Category>

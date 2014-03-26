@@ -1,0 +1,4 @@
+<Faq alias="string-print" author="Kristian Köhntopp">
+  <Question>Was ist besser, print() oder echo?</Question>
+  <Keywords>Unterschied, Vergleich</Keywords>
+</Faq>

@@ -1,0 +1,7 @@
+<Faq alias="http-redirect" author="Kristian Köhntopp">
+  <Question>Wie erzeuge ich mit PHP einen Redirect auf eine andere Seite?</Question>
+  <Keywords>Redirect, Header, 302, HTTP, URL</Keywords>
+  <Editors>
+    <Editor name="Niels Braczek" lastedit="2008-08-12 00:00:00" />
+  </Editors>
+</Faq>

@@ -1,0 +1,7 @@
+<Faq alias="mysql-blob" author="Thomas Hamacher">
+  <Question>Wie kann ich Bilder in einer MySQL-Datenbank speichern?</Question>
+  <Keywords>SQL, Datenbank, MySQL, Bild, Download, Upload, Performance, BLOB</Keywords>
+  <Editors>
+    <Editor name="Niels Braczek" lastedit="2010-01-05 00:00:00" />
+  </Editors>
+</Faq>

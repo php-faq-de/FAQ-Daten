@@ -1,0 +1,14 @@
+<p>Mögliche Ursachen dafür werden in der MySQL-Dokumentation in
+Kapitel 18.2.1 diskutiert. Die Fehlermeldung kann durch einen
+Idle-Timeout auf der Datenbankverbindung (8 Stunden) oder durch
+zu große Datenpakete beim Arbeiten mit BLOBs und TEXT-Feldern
+auftreten. In letzterem Fall empfiehlt die MySQL-Dokumentation
+das Setzen der MySQL-Konfigurationsvariablen
+<tt>max_allowed_packet=#</tt> auf einen großen Wert (einige MB).</p>
+
+<p>Ein Benutzer berichtete vom Auftreten dieses Fehlers beim
+Arbeiten mit UPDATE-Anweisungen in einer breiten Tabelle, die
+auch bis zu 150 KB große TEXT-Felder enthielt. Abhilfe war hier
+das Auslagern der TEXT-Felder in eine separate Tabelle. Dies
+brachte zugleich auch einen großen Performancegewinn.</p>
+

@@ -1,0 +1,34 @@
+<p>
+Da JavaScript auf dem Client und PHP auf dem Server läuft,
+kann man aus JavaScript auch keine PHP-Funktionen direkt
+aufrufen. PHP wird immer als das Resultat eines HTTP-Requests
+ausgeführt, also beim Holen einer Seite mit GET oder beim Verarbeiten
+eines Formulares mit POST. Es ist also nicht möglich, aus JavaScript
+heraus eine PHP-Funktion aufzurufen, außer durch Erzeugen eines
+HTTP-Requests (durch den von PHP eine neue Seite generiert wird).
+</p>
+
+<p>
+Einen GET-Request mit JavaScript erreicht man prinzipiell durch
+</p>
+
+<pre>&lt;script type=<span style="color: #ff0000;">&quot;text/javascript&quot;</span> language=<span style="color: #ff0000;">&quot;JavaScript&quot;</span>&gt;
+window.location.href = <span style="color: #ff0000;">&quot;script.php?php_var=&quot;</span> + escape<span style="color: #000000;">&#40;</span>js_var<span style="color: #000000;">&#41;</span>;
+<span style="color: #000000; font-weight: bold;">&lt;/script&gt;</span></pre>
+
+<p>
+Im dadurch aufgerufenen PHP-Skript <tt>script.php</tt> ist dann
+die Variable <tt>$_REQUEST['php_var']</tt> mit dem Wert von <tt>js_var</tt>
+verfügbar. Einen POST- oder GET-Request mit einem Formular erreicht
+man durch
+</p>
+
+<pre>&lt;script type=<span style="color: #ff0000;">&quot;text/javascript&quot;</span> language=<span style="color: #ff0000;">&quot;JavaScript&quot;</span>&gt;
+document.formularname.submit<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000; font-weight: bold;">&lt;/script&gt;</span></pre>
+
+<p>
+Weitere Informationen zur Variablenübergabe: siehe
+"<a class="faq" href="http://www.php-faq.de/ch-webvariablen.html">Variablen und Formulare</a>" in dieser FAQ.
+</p>
+

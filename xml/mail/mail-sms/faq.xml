@@ -1,0 +1,4 @@
+<Faq alias="mail-sms" author="Martin Jansen">
+  <Question>Wie versende ich SMS mit PHP?</Question>
+  <Keywords>Mail, SMS, Versand, Gateway, Handy</Keywords>
+</Faq>

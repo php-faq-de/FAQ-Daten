@@ -1,0 +1,17 @@
+<p>
+Mit <tt>include '/subdir/foo.php'</tt> bindet man ein Script in einem
+untergeordneten Verzeichnis ein. In <tt>foo.php</tt> will man nun die
+ebenfalls in <tt>/subdir</tt> stehende Datei <tt>bar.php</tt> einbinden.
+Ein einfaches <tt>include 'bar.php'</tt> funktioniert nicht, da
+PHP die Pfadangabe nicht relativ zum Script mit der
+<a href="http://www.php3.de/include">include()</a>-Anweisung, sondern <em>relativ zum
+Ursprungsscript</em> benötigt.
+</p>
+
+<p>
+Mit Hilfe der Konstanten <tt>__FILE__</tt> kann man sich den richtigen
+Pfad zusammenschrauben:
+</p>
+
+<pre><span style="color: #b1b100;">include</span> <a href="http://www.php3.de/dirname"><span style="color: #000066;">dirname</span></a><span style="color: #000000;">&#40;</span> <span style="color: #000000; font-weight: bold;">__FILE__</span> <span style="color: #000000;">&#41;</span> . <span style="color: #ff0000;">'/bar.php'</span>;</pre>
+

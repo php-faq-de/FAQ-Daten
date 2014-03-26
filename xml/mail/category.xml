@@ -1,0 +1,18 @@
+<Category alias="mail" name="Mail lesen und schreiben" keywords="PHP, Usenet, FAQ, dclp">
+  <!--Die FAQs sind hier noch mal redundant aufgelistet um die Reihenfolge vorzugeben.-->
+  <Faqs>
+    <Faq alias="mail-smtp" />
+    <Faq alias="mail-dns" />
+    <Faq alias="mail-unix" />
+    <Faq alias="mail-windows" />
+    <Faq alias="mail-server" />
+    <Faq alias="mail-html" />
+    <Faq alias="mail-attachment" />
+    <Faq alias="mail-massenversand" />
+    <Faq alias="mail-adresse-testen" />
+    <Faq alias="mail-zustellung" />
+    <Faq alias="mail-adresse-gueltig" />
+    <Faq alias="mail-sms" />
+    <Faq alias="mail-absender" />
+  </Faqs>
+</Category>

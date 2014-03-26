@@ -1,0 +1,21 @@
+<Category alias="general" name="Allgemeine Fragen rund um PHP" keywords="PHP, Usenet, FAQ, dclp">
+  <!--Die FAQs sind hier noch mal redundant aufgelistet um die Reihenfolge vorzugeben.-->
+  <Faqs>
+    <Faq alias="php-was" />
+    <Faq alias="php-version" />
+    <Faq alias="php4-wo" />
+    <Faq alias="php51-neu" />
+    <Faq alias="php5-neu" />
+    <Faq alias="php4-neu" />
+    <Faq alias="php-mehr-info" />
+    <Faq alias="php-editoren" />
+    <Faq alias="php-doku-generator" />
+    <Faq alias="server-abkuerzungen" />
+    <Faq alias="php4-application-server" />
+    <Faq alias="web-server-client" />
+    <Faq alias="php-easter-egg" />
+    <Faq alias="php53-neu" />
+    <Faq alias="php-ide" />
+    <Faq alias="was-ist-php-ide" />
+  </Faqs>
+</Category>

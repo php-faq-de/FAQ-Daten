@@ -1,0 +1,44 @@
+<p>
+Der Referer ist eine Variable, in der stehen soll, von welcher
+Seite der Benutzer kommt, der sich gerade auf der Seite
+befindet. Hat der User zum Beispiel bei einer Suchmaschine auf
+einen Link geklickt, so würde der Referer
+<tt>"http://suchmaschine.tld/query?suchwort=german-faq"</tt> lauten.
+</p>
+
+<p>
+Dies muss allerdings nicht immer so sein:
+</p>
+
+<ul>
+  <li><p>
+      Die Entwickler des Browsers haben nicht vorgesehen, dass
+      ein Referer-String mitgesendet wird oder der User hat das
+      Mitsenden des Referers im Browser deaktivert.</p>
+  </li>
+
+  <li><p>
+      Der User verwendet einen lokalen Proxyserver (z.B.
+      <a href="http://www.webwasher.com/">Webwasher</a>), der die Referer-Information
+      herausfiltert.</p>
+  </li>
+
+  <li><p>
+      Ein Proxyserver bei einem Provider, im Rechenzentrum einer
+      Universität oder in einem Unternehmen ist so konfiguriert,
+      dass er keine Referer-Strings mitsendet.</p>
+  </li>
+
+  <li><p>
+      Neben dem kompletten Entfernen des Referer-Strings aus den
+      Headerdaten kann es auch möglich sein, dass der Referer
+      durch o.g. Quellen modifiziert wird und dadurch
+      unbrauchbar wird.</p>
+  </li>
+</ul>
+
+<p>
+Diese Punkte sind Argumente dafür, den Referer nicht zu
+<em>sicherheitsrelevanten</em> Zwecken auf einer Website einzusetzen.
+</p>
+

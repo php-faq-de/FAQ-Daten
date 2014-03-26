@@ -1,0 +1,4 @@
+<Faq alias="php53-neu" author="Ulf Kadner am 27. April 2011">
+  <Question>Was ist neu in PHP 5.3</Question>
+  <Keywords>PHP 5.3, Namensräume, namespaces, closures, late binding, late static binding, Späte statische Bindung, Anonyme Funktionen, goto, NOWDOC, ternary operator</Keywords>
+</Faq>

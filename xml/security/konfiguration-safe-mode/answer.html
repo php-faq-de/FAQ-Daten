@@ -1,0 +1,110 @@
+<p>
+Die hier aufgeführte Liste basiert auf einer Analyse einer
+bestimmten, inzwischen veralteten Version des PHP-Sourcecodes.
+Die grundsätzlichen Informationen sind korrekt, aber die Liste
+der einzelnen Teileinschränkungen dürfte nicht mehr abschließend
+sein.
+</p>
+
+<p>
+Es gibt eine Konfigurationsvariable <a href="http://de3.php.net/manual/en/ini.php">safe_mode</a>, die
+in der <tt>php.ini</tt> gesetzt werden kann. Weiterhin gibt es die
+Konfigurationsvariablen <a href="http://de3.php.net/manual/en/ini.php">safe_mode_exec_dir</a> und
+<a href="http://de3.php.net/manual/en/ini.php">sql_safe_mode</a>.
+</p>
+
+<p>
+Wenn <a href="http://de3.php.net/manual/en/ini.php">safe_mode</a> aktiv ist, sind verschiedene
+PHP-Funktionen privilegiert oder eingeschränkt. Zumeist gilt
+die <em>safe_mode Einschränkung</em>, dass auf eine Datei oder
+ein Verzeichnis nur eingewirkt werden darf, wenn die Datei oder
+das Verzeichnis denselben Eigentümer hat wie das Script.
+Im Einzelnen:
+</p>
+
+<ul>
+<li><p>
+Alle Dateifunktionen einschließlich <a href="http://www.php3.de/include">include()</a> und <a href="http://www.php3.de/require">require()</a> können nur
+noch mit lokalen Dateien arbeiten, die denselben Eigentümer
+(uid) haben wie der Eigentümer des Scriptes.</p>
+</li>
+
+<li>
+    <ul>
+     <li><p>Auch ftp-Pfadnamen werden so geprüft.</p></li>
+     <li><p>Auch zlib-Pfadnamen werden so geprüft.</p></li>
+     <li><p><a href="http://www.php3.de/mkdir">mkdir()</a> und <a href="http://www.php3.de/posix_mkfifo">posix_mkfifo()</a> sind nur in Verzeichnissen
+         zugelassen, die die Einschränkung erfüllen.</p>
+     </li>
+     <li><p>Das Ziel eines <a href="http://www.php3.de/link">link()</a> und
+         <a href="http://www.php3.de/symlink">symlink()</a> (Parameter 1 von
+         <a href="http://www.php3.de/symlink">symlink()</a>) muss die Einschränkung
+         erfüllen.</p>
+     </li>
+     <li><p>Die Subjekte der Funktionen <a href="http://www.php3.de/unlink">unlink()</a>, <a href="http://www.php3.de/chgrp">chgrp()</a>,
+         <a href="http://www.php3.de/chown">chown()</a>, <a href="http://www.php3.de/chmod">chmod()</a>, <a href="http://www.php3.de/touch">touch()</a>,
+         <a href="http://www.php3.de/rmdir">rmdir()</a>, <a href="http://www.php3.de/rename">rename()</a> und <a href="http://www.php3.de/copy">copy()</a> müssen
+         die Einschränkung erfüllen.</p>
+     </li>
+    </ul>
+</li>
+<li><p>Lokalen, absoluten Pfadnamen wird <tt>document_root</tt>
+    vorangestellt.</p>
+</li>
+<li><p>In den Funktionen <a href="http://www.php3.de/popen">popen()</a>,
+    <a href="http://www.php3.de/system">system()</a> und <a href="http://www.php3.de/exec">exec()</a>
+    können nur Kommandos ausgeführt werden, die im <a href="http://de3.php.net/manual/en/ini.php">safe_mode_exec_dir</a> stehen. Auf die ausgeführten
+    Kommandos wird von den Funktionen <a href="http://www.php3.de/popen">popen()</a>, <a href="http://www.php3.de/system">system()</a> und
+    <a href="http://www.php3.de/exec">exec()</a> automatisch <a href="http://www.php3.de/EscapeShellCmd">EscapeShellCmd()</a> angewendet.</p>
+</li>
+<li><p>Dynamisch ladbare Erweiterungen (<a href="http://www.php3.de/dl">dl()</a>-Funktion)
+    stehen in <a href="http://de3.php.net/manual/en/ini.php">safe_mode</a> nicht zur Verfügung
+    ("Dynamically loaded extensions aren't allowed when running
+    in SAFE MODE.").</p>
+</li>
+<li><p>Es kann kein neues CPU-Zeitlimit festgelegt werden ("Cannot
+    set time limit in safe mode").</p>
+</li>
+<li><p>Wird <tt>mod_php</tt> verwendet, steht in der Funktion
+    <a href="http://www.php3.de/getallheaders">getallheaders()</a> der Wert des Headers
+    "Authorization" (Loginname und Passwort) nicht zur
+    Verfuegung.</p>
+</li>
+<li><p>Die Funktion <a href="http://www.php3.de/header">header()</a> wird dem Header
+    "WWW-authenticate" immer den Eigentümer des
+    Scriptes als Bestandteil des Realms hinzufügen.</p>
+</li>
+<li><p>Das filepro Map-File "dir/map" (wobei <tt>dir</tt>
+  der Parameter der filepro()-Funktionen ist) muss die
+  Einschränkung erfüllen.  Dies gilt für <a href="http://www.php3.de/filepro">filepro()</a>,
+  <a href="http://www.php3.de/filepro_rowcount">filepro_rowcount()</a> und
+  <a href="http://www.php3.de/filepro_retrieve">filepro_retrieve()</a>.</p>
+</li>
+<li><p>Das dbase-Modul verlangt in <a href="http://www.php3.de/dbase_open">dbase_open()</a> und
+  <a href="http://www.php3.de/dbase_create">dbase_create()</a>, dass die dbf-Datei die
+  Einschränkung erfüllt.</p>
+</li>
+<li><p>Das DBM-Modul setzt voraus, dass in <a href="http://www.php3.de/dbmopen">dbmopen()</a>
+  das Verzeichnis, in dem die DBM-Datenbank angelegt wird, die
+  Einschränkung erfüllt. Dies ist bei den DBA-Funktionen nicht
+  der Fall.</p>
+</li>
+</ul>
+
+<p>
+Wenn <a href="http://de3.php.net/manual/en/ini.php">sql_safe_mode</a> aktiv ist, können bei einem
+MySQL-Connect <tt>host</tt>, <tt>user</tt> und <tt>password</tt>
+nicht angegeben werden ("SQL safe mode in effect - ignoring
+host/user/password information").
+</p>
+
+<p>
+<tt>safe_mode</tt> ist nicht sicher: Ein Fehler in der
+<a href="http://www.php3.de/popen">popen()</a>-Funktion ist erst mit 3.0.14
+korrigiert worden, ein weiterer Fehler in der <a href="http://www.php3.de/mail">mail()</a>-Funktion erst in 3.0.15. Spätere Versionen von
+PHP hatten weitere Lücken. Man sollte stattdessen
+die CGI-Version in einem <tt>chroot</tt>-Environment verwenden
+und mit <tt>setrlimit</tt> noch weitergehende Einschränkungen
+definieren.
+</p>
+

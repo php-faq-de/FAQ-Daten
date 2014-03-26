@@ -1,0 +1,39 @@
+<p>
+Dieser Fehler kann mehrere Ursachen haben:
+</p>
+
+<ul>
+<li>
+<p>Die Datei <tt>xy</tt> existiert nicht (möglicherweise ein
+Pfad-Problem)</p>
+</li>
+
+<li>
+<p><tt>xy</tt> ist eine lokale Datei, an die Parameter angehängt
+wurden - siehe hierzu: ""<a class="faq" href="http://php-faq.de/q-datei-uebergabe.html">Wie übergebe ich Variablen an eingebundene Dateien?</a>""</p>
+</li>
+
+<li>
+<p>PHP kann die Datei <tt>xy</tt> nicht lesen, weil es nicht
+die erforderlichen Rechte für die Datei hat (der Fehler tritt
+dann angeblich in Zeile 0 auf)</p>
+</li>
+
+<li>
+<p><tt>xy</tt> ist ein URL, <tt>allow_url_fopen</tt> steht aber
+auf 0 (siehe <a href="http://www.php3.de/phpinfo">phpinfo()</a>)</p>
+</li>
+
+<li>
+<p><tt>xy</tt> ist ein URL und wird mit <a href="http://www.php3.de/include">include()</a>
+unter Windows benutzt; das wird zumindest derzeit nicht unterstützt
+</p>
+</li>
+</ul>
+
+<p>
+All diese Probleme können analog auch mit <a href="http://www.php3.de/require">require()</a>
+auftreten, nur dass die Fehlermeldung dann <tt>Fatal error: Failed
+opening required 'xy' ...</tt> lautet.
+</p>
+

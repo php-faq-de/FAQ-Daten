@@ -1,0 +1,87 @@
+<p>
+MySQL verarbeitet Datumsangaben im ISO-8601-Format (siehe
+<a href="http://www.cl.cam.ac.uk/~mgk25/iso-time.html">die Abhandlung von Markus Kuhn</a> zu diesem Thema).
+Dies <em>ist</em> das offizielle deutsche Datumsformat, eine
+Umwandlung ist nicht notwendig, weil nicht normgerecht.
+</p>
+
+<p>
+Dennoch kann man das Datum auch in anderen Formaten bekommen.
+Wahlweise kann die Umwandlung bereits in MySQL oder erst in PHP
+geschehen. In MySQL kann man mit Hilfe der Funktion
+<tt>date_format</tt> das Datum in beliebigen Formaten
+bekommen:
+</p>
+
+<pre>
+mysql&gt; SELECT date_format(changed, '%d.%m.%Y %H:%i:%s') AS datum
+    -&gt; FROM teiln_liste;
++---------------------+
+| datum               |
++---------------------+
+| 27.08.1998 12:49:29 |
+| 14.12.1999 15:05:52 |
+| 13.12.1999 08:30:43 |
+| 13.05.1998 15:51:45 |
+| 06.10.1998 14:30:25 |
+| 07.08.1998 11:28:59 |
+| 23.06.1998 17:15:16 |
+| 14.01.1999 08:34:22 |
+| 07.01.2000 11:36:42 |
+| 01.02.1999 08:47:25 |
++---------------------+
+10 rows in set (0.00 sec)
+</pre>
+
+<p>
+In PHP kann man mit Hilfe der Funktion
+<a href="http://www.php3.de/date">date()</a> aus einem <tt>time_t</tt> ein beliebiges
+Datum generieren und mit Hilfe der Funktion
+<a href="http://www.php3.de/mktime">mktime()</a> aus den Fragmenten einer Datumsangabe
+einen <tt>time_t</tt> erzeugen. Mit den <tt>time_t</tt>
+(Sekunden seit Mitternacht GMT, 1. Januar 1970) lassen sich sehr
+natürlich Zeitdifferenzen bestimmen und andere Zeitrechnungen
+ausführen.
+</p>
+
+<p>
+Will man dagegen nur einen MySQL <tt>TIMESTAMP</tt> oder <tt>DATE</tt>
+in andere Reihenfolge umsortieren, kann man stattdessen mit den
+Funktionen <a href="http://www.php3.de/explode">explode()</a> oder
+<a href="http://www.php3.de/substr">substr()</a> arbeiten.
+</p>
+
+<pre><span style="color: #808080; font-style: italic;">/**
+ * date_mysql2german
+ * wandelt ein MySQL-DATE (ISO-Date)
+ * in ein traditionelles deutsches Datum um.
+ */</span>
+<span style="color: #000000; font-weight: bold;">function</span> date_mysql2german<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$datum</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+    <a href="http://www.php3.de/list"><span style="color: #000066;">list</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$jahr</span>, <span style="color: #0000ff;">$monat</span>, <span style="color: #0000ff;">$tag</span><span style="color: #000000;">&#41;</span> = <a href="http://www.php3.de/explode"><span style="color: #000066;">explode</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;-&quot;</span>, <span style="color: #0000ff;">$datum</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+    <span style="color: #b1b100;">return</span> <a href="http://www.php3.de/sprintf"><span style="color: #000066;">sprintf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;%02d.%02d.%04d&quot;</span>, <span style="color: #0000ff;">$tag</span>, <span style="color: #0000ff;">$monat</span>, <span style="color: #0000ff;">$jahr</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000;">&#125;</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">/**
+ * date_german2mysql
+ * wandelt ein traditionelles deutsches Datum
+ * nach MySQL (ISO-Date).
+ */</span>
+<span style="color: #000000; font-weight: bold;">function</span> date_german2mysql<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$datum</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+    <a href="http://www.php3.de/list"><span style="color: #000066;">list</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$tag</span>, <span style="color: #0000ff;">$monat</span>, <span style="color: #0000ff;">$jahr</span><span style="color: #000000;">&#41;</span> = <a href="http://www.php3.de/explode"><span style="color: #000066;">explode</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;.&quot;</span>, <span style="color: #0000ff;">$datum</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+    <span style="color: #b1b100;">return</span> <a href="http://www.php3.de/sprintf"><span style="color: #000066;">sprintf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;%04d-%02d-%02d&quot;</span>, <span style="color: #0000ff;">$jahr</span>, <span style="color: #0000ff;">$monat</span>, <span style="color: #0000ff;">$tag</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000;">&#125;</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">/**
+ * timestamp_mysql2german
+ * wandelt ein MySQL-Timestamp
+ * in ein traditionelles deutsches Datum um.
+*/</span>
+<span style="color: #000000; font-weight: bold;">function</span> timestamp_mysql2german<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$t</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+    <span style="color: #b1b100;">return</span> <a href="http://www.php3.de/sprintf"><span style="color: #000066;">sprintf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;%02d.%02d.%04d&quot;</span>,
+                    <a href="http://www.php3.de/substr"><span style="color: #000066;">substr</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$t</span>, <span style="color: #cc66cc;">6</span>, <span style="color: #cc66cc;">2</span><span style="color: #000000;">&#41;</span>,
+                    <a href="http://www.php3.de/substr"><span style="color: #000066;">substr</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$t</span>, <span style="color: #cc66cc;">4</span>, <span style="color: #cc66cc;">2</span><span style="color: #000000;">&#41;</span>,
+                    <a href="http://www.php3.de/substr"><span style="color: #000066;">substr</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$t</span>, <span style="color: #cc66cc;">0</span>, <span style="color: #cc66cc;">4</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000;">&#125;</span></pre>
+

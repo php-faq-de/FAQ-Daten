@@ -1,0 +1,66 @@
+<p>
+      Ja. Es gibt für die Erstellung von PDF-Dateien mit PHP zwei
+      Bibliotheken: die
+      <a href="http://www.php3.de/ref.pdf.php">PDFlib</a>
+      von Thomas Merz und FastIO's
+      <a href="http://www.php3.de/ref.cpdf.php">ClibPDF</a>.
+
+      Für die kommerzielle Nutzung brauchst du aber eine spezielle
+      Lizenz für die von dir verwendete Bibliothek. Details für die
+      kommerzielle Nutzung von PDFlib findest du unter
+      <a href="http://www.pdflib.com/pdflib/business.html">http://www.pdflib.com/pdflib/business.html</a>.
+      Den Lizenzvertrag zur Nutzung von ClibPDF findest du unter
+      <a href="http://www.fastio.com/licensePlain.html">http://www.fastio.com/licensePlain.html</a>.
+</p>
+
+<p>
+      Da das Erstellen von PDF-Dateien durch pixelgenaues Layouten
+      sehr umständlich ist, hat Alexander Wirtz die Klassenbibliothek
+      <a href="http://www.pc4p.net/">PC4P</a> geschrieben,
+      die die PDFLIB-Funktionen nutzt und mit der es wesentlich einfacher
+      ist, Rahmen/Textblöcke etc. auf einem PDF-Dokument zu platzieren.
+      Mit PC4P arbeitet man objektorientiert auf dem PDF-Dokument.
+</p>
+
+<p>
+      Eine weitere Variante PDF-Dateien zu erstellen ist die
+      Verwendung einer der in PHP geschriebenen Klassen zur
+      Generierung von PDF-Dateien wie
+      <a href="http://www.fpdf.org/">FPDF</a>,
+      <a href="http://ros.co.nz/pdf/">PDF-Klasse von RO&amp;S</a>
+      oder der 
+      <a href="http://www.potentialtech.com/ppl.php">phppdflib</a>.
+      Diese Klassen bieten im Vergleich zu PDFlib und ClibPDF nur
+      eingeschränkte - für viele Zwecke aber trotzdem ausreichende -
+      Möglichkeiten.
+</p>
+
+<p>
+      Man kann PDF-Dateien aber auch ohne diese Bibliotheken oder Klasse
+      erstellen - PDF-Dateien sind Text-Dateien, die bestimmte Steuersequenzen
+      enthalten. Diese Steuersequenzen sind durch Adobe veröffentlicht
+      worden und können wie normaler Text in eine Datei geschrieben
+      werden.
+      Adobe veröffentlicht die Details zum PDF-Format im Rahmen des
+      <a href="http://partners.adobe.com/asn/tech/pdf/specifications.jsp">Adobe Solutions Network (ASN)</a>.
+      Die Referenz ist auch in Buchform erhältlich.
+      In Zusammenarbeit mit Adobe sind im Addison-Wesley-Verlag
+      bisher folgende Bücher erschienen:
+</p>
+
+<ul>
+<li><p><a class="book" href="http://www.amazon.de/exec/obidos/ASIN/0201615886/bsdsbraczekso-21" target="amazon">PDF Reference, Second Edition, Version 1.3</a>
+</p></li>
+<li><p><a class="book" href="http://www.amazon.de/exec/obidos/ASIN/0201758393/bsdsbraczekso-21" target="amazon">PDF Reference, Third Edition, Version 1.4</a>
+</p></li>
+</ul>
+
+<p>
+      Im PDF-Format ist die Verwendung der LZW-Kompression
+      möglich. Diese ist durch das US-Patent No. 4,558,302 geschützt,
+      welches der Firma Unisys Corporation gehört. Man benötigt also
+      bei Erstellung von PDF-Dateien auf Basis der
+      Datei-Spezifikationen eine Lizenz von Unisys, oder muss auf
+      Komprimierung verzichten.
+</p>
+

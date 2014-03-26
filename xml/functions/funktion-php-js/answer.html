@@ -1,0 +1,31 @@
+<p>
+JavaScript läuft auf dem Client (im Browser), PHP läuft auf dem
+Server, also genau am anderen Ende der Welt; wenn die HTML-Seite beim
+Browser ankommt, ist PHP mit der Arbeit schon fertig. Der Aufruf einer
+JavaScript-Funktion aus PHP ist also prinzipiell unmöglich.
+</p>
+
+<p>
+Allerdings kann man Werte von PHP an JavaScript übergeben; um eine
+in PHP vorhandene Variable in JavaScript verwenden zu können, muss man
+sie innerhalb eines <tt>&lt;script&gt;</tt>-Bereiches ausgeben:
+</p>
+
+<pre>&lt;script type=<span style="color: #ff0000;">&quot;text/javascript&quot;</span> language=<span style="color: #ff0000;">&quot;JavaScript&quot;</span>&gt;
+<span style="color: #000000; font-weight: bold;">&lt;?php</span>
+<a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;js_var = '%s';<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>,
+        <a href="http://www.php3.de/strtr"><span style="color: #000066;">strtr</span></a><span style="color: #000000;">&#40;</span><a href="http://www.php3.de/addslashes"><span style="color: #000066;">addslashes</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$php_var</span><span style="color: #000000;">&#41;</span>,
+        <a href="http://www.php3.de/array"><span style="color: #000066;">array</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;<span style="color: #000099; font-weight: bold;">\r</span>&quot;</span> =&gt; <span style="color: #ff0000;">'<span style="color: #000099; font-weight: bold;">\r</span>'</span>, <span style="color: #ff0000;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span> =&gt; <span style="color: #ff0000;">'<span style="color: #000099; font-weight: bold;">\n</span>'</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>
+      <span style="color: #000000;">&#41;</span>;
+<span style="color: #000000; font-weight: bold;">?&gt;</span>
+<span style="color: #000000; font-weight: bold;">&lt;/script&gt;</span></pre>
+
+<p>
+Auf diese Weise wird die JavaScript-Variable <tt>js_var</tt> mit
+dem Wert der PHP-Variable <tt>$php_var</tt> vorbelegt.
+Natürlich kann man so auch beliebigen ausführbaren JavaScript-Code
+ausgeben, den der Browser anschließend verarbeitet. Wichtig ist nur
+zu verstehen, dass ein logischer, räumlicher und auch zeitlicher Schnitt
+zwischen PHP- und JavaScript-Code vorhanden ist.
+</p>
+

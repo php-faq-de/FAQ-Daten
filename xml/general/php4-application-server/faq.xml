@@ -1,0 +1,7 @@
+<Faq alias="php4-application-server" author="Sebastian Bergmann">
+  <Question>Gibt es Application Server für PHP?</Question>
+  <Keywords>Application, Server, SRM, Pooling, Daemon, Session</Keywords>
+  <Editors>
+    <Editor name="Ulf Kadner" lastedit="2014-03-26 00:00:00" />
+  </Editors>
+</Faq>

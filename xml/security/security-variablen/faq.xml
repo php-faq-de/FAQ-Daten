@@ -1,0 +1,7 @@
+<Faq alias="security-variablen" author="Kristian Köhntopp">
+  <Question>Wie unterscheide ich böse Variablen von guten?</Question>
+  <Keywords>Sicherheit, Variablen, GET, POST, Cookie</Keywords>
+  <Editors>
+    <Editor name="Niels Braczek" lastedit="2010-09-01 00:00:00" />
+  </Editors>
+</Faq>

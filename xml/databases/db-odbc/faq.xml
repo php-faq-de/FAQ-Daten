@@ -1,0 +1,4 @@
+<Faq alias="db-odbc" author="Kristian Köhntopp">
+  <Question>Wie kann ich auf einen ODBC-Server (MSSQL, Access) zugreifen?</Question>
+  <Keywords>SQL, Datenbank, ODBC, Access, Windows</Keywords>
+</Faq>

@@ -1,0 +1,32 @@
+<p>
+  Die Symptome sind meist, dass die Seiten auf dem Webserver des Hosts
+  tadellos funktionieren, aber bei dem nagelneu aufgesetzten Testserver
+  die Formulareingaben einfach nicht mehr ankommen. Oft stolpern auch
+  Neulinge darüber, wenn die Beispiele aus dem Lehrbuch nicht auf dem
+  eigenen Testserver funktionieren.
+</p>
+<p>
+  Seit PHP 4.2.0 wurde <a href="http://de3.php.net/manual/en/ini.php">register_globals</a> in der
+  <tt>php.ini</tt> per Default abgeschaltet. Die Option war dafür
+  zuständig, dass ein Parameter an das Script automatisch in eine
+  entsprechend genannte Variable kopiert wurde. Ein Angreifer hat damit
+  jedoch die Möglichkeit, Variablen, die der Programmierer
+  versehentlich uninitialisiert ließ, mit beliebigen Werten
+  vorzubelegen.
+</p>
+<p>
+  Es gibt zwei Möglichkeiten, dieses Problem in den Griff zu kriegen.
+</p>
+<p>
+  Die <em>gute Wahl</em> ist, die PHP-Scripte entsprechend anzupassen.
+  Das ist reine Fleißarbeit. Siehe auch
+  "<a href="http://de3.php.net/manual/de/security.globals.php">Verwendung von Register Globals</a>".
+</p>
+<p>
+  Die <em>schlechte Wahl</em> ist, <a href="http://de3.php.net/manual/en/ini.php">register_globals</a>
+  wieder zu aktivieren. Da der Webauftritt damit wieder angreifbar ist,
+  sollte man es höchstens als Notlösung betrachten, um den Webauftritt
+  vorübergehend wieder online zu kriegen, bis man die Scripte
+  umgestellt hat. Wenn man keine Rechte hat, um <a href="http://de3.php.net/manual/en/ini.php">register_globals</a> zu aktivieren, hilft die Funktion
+  <a href="http://www.php3.de/import_request_variables">import_request_variables()</a> weiter.
+</p>

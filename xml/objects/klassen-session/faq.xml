@@ -1,0 +1,4 @@
+<Faq alias="klassen-session" author="Clemens Koppensteiner">
+  <Question>Wie speichere ich ein Objekt in einer Session?</Question>
+  <Keywords>Klasse, Objekt, Session, speichern, serialisieren, Eigenschaften</Keywords>
+</Faq>

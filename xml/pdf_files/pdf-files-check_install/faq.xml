@@ -1,0 +1,4 @@
+<Faq alias="pdf-files-check_install" author="Kai Schröder">
+  <Question>Wie sehe ich, ob meine PHP-Installation die           PDF-Bibliotheken benutzen kann?</Question>
+  <Keywords>PDF, extension</Keywords>
+</Faq>

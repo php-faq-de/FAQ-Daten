@@ -1,0 +1,77 @@
+<p>
+Um in Unix eine Datei anlegen zu können, benötigt ein Programm
+x-Rechte an jedem Verzeichnis entlang des Pfadnamens sowie
+w-Recht an dem Verzeichnis, in dem die Datei angelegt werden
+soll.
+</p>
+
+<p>
+w-Recht an einem Verzeichnis berechtigt nicht nur dazu, eine
+Datei neu anzulegen, sondern es berechtigt außerdem dazu, die
+Namen existierender Dateien aus dem Verzeichnis zu entfernen.
+Dies wird in Unix oft vereinfachend als "das Löschen einer Datei"
+bezeichnet. Beim Entfernen von Namen aus einem Verzeichnis
+werden die Rechte an der Datei und ihr Eigentümer nicht geprüft.
+</p>
+
+<p>
+Dies ändert sich, setzt man an dem Verzeichnis, in dem sich die
+Datei befindet, zusätzlich das t-Recht. In diesem Fall können
+nur der Superuser (genauer: jeder Prozeß der CAP_FOWNER
+Capability hat), der Eigentümer des Verzeichnisses oder der
+Eigentümer der Datei noch den Namen aus dem Verzeichnis
+entfernen.
+</p>
+
+<p>
+Um eine existierende Datei zu überschreiben, ist dagegen x-Recht
+an jedem Verzeichnis entlang des Pfadnamens notwendig, sowie
+w-Recht an der zu verändernden Datei (oder man hat CAP_FOWNER
+Capability).
+</p>
+
+<p>
+In Apache mit suexec ist es so, dass CGI-Programme mit
+derjenigen User-ID und Group-ID ausgeführt werden, die für den
+virtuellen Webserver mit Hilfe der Direktiven <tt>User</tt> und <tt>Group</tt>
+definiert worden sind. CGI-PHP legt also Dateien mit diesen
+User- und Group-Rechten an und das Zielverzeichnis muss
+entsprechende Rechte besitzen, damit ein <a href="http://www.php3.de/fopen">fopen()</a>
+mit dem Anlegen einer Datei erfolgreich sein kann.
+</p>
+
+<p>
+In Apache mit mod_php ist es so, dass der PHP-Interpreter als
+Bestandteil des Webservers läuft und mit den Rechten des
+Webservers Dateien anlegt oder löscht. In diesem Fall ist
+ausschlaggebend, was die globale (serverweite) <tt>User</tt>- und
+<tt>Group</tt>-Direktive für den Webserver festlegt. Das
+Zielverzeichnis muss für diesen Unix-Benutzer passende Rechte
+anbieten.
+</p>
+
+<p>
+In PHP kann es sein, dass zusätzliche Beschränkungen gelten, die
+in Kraft treten, falls <a href="http://de3.php.net/manual/en/ini.php">safe_mode</a> aktiviert ist. Dies kann
+in CGI-PHP in der <tt>php.ini</tt> geschehen, in mod_php zusätzlich
+in &lt;Directory&gt;-Blöcken in der zentralen <tt>httpd.conf</tt>, jedoch
+nicht in <tt>.htaccess</tt>-Dateien.
+</p>
+
+<p>
+Es ist empfehlenswert, für jeden virtuellen Webserver eine
+gesonderte CGI-Identität anzulegen und jedem virtuellen
+Webserver ein Verzeichnis einzuräumen, das keine URL hat (nicht
+unterhalb der Document Root liegt) und das nur durch diese
+CGI-Identität beschreibbar ist. Auf diese Weise kann jeder
+virtuelle Webserver anwendungsspezifische Daten auf eine Weise
+speichern, die nicht durch das http-Protokoll erreichbar ist und
+die nicht durch andere CGI-Programme anderer virtueller
+Webserver gelesen oder geschrieben werden koennen.
+</p>
+
+<p>
+Wird mod_php verwendet, ist ein solcher Schutz nur mit
+<a href="http://de3.php.net/manual/en/ini.php">safe_mode</a> erreichbar. Dies birgt jedoch andere Nachteile.
+</p>
+

@@ -1,0 +1,4 @@
+<Faq alias="php-variablen" author="Kristian Köhntopp">
+  <Question>Welche Variablenarten gibt es in PHP und wie greife ich auf sie zu?</Question>
+  <Keywords>Variable, Konstante, Namensraum, Funktion, Global, Local, Static, Klasse, Objekt, Konstruktor, Typ</Keywords>
+</Faq>

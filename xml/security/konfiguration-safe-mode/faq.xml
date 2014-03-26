@@ -1,0 +1,4 @@
+<Faq alias="konfiguration-safe-mode" author="Kristian Köhntopp">
+  <Question>Was genau bewirkt safe_mode und ist das sicher?</Question>
+  <Keywords>safe_mode, Sicherheit, Konfiguration, php.ini, Beschraenkung, gefaehrlich</Keywords>
+</Faq>

@@ -1,0 +1,4 @@
+<Faq alias="oracle-kompilierung" author="Anton Bangratz">
+  <Question>Ich habe Oracle-Support mit --with-oci8 in PHP eincompiliert, nun startet der Apache nicht mehr.</Question>
+  <Keywords>Oracle, kompilieren, OCI, Webserver, Apache, Library, Unterstuetzung, Fehler</Keywords>
+</Faq>

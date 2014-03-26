@@ -1,0 +1,19 @@
+<p>
+Wenn die Konfiguration von PHP mit <tt>--with-oci8</tt> korrekt erfolgt
+ist, dann kann mit einiger Sicherheit angenommen werden, dass
+ORACLE nicht korrekt installiert wurde. Falls man die
+Fehlermeldungen von <tt>configure</tt> und <tt>make</tt> überlesen hat, ist es
+möglich, dass der Oracle-Support nicht oder nur fehlerhaft in PHP
+einkompiliert wurde. Dies geschieht meist dann, wenn man übersieht, dass die
+Headerdateien, die von PHP benötigt werden, in der ORACLE
+Clientinstallation nicht enthalten sind. Die Dateien befinden sich
+in <tt>$ORACLE_HOME/rdbms/demo/</tt> und
+<tt>$ORACLE_HOME/rdbms/public/</tt>.
+</p>
+
+<p>
+<em>Lösung:</em> Nachinstallieren von Pro*C/C++ und der
+Demodateien aus der ORACLE-Server Distribution, danach Neukompilierung
+von PHP.
+</p>
+

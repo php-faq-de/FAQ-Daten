@@ -1,0 +1,52 @@
+<p>
+PHP-Code wird mit Hilfe von SGML Processing Instructions (PIs)
+in HTML eingebettet. Der Code steht zwischen <tt>&lt;?php</tt> und
+<tt>?&gt;</tt> (empfohlene Schreibweise):
+</p>
+
+<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+  <a href="http://www.php3.de/phpinfo"><span style="color: #000066;">phpinfo</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+ <span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+
+<p>
+Alternativ kann auch ein Script-Tag für Server-Side Scripting
+verwendet werden:
+</p>
+
+<pre><span style="color: #000000; font-weight: bold;">&lt;script language</span>=<span style="color: #ff0000;">&quot;php&quot;</span>&gt;
+  <a href="http://www.php3.de/phpinfo"><span style="color: #000066;">phpinfo</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000; font-weight: bold;">&lt;/script&gt;</span></pre>
+
+<p>
+Falls die Konfigurationsvariable
+<a href="http://de3.php.net/manual/en/ini.php">short_open_tag</a> gesetzt ist (nicht empfohlen!), kann man den
+Namen der Scriptsprache in den PIs weglassen:
+</p>
+
+<pre><span style="color: #000000; font-weight: bold;">&lt;?</span>
+  <a href="http://www.php3.de/phpinfo"><span style="color: #000066;">phpinfo</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+ <span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+
+<p>
+Dies erlaubt auch schnelle Ausgabe des Wertes von Ausdrücken.
+</p>
+
+<pre><span style="color: #000000; font-weight: bold;">&lt;?</span>= <span style="color: #0000ff;">$_SERVER</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'PHP_SELF'</span><span style="color: #000000;">&#93;</span> <span style="color: #000000; font-weight: bold;">?&gt;</span>
+&lt;!-- kann anstelle von --&gt;
+<span style="color: #000000; font-weight: bold;">&lt;?</span> <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #0000ff;">$_SERVER</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'PHP_SELF'</span><span style="color: #000000;">&#93;</span> <span style="color: #000000; font-weight: bold;">?&gt;</span>
+&lt;!-- geschrieben werden. --&gt;</pre>
+
+<p>
+Falls die Konfigurationsvariable <a href="http://de3.php.net/manual/en/ini.php">asp_tags</a> gesetzt
+ist (nicht empfohlen!), kann man auch
+</p>
+
+<pre>&lt;%
+  <a href="http://www.php3.de/phpinfo"><span style="color: #000066;">phpinfo</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+ %&gt;</pre>
+
+<p>
+a la Microsoft schreiben. Dies wird von vielen Editoren
+(Frontpage, Dreamweaver) besser verstanden.
+</p>
+

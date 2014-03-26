@@ -1,0 +1,62 @@
+<p>
+In diesem Beispiel wird die HTML-Datei über den
+<a href="http://www.php3.de/file">file()</a>-Befehl vom entfernten Server gezogen.
+Die Funktion <tt>absolute()</tt> erwartet als ersten Parameter
+einen Link und als zweiten Parameter die volle URL des Dokuments,
+in dem sich der Link befindet. Sie kann auch in einem anderen
+Kontext verwendet werden. Obwohl viele der Anweisungen
+(z.B. <a href="http://www.php3.de/substr">substr()</a> oder <a href="http://www.php3.de/strrpos">strrpos()</a>) auch über reguläre Ausdrücke gelöst werden
+können, wurde aus Performance-Gründen bewusst darauf verzichtet.
+</p>
+
+<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+<span style="color: #808080; font-style: italic;">// Datei über HTTP aufrufen</span>
+<span style="color: #0000ff;">$url</span> = <span style="color: #ff0000;">'http://www.server.de/test.html'</span>;
+<span style="color: #0000ff;">$old</span> = <a href="http://www.php3.de/implode"><span style="color: #000066;">implode</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">''</span>, <a href="http://www.php3.de/file"><span style="color: #000066;">file</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$url</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;">// Links suchen und an absolute() weiterleiten</span>
+<span style="color: #0000ff;">$new</span> = <a href="http://www.php3.de/preg_replace"><span style="color: #000066;">preg_replace</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">',&lt;a([^&gt;]+)href=&quot;([^&gt;&quot;<span style="color: #000099; font-weight: bold;">\s</span>]+)&quot;,ie'</span>,
+    <span style="color: #ff0000;">'&quot;&lt;a<span style="color: #000099; font-weight: bold;">\1</span>href=<span style="color: #000099; font-weight: bold;">\"</span>&quot; . absolute(&quot;<span style="color: #000099; font-weight: bold;">\2</span>&quot;, $url) . &quot;<span style="color: #000099; font-weight: bold;">\"</span>&quot;'</span>,
+    <span style="color: #0000ff;">$old</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;">// HTML-Code ausgeben</span>
+<a href="http://www.php3.de/header"><span style="color: #000066;">header</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'Content-type: text/plain'</span><span style="color: #000000;">&#41;</span>;
+<a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #0000ff;">$new</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;">// Funktion, die relative in absolute Links umschreibt</span>
+<span style="color: #000000; font-weight: bold;">function</span> absolute <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$relative</span>, <span style="color: #0000ff;">$absolute</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+&nbsp;
+    <span style="color: #808080; font-style: italic;">// Link ist schon absolut</span>
+    <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><a href="http://www.php3.de/preg_match"><span style="color: #000066;">preg_match</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">',^(https?://|ftp://|mailto:|news:),i'</span>, <span style="color: #0000ff;">$relative</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>
+        <span style="color: #b1b100;">return</span> <span style="color: #0000ff;">$relative</span>;
+&nbsp;
+    <span style="color: #808080; font-style: italic;">// parse_url() nimmt die URL auseinander</span>
+    <span style="color: #0000ff;">$url</span> = <a href="http://www.php3.de/parse_url"><span style="color: #000066;">parse_url</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$absolute</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+    <span style="color: #808080; font-style: italic;">// dirname() erkennt auf / endende URLs nicht</span>
+    <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$url</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'path'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#123;</span><a href="http://www.php3.de/strlen"><span style="color: #000066;">strlen</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$url</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'path'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span> - <span style="color: #cc66cc;">1</span><span style="color: #000000;">&#125;</span> == <span style="color: #ff0000;">'/'</span><span style="color: #000000;">&#41;</span>
+        <span style="color: #0000ff;">$dir</span> = <a href="http://www.php3.de/substr"><span style="color: #000066;">substr</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$url</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'path'</span><span style="color: #000000;">&#93;</span>, <span style="color: #cc66cc;">0</span>, <a href="http://www.php3.de/strlen"><span style="color: #000066;">strlen</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$url</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'path'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span> - <span style="color: #cc66cc;">1</span><span style="color: #000000;">&#41;</span>;
+    <span style="color: #b1b100;">else</span>
+        <span style="color: #0000ff;">$dir</span> = <a href="http://www.php3.de/dirname"><span style="color: #000066;">dirname</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$url</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'path'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+    <span style="color: #808080; font-style: italic;">// absoluter Link auf dem gleichen Server</span>
+    <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$relative</span><span style="color: #000000;">&#123;</span><span style="color: #cc66cc;">0</span><span style="color: #000000;">&#125;</span> == <span style="color: #ff0000;">'/'</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+        <span style="color: #0000ff;">$relative</span> = <a href="http://www.php3.de/substr"><span style="color: #000066;">substr</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$relative</span>, <span style="color: #cc66cc;">1</span><span style="color: #000000;">&#41;</span>;
+        <span style="color: #0000ff;">$dir</span> = <span style="color: #ff0000;">''</span>;
+    <span style="color: #000000;">&#125;</span>
+&nbsp;
+    <span style="color: #808080; font-style: italic;">// Link fängt mit ./ an</span>
+    <span style="color: #b1b100;">elseif</span> <span style="color: #000000;">&#40;</span><a href="http://www.php3.de/substr"><span style="color: #000066;">substr</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$relative</span>, <span style="color: #cc66cc;">0</span>, <span style="color: #cc66cc;">2</span><span style="color: #000000;">&#41;</span> == <span style="color: #ff0000;">'./'</span><span style="color: #000000;">&#41;</span>
+        <span style="color: #0000ff;">$relative</span> = <a href="http://www.php3.de/substr"><span style="color: #000066;">substr</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$relative</span>, <span style="color: #cc66cc;">2</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+    <span style="color: #808080; font-style: italic;">// Referenzen auf höher liegende Verzeichnisse auflösen</span>
+    <span style="color: #b1b100;">else</span> <span style="color: #b1b100;">while</span> <span style="color: #000000;">&#40;</span><a href="http://www.php3.de/substr"><span style="color: #000066;">substr</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$relative</span>, <span style="color: #cc66cc;">0</span>, <span style="color: #cc66cc;">3</span><span style="color: #000000;">&#41;</span> == <span style="color: #ff0000;">'../'</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+        <span style="color: #0000ff;">$relative</span> = <a href="http://www.php3.de/substr"><span style="color: #000066;">substr</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$relative</span>, <span style="color: #cc66cc;">3</span><span style="color: #000000;">&#41;</span>;
+        <span style="color: #0000ff;">$dir</span> = <a href="http://www.php3.de/substr"><span style="color: #000066;">substr</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$dir</span>, <span style="color: #cc66cc;">0</span>, <a href="http://www.php3.de/strrpos"><span style="color: #000066;">strrpos</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$dir</span>, <span style="color: #ff0000;">'/'</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>;
+    <span style="color: #000000;">&#125;</span>
+&nbsp;
+    <span style="color: #808080; font-style: italic;">// volle URL zurückgeben</span>
+    <span style="color: #b1b100;">return</span> <a href="http://www.php3.de/sprintf"><span style="color: #000066;">sprintf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'%s://%s%s/%s'</span>, <span style="color: #0000ff;">$url</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'scheme'</span><span style="color: #000000;">&#93;</span>, <span style="color: #0000ff;">$url</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'host'</span><span style="color: #000000;">&#93;</span>, <span style="color: #0000ff;">$dir</span>, <span style="color: #0000ff;">$relative</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000;">&#125;</span>
+<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+

@@ -1,0 +1,4 @@
+<Faq alias="sessions-namen" author="Daniel T. Gorski">
+  <Question>Wie kann ich den Namen der Session ändern, ohne in die php.ini einzugreifen?</Question>
+  <Keywords>Session, Name, php.ini, aendern, umbenennen</Keywords>
+</Faq>

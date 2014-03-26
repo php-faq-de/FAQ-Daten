@@ -1,0 +1,4 @@
+<Faq alias="mysql-eignung" author="Niels Braczek" created="2010-01-05 00:00:00">
+  <Question>Kommt MySQL mit mehr als x Datensätzen pro Tabelle klar? Wie stabil ist MySQL?</Question>
+  <Keywords>SQL, Datenbank, MySQL, Tabelle, Tabellengroesse, Stabilitaet, Groesse</Keywords>
+</Faq>

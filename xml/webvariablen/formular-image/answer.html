@@ -1,0 +1,20 @@
+<p>
+In Formularen kann man statt eines <tt>SUBMIT</tt> auch ein
+<tt>IMAGE</tt> als Absendeknopf installieren. Dies sieht dann so
+aus:
+</p>
+
+<pre>&lt;input type=<span style="color: #ff0000;">&quot;image&quot;</span> src=<span style="color: #ff0000;">&quot;meinbild.png&quot;</span> name=<span style="color: #ff0000;">&quot;sub&quot;</span> /&gt;</pre>
+
+<p>
+Wenn der User das Bild anklickt, werden zwei Variablen mit den
+Namen <tt>sub.x</tt> und <tt>sub.y</tt> erzeugt, die die Koordinaten des
+Klicks relativ zur linken, oberen Ecke des Bildes beschreiben.
+Da Variablennamen in PHP keine Punkte enthalten dürfen, wandelt
+PHP die Punkte in Unterstriche um. Im Beispiel bekommt man die
+Variablen mit den Namen <tt>$_REQUEST['sub_x']</tt> und
+<tt>$_REQUEST['sub_y']</tt> übergeben (bzw. vor PHP 4.1.0
+<tt>$HTTP_GET_VARS['sub_x']</tt>, etc. oder
+<tt>$HTTP_POST_VARS['sub_x']</tt>).
+</p>
+

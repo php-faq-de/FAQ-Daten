@@ -1,0 +1,72 @@
+<p>
+Bei der SQL-Anweisung <tt>SELECT * FROM ...</tt> muss das
+Datenbank-Management-System (DBMS) <em>alle</em> Spalten der
+betreffenden Datensätze selektieren, auch
+wenn in der anschließenden Verarbeitung nur ein Teil davon wirklich
+gebraucht wird. Das ist langsam und schlicht und einfach unsinnig,
+und die unnötigen Spalten verhindern unter Umständen, dass der
+integrierte Optimizer die Query effizient ausführen kann.
+</p>
+
+<p>
+Selbst wenn alle Spalten tatsächlich benötigt werden, sollten sie
+separat aufgeführt werden, weil
+</p>
+
+<ul>
+ <li>
+  <p>
+  die Tabelle nachträglich erweitert werden könnte, die neue(n)
+  Spalte(n) (im worst case ein BLOB!) nach der Abfrage aber nicht
+  gebraucht werden
+  </p>
+ </li>
+
+ <li>
+  <p>
+  die Reihenfolge der Spalten bei der Ausgabe sonst undefiniert
+  ist (bei den meisten Datenbanken ist es die Reihenfolge der
+  Spaltendefinition bei der Anlage der Tabelle). Diese Reihenfolge
+  könnte sich ändern (z.B. durch Einspielen eines Backups nach
+  Erweiterung der Tabelle, durch eine neue Version des DBMS, etc.)
+  </p>
+ </li>
+
+ <li>
+  <p>
+  die Spalten sonst möglicherweise keinen vernünftigen oder
+  eindeutigen Namen haben. Führt man die Spalten einzeln an, kann
+  man mittels <tt>AS</tt> einen Namen (Alias) vergeben:
+  <tt>SELECT   p.pers_p_nr AS personalnummer
+  FROM     personal p
+  ORDER BY personalnummer</tt>
+  </p>
+ </li>
+
+ <li>
+  <p>
+  dadurch im Script quasi automatisch dokumentiert wird, welche
+  Spalten anschließend verarbeitet werden
+  </p>
+ </li>
+</ul>
+
+<p>
+Im <a href="http://www.mysql.com/documentation/">MySQL-Manual</a>
+wird in den Beispielen der Einfachheit halber fast immer
+<tt>SELECT *</tt> verwendet. Daran darf man sich jedoch für die
+Praxis kein Beispiel nehmen, sagt auch das Handbuch explizit - Zitat:
+"<em>You should NEVER, in an application, use SELECT *
+and retrieve the columns based on their position, because the order
+in which columns are returned CANNOT be guaranteed over time;
+A simple change to your database may cause your application to fail
+rather dramatically.</em>"
+</p>
+
+<p>
+Auch für <tt>INSERT</tt> gilt: immer alle Spaltennamen angeben! Statt
+<tt>INSERT INTO tabelle VALUES (1, 2, 3)</tt> ist also <tt>INSERT
+INTO tabelle (spalte1, spalte2, spalte3) VALUES (1, 2, 3)</tt> zu
+schreiben.
+</p>
+

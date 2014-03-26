@@ -1,0 +1,109 @@
+<p>
+KDE bietet das Kommandozeilenprogramm <tt>kwebdesktop</tt> an, das
+vom KDE HTML Widget Gebrauch macht. Dieses Programm lädt eine
+Webseite und wandelt sie in ein PNG-Bild um. Es wird
+folgendermaßen aufgerufen:
+</p>
+
+<pre>
+kwebdesktop x y datei url
+</pre>
+
+<p>
+<tt>x</tt> ist die Breite des Bildes in Pixeln, <tt>y</tt> die
+Höhe des Bildes in Pixeln, <tt>datei</tt> der Name der zu
+erzeugenden PNG-Datei und <tt>url</tt> der URL der zu ladenden
+Seite.
+</p>
+
+<p>
+In Suse Linux ist <tt>kwebdesktop</tt> Bestandteil des Paketes <tt>kdebase</tt>;
+getestet wurde Version 2.2.1.
+</p>
+
+<h3>Anmerkungen</h3>
+
+<p>
+Falls man nicht gerade einen mit überduchschnittlich viel RAM bestückten Server
+sein Eigen nennt, sollte man diese Lösung nicht auf einen Server
+nutzen, auf dem öffentliche Dienste wie Webserver, MySQL, Mail u.a. angeboten
+werden.
+</p>
+
+<p>
+Die Installation des dazu notwendigen <tt>kdebase4</tt>-Pakets (openSuse11)
+benötig durchschnittlich 340MB mehr RAM (das wurde mit einem einfachen
+<tt>free -m</tt> vor und nach der Installation getestet). Ferner müssen
+noch die Pakete <tt>xorg-x11-server-extra</tt>, <tt>kde4-konqueror</tt>
+und <tt>kde4-webkitpart</tt> installiert werden. Zur Laufzeit kommen hier
+definitiv ~500MB Mehrverbrauch an Arbeitsspeicher dazu.
+</p>
+
+<p>
+Auf einer Desktop-Maschine mit grafischem Interface ist das natürlich meistens
+alles bereits installiert. Der virtuelle Framebuffer <tt>Xvfb</tt> für den X-Server
+wird auf Desktop-Maschinen nicht benötigt; folglich muss dann auch nicht das
+Paket <tt>xorg-x11-server-extra</tt> installiert werden.
+</p>
+
+<p>
+Wer das trotzdem auf seinem Server probieren will, der sollte die oben
+beschriebenen Pakete installieren und dann wie folgt vorgehen:
+</p>
+
+<pre>
+# 1. X starten
+linux:~> Xvfb :10 &
+[1] 11237
+linux:~> Could not init font path element /usr/share/fonts/TTF/,
+removing from list!
+Could not init font path element /usr/share/fonts/OTF, removing from list!
+Could not init font path element /usr/share/fonts/CID/, removing from list!
+
+# 2. Display umlenken
+linux:~> export DISPLAY=:10
+
+# 3. Rendern
+
+linux:~> kwebdesktop 1024 768 bla.png \
+              http://www.php-faq.de/q/q-grafik-webseite.html
+Xlib:  extension "XInputExtension" missing on display ":10.0".
+Failed to get list of devices
+Xlib:  extension "XInputExtension" missing on display ":10.0".
+Failed to get list of devices
+kbuildsycoca running...
+FreeFontPath: FPE "/usr/share/fonts/misc/" refcount is 2, should be 1;
+fixing.
+Could not init font path element /usr/share/fonts/TTF/, removing from list!
+Could not init font path element /usr/share/fonts/OTF, removing from list!
+Could not init font path element /usr/share/fonts/CID/, removing from list!
+
+# 4. Resizen + Typ ändern
+
+linux:~> convert -resize 256x192 bla.png  fasel.jpg 
+</pre>
+
+<h3>Alternativen</h3>
+
+<dl>
+<dt>browsershots</dt>
+<dd>
+<p>Die Webseite <a class="external" href="http://browsershots.org/" hreflang="en">browsershots.org</a>
+bietet neben ihrem Service, Screenshots von allen möglichen Webseiten
+in unterschiedlichsten Browsern zu machen, auch die Möglichkeit deren Server
+(in Python) komplett zu installieren um damit ein Bildschirmfoto zu machen.
+(Es lassen sich auch nur Teile davon einsetzen)</p>
+<p>
+Genaueres zur Installation findet sich im <a class="external" href="http://trac.browsershots.org/wiki/InstallServer">Wiki</a> des Projektes.</p>
+</dd>
+
+<dt>WebThumb</dt>
+<dd>
+<p><a class="external" href="http://www.boutell.com/" hreflang="en">Boutell</a>, die Firma, die die GD-Lib
+anbietet, welche auch in PHP zum Einsatz kommt, bietet mit
+<a class="external" href="http://www.boutell.com/webthumb/" hreflang="en">Webthumb</a> ein
+Paket an, mit dem sich Screenshots einer Webseite im
+Mozilla-Webbrowser erzeugen lassen.
+</dd>
+</dl>
+

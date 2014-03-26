@@ -1,0 +1,41 @@
+<p>
+Das Auswählen mehrerer Dateien oder gar ganzer Verzeichnisse ist
+mit einem <tt>&lt;input type="file"&gt;</tt>-Feld nicht möglich.
+Auch das Vorgeben eines bestimmten Verzeichnisses oder vollständigen
+Pfades ist bei File-Input-Feldern unterbunden, sei es als Angabe
+<tt>value="path/to/file"</tt> oder per JavaScript. Warum? Aus
+Sicherheitsgründen! Wem wäre es schon recht, wenn auf einer
+x-beliebigen Internetseite sich ein (z.B. durch Layer verstecktes)
+Formular mit einem Feld <tt>&lt;input type="file"
+value="c:\eigene dateien\*.*"&gt;</tt> mittels JavaScript
+selbsttätig abschicken würde? Eben deshalb muss jede Datei, die
+verschickt werden soll, vom Anwender <em>manuell</em> und damit
+<em>bewusst</em> ausgewählt werden.
+</p>
+
+<p>
+Mehrere Dateien lassen sich verschicken
+</p>
+<ul>
+<li><p>mit mehreren <tt>&lt;input type="file"&gt;</tt>-Feldern -
+pro Datei eines (Tipp: <tt>[]</tt> an den Namen des Input-Feldes
+anhängen, um in PHP ein Array mit den Dateiinformationen zu
+erhalten)</p></li>
+<li><p>als <tt>.zip</tt>- oder <tt>.tar</tt>-Datei</p></li>
+<li><p>per FTP</p></li>
+<li><p>mit einem eigenen Tool, das auf dem Rechner des Absenders
+installiert werden muss</p></li>
+<li><p>per (Java-) Applet - hier gibt es mehrere kommerzielle oder
+kostenlose Lösungen, z.B.
+</p>
+
+<ul>
+<li><p><a href="http://www.infomentum.com/appletfile/">AppletFile</a></p></li>
+<li><p><a href="http://www.softartisans.com/softartisans/sajfile.html">JFile</a></p></li>
+<li><p><a href="http://www.aspupload.com/jupload.html">JUpload (kommerziell)</a></p></li>
+<li><p><a href="http://www.jupload.biz/">JUpload (frei)</a></p></li>
+</ul>
+
+</li>
+</ul>
+

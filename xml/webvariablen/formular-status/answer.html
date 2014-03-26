@@ -1,0 +1,39 @@
+<p>Wenn ein HTML-Formular abgeschickt wird, nimmt der Webserver die enthaltenen Daten entgegen, stellt über das action-Attribut fest, welche Anwendung zuständig ist, startet diese Anwendung und übergibt ihr die empfangenen Daten. Das schließt zunächst jede Möglichkeit aus, den Benutzer über den Fortschritt des Uploads zu informieren.</p>
+
+<h3>RFC1867 File Upload Progress Hook</h3>
+
+<p>Die <a href="http://pecl.php.net/package/APC">PECL-Erweiterung <abbr lang="en" title="Alternative PHP Cache">APC</abbr></a> bietet jedoch seit der Version 3.20 in Verbindung mit PHP 5.2.0 oder aktueller einen Hook für den Upload von Dateien nach <a href="http://www.faqs.org/rfcs/rfc1867.html"><abbr lang="en" title="Request For Comments 1867 - Form-based File Upload in HTML">RFC1867</abbr></a>, sofern PHP als Modul integriert ist. In Verbindung mit einer clientseitigen Skriptsprache, i.d.R JavaScript, lässt sich damit sehr wohl ein Fortschrittsbalken realisieren.</p>
+
+<p>APC bietet mehrere Möglichkeiten, den Upload zu konfigurieren. Sie sind in der <a href="http://viewcvs.php.net/viewvc.cgi/pecl/apc/INSTALL?revision=3.65&view=markup">Installationsanleitung für APC</a> beschrieben. Hier eine Übersetzung der betreffenden Optionen:</p>
+
+<dl>
+  <dt>apc.rfc1867</dt>
+  <dd><p>Der RFC1867 File Upload Progress Hook ist nur verfügbar, wenn APC gegen PHP 5.2.0 oder neuer kompiliert wurde. Wenn diese Option aktiviert ist, erzeugt APC für jeden Datei-Upload, der ein Feld namens APC_UPLOAD_PROGRESS vor dem Dateifeld enthält, einen upload_&lt;key&gt;-Eintrag im Usercache, wobei &lt;key&gt; der Wert des APC_UPLOAD_PROGRESS-Formularfeldes ist.</p>
+
+  <p class="warn">Zu beachten ist, dass die Upload-Verfolgung derzeit nicht threadsafe ist. Uploads, die starten, während ein anderer Upload noch läuft, schalten die Verfolgung für den laufenden Upload ab.<br />
+ 	(Default: 0)</p></dd>
+ 	
+  <dt>apc.rfc1867_prefix</dt>
+  <dd><p>Präfix für den Usercache-Eintrag.<br />
+ 	(Default: "upload_")</p></dd>
+ 	
+  <dt>apc.rfc1867_name</dt>
+  <dd><p>Name des versteckten Formularfeldes, das die Upload-Verfolgung aktiviert und den Usercache-Schlüssel festlegt.<br />
+ 	(Default: "APC_UPLOAD_PROGRESS")</p></dd>
+ 	
+  <dt>apc.rfc1867_freq</dt>
+  <dd><p>Die Häufigkeit, mit der der Usercache mit den Informationen eines laufenden Uploads aktualisiert wird. Die Angabe kann ein Prozentsatz der Dateigröße sein oder eine Angabe in Bytes, optional mit nachgestelltem 'k', 'm' oder 'g' für Kilobytes, Megabytes bzw. Gigabytes. Der Wert 0 veranlasst, dass die Aktualisierung so oft wie möglich durchgeführt wird, was den Upload-Prozess verlangsamen kann.<br />
+ 	(Default: 0)</p></dd>
+</dl>
+
+<h3>Links</h3>
+
+<p>Die Reihenfolge der Links stellt keine Wertung dar.</p>
+
+<ul>
+  <li>Beispiel: <a href="http://progphp.com/progress.php">http://progphp.com/progress.php</a>, Sourcecode unter <a href="http://progphp.com/progress.phps">http://progphp.com/progress.phps</a></li>
+  <li><a lang="en" href="http://www.dinke.net/blog/2006/11/04/php-52-upload-progress-meter/en/">PHP 5.2 upload progress meter</a></li>
+  <li><a lang="de" href="http://www.easy-coding.de/wiki/php/upload-fortschritt-mit-php-ajax.html">Upload Fortschritt mit PHP + AJAX</a></li>
+  <li><a lang="de" href="http://de.wikipedia.org/wiki/Hook_(EDV)">Hook</a> - Erläuterung auf Wikipedia</li>
+</ul>
+

@@ -1,0 +1,7 @@
+<Faq alias="php-doku-generator" author="Guido Haeger">
+  <Question>Gibt es für PHP einen &amp;quot;Dokumentationsgenerator&amp;quot; ähnlich Javadoc für Java?</Question>
+  <Keywords>Javadoc, PHPDoc, Dokumentation, Kommentar, Quelltext</Keywords>
+  <Editors>
+    <Editor name="Ulf Kadner" lastedit="2014-03-26 00:00:00" />
+  </Editors>
+</Faq>

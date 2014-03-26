@@ -1,0 +1,7 @@
+<Faq alias="formular-upload-php3" author="Kristian Köhntopp">
+  <Question>Wie funktioniert ein Datei-Upload über HTML-Formulare bei PHP 3?</Question>
+  <Keywords>Datei, Upload, input, POST, enctype, HTML</Keywords>
+  <Editors>
+    <Editor name="Niels Braczek" lastedit="2008-08-10 00:00:00" />
+  </Editors>
+</Faq>

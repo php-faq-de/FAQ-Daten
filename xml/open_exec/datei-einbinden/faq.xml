@@ -1,0 +1,7 @@
+<Faq alias="datei-einbinden" author="Johannes Frömter">
+  <Question>Wie wende ich include() mit verschachtelten Verzeichnissen an?</Question>
+  <Keywords>Datei, einbinden, include, Verzeichnis, Pfad, relativ, Konstante</Keywords>
+  <Editors>
+    <Editor name="Niels Braczek" lastedit="2009-06-03 00:00:00" />
+  </Editors>
+</Faq>

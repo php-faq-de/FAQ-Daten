@@ -1,0 +1,23 @@
+<p>
+	Wie bei allen anderen HTTP-Headern, darf auch <em>vor</em> dem
+	Setzen von Cookies (Sessionfunktionen von PHP4 benutzen
+	standardmäßig Cookies) <em>kein</em> einziges Byte des Codes
+	an den Client gesendet werden. Erst wenn alle HTTP-Header
+	gesendet worden sind, dürfen entsprechende Daten (z. B. HTML)
+	gesendet werden.
+</p>
+
+<p>
+	Typische Stolperfallen sind Leerzeichen bzw. -zeilen vor dem ersten
+	<tt>&lt;?</tt> bzw. <tt>&lt;?php</tt> Delimiter des Scripts oder mit
+	<tt>include()</tt> oder <tt>require()</tt> importierte Scriptfragmente,
+	die natürlich gar keine Ausgabe produzieren dürfen - weder vor dem
+	ersten Delimiter, noch dazwischen, noch nach dem letzten.
+</p>
+
+<p>
+	Zusätzlich kommt durch die <tt>auto_prepend_file</tt>-Einstellung in der
+	<tt>php.ini</tt>, bzw. in der Webserverkonfiguration, eine weitere
+	potentielle Fehlerquelle hinzu.
+</p>
+

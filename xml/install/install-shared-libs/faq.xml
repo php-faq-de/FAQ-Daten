@@ -1,0 +1,7 @@
+<Faq alias="install-shared-libs" author="Kristian Köhntopp">
+  <Question>Linux: Meine shared libraries werden nicht gefunden.</Question>
+  <Keywords>Linux, shared, library, nicht gefunden, Apache</Keywords>
+  <Editors>
+    <Editor name="Niels Braczek" lastedit="2008-08-12 00:00:00" />
+  </Editors>
+</Faq>

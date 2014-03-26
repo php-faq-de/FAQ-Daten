@@ -1,0 +1,4 @@
+<Faq alias="formular-upload-php4" author="Kerry W. Lothrop">
+  <Question>Wie funktioniert ein Datei-Upload über HTML-Formulare?</Question>
+  <Keywords>Datei, Upload, input, POST, enctype, HTML</Keywords>
+</Faq>

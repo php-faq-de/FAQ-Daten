@@ -1,0 +1,4 @@
+<Faq alias="konfiguration-werte" author="Kristian Köhntopp">
+  <Question>Was bedeuten master value und local value in phpinfo()?</Question>
+  <Keywords>php.ini, Konfiguration, master, local, value, Modul, Server</Keywords>
+</Faq>

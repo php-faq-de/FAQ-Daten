@@ -1,0 +1,15 @@
+<Category alias="code" name="Guter Code" keywords="PHP, Usenet, FAQ, dclp">
+  <!--Die FAQs sind hier noch mal redundant aufgelistet um die Reihenfolge vorzugeben.-->
+  <Faqs>
+    <Faq alias="stil-waechter" />
+    <Faq alias="stil-normalform" />
+    <Faq alias="stil-content-code" />
+    <Faq alias="terminologie-if" />
+    <Faq alias="stil-anfuehrungszeichen" />
+    <Faq alias="html-validieren" />
+    <Faq alias="stil-kommentare" />
+    <Faq alias="http-caching" />
+    <Faq alias="http-redirect" />
+    <Faq alias="php-wap" />
+  </Faqs>
+</Category>

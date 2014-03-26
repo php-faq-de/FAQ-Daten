@@ -1,0 +1,4 @@
+<Faq alias="sybase-list-dbs" author="Timm Friebe">
+  <Question>MySQL-Kompatibilität: Datenbanken auflisten</Question>
+  <Keywords>Sybase, Datenbank, Datenbanken, sybase_list_dbs</Keywords>
+</Faq>

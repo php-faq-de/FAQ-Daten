@@ -1,0 +1,44 @@
+<p>
+Das sind Escapes, die vor bestimmten Sonderzeichen stehen, um
+diese zu "entschärfen". Verantwortlich für dieses Verhalten ist
+die Funktion <tt>magic_quotes</tt> von PHP, die üblicherweise
+in der <tt>php.ini</tt> eingestellt wird. Dabei gilt
+<a href="http://de3.php.net/manual/en/ini.php">magic_quotes_gpc</a> für Daten, die per GET, POST
+oder COOKIE übergeben werden und <a href="http://de3.php.net/manual/en/ini.php">magic_quotes_runtime</a>
+für Daten, die aus Datenbanken, Dateien oder anderen externen Quellen
+kommen. Escaped werden <tt>'</tt> (single quote), <tt>"</tt> (double
+quote), <tt>\</tt> (backslash) und NUL (das Null-Byte).
+</p>
+
+<p>
+Um die Escape-Zeichen wieder zu entfernen, benutzt man
+<a href="http://www.php3.de/stripslashes">stripslashes()</a>; manuell hinzufügen kann man
+sie mittels <a href="http://www.php3.de/addslashes">addslashes()</a>.
+</p>
+
+<p>
+Die Konfiguration von magic_quotes kann man an verschiedenen
+Stellen beeinflussen:
+</p>
+
+<pre>
+php.ini:
+magic_quotes_runtime = on|off
+magic_quotes_gpc     = on|off
+
+.htaccess, httpd.conf:
+php_flag magic_quotes_runtime on|off
+php_flag magic_quotes_gpc     on|off
+
+.php
+ini_set("magic_quotes_runtime", 0|1);
+// magic_quotes_gpc geht hier nicht
+</pre>
+
+<p>
+In Verbindung mit Sybase-Datenbanken (d.h. bei zusätzlich
+gesetzter Option <a href="http://de3.php.net/manual/en/ini.php">magic_quotes_sybase</a>) gibt
+es eine Besonderheit: Hier werden single quotes nicht mit
+einem Backslash, sondern mit einem weiteren single quote escaped.
+</p>
+

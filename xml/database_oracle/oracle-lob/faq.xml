@@ -1,0 +1,4 @@
+<Faq alias="oracle-lob" author="Thomas Fromm">
+  <Question>Wie bearbeite ich LOBs mit PHP?</Question>
+  <Keywords>Oracle, Datenbank, LOB, speichern</Keywords>
+</Faq>

@@ -1,0 +1,7 @@
+<Faq alias="code-upload" author="Andreas Bohne-Lang">
+  <Question>Wie kann ich einen HTTP POST-Request mit Datei-Upload absenden?</Question>
+  <Keywords>POST, multipart, File, upload, Datei</Keywords>
+  <Editors>
+    <Editor name="Niels Braczek" lastedit="2008-08-12 00:00:00" />
+  </Editors>
+</Faq>

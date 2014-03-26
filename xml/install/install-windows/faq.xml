@@ -1,0 +1,7 @@
+<Faq alias="install-windows" author="Martin Jansen">
+  <Question>Wie installiere ich PHP auf Windows?</Question>
+  <Keywords>mod_php, Windows, Win32, Installation, Bibliotheken, Modul, Apache, Download, WAMP</Keywords>
+  <Editors>
+    <Editor name="Niels Braczek" lastedit="2008-08-12 00:00:00" />
+  </Editors>
+</Faq>

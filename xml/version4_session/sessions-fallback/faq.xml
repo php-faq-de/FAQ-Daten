@@ -1,0 +1,7 @@
+<Faq alias="sessions-fallback" author="Daniel T. Gorski">
+  <Question>Wie übergebe ich Session-IDs ohne Cookies an eine andere Seite? Was ist Fallback?</Question>
+  <Keywords>Session-ID, SessionID, Cookie, GET, Fallback, Fall back, URL</Keywords>
+  <Editors>
+    <Editor name="Niels Braczek" lastedit="2008-11-08 00:00:00" />
+  </Editors>
+</Faq>

@@ -1,0 +1,72 @@
+<p>In der strukturierten Programmierung erzeugt man Schleifen
+ohne Schleifenkurzschlüsse mit <tt>continue</tt> oder
+<tt>break</tt> und Funktionen mit genau einem Funktionsausgang
+durch <tt>return</tt>. Dadurch entsteht häufig Code mit sehr
+vielen geschachtelten Abfragen.</p>
+
+<p>Meistens versucht man vor der eigentlichen Nutzlast einer
+Schleife oder einer Funktion eine Reihe von Vorbedingungen zu
+testen, die für den erfolgreichen Einsatz der Nutzlast
+sichergestellt sein müssen. Der generierte Code sieht dann wie
+folgt aus:</p>
+
+<pre><span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span>vorbedingung<span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+  <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span>vorbedingung2<span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+    <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span>vorbedingung3<span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+      doit<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>; <span style="color: #808080; font-style: italic;">// Nutzlast</span>
+    <span style="color: #000000;">&#125;</span> <span style="color: #b1b100;">else</span> <span style="color: #000000;">&#123;</span>
+      handle_error3<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+  <span style="color: #000000;">&#125;</span> <span style="color: #b1b100;">else</span> <span style="color: #000000;">&#123;</span>
+    handle_error2<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+  <span style="color: #000000;">&#125;</span>
+<span style="color: #000000;">&#125;</span> <span style="color: #b1b100;">else</span> <span style="color: #000000;">&#123;</span>
+  handle_error<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000;">&#125;</span></pre>
+
+<p>Dies ist sehr schwer zu lesen und zu verstehen, weil der
+eigentliche Zweck der Funktion tief geschachtelt und sehr
+unübersichtlich versteckt ist. Geübte Programmierer verwenden
+stattdessen absichtlich die in der strukturierten Programmierung verpönten
+Schleifenkurzschlüsse und frühzeitigen Funktionsausstiege in
+einer bestimmten Form, um besser lesbaren Code zu schreiben:</p>
+
+<pre><span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span>!vorbedingung<span style="color: #000000;">&#41;</span>
+  handle_error<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+<span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span>!vorbedingung2<span style="color: #000000;">&#41;</span>
+  handle_error2<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+<span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span>!vorbedingung3<span style="color: #000000;">&#41;</span>
+  handle_error3<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+doit; <span style="color: #808080; font-style: italic;">// Nutzlast</span></pre>
+
+<p>Dieser Code skaliert sich besser: Egal wieviele
+Vorbedingungen zu erfüllen sind - die Einrücktiefe bleibt
+konstant. Außerdem steht der normale Fall jetzt in Falllinie und
+der Fehlercode ist als Ausnahme eingerückt und zur Seite
+gedrängt.</p>
+
+<p>Ein praktisches Beispiel: Der folgende Code zum Durchlesen
+eines Verzeichnisses</p>
+
+<pre><span style="color: #0000ff;">$d</span> = <a href="http://www.php3.de/dir"><span style="color: #000066;">dir</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;d:/logfiles&quot;</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #b1b100;">while</span><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$entry</span>=<span style="color: #0000ff;">$d</span>-&gt;<span style="color: #006600;">read</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+  <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$entry</span> != <span style="color: #ff0000;">&quot;.&quot;</span><span style="color: #000000;">&#41;</span> &amp;&amp; <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$entry</span> != <span style="color: #ff0000;">&quot;..&quot;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+    doit<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+  <span style="color: #000000;">&#125;</span>
+<span style="color: #000000;">&#125;</span>
+<span style="color: #0000ff;">$d</span>-&gt;<span style="color: #006600;">close</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;</pre>
+
+<p>wird durch die Umstellung zu</p>
+
+<pre><span style="color: #0000ff;">$d</span> = <a href="http://www.php3.de/dir"><span style="color: #000066;">dir</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;d:/logfiles&quot;</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #b1b100;">while</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$entry</span> = <span style="color: #0000ff;">$d</span>-&gt;<span style="color: #006600;">read</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+&nbsp;
+  <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$entry</span> == <span style="color: #ff0000;">&quot;.&quot;</span> or <span style="color: #0000ff;">$entry</span> == <span style="color: #ff0000;">&quot;..&quot;</span><span style="color: #000000;">&#41;</span>
+        <span style="color: #b1b100;">continue</span>;
+&nbsp;
+  doit<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000;">&#125;</span>
+<span style="color: #0000ff;">$d</span>-&gt;<span style="color: #006600;">close</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;</pre>
+

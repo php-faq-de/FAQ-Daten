@@ -1,0 +1,4 @@
+<Faq alias="formular-register-globals" author="Richard Körber" created="2010-01-17 00:00:00">
+  <Question>Warum funktionieren meine Formulare nicht?</Question>
+  <Keywords>Formular, Variablen, Register_Globals, PHP 4.2.0</Keywords>
+</Faq>

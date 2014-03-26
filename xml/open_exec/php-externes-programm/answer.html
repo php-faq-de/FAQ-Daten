@@ -1,0 +1,81 @@
+<p>
+PHP kennt nicht weniger als fünf Mechanismen, um externe
+Kommandos (z. B. Unix-Shellbefehle) von PHP aus zu starten. Alle
+diese Mechanismen können zu einem Sicherheitsrisiko werden, wenn
+man Benutzereingaben Bestandteil der ausgeführten Kommandos oder
+Dateinamen werden lässt.
+</p>
+
+<p>
+Durch Anwendung der Funktion <a href="http://www.php3.de/EscapeShellCmd">EscapeShellCmd()</a>
+kann man das Risiko etwas vermindern (etwa:
+<tt>system(escapeshellcmd($cmd))</tt>). Dennoch empfiehlt es
+sich, die Parameter, die in die Gestaltung von <tt>$cmd</tt>
+eingehen, sorgfältig zu prüfen.
+</p>
+
+<p>
+Externe Kommandos werden bei Verwendung von CGI PHP unter der
+Identität des CGI-Wrappers ausgeführt, bei Verwendung einer
+Modulversion von PHP mit der Identität des Webservers (siehe
+auch <a href="http://www.koehntopp.de/kris/artikel/webtune/">Webserver verstehen und tunen</a> von Kristian Köhntopp).
+</p>
+
+<p>
+Will man ein externes Kommando einfach nur ausführen, kann man
+das betreffende Kommando einfach in Backticks setzen:
+</p>
+
+<pre>`<a href="http://www.php3.de/touch"><span style="color: #000066;">touch</span></a> yyy`;</pre>
+
+<p>
+Dies wird im selben Verzeichnis wie das PHP-Script die Datei
+<tt>yyy</tt> erzeugen, falls der Webserver dort Schreibrecht hat.
+</p>
+
+<p>
+Alternativ kann man ein Kommando durch die Funktion
+<a href="http://www.php3.de/exec">exec()</a> starten lassen. Auch hier ist die Ausgabe
+nicht sichtbar, kann aber in einem Array abgelegt werden:
+</p>
+
+<pre><a href="http://www.php3.de/exec"><span style="color: #000066;">exec</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;cat /etc/group&quot;</span>, <span style="color: #0000ff;">$lines</span>, <span style="color: #0000ff;">$result</span><span style="color: #000000;">&#41;</span>;
+  <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;result = $result&lt;br&gt;&quot;</span>;
+&nbsp;
+  <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;Lines&lt;br&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
+  <span style="color: #b1b100;">foreach</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$lines</span> <span style="color: #b1b100;">as</span> <span style="color: #0000ff;">$k</span> =&gt; <span style="color: #0000ff;">$v</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+    <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;k=$k v=$v&lt;br&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
+  <span style="color: #000000;">&#125;</span></pre>
+
+<p>
+Die Ausgabe des Befehls wird im Feld <tt>$lines</tt> zur Verfügung
+gestellt, der Exitcode des Befehls in <tt>$result</tt>.
+</p>
+
+<p>
+Die Funktion <a href="http://www.php3.de/system">system()</a> gibt die Ausgabe des
+Unix-Kommandos dagegen an den Webserver weiter. Ebenso
+<a href="http://www.php3.de/passthru">passthru()</a>:
+</p>
+
+<pre><a href="http://www.php3.de/system"><span style="color: #000066;">system</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;ls -l&quot;</span>, <span style="color: #0000ff;">$result</span><span style="color: #000000;">&#41;</span>;
+  <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;Result: $result&lt;br&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
+&nbsp;
+  <a href="http://www.php3.de/passthru"><span style="color: #000066;">passthru</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;ls -l&quot;</span>, <span style="color: #0000ff;">$result</span><span style="color: #000000;">&#41;</span>;
+  <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;Result: $result&lt;br&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;</pre>
+
+<p>
+Schließlich kann man externe Kommandos noch mit Hilfe der
+Funktion <a href="http://www.php3.de/popen">popen()</a> starten:
+</p>
+
+<pre><span style="color: #0000ff;">$fp</span> = <a href="http://www.php3.de/popen"><span style="color: #000066;">popen</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;ls -l&quot;</span>, <span style="color: #ff0000;">&quot;r&quot;</span><span style="color: #000000;">&#41;</span>;
+  <span style="color: #b1b100;">while</span><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$line</span> = <a href="http://www.php3.de/fgets"><span style="color: #000066;">fgets</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span>, <span style="color: #cc66cc;">1024</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+    <a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;%s&lt;br&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>, <span style="color: #0000ff;">$line</span><span style="color: #000000;">&#41;</span>;
+  <span style="color: #000000;">&#125;</span></pre>
+
+<p>
+Im <a href="http://de3.php.net/manual/en/ini.php">safe_mode</a> unterliegt die Programmausführung
+weiteren Einschränkungen.
+</p>
+

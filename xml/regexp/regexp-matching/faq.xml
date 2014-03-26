@@ -1,0 +1,4 @@
+<Faq alias="regexp-matching" author="Johannes Frömter">
+  <Question>Wie teste ich auf die Existenz mehrerer Suchworte in einem String?</Question>
+  <Keywords>Anwendung, Beispiel</Keywords>
+</Faq>

@@ -1,0 +1,55 @@
+<p>
+  Um Passwörter nicht im Klartext in eine Datenbank speichern zu müssen,
+  gibt es die Möglichkeit diese vorher mit einer Einweg-Verschlüsselung
+  zu versehen, bzw. nur einen Hash des Passworts abzuspeichern.
+  Die Funktionen <a href="http://www.php3.de/crypt">crypt()</a> und <a href="http://www.php3.de/md5">md5()</a> 
+  können hierfür benutzt werden. 
+</p>
+<p>
+  Crypt verschlüsselt auf den meisten Systemen das Passwort mit DES, es werden
+  jedoch nur die ersten 8 Zeichen zur Verschlüsselung benutzt, längere
+  Passwörter werden also einfach abgeschnitten.
+</p>
+<p>
+  MD5 ist eine kryptographische Hash-Funktion. Sie berechnet für einen
+  beliebigen Eingabestring einen Hash, der 128 Bit lang ist.
+</p>
+<p>Beide Funktionen haben Eigenschaften, die uns hier sehr nützlich sind:</p>
+<ul>
+  <li><p>Sie sind determiniert: sie geben für eine bestimmte Eingabe immer
+      das gleiche Ergebnis zurück.</p>
+  </li>
+  <li><p>Es lässt sich nicht vom Ergebnis auf die Eingabe schliessen. <em>Damit
+      ist eine "Rückrechnung" des Passwort-Hashes auf das echte Passwort
+      des Benutzers nicht möglich (außer durch Brute-Force).</em></p>
+  </li>
+  <li><p>Es ist sehr unwahrscheinlich (wenn auch nicht unmöglich), dass zwei
+      verschiedene Eingaben genau denselben Hash-Wert ergeben.</p>
+  </li>
+</ul>
+<p>
+  Um die Passwörter der Benutzer also sicher zu speichern, wird vor dem
+  Speichern in z.B. einer Datenbank erst der Hash des Passworts berechnet und
+  dieser dann gespeichert.
+  Da wir (und vor allem andere) nicht in der Lage
+  sind, aus dem gespeicherten String das wirkliche Passwort zu berechnen,
+  kann bei der Prüfung der Passworteingabe nicht das Passwort direkt
+  verglichen werden.
+  Wir berechnen zunächst also wieder den Hash der Eingabe und vergleichen
+  diesen mit dem gespeicherten Hash. Wegen der o.g. Eigenschaft wird
+  der Hash der Eingabe (i.A.) genau dann gleich dem gespeicherten Hashwert
+  sein, wenn die ursprünglich eingegebenen Passwörter gleich sind.
+</p>
+<p>
+  Auch wenn die Passwörter nun sicher in der Datenbank gespeichert sind,
+  sollte hier nicht übersehen werden, dass die Eingaben des Benutzers,
+  also auch das Passwort, bei einer normalen HTTP-Übertragung unverschlüsselt
+  über die Leitung gehen und somit nicht sicher sind.
+  Eine mögliche clientseitige Verschlüsselung z.B. durch Javascript, bei der
+  nur das Passwort verschlüsselt wird, ist keine Abhilfe dagegen. Hier würde
+  zwar das Passwort nicht ersichtlich sein, zum Anmelden würde es aber reichen,
+  den mitgesnifften Hash an den Server zu schicken.
+  Letztlich bleibt für eine sichere Authentifizierung nur die Übertragung
+  über HTTPS.
+</p>
+

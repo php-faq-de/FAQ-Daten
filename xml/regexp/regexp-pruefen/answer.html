@@ -1,0 +1,32 @@
+<p>
+Häufig ist es nötig, festzustellen, ob ein String nur Ziffern
+bzw. nur Buchstaben enthält.
+</p>
+
+<p>
+<tt>$string</tt> sei die Zeichenkette, die überprüft werden soll.
+Die Regular Expression im ersten Beispiel überprüft, ob
+nur Ziffern in $string enthalten sind. Ist dies der Fall,
+gibt sie "Zeichenkette OK" aus, ansonsten lautet die
+Ausgabe "Ungültiges Zeichen in der Zeichenkette".
+</p>
+
+<pre><span style="color: #808080; font-style: italic;">/* Regex zur Ueberpruefung des Strings */</span>
+<span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span>!<a href="http://www.php3.de/preg_match"><span style="color: #000066;">preg_match</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;/^<span style="color: #000099; font-weight: bold;">\d</span>+$/&quot;</span>,<span style="color: #0000ff;">$string</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+  <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;Ungültiges Zeichen in der Zeichenkette&quot;</span>;
+<span style="color: #000000;">&#125;</span> <span style="color: #b1b100;">else</span> <span style="color: #000000;">&#123;</span>
+  <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;Zeichenkette OK&quot;</span>;
+<span style="color: #000000;">&#125;</span></pre>
+
+<p>
+Um zu überprüfen, ob in der Zeichenkette nur Buchstaben
+stehen, kann man folgende Regex verwenden, die auf dem
+gleichen Prinzip beruht:
+</p>
+
+<pre><span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span>!<a href="http://www.php3.de/preg_match"><span style="color: #000066;">preg_match</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;=^[a-zäöüß]+$=i&quot;</span>,<span style="color: #0000ff;">$string</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+  <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;Ungültiges Zeichen in der Zeichenkette&quot;</span>;
+<span style="color: #000000;">&#125;</span> <span style="color: #b1b100;">else</span> <span style="color: #000000;">&#123;</span>
+  <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;Zeichenkette OK&quot;</span>;
+<span style="color: #000000;">&#125;</span></pre>
+

@@ -1,0 +1,57 @@
+<p>
+Man kann Objekte genau wie alle anderen Typen in Sessions speichern
+indem man sie in den <tt>$_SESSION</tt>-Array speichert. Zu beachten
+ist dabei allerdings, dass auf <em>jeder</em> Seite, in der auf die
+Session zugegriffen wird (in der also <a href="http://www.php3.de/session_start">session_start()</a>
+aufgerufen wird), auch die Klassendefinition eingebunden sein muss.
+Falls sich diese in einer seperaten Datei befindet, muss sie 
+<em>vor</em> <tt>session_start()</tt> inkludiert werden. Wenn keine 
+Klassendefinition vorhanden ist, stellt PHP die Klassenfunktionen nicht
+wieder her - die Klasse ist somit meistens nutzlos.
+</p>
+
+<p>
+Oft muss man ein Objekt aufräumen, bevor es am Ende des Skriptes
+gespeichert (serialisiert) wird. Dazu dient dient die "magische" 
+Funktion <a href="http://www.php3.de/language.oop.magic-functions">__sleep()</a>. Diese wird vor dem Serialisieren des Objekts von 
+PHP aufgerufen. Sie muss einen Array mit allen Variablen des Objektes 
+zurückgegben, die gespeichert werden sollen.
+</p>
+
+<p>
+Ihr Gegenstück ist die Funktion <a href="http://www.php3.de/language.oop.magic-functions">__wakeup()</a>. Sie wird beim
+Wiederherstellen des Objektes aufgerufen.
+</p>
+
+<pre><span style="color: #000000; font-weight: bold;">class</span> myClass <span style="color: #000000;">&#123;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">var</span> <span style="color: #0000ff;">$id</span>;
+<span style="color: #000000; font-weight: bold;">var</span> <span style="color: #0000ff;">$text</span>;
+<span style="color: #000000; font-weight: bold;">var</span> <span style="color: #0000ff;">$db</span>;
+&nbsp;
+<span style="color: #000000; font-weight: bold;">function</span> <a href="http://www.php3.de/gettext"><span style="color: #000066;">getText</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+	<span style="color: #b1b100;">return</span> <span style="color: #0000ff;">$this</span>-&gt;<span style="color: #006600;">text</span>;
+<span style="color: #000000;">&#125;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">function</span> setText<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$text</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+	<span style="color: #0000ff;">$this</span>-&gt;<span style="color: #006600;">text</span> = <span style="color: #0000ff;">$text</span>;
+	<span style="color: #808080; font-style: italic;">// schreibe Text in die Datenbank</span>
+	<span style="color: #000000;">&#91;</span>...<span style="color: #000000;">&#93;</span>
+<span style="color: #000000;">&#125;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">function</span> __sleep<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+	<span style="color: #808080; font-style: italic;">// schließe die Datenbankverbindung</span>
+	<span style="color: #0000ff;">$this</span>-&gt;<span style="color: #006600;">db</span>-&gt;<span style="color: #006600;">disconnect</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+	<span style="color: #b1b100;">return</span> <a href="http://www.php3.de/array"><span style="color: #000066;">array</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'id'</span>, <span style="color: #ff0000;">'text'</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000;">&#125;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">function</span> __wakeup<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+	<span style="color: #808080; font-style: italic;">// stelle die Datenbankverbindung wieder her</span>
+	<span style="color: #0000ff;">$this</span>-&gt;<span style="color: #006600;">db</span> = <span style="color: #000000; font-weight: bold;">new</span> DB<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#91;</span>...<span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+	<span style="color: #808080; font-style: italic;">// hole den Text aus der Datenbank</span>
+	<span style="color: #000000;">&#91;</span>...<span style="color: #000000;">&#93;</span>
+<span style="color: #000000;">&#125;</span>
+<span style="color: #000000;">&#125;</span></pre>
+

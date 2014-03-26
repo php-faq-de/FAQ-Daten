@@ -1,0 +1,37 @@
+<p>
+Wenn das Script <em>bereits</em> läuft, gar nicht.
+</p>
+
+<p>
+Es gibt einen inoffiziellen Lösungsansatz seitens Netscape, mit
+dem es möglich ist, die Ausgabe eines laufenden Scriptes in
+einen anderen Frame umzulenken. Dies ist jedoch nicht portabel:
+PHP läuft auf dem Server und weiß zunächst einmal nichts von den
+Frames eines Clients.
+</p>
+
+<p>
+Es jedoch möglich, sich mit JavaScript eine Brückenseite zu
+schreiben (vom laufendem Script schreiben zu lassen), die mit
+Hilfe von <tt>onLoad()</tt> erneut eine PHP-Seite vom Server für
+einen anderen Frame anfordert
+(<tt>top.anderesFrame.location.href="/seite1.php";
+self.location.href="/seite2.php"</tt>).
+</p>
+
+<p>
+Von diesem Verfahren wird hier deutlich abgeraten, da viele User
+(bei manchen Firmen gehört das auch zu der Firmenpolicy)
+JavaScript aus Sicherheitsgründen abschalten. Dann bleibt der
+Bildschirm u.U. leer und der Besucher verwirrt. Wiederkommen
+wird er bestimmt nicht mehr.
+</p>
+
+<p>
+<em>Vor</em> der Ausführung des Scriptes, ist es selbstverständlich
+möglich mittels <tt>&lt;A HREF="seite1.php"
+TARGET="andererFrame"&gt;</tt> das Script in einem anderem Frame
+(bzw. mit <tt>javascript:window.open()</tt> geöffneten Fenster)
+ausführen zu lassen.
+</p>
+

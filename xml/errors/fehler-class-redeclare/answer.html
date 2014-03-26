@@ -1,0 +1,13 @@
+<p>
+In den meisten Fällen werden immer wieder verwendete Funktionen und Klassen
+in seperate Dateien geschrieben und diese dann über include oder require in
+das Programm eingebunden. Wird über include oder require eine solche Datei
+zweimal geladen, wird der darin enthaltene Code auch zweimal ausgeführt.
+Das aber führt auf Grund der Redefinition der Funktion(en) und/oder
+Klasse(n) zu einem Fehler. Um diesen Fehler zu vermeiden, muss
+<a href="http://www.php3.de/include_once">include_once()</a> oder <a href="http://www.php3.de/require_once">require_once()</a>
+verwendet werden. Include_once und require_once verhalten sich beim ersten
+Aufruf wie include und require, bei wiederholtem Aufruf wird jedoch ein
+erneutes Laden der gleichen Datei verhindert.
+</p>
+

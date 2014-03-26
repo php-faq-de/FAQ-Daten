@@ -1,0 +1,80 @@
+<p>
+In nahezu allen Einsatzgebieten einer Datenbank wird die
+Datenbank durch ein bestimmtes Benutzerinterface (z.B. über das
+Web) abgefragt und auch gefüllt. Oft darf ein bestimmter
+Benutzer nicht alles sehen, was sich in der Datenbank befindet -
+und schon gar nicht ändern oder löschen. Falsch programmierte
+Scripte ermöglichen jedoch genau dies - dabei ist ein Schutz
+gegen die als SQL-Injection bekannte Technik gar nicht so
+schwer. Auf die Prüfung der übergebenen Parameter kommt es an.
+(Siehe dazu auch "<a class="faq" href="http://www.php-faq.de/q-sicherheit-parameter.html">Prüfe importierte Parameter. Traue niemandem</a>").
+</p>
+<p>
+Zunächst mal ein Beispiel, wie eine solche SQL-Injektion
+aussehen könnte: in einer Benutzerverwaltung darf ein User genau
+sein eigenes Passwort ändern. Wir haben also die Tabelle
+"account", die insbesondere die Logindaten des Users und des
+Admins enthält. Der Benutzer sendet das Passwort-Ändern-Formular
+in seinem Browser ab und serverseitig wird das neue Passwort in
+die Datenbank geschrieben:
+</p>
+<pre><span style="color: #0000ff;">$result</span>= <span style="color: #0000ff;">$db</span>-&gt;<span style="color: #006600;">update</span> <span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'
+    update account
+    set password= &quot;'</span>.<span style="color: #0000ff;">$_REQUEST</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'newpassword'</span><span style="color: #000000;">&#93;</span>.<span style="color: #ff0000;">'&quot;
+    where username= &quot;'</span>.<span style="color: #0000ff;">$_REQUEST</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'username'</span><span style="color: #000000;">&#93;</span>.<span style="color: #ff0000;">'&quot;'</span>
+  <span style="color: #000000;">&#41;</span>;</pre>
+<p>
+Hier wird die Variable $_REQUEST['newpassword'] nicht geprüft -
+der Benutzer kann eintragen, was er möchte. Mit etwas
+Trial-and-Error findet der Benutzer heraus, dass er die
+doppelten Anführungszeichen (") als String-Delimiter
+benutzen muss; er gibt nun ein Passwort seiner Wahl und als
+Username <tt>userxy" or username="admin</tt>. Somit ergibt sich
+nach der Textersetzung folgendes SQL:
+</p>
+<pre>update account
+  set password= <span style="color: #ff0000;">&quot;adminsuxx&quot;</span>
+  where username=<span style="color: #ff0000;">&quot;userxy&quot;</span> or username=<span style="color: #ff0000;">&quot;admin&quot;</span></pre>
+<p>
+Es kommt hier also hochgradig darauf an, niemals fremden
+Parametern zu trauen. Auf was muss also getestet werden?
+Parameter, die innerhalb von Quotes als String an die Datenbank
+übergeben werden sollen, dürfen selbst keine ungeschützten
+Quotes enthalten. Parameter, die IDs oder Zahlen repräsentieren,
+dürfen nur Ziffern enthalten. Die beiden Funktionen sichern
+genau dies, und sorgen zudem dafür, dass NULL-Values korrekt
+wiedergegeben werden:
+</p>
+<pre><span style="color: #000000; font-weight: bold;">function</span> sqlSafeString<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$param</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+    <span style="color: #808080; font-style: italic;">// Hier wird wg. der grossen Verbreitung auf MySQL eingegangen</span>
+    <span style="color: #b1b100;">return</span> <span style="color: #000000;">&#40;</span><span style="color: #000000; font-weight: bold;">NULL</span> === <span style="color: #0000ff;">$param</span> ? <span style="color: #ff0000;">&quot;NULL&quot;</span> : <span style="color: #ff0000;">'&quot;'</span>.<a href="http://www.php3.de/mysql_escape_string"><span style="color: #000066;">mysql_escape_string</span></a> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$param</span><span style="color: #000000;">&#41;</span>.<span style="color: #ff0000;">'&quot;'</span><span style="color: #000000;">&#41;</span>;
+  <span style="color: #000000;">&#125;</span>
+&nbsp;
+  <span style="color: #000000; font-weight: bold;">function</span> sqlSafeInt<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$param</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+    <span style="color: #b1b100;">return</span> <span style="color: #000000;">&#40;</span><span style="color: #000000; font-weight: bold;">NULL</span> === <span style="color: #0000ff;">$param</span> ? <span style="color: #ff0000;">&quot;NULL&quot;</span> : <a href="http://www.php3.de/intval"><span style="color: #000066;">intVal</span></a> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$param</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>;
+  <span style="color: #000000;">&#125;</span></pre>
+<p>
+(Die genauen Vorgaben zum Schützen von Sonderzeichen hängen vom
+SQL-Dialekt des RDBMS ab und müssen gegebenenfalls angepasst
+werden.) Man hätte so oben beschriebenes SQL so umschreiben
+können:
+</p>
+<pre><span style="color: #0000ff;">$result</span>= <span style="color: #0000ff;">$db</span>-&gt;<span style="color: #006600;">update</span> <span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'
+    update account
+    set password= '</span>.sqlSafeString <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$_REQUEST</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'newpassword'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span>.<span style="color: #ff0000;">'
+    where username= '</span>.sqlSafeString <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$_REQUEST</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'username'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span>
+  <span style="color: #000000;">&#41;</span>;</pre>
+<p>
+Obiger SQL-Injection-Versuch wäre dann gescheitert (weil keine
+Zeile auf diesen Usernamen matcht):
+</p>
+<pre>update account
+  set password= <span style="color: #ff0000;">&quot;adminsuxx&quot;</span>
+  where username=<span style="color: #ff0000;">&quot;userxy<span style="color: #000099; font-weight: bold;">\&quot;</span> or username=<span style="color: #000099; font-weight: bold;">\&quot;</span>admin<span style="color: #000099; font-weight: bold;">\&quot;</span>&quot;</span></pre>
+<p>
+Eine Funktion, die komfortable SQL-Manipulation mit
+automatischem Escaping bietet, wird in "<a class="faq" href="http://www.php-faq.de/q-sybase-quoting.html">String-Quoting bei Sybase</a>" vorgestellt; sie ist zwar für Sybase
+geschrieben worden, lässt sich aber leicht für andere
+Datenbanksysteme adaptieren.
+</p>
+

@@ -1,0 +1,46 @@
+<p>
+Siehe auch
+<a href="http://www.koehntopp.de/kris/artikel/webtune">Webserver verstehen und tunen</a>
+von Kristian Köhntopp.
+</p>
+
+<p>
+Jedes Mal, wenn eine Seite mit PHP-Code darauf ausgeführt werden
+muss, muss der PHP-Interpreter gestartet werden. Wird PHP als
+CGI-Programm installiert, bedeutet dies, dass am Anfang der Seite
+ein neuer Prozess erzeugt werden muss und der PHP-Interpreter in
+diesen Prozess geladen werden muss. Dies verbraucht eine ganze
+Menge Systemressourcen. Am Ende der Seite endet auch der
+Interpreterprozess und aller Speicher wird freigegeben. Ebenso
+werden alle Filehandles geschlossen und damit alle
+Datenbankverbindungen aufgegeben.
+</p>
+
+<p>
+Installiert man PHP dagegen als Modul, etwa in einem
+Apache-Webserver, dann ist das PHP-Modul Bestandteil des
+Webservers und ständig geladen. Es kann außerdem Datenbanklinks
+über die Lebensdauer einer PHP-Seite hinaus offen halten, was
+speziell bei Oracle-Datenbanken große Performancevorteile
+bringt.
+</p>
+
+<p>
+Nur mit einem CGI-PHP ist es möglich, PHP als Scriptsprache zur
+Erstellung von "Shellscripten" einzusetzen.
+</p>
+
+<p>
+Viele Massen-Webhoster setzen bevorzugt CGI-PHP ein, weil es
+sich leichter auf eine Weise installieren lässt, die die
+Systemsicherheit nicht gefährdet. CGI-PHP erlaubt den Einsatz
+der Apache-Erweiterung <tt>suexec</tt>, die Erstellung einer
+<tt>chroot()</tt>-Umgebung und die bessere Kontrolle der durch
+den Anwender verbrauchten Systemressourcen.
+</p>
+
+<p>
+Praktisch alle großen PHP-Sites setzen PHP als Modul ein, weil
+die Performance hier deutlich besser ist.
+</p>
+

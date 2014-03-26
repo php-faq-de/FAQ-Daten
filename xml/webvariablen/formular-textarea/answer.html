@@ -1,0 +1,32 @@
+<p>
+Dieses Codebeispiel erzeugt für jede Zeile in der Textarea eine Ausgabe,
+die etwa so aussieht:
+</p>
+<pre>
+Der Inhalt von Zeile 0 ist: "Inhalt der ersten Zeile"
+</pre>
+<p>
+Zu beachten ist, dass die Zählung innerhalb des Arrays $line mit 0
+beginnt. Der Code ist für PHP 4.1.0 oder höher geschrieben. Wenn eine
+älter Version von PHP verwendet wird, so ist $_SERVER["PHP_SELF"] durch
+$PHP_SELF und $_REQUEST["TA"] durch $TA oder $HTTP_POST_VARS["TA"] zu
+ersetzen.
+</p>
+<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+<a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">'&lt;form action=&quot;'</span>.<span style="color: #0000ff;">$_SERVER</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;PHP_SELF&quot;</span><span style="color: #000000;">&#93;</span>.<span style="color: #ff0000;">'&quot; method=&quot;post&quot;&gt;'</span>;
+<a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">'&lt;textarea name=&quot;TA&quot; cols=&quot;50&quot; rows=&quot;10&quot;&gt;'</span>;
+<span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><a href="http://www.php3.de/isset"><span style="color: #000066;">isset</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$_REQUEST</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;TA&quot;</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+    <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #0000ff;">$_REQUEST</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;TA&quot;</span><span style="color: #000000;">&#93;</span>;
+<span style="color: #000000;">&#125;</span>
+<a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">'&lt;/textarea&gt;'</span>;
+<a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">'&lt;input type=&quot;submit&quot; value=&quot;Prüfen...&quot;&gt;'</span>;
+<a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">'&lt;/form&gt;'</span>;
+&nbsp;
+<span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><a href="http://www.php3.de/isset"><span style="color: #000066;">isset</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$_REQUEST</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;TA&quot;</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+    <span style="color: #0000ff;">$lines</span> = <a href="http://www.php3.de/preg_split"><span style="color: #000066;">preg_split</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;/<span style="color: #000099; font-weight: bold;">\r</span><span style="color: #000099; font-weight: bold;">\n</span>/&quot;</span>, <span style="color: #0000ff;">$_REQUEST</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;TA&quot;</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span>;
+    <span style="color: #b1b100;">foreach</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$lines</span> <span style="color: #b1b100;">as</span> <span style="color: #0000ff;">$key</span> =&gt; <span style="color: #0000ff;">$value</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#123;</span>
+      <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">'Der Inhalt von Zeile '</span>.<span style="color: #0000ff;">$key</span>.<span style="color: #ff0000;">' ist: &quot;'</span>.<span style="color: #0000ff;">$value</span>.<span style="color: #ff0000;">'&quot;&lt;br&gt;'</span>;
+    <span style="color: #000000;">&#125;</span>
+<span style="color: #000000;">&#125;</span>
+<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+

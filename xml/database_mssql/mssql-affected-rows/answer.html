@@ -1,0 +1,13 @@
+<p>
+Bei MySQL liefert die Funktion <a href="http://www.php3.de/mysql_affected_rows">mysql_affected_rows()</a> die Anzahl betroffener Datensätze
+einer vorhergehenden MySQL Operation zurück. Diese Funktion für
+den SQL-Server, mssql_affected_rows ist nicht vorhanden.
+</p>
+<p>
+Die PHP ab Version 4.0.4 heisst die Funktion <a href="http://www.php3.de/mssql_rows_affected">mssql_rows_affected()</a>, statt wie erwartet <tt>mssql_affected_rows</tt>.
+In PHP vor Version 4.0.4 können Sie sich dadurch behelfen das Sie diesen Wert
+aus den Systemvariablen des SQL-Servers ermitteln Lesen Sie nach einer
+Datenbankoperation die Variable <tt>@@rowcount</tt> aus.
+</p>
+<pre><a href="http://www.php3.de/list"><span style="color: #000066;">list</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$rows</span><span style="color: #000000;">&#41;</span> = mssql_fetch_row<span style="color: #000000;">&#40;</span>mssql_query<span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'select @@rowcount'</span>, <span style="color: #0000ff;">$dbh</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>;</pre>
+

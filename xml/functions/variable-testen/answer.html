@@ -1,0 +1,35 @@
+<p>
+<tt>if($var)</tt> evaluiert nur dann zu <tt>true</tt>, wenn <tt>$var</tt>
+keinen der folgenden Werte darstellt: <tt>false</tt>, <tt>0</tt>,
+<tt>0.0</tt>, <tt>""</tt> oder <tt>"0"</tt>,
+<tt>NULL</tt>, <tt>array()</tt> oder <tt>new stdClass</tt>. Alle diese 
+Werte bedeuten <tt>false</tt> in ihrem jeweiligen Typ (Bool, Integer, Float,
+String, Null, Array, Object).
+</p>
+
+<p>
+<tt>if(isset($weiter))</tt> evaluiert immer zu <tt>true</tt>, wenn
+<tt>$weiter</tt> nicht <tt>undefined</tt> ist.
+</p>
+
+<p>
+Im ersten Fall wird der Inhalt, im zweiten Fall die
+Existenz der Variablen bewertet.
+</p>
+
+<p>
+Ein ähnliches Problem tritt bei Vergleichen auf:
+<tt>if($var == false)</tt> evaluiert immer dann zu <tt>true</tt>,
+wenn <tt>$var</tt> einen der obigen Werte darstellt. PHP führt
+hier eine automatische Typenkonvertierung durch,
+wodurch die beiden Variablen als äquivalent angesehen werden.
+</p>
+
+<p>
+Diese Typkonvertierung kann mit den Vergleichsoperatoren
+<tt>===</tt> (drei Gleichheitszeichen) und <tt>!==</tt>
+vermieden werden. Der Vergleich <tt>===</tt> ist nur dann wahr,
+wenn die beiden Operanden den gleichen Typ und den gleichen Wert
+haben.
+</p>
+

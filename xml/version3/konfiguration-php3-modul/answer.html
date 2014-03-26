@@ -1,0 +1,25 @@
+<p>
+Immer wenn von einer Konfigurationsanweisung der Form
+<tt>name=wert</tt> für die Konfigurationsdatei <tt>php3.ini</tt> die
+Rede ist, dann kann für mod_php in Apache stattdessen
+auch die Apache-Konfigurationsdirektive <tt>php3_name
+wert</tt> verwendet werden. Man beachte, dass dem Namen der Anweisung
+<tt>php3_</tt> vorangestellt wird und dass in einer
+Apache-Konfigurationsdatei <em>keine</em> Gleichheitszeichen
+verwendet werden dürfen.
+</p>
+
+<p>
+Die Konfigurationsdirektiven können in der <tt>httpd.conf</tt> in
+einem &lt;directory&gt;-Block oder in einer <tt>.htaccess</tt>-Datei
+stehen. Sie gelten für das bezeichnete Verzeichnis und alle
+seine Unterverzeichnisse. Dies erlaubt es, die PHP-Konfiguration
+pro Verzeichnis anzupassen.
+</p>
+
+<p>
+Mit Hilfe der PHP-Funktion <a href="http://www.php3.de/get_cfg_var">get_cfg_var()</a>
+lassen sich Konfigurationsvariablen aus der <tt>php3.ini</tt> zur Laufzeit
+abfragen.
+</p>
+

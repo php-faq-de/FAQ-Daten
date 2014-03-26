@@ -1,0 +1,418 @@
+<h2>Konstanten</h2>
+
+<pre><a href="http://www.php3.de/define"><span style="color: #000066;">define</span></a><span style="color: #000000;">&#40;</span>NAME, Wert<span style="color: #000000;">&#41;</span>;</pre>
+
+<p>
+definiert eine Konstante. Diese Konstante ist überall gültig,
+also nicht nur im globalen Namensraum, sondern auch in Klassen
+und in Funktionen.
+</p>
+
+<h2>Globale Variablen</h2>
+
+<p>
+Eine globale Variable definiert man implizit durch ihre
+Benutzung innerhalb des globalen Namensraumes, also einfach
+durch
+</p>
+
+<pre><span style="color: #0000ff;">$a</span> = <span style="color: #cc66cc;">10</span>;</pre>
+
+<p>außerhalb jeder Klasse oder Funktion.</p>
+
+<h2>Superglobale automatische Variablen</h2>
+
+<p> 
+PHP unterhält einige Arrays, die es automatisch mit Werten
+befüllt. Diese Arrays sind global, und sie sind anders als
+normale globale Variablen automatisch auch in allen Funktionen
+und in Klassen sichtbar, ohne dass sie mit der Anweisung
+<tt>global</tt> importiert werden müssen.
+</p>
+
+<p>
+Es sind dies die Felder <tt>$_GET</tt> (Get-Parameter des
+Scriptes), <tt>$_POST</tt> (Post-Parameter des Scriptes),
+<tt>$_COOKIE</tt> (Cookie-Parameter des Scriptes), 
+<tt>$_SERVER</tt> (Serverdefinierte Variablen, CGI-Umgebung),
+<tt>$_ENV</tt> (Umgebungsvariablen), <tt>$_REQUEST</tt>,
+<tt>$_FILES</tt> und <tt>$_SESSION</tt> sowie <tt>$GLOBALS</tt>
+(ohne führenden Unterstrich, alle globalen Variablen).
+</p>
+
+<h2>Variablen in Funktionen</h2>
+
+<p>
+In PHP hat jede Funktion ihren separaten Namensraum. In diesem
+Namensraum existieren nur diejenigen Variablen, die als
+Formalparameter der Funktion in die Funktion importiert worden
+sind oder die innerhalb der Funktion definiert worden sind.
+Diese Variablen haben die Lebensdauer des Funktionsaufrufes,
+d.h. sie verlieren beim Verlassen der Funktion ihren Wert.
+</p>
+
+<p>
+Es ist möglich, in den Namensraum einer Funktion weitere
+Variablen hineinzuimportieren. Dies geschieht mit Hilfe der
+Anweisung <tt>global</tt>.
+</p>
+
+<p>Beispiel:</p>
+
+<pre><span style="color: #000000; font-weight: bold;">function</span> testfunc<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$para1</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+  <a href="http://www.php3.de/global"><span style="color: #000066;">global</span></a> <span style="color: #0000ff;">$glob1</span>;
+&nbsp;
+  <span style="color: #0000ff;">$loc1</span> = <span style="color: #cc66cc;">10</span>;
+  <span style="color: #0000ff;">$glob1</span> = <span style="color: #0000ff;">$glob1</span> + <span style="color: #cc66cc;">1</span>;
+&nbsp;
+  <span style="color: #b1b100;">return</span>;
+<span style="color: #000000;">&#125;</span></pre>
+
+<p>
+Diese Funktion hat zunächst einmal die Variablen <tt>$para1</tt> und
+<tt>$loc1</tt> als Parameter bzw. als lokale Variable definiert. Diese
+Variablen verlieren mit der schließenden Klammer "}" ihren
+Wert. Außerdem wird die Variable <tt>$glob1</tt> in den Namensraum der
+Funktion importiert. Der Wert von <tt>$glob1</tt> ist auch außerhalb von
+<tt>testfunc()</tt> sichtbar und <tt>$glob1</tt> bleibt für die gesamte
+Lebensdauer des Programmes bestehen.
+</p>
+
+<p>
+Weiterhin kann man innerhalb einer Funktion noch lokale
+Variablen definieren, die nur innerhalb der Funktion sichtbar
+sind, deren Wert jedoch nach dem Ende der Funktion erhalten
+bleibt und bei einem erneuten Funktionsaufruf erneut sichtbar
+wird. Dies erfolgt mit Hilfe der Anweisung <tt>static</tt>.
+</p>
+
+<pre><span style="color: #000000; font-weight: bold;">function</span> testfunc2<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$para1</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+  <a href="http://www.php3.de/global"><span style="color: #000066;">global</span></a> <span style="color: #0000ff;">$glob1</span>;
+  <a href="http://www.php3.de/static"><span style="color: #000066;">static</span></a> <span style="color: #0000ff;">$stat1</span> = <span style="color: #cc66cc;">0</span>;
+&nbsp;
+  <span style="color: #0000ff;">$loc1</span> = <span style="color: #cc66cc;">10</span>;
+  <span style="color: #0000ff;">$glob1</span> = <span style="color: #0000ff;">$glob1</span> + <span style="color: #cc66cc;">1</span>;
+  <span style="color: #0000ff;">$stat1</span> = <span style="color: #0000ff;">$stat1</span> + <span style="color: #cc66cc;">1</span>;
+&nbsp;
+  <a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Die Funktion testfunc2() wurde %s mal aufgerufen.<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>,
+    <span style="color: #0000ff;">$stat1</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000;">&#125;</span></pre>
+
+<p>
+In diesem Beispiel ist die Anweisung <tt>static $stat1</tt> dazu
+gekommen, die die Variable <tt>$stat1</tt> als lokale, aber langlebige
+Variable in <tt>testfunc2()</tt> definiert und zur Vermeidung einer
+Warnung mit 0 initialisiert. Der Wert von <tt>$stat1</tt> bleibt über
+einen einzelnen Funktionsaufruf erhalten. <tt>$stat1</tt> zählt also im
+Beispiel oben die Anzahl der Aufrufe von <tt>testfunc2()</tt>.
+</p>
+
+<p>
+PHP definiert die superglobale Variable <tt>$GLOBALS[]</tt> vom
+Typ Array/Hash. Es handelt sich um einen Namen fuer die globale
+Symboltabelle des Interpreters. Der Name ist in allen
+Namensräumen sichtbar. Entsprechend ist das Konstrukt
+</p>
+
+<pre><span style="color: #000000; font-weight: bold;">function</span> testfunc3<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+  <a href="http://www.php3.de/global"><span style="color: #000066;">global</span></a> <span style="color: #0000ff;">$glob1</span>;
+&nbsp;
+  <span style="color: #0000ff;">$glob1</span> = <span style="color: #0000ff;">$glob1</span> + <span style="color: #cc66cc;">1</span>;
+&nbsp;
+  <span style="color: #b1b100;">return</span>;
+<span style="color: #000000;">&#125;</span></pre>
+
+<p>gleichbedeutend mit</p>
+
+<pre><span style="color: #000000; font-weight: bold;">function</span> testfunc3b<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+  <span style="color: #0000ff;">$GLOBALS</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;glob1&quot;</span><span style="color: #000000;">&#93;</span> = <span style="color: #0000ff;">$GLOBALS</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;glob1&quot;</span><span style="color: #000000;">&#93;</span> + <span style="color: #cc66cc;">1</span>;
+&nbsp;
+  <span style="color: #b1b100;">return</span>;
+<span style="color: #000000;">&#125;</span></pre>
+
+<h2>Variablen in Klassen</h2>
+
+<p>
+Die dritte Sorte Namensräume, die in PHP existiert, sind
+"<a class="faq" href="http://php-faq.de/ch-objects.html">Klassen und Objekte</a>". Eine Klasse wird vereinbart mit der
+Anweisung
+</p>
+
+<pre><span style="color: #000000; font-weight: bold;">class</span> MyClass <span style="color: #000000;">&#123;</span>
+  <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #0000ff;">$a</span>;
+  <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #0000ff;">$b</span>;
+&nbsp;
+  <span style="color: #000000; font-weight: bold;">function</span> c<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+    <a href="http://www.php3.de/print"><span style="color: #000066;">print</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Der Wert von a ist %s<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>, <span style="color: #0000ff;">$this</span>-&gt;<span style="color: #006600;">a</span><span style="color: #000000;">&#41;</span>
+    <span style="color: #0000ff;">$this</span>-&gt;<span style="color: #006600;">b</span> = <span style="color: #0000ff;">$this</span>-&gt;<span style="color: #006600;">b</span> + <span style="color: #cc66cc;">1</span>;
+    <a href="http://www.php3.de/print"><span style="color: #000066;">print</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Der Wert von b ist %s<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>, <span style="color: #0000ff;">$this</span>-&gt;<span style="color: #006600;">b</span><span style="color: #000000;">&#41;</span>;
+  <span style="color: #000000;">&#125;</span>
+&nbsp;
+  <span style="color: #000000; font-weight: bold;">function</span> MyClass<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+    <span style="color: #0000ff;">$this</span>-&gt;<span style="color: #006600;">a</span> = <span style="color: #cc66cc;">10</span>;
+    <span style="color: #0000ff;">$this</span>-&gt;<span style="color: #006600;">b</span> = <span style="color: #cc66cc;">0</span>;
+  <span style="color: #000000;">&#125;</span>
+<span style="color: #000000;">&#125;</span></pre>
+
+<p>
+Nach dieser Definition ist KEINE Variable belegt, aber es
+existiert ein Bauplan fuer MyClass-Variablen. MyClass ist ein
+Typ, so wie integer, float oder string Typen in PHP sind. Mit
+Hilfe der Anweisung "new" kann man sich Variablen nach diesem
+Bauplan erstellen lassen. "new" ist also eine Fabrik, der man
+einen Bauplan mitgibt und die nach diesem Plan Variablen
+herstellt.
+</p>
+
+<pre><span style="color: #0000ff;">$o</span> = <span style="color: #000000; font-weight: bold;">new</span> MyClass;</pre>
+
+<p>
+Den Bauplan einer Variablen bezeichnet man als Klasse, hier der
+Klasse MyClass. Die nach diesem Plan gebaute Variable als ein
+Objekt der Klasse, hier also als das Objekt <tt>$o</tt> der Klasse
+MyClass. Manche Leute sagen zu dem Objekt <tt>$o</tt> der Klasse MyClass
+auch "<tt>$o</tt> ist eine Instanz der Klasse MyClass".
+</p>
+
+<p>
+Nach einem Bauplan können mehrere Objekte gebaut werden, d.h.
+eine Klasse kann mehrere Instanzen haben.
+</p>
+
+<pre><span style="color: #0000ff;">$p</span> = <span style="color: #000000; font-weight: bold;">new</span> MyClass;</pre>
+
+<p>
+Die Variablen mit den Namen "a" und "b" in einem Objekt der
+Klasse MyClass werden in PHP als Slots oder Instanzvariablen
+bezeichnet. Man spricht sie immer über den Namen des Objektes an:
+</p>
+
+<pre><span style="color: #0000ff;">$o</span>-&gt;<span style="color: #006600;">a</span> = <span style="color: #cc66cc;">17</span>;
+<span style="color: #0000ff;">$p</span>-&gt;<span style="color: #006600;">a</span> = <span style="color: #cc66cc;">31</span>;</pre>
+
+<p>
+Dadurch werden sie unterscheidbar, d.h. es ist erkennbar, ob man
+den Slot mit dem Namen "a" des Objektes <tt>$o</tt> oder des
+Objektes <tt>$p</tt> meint. Das kann man sich vorstellen wie
+Pfadnamen: In unterschiedlichen Verzeichnissen eines
+Dateisystems kann man ja auch Dateien mit demselben Namen liegen
+haben, aber diese Variablen unterscheiden sich im Pfadnamen.
+</p>
+
+<p>
+Eine Klasse kann nicht nur Instanzvariablen definieren, sondern
+auch Instanzfunktionen, hier die Funktionen mit den Namen "c"
+und "MyClass". Sie werden genauso angesprochen wie die
+Instanzvariablen:
+</p>
+
+<pre><span style="color: #0000ff;">$o</span>-&gt;<span style="color: #006600;">c</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #0000ff;">$p</span>-&gt;<span style="color: #006600;">c</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #0000ff;">$o</span>-&gt;<span style="color: #006600;">MyClass</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #0000ff;">$p</span>-&gt;<span style="color: #006600;">MyClass</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;</pre>
+
+<p>
+Manche Leute nennen die Funktionen eines Objektes auch
+"Methoden" und reden dann von "Instanzmethoden" statt
+"Instanzfunktionen". Das hat keinen praktischen Zweck und dient
+nur der Förderung der allgemeinen Verwirrung.
+</p>
+
+<p>
+Beim Funktionsaufrufen gilt die folgende Sonderregel: Eine
+Funktion, die exakt denselben Namen hat wie die Klasse, in der
+sie enthalten ist, wird auch dann aufgerufen, wenn das Objekt
+von <tt>new</tt> gebaut wird. Diese Funktion kann also verwendet werden,
+um die Slots des Objektes mit Defaultwerten zu initialisieren:
+</p>
+
+<pre><span style="color: #0000ff;">$c</span> = <span style="color: #000000; font-weight: bold;">new</span> MyClass;</pre>
+
+<p>
+Hier wird also die Funktion <tt>$c-&gt;MyClass()</tt> automatisch
+aufgerufen. Weil diese Funktion aufgerufen wird, während das
+Objekt nach dem Bauplan gebaut wird, nennt man eine solche
+Funktion einen Konstruktor. Ein Konstruktor könnte auch optionale
+Parameter erwarten und man könnte der Funktion dann beim
+Zusammenbau diese Parameter mitgeben:
+</p>
+
+<pre><span style="color: #000000; font-weight: bold;">class</span> MyClass2 <span style="color: #000000;">&#123;</span>
+&nbsp;
+  ...
+&nbsp;
+  <span style="color: #000000; font-weight: bold;">function</span> MyClass2<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$p1</span> = <span style="color: #ff0000;">&quot;&quot;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+    <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$p1</span> != <span style="color: #ff0000;">&quot;&quot;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+      <span style="color: #0000ff;">$this</span>-&gt;...
+    <span style="color: #000000;">&#125;</span>
+  <span style="color: #000000;">&#125;</span>
+<span style="color: #000000;">&#125;</span>
+&nbsp;
+<span style="color: #0000ff;">$mc1</span> = <span style="color: #000000; font-weight: bold;">new</span> MyClass2<span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;beispielwert&quot;</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #0000ff;">$mc2</span> = <span style="color: #000000; font-weight: bold;">new</span> MyClass2<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;</pre>
+
+<p>
+Wenn der Bauplan einer Variablen erstellt wird, wenn wir also
+die Klasse MyClass definieren, dann wissen wir noch nicht, unter
+welchen Namen die Slots und Instanzfunktionen des Objektes
+einmal angesprochen werden. Daher können wir in der Funktion
+nicht <tt>$o-&gt;a</tt> oder <tt>$p-&gt;c()</tt> schreiben, sondern
+müssen irgendetwas allgemeineres als Platzhalter notieren.
+</p>
+
+<p>
+Die Pseudovariable <tt>$this</tt> steht dabei in einer
+Instanzfunktion als Platzhalter für den tatsächlichen Namen
+dieses Objektes. Innerhalb des Objektes <tt>$o</tt> steht
+<tt>$this-&gt;a</tt> also als Platzhalter fuer <tt>$o-&gt;a</tt>,
+innerhalb des Objektes <tt>$p</tt> steht <tt>$this-&gt;a</tt> jedoch als
+Platzhalter fuer <tt>$p-&gt;a</tt>. Man kann <tt>$this</tt> auch als
+"meine" lesen, also ist <tt>$this-&gt;a</tt> "mein Slot a" und
+<tt>$this-&gt;c()</tt> "meine Instanzfunktion c".
+</p>
+
+<h2>Referenzen in PHP</h2>
+
+<p>
+In PHP ist es so, dass jede Zuweisung eine Kopie der
+angesprochenen Variablen erzeugt:
+</p>
+
+<pre><span style="color: #0000ff;">$a</span> = <span style="color: #cc66cc;">10</span>;
+<span style="color: #0000ff;">$b</span> = <span style="color: #cc66cc;">20</span>;
+<span style="color: #0000ff;">$c</span> = <span style="color: #cc66cc;">30</span>;
+&nbsp;
+<span style="color: #0000ff;">$arr</span> = <a href="http://www.php3.de/array"><span style="color: #000066;">array</span></a><span style="color: #000000;">&#40;</span> <span style="color: #0000ff;">$a</span>, <span style="color: #0000ff;">$b</span>, <span style="color: #0000ff;">$c</span> <span style="color: #000000;">&#41;</span>;
+&nbsp;
+<span style="color: #0000ff;">$arr</span><span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">1</span><span style="color: #000000;">&#93;</span> = <span style="color: #cc66cc;">22</span>;</pre>
+
+<p>
+Dies verändert den Wert von <tt>$arr[1]</tt> auf 22, aber der Wert von
+<tt>$b</tt> ändert sich nicht. Dies gilt auch bei Funktionsaufrufen:
+</p>
+
+<pre><span style="color: #000000; font-weight: bold;">function</span> m<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$p1</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+  <span style="color: #0000ff;">$p1</span> = <span style="color: #cc66cc;">22</span>;
+<span style="color: #000000;">&#125;</span>
+&nbsp;
+m<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$b</span><span style="color: #000000;">&#41;</span>;</pre>
+
+<p>
+Dies setzt den Wert von <tt>$p1</tt> auf 22, aber <tt>$p1</tt> ist eine
+Kopie von <tt>$b</tt> und <tt>$b</tt> verändert den Wert nicht. Da beim
+Aufrufen ("Call") einer Funktion der Wert von <tt>$b</tt> in
+<tt>$p1</tt> kopiert, also der Wert von <tt>$b</tt> an <tt>$p1</tt>
+übergeben wird, nennt man dies "Call by value".
+</p>
+
+<p>
+Man könnte auch eine Funktion schreiben, die den Namen der
+Variablen übergeben bekommt und dann mit Hilfe dieses Namens auf
+die globale Variable dieses Namens zugreift:
+</p>
+
+<pre><span style="color: #000000; font-weight: bold;">function</span> m2<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$p1</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+  <span style="color: #0000ff;">$GLOBALS</span><span style="color: #000000;">&#91;</span><span style="color: #0000ff;">$p1</span><span style="color: #000000;">&#93;</span> = <span style="color: #cc66cc;">22</span>;
+<span style="color: #000000;">&#125;</span>
+&nbsp;
+m2<span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;b&quot;</span><span style="color: #000000;">&#41;</span>;</pre>
+
+<p>
+Da in diesem Fall der Name der Variablen übergeben wird und mit
+Hilfe dieses Namens dann die originale Variable dieses Namens
+verändert wird, nennt man diese Art des Funktionsaufrufes "Call
+by name" (obwohl bei richtigem Call by Name noch viel obskurere
+Dinge möglich sind)..
+</p>
+
+<p>
+Schon in PHP3 ist es so, dass man eine Funktion als "Call by
+Reference" definieren kann. In diesem Fall wird keine Kopie des
+Variablenwertes übergeben, sondern der Formalparameter <tt>p1</tt> wird
+zu einem alternativen Namen für den übergebenen Wert. Wieder
+wird der Wert der originalen globalen Variablen verändert:
+</p>
+
+<pre><span style="color: #000000; font-weight: bold;">function</span> m3<span style="color: #000000;">&#40;</span>&amp;<span style="color: #0000ff;">$p1</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+  <span style="color: #0000ff;">$p1</span> = <span style="color: #cc66cc;">22</span>;
+<span style="color: #000000;">&#125;</span>
+&nbsp;
+m3<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$b</span><span style="color: #000000;">&#41;</span>;</pre>
+
+<p>
+Hier ist <tt>$p1</tt> in <tt>m3()</tt> ein alternativer Name fuer die
+Variable, die beim Aufruf genennt wird. In <tt>m3($b)</tt> wird die
+Variable <tt>$b</tt> benannt, also ist <tt>$p1</tt> in diesem Aufruf ein
+alternativer Name fuer <tt>$b</tt>. Immer wenn innerhalb dieses Aufrufes
+von <tt>m3() $p1</tt> verwendet wird, wird <tt>$b</tt> angesprochen.
+</p>
+
+<p>
+Seit PHP4 ist es nun so, dass man Referenzen auch an
+anderer Stelle verwenden kann, zum Beispiel in der o.a.
+Arraydefinition:
+</p>
+
+<pre><span style="color: #0000ff;">$a</span> = <span style="color: #cc66cc;">10</span>;
+<span style="color: #0000ff;">$b</span> = <span style="color: #cc66cc;">20</span>;
+<span style="color: #0000ff;">$c</span> = <span style="color: #cc66cc;">30</span>;
+&nbsp;
+<span style="color: #0000ff;">$arr</span> = <a href="http://www.php3.de/array"><span style="color: #000066;">array</span></a><span style="color: #000000;">&#40;</span> &amp;<span style="color: #0000ff;">$a</span>, &amp;<span style="color: #0000ff;">$b</span>, &amp;<span style="color: #0000ff;">$c</span> <span style="color: #000000;">&#41;</span>;
+&nbsp;
+<span style="color: #0000ff;">$arr</span><span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">1</span><span style="color: #000000;">&#93;</span> = <span style="color: #cc66cc;">22</span>;
+&nbsp;
+<a href="http://www.php3.de/print"><span style="color: #000066;">print</span></a> <span style="color: #0000ff;">$b</span>;</pre>
+
+<p>
+Dieses Beispiel druckt den Wert 22. In diesem Beispiel sind
+<tt>$arr[0]</tt>, <tt>$arr[1]</tt> und <tt>$arr[2]</tt> keine Kopien
+der Werte von <tt>$a</tt>, <tt>$b</tt> und <tt>$c</tt>, sondern die
+<tt>$arr</tt>-Variablen werden zu alternativen Namen fuer <tt>$a</tt>,
+<tt>$b</tt> und <tt>$c</tt>. Jeder Zugriff auf <tt>$arr[1]</tt>
+spricht also in Wirklichkeit <tt>$b</tt> an.
+</p>
+
+<p>
+Man liest "<tt>$arr[1] = &amp;$b</tt>" als "<tt>$arr</tt> von Eins
+ist eine Referenz auf <tt>$b</tt>".
+</p>
+
+<h2>Klassenfunktionen in PHP4</h2>
+
+<p>
+Wenn man eine Klasse definiert, kann man in PHP3 mit dieser
+Klasse nichts anderes machen als mit Hilfe von "new" Objekte
+dieser Klasse zu erzeugen.
+</p>
+
+<p>
+In PHP4 kann man jedoch nicht nur Funktionen eines Objektes
+aufrufen, sondern auch schon Funktionen einer Klasse. Das sind
+also nichts anderes als gewöhnliche Funktionsaufrufe, nur dass
+die Funktionsnamen sehr seltsam aussehen:
+</p>
+
+<pre><span style="color: #000000; font-weight: bold;">class</span> MyClass3 <span style="color: #000000;">&#123;</span>
+  <span style="color: #000000; font-weight: bold;">function</span> c<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+    <a href="http://www.php3.de/print"><span style="color: #000066;">print</span></a> <span style="color: #ff0000;">&quot;Ich bin Funktion c() in der Klasse MyClass<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
+  <span style="color: #000000;">&#125;</span>
+<span style="color: #000000;">&#125;</span>
+&nbsp;
+MyClass3::<span style="color: #006600;">c</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;</pre>
+
+<p>
+Dieses Stück Code haette man so auch schreiben koennen und es
+wäre leichter zu verstehen gewesen:
+</p>
+
+<pre><span style="color: #000000; font-weight: bold;">function</span> c<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+  <a href="http://www.php3.de/print"><span style="color: #000066;">print</span></a> <span style="color: #ff0000;">&quot;Ich bin die stinknormale Funktion c()<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
+<span style="color: #000000;">&#125;</span>
+&nbsp;
+c<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;</pre>
+
+<p>
+Man kann dies verwenden, um in abgeleiteten Klassen Funktionen
+gleichen Namens in Oberklassen aufzurufen.
+</p>
+

@@ -1,0 +1,37 @@
+<p>
+Mit den Funktionen
+<a href="http://www.php3.de/mysql_num_rows">mysql_num_rows()</a>
+bzw.
+<a href="http://www.php3.de/mysql_affected_rows">mysql_affected_rows()</a>
+kann man
+die Anzahl der gefundenen Datensätze bei einem SELECT-Statement bzw.
+die Anzahl der betroffenen Datensätze bei einem
+UPDATE-/INSERT-Statement überprüfen.
+</p>
+
+<pre><span style="color: #808080; font-style: italic;">// Beispiel für ein Select-Statement</span>
+<span style="color: #0000ff;">$query</span> = <span style="color: #ff0000;">&quot;SELECT * FROM table WHERE x = '$x'&quot;</span>;
+<span style="color: #0000ff;">$result</span> = @<a href="http://www.php3.de/mysql_query"><span style="color: #000066;">mysql_query</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$query</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+<span style="color: #b1b100;">if</span><span style="color: #000000;">&#40;</span>!<span style="color: #0000ff;">$result</span><span style="color: #000000;">&#41;</span>
+<span style="color: #000000;">&#123;</span>
+    <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;Fehler: &quot;</span> . <a href="http://www.php3.de/mysql_error"><span style="color: #000066;">mysql_error</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000;">&#125;</span>
+<span style="color: #b1b100;">else</span>
+<span style="color: #000000;">&#123;</span>
+    <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <a href="http://www.php3.de/mysql_num_rows"><span style="color: #000066;">mysql_num_rows</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> . <span style="color: #ff0000;">&quot; Datensätze gefunden.&lt;br /&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
+<span style="color: #000000;">&#125;</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">// Beispiel für ein UPDATE-Statement</span>
+<span style="color: #0000ff;">$query</span> = <span style="color: #ff0000;">&quot;UPDATE table SET a = '$a' WHERE x = '$x'&quot;</span>;
+<span style="color: #0000ff;">$result</span> = @<a href="http://www.php3.de/mysql_query"><span style="color: #000066;">mysql_query</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$query</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+<span style="color: #b1b100;">if</span><span style="color: #000000;">&#40;</span>!<span style="color: #0000ff;">$result</span><span style="color: #000000;">&#41;</span>
+<span style="color: #000000;">&#123;</span>
+    <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;Fehler: &quot;</span> . <a href="http://www.php3.de/mysql_error"><span style="color: #000066;">mysql_error</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000;">&#125;</span>
+<span style="color: #b1b100;">else</span>
+<span style="color: #000000;">&#123;</span>
+    <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <a href="http://www.php3.de/mysql_affected_rows"><span style="color: #000066;">mysql_affected_rows</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> . <span style="color: #ff0000;">&quot; Datensätze geändert.&lt;br /&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
+<span style="color: #000000;">&#125;</span></pre>
+

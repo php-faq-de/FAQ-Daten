@@ -1,0 +1,4 @@
+<Faq alias="php-passwort" author="Kristian Köhntopp">
+  <Question>Kann ich mit CGI PHP ein Verzeichnis mit einem Passwort schützen?</Question>
+  <Keywords>CGI, Passwort, schuetzen, Authentifizierung, Verzeichnis, Login</Keywords>
+</Faq>

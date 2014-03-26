@@ -1,0 +1,4 @@
+<Faq alias="db-langsam" author="Kristian Köhntopp">
+  <Question>Windows: Jeder Zugriff auf meine Datenbank dauert eine halbe Minute!</Question>
+  <Keywords>SQL, Datenbank, Performance, Windows, langsam</Keywords>
+</Faq>

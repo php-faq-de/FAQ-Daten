@@ -1,0 +1,75 @@
+<p>
+Bei der Installation von PHP unter Windows hat man ebenso wie unter Unix/Linux die Möglichkeit, PHP als
+CGI-Version oder als Modul für den Apache Webserver zu installieren. Die Vor- und Nachteile der
+verschiedenen Versionen werden im Artikel "<a href="${php-cgi-vs-modul}">CGI PHP oder Modul?</a>"
+erläutert.
+</p>
+
+<p>
+Sowohl die CGI- als auch die Modul-Version sind auf der offiziellen
+<a href="http://www.php.net/downloads.php">Downloadseite</a> erhältlich.
+</p>
+
+<p>
+Mit der Modul-Version ist es zur Zeit jedoch nicht möglich, die GD-Library bzw. die Sablotron-Library
+zu nutzen, da diese nicht threadsafe sind.
+</p>
+
+<p>
+Die offizielle Installationsanleitung für die CGI-Version in englischer Sprache befindet sich auf dem
+<a href="http://www.php.net/manual/en/install.windows.php">offiziellen PHP-Server</a>.
+</p>
+
+<p>
+In deutscher Sprache findet man zur selben Frage eine umfangreiche
+<a href="http://www.infos24.de/phpe/handbuch/2_php_installation.htm">WAMP-Anleitung</a> auf infos24.
+Viele weitere Tutorials zu diesem Thema findet Google.
+</p>
+
+<p>
+Zur Installation der Modul-Version schrieb <a href="mailto:derhoermi@gmx.net">Björn Höhrmann</a>
+am 20.07.2000 in de.comp.lang.php folgendes:
+</p>
+
+<pre>
+Zur Installation:
+
+WinNT4:       E:\Winnt\
+Apache:       E:\winapp\apache\
+PHP4 Module:  E:\winapp\apache\php4module\
+
+E:\winapp\apache\conf\httpd.conf:
+ + LoadModule php4_module php4module/php4apache.dll
+ + AddType application/x-httpd-php .php
+
+E:\winapp\apache\php4module\php.ini:
+ > Kopiert nach E:\Winnt\
+
+[...]
+
+E:\winapp\apache>set path=%path%;e:\winapp\apache\php4module\
+E:\winapp\apache>apache -k start
+Apache/1.3.11 (WunLix) PHP/4.0.2-dev running...
+
+[...]
+</pre>
+
+<p>
+Darüber hinaus gibt es mehrere Pakete, die eine komplette Serverumgebung
+inkl. PHP und MySQL auf einem Windows-Rechner installieren.
+</p>
+
+<ul>
+
+<li><p><a href="http://www.appservnetwork.com/">AppServ Open Project</a></p></li>
+
+<li><p><a href="http://www.firepages.com.au/">phpdev</a> (nicht ganz aktuell)</p></li>
+
+<li><p><a href="http://www.easyphp.org/">EasyPHP</a> (relativ aktuell)</p></li>
+
+<li><p>Das derzeit aktuellste Paket ist <a href="http://www.apachefriends.org/wampp.html">XAMPP für Windows</a>,
+das auch mod_perl, mod_ssl und einiges mehr enthält. Es ist auch eine Version mit PHP 5 erhältlich, wenn man
+seine Programme bereits mit PHP 5 testen will.
+</p></li>
+
+</ul>

@@ -1,0 +1,11 @@
+<Category alias="install" name="Installation und Inbetriebnahme" keywords="PHP, Usenet, FAQ, dclp">
+  <!--Die FAQs sind hier noch mal redundant aufgelistet um die Reihenfolge vorzugeben.-->
+  <Faqs>
+    <Faq alias="install-kompilieren" />
+    <Faq alias="install-problem" />
+    <Faq alias="install-apache-cgi" />
+    <Faq alias="install-windows" />
+    <Faq alias="install-shared-libs" />
+    <Faq alias="install-lex" />
+  </Faqs>
+</Category>

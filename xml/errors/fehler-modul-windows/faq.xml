@@ -1,0 +1,7 @@
+<Faq alias="fehler-modul-windows" author="Johannes Frömter">
+  <Question>Windows: Call to unsupported or undefined function: xy()</Question>
+  <Keywords>Windows, Fehler, DLL, Modul, unsupported, undefined, Funktion, php.ini</Keywords>
+  <Editors>
+    <Editor name="Niels Braczek" lastedit="2008-08-12 00:00:00" />
+  </Editors>
+</Faq>

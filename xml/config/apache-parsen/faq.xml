@@ -1,0 +1,7 @@
+<Faq alias="apache-parsen" author="Johannes Frömter">
+  <Question>Apache: Kann ich PHP auch auf .html-Dateien anwenden?</Question>
+  <Keywords>phps, html, Syntax, Highlighting, Parser, Apache, Datei, Endung</Keywords>
+  <Editors>
+    <Editor name="Niels Braczek" lastedit="2008-08-12 00:00:00" />
+  </Editors>
+</Faq>

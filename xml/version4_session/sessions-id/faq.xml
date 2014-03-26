@@ -1,0 +1,7 @@
+<Faq alias="sessions-id" author="Daniel T. Gorski">
+  <Question>Was ist eine Session-ID? Was ist PHPSESSID?</Question>
+  <Keywords>Session-ID, SessionID, SID, PHPSESSID, GET, Session, Name, ID</Keywords>
+  <Editors>
+    <Editor name="Niels Braczek" lastedit="2008-08-12 00:00:00" />
+  </Editors>
+</Faq>

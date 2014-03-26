@@ -1,0 +1,19 @@
+<Category alias="regexp" name="Reguläre Ausdrücke" keywords="PHP, Usenet, FAQ, dclp">
+  <!--Die FAQs sind hier noch mal redundant aufgelistet um die Reihenfolge vorzugeben.-->
+  <Faqs>
+    <Faq alias="regexp-lernen" />
+    <Faq alias="regexp-ereg" />
+    <Faq alias="regexp-verwenden" />
+    <Faq alias="regexp-was" />
+    <Faq alias="regexp-bauelemente" />
+    <Faq alias="regexp-matching" />
+    <Faq alias="regexp-grosser-text" />
+    <Faq alias="regexp-links-finden" />
+    <Faq alias="regexp-links-ersetzen" />
+    <Faq alias="regexp-pruefen" />
+    <Faq alias="regexp-ersetzen" />
+    <Faq alias="regexp-uri-klickbar" />
+    <Faq alias="regexp-gierig" />
+    <Faq alias="regexp-links-absolut" />
+  </Faqs>
+</Category>

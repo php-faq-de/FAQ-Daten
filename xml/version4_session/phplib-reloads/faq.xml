@@ -1,0 +1,4 @@
+<Faq alias="phplib-reloads" author="Kristian Köhntopp">
+  <Question>Wie kann ich Reloads durch den User erkennen und verhindern?</Question>
+  <Keywords>Reload, Formular, verhindern, Fehler, Session</Keywords>
+</Faq>

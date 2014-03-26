@@ -1,0 +1,21 @@
+<p>
+Beim schreiben in die MSSQL Datenbank erscheinen " als \" und '
+geben einen Fehler aus, trotz korrekter Anwendung
+Addslashes/Stripslashes.
+</p>
+<p>
+MSSQL stammt von Sybase ab. Die Sonderzeichen müssen mit '
+escaped werden und nicht mit \. Die Lösung, die überall
+funktioniert, ist eine eigene addslashes/stripslashes-Funktion zu
+schreiben. Die zweite Lösung erfordert zwar weniger Aufwand, 
+benötigt jedoch Zugriff auf die Konfiguratinsdatei php.ini. 
+Setzen Sie dort den Eintrag für die <a href="http://de3.php.net/manual/en/ini.php">magic_quotes_sybase</a> 
+auf on. Aus Gründen der Portabilität ist von dieser Lösung aber
+dringend abzuraten.
+</p>
+<pre class="ini"><span style="color: #000099;">magic_quotes_sybase </span>=<span style="color: #660066;"> On</span></pre>
+<p>
+  Diese Problematik und deren Lösungsansätze werden auch in 
+  "<a class="faq" href="http://php-faq.de/q-sybase-quoting.html">String-Quoting bei Sybase</a>" näher beschrieben.
+</p>
+

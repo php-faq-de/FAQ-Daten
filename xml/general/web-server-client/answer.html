@@ -1,0 +1,26 @@
+<p>
+Ohne genauer in die Details zu gehen (immerhin ist das hier eine FAQ zu PHP und nicht zur Funktionsweise
+des Internets), kann man den Vorgang zwischen dem Eintippen der URL und der Anzeige der (HTML) Daten etwa
+folgendermaßen zusammenfassen:
+</p>
+
+<p>
+Der <em>Client</em> (also der Web-Browser) schickt eine Anfrage an den <em>Server</em> auf dem die PHP-
+Seite gespeichert ist mit einer Anfrage nach, z.B., <tt>index.php</tt>. Die Sprache (das Protokoll), in
+der diese Anfrage gesendet wird, nennt sich <em>HTTP</em> (Hypertext Transfer Protocol, daher beginnen
+die URLs von Webseiten auch mit "http://").
+</p>
+
+<p>
+Am Server wird diese Anfrage von einem speziellen Programm, dem HTTP-Server (z.B. Apache) erhalten. Wenn
+nun eine statische HTML-Seite (<tt>.html</tt>) gewünscht ist, ließt sie der Server direkt aus und schickt
+sie zurück an den Client. Ist aber eine PHP-Seite gefragt, leitet er die Anfrage an den <em>PHP-
+Präprozessor</em> (dem Programm das sozusagen hinter der Programmiersprache PHP steht) weiter. Dieser
+ließt nun den PHP-Quelltext der Seite, parst ihn und generiert daraus die HTML-Seite, die an den HTTP-
+Server und schlussendlich zum Client weitergeleitet wird.
+</p>
+<p>
+Der Browser stellt nun das zurückgegeben HTML (hier ist also kein PHP-Code mehr enthalten) dar und führt
+eventuell enthaltenen JavaScript Code aus.
+</p>
+

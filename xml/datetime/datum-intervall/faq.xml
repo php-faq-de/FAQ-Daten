@@ -1,0 +1,4 @@
+<Faq alias="datum-intervall" author="Kristian Köhntopp">
+  <Question>Wie kann ich die Anzahl der Tage zwischen zwei Daten bestimmen?</Question>
+  <Keywords>Intervall, Zeitdauer, Julianisches Datum, GregorianToJD</Keywords>
+</Faq>

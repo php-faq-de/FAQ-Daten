@@ -1,0 +1,8 @@
+<Faq alias="php-version" author="Kristian Köhntopp">
+  <Question>Welche Version von PHP ist aktuell?</Question>
+  <Keywords>Version, aktuell</Keywords>
+  <Editors>
+    <Editor name="Niels Braczek" lastedit="2009-05-30 00:00:00" />
+    <Editor name="Ulf Kadner" lastedit="2014-03-26 00:00:00" />
+  </Editors>
+</Faq>

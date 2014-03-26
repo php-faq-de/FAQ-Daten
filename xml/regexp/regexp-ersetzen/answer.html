@@ -1,0 +1,26 @@
+<p>
+Mit Regulären Ausdrücken kann man zwar wunderbar "positive Treffer"
+formulieren, aber das Gegenteil davon geht nur sehr schwer
+(abgesehen von negierten Zeichenklassen und Lookaheads/-behinds geht
+es <em>nicht</em>). Die Entscheidung, ob ein Treffer innerhalb eines
+HTML-Tags (also zwischen <tt>&lt;</tt> und <tt>&gt;</tt>) liegt oder
+nicht, muss man von <em>PHP</em> treffen lassen. Hierzu gibt es den
+Modifier <em>e</em>, der PHP das zweite Argument von
+<a href="http://www.php3.de/preg_replace">preg_replace()</a> als PHP-Code auswerten läßt.
+</p>
+
+<p>
+Mit folgender Konstruktion kann man in <tt>$t</tt> alle
+Vorkommen von <tt>$s</tt> außerhalb von
+<tt>&lt;</tt> und <tt>&gt;</tt> durch <tt>$r</tt>
+ersetzen; die zweite Version ist besonders mit dem Modifier <em>i</em>
+interessant, um Wörter unabhängig von ihrer Groß-/Kleinschreibung
+unter Beibehaltung der Schreibweise hervorzuheben:
+</p>
+
+<pre><span style="color: #808080; font-style: italic;">// $s in $t durch $r ersetzen:</span>
+<a href="http://www.php3.de/preg_replace"><span style="color: #000066;">preg_replace</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;/((&lt;[^&gt;]*)|$s)/e&quot;</span>, <span style="color: #ff0000;">'&quot;<span style="color: #000099; font-weight: bold;">\2</span>&quot;==&quot;<span style="color: #000099; font-weight: bold;">\1</span>&quot;? &quot;<span style="color: #000099; font-weight: bold;">\1</span>&quot;:&quot;$r&quot;'</span>, <span style="color: #0000ff;">$t</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;">// $s case-insensitive in $t hervorheben:</span>
+<a href="http://www.php3.de/preg_replace"><span style="color: #000066;">preg_replace</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;/((&lt;[^&gt;]*)|$s)/ie&quot;</span>, <span style="color: #ff0000;">'&quot;<span style="color: #000099; font-weight: bold;">\2</span>&quot;==&quot;<span style="color: #000099; font-weight: bold;">\1</span>&quot;? &quot;<span style="color: #000099; font-weight: bold;">\1</span>&quot;:&quot;&lt;b&gt;<span style="color: #000099; font-weight: bold;">\1</span>&lt;/b&gt;&quot;'</span>, <span style="color: #0000ff;">$t</span><span style="color: #000000;">&#41;</span>;</pre>
+

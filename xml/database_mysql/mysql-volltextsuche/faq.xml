@@ -1,0 +1,7 @@
+<Faq alias="mysql-volltextsuche" author="Matthias P. Wuerfl">
+  <Question>Wie realisiere ich eine Volltextsuche mit MySQL?</Question>
+  <Keywords>SQL, Datenbank, MySQL, Suche, Volltextsuche, LIKE, Index, FULLTEXT</Keywords>
+  <Editors>
+    <Editor name="Niels Braczek" lastedit="2008-08-12 00:00:00" />
+  </Editors>
+</Faq>

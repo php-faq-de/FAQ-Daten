@@ -1,0 +1,104 @@
+<p>
+Bei einer Session wird jedem Browser, der auf eine Webanwendung
+zugreift, eine Kennnummer gegeben, mit der man folgende Zugriffe
+dieses Browsers wiedererkennen kann. Auf dem Webserver werden
+unter dieser Kennnummer eine Reihe von PHP-Variablen gespeichert,
+die auf diese Weise von Seite zu Seite weitergereicht werden.
+Man erzielt damit einen ähnlichen Effekt wie mit <tt>&lt;INPUT
+TYPE="hidden"&gt;</tt>-Variablen, die von Seite zu Seite
+weitergereicht werden, vermeidet jedoch eine Reihe von Nachteilen
+dieser Variablen:
+</p>
+
+<ul>
+<li>
+<p>
+Sessionvariablen sind in der Größe nicht durch etwa die
+Länge der URL oder andere Faktoren beschränkt.
+</p>
+</li>
+<li>
+<p>
+Sessionvariablen werden nicht ständig zwischen dem Browser
+und dem Webserver hin- und hergebounced und sind daher der
+Manipulation eines Anwenders entzogen, sobald sie erst einmal
+Bestandteil der Session sind.
+</p>
+</li>
+<li>
+<p>Sessionvariablen erlauben die Entwicklung weitergehender
+Nutzanwendungen wie zum Beispiel Benutzeranmeldungen,
+Warenkörbe oder andere Dienste, die einen Zustand bewahren
+müssen.
+</p>
+</li>
+</ul>
+
+<p>
+Eine Webanwendung muss man sich aus zwei getrennten Teilen
+bestehend vorstellen. Der eine Teil, bestehend aus dem Webserver
+und allen anderen involvierten Rechnern auf dieser Seite der
+Firewall, ist grundsätzlich vertrauenswürdig. Daten, die von
+solchen Maschinen kommen, sind Bestandteil des durch den
+Serveradministrator kontrollierten Bereiches und daher mit
+großer Wahrscheinlichkeit korrekt und nicht kompromittiert.
+</p>
+
+<p>
+Der andere Teil ist alles jenseits der Firewall, einschließlich
+des Browsers des Benutzers. Daten, die von dort kommen, sind
+nicht vertrauenswürdig:
+</p>
+
+<p>
+Bei konventionellen Anwendungen werden mit jedem GET- oder
+POST-Request Parameter an den Server gesendet. Es handelt sich
+um sichtbare Formulardaten oder versteckte Formulardaten aus
+HIDDEN-Feldern oder statisch an URLs angehängte GET-Parameter
+sowie um Cookies. Diese Daten muss der Server <em>jedes Mal</em> wenn
+er sie erhält validieren und gegebenenfalls ablehnen. Das ist
+sehr, sehr schwierig zu machen und die meisten Anwendungen
+machen es nicht korrekt. Sie haben daher scheunentorgroße
+Zugangslöcher, die ein Anwender zum Hijacken der gesamten
+Webservermaschine benutzen kann. Diese Maschine wird dann zum
+Einfallstor für das gesamte Subnetz, in dem sich diese Maschine
+physikalisch befindet.
+</p>
+
+<p>
+Bei Anwendungen mit Sessions wird bei jedem Request die
+Session-ID gesendet und diese hat eine Form, die sie schwer
+manipulierbar macht. Manipuliert der Benutzer die Session-ID, so
+erwischt er mit an Sicherheit grenzender Wahrscheinlichkeit eine
+ungültige Session-ID und startet so eine neue Session. Die
+Anwendung initialisiert sich dann korrekt und der User startet,
+als hätte er die Anwendung soeben frisch aufgerufen.
+Manipulation der Session-ID wird also von der Anwendung erkannt
+und führt zu einem definierten und unschädlichen Verhalten.
+</p>
+
+<p>
+Außerdem erhalten auch Anwendungen mit Sessions ebenfalls Daten
+aus Formularen. In der Regel sind dies keine HIDDEN-Felder, denn
+der Zustand wird nun auf dem Server als Teil der Session gehalten.
+Stattdessen handelt es sich ausschließlich um sichtbare
+Formulardaten. Diese müssen beim Übergang aus dem
+Kontrollbereich des Benutzers in die Session natürlich
+validiert werden. Danach verbleiben sie jedoch in der Session
+und können als vertrauenswürdig angesehen werden.
+</p>
+
+<p>
+Vertrauen bedeutet in diesem Kontext, dass die Daten mindestens
+die zugesicherten Eigenschaften haben, auf die bei der
+Validierung getestet worden ist. Die Anwendung darf natürlich
+nicht darauf vertrauen, dass die Daten Eigenschaften haben, die
+nicht validiert worden sind. Wenn man bei der Übernahme von
+Formulardaten in Sessiondaten einen Benutzernamen auf
+<tt>\w{3,8}</tt> testet, dann kann man in der Anwendung zwar darauf
+vertrauen, dass der Benutzername keine bösen Sonderzeichen
+enthält, nicht leer ist und in die Datenbankfelder passt, aber
+nicht darauf vertrauen, dass der Benutzername auch die
+Eigenschaft "eindeutig" und "noch nicht vergeben" erfüllt.
+</p>
+

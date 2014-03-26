@@ -1,0 +1,4 @@
+<Faq alias="php-cgi-vs-modul" author="Kristian Köhntopp">
+  <Question>CGI PHP oder Modul?</Question>
+  <Keywords>SAPI, CGI, Modul, mod_php, Installation, shell, cron, cronjob, crontab, Performance, suexec</Keywords>
+</Faq>

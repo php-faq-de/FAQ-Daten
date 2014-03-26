@@ -1,0 +1,32 @@
+<p>
+	Die sog. Session-ID ist ein zufällig ausgewählter Schlüssel, der die
+	Sessiondaten auf dem Server eindeutig identifiziert. Dieser Schlüssel
+	kann z.B. über Cookies oder als Bestandteil der URL an ein
+	Folgescript	übergeben werden, damit dieses die Sessiondaten auf dem
+	Server wiederfinden kann.
+</p>
+
+<p>
+	<tt>PHPSESSID</tt> ist bei PHP4 der Default-Name der Session. Möchte
+	man	diesen Namen aus z.B. ästhetischen Gründen modifizieren - vor
+	allem, wenn er als GET-Parameter als Teil der URL sichbar wird - so
+	kann man dies in der <tt>php.ini</tt>, der Webserverkonfiguration
+	oder direkt	mit PHP bewerkstelligen. Der Artikel
+	"<a class="faq" href="http://www.php-faq.de/q-sessions-namen.html">Wie kann ich den Namen der Session ändern, ohne in die php.ini einzugreifen?</a>" geht genauer darauf ein.
+</p>
+
+<p>
+	Eine Beispiel, wenn die Session-ID als GET-Parameter in der URL
+	übertragen wird:
+</p>
+
+<pre>
+                            Query-String (alle GET-Parameter)
+Protokoll     Subdomain      _________________|__________________
+  |              |          /                                    \
+http://www.daniel-gorski.de?query=xyz&amp;PHPSESSID=cd45a3f73493d5d...
+        |                |            \__________________________/
+   Subdomain       Top Level Domain                |
+                                       Session-Name und Session-ID
+</pre>
+

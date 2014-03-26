@@ -1,0 +1,24 @@
+<p>
+      Laut PHP-Manual sind alle Längen- und Koordinatenangaben in
+      Postscript-Punkten gemessen. Für gewöhnlich entsprechen 72
+      PostScript-Punkte 1 Inch (72 dpi, 1 Inch = 2,54cm), was jedoch
+      von der Auflösung des Ausgabegeräts abhängt (Drucker verwenden
+      meist 300 oder 600dpi).
+</p>
+
+<p>
+      Die Spezifikation von Adobe überläßt die Wahl der Maßeinteilung
+      dem Entwickler. Eine PDF-Seite ist immer im Format DIN A4, also
+      297 Millimeter hoch und 210 Millimeter breit. Beim Anlegen einer
+      neuen PDF-Seite muss eine Höhe und eine Breite in Punkten
+      angegeben werden. Diese Angaben bilden dann den Maßstab für das
+      Koordinatensystem.
+</p>
+
+<p>
+      Dieser berechnet sich wie folgt: Punktanzahl durch Kantenlänge
+      (in Millimetern). Definiert man also die Breite der Seite mit
+      2100 Punkten, so ergibt sich ein Maßstab von 10 Punkten pro
+      Millimeter (2100 Punkte geteilt durch 210 mm).
+</p>
+

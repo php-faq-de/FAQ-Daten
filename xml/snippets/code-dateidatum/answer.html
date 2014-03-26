@@ -1,0 +1,17 @@
+<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+<span style="color: #808080; font-style: italic;">// Modifikationszeit von (Wie heiße ich?)</span>
+<span style="color: #0000ff;">$unixTime</span> = <a href="http://www.php3.de/filemtime"><span style="color: #000066;">filemtime</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$HTTP_SERVER_VARS</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;PATH_TRANSLATED&quot;</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+<span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$unixTime</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+    <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;Letzte Änderung: &quot;</span>. <a href="http://www.php3.de/date"><span style="color: #000066;">date</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;d M Y, H:i:s&quot;</span>, <span style="color: #0000ff;">$unixTime</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000;">&#125;</span> <span style="color: #b1b100;">else</span> <span style="color: #000000;">&#123;</span>
+    <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;Datei existiert nicht! Falscher Pfad?&quot;</span>;
+<span style="color: #000000;">&#125;</span>
+<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+
+<p>
+Möchte man unter UNIX-Derivaten das Datum der letzten Änderung der
+zugehörigen Inodes (z.B. Änderungen der Filesystem-Rechte) erfahren,
+so ist die Funktion <a href="http://www.php3.de/filectime">filectime()</a> zu benutzen.
+</p>
+

@@ -1,0 +1,16 @@
+<Category alias="open_exec" name="Dateifunktionen und Programmausführung" keywords="PHP, Usenet, FAQ, dclp">
+  <!--Die FAQs sind hier noch mal redundant aufgelistet um die Reihenfolge vorzugeben.-->
+  <Faqs>
+    <Faq alias="datei-lesen" />
+    <Faq alias="php-externes-programm" />
+    <Faq alias="datei-download" />
+    <Faq alias="datei-einfuegen" />
+    <Faq alias="datei-rueckwaerts" />
+    <Faq alias="datei-upload-ftp" />
+    <Faq alias="datei-rechte" />
+    <Faq alias="php-schnittstelle" />
+    <Faq alias="datei-loeschen" />
+    <Faq alias="datei-einbinden" />
+    <Faq alias="datei-uebergabe" />
+  </Faqs>
+</Category>

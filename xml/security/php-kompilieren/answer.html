@@ -1,0 +1,56 @@
+<p>
+Anders als beispielsweise bei Java wird PHP-Code erst zur Laufzeit
+(wenn das Script aufgerufen wird) kompiliert, d.h. der Programmcode
+liegt im "Klartext" in den <tt>.php</tt>-Dateien. Für normale
+Besucher einer von PHP erzeugten Webseite ist der Programmcode nicht
+einzusehen. Solange man die Scripte nur auf dem eigenen Webserver
+einsetzt, ist der Code für andere unsichtbar (siehe hierzu auch den
+Artikel '"<a class="faq" href="http://www.php-faq.de/q-php-code.html">Wie kann ein Besucher meiner Seite den PHP-Code im Browser sehen?</a>"'). Gibt man
+PHP-Dateien jedoch (an Kunden) weiter, erhalten diese damit den
+Source Code. Wenn der Code nicht "Open Source" ist, sollte man per
+Vertrag das Copyright und die Nutzungsbedingungen genau regeln.
+</p>
+
+<p>
+Von <a href="http://www.zend.com/">Zend</a>
+gibt es als kommerzielles Produkt den
+<a href="http://www.zend.com/zend/products.php#encoder">Zend Encoder Unlimited</a>,
+der PHP-Code in ein binäres Format überführt und damit weitgehend vor Ausspähung,
+Veränderung und Re-engineering schützt. Das Produkt ist nicht gerade
+billig, außerdem braucht man natürlich auf jedem Webserver, der
+kompilierten Code ausführen soll, ein Zusatzmodul (dieses allerdings
+ist kostenlos).
+</p>
+
+<p>
+Nach dem gleichen Prinzip funktioniert der
+<a href="http://pbc.sourceforge.net/">PHP Bytecode Compiler</a>,
+der im derzeitigen Beta-Stadium allerdings noch keinen
+objektorientierten Code verarbeiten kann. Die Kompilierung erfolgt
+außerdem "online", der Encoder ist (noch) nicht zum Download
+verfügbar.
+</p>
+
+<p>
+Auch <a href="http://www.microcode.de/">microCODE</a>
+macht aus PHP-Code einen nicht lesbaren Bytecode, der durch ein
+einzubindendes .so-Modul vom PHP-Interpreter ausgeführt werden kann.
+</p>
+
+<p>
+Einen etwas anderen Weg gehen die Tools
+<a href="http://www.hotscripts.com/Detailed/10841.html">Code Obfuscator</a>
+und
+<a href="http://pobs.mywalhalla.net/">POBS</a> - sie kommen ohne
+serverseitige Module aus, da sie den Code nur für Menschen, nicht
+aber für den PHP-Interpreter "unleserlich"
+machen. Der Code Obfuscator ersetzt die (meist sprechenden)
+Variablennamen durch (nichtssagende) Konstrukte, so dass es schwer
+ist, die Funktion eines so bearbeiteten Scripts nachzuverfolgen.
+POBS macht dasselbe, geht aber noch weiter, indem auch Konstanten
+und Funktionsnamen verändert und Kommentare, Einrückungen
+sowie Leerzeilen entfernt werden. Der resultierende Code ist immer
+noch gültiger PHP-Code, aber seine Funktionsweise ist kaum mehr
+zu entziffern.
+</p>
+

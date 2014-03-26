@@ -1,0 +1,48 @@
+<p>
+Wenn PHP über die Shell als Skriptsprache benutzt wird, ist es
+oft nützlich, auf der Kommandozeile Parameter zu übergeben.
+In PHP stehen die Variablen <tt>$_SERVER["argc"]</tt> und
+<tt>$_SERVER["argv"]</tt> zur Verfügung.
+</p>
+
+<dl>
+<dt><tt>$_SERVER["argc"]</tt></dt>
+<dd>
+<p>Anzahl der auf der Kommandozeile übergebenen Argumente.</p>
+</dd>
+
+<dt><tt>$_SERVER["argv"]</tt></dt>
+<dd>
+<p>Array mit den übergebenen Argumenten und dem Dateinamen im
+ersten Element.</p>
+</dd>
+</dl>
+
+<p>
+Wenn ein PHP-Skript über das Web aufgerufen wird, enthalten diese
+Variablen die über <tt>GET</tt> übergeben Argumente.
+Man kann dieses Verhalten in der <tt>php.ini</tt>-Datei
+abschalten (<a href="http://de3.php.net/manual/en/ini.php">register_argv_argc</a>).
+</p>
+
+<p>
+Beispiel:
+</p>
+
+<pre>
+tobias@dev:~ > cat arg.php
+#! /usr/bin/php -q
+# Getestet mit Suse Linux 8.1 (register_globals = off)
+<?php
+  echo "argc = {$_SERVER['argc']}\n";
+  foreach ($_SERVER['argv'] as $k => $v) {
+    echo "_SERVER['argv'][$k] = $v\n";
+  }
+tobias@dev:~ > ./arg.php foo bar baz
+argc = 4
+_SERVER['argv'][0] = /var/tmp/x.php
+_SERVER['argv'][1] = foo
+_SERVER['argv'][2] = bar
+_SERVER['argv'][3] = baz
+</pre>
+

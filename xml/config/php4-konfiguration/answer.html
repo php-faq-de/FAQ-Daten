@@ -1,0 +1,65 @@
+<p>PHP verwendet die globale Konfigurationdatei <tt>php.ini</tt>. 
+Die Ausgabe von <a href="http://www.php3.de/phpinfo">phpinfo()</a> sagt, wo PHP diese Datei sucht.
+Findet PHP keine <tt>php.ini</tt>, arbeitet es mit Default-Werten,
+die sich kaum von denen aus der <tt>php.ini-dist</tt> unterscheiden.
+Ob bzw. welche Konfigurationsdatei verwendet wird, läßt sich mittels</p>
+
+<pre><a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <a href="http://www.php3.de/get_cfg_var"><span style="color: #000066;">get_cfg_var</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;cfg_file_path&quot;</span><span style="color: #000000;">&#41;</span>;</pre>
+
+<p>herausfinden. Neben der <tt>php.ini</tt> gibt es aber noch andere
+Möglichkeiten, die PHP-Konfiguration zu beeinflussen:</p>
+
+<dl>
+<dt><tt>httpd.conf</tt> (zentrale Apache-Konfiguration)</dt>
+<dd>
+
+<p>Diese Einstellungen wirken sich auf den ganzen Server (oder virtuelle
+Hosts oder sog. Container) aus (nur bei PHP als Apache-Modul):</p>
+
+<pre class="ini"># String- und Integerwerte
+# php_value variable wert
+php_value max_execution_time <span style="">60</span>
+&nbsp;
+# Booleanwerte
+# php_flag variable on|off
+php_flag track_vars on
+&nbsp;
+# Geschützte Werte, die nur in der zentralen
+# Apache-Konfig gesetzt werden dürfen.
+# php_admin_value variable wert
+# php_admin_flag  variable on|off</pre>
+
+</dd>
+
+<dt><tt>.htaccess</tt> (Per-Verzeichnis-Konfigurationsdatei)</dt>
+<dd>
+<p><tt>php_flag</tt> und <tt>php_value</tt> können wie oben beschrieben
+verwendet werden. Diese Einstellungen wirken sich auf alle PHP-Scripts
+im aktuellen und allen Unterverzeichnissen aus (nur bei PHP als
+Apache-Modul).</p>
+</dd>
+
+<dt><tt>ini_set</tt> (Konfiguration im PHP-Script)</dt>
+<dd>
+
+<p>Mit <a href="http://www.php3.de/ini_set">ini_set()</a> kann man <em>zur Laufzeit des
+Scripts</em> die PHP-Konfiguration manipulieren:</p>
+
+<pre><a href="http://www.php3.de/ini_set"><span style="color: #000066;">ini_set</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;max_execution_time&quot;</span>, <span style="color: #ff0000;">&quot;60&quot;</span><span style="color: #000000;">&#41;</span>;
+<a href="http://www.php3.de/phpinfo"><span style="color: #000066;">phpinfo</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;</pre>
+
+<p>Wie man sehen kann, wurde die maximale Ausführungszeit für
+dieses eine Script verdoppelt (gegenüber der Default-Einstellung).</p>
+
+</dd>
+</dl>
+
+<p>Diese drei Einstellmöglichkeiten betreffen jeweils den sog. "Local Value",
+im Gegensatz zum "Master Value", der ausschließlich in der <tt>php.ini</tt>
+definiert wird. Effektiv zur Anwendung kommt der "Local Value". Eine
+Übersicht über die Werte erhält man mit <a href="http://www.php3.de/phpinfo">phpinfo()</a>.</p>
+
+<p><em>Hinweis: Bei Änderungen an den Dateien <tt>httpd.conf</tt> und
+<tt>php.ini</tt> muss bei der Modulversion von PHP der Apache neu gestartet
+werden, um die Änderungen wirksam werden zu lassen.</em></p>
+

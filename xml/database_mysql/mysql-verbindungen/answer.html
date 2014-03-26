@@ -1,0 +1,18 @@
+<p>
+Manchmal ist es sinnvoll, gleichzeitig mehr als eine Verbindung zum
+Datenbankserver offen zu haben (z.B. wenn man mit mehr als einer
+Datenbank arbeitet). Der Befehl <a href="http://www.php3.de/mysql_connect">mysql_connect()</a>
+hat leider den Mangel, dass er bei wiederholtem Aufruf mit identischem
+Hostnamen, Benutzernamen und Kennwort immer <em>dieselbe</em>
+Verbindungskennung liefert. Anstatt für diesen Zweck verschiedene
+Benutzer anzulegen, kann man ihn jedoch auch mit unterschiedlichen
+Hostnamen austricksen - einmal mit <tt>localhost</tt> und einmal mit
+<tt>127.0.0.1</tt> aufgerufen, liefert er bereits zwei
+unterschiedliche Links...
+</p>
+
+<p>
+Ab PHP Version 4.2 besitzt mysql_connect() einen optionalen
+Parameter, mit dem man eine neue Verbindung erzwingen kann.
+</p>
+

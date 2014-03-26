@@ -1,0 +1,21 @@
+<Category alias="version4_session" name="Sessions" keywords="PHP, Usenet, FAQ, dclp">
+  <!--Die FAQs sind hier noch mal redundant aufgelistet um die Reihenfolge vorzugeben.-->
+  <Faqs>
+    <Faq alias="sessions-wie" />
+    <Faq alias="sessions-id" />
+    <Faq alias="sessions-cookie" />
+    <Faq alias="sessions-fallback" />
+    <Faq alias="sessions-namen" />
+    <Faq alias="sessions-schutz" />
+    <Faq alias="sessions-datenmenge" />
+    <Faq alias="sessions-anzeigen" />
+    <Faq alias="sessions-cookie-anzeigen" />
+    <Faq alias="sessions-dateisystem" />
+    <Faq alias="sessions-windows" />
+    <Faq alias="sessions-zweck" />
+    <Faq alias="sessions-objekte" />
+    <Faq alias="sessions-methode" />
+    <Faq alias="sessions-ip" />
+    <Faq alias="phplib-reloads" />
+  </Faqs>
+</Category>

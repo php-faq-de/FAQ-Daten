@@ -1,0 +1,4 @@
+<Faq alias="fehler-class-redeclare" author="Uwe E. Schirm">
+  <Question>Fatal error: Cannot redeclare class ... in ... on line ...</Question>
+  <Keywords>class, redeclare, include, require, include_once, require_once</Keywords>
+</Faq>

@@ -1,0 +1,21 @@
+<p>
+Wenn Du einen Fehler in einem der Texte der FAQ gefunden hast, dann bitten wir Dich, uns diesen
+mitzuteilen. Dazu schickst Du am besten eine E-Mail an
+<a href="mailto:faqlist@php3.de">faqlist@php3.de</a>. Unter dieser Adresse erreichst Du die
+Mailingliste der de.comp.lang.php-FAQ, welche alle Autoren der FAQ abonniert haben.
+</p>
+
+<p>
+Wenn du einen Fehler in der FAQ gefunden hast, dann kannst Du ihn direkt in den Dateien ändern,
+die du via CVS heruntergeladen hast. Anschließend kannst Du die Änderungen in eine Datei schreiben
+und diese dann an die dclp-FAQ Mailingliste schicken:
+</p>
+
+<pre>
+# Änderungen in Datei umleiten
+$ cvs diff -u &gt; /tmp/diff
+
+# E-Mail an dclp-FAQ Mailingliste schicken (Beispiel-Programm: mutt)
+$ mutt -a /tmp/diff -s 'Meine Aenderungen an der FAQ' faqlist@php3.de
+</pre>
+

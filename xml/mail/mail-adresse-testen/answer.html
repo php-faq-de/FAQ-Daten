@@ -1,0 +1,31 @@
+<p>
+Der Mailer eines Systems kann die Mail dann zustellen, wenn das
+Domain Name System (DNS) für die Zieladresse einen Mail
+Exchanger (MX) Ressource Record (RR) oder einen Address (A)
+Ressource Record enthält. Wenn man testen möchte, ob die
+Empfängeradresse für eine Mail gültig ist, braucht man Zugriff
+auf das Internet und einen DNS-Server, den man befragen kann.
+Dann kann man die Anfrage, die der Mailer später einmal stellen
+wird, um die Mail zuzustellen, manuell mit Hilfe der Funktion
+<a href="http://www.php3.de/checkdnsrr">checkdnsrr()</a> nachvollziehen. Die Funktion
+liefert <tt>true</tt>, wenn ein passender RR vorhanden ist.
+</p>
+
+<p>
+Eine DNS-Anfrage kann je nach Verfügbarkeit des DNS-Systems bis
+zu mehreren Minuten dauern. Der betreffende Webserverprozeß ist
+in diesem Zeitraum blockiert. Das Vorhandensein der benötigten
+RRs garantiert natürlich nicht, dass das Zielsystem auch mit uns
+redet oder dass der gewünschte Benutzer existiert und Mail
+empfangen kann. Die einzige Methode, zuverlässig zu testen, ob
+eine Mail zustellbar ist, ist sie zuzustellen.
+</p>
+
+<pre><span style="color: #0000ff;">$addr</span> = <span style="color: #ff0000;">&quot;user@host.doma.in&quot;</span>;
+  <a href="http://www.php3.de/list"><span style="color: #000066;">list</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$user</span>, <span style="color: #0000ff;">$host</span><span style="color: #000000;">&#41;</span> = <a href="http://www.php3.de/explode"><span style="color: #000066;">explode</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;@&quot;</span>, <span style="color: #0000ff;">$addr</span><span style="color: #000000;">&#41;</span>;
+  <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><a href="http://www.php3.de/checkdnsrr"><span style="color: #000066;">checkdnsrr</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$host</span>, <span style="color: #ff0000;">&quot;MX&quot;</span><span style="color: #000000;">&#41;</span> or <a href="http://www.php3.de/checkdnsrr"><span style="color: #000066;">checkdnsrr</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$host</span>, <span style="color: #ff0000;">&quot;A&quot;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+    <a href="http://www.php3.de/print"><span style="color: #000066;">print</span></a> <span style="color: #ff0000;">&quot;Mail ist vielleicht zustellbar.&lt;BR&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
+  <span style="color: #000000;">&#125;</span> <span style="color: #b1b100;">else</span> <span style="color: #000000;">&#123;</span>
+    <a href="http://www.php3.de/print"><span style="color: #000066;">print</span></a> <span style="color: #ff0000;">&quot;Mail ist sicher nicht zustellbar.&lt;BR&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
+  <span style="color: #000000;">&#125;</span></pre>
+

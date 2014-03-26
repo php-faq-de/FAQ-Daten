@@ -1,0 +1,66 @@
+<p>
+Angenommen, es ist eine Reihe von Funktionen vorhanden, die mit
+einer Datenbank kommunizieren und diese Funktionen sollen in
+eine Klasse umgewandelt werden:
+</p>
+
+<pre><span style="color: #0000ff;">$Link_ID</span>  = <span style="color: #cc66cc;">0</span>;  <span style="color: #808080; font-style: italic;">// ID der aktuellen DB-Verbindung</span>
+ <span style="color: #0000ff;">$Query_ID</span> = <span style="color: #cc66cc;">0</span>; <span style="color: #808080; font-style: italic;">// ID des aktuellen Abfrageresultates</span>
+ <span style="color: #0000ff;">$Error</span>    = <span style="color: #cc66cc;">0</span>;    <span style="color: #808080; font-style: italic;">// Letzte Datenbank-Fehlermeldung</span>
+&nbsp;
+ <span style="color: #000000; font-weight: bold;">function</span> connect<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span> ... <span style="color: #000000;">&#125;</span>
+&nbsp;
+ <span style="color: #000000; font-weight: bold;">function</span> query<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>   <span style="color: #000000;">&#123;</span> ... <span style="color: #000000;">&#125;</span>
+&nbsp;
+ <span style="color: #000000; font-weight: bold;">function</span> next_record<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span> ... <span style="color: #000000;">&#125;</span>
+&nbsp;
+ <span style="color: #000000; font-weight: bold;">function</span> num_rows<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span> ... <span style="color: #000000;">&#125;</span></pre>
+
+<p>
+Aus diesen Variablen und Funktionen wird eine Klasse, indem man
+vor alle verwendeten Variablen das Schlüsselwort <tt>var</tt>
+schreibt und indem man alle Variablen und Funktionen mit einem
+<tt>class</tt>-Konstrukt umschließt.
+</p>
+
+<pre><span style="color: #000000; font-weight: bold;">class</span> DB_MiniSQL <span style="color: #000000;">&#123;</span>
+ <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #0000ff;">$Link_ID</span>  = <span style="color: #cc66cc;">0</span>; <span style="color: #808080; font-style: italic;">// ID der aktuellen DB-Verbindung</span>
+ <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #0000ff;">$Query_ID</span> = <span style="color: #cc66cc;">0</span>; <span style="color: #808080; font-style: italic;">// ID des aktuellen Abfrageresultates</span>
+ <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #0000ff;">$Error</span>    = <span style="color: #cc66cc;">0</span>; <span style="color: #808080; font-style: italic;">// Letzte Datenbank-Fehlermeldung</span>
+&nbsp;
+ <span style="color: #000000; font-weight: bold;">function</span> connect<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span> ... <span style="color: #000000;">&#125;</span>
+&nbsp;
+ <span style="color: #000000; font-weight: bold;">function</span> query<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>   <span style="color: #000000;">&#123;</span> ... <span style="color: #000000;">&#125;</span>
+&nbsp;
+ <span style="color: #000000; font-weight: bold;">function</span> next_record<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span> ... <span style="color: #000000;">&#125;</span>
+&nbsp;
+ <span style="color: #000000; font-weight: bold;">function</span> num_rows<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span> ... <span style="color: #000000;">&#125;</span>
+<span style="color: #000000;">&#125;</span></pre>
+
+<p>
+Klassen selbst sind nur Baupläne, sie erzeugen keine Variablen
+und die Funktionen, die in ihnen enthalten sind, lassen sich so
+nicht verwenden. Mit Hilfe der Anweisung <tt>new</tt> läßt man den
+PHP-Interpreter eine Variable, ein Objekt, nach diesem Bauplan
+bauen.
+</p>
+
+<pre><span style="color: #0000ff;">$db1</span> = <span style="color: #000000; font-weight: bold;">new</span> DB_MiniSQL; <span style="color: #808080; font-style: italic;">// $db1 ist ein Objekt der Klasse DB_MiniSQL</span>
+ <span style="color: #0000ff;">$db2</span> = <span style="color: #000000; font-weight: bold;">new</span> DB_MiniSQL; <span style="color: #808080; font-style: italic;">// $db2 ist noch ein Objekt derselben Klasse</span></pre>
+
+<p>
+Das Objekt <tt>$db1</tt> kann man sich wie ein Array mit einer
+besonderen Syntax vorstellen. Anstatt auf <tt>$db1["Link_ID"]</tt>
+und <tt>$db1["Error"]</tt> zuzugreifen, muss man
+<tt>$db1-&gt;Link_ID</tt> und <tt>$db1-&gt;Error</tt> verwenden. Auch
+die Funktionen in einem Objekt lassen sich so aufrufen:
+<tt>$db1-&gt;connect()</tt>, <tt>$db1-&gt;query()</tt> und so weiter.
+</p>
+
+<p>
+Ein beliebter Fehler ist, <tt>$db1-&gt;Error</tt> zu meinen,
+aber <tt>$db1-&gt;<em>$</em>Error</tt> zu schreiben. Das ist falsch:
+Der vollständige Name der Variablen ist <tt>db1-&gt;Error</tt>, mit
+einem <tt>$</tt> davor, um ihn als Variablennamen zu kennzeichnen.
+</p>
+

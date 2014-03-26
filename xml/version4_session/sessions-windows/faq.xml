@@ -1,0 +1,4 @@
+<Faq alias="sessions-windows" author="Sebastian Bergmann">
+  <Question>Wie benutze ich die Session-Funktionen unter Windows?</Question>
+  <Keywords>Session, Windows, Pfad, speichern, php.ini, Konfiguration, save_path</Keywords>
+</Faq>

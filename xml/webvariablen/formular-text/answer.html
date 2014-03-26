@@ -1,0 +1,29 @@
+<p>
+Normale Input-Felder eignen sich für einzeilige Eingaben von 1 bis
+ca. 100 Zeichen. In HTML werden sie als <tt>&lt;input type="text"
+name="variable"/&gt;</tt> definiert, wobei der Inhalt von
+<tt>name</tt> in PHP zum Namen der Variable wird, die die Eingabe
+des Benutzers enthält: <tt>$_REQUEST['variable']</tt>.
+</p>
+
+<p>
+Für eine Vorbelegung des Feldes gibt es das optionale Attribut
+<tt>value</tt>:
+</p>
+
+<pre>&lt;input type=&quot;text&quot; name=&quot;var&quot;
+       value=&quot;&lt;?php echo htmlspecialchars($_REQUEST['var']); ?&gt;&quot;/&gt;</pre>
+
+<p>
+Da die Variable auch Anführungszeichen enthalten könnte (was das
+Ende des value-Feldes bedeuten würde), muss man sie durch
+<a href="http://www.php3.de/htmlspecialchars">htmlspecialchars()</a> "entschärfen" lassen.
+</p>
+
+<p>
+Formular-Felder werden von PHP <em>immer</em> als Variablen vom Typ
+<tt>string</tt> zur Verfügung gestellt - auch wenn das Feld "nichts",
+oder wenn es nur Zahlen enthält. Siehe hierzu auch:
+""<a class="faq" href="http://php-faq.de/q-formular-verarbeitung.html">Wie erkenne ich fehlerhafte/fehlende Eingaben?</a>"".
+</p>
+

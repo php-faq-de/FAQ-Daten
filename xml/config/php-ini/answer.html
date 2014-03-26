@@ -1,0 +1,89 @@
+<p>
+Die Ausgabe von <a href="http://www.php3.de/phpinfo">phpinfo()</a> sagt unter anderem,
+wo PHP seine Konfigurationsdatei <tt>php.ini</tt> sucht.
+Steht hier nur <tt>php.ini</tt>, hat PHP keine Datei gefunden und
+arbeitet mit Default-Einstellungen (diese entsprechen etwa denen aus
+der <tt>php.ini-dist</tt>); weniger irreführend ist die Ausgabe von
+<tt>echo get_cfg_var('cfg_file_path')</tt>, sie ist in diesem Fall
+einfach leer.
+</p>
+
+<p>
+Bei der Kompilierung von PHP kann mit der Direktive
+<tt>--with-config-file-path=/dir</tt> ein Verzeichnis definiert
+werden; default-mäßig erwartet PHP die <tt>php.ini</tt> unter Unix
+in <tt>/usr/local/lib</tt> und unter Windows im Windows-Verzeichnis.
+Dorthin kopiert man die mitgelieferte <tt>php.ini-dist</tt> und
+benennt sie in <tt>php.ini</tt> um.
+</p>
+
+<p>
+Ab der Version 4.3.0 kann bei der Kompilierung von PHP mit der Direktive
+<tt>--with-config-file-scan-dir=PATH</tt> ein zusätzliches Verzeichnis
+definiert werden, in dem zusätzliche php.ini Dateien liegen können. Wurde PHP
+mit dieser Option kompiliert und liegen php.ini Dateien in diesem Verzeichnis,
+haben die Einstellungen Vorrang gegenüber der vorher gefundenen php.ini.
+</p>
+
+<p>
+Neben der <tt>php.ini</tt> und den <tt>.htaccess</tt>-Dateien gibt
+es unter Windows auch die Möglichkeit, in der Registry
+PHP-Konfigurations-Einstellungen vorzunehmen - ob dies der
+Übersichtlichkeit dienlich ist, sei dahingestellt...
+Die Einstellungen wirken sich als 'local value'
+(siehe <a href="http://www.php3.de/phpinfo">phpinfo()</a>) auf bestimmte
+Verzeichnisse sowie deren Unterverzeichnisse aus.
+</p>
+
+<ol>
+<li>
+<p>Regedit öffnen</p>
+</li>
+
+<li>
+<p>Den Schlüssel <tt>HKEY_LOCAL_MACHINE\SOFTWARE</tt> öffnen</p>
+</li>
+
+<li>
+<p>Den Schlüssel <tt>PHP</tt> anlegen</p>
+</li>
+
+<li>
+<p>Den Schlüssel <tt>Per Directory Values</tt> anlegen</p>
+</li>
+
+<li>
+<p>Einen Schlüssel für das Laufwerk anlegen, in dem sich das
+Document Root befindet, z.B. <tt>C</tt> oder <tt>D</tt> (ohne
+'<tt>:\</tt>'!)</p>
+</li>
+
+<li>
+<p>Einen Schlüssel für das Document-Root-Verzeichnis anlegen,
+z.B. '<tt>www</tt>'</p>
+</li>
+
+<li>
+<p>(Für jedes Unterverzeichnis einen weiteren Unterschlüssel
+anlegen, z.B. '<tt>php</tt>')</p>
+</li>
+
+<li>
+<p>Einen neuen "Zeichenfolgenwert" anlegen, z.B
+'<tt>auto_prepend_file</tt>'</p>
+</li>
+
+<li>
+<p>Dem neuen Eintrag einen Wert zuweisen, z.B.
+'<tt>prepend.php</tt>'</p>
+</li>
+</ol>
+
+<p>
+Der vollständige Schlüssel aus obigem Beispiel sollte nun so aussehen:
+<tt>HKEY_LOCAL_MACHINE\SOFTWARE\PHP\Per Directory Values\C\www\php
+-&gt; auto_prepend_file = 'prepend.php'</tt>. <em>Anmerkung: Egal ob der
+Eintrag ein bool'scher Wert, Integer oder String ist, der Schlüssel
+muss immer vom Typ "Zeichenfolgenwert" (engl. "string") sein.</em>
+</p>
+

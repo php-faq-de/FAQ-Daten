@@ -1,0 +1,28 @@
+<p>
+Der <a href="http://hoohoo.ncsa.uiuc.edu/cgi/">CGI-Standard</a> definiert eine Reihe von Variablen, die
+vorhanden sein müssen. Eine Übersicht bekommt man wie üblich mit
+<a href="http://www.php3.de/phpinfo">phpinfo()</a> Von besonderem Interesse sind
+</p>
+
+<dl>
+
+<dt><tt>$_SERVER["HTTP_REFERER"]</tt></dt>
+<dd>
+<p>Die URL der Seite, die auf diese Seite verwiesen hat.</p>
+</dd>
+
+<dt><tt>$_SERVER["HTTP_USER_AGENT"]</tt></dt>
+<dd>
+<p>Die Browserkennung des abrufenden Browsers.</p>
+</dd>
+
+<dt><tt>$_SERVER["REMOTE_ADDR"]</tt></dt>
+<dd>
+<p>Die IP-Nummer des abrufenden Rechners. Dies kann die momentane
+IP-Nummer des tatsächlichen Abrufers (oft dynamisch vergeben und
+variabel) oder die IP-Nummer des Proxy-Servers sein, den der Abrufer
+verwendet.</p>
+</dd>
+
+</dl>
+

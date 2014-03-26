@@ -1,0 +1,38 @@
+<p>
+Manchmal möchte man auf Variablen zugreifen, deren Namen
+variabel sind. Zum Beispiel könnte man die Variablen mit den
+Namen <tt>$myvar1</tt>, <tt>$myvar2</tt>, <tt>$myvar3</tt>,
+<tt>...</tt>, <tt>$myvar9</tt> haben.
+</p>
+
+<p>Am günstigsten wäre es, in so einem Fall ein Array zu nehmen.</p>
+
+<pre><span style="color: #b1b100;">for</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$i</span>=<span style="color: #cc66cc;">0</span>; <span style="color: #0000ff;">$i</span>&lt;<span style="color: #cc66cc;">10</span>; <span style="color: #0000ff;">$i</span>++<span style="color: #000000;">&#41;</span>
+	<a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #0000ff;">$myvar</span><span style="color: #000000;">&#91;</span><span style="color: #0000ff;">$i</span><span style="color: #000000;">&#93;</span>;</pre>
+
+<p>
+Wenn es unbedingt skalare Variablen sein müssen, kann man
+stattdessen über das <tt>$GLOBALS[]</tt>-Array zugreifen:
+</p>
+
+<pre><span style="color: #b1b100;">for</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$i</span>=<span style="color: #cc66cc;">0</span>; <span style="color: #0000ff;">$i</span>&lt;<span style="color: #cc66cc;">10</span>; <span style="color: #0000ff;">$i</span>++<span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+  <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><a href="http://www.php3.de/isset"><span style="color: #000066;">isset</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$GLOBALS</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;myvar$i&quot;</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>
+    <a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Variable var%d existiert und ihr Wert ist %s&lt;br /&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>,
+      <span style="color: #0000ff;">$i</span>, <span style="color: #0000ff;">$GLOBALS</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;myvar$i&quot;</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000;">&#125;</span></pre>
+
+<p>
+Statt <tt>echo $GLOBALS[$lall];</tt> kann man auch die zwei Befehle
+<tt>global $$lall; echo $$lall;</tt> verwenden. Empfohlen ist jedoch
+das Konstrukt mit <tt>$GLOBALS[]</tt>, weil es leichter zu lesen und
+zu verstehen ist. Das gilt besonders bei Dateinamen, die sich
+aus einem konstanten Stamm und einem variablen Anteil
+zusammensetzen.
+</p>
+
+<p>
+Eine weitere alternative Schreibweise für variable Variablen ist
+${$lall}; für zusammengesetzte Variablennamen entsprechend beispielsweise
+${"datei_$lall"}.
+</p>
+

@@ -1,0 +1,90 @@
+<p>Es gibt zahlreiche fertige PHP-Lösungen für den Zugriff
+auf EMail-Accounts per Weboberfläche. Viele von ihnen benutzen
+die <a href="http://www.php3.de/ref.imap.php">IMAP</a>-Library, die nicht
+bei jedem Provider installiert ist. Für das Verarbeiten und
+Speichern der Mails wird oft eine Datenbank benötigt, und zum
+Versenden von Mails wird teilweise das lokal installierte
+Mailprogramm benutzt - diese Voraussetzungen sollten bei der
+Auswahl also berücksichtigt werden.
+</p>
+
+<ul>
+<li>
+<p><a href="http://cushman.net/projects/aeromail/">AeroMail</a>
+- IMAP-Webmail-Client für PHP3 oder PHP4. PHP muss als
+Apache-Modul laufen. (Funktioniert nicht mit <a href="http://de3.php.net/manual/en/ini.php">register_globals</a> = off)</p>
+</li>
+
+<li>
+<p><a href="http://basilix.org/">Basilix</a>
+- IMAP- und MySQL-basierende Applikation in PHP. (Funktioniert
+ nicht mit <a href="http://de3.php.net/manual/en/ini.php">register_globals</a> = off)</p>
+</li>
+
+<li>
+<p><a href="http://www.horde.org/imp/">IMP</a>
+- IMP ist der Webmail-Teil des Horde-Projektes. Die
+IMAP-Bibliothek von PHP sowie MySQL oder PostgreSQL sind nötig.
+Versionen für PHP3 (mit PHPLIB) und PHP4 vorhanden.</p>
+</li>
+
+<li>
+<p><a href="http://instantwebmail.sourceforge.net/">Instant Web Mail</a>
+- einfacher, mehrsprachiger POP3-Mailclient für PHP ab
+Version 4.0.3 ohne IMAP-Modul.(Funktioniert nicht mit <a href="http://de3.php.net/manual/en/ini.php">register_globals</a> = off)</p>
+</li>
+
+<li>
+<p><a href="http://nocc.sourceforge.net/">NOCC</a>
+- In PHP4 geschriebener Webmail-Client für IMAP- und
+POP3-Accounts, keine Datenbank nötig, unterstützt zahlreiche
+Sprachen.(Funktioniert nicht mit <a href="http://de3.php.net/manual/en/ini.php">register_globals</a>
+ = off)</p>
+</li>
+
+<li>
+<p><a href="http://renaghan.com/pcr/phpop.html">phpop</a>
+- Webmailer basierend auf PHP3, MySQL und PHPLIB. (Funktioniert nicht
+ mit <a href="http://de3.php.net/manual/en/ini.php">register_globals</a> = off)</p>
+</li>
+
+<li>
+<p><a href="http://webgadgets.com/phpost/">PHPost</a>
+- Reiner POP3-Client für PHP4, kommt ohne Datenbank,
+IMAP-Modul und JavaScript aus. Unterstützt mehrere Sprachen.
+(Funktioniert nicht mit <a href="http://de3.php.net/manual/en/ini.php">register_globals</a> = off)</p>
+</li>
+
+<li>
+<p><a href="http://ractive.ch/popper/">popper</a>
+- POP3-Webmail-Client für PHP4 und MySQL.
+(Funktioniert nicht mit <a href="http://de3.php.net/manual/en/ini.php">register_globals</a> = off)</p>
+</li>
+
+<li>
+<p><a href="http://www.trlinux.com/">Postaci</a>
+- Türkischer Webmailer (mehrsprachenfähig) für PHP4,
+SQL-Datenbank nötig, POP3- und IMAP-Unterstützung.
+(Funktioniert nicht mit <a href="http://de3.php.net/manual/en/ini.php">register_globals</a> = off)</p>
+</li>
+
+<li>
+<p><a href="http://rymo.sourceforge.net/">rymo</a>
+- Kleiner POP3-Webmail-Client für PHP3/4.
+(Funktioniert nicht mit <a href="http://de3.php.net/manual/en/ini.php">register_globals</a> = off)</p>
+</li>
+
+<li>
+<p><a href="http://www.squirrelmail.org/">SquirrelMail</a>
+- Leistungsfähiger Webmail-Client für PHP4. Nur geeignet für
+IMAP-Mailboxen, benötigt dennoch nicht die IMAP-Bibliothek von PHP4!
+Plugin-fähig, zahlreiche Erweiterungen vorhanden.</p>
+</li>
+
+<li>
+<p><a href="http://twig.screwdriver.net/">TWIG</a>
+- Groupware-Tool mit EMail-Funktion (IMAP), läuft auf PHP3
+und PHP4, braucht eine Datenbank (MySQL oder PostgreSQL).
+(Funktioniert nicht mit <a href="http://de3.php.net/manual/en/ini.php">register_globals</a> = off)</p>
+</li>
+</ul>

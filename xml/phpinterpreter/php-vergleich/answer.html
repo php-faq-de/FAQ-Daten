@@ -1,0 +1,121 @@
+<p>
+PHP ist 
+ein Bytecode-Compiler, der das Script beim Aufruf compiliert.
+PHP kann als CGI-Programm oder als Bestandteil des Webservers
+(<tt>mod_php</tt>) ausgeführt werden. Als CGI-Programm ist es
+beliebig portabel, als Modul ist es für eine Reihe von populären
+APIs verfügbar. PHP
+unterstützt Datenbankzugriffe nicht nur über ODBC (oftmals
+Treiber von schlechter Performance und mit unvollständigen
+API-Implementierungen), sondern auch über die Native API einer
+ganzen Reihe von Datenbanken. Dazu LDAP, IMAP und eine Reihe
+anderer Datenbanken, außerdem HTTP, FTP-Protokolle (Intelligent
+Agent-Programmierung) und Direktzugriff auf Dbase und
+DB/DBM-Dateiformate. Dynamische Generierung von PNG-Bildern mit
+der libgd und der freetype library. Volltextindices und
+Suchmaschinen über externe Open Source Programme (MySQL Fulltext und
+andere). Gateways nach Java und COM existieren und werden
+mitgeliefert.  Zahlreiche Spracherweiterungen vorhanden, der Quelltext
+des Interpreters liegt vor und ist Open Source. Die Syntax folgt
+der C, Java, Javascript, Perl-Familie von Sprachen.
+Ausgezeichnete Dokumentation und glänzender Support, wie bei
+Open Source üblich (Mailinglisten in Deutscher und Englischer
+Sprache). Sessionmanagement seit Version 4 eingebaut.
+</p>
+
+<p>
+Cold Fusion ist eine Interpreter-Markup-Language. Es handelt
+sich um eine reine Interpretersprache mit der Option,
+Seitenquelltext auf der Serverseite durch "Codierung" zu
+verschleiern (das ausgegebene HTML muss selbstverständlich lesbar
+sein). Cold Fusion kann als Modul in Apache ausgeführt werden
+oder als CGI-Programm. Da es nicht Open Source ist, ist seine
+Verfügbarkeit über Plattformgrenzen beschränkt: Ursprünglich
+nur auf Windows verfügbar, ist Linux-Support mittlerweile
+für einige Distributionen vorhanden; Solaris wird ebenfalls
+unterstützt. Datenbankzugriff erfolgt über ODBC. LDAP, IMAP und
+einige andere Dinge werden unterstützt, andere Protokolle müssen
+ggf. über Dritthersteller oder Erweiterungen von Herstellerseite
+zugekauft werden. Intelligent Agents können erstellt werden.
+Keine Generierung von GIF-Bildern on-the-fly. CF kann Texte mit
+einer eigenen Engine (Verity) volltextindizieren und dann darauf
+zugreifen. Zahlreiche Spracherweiterungen vorhanden (Custom Tag
+Library beim Hersteller). Syntax: Tagschreibweise, um bei
+Anfängern den Eindruck einer Programmiersprache zu vermeiden.
+Neuere Versionen von Cold Fusion haben Java- und COM-Interfaces.
+</p>
+
+<p>
+Microsoft ASP ist keine Scriptsprache, sondern ein Framework für
+die Einbindung einer solchen. Es stellt mehr eine API dar, die
+beliebige Scriptsprachen verwenden können, um Variablen über die
+Lebensdauer einer Seite hinaus persistent zu machen, um mit dem
+Webserver und anderen Scriptsprachen kommunizieren zu können und
+um andere, Microsoft-spezifische Eigenheiten ansprechen zu
+können. Mit MS-ASP werden zwei Scriptsprachen mitgeliefert
+(JavaScript und VisualBasic), aber es existieren weitere, von
+Microsoft unabhängige Sprachen (etwa Perl), die ebenfalls ASP
+verwenden. ASP ist fester Bestandteil des IIS auf NT bzw. Windows
+2000/XP, es gibt aber auch andere Webserver (z.B.
+<a href="http://www.sambar.com/">Sambar Server</a>),
+die ASP unterstützen.
+Da es sich beim IIS mit ASP um ein
+Microsoft-Produkt handelt, sind Supportoptionen, -preise und
+-Qualität sofort klar (<em>Hinweis:</em> Seit Windows 2000 verlangt
+Microsoft eine zusätzliche
+<a href="http://www.microsoft.com/windows2000/server/howtobuy/pricing/changes.asp">Internet Connection License</a>
+für den IIS, wenn dieser am Internet betrieben werden soll).
+Unterstützung anderer Plattformen ist kaum möglich, da ASP
+starken Gebrauch von den OLE/COM/DCOM-Fertigkeiten der
+MS-Plattform macht: Selbst nach der Portierung (etwa durch
+Chilisoft oder Software AG) steht man immer noch vor dem
+Problem, die entsprechenden OLE/COM/DCOM-Objekte auf der
+Nicht-Microsoft Plattform verfügbar zu machen. LDAP, IMAP und
+andere Dinge sind über den OLE/COM/DCOM-Mechanismus möglich,
+entsprechende Objekte sind eventuell von Drittanbietern zu
+kaufen.
+</p>
+
+<p>
+mod_perl und embedPerl sind ein Mechanismus, mit denen
+man den Perl-Interpreter als Bestandteil des Apache-Webservers
+ausführen kann und mit dem man dann Perl-Programme mit HTML
+mischen kann. Programme werden proaktiv geladen und compiliert,
+sodass die typische Startup-Latenz von Perl-Programmen als CGI
+wegfällt. Der Speicherverbrauch ist beträchtlich, die
+Geschwindigkeiten von PHP und
+und mod_perl liegen in etwa gleichauf. Unterstützt wird
+der Apache Webserver auf allen Plattformen. mod_perl ist
+prinzipiell in der Lage, alle Perl-Module auf dem CPAN
+auszuführen, daher werden alle von Perl unterstützten
+Datenbanken (einschließlich ODBC und einer Menge nativer Interfaces)
+unterstützt, ebenso LDAP, IMAP, LibGD. Syntax folgt der von
+Perl... Negativ fällt hier vor allen Dingen der übermäßige
+Speicherverbrauch bei größeren Projekten auf und die auf
+Anfänger abschreckend wirkende Vielfalt von Sprachkonstrukten
+und Bibliotheken. Besondere Pluspunkte für erfahrene
+Programmierer sind die Ausdrucksstärke und Vielfalt der Sprache
+und ihrer Konstrukte und die wirklich umfassende Sammlung von
+Bibliotheken.
+</p>
+
+<p>
+Apple Webobjects sind ein System, mit dem ein kleines, im
+Source vorliegendes Rumpf-C-CGI-Programm über einen remote
+procedure call mit einem als Coprozess laufenden
+Anwendungsprogramm kommuniziert. Das Anwendungsprogramm ist mit
+dem Webobjects Toolkit in Objective-C geschrieben und wird dann
+compiliert; es ist ein Maschinenprogramm. Kommunikation erfolgt
+durch das Datenbank-Kit von Apple über die Native API der
+unterstützten Datenbanken mit beliebigen Datenbanken. Apple
+bietet außerdem eine exzellente Entwicklungsumgebung mit
+GUI-Designer (ja, erzeugt auch HTML :-) ) und einem sehr schönen
+ER-Modeller und Debugger (gdb mit einem sexy Outfit). Webobjects
+skaliert sich ausgezeichnet durch das verwendete RPC-Schema
+(Apple Portable Distributed Objects auf einem beliebigen
+etablierten RPC-Mechanismus aufsetzend) und die Möglichkeit, den
+Application Server zu replizeren. Interessant ist die
+ungeschlagene Geschwindigkeit und die extrem gute
+Entwicklungsumgebung.
+</p>
+

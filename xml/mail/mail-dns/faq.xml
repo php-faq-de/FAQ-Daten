@@ -1,0 +1,7 @@
+<Faq alias="mail-dns" author="Kristian Köhntopp">
+  <Question>Was ist das Domain Name System?</Question>
+  <Keywords>Mail, DNS, Domain, Name, IP, MX, Server, nslookup, Record, sendmail</Keywords>
+  <Editors>
+    <Editor name="Niels Braczek" lastedit="2008-08-12 00:00:00" />
+  </Editors>
+</Faq>

@@ -1,0 +1,34 @@
+<p>Die einfachste Möglichkeit, Konfigurationsvariablen zu ändern, ist, 
+  diese in der php.ini einzutragen (siehe hierzu "<a class="faq" href="http://php-faq.de/q-php-ini.html">Wo finde ich die php.ini?</a>"). 
+  Dies ist aber nicht immer möglich bzw. gewünscht. Entweder weil man 
+  keinen Zugriff auf die php.ini hat oder weil man serverunabhängig 
+  programmieren möchte. Deshalb gibt es die Möglichkeit, 
+  Konfigurationsvariablen zur Scriptlaufzeit zu ändern. Eine volle 
+  Übersicht über die verfügbaren Variablen gibt es auf der Manual-Seite 
+  der Funktion <a href="http://www.php3.de/ini_set">ini_set()</a>.Besondere Aufmerksamkeit 
+  verdient hier die dritte Spalte der Tabellen. Variablen, die mit 
+  <tt>PHP_INI_ALL</tt> gekennzeichnet sind, lassen sich mit der Funktion 
+  <a href="http://www.php3.de/ini_set">ini_set()</a> innerhalb eines Scriptes ändern oder in einer 
+  <tt>.htaccess</tt>-Datei setzen. So kann man zum Beispiel innerhalb eines Scriptes 
+  und unabhängig vom Server-Betriebssystem den Include-Path anpassen:</p>
+  
+<pre><span style="color: #0000ff;">$include_path</span><span style="color: #000000;">&#91;</span><span style="color: #000000;">&#93;</span> = <span style="color: #ff0000;">'.'</span>;
+<span style="color: #0000ff;">$include_path</span><span style="color: #000000;">&#91;</span><span style="color: #000000;">&#93;</span> = <span style="color: #ff0000;">'pear/'</span>;
+&nbsp;
+<a href="http://www.php3.de/ini_set"><span style="color: #000066;">ini_set</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'include_path'</span>, <a href="http://www.php3.de/implode"><span style="color: #000066;">implode</span></a><span style="color: #000000;">&#40;</span>PATH_SEPARATOR, <span style="color: #0000ff;">$include_path</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>;</pre>
+  
+  <p>
+    Mit <tt>PHP_INI_PERDIR</tt> gekennzeichnete Variablen lassen sich 
+    ausschließlich mittels einer <tt>.htaccess</tt>-Datei setzen. So 
+    ist auf manchen Servern per default <tt>session.use_trans_sid</tt> 
+    deaktiviert. Folgende <tt>.htaccess</tt>-Datei aktiviert dies:
+  </p>
+  
+<pre class="ini">&lt;IfModule mod_php4.c&gt;
+  php_value session.use_trans_sid <span style="">1</span>
+&lt;/IfModule&gt;</pre>
+  
+  <p>Um mit <tt>PHP_INI_SYSTEM</tt> gekennzeichnete Variablen zu 
+    ändern, benötigt man Zugriff auf die php.ini.
+  </p>
+

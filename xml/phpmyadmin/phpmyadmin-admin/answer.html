@@ -1,0 +1,40 @@
+<p>
+Seit phpMyAdmin 2.0.3 ist es möglich, eine zentrale Kopie von
+phpMyAdmin zu installieren, in die sich die einzelnen Benutzer
+mit Benutzername und Passwort einloggen. phpMyAdmin benutzt
+dafür das Rechte-System von MySQL. Benutzer müssen daher korrekt
+in das Rechte-System eingetragen sein: Für jeden Benutzer, der
+auf phpMyAdmin zugreifen können soll, muss ein Eintrag in die
+<tt>mysql.user</tt> und <tt>mysql.db</tt>-Tabelle gemacht
+werden. Um dem Benutzer <tt>foo</tt> Zugriff auf die Datenbank
+<tt>foo_db</tt> zu geben, würden Sie folgende SQL-Statements
+benutzen:
+</p>
+
+<pre class="sql"><span style="color: #993333; font-weight: bold;">INSERT</span> <span style="color: #993333; font-weight: bold;">INTO</span> user <span style="color: #66cc66;">&#40;</span>Host, User, Password, Select_priv, Insert_priv,
+                 Update_priv, Delete_priv, Create_priv, Drop_priv,
+                 Reload_priv, Shutdown_priv, Process_priv,
+                 File_priv, Grant_priv, References_priv, Index_priv,
+                 Alter_priv<span style="color: #66cc66;">&#41;</span>
+          <span style="color: #993333; font-weight: bold;">VALUES</span> <span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'localhost'</span>, <span style="color: #ff0000;">'foo'</span>, PASSWORD<span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'bar'</span><span style="color: #66cc66;">&#41;</span>, <span style="color: #ff0000;">'N'</span>, <span style="color: #ff0000;">'N'</span>,
+                 <span style="color: #ff0000;">'N'</span>, <span style="color: #ff0000;">'N'</span>, <span style="color: #ff0000;">'N'</span>, <span style="color: #ff0000;">'N'</span>, <span style="color: #ff0000;">'N'</span>, <span style="color: #ff0000;">'N'</span>, <span style="color: #ff0000;">'N'</span>, <span style="color: #ff0000;">'N'</span>, <span style="color: #ff0000;">'N'</span>, <span style="color: #ff0000;">'N'</span>,
+                 <span style="color: #ff0000;">'N'</span>, <span style="color: #ff0000;">'N'</span><span style="color: #66cc66;">&#41;</span>
+<span style="color: #993333; font-weight: bold;">INSERT</span> <span style="color: #993333; font-weight: bold;">INTO</span> db   <span style="color: #66cc66;">&#40;</span>Host, Db, User, Select_priv, Insert_priv,
+                 Update_priv, Delete_priv, Create_priv, Drop_priv,
+                 Grant_priv, References_priv, Index_priv, Alter_priv<span style="color: #66cc66;">&#41;</span>
+          <span style="color: #993333; font-weight: bold;">VALUES</span> <span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'localhost'</span>, <span style="color: #ff0000;">'foo_db'</span>, <span style="color: #ff0000;">'foo'</span>, <span style="color: #ff0000;">'Y'</span>, <span style="color: #ff0000;">'Y'</span>, <span style="color: #ff0000;">'Y'</span>, <span style="color: #ff0000;">'Y'</span>,
+                 <span style="color: #ff0000;">'Y'</span>, <span style="color: #ff0000;">'Y'</span>, <span style="color: #ff0000;">''</span>, <span style="color: #ff0000;">''</span>, <span style="color: #ff0000;">''</span>, <span style="color: #ff0000;">''</span><span style="color: #66cc66;">&#41;</span></pre>
+
+<p>
+Bitte beachten Sie, dass Sie nach dieser Änderung ein <tt>FLUSH
+PRIVILEGES</tt>-Statement ausführen müssen, damit sie wirksam wird.
+</p>
+
+<p>
+Seit phpMyAdmin 2.0.6 werden auch Wildcards im Rechte-System
+unterstützt; damit können Sie dem Benutzer <tt>foo</tt>
+beispielsweise Zugriff auf alle Datenbanken geben, deren Name
+mit <tt>foo_</tt> beginnt. Weitere Informationen zum Setup eines
+solchen Benutzers finden Sie im MySQL-Handbuch.
+</p>
+

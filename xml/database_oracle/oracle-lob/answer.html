@@ -1,0 +1,45 @@
+<p>
+Diese Codebeispiele beschreiben <tt>insert</tt>, <tt>update</tt> und
+<tt>select</tt>:</p>
+
+<pre><span style="color: #808080; font-style: italic;">// INSERT:</span>
+<span style="color: #0000ff;">$req</span> = <span style="color: #ff0000;">&quot;INSERT INTO bdata (description, data) VALUES
+        (:description, EMPTY_BLOB()) returning data into :data&quot;</span>;
+<span style="color: #0000ff;">$stmt</span> = OCIParse<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$conn</span>, <span style="color: #0000ff;">$req</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #0000ff;">$lob</span> = OCINewDescriptor<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$conn</span>, OCI_D_LOB<span style="color: #000000;">&#41;</span>;
+OCIBindByName<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$stmt</span>, <span style="color: #ff0000;">&quot;:description&quot;</span>, <span style="color: #0000ff;">$description</span>, <span style="color: #cc66cc;">-1</span><span style="color: #000000;">&#41;</span>;
+OCIBindByName<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$stmt</span>, <span style="color: #ff0000;">&quot;:data&quot;</span>, <span style="color: #0000ff;">$lob</span>, <span style="color: #cc66cc;">-1</span>, OCI_B_BLOB<span style="color: #000000;">&#41;</span>;
+OCIExecute<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$stmt</span>, OCI_DEFAULT<span style="color: #000000;">&#41;</span>;
+<span style="color: #b1b100;">if</span><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$lob</span>-&gt;<span style="color: #006600;">save</span><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$bdata</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+ OCICommit<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$conn</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000;">&#125;</span> <span style="color: #b1b100;">else</span> <span style="color: #000000;">&#123;</span>
+ <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;Problems: Couldn't upload Lob<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
+<span style="color: #000000;">&#125;</span>
+OCIFreeDesc<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$lob</span><span style="color: #000000;">&#41;</span>;
+OCIFreeStatement<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$stmt</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;">// Für die verwendeten Typen beim OCIBindByName auf jeden Fall mal</span>
+<span style="color: #808080; font-style: italic;">// ins PHP Handbuch schauen.</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">// UPDATE:</span>
+<span style="color: #808080; font-style: italic;">// Das SELECT FOR UPDATE sperrt den Eintrag für</span>
+<span style="color: #808080; font-style: italic;">// andere Schreibzugriffe</span>
+<span style="color: #808080; font-style: italic;">// Diese Sperre wird erst beim nächsten Commit aufgehoben</span>
+<span style="color: #0000ff;">$req</span>=<span style="color: #ff0000;">&quot;SELECT data FROM bdata WHERE id='5' FOR UPDATE&quot;</span>;
+<span style="color: #0000ff;">$stmt</span>=OCIParse<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$conn</span>, <span style="color: #0000ff;">$req</span><span style="color: #000000;">&#41;</span>;
+OCIExecute<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$stmt</span>, OCI_DEFAULT<span style="color: #000000;">&#41;</span>;
+&nbsp;
+<span style="color: #0000ff;">$req</span>=<span style="color: #ff0000;">&quot;UPDATE bdata SET data=:data WHERE id='5'&quot;</span>;
+<span style="color: #0000ff;">$stmt</span>=OCIParse<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$conn</span>, <span style="color: #0000ff;">$req</span><span style="color: #000000;">&#41;</span>;
+OCIBindByName<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$stmt</span>, <span style="color: #ff0000;">&quot;:data&quot;</span>, <span style="color: #0000ff;">$data</span>, <span style="color: #cc66cc;">-1</span><span style="color: #000000;">&#41;</span>;
+OCIExecute<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$stmt</span>, OCI_DEFAULT<span style="color: #000000;">&#41;</span>;
+OCICommit<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$conn</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;">// SELECT</span>
+<span style="color: #0000ff;">$req</span>=<span style="color: #ff0000;">&quot;SELECT data FROM bdata WHERE id='5'&quot;</span>;
+<span style="color: #0000ff;">$stmt</span>=OCIParse<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$conn</span>, <span style="color: #0000ff;">$req</span><span style="color: #000000;">&#41;</span>;
+OCIExecute<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$stmt</span><span style="color: #000000;">&#41;</span>;
+OCIFetch<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$stmt</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #0000ff;">$bdatalob</span>=OCIResult<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$stmt</span>, <span style="color: #ff0000;">&quot;DATA&quot;</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #0000ff;">$bdata</span>=<span style="color: #0000ff;">$bdatalob</span>-&gt;<span style="color: #006600;">load</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;</pre>
+

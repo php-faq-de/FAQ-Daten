@@ -1,0 +1,4 @@
+<Faq alias="sessions-cookie" author="Daniel T. Gorski">
+  <Question>Wie stelle ich fest, ob der Client die Cookie-Annahme verweigert?</Question>
+  <Keywords>Session-ID, SessionID, Cookie, GET, Fallback, Fall back, Browser</Keywords>
+</Faq>

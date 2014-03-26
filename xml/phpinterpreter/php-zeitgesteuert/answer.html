@@ -1,0 +1,43 @@
+<p>
+"echo" als PHP-Script "echo.php":
+</p>
+
+<pre><span style="color: #808080; font-style: italic;">#! /usr/bin/php</span>
+<span style="color: #000000; font-weight: bold;">&lt;?php</span>
+  <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;argc = {$_SERVER['argc']}<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
+  <span style="color: #b1b100;">foreach</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$_SERVER</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'argv'</span><span style="color: #000000;">&#93;</span> <span style="color: #b1b100;">as</span> <span style="color: #0000ff;">$k</span> =&gt; <span style="color: #0000ff;">$v</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+    <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;_SERVER['argv'][$k] = $v<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
+  <span style="color: #000000;">&#125;</span>
+<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+
+<p>
+Dies setzt ein installiertes Binary von PHP in
+<tt>/usr/bin/php</tt> voraus. Seit PHP 4.3.0 wird PHP (ob Webserver-Modul
+oder CGI-Version) immer mit dem <tt>CLI</tt> (Command Line Interface) ausgeliefert
+(UNIX/Linux: ein Binary namens "php", Windows: "php.exe"). Dieses kann für
+Standalone-Applikationen benutzt werden. Zusätzlich bietet das CLI noch einige
+weitere interessante
+<a href="http://www.php3.de/manual/en/features.commandline.php">Optionen und Eigenschaften</a>
+</p>
+
+<p>
+Ein solches Script lässt sich über die Unix-Zeitsteuerung <tt>cron</tt>
+bzw. äquivalente Programme regelmäßig aufrufen.
+</p>
+
+<p>
+Dem Script steht das Array <tt>$_SERVER['argv'][]</tt> zur Verfügung, welches
+die Kommandozeilenparameter des Aufrufs enthält. Dieses Array
+kann auf die übliche Weise aufgezählt werden. Die Anzahl der
+Elemente des Arrays kann man mit der Funktion
+<a href="http://www.php3.de/count">count()</a> bestimmen oder in der Variablen
+<tt>$_SERVER['argc']</tt> nachschlagen.
+</p>
+
+<p>
+Hat man nur <tt>mod_php</tt> zur Verfügung, kann man eine
+bestimmte URL des Webservers durch PHP regelmäßig zeitgesteuert
+abrufen lassen. Dazu sind Tools wie <tt>wget</tt> oder 
+<tt>lynx</tt> hilfreich.
+</p>
+

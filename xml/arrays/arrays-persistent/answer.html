@@ -1,0 +1,16 @@
+<p>Die einzig vernünftige und sichere Methode, um ein Array von
+einer Seite auf eine andere Seite zu transportieren, ist das
+Ablegen des Arrays in einer Session auf dem Server. Alle anderen
+Methoden stellen ein Sicherheitsrisiko dar und sollten nicht
+angewendet werden.</p>
+
+<p>Weitere Informationen zu Sessions finden sich in
+"<a class="faq" href="http://php-faq.de/ch-version4_session.html">Sessions</a>" und in
+"<a class="faq" href="http://php-faq.de/q-sessions-zweck.html">Was sind Sessions und warum sind sie nützlich?</a>"</p>
+
+<p>Im Prinzip kann man ein Array mit <a href="http://www.php3.de/serialize">serialize()</a>
+in einen String verwandeln und per URL weiterreichen (URL-Codierung
+etc. nicht vergessen), aber das ist wegen der begrenzten Länge von
+URLs und der Manipulationsmöglichkeit durch den Benutzer zu
+vermeiden.</p>
+

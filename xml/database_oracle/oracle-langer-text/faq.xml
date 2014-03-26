@@ -1,0 +1,4 @@
+<Faq alias="oracle-langer-text" author="Thomas Fromm">
+  <Question>Wie speichere ich Datensätze mit mehr als 2000 Zeichen ab?</Question>
+  <Keywords>Oracle, Datenbank, speichern, Limit, Groesse, Zeichen, Laenge</Keywords>
+</Faq>

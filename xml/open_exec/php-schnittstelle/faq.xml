@@ -1,0 +1,4 @@
+<Faq alias="php-schnittstelle" author="Matthias P. Wuerfl">
+  <Question>Wie kann ich mit PHP auf die serielle Schnittstelle zugreifen?</Question>
+  <Keywords>Schnittstelle, lesen, schreiben, Zugriff, seriell, tty, extern, Server, Client, Unix</Keywords>
+</Faq>

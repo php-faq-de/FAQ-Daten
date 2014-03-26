@@ -1,0 +1,26 @@
+<p>
+In PHP bieten die meisten Datenbanken zwei
+<tt>connect()</tt>-Funktionen an: Eine gewöhnliche und eine
+<tt>pconnect()</tt>-Funktion. Verwendet man CGI PHP, unterscheiden
+sich beide Funktionen nicht.
+</p>
+
+<p>
+Verwendet man das PHP-Modul, werden die mit einem <tt>connect()</tt>
+hergestellten Datenbankverbindungen am Ende der Seite
+geschlossen. Mit <tt>pconnect()</tt> hergestellte Verbindungen
+bleiben jedoch geöffnet. Dies dient einzig und alleine dazu, das
+ständige Öffnen und Schließen von Netzwerkverbindungen zu
+vermeiden, denn der Verbindungsaufbau ist bei einigen
+Datenbanken (etwa Oracle) sehr aufwendig.
+</p>
+
+<p>
+Es ist daher empfehlenswert, in jedem Fall die
+<tt>pconnect()</tt>-Variante zu verwenden (aber: Vergleiche
+<a href="http://www.koehntopp.de/kris/artikel/webtune/">Webserver verstehen und tunen</a>.
+Es können sehr viele offene Datenbankverbindungen entstehen).
+Siehe auch: PHP Manual,
+<a href="http://www.php3.de/features.persistent-connections">Persistente Datenbankverbindungen</a>.
+</p>
+

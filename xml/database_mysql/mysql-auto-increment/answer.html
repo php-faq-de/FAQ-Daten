@@ -1,0 +1,76 @@
+<p>Ganzzahlige Datenbankfelder in MySQL können mit dem Attribut
+<tt>auto_increment</tt> versehen werden. Wird über die betreffende
+Tabelle eine INSERT-Query ausgeführt, so wird automatisch der Wert des
+mit <tt>auto_increment</tt> gekennzeichneten Feldes um Eins erhöht
+(inkrementiert), ohne dass dieses in der INSERT-Query explizit angegeben
+werden muss bzw. darf. Dies ist bei "flachen" Tabellen ohne Relationen
+nützlich z.B. bei Gästebüchern.</p>
+
+<p>Mit dem MySQL-Monitor erzeugtes Beispiel:</p>
+
+<pre>
+mysql&gt; CREATE DATABASE foo;
+mysql&gt; USE foo;
+
+mysql&gt; CREATE TABLE bar (
+    -&gt;    ID int(10) unsigned NOT NULL auto_increment,
+    -&gt;    INHALT varchar(32) NOT NULL,
+    -&gt;    PRIMARY KEY (ID)
+    -&gt; );
+
+mysql&gt; DESCRIBE bar;
++--------+------------------+------+-----+---------+----------------+
+| Field  | Type             | Null | Key | Default | Extra          |
++--------+------------------+------+-----+---------+----------------+
+| ID     | int(10) unsigned |      | PRI | 0       | auto_increment |
+| INHALT | varchar(32)      |      |     |         |                |
++--------+------------------+------+-----+---------+----------------+
+
+mysql&gt; INSERT bar SET INHALT='erster Datensatz';
+mysql&gt; INSERT bar SET INHALT='zweiter Datensatz';
+
+mysql&gt; SELECT * FROM bar;
++----+-------------------+
+| ID | INHALT            |
++----+-------------------+
+|  1 | erster Datensatz  |
+|  2 | zweiter Datensatz |
++----+-------------------+
+2 rows in set (0.00 sec)
+</pre>
+
+<p>Wie man sehen kann, wird das Feld "ID" automatisch erhöht.
+Logischerweise darf nur ein Feld mit dem <tt>auto_increment</tt>
+Attribut versehen werden. Zusätzlich muss dieses Feld
+als Index definiert werden - z.B. als Primär-Schlüssel (PRIMARY KEY).</p>
+
+<p>Um den Wert des letzten Inkrements erfahren, stellt PHP die Funktion
+<tt>mysql_insert_id()</tt> zur Verfügung:</p>
+
+<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+<span style="color: #808080; font-style: italic;">// Es wird davon ausgegangen, dass $host, $user und</span>
+<span style="color: #808080; font-style: italic;">// $passwort korrekt initialisiert sind</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">// Verbindung zu MySQL-Datenbank herstellen oder sterben.</span>
+<span style="color: #0000ff;">$linkID</span> = <a href="http://www.php3.de/mysql_connect"><span style="color: #000066;">mysql_connect</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$host</span>,<span style="color: #0000ff;">$user</span>,<span style="color: #0000ff;">$password</span><span style="color: #000000;">&#41;</span>
+   or <a href="http://www.php3.de/die"><span style="color: #000066;">die</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Abbruch: Verbindung zu Host '$host' konnte&quot;</span>
+         .<span style="color: #ff0000;">&quot; nicht hergestellt werden.&quot;</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;">// Benötigte Datenbank auswählen oder sterben.</span>
+@<a href="http://www.php3.de/mysql_select_db"><span style="color: #000066;">mysql_select_db</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;foo&quot;</span><span style="color: #000000;">&#41;</span>
+   or <a href="http://www.php3.de/die"><span style="color: #000066;">die</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Abbruch: Datenbank '$database' konnte nicht&quot;</span>
+         .<span style="color: #ff0000;">&quot; selektiert werden.&lt;br&gt;&lt;br&gt;MySQL sagt: &quot;</span>.<a href="http://www.php3.de/mysql_error"><span style="color: #000066;">mysql_error</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;">// INSERT ausführen</span>
+@<a href="http://www.php3.de/mysql_query"><span style="color: #000066;">mysql_query</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;INSERT bar SET INHALT='dritter Datensatz'&quot;</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;">//  In unserem Beispiel ergibt das beim erstmaligen Aufruf &quot;3&quot;</span>
+<span style="color: #808080; font-style: italic;">//  dann &quot;4&quot;, dann &quot;5&quot; etc.</span>
+<a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <a href="http://www.php3.de/mysql_insert_id"><span style="color: #000066;">mysql_insert_id</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$linkID</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+
+<p>Die Funktion <tt>mysql_insert_id()</tt> liefert nichts zurück,
+wenn vorher keine INSERT-Query ausgeführt wurde; sie liefert einen
+falschen Wert, wenn der Typ des <tt>auto-increment</tt>-Feldes
+als BIGINT definiert wird, für die meisten Anwendungen sollte aber
+der Typ INT UNSIGNED mehr als ausreichend sein.</p>

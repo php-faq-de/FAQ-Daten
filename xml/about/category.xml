@@ -1,0 +1,21 @@
+<Category alias="about" name="Über diese FAQ" keywords="PHP, Usenet, FAQ, dclp">
+  <!--Die FAQs sind hier noch mal redundant aufgelistet um die Reihenfolge vorzugeben.-->
+  <Faqs>
+    <Faq alias="faq-ueberblick" />
+    <Faq alias="faq-download" />
+    <Faq alias="faq-by-mail" />
+    <Faq alias="private-anfragen" />
+    <Faq alias="faq-verwenden" />
+    <Faq alias="faq-fehler" />
+    <Faq alias="faq-mitmachen" />
+    <Faq alias="newsgroup-jobs" />
+    <Faq alias="newsgroup-providersuche" />
+    <Faq alias="newsgroup-flames" />
+    <Faq alias="newsgroup-neuling" />
+    <Faq alias="newsgroup-wie-helfen" />
+    <Faq alias="newsgroup-oe-opfer" />
+    <Faq alias="newsgroup-tofu" />
+    <Faq alias="newsgroup-faqreferenz" />
+    <Faq alias="newsgroup-fragen" />
+  </Faqs>
+</Category>

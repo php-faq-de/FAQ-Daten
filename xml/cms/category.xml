@@ -1,0 +1,7 @@
+<Category alias="cms" name="Content Management Systeme" keywords="PHP, Usenet, FAQ, dclp">
+  <!--Die FAQs sind hier noch mal redundant aufgelistet um die Reihenfolge vorzugeben.-->
+  <Faqs>
+    <Faq alias="cms-was" />
+    <Faq alias="cms-marktueberblick" />
+  </Faqs>
+</Category>

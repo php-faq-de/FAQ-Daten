@@ -1,0 +1,17 @@
+<Category alias="pdf_files" name="PDF-Dateien" keywords="PHP, Usenet, FAQ, dclp">
+  <!--Die FAQs sind hier noch mal redundant aufgelistet um die Reihenfolge vorzugeben.-->
+  <Faqs>
+    <Faq alias="pdf-files-php" />
+    <Faq alias="pdf-files-einheiten" />
+    <Faq alias="pdf-files-masstab" />
+    <Faq alias="pdf-files-template" />
+    <Faq alias="pdf-files-schutz" />
+    <Faq alias="pdf-files-rechte" />
+    <Faq alias="pdf-files-encryption" />
+    <Faq alias="pdf-files-lesbar" />
+    <Faq alias="pdf-files-mime_type" />
+    <Faq alias="pdf-files-check_install" />
+    <Faq alias="pdf-files-install" />
+    <Faq alias="pdf-files-ie-blank" />
+  </Faqs>
+</Category>

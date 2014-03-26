@@ -1,0 +1,22 @@
+<Category alias="database_mysql" name="Datenbanken: MySQL" keywords="PHP, Usenet, FAQ, dclp">
+  <!--Die FAQs sind hier noch mal redundant aufgelistet um die Reihenfolge vorzugeben.-->
+  <Faqs>
+    <Faq alias="mysql-eignung" />
+    <Faq alias="mysql-zugriff" />
+    <Faq alias="mysql-csv-import" />
+    <Faq alias="mysql-csv-export" />
+    <Faq alias="mysql-aenderungsdatum" />
+    <Faq alias="mysql-ip-sortieren" />
+    <Faq alias="mysql-loeschen" />
+    <Faq alias="mysql-blob" />
+    <Faq alias="mysql-zufall" />
+    <Faq alias="mysql-seitenweise" />
+    <Faq alias="mysql-auto-increment" />
+    <Faq alias="mysql-inkrement" />
+    <Faq alias="mysql-volltextsuche" />
+    <Faq alias="mysql-fehlerbehandlung" />
+    <Faq alias="mysql-umlaute-sortieren" />
+    <Faq alias="mysql-verbindungen" />
+    <Faq alias="mysql-betroffene-datensaetze" />
+  </Faqs>
+</Category>

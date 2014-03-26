@@ -1,0 +1,7 @@
+<Faq alias="konfiguration-php3-modul" author="Kristian Köhntopp">
+  <Question>Ich verwende PHP (Version 3) als Apache-Modul. Wie kann ich dies konfigurieren?</Question>
+  <Keywords>Apache, php.ini, Konfiguration, htaccess, Modul, mod_php</Keywords>
+  <Editors>
+    <Editor name="Niels Braczek" lastedit="2008-08-12 00:00:00" />
+  </Editors>
+</Faq>

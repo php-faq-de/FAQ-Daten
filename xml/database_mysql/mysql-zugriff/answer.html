@@ -1,0 +1,59 @@
+<p>Mit Hilfe der Funktion <a href="http://www.php3.de/mysql_connect">mysql_connect()</a>
+kann man eine Datenbankverbindung zu einem MySQL-Server aufbauen,
+um dann mit <a href="http://www.php3.de/mysql_select_db">mysql_select_db()</a> die Datenbank
+auf dem Server auszuwählen. Das Resultat ist eine <tt>Link-ID</tt>,
+die man bei allen anderen MySQL-Funktionen angeben kann.</p>
+
+<p>In der <tt>php.ini</tt> kann man festlegen, welche Datenbank und
+welcher Benutzername und welches Passwort die Funktion verwenden
+soll, wenn diese Angaben beim Funktionsaufruf weggelassen
+werden, auch wenn es nur untermittelschlau ist, dies zu tun:</p>
+
+<pre>
+; default host for mysql_connect() (doesn't apply in safe mode)
+mysql.default_host  =
+; default user for mysql_connect() (doesn't apply in safe mode)
+mysql.default_user  =
+; default password for mysql_connect() (doesn't apply in safe mode)
+mysql.default_password  =
+
+; Note that this is generally a *bad* idea to store passwords
+; in this file. *Any* user with PHP access can run
+; 'echo cfg_get_var("mysql.default_password")' and reveal that
+; password!  And of course, any users with read access to this
+; file will be able to reveal the password as well.
+</pre>
+
+<p>Kontaktaufnahme mit dem Server und Festlegen der Datenbank:</p>
+
+<pre><span style="color: #0000ff;">$link</span> = <a href="http://www.php3.de/mysql_connect"><span style="color: #000066;">mysql_connect</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;localhost&quot;</span>, <span style="color: #ff0000;">&quot;ich&quot;</span>, <span style="color: #ff0000;">&quot;geheim&quot;</span><span style="color: #000000;">&#41;</span>;
+  <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span>!<span style="color: #0000ff;">$link</span><span style="color: #000000;">&#41;</span>
+    <a href="http://www.php3.de/die"><span style="color: #000066;">die</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Kann den Server nicht erreichen.&quot;</span><span style="color: #000000;">&#41;</span>;
+  <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span>!<a href="http://www.php3.de/mysql_select_db"><span style="color: #000066;">mysql_select_db</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;meinedatenbank&quot;</span>, <span style="color: #0000ff;">$link</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>
+    <a href="http://www.php3.de/die"><span style="color: #000066;">die</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Kann die Datenbank nicht anwählen.&quot;</span><span style="color: #000000;">&#41;</span>;</pre>
+
+<p>Das Senden einer Anfrage an die Datenbank erfolgt mit Hilfe der
+Funktion <a href="http://www.php3.de/mysql_query">mysql_query()</a>. Diese Funktion liefert
+einen Result-Identifier, mit dem dann das Ergebnis abgefragt werden
+kann: Mit der Funktion <a href="http://www.php3.de/mysql_num_rows">mysql_num_rows()</a>
+bestimmt man die Anzahl der Zeilen des Ergebnisses und mit Hilfe der
+Funktion <a href="http://www.php3.de/mysql_fetch_array">mysql_fetch_array()</a>
+kann man die jeweils aktuelle Zeile des Ergebnisses einlesen.</p>
+
+<pre><span style="color: #0000ff;">$query</span> = <span style="color: #ff0000;">&quot;SELECT * FROM meinetabelle ORDER BY id&quot;</span>;
+<span style="color: #0000ff;">$result</span> = <a href="http://www.php3.de/mysql_query"><span style="color: #000066;">mysql_query</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$query</span>, <span style="color: #0000ff;">$link</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span>!<span style="color: #0000ff;">$result</span><span style="color: #000000;">&#41;</span>
+<span style="color: #000000;">&#123;</span>
+    <a href="http://www.php3.de/print"><span style="color: #000066;">print</span></a> <a href="http://www.php3.de/mysql_error"><span style="color: #000066;">mysql_error</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+    <a href="http://www.php3.de/die"><span style="color: #000066;">die</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Query $query ist ungültiges SQL.&quot;</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000;">&#125;</span>
+&nbsp;
+<span style="color: #0000ff;">$zeilen</span> = <a href="http://www.php3.de/mysql_num_rows"><span style="color: #000066;">mysql_num_rows</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$result</span><span style="color: #000000;">&#41;</span>;
+<a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Das Ergebnis hat %d Zeilen.<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>, <span style="color: #0000ff;">$zeilen</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+<span style="color: #b1b100;">while</span><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$avar</span> = <a href="http://www.php3.de/mysql_fetch_array"><span style="color: #000066;">mysql_fetch_array</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$result</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>
+    <a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Spalte bla hat den Wert %s<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>, <span style="color: #0000ff;">$avar</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;bla&quot;</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+<a href="http://www.php3.de/mysql_free_result"><span style="color: #000066;">mysql_free_result</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$result</span><span style="color: #000000;">&#41;</span>;
+<a href="http://www.php3.de/mysql_close"><span style="color: #000066;">mysql_close</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$link</span><span style="color: #000000;">&#41;</span>;</pre>
+

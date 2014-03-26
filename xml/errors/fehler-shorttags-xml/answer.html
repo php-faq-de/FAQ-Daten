@@ -1,0 +1,25 @@
+<p>
+Im Normalfall erlaubt PHP den Skriptbereicht mit <tt>&lt;? ?&gt;</tt>
+(den sogenannten Short-Tags) einzugrenzen, da diese Variante schneller
+zu schreiben ist - als <tt>&lt;?php ?&gt;</tt> - und man außerdem
+einfach Variablen ausgeben kann (<tt>&lt;?=$variable ?&gt;</tt>). Für
+PHP ist es aber unmöglich diese Notation von einer XML-Deklaration
+(<tt>&lt;?xml version="1.0" ?&gt;</tt>) zu unterscheiden; der Parser
+glaubt daher, dass es sich hierbei um PHP-Code handelt, der natürlich
+syntaktisch nicht korrekt ist.
+</p>
+
+<p>
+Um das Parsen der Short-Tags abzuschalten, muss man den Eintrag <a href="http://de3.php.net/manual/en/ini.php">short_open_tag</a> in der <tt>php.ini</tt> auf <tt>off</tt>
+setzen. Danach wird nur mehr Code innerhalb der XML-konformen Processing
+Instructions (PI) <tt>&lt;?php ?&gt;</tt> bzw. dem <tt>&lt;script
+language="php"&gt; ... &lt;/script&gt;</tt> Tag interpretiert.
+</p>
+
+<p>
+Alternativ kann man natürlich auch die XML-Deklaration mittels
+<tt>echo</tt> ausgeben:
+</p>
+
+<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span> <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">'&lt;?xml version=&quot;1.0&quot; ?&gt;'</span>; <span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+

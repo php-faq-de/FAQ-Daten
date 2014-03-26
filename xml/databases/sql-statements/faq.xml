@@ -1,0 +1,7 @@
+<Faq alias="sql-statements" author="Kristian Köhntopp">
+  <Question>Wieso kann ich mehrere, durch Semikolon getrennte Statements nicht ausführen?</Question>
+  <Keywords>SQL, Datenbank, Semikolon, phpMyAdmin</Keywords>
+  <Editors>
+    <Editor name="Niels Braczek" lastedit="2008-08-12 00:00:00" />
+  </Editors>
+</Faq>

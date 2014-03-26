@@ -1,0 +1,77 @@
+<p>Üblicherweise benutzt man Werte ohne Vorzeichen (<tt>UNSIGNED</tt>)
+für den Typ des <tt>auto_increment</tt>-Feldes. Ab der
+MySQL Server-Version 3.23 ist es auch nicht mehr möglich,
+in diesen Feldern negative Zahlen zu führen.</p>
+
+<p>Geeignete Datentypen für <tt>auto_increment</tt> wären:</p>
+
+<ul>
+<li><p><tt>TINYINT UNSIGNED</tt> - Wertebereich 0 bis 255.</p></li>
+<li><p><tt>SMALLINT UNSIGNED</tt> - Wertebereich 0 bis 65535.</p></li>
+<li><p><tt>MEDIUMINT UNSIGNED</tt> - Wertebereich 0 bis 16777215.</p></li>
+<li><p><tt>INT UNSIGNED</tt> - Wertebereich 0 bis 4294967295. </p></li>
+</ul>
+
+<p>Für die meisten Anwendungen ist der Datentyp <tt>INT UNSIGNED</tt>
+mehr als ausreichend - immerhin ermöglicht dieser eine Adressierung
+von über vier Milliarden Datensätzen!</p>
+
+<p>Der Initialwert des <tt>auto_increment</tt>-Feldes ist 1. Um diesen
+Wert zu ändern, muss man ihn explizit setzen:</p>
+
+<pre>
+mysql&gt; DELETE FROM bar;
+
+mysql&gt; INSERT bar SET INHALT='erster Datensatz';
+
+mysql&gt; SELECT * FROM bar;
++----+------------------+
+| ID | INHALT           |
++----+------------------+
+|  1 | erster Datensatz |
++----+------------------+
+
+mysql&gt; INSERT bar SET ID='1000', INHALT='zweiter Datensatz';
+
+mysql&gt; SELECT * FROM bar;
++------+-------------------+
+| ID   | INHALT            |
++------+-------------------+
+|    1 | erster Datensatz  |
+| 1000 | zweiter Datensatz |
++------+-------------------+
+
+mysql&gt; INSERT bar SET INHALT='dritter Datensatz';
+
+mysql&gt; SELECT * FROM bar;
++------+-------------------+
+| ID   | INHALT            |
++------+-------------------+
+|    1 | erster Datensatz  |
+| 1000 | zweiter Datensatz |
+| 1001 | dritter Datensatz |
++------+-------------------+
+</pre>
+
+<p>Der <tt>auto_increment</tt>-Wert läuft nicht über - d.h. er wird
+nicht wieder negativ (bzw. Null bei <tt>UNSIGNED</tt>), wenn er über
+seinen Wertebereich hinaus adressiert wird. Stattdessen wird MySQL
+einen Fehler melden:</p>
+
+<pre>
+mysql&gt; INSERT bar SET ID='4294967295', INHALT='letzter Datensatz';
+
+mysql&gt; SELECT * FROM bar;
++------------+-------------------+
+| ID         | INHALT            |
++------------+-------------------+
+|          1 | erster Datensatz  |
+|       1000 | zweiter Datensatz |
+|       1001 | dritter Datensatz |
+| 4294967295 | letzter Datensatz |
++------------+-------------------+
+
+mysql&gt; INSERT bar SET INHALT='geht noch einer rein?';
+ERROR 1062: Duplicate entry '4294967295' for key 1
+</pre>
+

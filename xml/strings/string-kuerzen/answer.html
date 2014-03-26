@@ -1,0 +1,24 @@
+<p>
+Im einfachsten Fall erreicht man dies mit der "Allround-Funktion"
+<a href="http://www.php3.de/substr">substr()</a> (weitere Beispiele im Manual):
+</p>
+
+<pre><span style="color: #808080; font-style: italic;">// Die ersten 20 Zeichen von $string ausgeben:</span>
+<a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <a href="http://www.php3.de/substr"><span style="color: #000066;">substr</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$string</span>, <span style="color: #cc66cc;">0</span>, <span style="color: #cc66cc;">20</span><span style="color: #000000;">&#41;</span>;</pre>
+
+<p>
+Soll die Ausgabe nicht mitten in einem Wort unterbrochen werden,
+bietet es sich an, die Funktion <a href="http://www.php3.de/wordwrap">wordwrap()</a> zu
+"missbrauchen":
+</p>
+
+<pre><span style="color: #808080; font-style: italic;">// Nur ganze Wörter, max. 20 Zeichen von $string ausgeben:</span>
+<span style="color: #0000ff;">$parts</span>= <a href="http://www.php3.de/explode"><span style="color: #000066;">explode</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>, <a href="http://www.php3.de/wordwrap"><span style="color: #000066;">wordwrap</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$string</span>, <span style="color: #cc66cc;">20</span>, <span style="color: #ff0000;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>;
+<a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #0000ff;">$parts</span><span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #000000;">&#93;</span>;</pre>
+
+<p>
+Hier wird an der gewünschten Stelle ein Zeilenumbruch durch <tt>wordwrap()</tt>
+eingefügt, anschliessend der String an den Zeilenumbrüchen in Arrays von Strings
+zerlegt und schliesslich das erste Array-Element ausgegeben.
+</p>
+

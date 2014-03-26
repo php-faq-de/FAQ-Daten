@@ -1,0 +1,24 @@
+<p>
+Diese Meldung kann zwei Ursachen haben:</p>
+
+<p>
+Der <tt>TNS/-Name</tt>, der bei der Verbindung zu einem ORACLE-Server
+benötigt und in <a href="http://www.php3.de/OCILogon">OCILogon()</a> übergeben wird ist falsch,
+oder  der <tt>TNS/-Name</tt> ist in der Datei <tt>tnsnames.ora</tt> im
+Verzeichnis <tt>$ORACLE_HOME/network/admin/</tt> nicht eingetragen.
+</p>
+
+<p>
+<em>Lösung:</em> Der Eintrag in der Datei <tt>tnsnames.ora</tt> muss korrekt
+sein, was man mit <tt>tnsping</tt> oder <tt>SQL*Plus</tt> überprüfen kann.
+Dieser Eintrag muss dann genau so der Funktion <a href="http://www.php3.de/OCILogon">OCILogon()</a> übergeben
+werden.
+</p>
+
+<p class="hint">
+Achtung: Kommt stattdessen die Meldung <tt>"oci_open_server: Error
+while trying to retrieve text for error ORA-12154"</tt>, so ist die
+Umbgebungsvariable <tt>ORACLE_HOME</tt> falsch oder nicht gesetzt. Der
+nächste Abschnitt enthält weitere Informationen zu Umgebungsvariablen.
+</p>
+

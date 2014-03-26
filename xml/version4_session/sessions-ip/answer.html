@@ -1,0 +1,87 @@
+<p>
+PHP versucht, Sessions Benutzern zuzuordnen. IP-Nummern sind
+konstruktionsbedingt immer den Netzwerkinterfaces von Rechnern
+und nicht Benutzern zugeordnet. Das ist eine vollkommen andere
+Sache und die Auswertung von IP-Nummern würde zu Fehlern im
+Betrieb führen.
+</p>
+
+<ul>
+<li>
+<p>
+Ein Rechner kann mehr als einen Benutzer haben. Jeder
+Benutzer auf diesem Rechner würde mit derselben IP-Nummer
+arbeiten. Ein Beispiel ist der Rechner <tt>kruuna.helsinki.fi</tt>:
+</p>
+
+<pre>
+kris@valiant:~ &gt; finger @kruuna.helsinki.fi  | wc -l
+    114
+</pre>
+
+<p>
+Auf diesem Rechner sind zum Messzeitpunkt über 110 Benutzer
+angemeldet gewesen, die alle über dieselbe IP-Nummer arbeiten.
+</p>
+</li>
+
+<li>
+<p>
+Ein Rechner kann mehr als einen Benutzer repräsentieren.
+Bei vielen Providern greifen Benutzer über Proxy-Server auf das
+Netz zu. Nach außen scheinen alle Zugriffe aus dem Netz des
+Providers von dem Proxy-Server zu kommen. Wenn der Proxy des
+Providers die Anonymisierungsfunktionen eingeschaltet hat, die
+z.B. der meistverwendete Proxy, <tt>squid2</tt>, ab Werk mitbringt
+oder die Programme wie <tt>WebWasher</tt> und <tt>JunkBuster</tt>
+bieten, dann sind diese Anwender auch durch weitere Header nicht
+zu unterscheiden.
+</p>
+</li>
+
+<li>
+<p>
+Die sichtbare IP-Nummer eines Benutzers kann während der
+Session wechseln. Viele Proxy-Server arbeiten in einem
+Cache-Verbund mit Lastverteilung. Die nach außen sichtbare
+IP-Nummer eines Anwenders wird je nach Lastsituation im
+Cache-Verbund diejenige IP-Nummer des am wenigsten ausgelasteten
+Proxy-Servers sein.
+</p>
+</li>
+
+<li>
+<p>
+Die tatsächliche IP-Nummer eines Benutzers kann während
+der Session wechseln. Viele Anwender arbeiten mit Timeout bei
+Inaktivität und dynamisch zugeteilten IP-Nummern. Lässt ein
+Anwender seinen Browser einige Minuten ungenutzt stehen, wird
+sich die IP-Verbindung abbauen. Dem Anwender wird beim Neustart
+der Netzverbindung unter Umständen eine neue, andere IP-Nummer
+zugeteilt.
+</p>
+</li>
+</ul>
+<p>
+Auch eine Auswertung der Headerzeile <tt>X-Forwarded-For</tt>, die
+manche Proxies setzen, ist nicht sinnvoll:
+</p>
+
+<ul>
+<li>
+<p>
+Diese Headerzeile <em>kann</em> gesetzt sein, <em>muss</em> jedoch
+nicht vorhanden sein. Squid, Webwasher und Junkbuster entfernen
+diese Headerzeile, wenn dies gewünscht wird.
+</p>
+</li>
+<li>
+<p>
+Die Information in dieser Headerzeile ist weder
+authentisch noch eindeutig: Die verwendete IP-Nummer kann die
+IP-Nummer eines RFC-Netzes sein - es gibt also sehr viele
+Maschinen auf der Welt mit der IP-Nummer 192.168.1.1.
+</p>
+</li>
+</ul>
+

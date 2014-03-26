@@ -1,0 +1,134 @@
+<p>
+Ein Upload-Formular muss ein Input-Element enthalten, das den Typ
+<tt>file</tt> hat. Da Dateien in einem Upload prinzipiell beliebig
+groß werden können, muss die Übermittlung des Formulares mit der
+Methode <tt>POST</tt> erfolgen. Außerdem muss ein bestimmter
+<tt>ENCTYPE</tt> für das Formular angegeben werden. Ein solches
+Formular kann von Netscape Navigator ab Version 3 und von
+Microsoft Internet Explorer ab Version 4 verarbeitet werden.
+</p>
+
+<pre>&lt;h1&gt;Hallo&lt;/h1&gt;
+&lt;form action=<span style="color: #ff0000;">&quot;/submit.php3&quot;</span> method=<span style="color: #ff0000;">&quot;post&quot;</span>
+      enctype=<span style="color: #ff0000;">&quot;multipart/form-data&quot;</span>&gt;
+&lt;input type=<span style="color: #ff0000;">&quot;file&quot;</span> name=<span style="color: #ff0000;">&quot;probe&quot;</span>&gt;
+&lt;input type=<span style="color: #ff0000;">&quot;submit&quot;</span> value=<span style="color: #ff0000;">&quot;los&quot;</span>&gt;
+&lt;/form&gt;</pre>
+
+<p>
+Das empfangende PHP-Script bekommt das Resultat des
+Datei-Uploads in einer Reihe von globalen Variablen mit dem
+Namensprefix <tt>$probe</tt> übermittelt, weil das Input-Element im
+Formular diesen Namen hat.
+</p>
+
+<h2>$probe</h2>
+<p>
+Diese Variable enthält den Namen der Datei in einem temporären
+Verzeichnis auf dem Server. Sie kann von dort mit einem
+<a href="http://www.php3.de/copy">copy()</a>-Aufruf abgeholt werden. Das ist auch
+notwendig, da die Originaldatei am Ende des Scriptes automatisch
+gelöscht wird.
+</p>
+
+<h2>$probe_name</h2>
+<p>
+Diese Variable enthält den Namen der Datei auf dem System des
+Anwenders. Der genaue Dateiname mit evtl. vorhandenen
+Laufwerksbuchstaben, Pfadseparatoren und anderen Sonderzeichen
+ist betriebssystemabhängig und das empfangende Script sollte
+keine Annahmen hierüber machen.
+</p>
+
+<h2>$probe_size</h2>
+<p>
+Diese Variable enthält die Länge der Datei auf dem Server in
+Bytes.
+</p>
+
+<h2>$probe_type</h2>
+<p>
+Diese Variable enthält den MIME-Type der Datei, so wie er dem
+Server vom Browser übermittelt worden ist.
+</p>
+
+<p>
+Der Upload von Dateien wird durch die beiden
+Konfigurationsparameter <tt>upload_tmp_dir</tt> und
+<tt>upload_max_filesize</tt> in der <tt>php3.ini</tt>
+gesteuert. <em>Und in Windows muss man sich in der </em><tt>php3.ini</tt><em>
+dringend ein gültiges</em> <tt>upload_tmp_dir</tt>
+<em>definieren, bevor das gezeigte Beispiel funktionieren kann.</em>
+Des weiteren ist es unter Umständen notwendig, die Variable
+$probe mit der PHP-Funktion <a href="http://www.php3.de/stripslashes">stripslashes()</a>
+zu bearbeiten, bevor man auf sie mit <a href="http://www.php3.de/copy">copy()</a> oder
+einem anderen Befehl zugreift. Dies liegt daran, dass Windows
+Pfadangaben scheinbar quotet, was der Befehl <a href="http://www.php3.de/stripslashes">stripslashes()</a>
+wieder rückgängig macht. Der Pfad zu <tt>upload_tmp_dir</tt> muss
+absolut angegeben werden.
+</p>
+
+<p>
+PHP legt die temporäre Datei in dem angegebenen Verzeichnis an
+und löscht sie am Ende des Scriptes wieder. Die Datei darf
+maximal die angegebene Größe haben. Ein Einstellen der
+Größenbegrenzung begrenzt jedoch nicht wirklich den
+Plattenplatz, der auf dem Server von PHP durch Fileupload
+verbraucht wird: Aus technischen Gründen muss PHP die Datei
+zunächst empfangen und kann sie erst dann verwerfen, wenn sie zu
+groß ist. Seit PHP 3.0.10 kann mehr als eine Datei pro Formular
+hochgeladen werden.
+</p>
+
+<h2>Achtung:</h2>
+
+<p>
+Aufgrund eines <a href="http://www.securityfocus.com/archive/1/80106">Bugs</a>
+in PHP muss das Script nach dem Upload prüfen, ob sich der/die
+Name(n) des Datei-Formularfeldes (im folgenden Beispiel <tt>probe</tt>)
+in den Hashes <tt>$HTTP_GET_VARS</tt>, <tt>$HTTP_POST_VARS</tt>
+oder <tt>$HTTP_COOKIE_VARS</tt> befindet.
+Ist dem so, <em>muss</em> das Script die Weiterverarbeitung (Kopieren)
+der - angeblich - hochgeladenen Datei(en) verweigern.
+</p>
+
+<p>
+Mehr über neue Funktionen zum Upload-Handling der PHP Versionen
+> 3.0.16 und > 4.0.2 gibt es im Kapitel
+<a href="http://www.php.net/manual/html/features.file-upload.html">POST method uploads</a>
+auf
+<a href="http://www.php.net/">www.php.net</a>.
+</p>
+
+<p>Vollständiges Beispiel:</p>
+
+<pre>&lt;h1&gt;Upload&lt;/h1&gt;
+&nbsp;
+&lt;form
+  action=<span style="color: #ff0000;">&quot;&lt;?php print $PHP_SELF ?&gt;&quot;</span>
+  method=<span style="color: #ff0000;">&quot;post&quot;</span>
+  enctype=<span style="color: #ff0000;">&quot;multipart/form-data&quot;</span>&gt;
+&lt;input type=<span style="color: #ff0000;">&quot;file&quot;</span> name=<span style="color: #ff0000;">&quot;probe&quot;</span>&gt;
+&lt;input type=<span style="color: #ff0000;">&quot;submit&quot;</span> value=<span style="color: #ff0000;">&quot;Los!&quot;</span>&gt;
+&lt;/form&gt;
+&lt;hr&gt;
+<span style="color: #000000; font-weight: bold;">&lt;?php</span>
+  <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><a href="http://www.php3.de/isset"><span style="color: #000066;">isset</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$probe</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+&nbsp;
+    <span style="color: #808080; font-style: italic;">// Bugfix für: http://www.securityfocus.com/archive/1/80106</span>
+    <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span> <a href="http://www.php3.de/isset"><span style="color: #000066;">isset</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$HTTP_COOKIE_VARS</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;probe&quot;</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span> ||
+         <a href="http://www.php3.de/isset"><span style="color: #000066;">isset</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$HTTP_POST_VARS</span>  <span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;probe&quot;</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span> ||
+         <a href="http://www.php3.de/isset"><span style="color: #000066;">isset</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$HTTP_GET_VARS</span>   <span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;probe&quot;</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span>
+       <span style="color: #000000;">&#41;</span> <a href="http://www.php3.de/die"><span style="color: #000066;">die</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Aus Sicherheitsgründen stirbt das Script jetzt.&quot;</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+    <a href="http://www.php3.de/copy"><span style="color: #000066;">copy</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$probe</span>, <span style="color: #ff0000;">&quot;./newfile.txt&quot;</span><span style="color: #000000;">&#41;</span>;
+    <a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Die Datei %s steht jetzt als&quot;</span>
+          .<span style="color: #ff0000;">&quot; newfile.txt zur Verfügung.
+<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>,
+      <span style="color: #0000ff;">$probe_name</span><span style="color: #000000;">&#41;</span>;
+    <a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Sie ist %s Bytes groß und vom Typ %s.
+<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>,
+      <span style="color: #0000ff;">$probe_size</span>, <span style="color: #0000ff;">$probe_type</span><span style="color: #000000;">&#41;</span>;
+  <span style="color: #000000;">&#125;</span>
+ <span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+

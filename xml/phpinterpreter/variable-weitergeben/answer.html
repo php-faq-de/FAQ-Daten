@@ -1,0 +1,40 @@
+<p>
+Man kann Parameter an ein PHP-Script als HTTP-GET- oder
+HTTP-POST-Parameter übergeben. Die Übergabe von Parametern als
+HTTP-POST ist in "<a class="faq" href="http://php-faq.de/q-code-post.html">Wie kann ich einen HTTP POST-Request absenden?</a>" erläutert.
+</p>
+
+<p>
+Einen HTTP-GET-Request erzeugt man, indem man einfach ein Link
+auf das gewünschte Script erzeugt und die Parameter mit der
+Funktion <a href="http://www.php3.de/urlencode">urlencode()</a> codiert anhängt.
+</p>
+
+<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+&nbsp;
+ <span style="color: #0000ff;">$para1</span> = <span style="color: #ff0000;">&quot;dies ist ein string&quot;</span>;
+ <span style="color: #0000ff;">$para2</span> = <span style="color: #cc66cc;">42</span>;
+&nbsp;
+ <span style="color: #0000ff;">$pstring</span> = <a href="http://www.php3.de/sprintf"><span style="color: #000066;">sprintf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;para1=%s&amp;amp;para2=%s&quot;</span>,
+		<a href="http://www.php3.de/urlencode"><span style="color: #000066;">urlencode</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$para1</span><span style="color: #000000;">&#41;</span>,
+		<a href="http://www.php3.de/urlencode"><span style="color: #000066;">urlencode</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$para2</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000; font-weight: bold;">?&gt;</span>
+&lt;a href=<span style="color: #ff0000;">&quot;meinscript.php?&lt;?php print $pstring ?&gt;&quot;</span>&gt;go&lt;/a&gt;</pre>
+
+<p>
+Das empfangende Script wird diese Parameter ganz normal
+entgegennehmen, automatisch decodieren und als Variablen
+mit den Namen <tt>$_GET["para1"]</tt> und
+<tt>$_GET["para2"]</tt> bereitstellen.
+</p>
+
+<p>
+Die Länge der durch einen GET-Request übergebaren Parameter ist
+begrenzt. Im einem GET- oder POST-Request übergebene Parameter
+sind durch den Anwender leicht manipulierbar. Wie in <a href="http://www.koehntopp.de/kris/artikel/webtune/">Webserver verstehen und tunen</a> diskutiert, ist es
+wesentlich besser, Sessionvariablen zu verwenden, wie sie
+durch <a href="http://www.php.net/manual/ref.session.php">Sessionfunktionen von PHP4</a> realisiert sind - im
+Gegensatz zu dem hier gezeigten manipulierbaren Verfahren sind
+Sessions nämlich sicher.
+</p>
+

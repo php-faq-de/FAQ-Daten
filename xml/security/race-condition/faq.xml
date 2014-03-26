@@ -1,0 +1,4 @@
+<Faq alias="race-condition" author="Frank Wiegand">
+  <Question>Was sind Race Conditions? Wie kann ich sie vermeiden?</Question>
+  <Keywords>Race Condition, zeitkritisch, atomar, Locking</Keywords>
+</Faq>

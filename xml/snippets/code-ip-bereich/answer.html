@@ -1,0 +1,29 @@
+<p>
+PHP4 bietet die Funktion <a href="http://www.php3.de/ip2long">ip2long()</a>, mit der man
+eine IP-Adresse in Punktschreibweise ("dotted quad") in die
+numerische Form umrechnen kann, was einen einfachen
+größer/kleiner-Vergleich erlaubt. Der Haken daran: Bei PHP beträgt
+der Maximalwert eines Integer-Typen etwas über 2 Milliarden (genau:
+2.147.483.647, vorzeichenbehafteter 32-Bit-Wert), was für die
+Umrechnung von IP-Adressen nicht ausreicht; bei 127.255.255.255
+ist Schluss, danach wechselt das Vorzeichen.
+</p>
+
+<p>
+Wandelt man die IP dagegen in einen String um, gibt es dieses Limit
+nicht. Dann kann man einfach mittels <a href="http://www.php3.de/if">if()</a>
+oder <a href="http://www.php3.de/strcmp">strcmp()</a> vergleichen:
+</p>
+
+<pre><span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span>ip2str<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$start</span><span style="color: #000000;">&#41;</span> &lt;= ip2str<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$ip</span><span style="color: #000000;">&#41;</span>
+    AND
+    ip2str<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$ip</span><span style="color: #000000;">&#41;</span> &lt;= ip2str<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$ende</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>
+...
+&nbsp;
+<span style="color: #000000; font-weight: bold;">function</span> ip2str<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$ip</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+    <span style="color: #0000ff;">$ip</span> = <a href="http://www.php3.de/preg_replace"><span style="color: #000066;">preg_replace</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;/(<span style="color: #000099; font-weight: bold;">\d</span>{1,3})<span style="color: #000099; font-weight: bold;">\.</span>?/e&quot;</span>,
+                       <span style="color: #ff0000;">'sprintf(&quot;%03d&quot;, <span style="color: #000099; font-weight: bold;">\1</span>)'</span>,
+                        <span style="color: #0000ff;">$ip</span><span style="color: #000000;">&#41;</span>;
+    <span style="color: #b1b100;">return</span> <span style="color: #000000;">&#40;</span>string<span style="color: #000000;">&#41;</span><span style="color: #0000ff;">$ip</span>;
+<span style="color: #000000;">&#125;</span></pre>
+

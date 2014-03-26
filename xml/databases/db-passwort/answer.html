@@ -1,0 +1,67 @@
+<p>
+Viele PHP-Scripte enthalten Connectinformationen mit Passworten
+und anderen wichtigen Daten, die nicht in falsche Hände fallen
+dürfen. Um diese Scripte gegen Zugriff von außen (über den
+Webserver) zu sichern, gibt es folgende Maßnahmen:
+</p>
+
+<ul>
+<li>
+<p>Die beste Lösung besteht darin, die Connectinformation in einer
+Include-Datei außerhalb des Webdateibaumes zu lagern. Wenn der
+eigene Webserver zum Beispiel die Document-Root
+<tt>/home/www/servers/www.kundenname.de/pages</tt> hat, man
+eigene Dateien jedoch schon ab der Ebene
+<tt>/home/www/servers/www.kundenname.de</tt> ablegen darf, dann
+ist es sinnvoll, sich ein Includeverzeichnis
+<tt>/home/www/servers/www.kundenname.de/php</tt> zu definieren
+und dort die Includedateien mit dem Loginnamen und Passwort
+abzulegen.</p>
+
+<p>Da dieses Include-Verzeichnis außerhalb der Document-Root
+liegt und keine URL hat, kann es auch nicht über den Webserver
+abgerufen werden.</p>
+</li>
+
+<li>
+<p>Die nächstschlechtere Lösung besteht darin, ein
+Verzeichnis unterhalb der Document-Root anzulegen und dieses
+Verzeichnis mit einem Passwort zu sichern. Niemand, auch der
+Eigentümer des Servers, muss auf dieses Verzeichnis per HTTP
+zugreifen können, sondern Wartung erfolgt in der Regel per FTP -
+es kann also auch ein ungültiges Passwort definiert werden.</p>
+</li>
+
+<li><p>Die schlechteste Lösung besteht darin, diese
+Include-Datein mit der Endung <tt>.php</tt> im normalen
+Dokumentenbaum zu hinterlegen und darauf zu vertrauen, dass
+Dateien mit dieser Endung immer geparsed werden. Während dies im
+Normalbetrieb immer der Fall ist, braucht der Webserver nur
+einmal ohne PHP-Modul gestartet zu werden und die Datei wird im
+Klartext ausgeliefert (näheres in ""<a class="faq" href="http://www.php-faq.de/q-php-code.html">Wie kann ein Besucher meiner Seite den PHP-Code im Browser sehen?</a>"").
+</p>
+</li>
+</ul>
+
+<p>
+Die connect()-Funktionen in PHP verlangen alle, dass das
+Datenbankpasswort im Klartext angegeben wird. Das bedeutet, dass
+das Passwort entweder im PHP-Code im Klartext angegeben ist oder
+vom Code in Klartext entschlüsselt werden kann. Wenn jemand die
+Dateien mit den Passworten oder dem Entschlüsselungscode lesen
+kann, dann bedeutet dies auch, dass das Klartextpasswort dieser
+Person bekannt wird. Die betreffende Person braucht den
+Entschlüsselungscode nicht zu verstehen - sie braucht ihn nur
+auszuführen und er wird zwangsläufig das Klartextpasswort passend
+für die Connect-Funktion liefern müssen.
+</p>
+
+<p>
+Daraus folgt, dass ein Schutz der Datenbankpassworte nur durch einen
+Schutz der entsprechenden Quelltextdateien möglich ist. Es ist Aufgabe
+des Hosting-Environments beim Provider, diesen Schutz zu bieten,
+indem entweder Zugriffsrechte an den Dateien entsprechend
+gesetzt sind oder indem sogar eine virtuelle Dateiumgebung mit
+chroot() eingerichtet wird.
+</p>
+

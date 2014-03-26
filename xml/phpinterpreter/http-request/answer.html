@@ -1,0 +1,37 @@
+<p>
+Allen CGI-Programmen stehen zusätzliche Zeilen des
+HTTP-Request-Headers als Umgebungsvariablen zur Verfügung. Die
+Headerzeile <tt>bla-fasel: laber</tt> wird dabei zur
+Umgebungsvariablen <tt>$_ENV["HTTP_BLA_FASEL"]</tt> mit dem Wert
+<tt>laber</tt>.
+</p>
+
+<p>
+Zusätzliche Angaben hinter der URL der Seite stehen in der
+Umgebungsvariablen <tt>$_ENV["PATH_INFO"]</tt> zur Verfügung. So wird
+im Request <tt>http://example.com/test.php/additional/info</tt>
+der Anteil <tt>/additional/info</tt> in dieser Variablen zu
+finden sein.
+</p>
+
+<p>
+Zusätzliche Angaben in der Form von Query-Strings wie sie von
+Formularen mit der <tt>METHOD="get"</tt> erzeugt werden, stehen in
+der Variablen <tt>$_SERVER["QUERY_STRING"]</tt> zur Verfügung. Ist der
+Query-String korrekt formuliert, werden diese Parameter auch als
+Variablen im Array <tt>$_GET</tt> vorbelegt. So wird der Request
+<tt>http://example.com/test.php?a=b&amp;c=d</tt> die
+Umgebungsvariable <tt>$_SERVER["QUERY_STRING"]</tt> mit dem Wert
+<tt>a=b&amp;c=d</tt> belegen und außerdem die Variablen
+<tt>$_GET["a"]</tt> mit dem Wert <tt>b</tt> und die Variable
+<tt>$_GET["c"]</tt> mit dem Wert <tt>d</tt> vorbelegen.
+</p>
+
+<p>
+Verwendet man PHP als Apache-Modul, so kann man außerdem noch
+über die spezielle Funktion <a href="http://www.php3.de/getallheaders">getallheaders()</a>
+auf diese Request-Header zugreifen. Ein solches Script ist
+jedoch nicht mit einem CGI-Interpreter ausführbar, daher sollte
+man diese Funktion im Namen der Portabilität vermeiden.
+</p>
+

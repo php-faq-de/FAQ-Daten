@@ -1,0 +1,4 @@
+<Faq alias="fehler-mysql-result" author="Kristian Köhntopp">
+  <Question>Supplied argument is not a valid MySQL result...</Question>
+  <Keywords>SQL, Datenbank, MySQL, result index, mysql_query, mysql_fetch_array, mysql_fetch_row, Fehler, mysql_error, mysql_errno</Keywords>
+</Faq>

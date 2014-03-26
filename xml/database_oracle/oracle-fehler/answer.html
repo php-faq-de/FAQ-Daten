@@ -1,0 +1,36 @@
+<p>
+Oracle Fehlermeldungen bestehen aus einem Fehlerbereich (ORA,
+OCI ...) und einer 5-stelligen Fehlernummer. Die komplette
+Fehlerbeschreibung bekommt man mit:
+</p>
+
+<pre>
+linux:# / oerr ora &lt;nummer&gt;
+</pre>
+
+<p>
+Vorrausgesetzt die Pfade ins $ORACLE_HOME/bin sind gesetzt,
+erscheint der volle Fehlertext. Kommt allerdings eine
+Fehlermeldung der Art:
+</p>
+
+<pre>
+Cannot find /u01/8.1.6/rdbms/mesg/orad.msg file.
+</pre>
+
+<p>
+ist die Oracle Installation eine teilweise ans deutsche angepasste Version.
+(oraus.msg ist die original Datei und orad.msg ist eine deutsche Version)
+Da die orad.msg nicht in allen Fällen vorhanden ist, empfiehlt es sich
+einen symbolischen Link zu setzen.
+</p>
+
+<pre>
+linux:# / cd /u01/8.1.6/rdbms/mesg/
+linux:# / ln -s oraus.msg orad.msg
+</pre>
+
+<p>
+Dannach sollte man zumindest die englischen Fehlertexte erhalten.
+</p>
+

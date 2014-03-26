@@ -1,0 +1,22 @@
+<p>
+PHP ist weitgehend unabhängig von der verwendeten
+Systemplattform. Von den Funktionen <a href="http://www.php3.de/microtime">microtime()</a> und
+<a href="http://www.php3.de/crypt">crypt()</a> ist bekannt, dass sie sich beiden Betriebssystemen
+unterschiedlich verhalten.
+</p>
+
+<p>
+Einige PHP-Module stehen nicht unter allen Systemplattformen zur
+Verfügung. So ist das Posix-Modul systembedingt nur unter Unix
+sinnvoll einsetzbar und das DCOM-Modul nur unter Windows
+verfügbar.
+</p>
+
+<p>
+PHP unterscheidet in Funktionen nicht zwischen den verschiedenen Verzeichnistrennern
+<tt>/</tt> und <tt>\</tt>. Man sollte jedoch beachten, dass ein Backslash in Strings
+als <tt>\\</tt> geschrieben werden muss. Möchte man erfahren, wie der Verzeichnistrenner
+auf einem System heißt, kann man die vordefinierte Konstante <tt>DIRECTORY_SEPARATOR</tt>
+benutzen.
+</p>
+

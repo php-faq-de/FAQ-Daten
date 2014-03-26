@@ -1,0 +1,7 @@
+<Faq alias="mysql-zugriff" author="Kristian Köhntopp">
+  <Question>Wie greife ich auf eine MySQL-Datenbank zu?</Question>
+  <Keywords>SQL, Datenbank, MySQL, Zugriff, connect, mysql_connect, pconnect, mysql_pconnect, mysql_fetch_row, mysql_fetch_array, mysql_query, mysql_num_rows</Keywords>
+  <Editors>
+    <Editor name="Niels Braczek" lastedit="2008-08-12 00:00:00" />
+  </Editors>
+</Faq>

@@ -1,0 +1,4 @@
+<Faq alias="phpmyadmin-edit" author="Tobias Ratschiller">
+  <Question>Wieso kann ich den Inhalt meiner Tabelle nicht editieren?</Question>
+  <Keywords>MySQL, phpMyAdmin, bearbeiten, Tabelle, Inhalt, primary key</Keywords>
+</Faq>

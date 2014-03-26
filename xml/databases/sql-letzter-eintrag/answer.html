@@ -1,0 +1,36 @@
+<p>
+In einer relationalen Datenbank gibt es keine Reihenfolge, also
+keine "letzte Zeile", kein "oben" oder "unten". Jedwede
+<em>definierte</em> Reihenfolge entsteht erst beim Selektieren
+von Datensätzen <em>und</em> der Sortierung nach irgendeinem
+Sortierkriterium.
+</p>
+
+<p>
+Um also den "ersten" oder "letzten" Datensatz selektieren zu können,
+muss die Tabelle eine Spalte vom Typ <tt>TIMESTAMP</tt> haben, die
+manuell oder automatisch auf das Eintrags- bzw. Änderungsdatum
+gesetzt wird. Anhand dieser Spalte kann das Ergebnis sortiert
+werden (<tt>ASC</tt> sortiert aufsteigend, <tt>DESC</tt> absteigend).
+Mit <tt>LIMIT</tt> wird das Ergebnis dann auf den ersten (oder die
+ersten n) Datensätze beschränkt:
+</p>
+
+<pre class="sql"><span style="color: #993333; font-weight: bold;">SELECT</span> xy <span style="color: #993333; font-weight: bold;">FROM</span> tabelle
+<span style="color: #993333; font-weight: bold;">ORDER</span> <span style="color: #993333; font-weight: bold;">BY</span> datum <span style="color: #993333; font-weight: bold;">DESC</span>
+<span style="color: #993333; font-weight: bold;">LIMIT</span> <span style="color: #cc66cc;">1</span></pre>
+
+<p>
+Wenn das DBMS Subselects zulässt (für MySQL ist dies ab Version 4.x
+geplant), kann man alternativ auch folgendes schreiben:
+</p>
+
+<pre class="sql"><span style="color: #993333; font-weight: bold;">SELECT</span> xy <span style="color: #993333; font-weight: bold;">FROM</span> tabelle
+<span style="color: #993333; font-weight: bold;">WHERE</span> datum = <span style="color: #66cc66;">&#40;</span><span style="color: #993333; font-weight: bold;">SELECT</span> MAX<span style="color: #66cc66;">&#40;</span>datum<span style="color: #66cc66;">&#41;</span> <span style="color: #993333; font-weight: bold;">FROM</span> tabelle<span style="color: #66cc66;">&#41;</span></pre>
+
+<p>
+Damit diese Selects effektiv vonstatten gehen, muss auf die
+Timestamp-Spalte ein Index gelegt werden. Die Verwendung eines
+Primärschlüssel- statt Timestamp-Feldes ist nicht empfohlen.
+</p>
+

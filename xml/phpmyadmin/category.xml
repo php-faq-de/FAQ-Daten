@@ -1,0 +1,13 @@
+<Category alias="phpmyadmin" name="phpMyAdmin" keywords="PHP, Usenet, FAQ, dclp">
+  <!--Die FAQs sind hier noch mal redundant aufgelistet um die Reihenfolge vorzugeben.-->
+  <Faqs>
+    <Faq alias="phpmyadmin-was" />
+    <Faq alias="phpmyadmin-kein-admin" />
+    <Faq alias="phpmyadmin-admin" />
+    <Faq alias="phpmyadmin-edit" />
+    <Faq alias="phpmyadmin-timestamp" />
+    <Faq alias="phpmyadmin-semikolon" />
+    <Faq alias="phpmyadmin-relationen" />
+    <Faq alias="phpmyadmin-pmaabsoluteuri" />
+  </Faqs>
+</Category>

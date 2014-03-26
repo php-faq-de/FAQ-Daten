@@ -1,0 +1,134 @@
+<p>
+Wenn das Ergebnis mehrerer Ereignisse von deren Reihenfolge abhängt, und
+diese Reihenfolge zeitlich nicht garantiert werden kann, dann spricht man
+von einer <em>Race Condition</em>. Der Name "Race Condition" leitet sich davon
+ab, dass mehrere Prozesse eine Art Rennen um die betroffene Ressource
+austragen, welches nur einer gewinnen kann.
+</p>
+
+<p>Ein typisches Beispiel für eine Race Condition:</p>
+
+<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+&nbsp;
+  <span style="color: #0000ff;">$datei</span> = <span style="color: #ff0000;">'/home/frank/datei'</span>;
+&nbsp;
+  <span style="color: #808080; font-style: italic;">// wenn $datei nicht existiert ...</span>
+  <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span>!<a href="http://www.php3.de/file_exists"><span style="color: #000066;">file_exists</span></a> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$datei</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+    <span style="color: #808080; font-style: italic;">// ... dann $datei zum Schreiben öffnen</span>
+    <span style="color: #0000ff;">$fp</span> = <a href="http://www.php3.de/fopen"><span style="color: #000066;">fopen</span></a> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$datei</span>, <span style="color: #ff0000;">'w'</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+    <span style="color: #808080; font-style: italic;">// andere Zugriffe abblocken</span>
+    <a href="http://www.php3.de/flock"><span style="color: #000066;">flock</span></a> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span>, LOCK_EX<span style="color: #000000;">&#41;</span>;
+&nbsp;
+    <span style="color: #808080; font-style: italic;">// Daten in die Datei schreiben</span>
+    <a href="http://www.php3.de/fputs"><span style="color: #000066;">fputs</span></a> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span>, <span style="color: #0000ff;">$data</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+    <span style="color: #808080; font-style: italic;">// Datei freigeben</span>
+    <a href="http://www.php3.de/flock"><span style="color: #000066;">flock</span></a> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span>, LOCK_UN<span style="color: #000000;">&#41;</span>;
+  <span style="color: #000000;">&#125;</span>
+  <span style="color: #b1b100;">else</span> <span style="color: #000000;">&#123;</span>
+    <span style="color: #808080; font-style: italic;">// Datei existiert bereits</span>
+  <span style="color: #000000;">&#125;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+
+<p>
+Nachdem der Test mit <a href="http://www.php3.de/file_exists">file_exists()</a> von dem Script
+(Prozess 1) durchgeführt worden ist, kann es sein, dass der Prozessor zunächst
+einem anderen Prozess (Prozess 2) Rechenzeit gewährt. Der Vorgang <em>Test auf
+Existenz und Lockfile anlegen</em> läuft <em>nicht atomar</em>, sondern geteilt ab.
+Prozess 2 kann in der Zwischenzeit die Datei <tt>$datei</tt> als symbolischen
+Link auf eine andere Datei anlegen. Das ist besonders gefährlich, da Prozess 2
+beispielsweise nicht unbedingt Schreibrechte an der gelinkten Datei haben muss.
+Wenn Prozess 1 wieder an der Reihe ist, wird die von Prozess 2 verlinkte Datei
+zum Schreiben geöffnet. Ein Eindringling kann dies ausnutzen und mithilfe von
+Prozess 1 wichtige Daten überschreiben lassen. Oft hört man das Argument, dass
+dieser Fall äußerst unwahrscheinlich ist. Das stimmt nicht - oft reicht es
+schon aus, die entsprechenden Programme häufig (mehrere Male pro Sekunde)
+auszuführen. Es ist nur eine Frage der Zeit, wann die Race Condition auftritt.
+</p>
+
+<p>
+Die Race Condition wird vermieden, indem man die Operation des Lockfile
+anlegen <em>atomar</em>, d. h. <em>unteilbar</em> ausführt. Dazu werden die Daten
+zunächst in eine temporäre Datei geschrieben. In PHP gibt es die Funktion
+<a href="http://www.php3.de/tempnam">tempnam()</a>, welche eine temporäre Datei mit eindeutigem Namen
+anlegt. Anschliessend erstellt man die gewünschte mit der Funktion
+<a href="http://www.php3.de/link">link()</a> an der entsprechenden Stelle. link() ist eine atomare
+Funktion und gibt <tt>false</tt> zurück, wenn die Datei nicht erstellt werden
+konnte. Dabei ist zu beachten, dass <a href="http://www.php3.de/link">link()</a> nicht über
+Dateisysteme hinweg funktioniert. Die temporäre Datei muss also im selben
+Dateisystem (auf derselben Partition) angelegt werden.</p>
+
+<p>
+Hier nun das Beispiel ohne Race Condition:
+</p>
+
+<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+&nbsp;
+  <span style="color: #0000ff;">$datei</span> = <span style="color: #ff0000;">'/home/frank/datei'</span>;
+&nbsp;
+  <span style="color: #808080; font-style: italic;">// temporäre Datei anlegen</span>
+  <span style="color: #0000ff;">$tempnam</span> = <a href="http://www.php3.de/tempnam"><span style="color: #000066;">tempnam</span></a> <span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'/home/frank/tmp'</span>, <span style="color: #ff0000;">'foo'</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+  <span style="color: #808080; font-style: italic;">// Fehler: Datei konnte nicht angelegt werden</span>
+  <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$tempnam</span> === <span style="color: #000000; font-weight: bold;">false</span><span style="color: #000000;">&#41;</span>
+    <a href="http://www.php3.de/die"><span style="color: #000066;">die</span></a> <span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Could not create $tempnam!&quot;</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+  <span style="color: #808080; font-style: italic;">// temporäre Datei zum Schreiben öffnen</span>
+  <span style="color: #0000ff;">$fp</span> = <a href="http://www.php3.de/fopen"><span style="color: #000066;">fopen</span></a> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$tempnam</span>, <span style="color: #ff0000;">'w'</span><span style="color: #000000;">&#41;</span> or <a href="http://www.php3.de/die"><span style="color: #000066;">die</span></a> <span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Could not open $tempnam!&quot;</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+  <span style="color: #808080; font-style: italic;">// andere Zugriffe abblocken</span>
+  <a href="http://www.php3.de/flock"><span style="color: #000066;">flock</span></a> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span>, LOCK_EX<span style="color: #000000;">&#41;</span>;
+&nbsp;
+  <span style="color: #808080; font-style: italic;">// Daten in die Datei schreiben</span>
+  <a href="http://www.php3.de/fputs"><span style="color: #000066;">fputs</span></a> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span>, <span style="color: #0000ff;">$data</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+  <span style="color: #808080; font-style: italic;">// Datei freigeben</span>
+  <a href="http://www.php3.de/flock"><span style="color: #000066;">flock</span></a> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span>, LOCK_UN<span style="color: #000000;">&#41;</span>;
+  <a href="http://www.php3.de/fclose"><span style="color: #000066;">fclose</span></a> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+  <span style="color: #808080; font-style: italic;">// $datei zu temporärer Datei hardlinken:</span>
+  <span style="color: #808080; font-style: italic;">// schlägt fehl, wenn $datei schon vorhanden ist</span>
+  <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span>!<a href="http://www.php3.de/link"><span style="color: #000066;">link</span></a> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$tempnam</span>, <span style="color: #0000ff;">$datei</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+    <span style="color: #808080; font-style: italic;">// Fehlschlag: Datei bereits vorhanden</span>
+  <span style="color: #000000;">&#125;</span>
+&nbsp;
+  <span style="color: #808080; font-style: italic;">// temporäre Datei löschen</span>
+  <a href="http://www.php3.de/unlink"><span style="color: #000066;">unlink</span></a> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$tempnam</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+
+<p>
+Unter Windows existiert die Funktion <a href="http://www.php3.de/link">link()</a> nicht.
+Stattdessen kann man <a href="http://www.php3.de/rename">rename()</a> verwenden. Mit der
+Verwendung von <a href="http://www.php3.de/rename">rename()</a> entfällt auch das Löschen
+der temporären Datei. <a href="http://www.php3.de/rename">rename()</a> unter Windows
+überschreibt <tt>nicht</tt> vorhandene Dateien, während
+<a href="http://www.php3.de/rename">rename()</a> unter UNIX/Linux dies tut.
+</p>
+
+<p>
+Allgemein gilt also: Atomare Operationen wie z. B. Operationen auf Dateien
+müssen atomar (d. h. in einem Schritt) ausgeführt werden. Viele Funktionen
+geben einen booleschen Wert zurück, mit dem man überprüfen kann, ob die
+Operation erfolgreich war.
+</p>
+
+<p>
+Diese Funktionen sind ein Anzeichen dafür, dass man eventuell eine Race
+Condition programmiert hat:
+</p>
+
+<ul>
+<li><p><a href="http://www.php3.de/file_exists">file_exists()</a></p></li>
+<li><p><a href="http://www.php3.de/filetype">filetype()</a></p></li>
+<li><p><a href="http://www.php3.de/is_dir">is_dir()</a></p></li>
+<li><p><a href="http://www.php3.de/is_executable">is_executable()</a></p></li>
+<li><p><a href="http://www.php3.de/is_file">is_file()</a></p></li>
+<li><p><a href="http://www.php3.de/is_link">is_link()</a></p></li>
+<li><p><a href="http://www.php3.de/is_readable">is_readable()</a></p></li>
+<li><p><a href="http://www.php3.de/is_writable">is_writable()</a></p></li>
+<li><p><a href="http://www.php3.de/is_writeable">is_writeable()</a></p></li>
+</ul>
+

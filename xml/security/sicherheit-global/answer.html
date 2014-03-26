@@ -1,0 +1,40 @@
+<p>
+In veralteten Versionen von PHP wurden eine ganze Menge Daten
+aus der Prozessumgebung und aus dem Internet in den globalen
+Namensraum importiert. Das war sehr bequem, aber auch ein
+Quell von zahlreichen Exploits in vielen weit verbreiteten
+PHP-Scripten. Mit der Version 4.2 wurde das Standardverhalten
+von PHP geändert: Diese Informationen stehen jetzt nur noch
+in besonderen, superglobalen Arrays zur Verfügung (siehe "<a class="faq" href="http://www.php-faq.de/q-php-variablen.html">Welche Variablenarten gibt es in PHP und wie greife ich auf sie zu?</a>" und "<a class="faq" href="http://www.php-faq.de/q-formular-register-globals.html">Warum funktionieren meine Formulare nicht?</a>").
+</p>
+
+<p>
+Versionen von PHP 4.2 und höher zeigen ebenfalls dieses
+obsolete Verhalten, sobald die Konfigurationsvariable
+<a href="http://de3.php.net/manual/en/ini.php">register_globals</a> wieder auf den Wert
+<tt>On</tt> gestellt wird. Es ist dringend empfohlen,
+diese Variable auf <tt>Off</tt> zu lassen.
+</p>
+
+<p>
+Daher war es in diesen veralteten Versionen von PHP dringend
+notwendig, globale Variablen möglichst zu vermeiden, um
+Sicherheitsproblemen aus dem Weg zu gehen.
+</p>
+
+<p>
+Dieser Abschnitt enthielt eine Reihe von Informationen darüber,
+nach welchen Regeln PHP den globalen Namensraum mit externen
+Daten vermatschte. Diese Informationen sind nun glücklicherweise
+obsolet, und wurden daher gestrichen.
+</p>
+
+<p>
+Die Empfehlung, möglichst keine globalen Variablen zu verwenden
+bleibt jedoch bestehen: Der Namensraum von Funktionen und
+Klassen ist wesentlich besser kontrollierbar. Es ist daher
+empfehlenswert, so viel Funktionalität als möglich in Funktionen
+oder Klassen abzulegen und dort kontrolliert Variablen als
+Funktionsparameter zu importieren.
+</p>
+

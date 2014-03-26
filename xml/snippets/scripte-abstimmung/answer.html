@@ -1,0 +1,43 @@
+<p>
+Man kann keine schummelsichere Abstimmung im Web realisieren,
+die nicht unfair berechtigte Abstimmende ausschließt, außer man
+treibt sehr großen Aufwand.
+</p>
+
+<p>
+Typische Schutzmechanismen, die jedoch nur Pseudosicherheit
+geben, sind: Die Seite nimmt Parameter per POST, prüft den
+Referer und versucht einen Cookie zu setzen. Wer den Cookie hat,
+kann nicht mehr abstimmen. Zum Mogeln muss man der Seite also die
+richtigen Parameter aus dem Formular mit einem POST füttern,
+darf den Referer nicht vergessen und darf den Cookie nicht
+annehmen. Das war alles.
+</p>
+
+<p>
+Eine etwas kompliziertere Absicherung  wäre ein Formular, das
+als <tt>hidden</tt>-Parameter eine Challenge hat, die auch auf dem
+Server als Session-Variable verbleibt. Ein Abstimmungsergebnis
+wird dann für die aktuelle Session nur angenommen, wenn die
+richtige Challenge mit in den Parametern ist. Das macht das
+Schummeln per Script ein wenig schwieriger, aber nicht
+unmöglich (mit LWP in Perl oder libwww in C problemlos möglich,
+mit PHP ein Code mit den preg_*-Funktionen.
+</p>
+
+<p>
+Mit SSL-Browser-Zertifikaten auf der Clientseite wäre es noch
+schwieriger zu fälschen, aber da gelangt man langsam in
+Regionen, wo es für den Wahlveranstalter wirklich teuer wird.
+</p>
+
+<p>
+Auf der Basis der IP-Nummern kann man nicht arbeiten, da viele
+Benutzer dieselbe IP-Nummer zu haben scheinen, wenn sie über
+Proxy-Server hereinkommen oder Benutzer auf einem
+Mehrbenutzer-Rechner sind (unfairer Ausschluss). Andererseits ist
+es für einen geübten Hacker oder einen Provider sehr leicht, von
+einer ganzen Reihe unterschiedlicher IP-Nummern mehrfach
+abzustimmen.
+</p>
+

@@ -1,0 +1,30 @@
+<p>
+Wenn man in Windows keinen eigenen Mailserver hat, den man zum
+Mailversand nutzen kann, muss man sich einen installieren. Die
+folgenden Produkte wurden in der Newsgroups zu diesem Zweck
+genannt:
+</p>
+
+<ul>
+<li><p>
+<a href="http://www.argosoft.com/applications/mailserver/">Argosoft Mailserver</a>
+</p></li>
+<li><p>
+<a href="http://www.tglsoft.de/">Hamster</a>
+</p></li>
+
+<li><p>
+<a href="http://www.pmail.com/overviews/ovw_mercury.htm">Mercury Mail Transport System</a>
+</p></li>
+</ul>
+
+<p>
+Im Prinzip kann man auch den Mailserver des Providers benutzen;
+hierzu ist in der <tt>php.ini</tt> im Abschnitt
+<tt>[mail function]</tt> bei <tt>SMTP</tt> der SMTP-Server des
+Providers und bei <tt>sendmail_from</tt> die eigene EMail-Adresse
+bei diesem Provider anzugeben. Allerdings kann es hier wegen
+SMTP-after-POP oder gesichertem SMTP (SMTP-AUTH-Login) Probleme
+geben.
+</p>
+

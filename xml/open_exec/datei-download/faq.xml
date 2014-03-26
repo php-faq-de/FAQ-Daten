@@ -1,0 +1,4 @@
+<Faq alias="datei-download" author="Kristian Köhntopp">
+  <Question>Wie realisiere ich einen Dateidownload mit PHP?</Question>
+  <Keywords>Datei, Download, Header, MIME-Typ</Keywords>
+</Faq>

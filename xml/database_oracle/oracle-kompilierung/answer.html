@@ -1,0 +1,24 @@
+<p>
+Die häufigste Ursache ist:
+</p>
+
+<p>
+Die shared libraries für den Oracle-Support werden nicht
+gefunden.
+</p>
+
+<p>
+<em>Lösung:</em> Das Verzeichnis <tt>$ORACLE_HOME/lib</tt> in
+<tt>/etc/ld.so.conf</tt> eintragen und <tt>ldconfig</tt> aufrufen.
+</p>
+
+<p>
+Eine weitere Möglichkeit wäre ein Fehler in der
+glibc-2.1. Behoben kann dies werden, indem den Apache neu
+gelinkt wird und dabei die Option <tt>-lpthread</tt> zu den
+LDFLAGS hinzugefügt wird. Dieser Fehler wurde in der glibc-2.2
+behoben.
+</p>
+
+<p>linux:/usr/src/apache_1_3_14/ # CFLAGS='-lpthread' ./configure ...</p>
+

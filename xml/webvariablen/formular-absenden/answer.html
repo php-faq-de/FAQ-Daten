@@ -1,0 +1,31 @@
+<p>
+Der Button muss einem Namen haben:
+</p>
+
+<pre>&lt;input type=<span style="color: #ff0000;">&quot;submit&quot;</span> name=<span style="color: #ff0000;">&quot;submit&quot;</span> value=<span style="color: #ff0000;">&quot;OK&quot;</span>/&gt;</pre>
+
+<p>
+Dann ist bei einem Mausklick oder einem Tastendruck auf den
+Submit-Button eine Variable mit dem Namen des Buttons vorhanden:
+</p>
+
+<pre><span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><a href="http://www.php3.de/isset"><span style="color: #000066;">isset</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$_REQUEST</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'submit'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span> ... <span style="color: #000000;">&#125;</span>
+<span style="color: #808080; font-style: italic;">// vor PHP 4.1.0 $HTTP_GET_VARS['submit'] oder $HTTP_POST_VARS['submit']</span></pre>
+
+<p>
+(Die Variable enthält den Text, der bei <tt>value</tt> angegeben
+wurde, oder den Standard-Text des Browsers für die Schaltfläche.)
+</p>
+
+<p>
+Wurde das Formular dagegen per JavaScript oder durch Drücken der
+Eingabetaste im <em>einzigen</em> Texteingabefeld des Formulars
+abgeschickt, ist die Variable <em>nicht</em> vorhanden.
+</p>
+
+<p>
+Man kann diese Abfrage sehr gut bei den sog. "Affenformularen"
+(Formulare, die sich selbst aufrufen, siehe
+""<a class="faq" href="http://www.php-faq.de/q-stil-normalform.html">Von HTML zu PHP: Schreibe Formularverarbeitungen in Normalform</a>"") gebrauchen.
+</p>
+

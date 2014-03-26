@@ -1,0 +1,4 @@
+<Faq alias="php-info" author="Kristian Köhntopp">
+  <Question>Wie finde ich heraus, wie mein PHP-Interpreter konfiguriert ist?</Question>
+  <Keywords>Konfiguration, Interpreter, Information, phpinfo</Keywords>
+</Faq>

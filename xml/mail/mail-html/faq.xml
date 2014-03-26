@@ -1,0 +1,4 @@
+<Faq alias="mail-html" author="Kristian Köhntopp">
+  <Question>Wie kann ich eine HTML-Mail versenden?</Question>
+  <Keywords>mail, html, MIME</Keywords>
+</Faq>

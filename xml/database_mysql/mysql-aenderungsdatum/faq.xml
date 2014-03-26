@@ -1,0 +1,7 @@
+<Faq alias="mysql-aenderungsdatum" author="Kristian Köhntopp">
+  <Question>Wie kann ich die Datensätze der letzten 2 Wochen listen?</Question>
+  <Keywords>SQL, Datenbank, MySQL, timestamp, aktuell</Keywords>
+  <Editors>
+    <Editor name="Niels Braczek" lastedit="2008-08-12 00:00:00" />
+  </Editors>
+</Faq>

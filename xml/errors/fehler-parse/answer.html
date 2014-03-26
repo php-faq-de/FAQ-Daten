@@ -1,0 +1,29 @@
+<p>
+Der PHP-Code enthält (mindestens einen) Syntax-Fehler. Der PHP-Parser
+kann den Code nicht interpretieren und stellt die Arbeit ein.
+</p>
+
+<p>
+Die in der Fehlermeldung angegebene Zeilennummer muss dabei nicht
+unbedingt exakt die Zeile sein, in der sich der Fehler befindet;
+vielmehr kann der <em>logische</em> Fehler auch eine oder mehrere
+Zielen davor passiert sein, in der angegebenen Zeile tritt jedoch
+der <em>syntaktische</em> Fehler auf. Beispiel:
+</p>
+
+<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+<a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;H;    // Anführungszeichen vergessen
+dies();
+das();
+?&gt;          &lt;-- hier tritt der Fehler auf!</span></pre>
+
+<p>
+Häufig sind vergessene Anführungszeichen oder nicht richtig geschlossene
+runde oder geschweifte Klammern die Ursache für Parse errors. Man
+sollte diese Zeichen immer paarweise schreiben und erst dann mit
+Inhalt füllen (also <tt>echo ""</tt> und dann zwischen die
+Anführungszeichen schreiben) und/oder einen Editor verwenden, der
+durch farbliche Markierung auf solche Unstimmigkeiten hinweist.
+Ein beliebter Fehler ist auch ein vergessenes Semikolon am Zeilenende.
+</p>
+

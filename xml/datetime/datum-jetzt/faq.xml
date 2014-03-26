@@ -1,0 +1,4 @@
+<Faq alias="datum-jetzt" author="Kristian Köhntopp">
+  <Question>Wie kann ich das aktuelle Datum bekommen?</Question>
+  <Keywords>time, strftime, date</Keywords>
+</Faq>

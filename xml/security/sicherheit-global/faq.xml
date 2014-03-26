@@ -1,0 +1,4 @@
+<Faq alias="sicherheit-global" author="Kristian Köhntopp">
+  <Question>Vermeide globale Variablen</Question>
+  <Keywords>Namensraum, GET, POST, Cookie, Parameter</Keywords>
+</Faq>

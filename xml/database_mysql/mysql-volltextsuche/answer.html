@@ -1,0 +1,70 @@
+<p>
+Um eine Volltextsuche für eine Website zu realisieren, eignen
+sich speziell dafür erstellte Tools besser. Siehe hierzu
+auch "<a class="faq" href="http://www.php-faq.de/q-scripte-volltextsuche.html">Wie kann ich eine Volltextsuche realisieren?</a>".
+</p>
+
+<p>
+Liegen die Inhalte der Website in einer MySQL-Tabelle,
+so kann man jedoch auch MySQL zur Suche verwenden.
+Für den "Hausgebrauch" sollte das auf wenig belasteten
+Servern oft reichen. MySQL bietet hierzu ab der Version 3.23.23
+die Möglichkeit, einen Volltextindex anzulegen.
+</p>
+
+<p>
+Um die Spalte einer Tabelle mit einem solchen Index zu
+belegen muss das SQL-Statement
+<tt>ALTER TABLE tabellenname ADD FULLTEXT (textpalte)</tt>
+ausgeführt werden, welches einen entsprechenden Wortindex
+anlegt. Anschließend kann mit einer Query wie
+<tt>SELECT * FROM tabellenname WHERE MATCH
+textspalte1 AGAINST ('suchtext')</tt> der Index durchsucht
+werden.
+
+Dieser Wortindex reagiert nur auf ganze Worte, es kann
+also nicht nach Teilworten oder Wortkombinationen gesucht
+werden. Die Suche nach "Bauer" findet also nicht
+"Bauernhof".
+</p>
+
+<p>
+Der Ausdruck <tt>MATCH a AGAINST b</tt> gibt einen
+Zahlenwert zurück, der die Relevanz des gefundenen
+Datensatzes wiedergibt, er kann also auch im
+<tt>SELECT</tt>-Teil eines SQL-Statements sinnvoll
+eingesetzt werden. Im <tt>ORDER BY</tt>-Teil
+des Statements braucht er nicht vorzukommen, denn MySQL
+sortiert automatisch nach Relevanz, wenn im
+<tt>WHERE</tt>-Teil der Volltextindex abgefragt wird.
+</p>
+
+<pre class="sql"><span style="color: #993333; font-weight: bold;">SELECT</span>   * <span style="color: #993333; font-weight: bold;">FROM</span> tabellenname
+<span style="color: #993333; font-weight: bold;">WHERE</span>    MATCH textspalte AGAINST <span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'wort1 wort2'</span><span style="color: #66cc66;">&#41;</span></pre>
+
+<p>
+...gibt alle Datensätze aus, in denen eines der Suchworte
+in textspalte vorkommt - nach Relevanz absteigend
+sortiert.
+</p>
+
+<p>
+Hat man eine MySQL-Version älter als 3.23.23, dann kann
+man auch eine Volltextsuche realisieren. Diese geht jedoch
+dann wesentlich langsamer vonstatten und belastet den
+Datenbankserver unverhältnismäßig stark, da MySQL hier
+nicht den Index benutzen kann.
+</p>
+
+<pre class="sql"><span style="color: #993333; font-weight: bold;">SELECT</span>   * <span style="color: #993333; font-weight: bold;">FROM</span> tabellenname
+<span style="color: #993333; font-weight: bold;">WHERE</span>    textspalte <span style="color: #993333; font-weight: bold;">LIKE</span> <span style="color: #ff0000;">'%wort1%'</span>
+<span style="color: #993333; font-weight: bold;">OR</span>       textspalte <span style="color: #993333; font-weight: bold;">LIKE</span> <span style="color: #ff0000;">'%wort2%'</span></pre>
+
+<p>
+Das Prozentzeichen hat im LIKE-Statement von SQL die
+Funktion, die man in anderen Situationen auch vom
+Sternchen (*) her kennt. Diese
+Query findet auch Teilwörter. Die Suche nach "Bauer"
+findet also auch "Bauernhof".
+</p>
+

@@ -1,0 +1,4 @@
+<Faq alias="sessions-datenmenge" author="Daniel T. Gorski">
+  <Question>Wie groß darf die Menge an Daten sein, die ich in einer Session speichern darf?</Question>
+  <Keywords>Session, Daten, Menge, Kilobyte, Performance, speichern</Keywords>
+</Faq>

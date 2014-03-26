@@ -1,0 +1,4 @@
+<Faq alias="variable-testen" author="Georg Maaß">
+  <Question>Was ist der Unterschied zwischen isset() und einem Vergleich auf den Leerstring?</Question>
+  <Keywords>Variable, Typ</Keywords>
+</Faq>

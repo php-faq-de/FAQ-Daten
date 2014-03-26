@@ -1,0 +1,90 @@
+<p>
+Bei jeder Art von Performancetuning ist das Wichtigste zunächst
+einmal eine Messung. Es kommt ganz entscheidend darauf an, als
+erstes festzustellen, was denn genau langsam ist, bevor man sich
+daran macht, die Dinge zu verändern. Wenn ein Script mit
+Datenbankzugriff zu langsam ist, dann kann dies mehrere Ursachen haben:
+</p>
+
+<h2>Die Datenbank steht offsite oder ist nur langsam erreichbar.</h2>
+<p>
+Wenn die Datenbank nicht auf derselben Maschine läuft wie der
+Webserver, dann findet die Kommunikation zwischen Datenbank-Client
+und Server nicht mehr über schnelle Kommunikationsmethoden wie
+shared memory oder UNIX Domain Sockets statt, sondern über eine
+TCP/IP-Verbindung, die eine wesentlich geringere Kapazität und
+wesentlich höhere Latenzzeiten hat. Dies hat besonders fatale
+Auswirkungen, wenn die Datenbank und der Webserver durch ein
+langsames Netzwerk getrennt sind (Umlaufzeiten für Pakete von
+10ms und mehr) oder wenn die Netzwerkbandbreite eingeschränkt
+ist (8 KB/sec und weniger).
+</p>
+
+<p>
+Hier kommt es ganz entscheidend darauf an, die Anzahl der
+Anfragen pro Seitenaufbau zu vermindern und die Menge der
+übertragenen Daten zu verringern. Die Anzahl der Abfragen lässt
+sich dadurch vermindern, dass man SQL JOIN-Operationen statt
+vieler Abfragen verwendet. Ein typisches, falsches Konstrukt ist
+</p>
+
+<pre><span style="color: #808080; font-style: italic;">// Liste der Treffer bestimmen</span>
+<span style="color: #0000ff;">$result</span>=do_database_query<span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;select id from tabelle where $bedingung&quot;</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;">// Treffer anzeigen</span>
+<span style="color: #b1b100;">foreach</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$result</span> <span style="color: #b1b100;">as</span> <span style="color: #0000ff;">$k</span> =&gt; <span style="color: #0000ff;">$v</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+  <span style="color: #0000ff;">$detail</span> = do_detail_query<span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;select * from tabelle2 where id =$v&quot;</span><span style="color: #000000;">&#41;</span>;
+  show_detail<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$detail</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000;">&#125;</span></pre>
+
+<p>
+Dieser Code generiert eine Masse von Queries nacheinander. Für
+jede einzelne Query wird ein Umlauf zur Datenbank und zurück
+notwendig und so summieren sich diese Umlaufzeiten zu
+gigiantischen Wartezeiten beim Seitenaufbau. Viel geschickter
+ist stattdessen
+</p>
+
+<pre><span style="color: #808080; font-style: italic;">// Treffer bestimmen</span>
+<span style="color: #0000ff;">$detail</span> = do_database_query<span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;select * from tabelle, tabelle2
+ where ( $bedingung ) and tabelle.id = tabelle2.id&quot;</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #b1b100;">foreach</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$detail</span> <span style="color: #b1b100;">as</span> <span style="color: #0000ff;">$k</span> =&gt; <span style="color: #0000ff;">$v</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+  show_detail<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$v</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000;">&#125;</span></pre>
+
+<p>Dies liefert die gewünschten Daten mit einer einzigen Query.</p>
+
+<h2>Die Datenbank hat hohe Verbindungsaufbaukosten und es wird
+CGI PHP verwendet.</h2>
+<p>
+Einigen Datenbanken, wie z. B. MySQL, macht es nichts aus, Datenbanklinks
+zu öffnen und wieder zu schließen. Andere Datenbanken, wie z. B. Oracle,
+starten bei jedem Connect einen eigenen Clientprozess. Dies ist
+ein sehr aufwendiger Vorgang. Wenn CGI PHP verwendet wird, dann
+endet der CGI Interpreter am Ende jeder Seite und mit dem
+Interpreter werden auch alle geöffneten Dateihandles und damit
+auch alle Datenbankverbindungen geschlossen - der Clientprozess
+der Datenbank endet und muss für eine neue Seite neu geladen und
+gestartet werden.
+</p>
+
+<p>
+In solchen Fällen ist die Verwendung eines PHP-Interpreters als
+Modul vorzuziehen, weil in dieser Konfiguration die mit
+<tt>pconnect()</tt> geöffneten Links über die Lebensdauer einer
+PHP-Seite hinaus gehalten und auf neuen Seiten wiederverwendet
+werden können.
+</p>
+
+<h2>Die Queries in der Datenbank sind nicht effizient.</h2>
+<p>
+Alle Datenbanken haben Werkzeuge zur Analyse von Anfragen. In
+MySQL ist dies das <tt>EXPLAIN</tt> Kommando, in Oracle ist es
+<tt>EXPLAIN PLAN</tt>. Die Ausgabe dieser Kommandos sollte man in
+jedem Fall verstehen lernen und zu Rate ziehen. Nur so kann man
+erkennen, ob Indizes zur Beschleunigung der Query verwendet
+werden, ob die Typen von Key und Foreign Key zueinander
+kompatibel sind und ob die Datenbank die richtige Tabelle als
+<em>treibende</em> Tabelle in einem JOIN verwendet.
+</p>
+

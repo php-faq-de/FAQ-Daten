@@ -1,0 +1,14 @@
+<p>
+	Am Beispiel der Session-Fallback-Klasse in
+	"<a class="faq" href="http://php-faq.de/q-sessions-fallback.html">Wie übergebe ich Session-IDs ohne Cookies an eine andere Seite? Was ist Fallback?</a>"
+	kann man nachvollziehen, wie man feststellen kann, ob der
+	Client Cookies akzeptiert oder nicht. Das Prinzip ist simpel:
+	Das aufgerufene Script prüft, ob ihm eine Session-ID übergeben
+	wurde. Falls nicht, forciert das Script einen Request auf sich
+	selbst und übergibt dabei eine frisch erzeugte Session-ID als GET-
+	Parameter an sich selbst. Beim zweiten Durchlauf des
+	Scriptes kann dieses feststellen, ob ihm vom Browser ein Cookie
+	mit der Session-ID übermittelt worden ist, oder ob es die Session-ID
+	aus dem GET-Parameter benutzen soll.
+</p>
+

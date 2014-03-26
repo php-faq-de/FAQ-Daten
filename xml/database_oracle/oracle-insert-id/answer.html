@@ -1,0 +1,27 @@
+<p>
+Der aktuellen Wert der Sequenz <tt>zaehler_der_tabelle_xy</tt> kann
+durch Verwendung von <tt>currval</tt> (abgeleitet von Current Value)
+ermittelt werden. Mit dem folgenden Codestück ist es möglich, den
+zuletzt eingefügten Wert abzufragen:</p>
+
+<pre><span style="color: #808080; font-style: italic;">// INSERT in die Tabelle</span>
+&nbsp;
+<span style="color: #0000ff;">$stmt</span> = OCIParse<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$conn</span>, <span style="color: #ff0000;">&quot;INSERT INTO xy (BLA_XY) VALUES 'BLA'&quot;</span><span style="color: #000000;">&#41;</span>;
+OCIExecute<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$stmt</span>, OCI_DEFAULT<span style="color: #000000;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;">//Abfrage der Sequence</span>
+<span style="color: #0000ff;">$stmt</span> = OCIParse<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$conn</span>,<span style="color: #ff0000;">&quot;SELECT zaehler_der_tabelle_xy.currval
+                 AS CV FROM DUAL&quot;</span><span style="color: #000000;">&#41;</span>;
+OCIExecute<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$stmt</span>, OCI_DEFAULT<span style="color: #000000;">&#41;</span>;
+OCIFetch<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$stmt</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #0000ff;">$last_id</span>=OCIResult<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$stmt</span>, <span style="color: #ff0000;">&quot;CV&quot;</span><span style="color: #000000;">&#41;</span>;
+OCICommit<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$conn</span><span style="color: #000000;">&#41;</span>;</pre>
+
+<p>
+<em>Achtung:</em> Das selektieren des currval funktioniert nur innerhalb
+derselben Transaktion (daher auch beim OCI_DEFAULT).
+Will man den aktuellen höchsten ID-Wert ermitteln, ist es besser,
+unter Verwendung der SQL-Funktion <tt>MAX()</tt> den höchsten Wert direkt
+aus der Tabelle abzufragen.
+</p>
+

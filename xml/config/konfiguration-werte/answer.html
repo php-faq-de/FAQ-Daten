@@ -1,0 +1,21 @@
+<p>
+Die Unterscheidung hat nur in der Modulversion von PHP einen Sinn:
+</p>
+
+<p>
+Der Master Value ist der Wert, der in der <tt>php.ini</tt>
+eingetragen ist. Diese Datei wird nur beim
+Neustart des PHP-Interpreters (beim Modul also beim Neustart des
+Webservers) eingelesen und beachtet. Diese Werte gelten überall
+auf dem Server, wenn kein besonderer <tt>local value</tt> definiert
+ist.
+</p>
+
+<p>
+Der Local Value ist der Wert, der in diesem Verzeichnis gilt. Er
+kann in einem Apache <tt>&lt;Directory&gt;</tt>-Block oder in
+einer <tt>.htaccess</tt>-Datei eingetragen sein. In ersterem Fall
+wird er beim Neustart des Servers neu gelesen, in letzterem Fall
+wird er bei jedem Zugriff neu gelesen und beachtet.
+</p>
+

@@ -1,0 +1,54 @@
+<p>
+Für Webserver-Statistiken zum Beispiel. Im Standard-Format des
+<tt>access.log</tt> von Apache wird der HTTP-Referer erfasst (wenn
+der Browser einen liefert); bereiten Statistikprogramme diese
+Logfiles auf, können sie Aussagen über Klickpfade machen, z.B.:
+</p>
+<ul>
+  <li><p>
+      <em>Zugriffe:</em> "Von welcher meiner Seiten wird am Häufigsten
+                 auf Seite xy gegangen?"</p>
+  </li>
+  <li><p>
+      <em>Einstiegsseite:</em> "Auf welche Seiten kommen Besucher von
+                       außen häufig?"</p>
+  </li>
+  <li><p>
+      <em>Linkseiten:</em> "Welche andere Seiten linken mich?"</p>
+  </li>
+  <li><p>
+      <em>Fehlerhafte Links:</em> "Von welcher Seite kam der Besucher
+                          zu dem toten Link?"</p>
+  </li>
+</ul>
+
+<p>
+Will man den Referer trotz der in "<a class="faq" href="http://www.php-faq.de/q-http-referer.html">Warum ist es schlecht, mit dem Referer zu arbeiten?</a>"
+beschriebenen Gegenargumente
+für weitergehende Zwecke benutzen (z.B. zum Schutz eines
+Programmdownloades vor direkter Verlinkung), sollte man
+<em>unbedingt</em> so vorgehen, dass Requests mit <em>fehlendem</em>
+Referer nicht behindert werden. Der Besucher kann völlig schuldlos
+an einem fehlenden Referer sein, z.B. wenn er hinter einem Proxy
+in der Firma sitzt. Daher darf man den Zugriff nur dann abblocken,
+wenn der Referer <em>vorhanden</em> ist, aber einen <em>nicht
+erlaubten</em> Wert hat. Bei der umgekehrten Vorgehensweise
+(Zugriff <em>nur</em> bei Referer von der <em>eigenen</em> Seite)
+verscherzt man es sich unweigerlich mit einem Teil seiner Besucher.
+</p>
+
+<p>
+In PHP hat man über die Variable
+<tt>$_SERVER["HTTP_REFERER"]</tt> Zugriff auf den Referer.
+Die Funktion <a href="http://www.php3.de/parse_url">parse_url()</a> dürfte beim Zerlegen
+des Strings sehr hilfreich sein, damit man ihn einfacher
+vergleichen kann.
+</p>
+
+<p>
+Man sollte sich aber immer bewusst sein, dass der Referer keine
+100%-ige Sache ist. Will (oder muss) man den Zugriff auf bestimmte
+Ressourcen "wasserdicht" gestalten, führt kein Weg an einer
+Session-Lösung vorbei.
+</p>
+

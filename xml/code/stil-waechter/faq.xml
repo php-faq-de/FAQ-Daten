@@ -1,0 +1,4 @@
+<Faq alias="stil-waechter" author="Kristian Köhntopp">
+  <Question>Halte Code links. Verwende Wächter statt Schachtel-if</Question>
+  <Keywords>Schleife, Funktion, If</Keywords>
+</Faq>

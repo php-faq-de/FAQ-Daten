@@ -1,0 +1,90 @@
+<p>
+Manche Mailer unterstützen Delivery Status Notification (DSN)
+nach <a href="http://www.rfc-editor.org/rfc/rfc1894.txt">RFC 1894</a>. Dies ist ein RFC auf der Internet Standards
+Track im Status <em>proposed standard</em>, er wird also in
+veränderter Form einmal <em>Draft Standard</em> und dann
+<em>Internet Standard</em> werden. Relevant im selben Zusammenhang
+ist die ganze Reihe der RFCs in diesem Bereich:
+</p>
+
+<ul>
+<li><p><a href="http://www.rfc-editor.org/rfc/rfc1891.txt">RFC 1891</a>
+(<em>SMTP Service Extension for Delivery Status Notifications</em>)
+</p></li>
+
+<li><p><a href="http://www.rfc-editor.org/rfc/rfc1892.txt">RFC 1892</a>
+(<em>The Multipart/Report Content Type for the Reporting
+of Mail System Administrative Messages</em>)
+</p></li>
+
+<li><p><a href="http://www.rfc-editor.org/rfc/rfc1893.txt">RFC 1893</a>
+(<em>Enhanced Mail System Status Codes</em>)
+</p></li>
+
+<li><p>und der bereits genannte
+<a href="http://www.rfc-editor.org/rfc/rfc1894.txt">RFC 1894</a>
+(<em>An Extensible Message Format for Delivery Status Notifications</em>)
+</p></li>
+</ul>
+
+<p>
+Die Anforderung von DSNs erfolgt mit Hilfe der in RFC 1891
+beschriebenen SMTP Service Extension, ist also Bestandteil des
+SMTP Dialoges.
+</p>
+
+<p>
+Auf Unix-Systemen wird der SMTP-Dialog durch das lokal
+installierte <tt>sendmail</tt>-Programm abgewickelt. Dieses versteht
+bestimmte Optionen (<tt>-N</tt> und <tt>-R</tt>, die in der Manualpage
+von <tt>sendmail</tt> beschrieben sind), mit deren Hilfe DSNs
+angefordert werden können. Die Option <tt>-N
+&lt;reportklasse&gt;</tt> legt fest, für welche Fälle DSNs erzeugt
+werden sollen. Es können mehrere Reportklassen durch Komma
+getrennt spezifiziert werden: <tt>failure</tt>, wenn eine
+Benachrichtigung bei Zustellproblemen erzeugt werden soll,
+<tt>delay</tt> für eine Benachrichtigung bei Zustellverzögerungen
+und <tt>success</tt>, für Nachricht, wenn die Zustellung erfolgreich
+war. Mit der Zustellbenachrichtigung wird zugleich ein Teil der
+Originalnachricht zurück übermittelt, damit der Absender
+feststellen kann, auf welche Nachricht sich die
+Zustellbenachrichtigung bezieht. Die Option <tt>-R
+&lt;return&gt;</tt> legt fest, wieviel von der Originalnachricht
+zurück übermittelt werden soll: <tt>hdrs</tt> übermittelt nur die
+Headerzeilen der Originalnachricht zurück, während <tt>full</tt> die
+komplette Originalnachricht in der Zustellbenachrichtigung
+zurückgibt.
+</p>
+
+<p>
+Auf Unix-Systemen kann man also DSNs anfordern, wenn man einen
+ausreichend neuen Sendmail (8.8.x oder besser) installiert hat
+und man die Konfigurationsvariable <tt>sendmail_path</tt>
+passend setzt:
+</p>
+
+<pre>sendmail_path = /usr/lib/sendmail -N failure,success -R hdrs -t</pre>
+
+<p>
+Auf Windows-Systemen wickelt PHP den SMTP-Dialog mit einem
+entfernten SMTP-Mailer ab. Es sind keine Eingriffsmöglichkeiten
+vorgesehen, mit deren Hilfe man den SMTP-Dialog erweitern kann.
+Entscheidet man sich, den SMTP-Dialog manuell abzuwickeln, damit
+man die SMTP-Erweiterungen gemäß RFC 1891 implementieren kann,
+ist unbedingt darauf zu achten, dass man das Vorhandensein dieser
+Erweiterungen im <tt>EHLO</tt>-Kommando des SMTP-Dialoges richtig
+abfragt, sonst schlägt die Mailzustellung fehl, wenn man auf
+einem Mailer einliefert, der kein DSN kann.
+</p>
+
+<p>
+Das Resultat von aktivierten DSNs sind Nachrichten mit dem
+Mime-Typ <tt>multipart/report</tt> wie in RFC 1892 und RFC 1894
+spezifiziert. Diese Nachrichten enthalten mindestens zwei, meist
+jedoch drei Teile, von denen einer
+<tt>message/delivery-status</tt> ist und eine maschinenlesbare
+DSN nach RFC 1894 enthält. Mit Hilfe eines POP3 oder
+IMAP-Clients kann man diese Nachrichten einsammeln und
+analysieren.
+</p>
+

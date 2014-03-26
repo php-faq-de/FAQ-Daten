@@ -1,0 +1,83 @@
+<p>
+Jede Form von Session-Management basiert auf zwei grundlegenden Dingen:
+</p>
+
+<ul>
+
+<li>
+<p>
+Einer Session-ID, die von Seite zu Seite weitergegeben
+wird.
+</p>
+</li>
+
+<li>
+<p>
+Einem Datensatz mit Variablen, der auf dem Server in einem
+dauerhaften Speicher verbleibt und der mit der Session-ID
+angesprochen wird.
+</p>
+</li>
+
+</ul>
+
+<p>
+Grundsätzlich gibt es zwei Methoden, die Session-ID von einer
+Seite zu nächsten weiterzugeben: Entweder die ID wird per Cookie
+"unsichtbar" als Bestandteil des Requests weitergegeben, oder sie
+wird auf irgendeine Weise Bestandteil der URL, etwa als
+GET-Parameter mit einem <tt>?</tt> an die URL angehängt, als
+<tt>PATH_INFO</tt> an die URL angehängt, als regulärer
+Pfadbestandteil, der von <tt>mod_rewrite</tt> herausgepult wird oder
+als Bestandteil des Hostnamens mit einem Wildcard A-Records im
+DNS. PHP unterstützt direkt die Weitergabe der Session-ID als
+Cookie und als GET/POST-Parameter, über <tt>mod_rewrite</tt> und einige
+minimale Änderungen ist jedoch auch die Weitergabe als
+Pfadbestandteil oder Hostname möglich.
+</p>
+
+<p>
+Ist die Session-ID in irgendeiner Form Bestandteil der URL,
+bekommt man das Problem, dass die URL mit der Session-ID
+gebookmarked wird oder - schlimmer - irgendwo abgedruckt wird.
+In diesem Fall kann es dazu kommen, dass zwei Benutzerdie nichts 
+miteinander zu tun haben, dieselbe Session verwenden. Dies
+kann bei Cookies niemals der Fall sein. Daher ist es aus
+technischer Sicht auf jeden Fall günstiger, Cookies zur
+Propagation der Session zu verwenden.
+</p>
+
+<p>
+Die Presse und schlecht informierte Verbraucherschützer haben
+Cookies jedoch einen schlechten Ruf eingebracht. Dort wird
+behauptet, Cookies seien üble Instrumente, um den Kunden zu
+tracken und sein Verhalten im Web auszuspionieren. Tatsächlich
+ist es so, dass man wiedererkennbare Benutzer und ihr Verhalten
+aufzeichnen und auswerten kann - ohne Wiedererkennung sind
+jedoch auch keine Warenkörbe, personalisierte Websites oder
+andere individuelle Services möglich.
+</p>
+
+<p>
+Andererseits schützt das Ablehnen eines Cookies auch nicht vor
+dem Tracking und dem folgenden Auswerten des Benutzerverhaltens:
+Wie oben gezeigt, kann man Session-IDs auch auf andere,
+schlechtere Weise als durch Cookies weiterverbreiten. Wenn es
+eine Website also darauf abgesehen hat, einen Benutzer zu
+tracken, dann hilft das Ablehnen des Cookies exakt gar nichts.
+Stattdessen ist es notwendig, den Kontakt zu dieser Website
+vollständig abzubrechen (dies ist insbesondere dann der Fall,
+wenn man sich nicht von einer Banneragentur wie DoubleClick
+ausspionieren lassen möchte. Ablehnen des Cookies nutzt auch
+hier nichts. Stattdessen muss man sich einen Proxy wie etwa
+JunkBuster installieren und auf diesem <em>allen</em> Datenverkehr
+in Richtung DoubleClick erden). Anders gesagt: nicht die Cookies
+sind böse, sondern das, was manche Firmen damit und jeder
+anderen Form von eindeutiger Identifikation anstellen.
+</p>
+
+<p>
+In den Fragen ""<a class="faq" href="http://php-faq.de/q-sessions-cookie.html">Wie stelle ich fest, ob der Client die Cookie-Annahme verweigert?</a>"" und ""<a class="faq" href="http://php-faq.de/q-sessions-fallback.html">Wie übergebe ich Session-IDs ohne Cookies an eine andere Seite? Was ist Fallback?</a>"" wird genauer eingegangen, wie man sich
+flexibel den Einstellungen der Benutzer anpassen kann.
+</p>
+

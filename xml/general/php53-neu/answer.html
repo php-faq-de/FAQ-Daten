@@ -1,0 +1,54 @@
+<p>
+Am 30. Juni 2009 wurde die finale Version 5.3 von PHP veröffentlicht. Diese bringt, als Minor-Release,
+zahlreiche neue Features mit:
+</p>
+
+<dl>
+  <dt>Einführung von Namensräumen (namespaces)</dt>
+  <dd><p>Namensräume sind ein Feature auf das die Entwicklergemeinde lange gewartet hat. Vereinfacht
+         gesagt kann jetzt jeder vollkommen unproblematisch im eigenen Namensraum für Klassen, Funktionen
+         und Konstanten beliebige Namen nutzen, ohne das er sich um die Kollision der Namen mit
+         existierenden Sorgen machen muss. PHP selbst nutzt ausschließlich den Root-Namensraum "\".
+         Mehr dazu findet sich im <a href="http://de3.php.net/manual/en/language.namespaces.php" hreflang="en">PHP-
+         Manual zu Namensräumen</a>.</p> </dd>
+  <dt>Späte statische Bindung (late static binding)</dt>
+  <dd><p>Diese ermöglicht es durch Nutzung des Schlüsselworts <tt style="color: blue;">static</tt>:: festzulegen
+      das Vererbung auch für statische Nutzung beachtet werden soll. Genaueres dazu findet sich im
+      <a href="http://php.net/manual/en/language.oop5.late-static-bindings.php" hreflang="en">PHP-Manual
+      zu late static binding</a></p> </dd>
+  <dt>Anonyme Funktionen (closures)</dt>
+  <dd><p>Diese ermöglichen die Nutzung von Funktionen ohne einen Namen. Das macht z.B. dann Sinn wenn eine
+         Funktion als Callback an eine andere übergeben werden soll. Mehr dazu findet sich im
+         <a href="http://php.net/manual/en/functions.anonymous.php" hreflang="en">PHP-Manual
+         zu closures</a></p> </dd>
+  <dt>Der "jump label"-Operator (goto)</dt>
+  <dd><p>Hierbei handelt es sich um einen eingeschränkten <tt style="color: blue;">goto</tt> Befehl der es
+         ermöglicht zu einer bestimmten Codestelle zu springen die entweder ein Label
+         <tt style="color: blue;">Labelname: …</tt> ist oder ein Schlüsselwort wie z.B. <tt style="color: blue;">end</tt>
+         in Schleifen. Details findest Du im entsprechenden
+         <a href="http://php.net/manual/en/control-structures.goto.php" hreflang="en">PHP-Manual zu goto</a>.</p></dd>
+  <dt>NOWDOC Schreibweise</dt>
+  <dd><p>Neben der bekannten HEREDOC Schreibweise für Zeichenketten gibt es jetzt auch die NOWDOC-Syntax.
+         Der Unterschied zu HEREDOC ist das kein Inhalt interpretiert wird. (Also wie bei Zeichenketten die
+         in 'Singlequotes' definiert sind) Informationen dazu findest Du im entsprechenenden
+         <a href="http://php.net/manual/en/language.types.string.php#language.types.string.syntax.nowdoc"
+            hreflang="en">Abschnitt im PHP-Manual</a>.</p> </dd>
+  <dt>Ternary-Operator in Kurzschreibweise</dt>
+  <dd><p>Der 3-fach Operator <tt style="color: blue;">?:</tt> existiert schon seit längeren. Neu ist das
+         ieser jetzt auch in Kurzschreibweise genutzt werden kann. <tt style="color: blue;">expr1 ?: expr3</tt>
+         gibt <tt style="color: blue;">expr1</tt> zurück wenn es zu <tt style="color: blue;">TRUE</tt> evaluiert,
+         sonst <tt style="color: blue;">expr3</tt>. Details dazu gibt wie immer
+         <a href="http://php.net/manual/en/language.operators.comparison.php#language.operators.comparison.ternary"
+            hreflang="en">im entsprechenden PHP-Manual Abschnitt</a>.</p> </dd>
+  <dt>Dynamischer Zugriff auf statische Elemente</dt>
+  <dd><p>Man kann jetzt auch statische Methoden über eine Instanz aufrufen. Wie etwa 
+         <tt style="color: blue;">$instance::staticMethod()</tt>. Der Vorteil hier ist das man nicht zwingend den
+         Namen der Klasse kennen muss.</p> </dd>
+  <dt>Neue Fehlermodi E_USER_DEPRECATED und E_DEPRECATED</dt>
+  <dd><p>Diese werden genutzt wenn signalisert werden soll das irgendwo veralteter Code genutzt wird.</p> </dd>
+</dl>
+
+<p>
+Das ist natürlich nur ein kleiner Auszug der wichtigsten Änderungen. Wer alle Änderungen kennen will sollte einen
+Blick ins <a href="http://php.net/ChangeLog-5.php#5.3.0" hreflang="en">Changelog von PHP 5.3</a> werfen.
+</p>

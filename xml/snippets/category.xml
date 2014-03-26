@@ -1,0 +1,25 @@
+<Category alias="snippets" name="Häufig benötigte Codeschnipsel" keywords="PHP, Usenet, FAQ, dclp">
+  <!--Die FAQs sind hier noch mal redundant aufgelistet um die Reihenfolge vorzugeben.-->
+  <Faqs>
+    <Faq alias="scripte-abstimmung" />
+    <Faq alias="code-post" />
+    <Faq alias="code-upload" />
+    <Faq alias="code-ip" />
+    <Faq alias="code-performance" />
+    <Faq alias="code-verzeichnis" />
+    <Faq alias="code-zufallszahlen" />
+    <Faq alias="code-klick-zaehler" />
+    <Faq alias="code-dateidatum" />
+    <Faq alias="code-mehrsprachig" />
+    <Faq alias="code-user-online" />
+    <Faq alias="code-links-testen" />
+    <Faq alias="code-excel" />
+    <Faq alias="code-ip-bereich" />
+    <Faq alias="code-teilbar" />
+    <Faq alias="code-intervall" />
+    <Faq alias="code-tabellenfarbe" />
+    <Faq alias="code-icq" />
+    <Faq alias="code-yahoo" />
+    <Faq alias="code-alphabet" />
+  </Faqs>
+</Category>

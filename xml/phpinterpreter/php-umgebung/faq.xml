@@ -1,0 +1,4 @@
+<Faq alias="php-umgebung" author="Kristian Köhntopp">
+  <Question>Wie kann ich auf Umgebungsvariablen zugreifen?</Question>
+  <Keywords>Umgebungsvariable, getenv, Referer, Variable</Keywords>
+</Faq>

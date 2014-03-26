@@ -1,0 +1,7 @@
+<Faq alias="konfiguration-cgi" author="Kristian Köhntopp">
+  <Question>Was ist --enable-force-cgi-redirect? Warum enthält $_SERVER['PHP_SELF'] den Pfad zum CGI-Interpreter?</Question>
+  <Keywords>Sicherheit, CGI, PHP_SELF, Pfad, php.exe, Interpreter, URL</Keywords>
+  <Editors>
+    <Editor name="Niels Braczek" lastedit="2008-08-12 00:00:00" />
+  </Editors>
+</Faq>

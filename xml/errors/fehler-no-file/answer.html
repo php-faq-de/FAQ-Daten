@@ -1,0 +1,92 @@
+<p>
+Diese Warnung besagt, dass die Datei oder das Verzeichnis, das mit
+<a href="http://www.php3.de/fopen">fopen()</a> geöffnet werden soll, nicht existiert.
+</p>
+<p>
+Die Ursache dafür kann vielfältig sein:
+</p>
+<ol>
+<li>
+<p>
+Die Datei, die geöffnet werden soll, existiert nicht.
+</p>
+<p>
+Dies passiert besonders häufig beim Zugriff auf URLs. Prüfen lässt sich die
+Existenz mit einem Browser. Der häufigste Fehler ist die Verwendung von
+relativen URLs. Richtig sind absolute URLs, die mit <tt>http://</tt> oder <tt>ftp://</tt>
+beginnen.
+</p>
+<p>
+Quellcode-Beispiele:
+</p>
+<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+<span style="color: #808080; font-style: italic;">/*
+Die externe URL http://www.example.com/verzeichnis/datei.ext soll gelesen werden.
+*/</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">/*
+in diesem Fall falsch, da eine URL absolut angegeben werden muss
+dieses Beispiel würde versuchen, die Datei datei.ext in
+/verzeichnis auf dem eigenen Server zu öffnen.
+*/</span>
+<span style="color: #0000ff;">$fp</span> = <a href="http://www.php3.de/fopen"><span style="color: #000066;">fopen</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;/verzeichnis/datei.ext&quot;</span>, <span style="color: #ff0000;">&quot;r&quot;</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;">/* richtig */</span>
+<span style="color: #0000ff;">$fp</span> = <a href="http://www.php3.de/fopen"><span style="color: #000066;">fopen</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;http://www.example.com/verzeichnis/datei.ext&quot;</span>, <span style="color: #ff0000;">&quot;r&quot;</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+</li>
+<li>
+<p>
+Das Verzeichnis existiert nicht.
+</p>
+<p>
+<a href="http://www.php3.de/fopen">fopen()</a> erstellt keine Verzeichnisse, wenn diese
+fehlen. Im Gegensatz dazu werden fehlende Dateien von
+<a href="http://www.php3.de/fopen">fopen()</a> automatisch angelegt, wenn sie zum
+schreiben geöffnet werden.
+</p>
+<p>
+Häufig wird in ChangeRoot-Umgebungen gearbeitet. Dies hat zur Folge,
+dass das Root-Verzeichnis des Users (z. B. /home/user/) von der
+Server-Root abweicht (/). Genaueres erfährt man durch die
+Verwendung von <a href="http://www.php3.de/phpinfo">phpinfo()</a>.
+</p>
+<p>
+Quellcode-Beispiele:
+</p>
+<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+<span style="color: #808080; font-style: italic;">/*
+die DocumentRoot sei /home/user und die zu öffnende Datei file.ext
+im Verzeichnis mydir
+*/</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">/* falsch */</span>
+<span style="color: #0000ff;">$fp</span> = <a href="http://www.php3.de/fopen"><span style="color: #000066;">fopen</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;/mydir/datei.ext&quot;</span>, <span style="color: #ff0000;">&quot;r&quot;</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;">/* richtig */</span>
+<span style="color: #0000ff;">$fp</span> = <a href="http://www.php3.de/fopen"><span style="color: #000066;">fopen</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;/home/user/mydir/file.ext&quot;</span>, <span style="color: #ff0000;">&quot;r&quot;</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+<p>
+Desweiteren kann es vorkommen, dass sich Tippfehler im Pfad befinden.
+Ein häufig übersehener Fehler sind Leerzeichen am Anfang, im Pfad
+oder an dessen Ende.
+</p>
+<p>
+Code-Beispiele:
+</p>
+<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+<span style="color: #808080; font-style: italic;">/* falsch, Leerzeichen am Anfang */</span>
+<span style="color: #0000ff;">$fp</span> = <a href="http://www.php3.de/fopen"><span style="color: #000066;">fopen</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot; /verzeichnis/datei.ext&quot;</span>, <span style="color: #ff0000;">&quot;w&quot;</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;">/* falsch, Leerzeichen im Pfad */</span>
+<span style="color: #0000ff;">$fp</span> = <a href="http://www.php3.de/fopen"><span style="color: #000066;">fopen</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;/verzeichnis/ datei.ext&quot;</span>, <span style="color: #ff0000;">&quot;a+&quot;</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;">/* falsch, Leerzeichen am Ende */</span>
+<span style="color: #0000ff;">$fp</span> = <a href="http://www.php3.de/fopen"><span style="color: #000066;">fopen</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;/verzeichnis/datei.ext &quot;</span>, <span style="color: #ff0000;">&quot;r+&quot;</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;">/* richtig */</span>
+<span style="color: #0000ff;">$fp</span> = <a href="http://www.php3.de/fopen"><span style="color: #000066;">fopen</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;/verzeichnis/datei.ext&quot;</span>, <span style="color: #ff0000;">&quot;w&quot;</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+</li>
+</ol>
+

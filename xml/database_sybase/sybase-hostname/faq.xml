@@ -1,0 +1,4 @@
+<Faq alias="sybase-hostname" author="Timm Friebe">
+  <Question>Hostnamen definieren</Question>
+  <Keywords>Sybase, Datenbank, Hostname, Prozessliste, sp_who</Keywords>
+</Faq>

@@ -1,0 +1,11 @@
+<Category alias="database_sybase" name="Datenbanken: Sybase" keywords="PHP, Usenet, FAQ, dclp">
+  <!--Die FAQs sind hier noch mal redundant aufgelistet um die Reihenfolge vorzugeben.-->
+  <Faqs>
+    <Faq alias="sybase-db-vs-ct" />
+    <Faq alias="sybase-freetds" />
+    <Faq alias="sybase-quoting" />
+    <Faq alias="sybase-changed-dbctx" />
+    <Faq alias="sybase-hostname" />
+    <Faq alias="sybase-text" />
+  </Faqs>
+</Category>

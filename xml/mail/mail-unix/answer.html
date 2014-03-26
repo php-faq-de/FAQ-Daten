@@ -1,0 +1,53 @@
+<p>
+Ein Unix-System hat in der Regel ein Mailprogramm installiert,
+das Anfragen an das DNS-System stellen kann oder auf andere
+Weise die zur Auslieferung der Mail benötigten Informationen
+beschaffen kann. In den meisten Fällen ist dieses Mailprogramm
+<tt>/usr/lib/sendmail</tt> (oder <tt>/usr/sbin/sendmail</tt>)
+und versteht eine Option <tt>-t</tt>, die bewirkt, dass man das
+Programm starten und eine Mail mit allen benötigten Headern auf
+der Standardeingabe hinterlassen kann. Das Programm wird dann
+auf der Basis der erhaltenen Headerinformationen den Envelope
+generieren, den Header vervollständigen und ggf. korrigieren,
+bevor die Mail dann abgesendet wird.
+</p>
+
+<p>
+Der einfachste Weg, um ein Programm zu starten und dann seine
+Standardeingabe mit Daten zu füllen, ist die C-Funktion
+<tt>popen()</tt>. Die PHP-Funktion <a href="http://www.php3.de/mail">mail()</a>
+verwendet diese C-Funktion, um das durch die
+Konfigurationsvariable <a href="http://de3.php.net/manual/en/ini.php">sendmail_path</a> definierte
+Mailprogramm zu starten und mit den benötigten Daten zu füttern.
+</p>
+
+<pre><a href="http://www.php3.de/mail"><span style="color: #000066;">mail</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;em@pfaeng.er&quot;</span>,
+     <span style="color: #ff0000;">&quot;Testmail&quot;</span>,
+     <span style="color: #ff0000;">&quot;Dies ist nur eine Testnachricht.&quot;</span>,
+     <span style="color: #ff0000;">&quot;From: ab@send.er<span style="color: #000099; font-weight: bold;">\r</span><span style="color: #000099; font-weight: bold;">\n</span>Reply-To: devnull@send.er&quot;</span><span style="color: #000000;">&#41;</span>;</pre>
+
+<p class="hint">
+Hinweis: In vielen Versionen von PHP unter Windows
+funktioniert die Variante von <a href="http://www.php3.de/mail">mail()</a> mit
+drei Parametern wegen eines Fehlers im Interpreter nicht. In
+diesem Fall ist die Funktion <a href="http://www.php3.de/mail">mail()</a> zwingend
+mit vier Parametern aufzurufen, etwa indem als vierter Parameter der
+Wert <tt>Content-Type: text/plain; charset=iso-8859-1</tt>
+angegeben wird.
+</p>
+
+<p>
+Alternativ kann man diese Funktionalität auch manuell in PHP
+nachprogrammieren, also die PHP-Funktion <a href="http://www.php3.de/popen">popen()</a> aufrufen und die Mail dann ausgeben. Beide
+Ansätze sind funktional gleich (aber <a href="http://www.php3.de/mail">mail()</a>
+ist weniger Arbeit).
+</p>
+
+<pre><span style="color: #0000ff;">$fd</span> = <a href="http://www.php3.de/popen"><span style="color: #000066;">popen</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;/usr/sbin/sendmail -t &quot;</span>,<span style="color: #ff0000;">&quot;w&quot;</span><span style="color: #000000;">&#41;</span>;
+  <a href="http://www.php3.de/fputs"><span style="color: #000066;">fputs</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fd</span>, <span style="color: #ff0000;">&quot;To: em@pfaeng.er<span style="color: #000099; font-weight: bold;">\r</span><span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #000000;">&#41;</span>;
+  <a href="http://www.php3.de/fputs"><span style="color: #000066;">fputs</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fd</span>, <span style="color: #ff0000;">&quot;From: ab@send.er<span style="color: #000099; font-weight: bold;">\r</span><span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #000000;">&#41;</span>;
+  <a href="http://www.php3.de/fputs"><span style="color: #000066;">fputs</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fd</span>, <span style="color: #ff0000;">&quot;Reply-To: devnull@send.er<span style="color: #000099; font-weight: bold;">\r</span><span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #000000;">&#41;</span>;
+  <a href="http://www.php3.de/fputs"><span style="color: #000066;">fputs</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fd</span>, <span style="color: #ff0000;">&quot;Subject: Testmail<span style="color: #000099; font-weight: bold;">\r</span><span style="color: #000099; font-weight: bold;">\n</span><span style="color: #000099; font-weight: bold;">\r</span><span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #000000;">&#41;</span>;
+  <a href="http://www.php3.de/fputs"><span style="color: #000066;">fputs</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fd</span>, <span style="color: #ff0000;">&quot;Das ist nur eine Testnachricht.<span style="color: #000099; font-weight: bold;">\r</span><span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #000000;">&#41;</span>;
+  <a href="http://www.php3.de/pclose"><span style="color: #000066;">pclose</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fd</span><span style="color: #000000;">&#41;</span>;</pre>
+

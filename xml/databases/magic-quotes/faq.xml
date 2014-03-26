@@ -1,0 +1,7 @@
+<Faq alias="magic-quotes" author="Johannes Frömter">
+  <Question>Wieso wird aus &amp;quot; plötzlich \&amp;quot; und wie geht das wieder weg?</Question>
+  <Keywords>escape, backslash, quote, magic_quotes</Keywords>
+  <Editors>
+    <Editor name="Niels Braczek" lastedit="2008-08-12 00:00:00" />
+  </Editors>
+</Faq>

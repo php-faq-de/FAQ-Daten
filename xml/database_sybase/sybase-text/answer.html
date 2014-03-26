@@ -1,0 +1,11 @@
+<p>In Sybase gibt es Datenfelder vom Typ <em>text</em>, die bis zu 2 GB Daten
+enthalten können. Bei einem Select mit PHP werden jedoch nur 32 KiloByte
+gelesen. Sollen mehr Daten gelesen werden können, muss vorher folgender Query
+abgesetzt werden:</p>
+
+<pre class="sql"><span style="color: #993333; font-weight: bold;">SET</span> textsize &lt;&lt;max_bytes&gt;&gt;</pre>
+
+<p>Sollen maximal 256 Kilobyte gelesen werden können, sähe das also so aus:</p>
+
+<pre class="sql"><span style="color: #993333; font-weight: bold;">SET</span> textsize <span style="color: #cc66cc;">262144</span></pre>
+

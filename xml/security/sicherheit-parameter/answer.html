@@ -1,0 +1,65 @@
+<p>Parameter, die als GET, POST oder COOKIE-Werte in das lokale
+Programm gekommen sind, sind nicht vertrauenswürdig. Techniken,
+die Variablen als GET-Parameter am Ende einer URL durchschleifen
+oder als HIDDEN-Variablen in Formularen weitergeben
+(<em>Ping-Pong-Technik</em>), sind daher prinzipbedingt
+fehlerhaft und können niemals sicher sein.</p>
+
+<p>Auch dürfen Variablen aus GPC-Quellen niemals ungeprüft
+direkt verwendet werden, sondern müssen zwingend erst einmal auf
+Ungefährlichkeit geprüft werden (siehe "<a class="faq" href="http://www.php-faq.de/q-security-variablen.html">Wie unterscheide ich böse Variablen von guten?</a>"). Bei Parametern, die gegen die
+Empfehlung per Ping-Pong weitergereicht werden, muss dieser Test
+<em>jedesmal</em> (auf jeder Seite) wieder gemacht werden, da ja
+ein Anwender oder ein böswilliges Programm die Werte inzwischen
+geändert haben könnte.</p>
+
+<p>Eine Webanwendung kontrolliert nur den Bereich bis zur
+Firewall. Der Browser des Anwenders befindet sich auf der
+anderen Seite der Firewall und ist daher als Feindesland
+anzusehen. Daten, die von dort kommen, können unerwartete Werte
+oder unerwartete Formate haben. Insbesondere kann eine
+Webanwendung keine Annahmen über bestimmte Eigenschaften des
+Browsers machen, wie zum Beispiel "JavaScript wird zuverlässig
+ausgeführt", "Cookies werden akzeptiert und verändern ihre Werte
+nicht spontan" oder "Referer-Header sind vertrauenswürdig".</p>
+
+<p>Es gelten daher die folgenden Empfehlungen:</p>
+
+<ul>
+
+<li>
+<p><em>Jede</em> Form von Ping-Pong, also Wert-Weitergabe durch
+GET-Parameter, HIDDEN-Variablen und dergleichen ist zu
+vermeiden. Auch durch Codierung der Werte ist hier nichts zu
+erreichen.</p>
+
+<p>Stattdessen sind Sessionvariablen zu verwenden. Nur die
+Session-ID wird von einer Seite an eine andere Seite
+weitergereicht.</p>
+</li>
+
+<li>
+<p><em>Keinesfalls</em> darf ein Programm Werte aus einer GET,
+POST oder COOKIE-Quelle direkt verwenden. Jeder externe Wert ist
+einer Plausibilitätsprüfung zu unterziehen, bevor er verwendet
+wird (Genau das wird in "<a class="faq" href="http://www.php-faq.de/q-security-variablen.html">Wie unterscheide ich böse Variablen von guten?</a>" näher
+beschrieben).</p>
+</li>
+
+<li>
+<p>Validierung von Eingabewerten <em>muss</em> serverseitig durch
+PHP geschehen. JavaScript-Validatoren sind nicht
+vertrauenswürdig: Der Browser des Anwenders führt diese
+Validatoren möglicherweise nicht aus, auch dann, wenn er sich
+durch die User-Agent-Zeile als JavaScript-fähiger Browser
+identifiziert. Ebenso muss angenommen werden, dass die
+Referer-Header des Browsers möglicherweise gefälscht sind. Man
+kann nicht annehmen, dass ein Zugriff tatsächlich von einer
+bestimmten vorhergehenden Seite hierher vermittelt wurde.</p>
+</li>
+
+</ul>
+
+<p>Zusammenfassend: Traue niemandem. Validiere allen Input oder
+stirb.</p>
+

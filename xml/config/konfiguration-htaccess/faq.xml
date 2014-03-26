@@ -1,0 +1,4 @@
+<Faq alias="konfiguration-htaccess" author="Kristian Köhntopp">
+  <Question>Welche Konfigurationsvariablen kann ich nicht in .htaccess-Dateien verwenden?</Question>
+  <Keywords>Konfiguration, htaccess, php.ini</Keywords>
+</Faq>

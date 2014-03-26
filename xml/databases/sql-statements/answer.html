@@ -1,0 +1,21 @@
+<p>
+SQL kennt keine Mehrfachstatements. Einige SQL-Frontends (der
+MySQL-Kommandoprozessor, phpMyAdmin) kennen Mehrfachstatements, die sie
+manuell in einzelne Anweisungen zerlegen und nacheinander an den
+Datenbankserver senden. PHP selbst macht dies nicht. Man muss seine
+Statements manuell zerlegen und einzeln nacheinander absenden.
+</p>
+
+<p>
+Um ein Statement zu zerlegen, ist es nicht ausreichend, auf dieses
+Statement einfach <a href="http://www.php3.de/explode">explode()</a> anzuwenden. Beispiel:
+</p>
+
+<pre class="sql"><span style="color: #993333; font-weight: bold;">INSERT</span> <span style="color: #993333; font-weight: bold;">INTO</span> <span style="color: #993333; font-weight: bold;">TABLE</span> <span style="color: #993333; font-weight: bold;">VALUES</span><span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'foo;bar'</span><span style="color: #66cc66;">&#41;</span>;</pre>
+
+<p>
+Wie es richtig geht, kann man im Code von phpMyAdmin nachlesen.
+Die relevante Stelle ist die Funktion <tt>split_sql()</tt> in
+der Datei <tt>db_readdump.php</tt>.
+</p>
+

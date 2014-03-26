@@ -1,0 +1,4 @@
+<Faq alias="http-referer" author="Martin Jansen">
+  <Question>Warum ist es schlecht, mit dem Referer zu arbeiten?</Question>
+  <Keywords>Referer, HTTP, Browser</Keywords>
+</Faq>

@@ -1,0 +1,4 @@
+<Faq alias="sql-select" author="Johannes Frömter">
+  <Question>Warum soll ich nicht SELECT * schreiben?</Question>
+  <Keywords>SQL, Select, Wildcard, Performance</Keywords>
+</Faq>

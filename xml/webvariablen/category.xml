@@ -1,0 +1,26 @@
+<Category alias="webvariablen" name="Variablen und Formulare" keywords="PHP, Usenet, FAQ, dclp">
+  <!--Die FAQs sind hier noch mal redundant aufgelistet um die Reihenfolge vorzugeben.-->
+  <Faqs>
+    <Faq alias="formular-variablen" />
+    <Faq alias="variable-uebergeben" />
+    <Faq alias="formular-limit" />
+    <Faq alias="formular-methode" />
+    <Faq alias="formular-text" />
+    <Faq alias="formular-textarea" />
+    <Faq alias="formular-select" />
+    <Faq alias="formular-select-multiple" />
+    <Faq alias="formular-radio" />
+    <Faq alias="formular-checkbox" />
+    <Faq alias="formular-upload-php4" />
+    <Faq alias="formular-mehrfach-upload" />
+    <Faq alias="formular-status" />
+    <Faq alias="formular-image" />
+    <Faq alias="formular-absenden" />
+    <Faq alias="formular-buttons" />
+    <Faq alias="formular-reset" />
+    <Faq alias="formular-verarbeitung" />
+    <Faq alias="formular-mehrfach" />
+    <Faq alias="formular-register-globals" />
+    <Faq alias="captcha-formularspam" />
+  </Faqs>
+</Category>

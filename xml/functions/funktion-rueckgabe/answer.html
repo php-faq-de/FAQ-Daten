@@ -1,0 +1,41 @@
+<!-- KOMMENTAR FUER DAS FAQ-TEAM:
+     Der Link zum Manual-Eintrag von return() entspricht nicht
+     dem ueblichen Schema. Daher habe ich hier darauf verzichtet,
+     return() ins Function-Tag zu uebertragen.
+
+     -mjansen
+
+     Das geht nun.
+
+     -kk
+//-->
+<p>
+PHP kann nur <em>einen</em> Wert mit <a href="http://www.php3.de/return">return()</a> zurückgeben.
+</p>
+
+<p>
+Wie bei der Übergabe von Funktionsargumenten, kann man aber auch
+hier beliebige Werte in einem Array zusammenfassen und so eine
+Rückgabe mehrerer Werte simulieren:
+</p>
+
+<pre><span style="color: #000000; font-weight: bold;">function</span> beispiel<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+    <span style="color: #0000ff;">$ret</span> = <a href="http://www.php3.de/array"><span style="color: #000066;">array</span></a><span style="color: #000000;">&#40;</span><span style="color: #cc66cc;">1</span>, <span style="color: #cc66cc;">2</span>, <span style="color: #cc66cc;">3</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+    <span style="color: #b1b100;">return</span><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$ret</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000;">&#125;</span></pre>
+
+<p>
+Im Funktionsaufruf kann man <a href="http://www.php3.de/list">list()</a> verwenden,
+um Variablen die Elemente des zurückgelieferten Arrays zuzuweisen:
+</p>
+
+<pre><a href="http://www.php3.de/list"><span style="color: #000066;">list</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$var1</span>, <span style="color: #0000ff;">$var2</span>, <span style="color: #0000ff;">$var3</span><span style="color: #000000;">&#41;</span> = beispiel<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;</pre>
+
+<p>
+Wenn man nicht tatsächlich mehrere Werte zurückgeben möchte,
+sondern lediglich mehrere Werte in einem Funktionsaufruf
+beeinflussen möchte, dann kann stattdessen auch mit
+Referenzparametern arbeiten.
+</p>
+

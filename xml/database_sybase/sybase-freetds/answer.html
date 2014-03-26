@@ -1,0 +1,19 @@
+<p>
+Für alle, die nicht in den Genuss der Sybase-Client-Libraries kommen,
+gibt es FreeTDS - das ist eine freie Implementation des der Sybase 
+zugrundeliegenden TDS- ("Tabular Data Streams") Protokolls.
+<a href="http://www.freetds.org/">FreeTDS</a> ist in der Version 0.62 relativ stabil (und auf 
+jeden Fall ausreichend stabil für normale PHP-Anwendungen). Einige Bugs zeigen 
+sich beim Canceln von Resultsets auf, die sich je nach Lage entweder in
+Segmentation Faults oder unendlich vielen Meldungen "Unknown Marker: XXX"
+äußern. PHP "cancelt" alle Resultsets bis auf das erste - multiple Resultsets
+werden beispielsweise von der Stored Procedure <tt>sp_help</tt> zurückgegeben.
+</p>
+<p>
+Für die freetds.conf ist die TDS-Version 5.0 zu wählen. Beispiel:</p>
+
+<pre class="ini"><span style="color: #000066; font-weight:bold;"><span style="">&#91;</span>gurke<span style="">&#93;</span></span>
+        <span style="color: #000099;">host </span>=<span style="color: #660066;"> <span style="">127.0</span><span style="">.0</span><span style="">.1</span></span>
+        <span style="color: #000099;">port </span>=<span style="color: #660066;"> <span style="">1999</span></span>
+        tds <span style="color: #000099;">version </span>=<span style="color: #660066;"> <span style="">5.0</span></span></pre>
+

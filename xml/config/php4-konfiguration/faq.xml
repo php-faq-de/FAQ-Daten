@@ -1,0 +1,7 @@
+<Faq alias="php4-konfiguration" author="Johannes Frömter">
+  <Question>Wie kann ich PHP (CGI und Apache-Modul) konfigurieren?</Question>
+  <Keywords>Konfiguration, CGI, Modul, Apache, php.ini, htaccess, httpd.conf</Keywords>
+  <Editors>
+    <Editor name="Niels Braczek" lastedit="2008-08-12 00:00:00" />
+  </Editors>
+</Faq>

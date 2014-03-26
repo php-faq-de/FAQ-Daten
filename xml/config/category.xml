@@ -1,0 +1,15 @@
+<Category alias="config" name="Konfiguration" keywords="PHP, Usenet, FAQ, dclp">
+  <!--Die FAQs sind hier noch mal redundant aufgelistet um die Reihenfolge vorzugeben.-->
+  <Faqs>
+    <Faq alias="php-info" />
+    <Faq alias="php-ini" />
+    <Faq alias="konfiguration-werte" />
+    <Faq alias="konfiguration-htaccess" />
+    <Faq alias="konfiguration-cgi" />
+    <Faq alias="konfiguration-time-limit" />
+    <Faq alias="apache-parsen" />
+    <Faq alias="php4-konfiguration" />
+    <Faq alias="webserver-frage" />
+    <Faq alias="konfiguration-laufzeit" />
+  </Faqs>
+</Category>

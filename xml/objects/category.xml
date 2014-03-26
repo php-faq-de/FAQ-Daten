@@ -1,0 +1,14 @@
+<Category alias="objects" name="Klassen und Objekte" keywords="PHP, Usenet, FAQ, dclp">
+  <!--Die FAQs sind hier noch mal redundant aufgelistet um die Reihenfolge vorzugeben.-->
+  <Faqs>
+    <Faq alias="klassen-warum" />
+    <Faq alias="klassen-wie" />
+    <Faq alias="klassen-this" />
+    <Faq alias="klassen-vererbung" />
+    <Faq alias="klassen-konstruktur" />
+    <Faq alias="klassen-polymorphie" />
+    <Faq alias="klassen-metainformation" />
+    <Faq alias="klassen-session" />
+    <Faq alias="klassen-objektname" />
+  </Faqs>
+</Category>

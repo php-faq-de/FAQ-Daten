@@ -1,0 +1,4 @@
+<Faq alias="funktion-js-php" author="Johannes Frömter">
+  <Question>Wie kann ich PHP-Funktionen aus JavaScript heraus aufrufen?</Question>
+  <Keywords>JavaScript, Funktion, GET, POST</Keywords>
+</Faq>

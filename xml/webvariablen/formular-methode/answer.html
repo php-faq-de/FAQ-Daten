@@ -1,0 +1,29 @@
+<p>
+Im allgemeinen ist es besser, die Methode <tt>GET</tt> zu verwenden:
+Formulare sind leichter zu debuggen und der Anwender kann sich
+ein fertig ausgefülltes Formular mit Parametern in die Bookmarks
+oder einen Link legen - das ist bequem und ergonomisch.
+</p>
+
+<p>
+Enthält das Formular Werte, die nicht in der URL angezeigt
+werden sollen und die ggf. nicht Bestandteil des Referer sein
+sollen und nicht in Proxy-Logs auftauchen sollen, dann ist die
+Verwendung von <tt>POST</tt> angezeigt. Dies ist zum Beispiel immer der
+Fall, wenn ein Eingabeelement <em>Password</em> verwendet wird.
+</p>
+
+<p>
+Ebenfalls soll <tt>POST</tt> verwendet werden, wenn die Länge von
+Eingabeelementen nicht nach oben begrenzt ist, also immer dann,
+wenn ein <tt>TEXTAREA</tt> verwendet wird.
+</p>
+
+<p>
+Schließlich ist die Verwendung von <tt>POST</tt> zwingend notwendig,
+wenn ein File-Upload durchgeführt werden soll, einmal wegen der
+prinzipiell unbegrenzten Länge, aber auch weil der notwendige
+<tt>ENCTYPE="multipart/form-data"</tt> nur mit <tt>POST</tt>
+zusammen funktioniert.
+</p>
+

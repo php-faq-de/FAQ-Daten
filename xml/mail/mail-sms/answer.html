@@ -1,0 +1,82 @@
+<p>
+Generell muss man bei der Verwendung von SMS zwei Arten unterscheiden:
+</p>
+
+<p>
+Auf der einen Seite gibt es die Möglichkeit, eine SMS an eine vorher
+definierte Rufnummer (z.B. die des eigenen Handys) zu senden.
+</p>
+
+<p>
+Die zweite Möglichkeit, die sehr häufig von Portalseiten
+(z.B. Lycos) genutzt wird, ist, dem Besucher der Seite die
+Möglichkeit zu geben, an eine Rufnummer seiner Wahl eine SMS
+zu senden. Diese SMS enthalten allerdings in der Regel
+einen kurzen Werbetext.
+</p>
+
+<p>
+Variante 1 lässt sich mit der <a href="http://www.php3.de/mail">mail()</a>-Funktion von PHP realisieren:
+Jeder Netzanbieter stellt jedem seiner Kunden auf Nachfrage eine eigene
+E-Mail-Adresse (z.B. &lt;rufnummer&gt;@smsmail.eplus.de) zur Verfügung.
+Nachrichten an diese E-Mail-Adresse werden als SMS an den
+Mobilfunkaccount des Kunden weitergeleitet.
+Dieser Service kostet je nach Anbieter einen gewissenen Betrag
+pro SMS.
+So würde zum Beispiel folgendes Skript eine SMS an die
+Nummer 0177-1234567 senden:
+</p>
+
+<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+<span style="color: #0000ff;">$subject</span> = <span style="color: #ff0000;">&quot;Hello World&quot;</span>;
+<span style="color: #0000ff;">$text</span> = <span style="color: #ff0000;">&quot;Just another PHP hacker&quot;</span>;
+<a href="http://www.php3.de/mail"><span style="color: #000066;">mail</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;491771234567@smsmail.eplus.de&quot;</span>,<span style="color: #0000ff;">$subject</span>,<span style="color: #0000ff;">$text</span>,<span style="color: #ff0000;">&quot;From: sms-service@send.er&quot;</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+
+<p>
+Mit dieser Variante lässt sich auf einfache Weise der Versand
+von SMS an eine vorher definierte Nummer (i.d.R. die eigene)
+realisieren.
+Ein Risiko, das man nicht unterschätzen sollte, ist die Gefahr des
+Missbrauchs:
+Ein böswilliger User sendet zum Beispiel 100 SMS in Folge und
+verursacht somit beim Empfänger auf einen Schlag
+beträchtliche Kosten.
+Hier müssen entsprechende Sicherheitsmechanismen wie zum
+Beispiel ein Limit an SMS pro IP oder Cookies ansetzen,
+die aber alle keine 100%-ige Sicherheit garantieren.
+</p>
+
+<p>
+Die zweite Möglichkeit verwendet ein vollwertiges SMS-Gateway,
+um den Versand von SMS an beliebige Nummern zu realiseren.
+</p>
+
+<p>
+Das SMS-Gateway ist entweder lokal auf dem eigenen Server
+installiert oder man verwendet einen Fremdanbieter, der eine
+SMS-Gateway zu entsprechenden Konditionen zur Verfügung stellt.
+</p>
+
+<p>
+Nachrichten, die über die SMS-Gateway versendet werden sollen,
+werden nach dem gleichen Prinzip wie Variante 1 mit der
+PHP-Funktion <a href="http://www.php3.de/mail">mail()</a> versendet. Der
+Unterschied besteht darin, dass neben dem Text der SMS auch
+entsprechende Steuersignale im E-Mail-Text enthalten sind, die
+für die SMS-Gateway die entsprechenden Informationen liefern,
+wohin die SMS gesendet werden soll. Bei der Verwendung eines
+Fremdanbieters sind des weiteren die nötigen
+Authentifizierungsdaten in der E-Mail enthalten, die den
+SMS-Versand ermöglichen.
+</p>
+
+<p>
+Selbstverständlich birgt auch diese Variante die Möglichkeit des
+Missbrauchs, weshalb auch hier die gleichen Sicherheitsmechanismen
+wie bei Variante 1 angewendet werden müssen.
+Die meisten der grossen Anbieter von kostenlosem SMS-Versand
+reduzieren so zum Beispiel die Anzahl Nachrichten, die pro
+IP gesendet werden dürfen, auf eine gewisse Anzahl pro Tag.
+</p>
+

@@ -1,0 +1,4 @@
+<Faq alias="datei-uebergabe" author="Johannes Frömter">
+  <Question>Wie übergebe ich Variablen an eingebundene Dateien?</Question>
+  <Keywords>Datei, einbinden, include, require, Variable, Uebergabe, Scope, Script</Keywords>
+</Faq>

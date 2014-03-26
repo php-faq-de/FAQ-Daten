@@ -1,0 +1,29 @@
+<p>
+Der einfachste Anwendungsfall von <a href="http://www.php3.de/preg_match">preg_match()</a> ist zu testen, ob ein Suchmuster auf einen
+gegebenen String paßt. Beispiele:
+</p>
+
+<pre><span style="color: #808080; font-style: italic;"># Kommt &quot;Wort&quot; in $eingabe vor?</span>
+<a href="http://www.php3.de/preg_match"><span style="color: #000066;">preg_match</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;/Wort/&quot;</span>, <span style="color: #0000ff;">$eingabe</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;"># Kommt &quot;Wort&quot;, &quot;wort&quot; oder &quot;wOrT&quot; etc. in $eingabe vor?</span>
+<a href="http://www.php3.de/preg_match"><span style="color: #000066;">preg_match</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;/wort/i&quot;</span>, <span style="color: #0000ff;">$eingabe</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;"># Kommt &quot;Wort&quot; am Anfang oder am Ende von $eingabe vor?</span>
+<a href="http://www.php3.de/preg_match"><span style="color: #000066;">preg_match</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;/^Wort|Wort$/&quot;</span>, <span style="color: #0000ff;">$eingabe</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;"># Kommt &quot;Wort&quot;, &quot;Wart&quot;, &quot;Wirt&quot; oder &quot;Wert&quot; in $eingabe vor?</span>
+<a href="http://www.php3.de/preg_match"><span style="color: #000066;">preg_match</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;/W[aeio]rt/&quot;</span>, <span style="color: #0000ff;">$eingabe</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;"># Kommt &quot;Wort&quot; oder &quot;Word&quot; in $eingabe vor?</span>
+<a href="http://www.php3.de/preg_match"><span style="color: #000066;">preg_match</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;/Wor(t|d)/&quot;</span>, <span style="color: #0000ff;">$eingabe</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;"># Kommt &quot;DM &quot; oder &quot;TDM &quot; mit einer zwei- bis</span>
+<span style="color: #808080; font-style: italic;"># dreistelligen Zahl in $eingabe vor?</span>
+<a href="http://www.php3.de/preg_match"><span style="color: #000066;">preg_match</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;/T?DM <span style="color: #000099; font-weight: bold;">\d</span>{2,3}/&quot;</span>, <span style="color: #0000ff;">$eingabe</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;"># Kommt &quot;Word &quot; mit einer Versionsnummer (z.B. 7.0 oder 97)</span>
+<span style="color: #808080; font-style: italic;"># in $eingabe vor? (\d+ paßt auf &quot;eine oder mehr&quot; Ziffern,</span>
+<span style="color: #808080; font-style: italic;"># \.? KANN ein Punkt sein, \d* sind &quot;Null oder mehr&quot; Ziffern)</span>
+<a href="http://www.php3.de/preg_match"><span style="color: #000066;">preg_match</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;/Word <span style="color: #000099; font-weight: bold;">\d</span>+<span style="color: #000099; font-weight: bold;">\.</span>?<span style="color: #000099; font-weight: bold;">\d</span>*/&quot;</span>, <span style="color: #0000ff;">$eingabe</span><span style="color: #000000;">&#41;</span>;</pre>
+

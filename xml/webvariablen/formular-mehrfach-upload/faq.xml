@@ -1,0 +1,7 @@
+<Faq alias="formular-mehrfach-upload" author="Johannes Frömter">
+  <Question>Wie kann ich mehrere Dateien auf einmal uploaden?</Question>
+  <Keywords>Datei, Upload, input, POST, mehrfach, enctype, HTML, Verzeichnis</Keywords>
+  <Editors>
+    <Editor name="Niels Braczek" lastedit="2009-05-30 00:00:00" />
+  </Editors>
+</Faq>

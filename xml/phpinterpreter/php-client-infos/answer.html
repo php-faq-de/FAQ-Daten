@@ -1,0 +1,37 @@
+<p>
+Das geht im allgemeinen Fall nicht. PHP wird auf dem Server
+ausgeführt, nicht im Browser des Zielsystems.
+</p>
+
+<p>
+Falls der Browser des Zielsystems JavaScript kann, falls dieser
+Browser JavaScript nicht disabled hat, falls die Firewall auf
+dem Weg zum Zielsystem nicht JavaScript ausfiltert und falls man
+an geeigneter Stelle ein Formular statt eines Links verwendet,
+dann kannst man in diesem Formular die Auflösung des Zielsystem
+durch JavaScript ermitteln lassen und an seine Site zurücksenden
+lassen. Mit den übrigen Fällen (Auflösung des Zielsystems nicht
+bekannt) muss man dennoch fertig werden.
+</p>
+
+<p>
+Die Tatsache, dass die Bildschirmauflösung des Zielsystems
+bekannt ist, hilft natürlich nicht beim Design, solange man nicht
+auch weiß
+</p>
+
+<ul>
+<li><p>wie groß die verwendete Schrift ist,</p></li>
+<li><p>ob die verwendeten Zeichensätze auf dem Zielsystem zur
+Verfügung stehen,</p></li>
+<li><p>wie groß die Fenster auf dem Zielsystem zur Zeit gerade
+sind.</p></li>
+</ul>
+
+<p>
+Man kann aus diesen Gründen davon ausgehen, dass eine
+auflösungsabhängige Darstellung auch dann auf mehr als der Hälfte
+der Zielsysteme nicht korrekt gerendert werden kann, auch wenn
+die Bildschirmauflösung des Zielsystems bekannt ist.
+</p>
+

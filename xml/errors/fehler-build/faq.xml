@@ -1,0 +1,7 @@
+<Faq alias="fehler-build" author="Johannes Frömter">
+  <Question>Warning: xy() is not supported in this PHP build</Question>
+  <Keywords>Fehler, Build, Windows, Funktion, Unterstuetzung</Keywords>
+  <Editors>
+    <Editor name="Niels Braczek" lastedit="2008-08-12 00:00:00" />
+  </Editors>
+</Faq>

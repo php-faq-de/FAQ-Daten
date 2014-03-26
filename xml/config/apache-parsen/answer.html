@@ -1,0 +1,93 @@
+<p>
+Prinzipiell kann man Dateien mit beliebigen Endungen durch PHP
+verarbeiten lassen, also auch die Endung <tt>.html</tt>.
+Normalerweise braucht man hierzu Zugriff auf die
+Apache-Konfigurations-Datei <tt>httpd.conf</tt> (wenn der Provider
+es nicht unterbunden hat, reicht aber auch ein Eintrag in einer
+<tt>.htaccess</tt>-Datei, die man einfach in sein Home-Directory
+stellt). Auf diese Weise lassen sich auch prima in PHP3 geschriebene
+Anwendungen bei einem Provider betreiben, der nur noch PHP4 anbietet
+(die Kompatibilität beträgt praktisch 100%, siehe
+<a href="http://www.php.net/manual/en/migration4.php">Anhang B. des PHP Manuals</a>).
+</p>
+
+<p>
+Je nachdem, ob PHP in der Modul- oder der CGI-Version zum Einsatz
+kommt, unterscheiden sich die Konfigurationsanweisungen. Bei PHP4
+ist das Modul die häufigere Art, hier sieht die Zeile meist so aus:
+</p>
+
+<pre class="ini">AddType application/x-httpd-php .php .php4 .html</pre>
+
+<p>
+Mehrere Dateiendungen schreibt man einfach durch Leerzeichen getrennt
+hintereinander. Beim Massenhoster 1&1 (PureTec, S+P, sowie deren
+Reseller) ist bei <tt>AddType</tt> eine etwas andere Syntax notwendig:
+<tt>AddType x-mapp-php4 .php .html</tt>
+</p>
+
+<p>
+Diese Konfigurationsanweisungen können in der <tt>httpd.conf</tt>
+entweder in Section 2 ('Main' server configuration) stehen, in
+<VirtualHost>-Containern (Section 3), wo sie nur für den
+entsprechenden Domain-/Hostnamen gelten, oder in
+<Directory>-Containern, wo sie nur für ein bestimmtes
+Verzeichnis und dessen Unterverzeichnisse gelten. Auch in
+<tt>.htaccess</tt>-Dateien sind sie möglich, sie gelten dann
+ebenfalls für nur für ein Verzeichnis bzw. dessen
+Unterverzeichnisse.
+</p>
+
+<p>
+Betreibt man PHP nicht als Webserver-Modul, sondern als CGI (z.B.
+PHP3 parallel zu PHP4), sieht der Eintrag folgendermaßen aus:
+</p>
+
+<pre class="ini">AddType application/x-httpd-php3 .php3 .html
+Action  application/x-httpd-php3 /cgi-bin/php
+&nbsp;
+// Für Windows
+ScriptAlias /php3/ <span style="color: #933;">&quot;/path-to-php-dir/&quot;</span>
+AddType application/x-httpd-php3 .php3
+Action  application/x-httpd-php3 <span style="color: #933;">&quot;/php3/php.exe&quot;</span></pre>
+
+<p>
+Solange die Modulversion von PHP verwendet wird und in
+den verarbeiteten Dateien keine PHP PIs (SGML Processing
+Instructions, die PHP einschalten: <tt>&lt;?php</tt> usw.)
+vorkommen, ist der Mehraufwand in CPU-Belastung und
+Zeitverbrauch kaum meßbar. Bei der CGI-Version entspricht
+der Mehraufwand dem Ausliefern jeder HTML-Seite durch ein
+CGI-Programm. Das kann beträchtlich sein.
+</p>
+
+<p>
+<em>Wichtig:</em> Bei Änderungen an der <tt>httpd.conf</tt>
+ist ein Neustart des Apache notwendig (Linux: <tt>apachectl
+restart</tt>), um sie wirksam werden zu lassen.
+</p>
+
+<p>
+Eine besondere Funktion kann man der Dateiendung <tt>.phps</tt>
+zukommen lassen, PHP stellt dann den Quellcode der Datei mit
+farbig hervorgehobenen Tags dar:
+</p>
+
+<pre class="ini">AddType application/x-httpd-php-source .phps</pre>
+
+<p>
+Man kann seine PHP-Dateien kopieren und als <tt>.phps</tt> speichern,
+dies hat jedoch Nachteile: es wird der doppelte Speicherplatz
+verbraucht, und bei Änderungen an der Datei muss die Kopie auch
+aktualisiert werden. Unter Unix/Linux kann man einen symbolischen
+Link auf die Datei anlegen, um dies zu vermeiden (<tt>ln -s file.php
+file.phps</tt>). Allerdings muss dies für jede Datei getan werden;
+will man alle Dateien mit der Endung <tt>.php</tt> auch als
+<tt>.phps</tt> abrufen können, bastelt man mit dem Apache-Modul
+<tt>mod_rewrite</tt> (oder auch <tt>mod_alias</tt>) eine Regel, die
+diese Requests abfängt und an ein PHP-Skript weiterleitet.
+Im Manual bei der Funktion <a href="http://www.php3.de/highlight_file">highlight_file()</a>
+findet man ein Beispiel, wie man Source Highlighting auch auf
+recht elegante Art mittels <tt>ForceType</tt> erreichen kann.
+</p>
+

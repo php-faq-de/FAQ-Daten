@@ -1,0 +1,120 @@
+<p>
+Mit Hilfe der <tt>GROUP BY</tt>-Clause kann man in SQL Daten
+aggregieren, also Äquivalenzklassen über den gefundenen
+Elementen bilden und mit den so gefundenen Teilmengen arbeiten.
+</p>
+
+<p>
+Gegeben sei eine Menge von Tupeln, etwa <tt>(1, 2)</tt>,
+<tt>(1, 3)</tt>, <tt>(2, 3)</tt>, <tt>(2, 2)</tt>, <tt>(3, 17)</tt>,
+<tt>(2, 21)</tt>. Man kann diese Menge jetzt in Teilmengen unterteilen,
+das wäre dann in der Mathematik eine Relation. Die Elemente, die
+gemeinsam in einer Teilmenge stehen, stehen dann <em>in einer Relation
+zueinander</em>.
+</p>
+
+<p>
+Eine Relation ist zum Beispiel <em>kleiner als x</em>. Nimmt man zum
+Beispiel die Menge N (natürliche Zahlen) und die Relation <em>kleiner 
+als 10</em>, dann teilt diese Relation die Menge N in zwei Teilmengen:
+Die Menge der natürlichen Zahlen, die die Relation erfüllen
+(also die Zahlen 0, 1, 2, 3, ..., 9) und die Menge der natürlichen
+Zahlen, die die Relation nicht erfüllen (die Zahlen 10, 11, ...).
+</p>
+
+<p>
+Ebenso kann man eine Äquivalenzrelation definieren. Eine solche
+Relation definiert mehrere Teilmengen und die Elemente einer
+Teilmenge sind gleich. In N mit <tt>==</tt> als Relation ist das
+witzlos, da die Teilmengen dann einelementig sind, aber mit den
+o.a. Tupeln kann man ein sinnvolles Beispiel definieren, wenn
+man als Äquivalenzrelation <tt>Gleichheit des ersten Elementes</tt>
+definiert. Man bekommt dann die folgenden Teilmengen:
+</p>
+
+<pre>
+Die Menge 1 == { (1, 2), (1, 3) }
+Die Menge 2 == { (2, 3), (2, 2), (2, 21) }
+Die Menge 3 == { (3, 17) }
+</pre>
+
+<p>Angenommen, die Tupel seien eine Tabelle</p>
+
+<pre class="sql"><span style="color: #993333; font-weight: bold;">CREATE</span> <span style="color: #993333; font-weight: bold;">TABLE</span> beispiel <span style="color: #66cc66;">&#40;</span>
+  x integer,
+  y integer
+<span style="color: #66cc66;">&#41;</span>;</pre>
+
+<p>dann würde man die o.a. Tupel als</p>
+
+<pre class="sql"><span style="color: #993333; font-weight: bold;">INSERT</span> <span style="color: #993333; font-weight: bold;">INTO</span> beispiel <span style="color: #66cc66;">&#40;</span>x, y<span style="color: #66cc66;">&#41;</span> <span style="color: #993333; font-weight: bold;">VALUES</span> <span style="color: #66cc66;">&#40;</span><span style="color: #cc66cc;">1</span>, <span style="color: #cc66cc;">2</span><span style="color: #66cc66;">&#41;</span>;
+<span style="color: #993333; font-weight: bold;">INSERT</span> <span style="color: #993333; font-weight: bold;">INTO</span> beispiel <span style="color: #66cc66;">&#40;</span>x, y<span style="color: #66cc66;">&#41;</span> <span style="color: #993333; font-weight: bold;">VALUES</span> <span style="color: #66cc66;">&#40;</span><span style="color: #cc66cc;">1</span>, <span style="color: #cc66cc;">3</span><span style="color: #66cc66;">&#41;</span>;
+<span style="color: #993333; font-weight: bold;">INSERT</span> <span style="color: #993333; font-weight: bold;">INTO</span> beispiel <span style="color: #66cc66;">&#40;</span>x, y<span style="color: #66cc66;">&#41;</span> <span style="color: #993333; font-weight: bold;">VALUES</span> <span style="color: #66cc66;">&#40;</span><span style="color: #cc66cc;">2</span>, <span style="color: #cc66cc;">3</span><span style="color: #66cc66;">&#41;</span>;
+<span style="color: #993333; font-weight: bold;">INSERT</span> <span style="color: #993333; font-weight: bold;">INTO</span> beispiel <span style="color: #66cc66;">&#40;</span>x, y<span style="color: #66cc66;">&#41;</span> <span style="color: #993333; font-weight: bold;">VALUES</span> <span style="color: #66cc66;">&#40;</span><span style="color: #cc66cc;">2</span>, <span style="color: #cc66cc;">2</span><span style="color: #66cc66;">&#41;</span>;
+<span style="color: #993333; font-weight: bold;">INSERT</span> <span style="color: #993333; font-weight: bold;">INTO</span> beispiel <span style="color: #66cc66;">&#40;</span>x, y<span style="color: #66cc66;">&#41;</span> <span style="color: #993333; font-weight: bold;">VALUES</span> <span style="color: #66cc66;">&#40;</span><span style="color: #cc66cc;">2</span>, <span style="color: #cc66cc;">21</span><span style="color: #66cc66;">&#41;</span>;
+<span style="color: #993333; font-weight: bold;">INSERT</span> <span style="color: #993333; font-weight: bold;">INTO</span> beispiel <span style="color: #66cc66;">&#40;</span>x, y<span style="color: #66cc66;">&#41;</span> <span style="color: #993333; font-weight: bold;">VALUES</span> <span style="color: #66cc66;">&#40;</span><span style="color: #cc66cc;">3</span>, <span style="color: #cc66cc;">17</span><span style="color: #66cc66;">&#41;</span>;</pre>
+
+<p>
+definieren und bekäme die Äquivalenzrelation aus dem Beispiel als
+</p>
+
+<pre>
+SELECT x AS mengenname FROM beispiel GROUP BY x;
++------------+
+| mengenname |
++------------+
+|          1 |
+|          2 |
+|          3 |
++------------+
+3 rows in set (0.01 sec)
+</pre>
+
+<p>
+d.h. die Tupel <tt>(x, y)</tt> mit gleichem <tt>x</tt> bilden jeweils
+eine Menge. Wir sehen uns von diesen Tupeln jeweils nur die
+<tt>x</tt> an.
+</p>
+
+<p>
+Die Mächtigkeit der Mengen 1, 2 und 3 kann man mittels
+<tt>count()</tt> bestimmen:
+</p>
+
+<pre>
+SELECT x AS mengenname, COUNT(x) AS maechtigkeit
+  FROM beispiel
+  GROUP BY x;
++------------+--------------+
+| mengenname | maechtigkeit |
++------------+--------------+
+|          1 |            2 |
+|          2 |            3 |
+|          3 |            1 |
++------------+--------------+
+3 rows in set (0.00 sec)
+</pre>
+
+<p>
+Man kann sich auch das Tupel <tt>(x, y)</tt> wieder ausgeben lassen:
+</p>
+
+<pre>
+SELECT x, y FROM beispiel GROUP BY x;
++------+------+
+| x    | y    |
++------+------+
+|    1 |    2 |
+|    2 |    3 |
+|    3 |   17 |
++------+------+
+3 rows in set (0.00 sec)
+</pre>
+
+<p>
+MySQL wählt hier <em>irgendein</em> <tt>y</tt>, da ja per Definition
+alle <tt>(x, y)</tt> innerhalb einer Teilmenge gleich sind und jedes
+Element der Teilmenge daher als Repräsentant der Teilmenge
+gewählt werden kann.
+</p>
+

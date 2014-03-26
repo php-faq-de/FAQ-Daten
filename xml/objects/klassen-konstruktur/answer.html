@@ -1,0 +1,50 @@
+<p>
+Ein Konstruktur ist eine gewöhnliche Funktion einer Klasse. Sie
+unterscheidet sich von anderen Funktionen derselben Klasse
+dadurch, dass sie beim Erzeugen der Klasse mit <tt>new</tt>
+automatisch aufgerufen wird. In PHP muss ein Konstruktor
+unglücklicherweise genauso heißen wie die Klasse selbst.
+</p>
+
+<p>
+Ein Konstruktor kann optionale Parameter mitgegeben bekommen. Er
+kann niemals ein Funktionsergebnis liefern.
+</p>
+
+<p>
+Man verwendet Konstruktoren oft, um die Variablen eines Objektes
+zu initialisieren. Die Klasse <tt>Menu</tt> in
+<a href="http://phplib.sourceforge.net/">PHPLIB</a>
+verwendet beispielweise einen Konstruktor, um eine Menüstruktur zu
+initialisieren.
+</p>
+
+<pre><span style="color: #000000; font-weight: bold;">class</span> Menu <span style="color: #000000;">&#123;</span>
+  <span style="color: #000000; font-weight: bold;">function</span> Menu<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>   <span style="color: #808080; font-style: italic;">// wird automatisch aufgerufen</span>
+    <span style="color: #0000ff;">$this</span>-&gt;<span style="color: #006600;">setup</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+  <span style="color: #000000;">&#125;</span>
+&nbsp;
+  <span style="color: #000000; font-weight: bold;">function</span> setup<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>  <span style="color: #808080; font-style: italic;">// Initialisierung...</span>
+    <a href="http://www.php3.de/reset"><span style="color: #000066;">reset</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$this</span>-&gt;<span style="color: #006600;">urlmap</span><span style="color: #000000;">&#41;</span>;
+    <span style="color: #b1b100;">while</span><span style="color: #000000;">&#40;</span>...<span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+      ...;
+    <span style="color: #000000;">&#125;</span>
+  <span style="color: #000000;">&#125;</span>
+<span style="color: #000000;">&#125;</span></pre>
+
+<p>
+In PHP3 wurde bei abgeleiteten Klassen der Konstruktor der Basisklasse
+nicht automatisch aufgerufen. Man musste stattdessen Code wie diesen
+schreiben:
+</p>
+
+<pre><span style="color: #000000; font-weight: bold;">class</span> My_Menu <span style="color: #000000; font-weight: bold;">extends</span> Menu <span style="color: #000000;">&#123;</span>
+  <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #0000ff;">$urlmap</span> = <a href="http://www.php3.de/array"><span style="color: #000066;">array</span></a><span style="color: #000000;">&#40;</span>
+    <span style="color: #808080; font-style: italic;">// meine eigenen Menüpunkte hier</span>
+  <span style="color: #000000;">&#41;</span>;
+&nbsp;
+  <span style="color: #000000; font-weight: bold;">function</span> My_Menu<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>   <span style="color: #808080; font-style: italic;">// wird automatisch aufgerufen</span>
+    <span style="color: #0000ff;">$this</span>-&gt;<span style="color: #006600;">setup</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;      <span style="color: #808080; font-style: italic;">// Aufruf der Initialisierung</span>
+  <span style="color: #000000;">&#125;</span>
+<span style="color: #000000;">&#125;</span></pre>
+

@@ -1,0 +1,54 @@
+<p>
+Um den Status einer Domain in Erfahrung zu bringen, stellt das
+jeweilige NIC (Network Information Center) einen sog.
+whois-Dienst für die von ihm verwaltete TLD (Top Level
+Domain, <tt>.com</tt>, <tt>.de</tt>, <tt>.info</tt> etc.) zur
+Verfügung. Dabei gibt es in der Praxis zwei Probleme: erstens
+sind die Adressen der whois-Server nicht wirklich einheitlich,
+und zweitens variiert das Ausgabe-Format von Anbieter zu Anbieter
+sehr stark - der eine liefert z.B. die komplette Anschrift des
+Domaininhabers, der andere sagt nur "besetzt" oder "frei". Die
+meisten whois-Scripte werten deshalb die Antwort des Server nicht
+aus, sondern liefern sie 1:1 als Text zurück.
+</p>
+
+<p>
+Hier eine Liste von in PHP programmierten whois-Scripten:
+</p>
+
+<ul>
+ <li>
+ <p><a href="http://www.mattsscripts.co.uk/mwhois.htm">MWhois</a>
+ bringt eine ausführliche Liste von NICs mit und parst die
+ Antworten der Server nach Strings wie "No entries found",
+ um den Status zu ermitteln. Kann durch Templates an
+ verschiedene Sprachen angepaßt werden.
+ </p>
+ </li>
+
+ <li>
+ <p><a href="http://zend.com/codex.php?id=170&single=1">whoislookup</a>
+ arbeitet überwiegend nach dem Schema <tt>whois.nic.tld</tt>. Die
+ Server-Antwort wird ungeparst präsentiert.
+ </p>
+ </li>
+
+ <li>
+ <p><a href="http://www.easydns.com/~markjr/whois2/">whois2</a>
+ arbeitet mit einer eigenen NIC-Liste. Für ausgewählte NICs gibt es
+ Erweiterungen, die das Parsen der Server-Antworten erledigen.
+ </p>
+ </li>
+
+ <li>
+ <p><a href="http://zend.com/codex.php?id=61&single=1">whoisclass</a>
+ überläßt die ganze Arbeit dem Server <tt>whois.geektools.com</tt>,
+ der seinerseits die tatsächlichen whois-Server abfragen muss. Für
+ stark frequentierte Seiten ist es ratsam, den
+ <a href="http://www.geektools.com/software.php">GeekTools Proxy</a>
+ auf dem <em>eigenen</em> Server zu installieren, um den Traffic
+ in Grenzen zu halten.
+ </p>
+ </li>
+</ul>
+

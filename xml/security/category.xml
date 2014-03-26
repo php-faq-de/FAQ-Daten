@@ -1,0 +1,17 @@
+<Category alias="security" name="Sicheres Programmieren in PHP" keywords="PHP, Usenet, FAQ, dclp">
+  <!--Die FAQs sind hier noch mal redundant aufgelistet um die Reihenfolge vorzugeben.-->
+  <Faqs>
+    <Faq alias="security-variablen" />
+    <Faq alias="konfiguration-safe-mode" />
+    <Faq alias="http-referer" />
+    <Faq alias="http-referer-nutzen" />
+    <Faq alias="php-kompilieren" />
+    <Faq alias="apache-passwort" />
+    <Faq alias="apache-php-passwort" />
+    <Faq alias="php-passwort" />
+    <Faq alias="safe-password" />
+    <Faq alias="sicherheit-global" />
+    <Faq alias="sicherheit-parameter" />
+    <Faq alias="race-condition" />
+  </Faqs>
+</Category>

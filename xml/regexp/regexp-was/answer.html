@@ -1,0 +1,52 @@
+<p>
+Reguläre Ausdrücke sind Suchmuster, die sich auf Strings
+anwenden lassen und für die entscheidbar ist, ob sie auf den
+String passen (<em>match</em>) oder nicht passen. So paßt das
+Suchmuster <tt>ei</tt> auf den String <tt>Weichei</tt>, weil darin die
+Zeichenfolge <tt>ei</tt> enthalten ist, aber nicht auf den String
+<tt>Warmduscher</tt>. Wendet man ein Suchmuster auf eine Menge von
+Strings an, dann bekommt man zwei Teilmengen, nämlich die Menge
+aller Strings, auf die das Muster paßt und die Menge aller
+Strings, auf die das Muster nicht paßt. Meistens interessiert
+man sich für eine der beiden Teilmengen ("Finde alle Namen, die
+mit einem einem <tt>A</tt> beginnen.", "Finde alle Zeichen, die nicht
+rechts von einem Kommentarzeichen stehen.")
+</p>
+
+<p>
+Reguläre Ausdrücke werden meistens durch einen endlichen
+Automaten realisiert. Die Informatik kennt Verfahren, mit denen
+man automatisch einen Automaten generieren kann, der für ein
+bestimmtes Suchmuster entscheidet, ob es auf einen String paßt
+oder nicht. Auch die regulären Ausdrücke in PHP funktionieren
+so: Bei der ersten Benutzung eines regulären Ausdruckes wird ein
+solcher Automat intern generiert (das Muster wird "compiliert")
+und dann angewendet. Bei späteren Benutzungen desselben
+Suchmusters kann dieser Automat dann unter Umständen wieder
+verwendet werden, was deutlich schneller ist.
+</p>
+
+<p>
+Einige Suchmuster und Bedingungen sind zu komplex, als dass man
+sie mit Hilfe von regulären Ausdrücken und Automaten formulieren
+kann. Typische Beispiele dafür sind Dinge, die Abzählungen
+erforderlich machen ("Finde alle Worte, die aus genausovielen
+<tt>b</tt>'s bestehen, wie sie <tt>a</tt>'s enthalten") und
+Dinge, die Vorbedingungen notwendig machen ("Finde alle Worte
+<tt>print</tt>, aber nur, wenn sie nicht in Anführungszeichen
+stehen oder Bestandteil eines Kommentares sind."). In diesem
+Fällen braucht man leistungsfähigere Konzepte und Werkzeuge,
+kontextfreie oder kontextsensitive Grammatiken und dazu passende
+Parser.
+</p>
+
+<p>
+In der Praxis verwendet man reguläre Ausdrücke, um zu
+entscheiden, ob ein String bestimmten formalen Kritierien genügt
+("Akzeptiere den Formularwert nur dann, wenn er
+ausschließlichlich Ziffern enthält.") oder um bestimmte
+Teilstücke aus Strings herauszuschneiden ("Liefere mit den Text
+zwischen dem <tt>begin</tt> und <tt>end</tt> aus dem gegebenen
+String.").
+</p>
+

@@ -1,0 +1,4 @@
+<Faq alias="fehler-konstante" author="Johannes Frömter">
+  <Question>Notice: Use of undefined constant ...</Question>
+  <Keywords>Fehler, Konstante, Variable, String, Array, Anfuehrungszeichen, error reporting level, type casting</Keywords>
+</Faq>

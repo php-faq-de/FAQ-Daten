@@ -1,0 +1,16 @@
+<Category alias="functions" name="Typen und Funktionen" keywords="PHP, Usenet, FAQ, dclp">
+  <!--Die FAQs sind hier noch mal redundant aufgelistet um die Reihenfolge vorzugeben.-->
+  <Faqs>
+    <Faq alias="php-variablen" />
+    <Faq alias="php-datentypen" />
+    <Faq alias="typ-konvertierung" />
+    <Faq alias="funktion-variabel" />
+    <Faq alias="funktion-rueckgabe" />
+    <Faq alias="variable-parameter" />
+    <Faq alias="variable-variablen" />
+    <Faq alias="variable-testen" />
+    <Faq alias="funktion-php-js" />
+    <Faq alias="funktion-js-php" />
+    <Faq alias="variable-finden" />
+  </Faqs>
+</Category>

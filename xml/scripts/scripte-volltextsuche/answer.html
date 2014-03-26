@@ -1,0 +1,45 @@
+<p>
+Eine Suchmaschine fuer Volltext wird man in den
+meisten Faellen nicht in PHP und mit einer SQL-Datenbank
+programmieren, sondern sinnvollerweise für diesen
+Anwendungszweck spezialisierte Software verwenden.
+SQL-Datenbanken sind nur dann optimal eingesetzt, wenn die Art
+der Daten und die Art der Anfragen den Einsatz von Indices
+möglich machen. Die meisten SQL-Datenbanken sind von Haus aus
+nicht besonders gut eingerichtet, um Indices über Volltext
+verwalten zu können: Zum einen können viele SQL-Datenbanken BLOB
+und TEXT-Felder gar nicht indizieren. Zum anderen können die
+meisten Datenbanken vorhandene Indices nicht nutzen, wenn der
+Suchausdruck nicht ohne Wildcard am vorderen Rand der Spalte
+verankert ist, d.h. wenn die Suche die Form <tt>LIKE
+'%suchwort'</tt> hat.
+
+MySQL bietet ab der Version 3.23.23 die Möglichkeit, einen
+Volltextindex anzulegen. Eine Anleitung dazu befindet sich in
+"<a class="faq" href="http://php-faq.de/q-mysql-volltextsuche.html">Wie realisiere ich eine Volltextsuche mit MySQL?</a>"
+</p>
+
+<p>Einige populäre Volltextsuchmaschinen:</p>
+
+<ul>
+<li><p>
+<a href="http://www.htdig.org/">ht://dig</a>
+</p></li>
+<li><p>
+<a href="http://webglimpse.org/">Glimpse</a>
+</p></li>
+<li><p>
+<a href="http://search.mnogo.ru/">mnoGoSearch (ehemals UDMSearch)</a>
+</p></li>
+<li><p>
+<a href="http://www.etymon.com/Isearch/">Isearch</a>
+</p></li>
+</ul>
+
+<p>
+In der Newsgroup wurde der folgende Text zum Studium empfohlen:
+<a class="book" href="http://www.amazon.de/exec/obidos/ASIN/1558605703/bsdsbraczekso-21" target="amazon">Managing Gigabytes;                Compressing and Indexing Documents and Images</a>,
+Ian H. Witten, Alistair Moffat, Timothy C. Bell;
+<a href="http://www.cs.mu.oz.au/mg/">Morgan Kaufmann Publishers</a>.
+</p>
+

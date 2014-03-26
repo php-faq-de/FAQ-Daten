@@ -1,0 +1,26 @@
+<p>
+Gewöhnlich macht man dies, indem man mit Session arbeitet und
+bei jedem Formular eine eindeutige ID ("Challenge") als
+Hidden-Variable in das Formular mit aufnimmt, die man sich
+außerdem in einer lokalen Sessionvariablen auf dem Server merkt.
+</p>
+
+<p>
+Wenn das Formular abgesendet wird, vergleicht man die gelieferte
+Challenge mit der lokal gemerkten Challenge und akzeptiert das
+Formular nur dann, wenn beide übereinstimmen.
+</p>
+
+<p>
+Wenn das Formular verarbeitet wird, löscht man die Challenge in
+der Sessionvariablen nach Abschluss der Verarbeitung. Wird das
+Formular ein weiteres Mal versendet, liefert es die alte
+Challenge aus der Hidden-Variable, deren Gegenstück in der
+Sessionvariablen aber bereits gelöscht wurde.
+</p>
+
+<p>
+Man kann dies sehr schön mit einem generischen Formularvalidator
+automatisieren, dann hat man gar keine Arbeit mehr damit.
+</p>
+

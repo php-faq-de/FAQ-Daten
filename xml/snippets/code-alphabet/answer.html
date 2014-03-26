@@ -1,0 +1,24 @@
+<p>
+Immer wieder kommt es vor, dass man die Buchstaben des Alphabets in
+einem Array benötigt. Natürlich muss man das nicht von Hand machen:
+</p>
+
+<pre><span style="color: #b1b100;">for</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$i</span> = <span style="color: #cc66cc;">65</span>; <span style="color: #0000ff;">$i</span> &lt;= <span style="color: #cc66cc;">90</span>; <span style="color: #0000ff;">$i</span>++<span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+    <span style="color: #0000ff;">$alphabet</span><span style="color: #000000;">&#91;</span><span style="color: #000000;">&#93;</span> = <a href="http://www.php3.de/chr"><span style="color: #000066;">chr</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$i</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000;">&#125;</span></pre>
+
+<p>
+Für Großbuchstaben lässt man die for-Schleife von 65 bis 90 laufen,
+für Kleinbuchstaben von 97 bis 122. Die Zahlen (ASCII-Codes) werden
+durch die Funktion <a href="http://www.php3.de/chr">chr()</a> in die entsprechenden
+Buchstaben umgewandelt und im Array <tt>$alphabet</tt> abgelegt.
+</p>
+
+<p>
+Es geht aber auch noch kürzer - seit PHP 4.1.0 akzeptiert
+die Funktion <a href="http://www.php3.de/range">range()</a> auch Buchstaben als
+Bereichsangabe:
+</p>
+
+<pre><span style="color: #0000ff;">$alphabet</span> = <a href="http://www.php3.de/range"><span style="color: #000066;">range</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'A'</span>, <span style="color: #ff0000;">'Z'</span><span style="color: #000000;">&#41;</span>;</pre>
+

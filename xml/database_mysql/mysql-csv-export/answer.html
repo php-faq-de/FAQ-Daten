@@ -1,0 +1,45 @@
+<p>Die Umkehrung von <tt>LOAD DATA INFILE</tt> ist das <tt>SELECT INTO
+OUTFILE</tt>, eine Variante des regulären SELECT.</p>
+
+<pre class="sql"><span style="color: #993333; font-weight: bold;">SELECT</span> ...
+    <span style="color: #993333; font-weight: bold;">INTO</span> <span style="color: #993333; font-weight: bold;">OUTFILE</span> <span style="color: #ff0000;">'/home/www/servers/www.servername.de/tmp/export.csv'</span>
+    <span style="color: #993333; font-weight: bold;">FIELDS</span>
+            TERMINATED <span style="color: #993333; font-weight: bold;">BY</span> <span style="color: #ff0000;">';'</span>
+            <span style="color: #993333; font-weight: bold;">OPTIONALLY</span> <span style="color: #993333; font-weight: bold;">ENCLOSED</span> <span style="color: #993333; font-weight: bold;">BY</span> <span style="color: #ff0000;">'&quot;'</span>
+    <span style="color: #993333; font-weight: bold;">FROM</span> ...;</pre>
+
+<p>Das Kommando wird die Datei auf dem Rechner anlegen, auf dem der
+Datenbankserver läuft und die Datei wird dem Benutzer gehören,
+unter dessen User-ID der Datenbankserver abläuft. Der
+Datenbankserver wird eine existierende Datei nicht
+überschreiben. Zur Ausführung des Kommandos ist
+<tt>file_priv</tt> notwendig.</p>
+
+<p>Eine vollständige Beschreibung des Kommandos in englischer
+Sprache gibt es im
+<a href="http://www.mysql.com/documentation/mysql/bychapter/manual_Reference.html#SELECT">MySQL Manual</a>.</p>
+
+<p>Wenn man kein <tt>file_priv</tt> hat, muss man sich
+stattdessen eine entsprechende Funktion in PHP selber bauen.
+Dabei ist folgendes zu beachten:</p>
+
+<ul>
+<li><p>In CSV-Dateien sind Datensätze durch Kommata getrennt.</p></li>
+<li><p>In CSV-Dateien sind Datensätze, die Sonderzeichen enthalten,
+insbesondere solche, die Kommata oder Anführungszeichen
+enthalten, durch Anführungszeichen einzuschließen.</p></li>
+<li><p>In CSV-Dateien dürfen alle Datensätze in Anführungszeichen
+eingeschlossen werden.</p></li>
+<li><p>In CSV-Dateien sind in Datensätzen, die Anführungszeichen
+enthalten, die Anführungszeichen zu verdoppeln.</p></li>
+</ul>
+
+<p>Eine zweispaltige Tabelle, die die Tupel <tt>( a; 10,4)</tt>
+und <tt>(b; Er sagte: "Hallo, Du!" )</tt> enthält, muss nach dem
+Export also so aussehen:</p>
+
+<pre>
+a,"10,4"
+b,"Er sagte: ""Hallo, Du!"""
+</pre>
+

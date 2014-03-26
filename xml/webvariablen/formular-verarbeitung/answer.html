@@ -1,0 +1,53 @@
+<p>
+Die Überprüfung von Formulareingaben ist in Hinblick auf die
+Sicherheit eines Skriptes ein nicht zu unterschätzender Faktor.
+Ausgangspunkt sollte meist das sogenannte <em>Affenformular</em>
+sein (siehe "<a class="faq" href="http://www.php-faq.de/q-stil-normalform.html">Von HTML zu PHP: Schreibe Formularverarbeitungen in Normalform</a>").
+</p>
+<h2>Erkennen fehlender Eingaben</h2>
+<p>
+Die Länge einer Textfeldeingabe lässt sich mit der PHP-Funktion
+<a href="http://www.php3.de/strlen">strlen()</a> ermitteln. Leere Strings sind in
+PHP <tt>FALSE</tt>, d.h. durch eine Überprüfung auf Wahrheit
+(<tt>if ($_REQUEST['textfeldname'])</tt>) lässt sich feststellen,
+ob der Benutzer eine Eingabe gemacht hat.
+</p>
+<h2>Textfelder generell</h2>
+<p>
+Wenn ein Textfeld nur bestimmte Zeichen enthalten darf, ist es
+oft am einfachsten zu überprüfen, ob der übermittelte String
+Zeichen enthält, die nicht erlaubt sind (siehe auch
+"<a class="faq" href="http://www.php-faq.de/q-regexp-bauelemente.html">Welche Bauelemente kommen in Regulären Ausdrücken vor?</a>"):
+</p>
+<pre><span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><a href="http://www.php3.de/preg_match"><span style="color: #000066;">preg_match</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'/[^0-9a-z_.-]/i'</span>, <span style="color: #0000ff;">$_REQUEST</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'textfeldname'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>
+    errmsg<span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'Ungültige Zeichen im Textfeld.'</span><span style="color: #000000;">&#41;</span>;</pre>
+<h2>Zahlenfelder</h2>
+<p>
+Um zu überprüfen, ob ein Textfeld eine Zahl enthält, eignet
+sich die Funktion <a href="http://www.php3.de/is_numeric">is_numeric()</a>. Diese
+Funktion akzeptiert allerdings auch Zeichen, die nicht Ziffern
+sind (z.B. <tt>-1.6e-12</tt>). Sollen nur Ziffern akzeptiert
+werden, helfen wieder Reguläre Ausdrücke:
+</p>
+<pre><span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><a href="http://www.php3.de/preg_match"><span style="color: #000066;">preg_match</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'/<span style="color: #000099; font-weight: bold;">\D</span>/'</span>, <span style="color: #0000ff;">$_REQUEST</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'textfeldname'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>
+    errmsg<span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'Ungültige Zeichen im Zahlenfeld.'</span><span style="color: #000000;">&#41;</span>;</pre>
+<h2>URLs</h2>
+<p>
+Zum Überprüfen einer URL reicht es meist aus, deren Anfang zu
+analysieren:
+</p>
+<pre><span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span>! <a href="http://www.php3.de/preg_match"><span style="color: #000066;">preg_match</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'=(https?|ftp)://[a-z0-9]([a-z0-9-]*[a-z0-9])?<span style="color: #000099; font-weight: bold;">\.</span>[a-z0-9]=i'</span>, <span style="color: #0000ff;">$_REQUEST</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'textfeldname'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>
+    errmsg<span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'Ungültige URL im Adressfeld.'</span><span style="color: #000000;">&#41;</span>;</pre>
+<p>
+Diese Überprüfung soll nur ein Ansatz sein und lässt sich
+beliebig erweitern/verfeinern. Die tatsächliche Erreichbarkeit
+gewährleistet diese Vorgehensweise allerdings nicht. Mit Hilfe
+der Funktion <a href="http://www.php3.de/fopen">fopen()</a> lässt sich die momentante
+Erreichbarkeit einer URL feststellen.
+</p>
+<h2>E-Mail-Adressen</h2>
+<p>
+Diese Frage wird unter "<a class="faq" href="http://www.php-faq.de/q-mail-adresse-gueltig.html">Wie kann ich feststellen, ob eine Mailadresse äußerlich gültig ist?</a>"
+und "<a class="faq" href="http://www.php-faq.de/q-mail-adresse-testen.html">Wie kann ich die Gültigkeit einer Mailadresse testen?</a>" beantwortet.
+</p>
+

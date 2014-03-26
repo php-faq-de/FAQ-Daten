@@ -1,0 +1,4 @@
+<Faq alias="oracle-zeichensatz" author="Anton Bangratz">
+  <Question>Warning: ORA-12705: invalid or unknown NLS parameter value specified</Question>
+  <Keywords>Oracle, Datenbank, Parameter, Server, Zeichensatz, Fehler</Keywords>
+</Faq>

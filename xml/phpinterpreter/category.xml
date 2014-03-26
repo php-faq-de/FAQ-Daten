@@ -1,0 +1,22 @@
+<Category alias="phpinterpreter" name="Fragen zum PHP Interpreter" keywords="PHP, Usenet, FAQ, dclp">
+  <!--Die FAQs sind hier noch mal redundant aufgelistet um die Reihenfolge vorzugeben.-->
+  <Faqs>
+    <Faq alias="php-vergleich" />
+    <Faq alias="php-vs-perl" />
+    <Faq alias="php-aus-asp" />
+    <Faq alias="php-cgi-vs-modul" />
+    <Faq alias="php-portierung" />
+    <Faq alias="php-zeitgesteuert" />
+    <Faq alias="php-einbetten" />
+    <Faq alias="php-umgebung" />
+    <Faq alias="http-request" />
+    <Faq alias="http-variablen" />
+    <Faq alias="php-shell" />
+    <Faq alias="variable-weitergeben" />
+    <Faq alias="php-auf-cdrom" />
+    <Faq alias="php-suchmaschine" />
+    <Faq alias="php-code" />
+    <Faq alias="php-ausgabe-frame" />
+    <Faq alias="php-client-infos" />
+  </Faqs>
+</Category>

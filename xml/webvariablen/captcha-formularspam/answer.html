@@ -1,0 +1,117 @@
+<p>
+Webformulare werden oft von Bots zum Spammen missbraucht. Mittels Captchas versucht man, Bots zu erkennen. Oft sind andere Methoden allerdings sinnvoller.
+</p>
+
+<h2>CAPTCHAs</h2>
+
+
+<p>
+CAPTCHA ist die Abkürzung für "Completely Automated Public Turing test to tell Computers and Humans Apart". Man versucht also den Benutzer des Formulars vor zusätzliche Probleme zu stellen, welcher ein Mensch lösen kann, ein Bot/Programm allerdings nicht. In der Regel passiert das mittels Darstellung von verfremdeten Zahlen und Buchstaben in Grafiken, welche die Benutzer erkennen und eintragen müssen.
+</p>
+<p>
+CAPTCHAs sind ein Mittel gegen offene, gezielte Angriff auf eine Website mittels Bots. Sie haben allerdings auch Nachteile:
+</p>
+<ol>
+<li>
+Die Bots werden immer weiter entwickelt und es besteht ständiger Bedarf an Verbesserungen um zu verhindern, dass die CATPCHAs auch von Bots gelöst werden können.
+</li>
+<li>
+Sie stellen auch für Menschen eine Hürde dar. Unter gewissen Umständen sogar eine unüberwindbare.
+</li>
+<li>
+Sie können unter anderem Vorwand an Menschen weitergereicht werden, welche diese dann gegen "Belohnung" lösen.
+</li>
+
+<h2>Alternative Abwehrmaßnahmen gegen ungezielte Angriffe</h2>
+
+<p>
+Gerade kleinere, unbekanntere Websites werden eher Opfer von Angriffen freilaufender Bots, welche versuchen relativ ungezielt Spam und Malware loszuwerden. Die Bots sind hier vergleichsweise dumm und nicht auf die Website speziell angepasst. Somit wirken einfachere Gegenmittel. Diese haben auch den Vorteil, das die Benutzer der Seite weniger belästigt werden.
+</p>
+<p>
+Solche Methoden (außer klassische Captchas), mit denen Formularspam wirksam eingedämmt werden kann sind:
+<p>
+
+<h3>1. Überprüfung der übermittelten Formularinhalte</h3>
+<p>
+Überprüfung auf Versuche, das Formular zu missbrauchen. Erkennt man aufgrund von bestimmten Zeichenketten einen Bot, so kann man eine Fehlermeldung ausgeben statt die eigentlich geplante Aktion auszuführen. Möglichkeiten für diese Zeichenketten sind zum Beispiel:
+</p>
+<dl>
+<dt>&lt;a href</dt>
+<dd>Bei einem klassischen Kontaktformular besteht i.d.R. keine Notwendigkeit für HTML-Eingaben.
+</dd>
+
+<dt>BCC:</dt>
+<dd>From:<br />
+Mime-Part:<br />
+..etc.<br />
+Mail-Header haben in Kommentaren zu einer Website nichts zu suchen
+</dd>
+
+<dt>Viagra</dt>
+<dd>Nach Belieben können Wörter aus dem Wortschatz der Spammer zu einer Nichtannahme führen.
+</dd>
+
+<dt>Automatisch Filter</dt>
+<dd>Hier können z.B. auch selbstlernende Filter verwendet werden.
+</dd>
+</dl>
+
+<h3>2. Verwendung eines "Light-Captchas"</h3>
+<p>
+Wenn die Website vor dem Angriff nicht von einem Menschen geprüft worden ist und der Bot nicht auf die Website optimiert ist, dann genügen oft relativ einfache Mittel um einen Bot zu erkennen:
+<dl>
+<dt>Honeypot</dt>
+<dd>Verwendung eines Feldes, in das nichts eingetragen werden darf. Dieses Feld sollte z.B. per CSS vor Besuchern verborgen werden. Spammer füllen i.d.R. alle Felder aus. Wenn das Feld ausgefüllt ist, dann kann man davon ausgehen, dass dies ein Bot gemacht hat.
+</dd>
+
+<dt>Einfache Aufgaben</dt>
+<dd>Lösung einfacher Aufgaben in Textform (z.B. Hauptstadt von Deutschland, 1+1, etc) vom Besucher verlangen und die Lösung überprüfen. Alternativ kann man auch vom Benutzer verlangen vor dem Absenden erst noch die Zeichenkette "Ja" in ein Feld einzugeben.
+</dd>
+</dl>
+
+<h3>3. Analyse des Surfverhaltens</h3>
+<dl>
+<dt>Mehrstufiges Formular</dt>
+<dd>Vom Benutzer das Aufrufen mehrerer Seiten verlangen. Man kann z.B. beim Aufruf des Formulars eine Session starten und beim Senden deren Existenz überprüfen. Auch eine Bestätigungsseite nach dem Ausfüllen des eigentlichen Formulars ist denkbar. Erst diese weitere Bestätigung führt die Aktion erst wirklich aus.
+</dd>
+
+<dt>Messen der Aufenthaltsdauer auf der Website</dt>
+<dd>Ein Mensch wird in der Regel wesentlich länger zum Ausfüllen eines Formulars benötigen als ein Programm.</dd>
+</dl>
+
+<p>All diese Methoden versuchen nach der Methode "Security by Obscurity" den Angriffen der Bots aus dem Wege zu gehen. Sie sind in Handling und Benutzbarkeit den Captchas überlegen und für den größten Teil aller Websites geeignet, können aber keine gezielten Angriffe abwehren.
+</p>
+
+<h2>Zusammenfassung</h2>
+<p>Es gibt viele Methoden, Formularspam zu vermeiden:</p>
+<ul>
+<li>klassisches Grafik-Captcha</li>
+<li>Audio-Captcha</li>
+<li>Inhaltsfiler statisch</li>
+<li>Inhaltsfilter selbstlernend</li>
+<li>Honeypot</li>
+<li>Einfache Aufgaben</li>
+<li>Mehrstufiges Formular</li>
+<li>Aufenthaltsdauer</li>
+</ul>
+
+<p>Aus diesen verschiedenen Methoden sollten insbesondere bezüglich der Kriterien</p>
+<ul>
+<li>Verlangt bestimmte Browsereinstellungen</li>
+<li>Verlangt zusätzliche Aktion vom Benutzer</li>
+<li>Könnte bestimmte Inhalte nicht-übermittelbar machen (z.B. Apotheken-Bestellung mit Viagra als Wort auf der Blacklist)</li>
+<li>zugänglich für Blinde/Farbenblinde</li>
+<li>zugänglich für Taube</li>
+<li>zugänglich mit Textbrowsern</li>
+<li>Aufwand der Implementation</li>
+<li>verbraucht Rechenzeit</li>
+<li>Umstand/Usabilty für den normalen Benutzer</li>
+<li>Wirksamkeit gegen üblichen Formularspam</li>
+<li>Wirksamkeit gegen gezielte Angriffe </li>
+</ul>
+
+<p>und der persönlichen Einschätzung des Gefahrenpotentials die geeigneten ausgesucht werden.</p>
+
+<h2>Weitere Informationen</h2>
+<p>Auf heise Developer wurde der Artikel <a href="http://www.heise.de/developer/Das-Ende-der-Bild-Captchas--/artikel/120521/0" target="extern">Das Ende der Bild-Captchas</a> veröffentlicht, der sich ausführlich mit diesem Thema auseinandersetzt.</p>
+

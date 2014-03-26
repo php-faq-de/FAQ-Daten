@@ -1,0 +1,4 @@
+<Faq alias="regexp-ersetzen" author="Johannes Frömter">
+  <Question>Wie ersetze ich in einem Text,                  jedoch nicht innerhalb von HTML-Tags?</Question>
+  <Keywords>ersetzen, begrenzen</Keywords>
+</Faq>

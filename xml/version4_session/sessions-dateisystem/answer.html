@@ -1,0 +1,183 @@
+<p>
+	Damit der Vorgang der Sessionspeicherung ein wenig verdeutlicht wird,
+	untersuchen wir die Veränderungen im Filesystem des Servers.
+	Die folgenden Beispiele laufen auf einem Linux/Unixsystem. Um sie
+	nachvollziehen zu können, muss PHP4 mit
+	<a href="http://de3.php.net/manual/en/ini.php">safe_mode</a>=Off
+	konfiguriert werden. Zusätzlich wird davon ausgegangen, dass der
+	Client (Browser) Cookies akzeptiert.
+</p>
+
+<p>
+	Als allererstes braucht man ein Script, welches den Inhalt des
+	im <a href="http://www.php3.de/ref.session.php#session.configuration">session.save_path</a>
+	festgelegten Directories anzeigen kann:
+</p>
+
+
+<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+    <span style="color: #808080; font-style: italic;">// Datei: list.dir.php</span>
+    <span style="color: #808080; font-style: italic;">// Liste das &quot;session.save_path&quot; Directory</span>
+    <span style="color: #808080; font-style: italic;">// &quot;safe_mode&quot; muss &quot;Off&quot; sein</span>
+    <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><a href="http://www.php3.de/strtolower"><span style="color: #000066;">strtolower</span></a><span style="color: #000000;">&#40;</span><a href="http://www.php3.de/session_module_name"><span style="color: #000066;">session_module_name</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span> == <span style="color: #ff0000;">&quot;files&quot;</span><span style="color: #000000;">&#41;</span>
+        <span style="color: #000000;">&#123;</span>
+            <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;&lt;pre&gt;&quot;</span>;
+            <a href="http://www.php3.de/system"><span style="color: #000066;">system</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;ls -l &quot;</span> . <a href="http://www.php3.de/session_save_path"><span style="color: #000066;">session_save_path</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>;
+            <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;&lt;/pre&gt;&quot;</span>;
+        <span style="color: #000000;">&#125;</span>
+<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+
+<p>
+	Dieses Script wird unter dem Namen <tt>list.dir.php</tt> gespeichert.
+	Hat man z.B. Shell-Zugriff auf den benötigten Teil des
+	Servers, führt natürlich auch ein einfaches <tt>ls -l /tmp</tt>
+	zu der von <tt>list.dir.php</tt> produzierten Ausgabe.
+</p>
+
+<p>
+	Das obige Script wird ausgeführt, um den Ursprungszustand
+	des im <a href="http://www.php3.de/ref.session.php#session.configuration">session.save_path</a>
+	gespeicherten Verzeichnisses zu betrachten. Zunächst
+	produziert das Script folgendes:
+</p>
+
+<h2>Ausgabe (mit <tt>list.dir.php</tt>):</h2>
+<pre>
+    insgesamt 0
+    srwxrwxrwx    1 root     root   0 Sep 22 21:38 mysql.sock
+</pre>
+
+<p>
+	Das Verzeichnis (in diesem Fall <tt>/tmp</tt>) ist fast leer. Die
+	Datei <tt>mysql.sock</tt> kann für unseren Zweck vernachlässigt werden.
+</p>
+
+<p>
+	Als nächstes schreibt man ein Script, welches nach und nach ergänzt
+	oder verändert wird, um die Veränderungen im Filesystem
+	zu beobachten. Der Name diese Scriptes sei <tt>session.php</tt>.
+	Dieses Script enthält nur die Funktion
+	<a href="http://www.php3.de/session_start">session_start()</a>.
+	Nach dem Start beobachten wir die Veränderungen:
+</p>
+
+<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+    <span style="color: #808080; font-style: italic;">// Datei: session.php</span>
+    @<a href="http://www.php3.de/session_start"><span style="color: #000066;">session_start</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+
+<h2>Ausgabe (mit <tt>list.dir.php</tt>):</h2>
+
+<pre>
+    insgesamt 0
+    srwxrwxrwx    1 root     root   0 Sep 22 21:38 mysql.sock
+    -rw-------    1 wwwrun   www    0 Okt  1 17:58 sess_cd45a3f76f73250..
+</pre>
+
+<p>
+	Wie man sehen kann, hat PHP eine Sessiondatei mit den Zugriffsrechten
+	des Webservers erzeugt, dessen Prozess es ja ist. Diese Datei ist
+	zunächst 0 (Null) Byte groß. Diese Datei wird gleich die Sessiondaten
+	aufnehmen.
+</p>
+
+<p>
+	Als nächstes wird in dem Script auf die Sessionvariablen
+	zugegriffen, wodurch diese automatisch erstellt werden.
+</p>
+
+<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+<span style="color: #808080; font-style: italic;">//  Datei: session.php</span>
+    @<a href="http://www.php3.de/session_start"><span style="color: #000066;">session_start</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+    <span style="color: #0000ff;">$_SESSION</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'userName'</span><span style="color: #000000;">&#93;</span>        = <span style="color: #ff0000;">&quot;dtg&quot;</span>;
+    <span style="color: #0000ff;">$_SESSION</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'userPermissions'</span><span style="color: #000000;">&#93;</span> = <span style="color: #ff0000;">&quot;keine :=(&quot;</span>;
+<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+
+<h2>Ausgabe (mit <tt>list.dir.php</tt>):</h2>
+
+<pre>
+    insgesamt 4
+    srwxrwxrwx    1 root     root   0 Sep 22 21:38 mysql.sock
+    -rw-------    1 wwwrun   www   55 Okt  1 17:58 sess_cd45a3f76f73250..
+</pre>
+
+<p>
+	Die Sessiondatei ist nun auf 51 Byte angewachsen.
+	Sie enthält folgenden String:
+</p>
+
+<pre>
+    userName|s:3:"dtg";userPermissions|s:9:"keine :=(";
+</pre>
+
+<p>
+	also die serialisierten (<a href="http://www.php3.de/serialize">serialize()</a>)
+	Namen und Inhalte der Variablen, die mit
+	<a href="http://www.php3.de/session_register">session_register()</a>
+	bestimmt wurden. In den Sessiondaten können verschiedene
+	Variablentypen gespeichert werden, also auch Arrays und Objekte.
+</p>
+
+<p>
+	Wenn man jetzt auf eine Variable in der Sessiondatei verzichten will,
+	kann man mittels <a href="http://www.php3.de/unset">unset()</a> PHP
+	davon abhalten, die	betreffende Variable zu speichern:
+</p>
+
+<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+    <span style="color: #808080; font-style: italic;">// Datei: session.php</span>
+    @<a href="http://www.php3.de/session_start"><span style="color: #000066;">session_start</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+    <a href="http://www.php3.de/unset"><span style="color: #000066;">unset</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$_SESSION</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'userPermissions'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+
+<h2>Ausgabe (mit <tt>list.dir.php</tt>):</h2>
+
+<pre>
+    insgesamt 4
+    srwxrwxrwx    1 root     root   0 Sep 22 21:38 mysql.sock
+    -rw-------    1 wwwrun   www   21 Okt  1 17:59 sess_cd45a3f76f73250..
+</pre>
+
+<p>
+	Die Variable <tt>$_SESSION['userPermissions']</tt> wurde verworfen, die
+	Sessiondatei ist nur noch 19 Byte groß und enthält nur noch
+	die Variable <tt>$_SESSION['userName']</tt>:
+</p>
+
+<pre>
+    userName|s:3:"dtg";
+</pre>
+
+<p>
+	Möchte man nun <em>alle</em> Sessiondaten löschen, stellt PHP4
+	die Funktion <a href="http://www.php3.de/session_destroy">session_destroy()</a> zur Verfügung.
+	Vor einem <a href="http://www.php3.de/session_destroy">session_destroy()</a>
+	muss aber ein <a href="http://www.php3.de/session_start">session_start()</a> ausgeführt werden:
+</p>
+
+<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+    <span style="color: #808080; font-style: italic;">// Datei: session.php</span>
+    @<a href="http://www.php3.de/session_start"><span style="color: #000066;">session_start</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+    <a href="http://www.php3.de/session_destroy"><span style="color: #000066;">session_destroy</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+
+<h2>Ausgabe (mit <tt>list.dir.php</tt>):</h2>
+
+<pre>
+    insgesamt 0
+    srwxrwxrwx    1 root     root   0 Sep 22 21:38 mysql.sock
+</pre>
+
+<p>
+	Die Sessiondatei wurde gelöscht und die Sessionvariablen stehen für
+	weitere Scripte nicht mehr zur Verfügung. Wird nach diesem Zeitpunkt
+	nochmals die Funktion <a href="http://www.php3.de/session_start">session_start()</a>
+	im gleichen Browserfenster aufgerufen, wird die Sessiondatei erneut
+	erzeugt, und zwar u.U. mit dem gleichen Namen d.h. mit der gleichen
+	Session-ID(!). Der Grund dafür ist, dass der vom Browser gespeicherte
+	Cookie - der die Session-ID enthält - erneut an den Server
+	übermittelt wird.
+</p>
+

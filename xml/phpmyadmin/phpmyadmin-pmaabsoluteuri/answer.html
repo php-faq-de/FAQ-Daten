@@ -1,0 +1,25 @@
+<p>
+<a href="http://www.phpmyadmin.net/">phpMyAdmin</a> nutzt in einigen Dateien eine HTTP-Umleitung nach
+<a href="http://www.ietf.org/rfc/rfc2616.txt">RFC 2616, 14.30</a> (HTTP/1.1).
+Das RFC verlangt, dass der <tt>Location</tt>-Header immer einen absoluten
+URI sendet. In die Konfigurationsdatei <tt>config.inc.php(3)</tt> trägt man also
+ein:
+</p>
+
+<pre><span style="color: #0000ff;">$cfg</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'PmaAbsoluteUri'</span><span style="color: #000000;">&#93;</span> = <span style="color: #ff0000;">'http://example.com/phpmyadmin/'</span>;</pre>
+
+<p>
+Wobei <tt>http://example.com/phpmyadmin/</tt> die Adresse ist, unter der
+man phpMyAdmin im Browser erreichen kann. Der Slash am Ende darf nicht vergessen
+werden. Seit Version 2.3.0 versucht phpMyAdmin diesen Wert selbständig zu
+ermitteln. Die Meldung verschwindet dadurch allerdings nicht. Man kann sie
+abschalten, indem man in der Konfigurationsdatei folgendes einträgt:
+</p>
+
+<pre><span style="color: #0000ff;">$cfg</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'PmaAbsoluteUri_DisableWarning'</span><span style="color: #000000;">&#93;</span> = <span style="color: #000000; font-weight: bold;">FALSE</span>;</pre>
+
+<p>
+Mehr Informationen dazu findet man in der
+<a href="http://www.phpmyadmin.net/documentation/#config">Dokumentation</a>.
+</p>
+

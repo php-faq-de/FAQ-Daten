@@ -1,0 +1,33 @@
+<p>
+Sowohl beim Eintragen als auch beim Auslesen der Daten in Textfeldern
+ist darauf zu achten, dass der verwendete Client die richtigen
+<tt>NLS/-Parameter</tt> verwendet. Die Clients bekommen diese Information
+über die Umgebungsvariablen <tt>NLS_LANG</tt> und <tt>ORA_NLS33</tt>. Der
+richtige Wert für <tt>NLS_LANG</tt> ist der Datenbank selber zu
+entnehmen. Hat die Datenbank zum Beispiel als <tt>Character Set</tt> die
+Einstellung <tt>WE8ISO8859P9</tt>, so sollte die Variable
+<tt>{SPRACHE}_{LAND}.WE8ISO8859P9</tt> lauten, wobei <tt>{SPRACHE}</tt> und
+<tt>{LAND}</tt> nur für die Steuerung der Meldungen, die der Client
+zurückgibt, zuständig sind, und vom mit dem ORACLE-Client
+installierten Sprachpaket abhängig sind. </p>
+
+<p>
+Die Einstellung von <tt>ORA_NLS33</tt> dient dazu, dem Client mitzuteilen,
+wo sich die Dateien befinden, die die Prompts in verschiedenen
+Sprachen beinhalten. </p>
+
+<p>Ein Beispiel für korrekte Einstellung:</p>
+
+<pre>
+export ORACLE_HOME=/opt/oracle/OraHome1
+export ORA_NLS33=$ORACLE_HOME/ocommon/nls/admin/data
+export NLS_LANG GERMAN_GERMANY.WE8ISO8859P9
+</pre>
+
+
+<p>Nun ist es noch wichtig, dass die Variablen von PHP korrekt
+initialisiert werden. Dabei ist darauf zu achten, dass man beim
+Modul-PHP diese Variablen <em>vor</em> dem Start des Apache setzt - im Script
+<tt>apachectl</tt> ist beispielsweise ein guter Platz dafür.
+</p>
+

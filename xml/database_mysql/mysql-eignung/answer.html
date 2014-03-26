@@ -1,0 +1,75 @@
+<p>MySQL ist als Datenbank äußerst stabil und auch bei großen
+Datenmengen extrem schnell und effizient. Die Grenzen von MySQL
+liegen nicht so sehr in der Größe der Tabellen oder der Anzahl
+von Datensätzen, sondern in der Komplexität der Datenmodelle,
+die damit implementiert werden kann.</p>
+
+<p>MySQL speichert Daten mit Index in Baumstrukturen. Auf diese
+Datenstrukturen kann mit logarithmischer Komplexität zugegriffen
+werden, d.h. für eine Tabelle mit <tt>n</tt> Datensätzen sind
+<tt>log(b,n)</tt> Zugriffe notwendig, bis der gesuchte
+Datensatz gefunden ist. <tt>b</tt> ist die Basis des
+Logarithmus. Wäre <tt>b</tt> gleich 2, dann wären zum Zugriff
+auf eine Tabelle mit 1.000 Datensätzen maximal 10, auf eine
+Tabelle mit 1.000.000 Datensätzen maximal 20 und auf eine
+Tabelle mit 1.000.000.000 maximal 30 Zugriffe notwendig, um
+einen beliebigen Zieldatensatz über den Index zu finden.
+Tatsächlich ist die Basis jedoch nicht 2, sondern weit größer.
+Sie ist abhängig von der internen Blockgröße der Datenbank und
+der mittleren Satzlänge in einem Index. Man kann annehmen, dass
+sie je nach Art der Daten zwischen 20 und 40 liegt. Damit wären
+zum Finden eines Datensatzes aus 1.000 Datensätzen maximal 3,
+aus 1.000.000 Datensätzen maximal 5 und aus 1.000.000.000
+Datensätzen maximal 7 Vergleiche und Plattenzugriffe
+notwendig.</p>
+
+<p>Entsprechend sind die Erfahrungen, die mit MySQL berichtet
+werden: Im Rahmen der Begrenzungen des Betriebssystems kommt
+MySQL mit beliebig großen Tabellen problemlos klar.<p>
+
+<h2>Übersicht über die maximalen MySQL-Tabellengrößen</h2>
+<p>in Verbindung mit den verschiedenen Betriebssystemen
+(Quelle: <a href="http://dev.mysql.com/doc/refman/5.4/en/full-table.html">MySQL-Handbuch</a>)</p>
+
+<table summary="Übersicht über die maximalen MySQL-Tabellengrößen in Verbindung mit den verschiedenen Betriebssystemen">
+  <tr>
+    <th>Betriebssystem</th>
+    <th>max. Dateigröße</th>
+  </tr>
+  <tr>
+    <td>Win32 FAT</td>
+    <td>2GB</td>
+  </tr>
+  <tr>
+    <td>Win32 FAT32</td>
+    <td>4GB</td>
+  </tr>
+  <tr>
+    <td>Win32 NTFS</td>
+    <td>2TB</td>
+  </tr>
+  <tr>
+    <td>Linux 2.2-Intel 32-bit</td>
+    <td>2GB</td>
+  </tr>
+  <tr>
+    <td>Linux 2.2-Intel 32-bit LFS</td>
+    <td>4GB</td>
+  </tr>
+  <tr>
+    <td>Linux 2.4+ ext3</td>
+    <td>4TB</td>
+  </tr>
+  <tr>
+    <td>Solaris 9/10</td>
+    <td>16TB</td>
+  </tr>
+  <tr>
+    <td>MacOS X HFS+</td>
+    <td>2TB</td>
+  </tr>
+  <tr>
+    <td>NetWare NSS</td>
+    <td>8TB</td>
+  </tr>
+</table>

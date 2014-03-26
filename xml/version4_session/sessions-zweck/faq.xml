@@ -1,0 +1,4 @@
+<Faq alias="sessions-zweck" author="Kristian Köhntopp">
+  <Question>Was sind Sessions und warum sind sie nützlich?</Question>
+  <Keywords>Session, GET, POST, PHPLIB, Sicherheit, Variablen, weitergeben, speichern</Keywords>
+</Faq>

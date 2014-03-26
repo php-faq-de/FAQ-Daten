@@ -1,0 +1,4 @@
+<Faq alias="fehler-unterdruecken" author="Kristian Köhntopp">
+  <Question>Was ist das für ein @-Zeichen vor einigen Funktionsaufrufen?</Question>
+  <Keywords>Funktion, @, Fehler, track_errors, unterdruecken, error_level</Keywords>
+</Faq>

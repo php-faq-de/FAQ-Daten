@@ -1,0 +1,4 @@
+<Faq alias="datei-loeschen" author="Martin Jansen">
+  <Question>Warum funktioniert unlink() unter Windows nicht?</Question>
+  <Keywords>Datei, loeschen, unlink, Windows, Fehler</Keywords>
+</Faq>

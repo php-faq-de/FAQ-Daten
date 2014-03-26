@@ -1,0 +1,4 @@
+<Faq alias="db-blob" author="Torsten Zühlsdorff" created="2010-01-15 00:00:00">
+  <Question>Ist es sinnvoll, Bilder in einer Datenbank abzulegen?</Question>
+  <Keywords>SQL, Datenbank, Bild, Download, Performance, BLOB</Keywords>
+</Faq>

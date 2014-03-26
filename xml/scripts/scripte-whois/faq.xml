@@ -1,0 +1,4 @@
+<Faq alias="scripte-whois" author="Johannes Frömter">
+  <Question>Wie kann ich eine whois-Abfrage mit PHP realisieren?</Question>
+  <Keywords>Script, whois, Domain, Abfrage, NIC, TLD</Keywords>
+</Faq>

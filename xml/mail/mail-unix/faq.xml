@@ -1,0 +1,7 @@
+<Faq alias="mail-unix" author="Kristian Köhntopp">
+  <Question>Unix: Wie funktioniert der Mailversand?</Question>
+  <Keywords>Mail, Unix, Versand, sendmail, Mailserver</Keywords>
+  <Editors>
+    <Editor name="Niels Braczek" lastedit="2008-08-12 00:00:00" />
+  </Editors>
+</Faq>

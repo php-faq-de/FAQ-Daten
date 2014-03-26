@@ -1,0 +1,70 @@
+<p>
+Häufig braucht man eine Klasse, die sich genauso verhält wie
+eine Klasse, die man schon hat, aber mit ganz kleinen
+Änderungen. Mit Hilfe des Schlüsselworts <tt>extends</tt> kann man
+sich eine Klasse definieren, die genauso ist wie eine bereits
+existierende Klasse und braucht dann nur noch das zu notieren,
+was anders ist.
+</p>
+
+<p>
+Die Änderungen können dabei eine bestehende Klasse erweitern,
+also neue Variablen und Funktionen zu einer Klasse hinzufügen
+oder bestehende Variablen und Funktionen einer Klasse ersetzen.
+</p>
+
+<p>
+Der folgende Beispiel-Code definiert eine Klasse
+<tt>Example_SQL</tt>, die sich ganz genauso verhält wie die Klasse
+<tt>DB_Sql</tt> in
+<a href="http://phplib.sourceforge.net/">PHPLIB</a>.
+Die Variablen <tt>$Host</tt>, <tt>$User</tt>,
+<tt>$Password</tt> und <tt>$Database</tt> sind jedoch anders belegt als
+in der originalen Klasse: Wir setzen dort einfach die
+Informationen ein, die notwendig sind, um unsere Datenbank zu
+kontaktieren. Außerdem ist die Funktion <tt>haltmsg()</tt> ersetzt.
+Die Klasse ruft diese Funktion auf, wenn ein Fehler aufgetreten
+ist. Wir ersetzen diese Funktion durch eine eigene Version,
+sodass wir Fehlermeldungen mit den Informationen drucken können,
+die der Anwender benötigt.
+</p>
+
+<pre><span style="color: #000000; font-weight: bold;">class</span> Example_Sql <span style="color: #000000; font-weight: bold;">extends</span> DB_Sql <span style="color: #000000;">&#123;</span>
+  <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #0000ff;">$Host</span>     = <span style="color: #ff0000;">&quot;database.netuse.de&quot;</span>;
+  <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #0000ff;">$User</span>     = <span style="color: #ff0000;">&quot;kris&quot;</span>;
+  <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #0000ff;">$Password</span> = <span style="color: #ff0000;">&quot;xyzzy&quot;</span>;
+  <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #0000ff;">$Database</span> = <span style="color: #ff0000;">&quot;example_database&quot;</span>;
+&nbsp;
+  <span style="color: #000000; font-weight: bold;">function</span> haltmsg<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$msg</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+<span style="color: #000000; font-weight: bold;">?&gt;</span>
+    Es ist ein Datenbankfehler aufgetreten. <a href="http://www.php3.de/die"><span style="color: #000066;">Die</span></a> Bearbeitung
+    Ihrer Eingaben wurde abgebrochen. Bitte informieren Sie
+    &lt;a href=<span style="color: #ff0000;">&quot;mailto:webmaster@example.kunde.de&quot;</span>&gt;den Webmaster&lt;/a&gt;
+    von diesem Problem.&lt;p&gt;
+&nbsp;
+<span style="color: #000000; font-weight: bold;">&lt;?php</span>
+    <a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Die Fehlermeldung der Datenbank war: %s<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>, <span style="color: #0000ff;">$msg</span><span style="color: #000000;">&#41;</span>;
+  <span style="color: #000000;">&#125;</span>
+<span style="color: #000000;">&#125;</span></pre>
+
+<p>
+Man kann die Klasse <tt>Example_SQL</tt> nicht verstehen,
+ohne die originale Klasse <tt>DB_SQL</tt> zu kennen. Die
+Klasse <tt>Example_SQL</tt> hat alle Eigenschaften und
+Funktionen, die <tt>DB_SQL</tt> auch hat. Erzeugt man also
+ein <tt>$db = new Example_SQL</tt>, dann kann man
+<tt>$db-&gt;query(...)</tt>, <tt>$db-&gt;next_record()</tt> und
+so weiter aufrufen, als ob man es mit einer Klasse
+<tt>DB_SQL</tt> zu tun hätte.
+</p>
+
+<p>
+Die Klasse zeigt nur in folgenden Punkten abweichendes
+Verhalten: Sie druckt ihre Fehlermeldungen in deutsch und
+enthält anwendungsspezifische Kontaktinformationen und sie
+kontaktiert anders als die Originalklasse defaultmäßig die
+Datenbank <tt>example_database</tt> auf dem Host
+<tt>database.netuse.de</tt> mit dem angegebenen Usernamen und
+Passwort.
+</p>
+

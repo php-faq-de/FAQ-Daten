@@ -1,0 +1,31 @@
+<p>Das Formular muss so aussehen:</p>
+
+<pre>&lt;form action=<span style="color: #ff0000;">&quot;script.php&quot;</span>&gt;
+&lt;select multiple=<span style="color: #ff0000;">&quot;multiple&quot;</span> size=<span style="color: #ff0000;">&quot;3&quot;</span> name=<span style="color: #ff0000;">&quot;avar[]&quot;</span>&gt;
+&lt;option value=<span style="color: #ff0000;">&quot;a&quot;</span>&gt;Eins&lt;/option&gt;
+&lt;option value=<span style="color: #ff0000;">&quot;b&quot;</span>&gt;Zwei&lt;/option&gt;
+&lt;option value=<span style="color: #ff0000;">&quot;c&quot;</span>&gt;Drei&lt;/option&gt;
+&lt;option value=<span style="color: #ff0000;">&quot;d&quot;</span>&gt;Vier&lt;/option&gt;
+&lt;option value=<span style="color: #ff0000;">&quot;e&quot;</span>&gt;Fuenf&lt;/option&gt;
+&lt;option value=<span style="color: #ff0000;">&quot;f&quot;</span>&gt;Sechs&lt;/option&gt;
+&lt;/select&gt;
+&lt;br /&gt;
+&lt;input type=<span style="color: #ff0000;">&quot;submit&quot;</span> name=<span style="color: #ff0000;">&quot;doit&quot;</span> value=<span style="color: #ff0000;">&quot;Los!&quot;</span> /&gt;
+&lt;/form&gt;</pre>
+
+<p>
+Entscheidend ist, dass der Name der Variablen im
+&lt;select&gt;-Tag mit eckigen Klammern endet, damit ein Array
+erzeugt wird. Das Script <tt>script.php</tt> erhält nun diese
+Variable <tt>$_REQUEST['avar']</tt> (bzw. vor PHP 4.1.0 als
+<tt>$HTTP_GET_VARS['avar']</tt>) als Array und kann die Werte
+dieses Arrays aufzählen.
+</p>
+
+<p>
+In PHP3 können auf diese Weise nur eindimensionale Arrays
+erzeugt werden, in PHP4 sind auch mehrdimensionale Felder
+möglich. In jedem Fall kann nur die letzte Dimension unbestimmt
+sein.
+</p>
+

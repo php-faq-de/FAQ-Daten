@@ -1,0 +1,4 @@
+<Faq alias="mssql-affected-rows" author="Frank Staude">
+  <Question>Kein mssql_affected_rows in PHP vorhanden</Question>
+  <Keywords>SQL, Datenbank, MSSQL</Keywords>
+</Faq>

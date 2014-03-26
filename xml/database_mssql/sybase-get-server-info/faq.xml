@@ -1,0 +1,7 @@
+<Faq alias="sybase-get-server-info" author="Timm Friebe">
+  <Question>MySQL-Kompatibilität: Server-Info</Question>
+  <Keywords>Sybase, Datenbank, Server, sybase_get_server_info</Keywords>
+  <Editors>
+    <Editor name="Niels Braczek" lastedit="2008-08-12 00:00:00" />
+  </Editors>
+</Faq>

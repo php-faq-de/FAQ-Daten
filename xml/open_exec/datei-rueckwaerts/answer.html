@@ -1,0 +1,55 @@
+<p>
+Dateien sind nicht in "Zeilen" organisiert, die Zeilenende-Zeichen
+(<tt>\n</tt> und/oder <tt>\r</tt>) sind ganz gewöhnliche Bytes im
+Datenstrom. Für das Lesen vom Dateianfang bis zum nächsten
+Zeilenende-Zeichen gibt es entsprechende Funktionen
+(<a href="http://www.php3.de/fgets">fgets()</a>), in umgekehrter Richtung ist dies
+jedoch wegen der physikalischen Organisation des Dateisystems nicht
+sinnvoll möglich.
+</p>
+
+<p>
+Man muss die Datei also zuerst vorwärts zeilenweise in ein Array
+einlesen - das erledigt die Funktion <a href="http://www.php3.de/file">file()</a> -
+und kann dann auf dieses Array beliebig, z. B. auch von hinten nach
+vorne, zugreifen.
+</p>
+
+<p>
+Beim Schreiben müssen die "Zeilen" nicht umständlich vorne in die
+Datei eingefügt, sondern können einfach hinten an die Datei angehängt
+werden; hierzu wird die Datei im Append-(Anhängen)-Modus geöffnet:
+</p>
+
+<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+  <span style="color: #808080; font-style: italic;">// In Datei schreiben (anhängen)</span>
+  <span style="color: #0000ff;">$fp</span> = <a href="http://www.php3.de/fopen"><span style="color: #000066;">fopen</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$filename</span>, <span style="color: #ff0000;">'a+'</span><span style="color: #000000;">&#41;</span>;
+  <a href="http://www.php3.de/flock"><span style="color: #000066;">flock</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span>, <span style="color: #cc66cc;">2</span><span style="color: #000000;">&#41;</span> or <a href="http://www.php3.de/die"><span style="color: #000066;">die</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'Kann die Datei nicht locken'</span><span style="color: #000000;">&#41;</span>;
+  <a href="http://www.php3.de/fwrite"><span style="color: #000066;">fwrite</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span>, <span style="color: #ff0000;">&quot;$zeile<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #000000;">&#41;</span>;
+  <a href="http://www.php3.de/fclose"><span style="color: #000066;">fclose</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000; font-weight: bold;">?&gt;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">&lt;?php</span>
+  <span style="color: #808080; font-style: italic;">// Datei &quot;zeilenweise&quot; in ein Array einlesen</span>
+  <span style="color: #0000ff;">$array</span> = <a href="http://www.php3.de/file"><span style="color: #000066;">file</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$filename</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+  <span style="color: #808080; font-style: italic;">// $array von vorne nach hinten durchlaufen</span>
+  <span style="color: #b1b100;">foreach</span><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$array</span> <span style="color: #b1b100;">as</span> <span style="color: #0000ff;">$zeile</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+      <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <a href="http://www.php3.de/trim"><span style="color: #000066;">trim</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$zeile</span><span style="color: #000000;">&#41;</span> . <span style="color: #ff0000;">&quot;&lt;br&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
+  <span style="color: #000000;">&#125;</span>
+&nbsp;
+  <span style="color: #808080; font-style: italic;">// $array von hinten nach vorne durchlaufen</span>
+  <span style="color: #0000ff;">$i</span> = <a href="http://www.php3.de/sizeof"><span style="color: #000066;">sizeof</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$array</span><span style="color: #000000;">&#41;</span>;
+  <span style="color: #b1b100;">while</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$i</span>--<span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+      <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <a href="http://www.php3.de/trim"><span style="color: #000066;">trim</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$array</span><span style="color: #000000;">&#91;</span><span style="color: #0000ff;">$i</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span> . <span style="color: #ff0000;">&quot;&lt;br&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
+  <span style="color: #000000;">&#125;</span>
+<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+
+<p>
+<a href="http://www.php3.de/file">file()</a> liest die Zeilen <em>einschließlich</em>
+der Zeilenende-Zeichen ein; da die letzte Zeile in der Datei nicht
+unbedingt ein Zeilenende-Zeichen hat, sollte
+<a href="http://www.php3.de/trim">trim()</a> bzw. <a href="http://www.php3.de/rtrim">rtrim()</a> angewendet
+werden, um einheitliche Zeilen zu bekommen.
+</p>
+

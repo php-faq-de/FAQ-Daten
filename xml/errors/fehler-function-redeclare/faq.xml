@@ -1,0 +1,4 @@
+<Faq alias="fehler-function-redeclare" author="Uwe E. Schirm">
+  <Question>Fatal error: Cannot redeclare ... (previously declared in ...) in ... on line ...</Question>
+  <Keywords>function, redeclare, include, require, include_once, require_once</Keywords>
+</Faq>

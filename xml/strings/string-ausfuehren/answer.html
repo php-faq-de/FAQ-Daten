@@ -1,0 +1,30 @@
+<p>
+Mit der Funktion <a href="http://www.php3.de/eval">eval()</a> kann man PHP-Code, der
+in einer Variablen als String vorliegt, ausführen lassen. eval()
+schaltet direkt in den PHP-Modus, d. h. PI-Tags (processing
+instructions, üblicherweise <tt>&lt;?php</tt> und <tt>?&gt;</tt>)
+müssen im String nicht enthalten sein. Der String darf aber PIs
+enthalten, um vom PHP- in den HTML-Modus (und zurück) zu wechseln;
+beginnt der String mit HTML, so ist zuerst ein schließender PI-Tag
+nötig:
+</p>
+
+<pre><span style="color: #0000ff;">$html_php_mix</span> = <span style="color: #ff0000;">'&lt;h1&gt; &lt;?php echo &quot;GROSS&quot;; ?&gt; &lt;/h1&gt;'</span>;
+<a href="http://www.php3.de/eval"><span style="color: #000066;">eval</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;?&gt; $html_php_mix &lt;?php &quot;</span><span style="color: #000000;">&#41;</span>;</pre>
+
+<p>
+Der öffnende PI-Tag zum Schluss ist nicht unbedingt notwendig - wenn
+man ihn schreibt, dann allerdings ist das Leerzeichen danach wichtig.
+Alle PHP-Anweisungen müssen korrekt mit einem Semikolon beendet
+werden (in normalem PHP-Code darf das Semikolon nach der letzten
+Anweisung fehlen).
+</p>
+
+<p>
+<em>Achtung: Der Funktion eval() darf man nur absolut
+vertrauenswürdigen Code übergeben; Code aus unbekannter Quelle kann
+äußerst gefährliche Befehle wie z.B. <tt>unlink($_SERVER['PHP_SELF'])</tt>,
+<a href="http://www.php3.de/mysql_drop_db">mysql_drop_db()</a> oder <a href="http://www.php3.de/system">system()</a>
+enthalten und großen Schaden anrichten.</em>
+</p>
+

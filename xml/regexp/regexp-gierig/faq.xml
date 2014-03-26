@@ -1,0 +1,4 @@
+<Faq alias="regexp-gierig" author="Johannes Frömter">
+  <Question>Hilfe, mein Regulärer Ausdruck frißt zuviel!</Question>
+  <Keywords>ungreedy</Keywords>
+</Faq>

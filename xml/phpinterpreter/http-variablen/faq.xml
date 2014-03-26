@@ -1,0 +1,4 @@
+<Faq alias="http-variablen" author="Kristian Köhntopp">
+  <Question>Gibt es noch mehr interessante Variablen im Environment?</Question>
+  <Keywords>Umgebungsvariable, getenv, Referer, Browser, IP, HTTP</Keywords>
+</Faq>

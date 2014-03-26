@@ -1,0 +1,123 @@
+<p>Da jede HTML-Datei auch ein gültiges, bedeutungsgleiches
+PHP-Programm ist, existiert ein einfacher und systematischer
+Weg, um von einem HTML-Formular zu einem PHP-Programm zu kommen,
+das dieses Formular bearbeitet. Hält man sich an diesen Weg,
+wird das resultierende Formular zugleich ein bestimmtes Format
+haben.</p>
+
+<p>Der erste Schritt ist die Entwicklung eines reinen
+HTML-Formulares, das die zu verarbeitenden Daten abfrägt.</p>
+
+<p>In einem zweiten Schritt wird man aus diesem Formular ein
+sogenanntes Affenformular machen, indem man dafür sorgt, dass das
+Formular sich selbst aufruft und seine alten Werte immer wieder
+einsetzt. Es heißt Affenformular, weil eine Million Affen dieses
+Formular eine Million mal aufrufen können, ohne etwas zu
+bewirken.</p>
+
+<pre>&lt;form action=&quot;&lt;?php echo $_SERVER['PHP_SELF']; ?&gt;&quot;&gt;
+&lt;input type=&quot;text&quot;
+       name=&quot;textfeld&quot;
+       value=&quot;&lt;?php if (isset($_REQUEST['textfeld'])) echo htmlspecialchars($_REQUEST['textfeld']); ?&gt;&quot;&gt;
+&lt;br&gt;
+&lt;input type=&quot;submit&quot;
+       name=&quot;do_form_x&quot;
+       value=&quot;Ausführen&quot;&gt;
+&lt;/form&gt;</pre>
+
+<p>Das Affenformular enthält an zwei Stellen PHP-Code: Bei 'action'
+wird der Dateiname des Skripts eingetragen. Durch Einsetzen von
+<tt>$_SERVER['PHP_SELF']</tt> (oder vor PHP 4.1.0 <tt>$HTTP_SERVER_VARS['PHP_SELF']</tt>)
+an Stelle des Dateinamens kann das Formular seine eigene
+Adresse bestimmen und sich somit selbst aufrufen. Und außerdem
+werden die Defaultwerte der verschiedenen Formularfelder durch
+PHP wieder mit den Ausgangswerten belegt. Wenn das Formular also
+abgesendet wird und die Eingabewerte nicht korrekt sind, wird
+das Formular wieder dargestellt und die alten Werte werden als
+Standardwerte wieder eingesetzt. Damit kann der Anwender sie
+korrigieren, ohne sie noch einmal eingeben zu müssen.</p>
+
+<p>Der dritte Schritt besteht dann darin, eine Reihe von
+Funktionen zu codieren, die die Werte aus diesem Formular
+validieren (siehe "<a class="faq" href="http://www.php-faq.de/q-formular-verarbeitung.html">Wie erkenne ich fehlerhafte/fehlende Eingaben?</a>") und ggf.
+die passenden Fehlermeldungen erzeugen, die dann an den
+geeigneten Stellen wieder in das Formular eingesetzt werden.
+Das Endresultat muss dann eine Variable haben, an der
+entscheidbar ist, ob der Formularinhalt gültig ist oder
+nicht.</p>
+
+<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">// Funktion zum Drucken von Fehlermeldungen</span>
+<span style="color: #000000; font-weight: bold;">function</span> errmsg<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$msg</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+   <span style="color: #000000; font-weight: bold;">?&gt;</span>
+   &lt;font color=<span style="color: #ff0000;">&quot;#ff0000&quot;</span>&gt;&lt;b&gt;&lt;?php <a href="http://www.php3.de/print"><span style="color: #000066;">print</span></a> <a href="http://www.php3.de/nl2br"><span style="color: #000066;">nl2br</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$msg</span><span style="color: #000000;">&#41;</span> ?&gt;&lt;/b&gt;&lt;/font&gt;
+   <span style="color: #000000; font-weight: bold;">&lt;?php</span>
+<span style="color: #000000;">&#125;</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">// Überprüft Eingabewerte für $textfeld auf Korrektheit.</span>
+<span style="color: #000000; font-weight: bold;">function</span> validate_textfeld<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$val</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+   <span style="color: #0000ff;">$msg</span> = <span style="color: #ff0000;">&quot;&quot;</span>;
+   <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><a href="http://www.php3.de/strlen"><span style="color: #000066;">strlen</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$val</span><span style="color: #000000;">&#41;</span> &lt; <span style="color: #cc66cc;">3</span><span style="color: #000000;">&#41;</span>
+      <span style="color: #0000ff;">$msg</span> .= <span style="color: #ff0000;">&quot;Die Eingabe muss mindestens 3 Zeichen lang sein.<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
+&nbsp;
+   <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><a href="http://www.php3.de/preg_match"><span style="color: #000066;">preg_match</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;/<span style="color: #000099; font-weight: bold;">\s</span>/&quot;</span>, <span style="color: #0000ff;">$val</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>
+      <span style="color: #0000ff;">$msg</span> .= <span style="color: #ff0000;">&quot;Die Eingabe darf keine Leerzeichen &quot;</span>
+             .<span style="color: #ff0000;">&quot;oder Tabulatoren enthalten.<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
+&nbsp;
+   <span style="color: #b1b100;">return</span> <span style="color: #0000ff;">$msg</span>;
+<span style="color: #000000;">&#125;</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">// Für jedes Formularfeld werden nun ein oder mehrere</span>
+<span style="color: #808080; font-style: italic;">// Validatoren aufgerufen und das Ergebnis der Überprüfung</span>
+<span style="color: #808080; font-style: italic;">// gemerkt.</span>
+<span style="color: #0000ff;">$valid</span> = <span style="color: #000000; font-weight: bold;">true</span>;
+<span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><a href="http://www.php3.de/isset"><span style="color: #000066;">isset</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$_REQUEST</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;textfeld&quot;</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+   <span style="color: #0000ff;">$error</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;textfeld&quot;</span><span style="color: #000000;">&#93;</span> = validate_textfeld<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$_REQUEST</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;textfeld&quot;</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span>;
+   <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$error</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;textfeld&quot;</span><span style="color: #000000;">&#93;</span> != <span style="color: #ff0000;">&quot;&quot;</span><span style="color: #000000;">&#41;</span>
+      <span style="color: #0000ff;">$valid</span> = <span style="color: #000000; font-weight: bold;">false</span>;
+<span style="color: #000000;">&#125;</span>
+&nbsp;
+<span style="color: #000000; font-weight: bold;">?&gt;</span>
+&lt;form action=<span style="color: #ff0000;">&quot;&lt;?php print $_SERVER[&quot;</span>PHP_SELF<span style="color: #ff0000;">&quot;]; ?&gt;&quot;</span>&gt;
+&lt;input type=<span style="color: #ff0000;">&quot;text&quot;</span>
+       name=<span style="color: #ff0000;">&quot;textfeld&quot;</span>
+       value=<span style="color: #ff0000;">&quot;&lt;?php print htmlspecialchars($_REQUEST[&quot;</span>textfeld<span style="color: #ff0000;">&quot;]); ?&gt;&quot;</span>&gt;&lt;br&gt;
+<span style="color: #000000; font-weight: bold;">&lt;?php</span>
+<span style="color: #808080; font-style: italic;">// Ggf. Fehlermeldung ausdrucken.</span>
+<span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$error</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;textfeld&quot;</span><span style="color: #000000;">&#93;</span> != <span style="color: #ff0000;">&quot;&quot;</span><span style="color: #000000;">&#41;</span>
+   <a href="http://www.php3.de/print"><span style="color: #000066;">print</span></a> errmsg<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$error</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;textfeld&quot;</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000; font-weight: bold;">?&gt;</span>
+&lt;input type=<span style="color: #ff0000;">&quot;submit&quot;</span>
+       name=<span style="color: #ff0000;">&quot;do_form_x&quot;</span>
+       value=<span style="color: #ff0000;">&quot;Ausführen&quot;</span>&gt;
+&lt;/form&gt;
+&lt;hr&gt;
+<span style="color: #000000; font-weight: bold;">&lt;?php</span> <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$valid</span> and <a href="http://www.php3.de/isset"><span style="color: #000066;">isset</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$_REQUEST</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;do_form_x&quot;</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span> <span style="color: #000000; font-weight: bold;">?&gt;</span>
+&lt;!-- Nutzlast --&gt;
+<span style="color: #000000; font-weight: bold;">&lt;?php</span> <span style="color: #000000;">&#125;</span> <span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+
+<p>Schließlich kann man im vierten Schritt daran gehen, die
+validierten Formulardaten einer Bearbeitungsfunktion zu
+übergeben und diese Funktion die eigentliche Arbeit machen zu
+lassen. Das Ergebnis dieser Verarbeitung wird in den meisten
+Fällen unterhalb des Formulars dargestellt werden, so dass man mit
+den Eingabedaten oben gleich die nächste Abfrage starten
+kann.</p>
+
+<p>An dieser Stelle hat man ein funktionierendes Formular und
+zwei Baustellen, an denen man weiterarbeiten kann: Zum einen muss
+man sich Gedanken darüber machen, welche Funktionalität aus
+diesem Formular an anderer Stelle so auch wieder verwendet
+werden könnte und sollte sich überlegen, ob man nicht eine
+Klasse schreiben möchte, in die man diese Funktionalität
+anwendungsunabhängig kapseln könnte. Auf diese Weise wird man sich
+Schritt für Schritt eine kleine Bibliothek an Funktionen
+zulegen, die in vielen anderen Projekten ebenfalls Anwendung
+finden kann.</p>
+
+<p>Zum anderen muss man sich überlegen, ob man
+die Verkettung von Bildschirmen, Knöpfen und Aktionen
+nicht ein wenig globaler lösen kann und welche Struktur man
+seinem Programm dafür geben wird.</p>
+

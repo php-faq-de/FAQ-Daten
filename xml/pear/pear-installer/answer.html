@@ -1,0 +1,22 @@
+<p>Mit Hilfe des PEAR Installers können PEAR Pakete komfortabel
+heruntergeladen und verwaltet werden. Damit der PEAR Installer
+verwendet werden kann, muss PHP mit dem Command Line Interface
+(CLI) SAPI übersetzt und installiert worden sein.
+Bis einschließlich den Releases der PHP 4.2 Versionsfamilie ist
+dies standardmäßig nicht der Fall, so dass PHP vor der Übersetzen
+mit der <tt>--enable-cli</tt> Direktive konfiguriert werden
+muss, damit die Kommandozeilenversion von PHP installiert wird.</p>
+
+<p>Folgender Aufruf lädt und installiert das fiktive PEAR Paket
+"PHP_FAQ_Beispiel":</p>
+<pre>pear install PHP_FAQ_Beispiel</pre>
+
+<p>Wurde bereits eine frühere Version des "PHP_FAQ_Beispiel"
+Paketes (mit dem PEAR Installer) installiert, so kann ein Upgrade
+mit</p>
+ <pre>pear upgrade PHP_FAQ_Beispiel</pre>
+<p>durchgeführt werden.</p>
+
+<pre>pear uninstall PHP_FAQ_Beispiel</pre>
+<p>deinstalliert das Paket wieder.</p>
+

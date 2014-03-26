@@ -1,0 +1,26 @@
+<p>
+Wenn man den SQL-Server 2000 installiert und dabei die Option
+"Standard" wählt, wird die Authentifizierung in dem Modus "Nur
+Windows" eingerichtet. Das heisst, dass man zwar im SQL-Server
+Benutzer einrichten kann, diese sich aber nicht anmelden können
+(z.B: mit dem QueryAnalyser). Als Fehlermeldung kommt:
+</p>
+<pre>
+Server: Nacht-Nr. 18452, Schweregrad 16, Status 1 
+Fehler bei der Anmeldung für den Benutzer "Benutzername". 
+Ursache: Keiner vertrauten SQL-Server-Verbindung zugeordnet. 
+</pre>
+<p>
+Um den SQL-Server davon zu überzeugen, dass auch Benutzer des
+SQl-Servers darauf zugreifen dürfen und nicht NUR Windows-User,
+kann man bei der Installation den Modus "Benutzerdefiniert"
+wählen - dann wird der Authentifizierungsmodus erfragt.  Bei
+einem bereits installierten SQL-Server kann dies nachträglich
+geändert werden, indem man den Server im EnterpriseManager
+auswählt (Konsolenstamm/Microsoft SQL-Servers/SQL-Server
+Gruppe/Name des Servers). Von dem zu ändernden SQL-Server wählt
+man das Kontextmenü an und ruft den Punkt "Eigenschaften" auf.
+Dort dann das Feld "Sicherheit" auswählen und Authentisierung
+auf "SQL-Server und Windows" umstellen.
+</p>
+

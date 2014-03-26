@@ -1,0 +1,14 @@
+<Category alias="strings" name="Stringfunktionen" keywords="PHP, Usenet, FAQ, dclp">
+  <!--Die FAQs sind hier noch mal redundant aufgelistet um die Reihenfolge vorzugeben.-->
+  <Faqs>
+    <Faq alias="string-print" />
+    <Faq alias="string-teilen" />
+    <Faq alias="string-parsen" />
+    <Faq alias="string-format" />
+    <Faq alias="string-zeilenumbruch" />
+    <Faq alias="string-html-umbruch" />
+    <Faq alias="string-umbruch" />
+    <Faq alias="string-kuerzen" />
+    <Faq alias="string-ausfuehren" />
+  </Faqs>
+</Category>

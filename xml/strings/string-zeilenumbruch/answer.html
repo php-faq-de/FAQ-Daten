@@ -1,0 +1,42 @@
+<p>
+Die sogenannten "Zeilenumbrüche" sind im Prinzip ganz gewöhnliche
+Bytes wie ein <tt>A</tt> oder <tt>%</tt> auch - sie werden erst bei
+der Anzeige in einem Editor als Zeilenumbrüche dargestellt.
+Hässlicherweise haben sich für diesen Zweck unterschiedliche Zeichen
+(Bytes) etabliert: Windows verwendet <tt>\r\n</tt>, Unix <tt>\n</tt>
+und der Mac <tt>\r</tt> als "neue-Zeile-Zeichen". Dabei gilt:
+</p>
+
+<pre>
+Escape-  Hex-  ASCII-  Abkür-  Name/Bedeutung      Name/Bedeutung
+Sequenz  Code  Code    zung    englisch            deutsch
+-------  ----  ------  ------  ------------------  --------------
+\r       0D    13      CR      carriage return     Wagenrücklauf
+\n       0A    10      LF      line feed, newline  Zeilenvorschub
+-------  ----  ------  ------  ------------------  --------------
+</pre>
+
+<p>
+Die Unterscheidung zwischen Wagenrücklauf und Zeilenvorschub rührt
+von den Zeilendruckern her, bei denen das zwei separate
+Steuersignale sind.
+</p>
+
+<p>
+Die Escape-Sequenzen können in PHP direkt in Strings, die zwischen
+<tt>"</tt> (Anführungszeichen, double quotes) stehen, sowie in
+Regulären Ausdrücken verwendet werden. Ebenso kann man dort
+<tt>\x0D</tt>, <tt>\x0A</tt> etc. (hexadezimale Escape-Sequenzen)
+verwenden. Die ASCII-Codes kann man von der Funktion
+<a href="http://www.php3.de/chr">chr()</a> umwandeln lassen.
+</p>
+
+<p>
+Empfängt man Daten von unbekannten Clients, sollten verarbeitende
+Funktionen mit allen Varianten zurecht kommen; eine universelle
+Funktion zum Ersetzen von Zeilenumbrüchen durch Leerzeichen sieht
+z. B. so aus:
+</p>
+
+<pre><span style="color: #0000ff;">$string</span> = <a href="http://www.php3.de/preg_replace"><span style="color: #000066;">preg_replace</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'/<span style="color: #000099; font-weight: bold;">\r</span><span style="color: #000099; font-weight: bold;">\n</span>|<span style="color: #000099; font-weight: bold;">\r</span>|<span style="color: #000099; font-weight: bold;">\n</span>/'</span>, <span style="color: #ff0000;">' '</span>, <span style="color: #0000ff;">$string</span><span style="color: #000000;">&#41;</span>;</pre>
+

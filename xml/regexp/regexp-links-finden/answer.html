@@ -1,0 +1,25 @@
+<p>
+<tt>$zeile</tt> sei der Inhalt einer zuvor eingelesenen HTML-Datei.
+Diese Variable muss innerhalb der While-Schleife neu zusammengebaut
+werden, sonst läuft man hier in eine Endlosschleife.
+</p>
+
+<pre><span style="color: #0000ff;">$pattern</span> = <span style="color: #ff0000;">'=^(.*)&lt;a(.*)href<span style="color: #000099; font-weight: bold;">\=</span>&quot;?(<span style="color: #000099; font-weight: bold;">\S</span>+)&quot;([^&gt;]*)&gt;(.*)&lt;/a&gt;(.*)$=msi'</span>;
+<span style="color: #b1b100;">while</span> <span style="color: #000000;">&#40;</span><a href="http://www.php3.de/preg_match"><span style="color: #000066;">preg_match</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$pattern</span>, <span style="color: #0000ff;">$zeile</span>, <span style="color: #0000ff;">$txt</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>
+<span style="color: #000000;">&#123;</span>
+  <span style="color: #808080; font-style: italic;">/* $txt[3] enthält die gewünschte URL. */</span>
+  <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #0000ff;">$txt</span><span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">3</span><span style="color: #000000;">&#93;</span>.<span style="color: #ff0000;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
+&nbsp;
+  <span style="color: #808080; font-style: italic;">/* $zeile neu bauen */</span>
+  <span style="color: #0000ff;">$zeile</span> = <span style="color: #0000ff;">$txt</span><span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">1</span><span style="color: #000000;">&#93;</span>.<span style="color: #ff0000;">&quot; hier war mal ein Link &quot;</span>.<span style="color: #0000ff;">$txt</span><span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">6</span><span style="color: #000000;">&#93;</span>;
+<span style="color: #000000;">&#125;</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">/* $zeile zur Kontrolle ausgeben */</span>
+<a href="http://www.php3.de/print"><span style="color: #000066;">print</span></a> <span style="color: #ff0000;">&quot;&lt;br&gt;&quot;</span>.<a href="http://www.php3.de/nl2br"><span style="color: #000066;">nl2br</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$zeile</span><span style="color: #000000;">&#41;</span>;</pre>
+
+<p>
+<tt>$txt</tt> enthält als Array alle Tokens, die in der Regexp
+in Klammern angegeben sind. <tt>$txt[0]</tt>als Sonderstellung
+enthält den ganzen Text.
+</p>
+

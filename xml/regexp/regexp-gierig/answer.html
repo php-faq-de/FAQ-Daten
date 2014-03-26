@@ -1,0 +1,52 @@
+<p>
+Setzt man in einem Regulären Ausdruck sogenannte <em>Quantifier</em>
+(<tt>?, *, +</tt> und <tt>{n,m}</tt>) ein, weil ein Teil des
+Ausdrucks in variabler Anzahl vorkommen darf, so versuchen diese
+grundsätzlich, so viele Zeichen wie nur möglich zu "fressen" (ohne
+dabei den Ausdruck scheitern zu lassen). Diese Eigenschaft wird
+"gierig" (engl. "greedy") genannt. Da dieses Verhalten nicht immer
+gewünscht ist, läßt sich die Gierigkeit (Greediness) umschalten -
+ein Quantifier frißt dann nur so viele Zeichen wie nötig, jedoch so
+wenig wie möglich.
+</p>
+
+<p>
+Diese Umschaltung läßt sich entweder durch den Modifier U (wie
+ungreedy) für <em>alle</em> Quantifier im gesamten Ausdruck, oder
+durch ein nachgestelltes ? (Fragezeichen) für einen <em>einzelnen</em>
+Quantifier realisieren. Auch eine Kombination ist möglich - d.h. erst
+mittels U die Quantifier normalerweise ungreedy zu machen, einzelne
+davon durch ein ? jedoch wieder greedy. Anhand folgender Beispiele
+ist zu sehen, wieviele Zeichen der Ausdruck <tt>.*</tt> je nach
+Greediness verschlingt - mal ist er mit dem erstbesten <tt>r</tt>
+zufrieden, mal nimmt er alles bis zum letztmöglichen <tt>r</tt> mit:
+</p>
+
+<pre><span style="color: #0000ff;">$string</span>  = <span style="color: #ff0000;">'Dieser Satz wird fast gefressen'</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;">// Normalzustand:</span>
+<a href="http://www.php3.de/preg_match"><span style="color: #000066;">preg_match</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'/D.*r/'</span>, <span style="color: #0000ff;">$string</span>, <span style="color: #0000ff;">$matches</span><span style="color: #000000;">&#41;</span>;
+-&gt; <span style="color: #006600;">Dieser</span> Satz wird fast gefr
+&nbsp;
+<span style="color: #808080; font-style: italic;">// Einen Quantifier ungreedy gemacht:</span>
+<a href="http://www.php3.de/preg_match"><span style="color: #000066;">preg_match</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'/D.*?r/'</span>, <span style="color: #0000ff;">$string</span>, <span style="color: #0000ff;">$matches</span><span style="color: #000000;">&#41;</span>;
+-&gt; <span style="color: #006600;">Dieser</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">// Greediness aller Quantifier umgeschaltet:</span>
+<a href="http://www.php3.de/preg_match"><span style="color: #000066;">preg_match</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'/D.*r/U'</span>, <span style="color: #0000ff;">$string</span>, <span style="color: #0000ff;">$matches</span><span style="color: #000000;">&#41;</span>;
+-&gt; <span style="color: #006600;">Dieser</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;">// Doppelt gemoppelt: Greediness umgeschaltet,</span>
+<span style="color: #808080; font-style: italic;">// einen Quantifier wieder zurückgeschaltet:</span>
+<a href="http://www.php3.de/preg_match"><span style="color: #000066;">preg_match</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'/D.*?r/U'</span>, <span style="color: #0000ff;">$string</span>, <span style="color: #0000ff;">$matches</span><span style="color: #000000;">&#41;</span>;
+-&gt; <span style="color: #006600;">Dieser</span> Satz wird fast gefr
+&nbsp;
+<span style="color: #808080; font-style: italic;">// Bei dieser Schreibweise spielt die Greediness keine Rolle:</span>
+<a href="http://www.php3.de/preg_match"><span style="color: #000066;">preg_match</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'/D[^r]*r/'</span>, <span style="color: #0000ff;">$string</span>, <span style="color: #0000ff;">$matches</span><span style="color: #000000;">&#41;</span>;
+-&gt; <span style="color: #006600;">Dieser</span></pre>
+
+<p>
+Die ereg()-Funktionen kennen übrigens keine umschaltbare Gierigkeit
+(d.h. Quantifier sind immer gierig).
+</p>
+

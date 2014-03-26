@@ -1,0 +1,53 @@
+<h2>Unix:</h2>
+
+<p>Bei "make install" wird, sofern nicht die
+<tt>--without-pear</tt> Direktive bei der Konfiguration
+angegeben wurde, der Kern des PEAR automatisch nach
+"/usr/local/lib/php/" kopiert.</p>
+
+<p>Danach muss lediglich die Direktive include_path
+von</p>
+
+<pre class="ini"><span style="color: #000099;">include_path	</span>= <span style="color: #933;">&quot;&quot;</span></pre>
+
+<p>in</p>
+
+<pre class="ini"><span style="color: #000099;">include_path	</span>= <span style="color: #933;">&quot;.:/usr/local/lib/php/&quot;</span></pre>
+
+<p>geändert werden. Man kann dann durch Aufrufen von
+<tt>pear</tt> in einer Shell den PEAR Installer starten.</p>
+
+<h2>Windows:</h2>
+
+<p>Unter Windows gibt es derzeit keinen automatischen
+Installationsprozess, daher ist hier etwas Handarbeit
+gefragt:</p>
+
+<ul>
+<li>
+  <p>Download der PHP Distribution oder Download aus
+  dem CVS-Repository</p>
+</li>
+<li>
+  <p>Entpacken des Archivs in ein beliebiges Verzeichnis</p>
+</li>
+<li>
+  <p>Nun muss die Datei PEAR.php.in im Unterverzeichnis pear
+  in PEAR.php umbenannt werden.</p>
+</li>
+<li>
+  <p>In der Datei PEAR.php müssen nun die Pfadangaben in
+  den drei Zeilen</p>
+
+  <pre><a href="http://www.php3.de/define"><span style="color: #000066;">define</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'PHP_BINDIR'</span>, <span style="color: #ff0000;">'@prefix@/bin'</span><span style="color: #000000;">&#41;</span>;
+  <a href="http://www.php3.de/define"><span style="color: #000066;">define</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'PEAR_INSTALL_DIR'</span>, <span style="color: #ff0000;">'@PEAR_INSTALLDIR@'</span><span style="color: #000000;">&#41;</span>;
+  <a href="http://www.php3.de/define"><span style="color: #000066;">define</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'PEAR_EXTENSION_DIR'</span>, <span style="color: #ff0000;">'@EXTENSION_DIR@'</span><span style="color: #000000;">&#41;</span>;</pre>
+
+  <p>an die Gegebenheiten der Installation angepasst werden.</p>
+</li>
+<li>
+  <p>Zum Abschluss sollte wie bei der Unix-Installation der
+  Include-Path auf den richtigen Wert gesetzt werden.</p>
+</li>
+</ul>
+

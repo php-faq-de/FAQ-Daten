@@ -1,0 +1,4 @@
+<Faq alias="sessions-objekte" author="Clemens Koppensteiner">
+  <Question>Wie speichere ich Objekte in Sessions?</Question>
+  <Keywords>Session, Objekt, serialisieren, __sleep, speichern</Keywords>
+</Faq>

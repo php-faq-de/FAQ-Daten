@@ -1,0 +1,35 @@
+<h3>MySQL</h3>
+
+<p><a href="http://www.mysql.com/">MySQL</a> ist das wohl bekannteste und am weitesten verbreitete freie relationale Datenbankmanagementsystem. Es zeichnet sich durch eine hohe Geschwindigkeit und geringen Speicherverbrauch aus. Eine der Besonderheiten von MySQL ist das Angebot verschiedener Speichersubsysteme, die auf verschiedene Einsatzzwecke hin optimiert wurden.</p>
+
+<p>Mit Version 5.0 wurde die Unterstützung für eine Reihe weiterer Features eingeführt, wobei die bedeutendsten Trigger, Views und Prozeduren darstellen.</p>
+
+<p>Das Datenbanksystem verfügt über ein sehr gutes und <a href="http://dev.mysql.com/doc/">umfangreiches Handbuch in mehreren Sprachen</a>, darunter auch eine deutsche Version. Durch die weite Verbreitung von MySQL gibt es eine breite Community von Nutzern, die auf vielfältige Weise Hilfe anbieten – von einfachen Tipps in Foren bis hin zur professionellen Betreuung und Schulungen zum <abbr title="relationales Datenbankmanagementsystem">RDMS</abbr>.</p>
+
+<p>Seit dem Ende des Jahres 2000 steht MySQL  unter der <abbr title="GNU Public License">GPL</p> frei zur Verfügung. Neben einer freien Community Version wird auch Enterprise Versionen angeboten, die gegen Entgelt langfristigen Support und schnellere Fehlerkorrekturen bietet.</p>
+
+<p>Um eine einfache Administration zu ermöglichen, gibt es für MySQL eine Vielzahl an Lösungen, allen voran das bekannte <a href="http://www.phpmyadmin.net/">phpMyAdmin</a>.</p>
+
+<p>Die hohe Geschwindigkeit der Weiterentwicklung von MySQL und die Vielzahl an unterstützten Speichersubsysteme ist zugleich aber auch ein Nachteil von MySQL. Viele der angebotenen Features lassen sich nicht kombinieren oder fehlen in einzelnen Speichersubsystemen. So unterstützt z.B. die Speicherengine MyISAM als einzige Volltextsuchen, jedoch – wie andere Subsysteme – keine referentielle Integrität.</p>
+
+<p>MySQL selbst fehlt ebenfalls die Unterstützung von CHECK-Constraints,  Sequenzen und Schemata und weicht zum Teil stark vom ANSI-Standard für SQL ab. 
+Die Qualitätssicherung von MySQL hat sich zum Teil einen schlechten Ruf erworben, da vereinzelt in Minor Updates schwerwiegende Fehler in grundlegenden Funktionen eingeführt wurden. So wurde im Update auf 5.1.23 ein Bug eingeführt, der eine Sortierung "ORDER BY DESC" wirkungslos machte. Es gibt eine Reihe von Blogs, die in Beiträgen solche Bugs verfolgen oder eine Vielzahl von MySQL-Gotchas (unerwartetes Verhalten) aufführen.</p>
+
+<h3>PostgreSQL</h3>
+
+<p>Das unter der freien <abbr title="Berkeley Software Distribution">BSD</abbr>-Lizenz stehenden <a href="http://www.postgresql.org/">PostgreSQL</a> ist der großteils geglückte Versuch, eine freie Implementation von SQL92 aus dem SQL-fremden Konzept Ingres abzuleiten. Dazu gehören eine umfangreiche Anzahl an unterstützten Merkmalen wie z.B. Transaktionen mit verschiedenen Abschottungsgraden, referentielle Integrität, Schemata, Subselects, Views, Trigger und Rules. Ebenfalls wird die Erstellung eigener Datentypen, Operatoren, Agregationfunktionen und Funktionen unterstützt.</p>
+
+<p>Neben der vom SQL-Standard vorgesehenen Funktionalität verfügt PostgreSQL über eine kleinere Menge nützlicher Erweiterungen, wie z.B. die native Unterstützung des Datentypes ARRAY und einer mächtigen Volltextsuche. Eine weitere Besonderheit von PostgreSQL ist, dass eigene Datenbankfunktionen in verschiedenen Sprachen geschrieben werden können. Unterstützte Sprachen sind unter anderen PG/SQL, C, Perl, Python, TCL und nicht zuletzt PHP.</p>
+
+<p>Für das RDMS steht ein <a href="http://www.postgresql.org/docs/">ausgezeichnetes Handbuch</a> bereit, welches allerdings nur in Englisch zur Verfügung steht. In Frankreich und anderen Länden gibt es jedoch Gruppen, die das Handbuch in ihre jeweilige Landessprache überführen. Neben dem Handbuch gibt es eine kleine, aber sehr aktive Community, die vornehmlich via Usenet umfangreiche Hilfestellungen bietet. Da auch die aktiven Entwickler dort anzutreffen sind, können selbst komplexe Probleme besprochen werden.</p>
+
+<p>Zur einfachen Administration von PostgreSQL können die beiden hervorragenden Programme <a href="http://phppgadmin.sourceforge.net/">phpPgAdmin</a> oder <a href="http://www.pgadmin.org/">pgAdmin</a> verwendet werden.</p>
+
+<p>Die vielfältigen und umfangreichen Möglichkeiten PostgreSQLs wirken gerade auf Anfänger abschreckend, doch wird dies durch das Handbuch und die Community schnell relativiert. Schnell wird klar, dass diese Unterstützungen grundlegend für eine professionelle Entwicklung von Datenbankanwendungen ist. Über viele Jahre hinweg hat dieser Umfang aber die Geschwindigkeit von PostgreSQL stark negativ beeinflusst, so dass man noch heute über den Spitzennamen "Langsamer Elefant" für das RDMS stolpert. In den letzten Jahren ist die Performance von PostgreSQL jedoch stark gestiegen und übertrifft gerade bei großer Last in Benchmarks häufig die von MySQL (<a href="http://www.randombugs.com/linux/mysql-postgresql-benchmarks.html">MySQL vs PostgreSQL Benchmarks</a>).</p>
+
+<h3>Fazit</h3>
+
+<p>Die Wahl der Datenbank hängt letztlich vom Ziel ab. Wird ein schnelles, relationales Speichersystem benötigt, ist MySQL eine gute Wahl. Sind jedoch referentielle Integrität, Partitionen, Rules, Triggers, Volltextsuchen, eigene Funktionen, sowie Transaktionen ganz oder in Teilen notwendig, sollte man direkt PostgreSQL wählen.</p>
+
+<p>Auch muss in der Entscheidung die Verfügbarkeit berücksichtigt werden. Während MySQL auf nahezu jedem Webserver zur Verfügung gestellt wird, sind die <a href="http://www.postgresql.org/support/professional_hosting">PostgreSQL-Webhoster</a> noch dünn gesät. In jedem Fall muss auch die angebotene Version berücksichtigt werden. Häufig werden nur alte Versionen der Datenbanken angeboten, welche womöglich wichtige Feature nicht unterstützen. Ein ebenfalls häufiges Problem ist, dass zwar eine neuere Version vorhanden ist, dem Nutzer aber nicht die Rechte zur Nutzung eines notwendigen Features eingeräumt werden.</p>
+

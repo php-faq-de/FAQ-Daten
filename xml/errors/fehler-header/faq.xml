@@ -1,0 +1,7 @@
+<Faq alias="fehler-header" author="Johannes Frömter">
+  <Question>Warning: Cannot add header information - headers already sent ...</Question>
+  <Keywords>Fehler, Header, HTTP, HTML, Cookie, Weiterleitung</Keywords>
+  <Editors>
+    <Editor name="Niels Braczek" lastedit="2008-08-12 00:00:00" />
+  </Editors>
+</Faq>

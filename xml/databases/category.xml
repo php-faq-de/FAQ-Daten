@@ -1,0 +1,23 @@
+<Category alias="databases" name="Datenbanken" keywords="PHP, Usenet, FAQ, dclp">
+  <!--Die FAQs sind hier noch mal redundant aufgelistet um die Reihenfolge vorzugeben.-->
+  <Faqs>
+    <Faq alias="sql-lernen" />
+    <Faq alias="sql-statements" />
+    <Faq alias="db-blob" />
+    <Faq alias="db-langsam" />
+    <Faq alias="db-performance" />
+    <Faq alias="sql-join" />
+    <Faq alias="sql-aggregation" />
+    <Faq alias="db-connect" />
+    <Faq alias="db-passwort" />
+    <Faq alias="db-vergleich" />
+    <Faq alias="db-zugang" />
+    <Faq alias="db-odbc" />
+    <Faq alias="magic-quotes" />
+    <Faq alias="sql-select" />
+    <Faq alias="sql-letzter-eintrag" />
+    <Faq alias="sql-ids" />
+    <Faq alias="sql-fehlerbehandlung" />
+    <Faq alias="sql-injection" />
+  </Faqs>
+</Category>

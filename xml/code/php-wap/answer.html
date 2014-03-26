@@ -1,0 +1,81 @@
+<p>
+Zuerst sollte man ein eigenes Verzeichnis für die WAP-Seiten anlegen
+und dem Apache beibringen, auch Dateien mit der typischen WAP-Endung
+<tt>.wml</tt> von PHP generieren zu lassen. Dies geschieht zum Beispiel
+mit folgender <tt>.htaccess</tt>-Datei in dem WAP-Verzeichnis:
+</p>
+<pre>AddType application/x-httpd-php .php .wml
+DirectoryIndex index.wml</pre>
+<p>
+Schick ist, jetzt eine Subdomain <tt>wap</tt> auf dieses Verzeichnis
+verweisen zu lassen.
+</p>
+<p>
+Es ist anschließend PHPs Aufgabe, mit der <a href="http://www.php3.de/header">header()</a>-Funktion
+einen korrekten Content-Type zu setzen. Ein Charset <em>muss</em>
+dabei angegeben werden! So könnte ein typisches WAP-PHP-Script
+beginnen:
+</p>
+<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+  <a href="http://www.php3.de/header"><span style="color: #000066;">header</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Content-Type: text/vnd.wap.wml;charset=iso-8859-1&quot;</span><span style="color: #000000;">&#41;</span>;
+  <a href="http://www.php3.de/print"><span style="color: #000066;">print</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;<span style="color: #000099; font-weight: bold;">\n</span><span style="color: #000099; font-weight: bold;">\n</span>&lt;?xml version=<span style="color: #000099; font-weight: bold;">\&quot;</span>1.0<span style="color: #000099; font-weight: bold;">\&quot;</span>?&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000; font-weight: bold;">?&gt;</span>
+&lt;!DOCTYPE wml <span style="color: #000000; font-weight: bold;">PUBLIC</span> <span style="color: #ff0000;">&quot;-//WAPFORUM//DTD WML 1.1//EN&quot;</span> <span style="color: #ff0000;">&quot;http://www.wapforum.org/DTD/wml_1.1.xml&quot;</span>&gt;</pre>
+<p>
+Darauf folgt der eigentliche WML-Content, in den man wie gewohnt
+PHP einbetten kann. Drei Dinge sind dabei wichtig:
+</p>
+<ul>
+  <li>
+    <p>
+    WML ist eine XML-Sprache. Man muss penibelst darauf achten,
+    dass der Code korrekt ist! Fehler in der Verschachtelung
+    oder Schreibweise der Tags sind fatal.
+    </p>
+    <p>
+    WAP lernt man zum Beispiel bei
+    <a href="http://selfwml.myscope.net/">SELFWML</a>
+    oder bei
+    <a href="http://www.w3schools.com/wap/wap_basic.asp">WAP Basics</a>.
+    </p>
+  </li>
+
+  <li>
+    <p>
+    Die von HTML bekannten Entities wie &amp;ouml; funktionieren
+    bei WAP nicht. Stattdessen verwendet man die ganz normalen
+    Umlaute etc. Das kann unter Umständen recht ärgerlich werden,
+    wenn man Funktionen geschrieben hat, die bereits solche Entities
+    liefern. Laut
+    <a href="http://www.wap.de/Wissen/Entwicklung/FAQ/">WAP-FAQ</a>
+    sind aber auch Entities der Art &amp;#246; erlaubt.
+    </p>
+  </li>
+
+  <li>
+    <p>
+    Handys haben recht wenig Speicherplatz. Die Seite sollte daher
+    maximal 1400 Zeichen groß sein, damit alle Handys sie anzeigen
+    können.
+    </p>
+  </li>
+</ul>
+<p>
+WAP erlaubt für Bilder <em>ausschließlich</em> das eigene Bildformat
+WBMP. Ein Konverter ist zum Beispiel im Paket von
+<a href="http://www.pyweb.com/tools/">Deck-it</a>
+enthalten. Bilder sollten sparsam verwendet werden und möglichst
+klein sein. Die Übertragung kostet Zeit, Geld und den sowieso
+schon knappen Speicherplatz auf dem Handy.
+</p>
+<p>
+Cookies führen zwar zu keiner Fehlermeldung, aber man sollte sich
+nicht darauf verlassen, dass sie funktionieren!
+</p>
+<p>
+Testen kann man die Seite mit WAP-Simulatoren, zum Beispiel
+<a href="http://www.pyweb.com/tools/">Deck-it</a>
+oder über verschiedene Online-Emulatoren. Letztendlich zählt aber
+nur eins: der Test mit dem echten Handy.
+</p>
+

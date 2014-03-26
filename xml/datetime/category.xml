@@ -1,0 +1,11 @@
+<Category alias="datetime" name="Datums- und Kalenderprobleme" keywords="PHP, Usenet, FAQ, dclp">
+  <!--Die FAQs sind hier noch mal redundant aufgelistet um die Reihenfolge vorzugeben.-->
+  <Faqs>
+    <Faq alias="datum-jetzt" />
+    <Faq alias="datum-mysql" />
+    <Faq alias="datum-intervall" />
+    <Faq alias="datum-gestern" />
+    <Faq alias="datum-monatslaenge" />
+    <Faq alias="datum-deutsch" />
+  </Faqs>
+</Category>

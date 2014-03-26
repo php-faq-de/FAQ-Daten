@@ -1,0 +1,7 @@
+<Faq alias="mssql-auth" author="Frank Staude">
+  <Question>SQL-Benutzer kann sich nicht anmelden</Question>
+  <Keywords>SQL, Datenbank, MSSQL, Authentisierung</Keywords>
+  <Editors>
+    <Editor name="Niels Braczek" lastedit="2008-08-12 00:00:00" />
+  </Editors>
+</Faq>

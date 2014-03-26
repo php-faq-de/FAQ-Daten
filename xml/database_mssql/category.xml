@@ -1,0 +1,14 @@
+<Category alias="database_mssql" name="Datenbanken: Microsoft SQL Server" keywords="PHP, Usenet, FAQ, dclp">
+  <!--Die FAQs sind hier noch mal redundant aufgelistet um die Reihenfolge vorzugeben.-->
+  <Faqs>
+    <Faq alias="sybase-list-tables" />
+    <Faq alias="sybase-list-dbs" />
+    <Faq alias="sybase-get-server-info" />
+    <Faq alias="sybase-list-processes" />
+    <Faq alias="mssql-auth" />
+    <Faq alias="mssql-affected-rows" />
+    <Faq alias="mssql-textorder" />
+    <Faq alias="mssql-sonderzeichen" />
+    <Faq alias="mssql-langespaltennamen" />
+  </Faqs>
+</Category>

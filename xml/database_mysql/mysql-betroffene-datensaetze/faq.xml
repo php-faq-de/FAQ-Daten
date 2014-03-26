@@ -1,0 +1,4 @@
+<Faq alias="mysql-betroffene-datensaetze" author="Guido Haeger">
+  <Question>Wie kann ich feststellen wie viele Datensätze von meiner Abfrage betroffen sind / gefunden wurden?</Question>
+  <Keywords>SQL, Datenbank, MySQL, Datensatz, Zeile, Anzahl, Abfrage</Keywords>
+</Faq>

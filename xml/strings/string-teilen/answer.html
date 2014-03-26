@@ -1,0 +1,87 @@
+<p>
+Man kann die einzelnen Zeichen in einem String ähnlich wie ein
+Array ansprechen, allerdings verwendet man anstelle der eckigen
+Klammern <tt>[</tt> und <tt>]</tt> geschweifte Klammern:
+<tt>{</tt> und <tt>}</tt>.
+</p>
+
+<pre><span style="color: #0000ff;">$str</span> = <span style="color: #ff0000;">&quot;teststring&quot;</span>;
+<span style="color: #0000ff;">$len</span> = <a href="http://www.php3.de/strlen"><span style="color: #000066;">strlen</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$str</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #b1b100;">for</span><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$i</span>=<span style="color: #cc66cc;">0</span>; <span style="color: #0000ff;">$i</span>&lt;<span style="color: #0000ff;">$len</span>; <span style="color: #0000ff;">$i</span>++<span style="color: #000000;">&#41;</span>
+  <a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Zeichen %d ist %s&lt;br&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>, <span style="color: #0000ff;">$i</span>, <span style="color: #0000ff;">$str</span><span style="color: #000000;">&#123;</span><span style="color: #0000ff;">$i</span><span style="color: #000000;">&#125;</span><span style="color: #000000;">&#41;</span>;</pre>
+
+<p>
+Diese Methode ist auch geeignet, um einen String in ein Array
+umzuwandeln:
+</p>
+
+<pre><span style="color: #000000; font-weight: bold;">function</span> stringToArray<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$string</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+  <span style="color: #0000ff;">$array</span> = <a href="http://www.php3.de/array"><span style="color: #000066;">array</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+  <span style="color: #b1b100;">for</span><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$i</span>=<span style="color: #cc66cc;">0</span>; <span style="color: #0000ff;">$i</span>&lt;strlen<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$string</span><span style="color: #000000;">&#41;</span>; <span style="color: #0000ff;">$i</span>++<span style="color: #000000;">&#41;</span>
+    <span style="color: #0000ff;">$array</span><span style="color: #000000;">&#91;</span><span style="color: #0000ff;">$i</span><span style="color: #000000;">&#93;</span> = <span style="color: #0000ff;">$string</span><span style="color: #000000;">&#123;</span><span style="color: #0000ff;">$i</span><span style="color: #000000;">&#125;</span>;
+  <span style="color: #b1b100;">return</span> <span style="color: #0000ff;">$array</span>;
+<span style="color: #000000;">&#125;</span></pre>
+
+<div class="amend insert"><div class="article-tools"><span class="createdate">13. August 2008</span>
+<span class="createby">Geschrieben von Niels Braczek</span>
+</div>
+
+<p>Das oben Stehende ist so nicht (mehr) korrekt. Es wurde inzwischen festgelegt, dass einzelne Zeichen eines Strings wie Array-Elemente mittels der eckigen Klammern <tt>[</tt> und <tt>]</tt> angesprochen werden. Die beschriebene Umwandlung in ein Array erübrigt sich dadurch vollständig.</p>
+<p>In der Version PHP6 soll die Schreibweise mit den geschweiften Klammern nicht mehr zulässig sein.</p>
+<p>Um einen String in Teile fester Länge zu zerlegen, verwendet man die Funktion <a href="http://www.php3.de/str_split">str_split()</a>:
+<pre><span style="color: #0000ff;">$arr</span> = str_split<span style="color: #000000;">&#40;</span> <span style="color: #ff0000;">&quot;Hallo Welt!&quot;</span>, <span style="color: #cc66cc;">3</span> <span style="color: #000000;">&#41;</span>;
+<a href="http://www.php3.de/print_r"><span style="color: #000066;">print_r</span></a><span style="color: #000000;">&#40;</span> <span style="color: #0000ff;">$arr</span> <span style="color: #000000;">&#41;</span>;</pre>
+<p>ergibt</p>
+<pre>
+Array
+(
+    [0] => Hal
+    [1] => lo
+    [2] => Wel
+    [3] => t!
+)
+</pre>
+</div>
+
+<p>
+Mit Hilfe der Funktion <a href="http://www.php3.de/substr">substr()</a>
+kann man Teilstrings aus einem String herausschneiden.
+</p>
+
+<p>
+Mit Hilfe der Funktion <a href="http://www.php3.de/explode">explode()</a>
+kann man einen String an einem Trennzeichen in ein Array
+zerlegen.
+</p>
+
+<pre><span style="color: #0000ff;">$str</span> = <span style="color: #ff0000;">&quot;dies ist ein teststring.&quot;</span>;
+  <span style="color: #0000ff;">$avar</span> = <a href="http://www.php3.de/explode"><span style="color: #000066;">explode</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot; &quot;</span>, <span style="color: #0000ff;">$str</span><span style="color: #000000;">&#41;</span>;
+  <span style="color: #0000ff;">$len</span> = <a href="http://www.php3.de/count"><span style="color: #000066;">count</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$avar</span><span style="color: #000000;">&#41;</span>;
+  <span style="color: #b1b100;">for</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$i</span>=<span style="color: #cc66cc;">0</span>; <span style="color: #0000ff;">$i</span>&lt;<span style="color: #0000ff;">$len</span>; <span style="color: #0000ff;">$i</span>++<span style="color: #000000;">&#41;</span>
+    <a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;%d: %s&lt;br&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>, <span style="color: #0000ff;">$i</span>, <span style="color: #0000ff;">$avar</span><span style="color: #000000;">&#91;</span><span style="color: #0000ff;">$i</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span>;</pre>
+
+<p>
+Dieses Beispiel zerlegt den gegebenen Teststring an den
+Leerzeichen und erzeugt ein Array <tt>$avar</tt> mit den Indices 0
+bis 3 (4 Elementen).
+</p>
+
+<p>
+Kompliziertere Zerlegungen lassen sich mit Hilfe der Funktion
+<a href="http://www.php3.de/preg_split">preg_split()</a> vornehmen. Das veraltete,
+weniger leistungsfähigere und langsamere <a href="http://www.php3.de/split">split()</a>
+könnte man auch verwenden.
+</p>
+
+<pre><span style="color: #0000ff;">$str</span> = <span style="color: #ff0000;">&quot;ich bin  ein    sehr komplizierter test, nicht wahr?&quot;</span>;
+  <span style="color: #0000ff;">$avar</span> = <a href="http://www.php3.de/preg_split"><span style="color: #000066;">preg_split</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;/[ <span style="color: #000099; font-weight: bold;">\t</span>.!?]+/&quot;</span>, <span style="color: #0000ff;">$str</span><span style="color: #000000;">&#41;</span>;
+  <span style="color: #0000ff;">$len</span> = <a href="http://www.php3.de/count"><span style="color: #000066;">count</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$avar</span><span style="color: #000000;">&#41;</span>;
+  <span style="color: #b1b100;">for</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$i</span>=<span style="color: #cc66cc;">0</span>; <span style="color: #0000ff;">$i</span>&lt;<span style="color: #0000ff;">$len</span>; <span style="color: #0000ff;">$i</span>++<span style="color: #000000;">&#41;</span>
+    <a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;%d: %s&lt;br&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>, <span style="color: #0000ff;">$i</span>, <span style="color: #0000ff;">$avar</span><span style="color: #000000;">&#91;</span><span style="color: #0000ff;">$i</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span>;</pre>
+
+<p>
+Im Gegensatz zum vorhergehenden Beispiel werden hier mehrfache
+Leerzeichen nicht als mehrfache Trennungen gezählt und auch
+Satzzeichen werden zu den Trennzeichen gezählt.
+</p>
+

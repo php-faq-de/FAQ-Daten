@@ -1,0 +1,4 @@
+<Faq alias="fehler-no-file" author="Kai Schröder">
+  <Question>Warning: fopen() - No such file or directory</Question>
+  <Keywords>Fehler, fopen, Datei, URL</Keywords>
+</Faq>

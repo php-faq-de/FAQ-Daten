@@ -1,0 +1,7 @@
+<Faq alias="konfiguration-laufzeit" author="Stephan Mann">
+  <Question>Meine Änderungen mit ini_set() haben keine Wirkung. Wie kann ich Konfigurationsvariablen zur Laufzeit ändern?</Question>
+  <Keywords>Konfiguration, Laufzeit, ini_set, htaccess, session.use_trans_sid, include_path</Keywords>
+  <Editors>
+    <Editor name="Niels Braczek" lastedit="2009-05-30 00:00:00" />
+  </Editors>
+</Faq>

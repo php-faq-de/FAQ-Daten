@@ -1,0 +1,50 @@
+<p>
+Ein Webspider bekommt bei der üblichen Konfiguration von
+Webservern in keinster Weise mit, ob die angeforderte
+Default-Datei (Directory-Index) eines Verzeichnisses nun
+home.htm, index.php oder irgendwie anders heißt.
+</p>
+
+<p>
+Er wird diese Datei lesen, und dann werden die HTML-Tags
+extrahiert, die für das Ranking aber noch eine Rolle spielen
+können (&lt;h1&gt;...&lt;/h1&gt;). Aus dem reinen Text werden
+meistens noch die Stopwörter entfernt und restliche Textbrei
+fließt dann aufbereitet in den Index. Die Meta-Tags spielen bei
+intelligenteren Suchmaschinen für das Ranking keine Rolle mehr.
+</p>
+
+<p>
+Jede Suchmaschine könnte grundsätzlich dynamisch generierte
+Seiten genauso erfassen, wie statische Seiten, weil der
+Spider/Robot der Suchmaschine genauso ein Client ist, wie Dein
+Browser und nicht mehr und nicht weniger sieht als Dein Browser:
+nämlich den HTML-Code und den Content-Type. Endungen der
+Dateinamen spielen bei korrekt programmierten Suchmaschinen
+keine Rolle - entscheidend sind im Web stattdessen die
+übermittelten Content-Types.
+</p>
+
+<p>
+Viele Suchmaschinenbetreiber werden jedoch keine dynamisch
+generierten Seiten erfassen, weil sie davon ausgehen, dass sich
+deren Inhalt sehr oft ändert und eine Indizierung der Seiten
+somit sinnlos ist. Wird nun bei einem HTML-Dokument aufgrund der
+Extension, des Pfadnamens (enthält das Schlüsselwort <tt>cgi</tt>)
+oder offensichtlich per GET übergebener Parameter eine
+dynamische Generierung vermutet, werden diese Dateien von
+einigen Spidern nicht indiziert, bzw. entsprechende Links nicht
+verfolgt. Dies ist zwar ebenfalls falsch - stattdessen sollte
+sich der Spider nur nach dem Inhalt der Datei <tt>robots.txt</tt>
+richten - aber viele Sites haben nur ungenügende oder ganz
+fehlende robots.txt-Dateien.
+</p>
+
+<p>
+Lies auch den
+<a href="http://www.suchfibel.de/aktuell/phpseiten_und_suchmaschinen.htm">Artikel</a>
+von Tobias Ratschiller in der
+<a href="http://www.suchfibel.de/">Suchfibel</a>
+zu diesem Thema.
+</p>
+

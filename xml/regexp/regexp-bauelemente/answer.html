@@ -1,0 +1,237 @@
+<p>
+Suchmuster in regulären Ausdrücken bestehen aus gewöhnlichen
+Zeichen und Zeichen mit einer Sonderbedeutung. Gewöhnliche
+Zeichen in Suchausdrücken stehen für die entsprechenden Zeichen
+in einem String. Der Suchausdruck <tt>hallo</tt> paßt also auf alle
+Strings, die irgendwo genau diese Zeichenfolge enthalten.
+Zeichen mit Sonderbedeutung stehen als Platzhalter für ein oder
+mehrere andere Zeichen, für Zeilenanfänge oder -enden oder für
+andere Sonderfunktionen. Sie sind es, die reguläre Ausdrücke
+eigentlich mächtig und sinnvoll machen.
+</p>
+
+<p>
+In regulären Ausdrücken gibt es <em>Zeichenmengen</em> (wird weiter
+unten erklärt), die durch eckige Klammern <tt>[</tt> und <tt>]</tt>
+eingeschlossen werden. Bei Zeichen mit Sonderbedeutung gelten
+leicht unterschiedliche Regeln, je nachdem ob man gerade eine
+außerhalb einer Zeichenmenge arbeitet oder innerhalb.
+</p>
+
+<p>
+Außerhalb von Zeichenmengen gibt es die folgenden besonderen
+Regeln:
+</p>
+
+<ul>
+<li><p>
+Der Backslash <tt>\</tt> wird als Escape-Zeichen verwendet,
+mit unterschiedlichen Anwendungen:</p>
+
+  <ul>
+   <li><p>
+       Für Sonderzeichen (also alle nicht-alphanumerischen
+       Zeichen) nimmt es den Zeichen ihre besondere Bedeutung,
+       sodass man sie "wörtlich" in das Suchmuster einfügen kann.
+       Das Suchmuster <tt>\*</tt> paßt also auf genau ein
+       Sternchen.</p>
+   </li>
+
+   <li><p>
+       Für alphabethische Zeichen hat es eine besondere
+       Bedeutung ähnlich wie in der Programmiersprache C:
+       <tt>\r</tt> steht für ein Return (ASCII 13), <tt>\n</tt>
+       steht für ein Linefeed (ASCII 10) und so weiter. Die
+       Zeichenfolgen <tt>\d</tt>, <tt>\D</tt>, <tt>\w</tt>,
+       <tt>\W</tt>, <tt>\s</tt> und <tt>\S</tt> beschreiben
+       bestimmte vordefinierte Zeichenmengen (siehe unten).</p>
+   </li>
+
+   <li><p>
+       In Zeichenfolgen <tt>\xYY</tt> definiert es das Zeichen
+       mit dem hexadezimalen Zeichencode <tt>YY</tt>. Ein
+       <tt>\x0A</tt> steht also für ein Zeichen mit einem
+       Zeichencode ASCII 10, Linefeed.</p>
+   </li>
+
+   <li><p>
+       In Zeichenfolgen <tt>\YYY</tt> definiert es das Zeichen
+       mit dem oktalen Zeichencode <tt>YYY</tt>. Ein
+       <tt>\012</tt> steht also für ein Zeichen mit dem
+       Zeichencode ASCII 10, Linefeed. Diese Schreibweise ist
+       jedoch nicht empfohlen, weil sie sich mit einer anderen
+       Schreibweise für sogenannte <em>Backreferences</em>
+       (siehe unten) überlappt.</p>
+   </li>
+   </ul>
+</li>
+
+<li><p>
+    Das Dachzeichen <tt>^</tt> steht als Markierung für einen
+    Stringanfang: Das Suchmuster <tt>^hallo</tt> paßt auf alle
+    Strings, die mit dem Wort <tt>hallo</tt> beginnen, jedoch
+    nicht auf Strings, die <tt>hallo</tt> irgendwo in der Mitte
+    enthalten.</p>
+</li>
+
+<li><p>
+    Entsprechend steht das Stringzeichen <tt>$</tt> für ein
+    Stringende: Das Suchmuster <tt>Welt!$</tt> paßt auf
+    Zeichenketten, die mit dem Text <tt>Welt!</tt> enden. Das
+    Suchmuster <tt>^$</tt> paßt auf Strings, die nur aus einem
+    Beginn und einem Ende bestehen, also auf Leerstrings.</p>
+</li>
+
+<li><p>
+    Der Punkt <tt>.</tt> paßt auf genau ein beliebiges Zeichen
+    außer dem Zeilenendezeichen <tt>\n</tt>. Das Suchmuster
+    <tt>...</tt> paßt also auf alle Strings, die aus genau drei
+    Zeichen bestehen.</p>
+</li>
+
+<li><p>
+    Die öffnende eckige Klammer <tt>[</tt> leitet eine
+    Zeichenmenge ein.</p>
+</li>
+
+<li><p>
+    Das Pipelinezeichen <tt>|</tt> kennzeichnet einen Zweig
+    einer Alternative. So paßt das Suchmuster <tt>(Sie|Du)</tt>,
+    sobald die Zeichenfolge <tt>Sie</tt> oder die Zeichenfolge
+    <tt>Du</tt> im Text enthalten ist.</p>
+</li>
+
+<li><p>
+    Die runden Klammern <tt>()</tt> schließen ein Untermuster
+    bzw. Teilmuster ein. Man kann dies verwenden, um einen
+    Teilbereich eines Suchmusters zum Zwecke der späteren
+    Verwendung zu markieren oder um Teilmuster zu gruppieren.</p>
+
+    <p>
+    Für die Gruppierung findet man im vorhergehenden Punkt schon
+    ein Beispiel: <tt>(Sie|Du)</tt> definiert ein Muster, das
+    auf <tt>Sie</tt> oder <tt>Du</tt> paßt. Dagegen
+    definiert <tt>Si(e|D)u</tt> ein Muster, das entweder auf
+    <tt>Sieu</tt> oder auf <tt>SiDu</tt> paßt.
+    </p>
+
+    <p>
+    Markierte Teilbereiche eines Suchmusters, sogenannte
+    <em>Backreferences</em> lassen sich später nach der
+    Anwendung des Musters extrahieren und weiterverarbeiten: Das
+    Muster <tt>"(.)"</tt> paßt auf genau ein beliebiges Zeichen,
+    das zwischen Anführungszeichen steht. Welcher Buchstabe aus
+    dem getesteten String genau gepaßt hat, kann man nach der
+    Anwendung des Suchmusters erfragen. Dies verwendet man oft,
+    um Teilstrings mit einem bestimmten Aussehen aus einem
+    größeren String herauszuschneiden.
+    </p>
+
+    <p>
+    Innerhalb eines regulären Ausdrucks werden die öffnenden
+    runden Klammern von links nach rechts durchnummeriert.
+    Innerhalb desselben Ausdrucks kann man sich mit
+    <em>Backreferences</em> auf den Text beziehen, der von einer
+    Klammer markiert worden ist: <tt>\1</tt> bezeichnet den
+    Text, der von der ersten öffnenden Klammer umschlossen wird,
+    <tt>\2</tt> den Text in der zweiten Klammer und so weiter.
+    Dazu in einem der folgenden Punkte mehr.
+    </p>
+</li>
+
+<li><p>
+    Mit Hilfe von Quantifizierern in geschweiften Klammern
+    <tt>{}</tt> kann man festlegen, wieviele Wiederholungen des
+    vorhergehenden Ausdrucks gesucht werden: <tt>{n,m}</tt>
+    steht für <tt>n</tt> bis <tt>m</tt> Wiederholungen des
+    vorhergehenden Ausdrucks, <tt>{n,}</tt> für mindestens
+    <tt>n</tt> Wiederholungen, <tt>{,m}</tt> für maximal
+    <tt>m</tt> Wiederholungen. Mit Hilfe von <tt>{n}</tt>
+    bezeichnet man genau <tt>n</tt> Wiederholungen.</p>
+
+    <p>
+    So paßt das Suchmuster <tt>a{3,5}</tt> auf alle Strings,
+    die zwischen 3 und 5 Zeichen <tt>a</tt> in Folge enthalten.
+    Das Muster <tt>(bla){3}</tt> paßt auf alle Strings, die
+    genau die Zeichenfolge <tt>blablabla</tt> enthalten und das
+    Muster <tt>^a(.{3,})b$</tt> paßt auf alle Strings, die mit
+    einem <tt>a</tt> anfangen, mit einem <tt>b</tt> enden und
+    die dazwischen mindestens 3 Zeichen enthalten.  Welche (und
+    wieviele) Zeichen dies waren, kann man nach Anwendung des
+    Musters abfragen, da dieser Bereich im Muster mit runden
+    Klammern markiert war.
+    </p>
+</li>
+
+<li><p>
+    Das Fragezeichen <tt>?</tt> kann als Kürzel für
+    <tt>{0,1}</tt> verwendet werden: Es steht für null oder eine
+    Wiederholung des vorhergehenden Ausdrucks.</p>
+</li>
+
+<li><p>
+    Der Stern <tt>*</tt> steht für <tt>{0,}</tt>, also für Null
+    oder mehr Wiederholungen des vorhergehenden Ausdrucks.</p>
+</li>
+
+<li><p>
+    Das Pluszeichen steht für <tt>{1,}</tt>, also für mindestens
+    eine Wiederholung des vorhergehenden Ausdrucks.</p>
+</li>
+</ul>
+
+<p>
+Eckige Klammern leiten eine Zeichenmenge ein. Eine Zeichenmenge
+steht immer für genau ein Zeichen und zwar für ein Zeichen, das
+in der Menge enthalten ist. Also paßt der reguläre Ausdruck
+<tt>[0123456789]</tt> auf genau eine beliebige Ziffer. Innerhalb
+der eckigen Klammern einer Zeichenmenge haben die folgenden
+Zeichen eine besondere Bedeutung:
+</p>
+
+<ul>
+<li><p>
+    Der Backslash <tt>\</tt> gilt als Escapezeichen: Das ihm
+    folgende Zeichen hat keine besondere Bedeutung, sondern steht
+    nur für sich selbst.</p>
+</li>
+
+<li><p>
+    Das Dach <tt>^</tt> als erstes Zeichen einer Zeichenmenge
+    (aber nur als erstes Zeichen!) negiert die Zeichenmenge. Die
+    Zeichenmenge <tt>[^0123456789]</tt> steht also für genau ein
+    Zeichen, das keine Ziffer ist.</p>
+</li>
+
+<li><p>
+    Das Minuszeichen <tt>-</tt> definiert einen Bereich. Die
+    Zeichenmenge <tt>[0-9]</tt> ist also eine kürzere Schreibweise als
+    <tt>[0123456789]</tt> für dieselbe Menge.</p>
+</li>
+
+<li><p>
+    Die besonderen Zeichenmengen <tt>\d</tt> (eine dezimale
+    Ziffer), <tt>\D</tt> (die Negation von <tt>\d</tt>),
+    <tt>\w</tt> (ein "Wort"-Zeichen), <tt>\W</tt> (die Negation
+    von <tt>\w</tt>), <tt>\s</tt> (ein "Whitespace"-Zeichen) und
+    <tt>\S</tt> (die Negation von <tt>\s</tt>) stehen für die jeweils
+    angegebenen Zeichen.</p>
+</li>
+</ul>
+
+<p>
+Verwendet man einen Suchausdruck mit den preg*-Funktionen, dann
+ist der Suchausdruck in sogenannte Begrenzerzeichen
+(<em>Delimiter</em>) einzuschließen, hinter denen noch <a href="http://www.php.net/manual/pcre.pattern.modifiers.php">Optionen</a> mit angegeben werden können. Meistens
+verwendet man entweder die Schrägstriche <tt>/</tt> oder
+Gleichheitszeichen <tt>=</tt>.
+</p>
+
+<p>
+Aus diesen Komponenten kann man sich mit einiger Übung
+Suchausdrücke zusammenbauen, die nicht nur weitgehend unlesbar
+sind, sondern die außerdem schnell und schmerzlos die
+gewünschten Suchfunktionen oder Such- und Ersetzefunktionen
+durchführen.
+</p>
+

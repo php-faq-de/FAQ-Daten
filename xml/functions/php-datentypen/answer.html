@@ -1,0 +1,108 @@
+<p>
+Dadurch, dass PHP allen Variablenbenutzungen das
+Markierungszeichen $ (Dollar) voranstellt, ist es möglich,
+Variablen in Stringkonstanten zu interpolieren, wie man es von
+der Unix-Shell her kennt. Will man das Markierungszeichen selbst
+ausgeben, kann man ihm es durch einen vorangestellten \
+(Backslash) entwerten. Einen Backslash gibt man aus, indem man
+ihn entwertet: \\ (Backslash Backslash).
+</p>
+
+<p>In PHP gibt es die folgenden Datentypen:</p>
+
+<h2>Skalare Werte: boolean, integer, float, string</h2>
+
+<pre><span style="color: #808080; font-style: italic;"># Zuweisung</span>
+<span style="color: #0000ff;">$mybool</span>  = <span style="color: #000000; font-weight: bold;">true</span>;
+<span style="color: #0000ff;">$myint</span>   = <span style="color: #cc66cc;">1</span>;
+<span style="color: #0000ff;">$myfloat</span> = <span style="color: #cc66cc;">3.14</span>;
+<span style="color: #0000ff;">$mystring</span>= <span style="color: #ff0000;">&quot;hallo&quot;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;"># Verwendung</span>
+<span style="color: #0000ff;">$yourbool</span>  = not <span style="color: #0000ff;">$mybool</span>;
+<span style="color: #0000ff;">$yourint</span>   = <span style="color: #0000ff;">$myint</span> * <span style="color: #cc66cc;">2</span>;
+<span style="color: #0000ff;">$yourfloat</span> = <span style="color: #0000ff;">$myfloat</span> * <span style="color: #cc66cc;">2.71828</span>;
+<span style="color: #0000ff;">$yourstring</span>= <span style="color: #0000ff;">$mystring</span> . <span style="color: #ff0000;">&quot; du da!&quot;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;"># Ausgabe</span>
+<a href="http://www.php3.de/print"><span style="color: #000066;">print</span></a> <span style="color: #ff0000;">&quot;$yourbool<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
+<a href="http://www.php3.de/print"><span style="color: #000066;">print</span></a> <span style="color: #ff0000;">&quot;$yourint<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
+<a href="http://www.php3.de/print"><span style="color: #000066;">print</span></a> <span style="color: #ff0000;">&quot;$yourfloat<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
+<a href="http://www.php3.de/print"><span style="color: #000066;">print</span></a> <span style="color: #ff0000;">&quot;$yourstring<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;</pre>
+
+<h2>Felder (Arrays)</h2>
+
+<p>
+Der Gebrauch von Feldern ist im Kapitel "<a class="faq" href="http://php-faq.de/ch-arrays.html">Arrays und Arrayvariablen</a>" ausführlicher erläutert.
+</p>
+
+<p>
+PHP unterscheidet nicht zwischen Feldern (Arrays) mit
+Integer-Index und Hashes (Assoziativen Arrays) mit beliebigen
+Indices.
+</p>
+
+<pre><span style="color: #808080; font-style: italic;"># Arrays</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;"># Zuweisung</span>
+<span style="color: #0000ff;">$a1</span>    = <a href="http://www.php3.de/array"><span style="color: #000066;">array</span></a><span style="color: #000000;">&#40;</span> <span style="color: #cc66cc;">10</span>, <span style="color: #cc66cc;">20</span>, <span style="color: #cc66cc;">30</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #0000ff;">$a2</span><span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #000000;">&#93;</span> = <span style="color: #cc66cc;">10</span>;
+<span style="color: #0000ff;">$a2</span><span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">2</span><span style="color: #000000;">&#93;</span> = <span style="color: #cc66cc;">30</span>;
+<span style="color: #0000ff;">$a2</span><span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">1</span><span style="color: #000000;">&#93;</span> = <span style="color: #cc66cc;">20</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;"># Verwendung</span>
+<span style="color: #0000ff;">$a3</span><span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #000000;">&#93;</span> = <span style="color: #0000ff;">$a1</span><span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #000000;">&#93;</span> + <span style="color: #0000ff;">$a2</span><span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">2</span><span style="color: #000000;">&#93;</span>; <span style="color: #808080; font-style: italic;">// $a3[0] ist 40</span>
+<span style="color: #0000ff;">$a3</span><span style="color: #000000;">&#91;</span><span style="color: #000000;">&#93;</span>  = <span style="color: #0000ff;">$a1</span><span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">1</span><span style="color: #000000;">&#93;</span> + <span style="color: #0000ff;">$a1</span><span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #000000;">&#93;</span>; <span style="color: #808080; font-style: italic;">// $a3[1] ist 30, Index autom. vergeben</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;"># Ausgabe</span>
+<a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;A1: %s %s %s<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>, <span style="color: #0000ff;">$a1</span><span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #000000;">&#93;</span>, <span style="color: #0000ff;">$a1</span><span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">1</span><span style="color: #000000;">&#93;</span>, <span style="color: #0000ff;">$a1</span><span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">2</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;"># Aufzählung</span>
+<span style="color: #b1b100;">for</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$i</span>=<span style="color: #cc66cc;">0</span>; <span style="color: #0000ff;">$i</span>&lt;=<span style="color: #cc66cc;">2</span>; <span style="color: #0000ff;">$i</span>++<span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+  <a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;%s: %s<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>, <span style="color: #0000ff;">$i</span>, <span style="color: #0000ff;">$a1</span><span style="color: #000000;">&#91;</span><span style="color: #0000ff;">$i</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000;">&#125;</span></pre>
+
+<pre><span style="color: #808080; font-style: italic;"># Hashes</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;"># Zuweisung</span>
+<span style="color: #0000ff;">$a1</span>    = <a href="http://www.php3.de/array"><span style="color: #000066;">array</span></a><span style="color: #000000;">&#40;</span> <span style="color: #ff0000;">&quot;peter&quot;</span> =&gt; <span style="color: #cc66cc;">10</span>, <span style="color: #ff0000;">&quot;paul&quot;</span> =&gt; <span style="color: #cc66cc;">20</span>, <span style="color: #ff0000;">&quot;mary&quot;</span> =&gt; <span style="color: #cc66cc;">30</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #0000ff;">$a2</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;peter&quot;</span><span style="color: #000000;">&#93;</span> = <span style="color: #cc66cc;">10</span>;
+<span style="color: #0000ff;">$a2</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;mary&quot;</span><span style="color: #000000;">&#93;</span>  = <span style="color: #cc66cc;">30</span>;
+<span style="color: #0000ff;">$a2</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;paul&quot;</span><span style="color: #000000;">&#93;</span>  = <span style="color: #cc66cc;">20</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;"># Verwendung</span>
+<span style="color: #0000ff;">$a3</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;peter&quot;</span><span style="color: #000000;">&#93;</span> = <span style="color: #0000ff;">$a1</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;peter&quot;</span><span style="color: #000000;">&#93;</span> + <span style="color: #0000ff;">$a2</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;mary&quot;</span><span style="color: #000000;">&#93;</span>; <span style="color: #808080; font-style: italic;">// $a3[&quot;peter&quot;] ist 40</span>
+&nbsp;
+<span style="color: #808080; font-style: italic;"># Ausgabe</span>
+<a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;A1: %s %s %s<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>, <span style="color: #0000ff;">$a1</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;peter&quot;</span><span style="color: #000000;">&#93;</span>, <span style="color: #0000ff;">$a1</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;paul&quot;</span><span style="color: #000000;">&#93;</span>, <span style="color: #0000ff;">$a1</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;mary&quot;</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;"># Aufzählung</span>
+<span style="color: #b1b100;">foreach</span><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$a1</span> <span style="color: #b1b100;">as</span> <span style="color: #0000ff;">$k</span> =&gt; <span style="color: #0000ff;">$v</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+  <a href="http://www.php3.de/print"><span style="color: #000066;">print</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;%s: %s<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>, <span style="color: #0000ff;">$k</span>, <span style="color: #0000ff;">$v</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000;">&#125;</span></pre>
+
+<h2>Objekte</h2>
+
+<p>
+Der Gebrauch von Objekten ist im Kapitel "<a class="faq" href="http://php-faq.de/ch-objects.html">Klassen und Objekte</a>" ausführlicher erläutert.
+</p>
+
+<h2>Spezielle Typen: Resource und NULL</h2>
+<p>
+Eine Resource ist eine spezielle Variable, die eine Referenz auf eine
+externe Resource enthält. Resourcen werden von bestimmten Funktionen
+erzeugt und benutzt. Wenn man zum Beispiel mit <tt>$db = mysql_connect(...)</tt>
+eine Datenbankverbindung herstellt, dann ist <tt>$db</tt> vom Typ Resource.
+</p>
+<p>
+Der spezielle NULL Wert steht dafür, dass eine Varaiable keinen Wert hat. NULL ist der einzig mögliche Wert des Typs NULL.
+</p>
+<p>
+Eine Variable wird als NULL interpretiert, wenn
+</p>
+<ul>
+<li><p>ihr die Konstannte NULL als Wert zugewiesen wurde.</p></li>
+<li><p>ihr bis jetzt kein Wert zugewiesen wurde.</p></li>
+<li><p>sie mit unset() gelöscht wurde.</p></li>
+</ul>
+

@@ -1,0 +1,57 @@
+<p>
+Wenn der Webserver ordnungsgemäß konfiguriert ist und er PHP unterstützt,
+bekommt der Besucher der Seite den PHP-Code nicht zu sehen, da er vom
+Webserver geparst wird und nur der generierte HTML-Code an den Browser
+geschickt wird.
+</p>
+
+<p>
+Folgende Szenarien sind jedoch denkbar, bei denen der Besucher den PHP-Code
+trotzdem zu sehen bekommt:
+</p>
+
+<ul>
+<li>
+<p>Auf dem Webserver ist kein PHP-Parser installiert. In diesem
+Fall behandelt der Webserver den PHP-Code wie "normalen" HTML-Code
+und schickt ihn unbearbeitet (ergo ungeparst) an den
+Browser.</p>
+</li>
+
+<li>
+<p>Aufgrund einer Fehlfunktion des Webserver ist der PHP-Parser
+ausgefallen oder der Webserver benutzt ihn nicht mehr:
+In diesem Fall sieht der User ebenfalls den ungeparsten Source-Code
+im Browserfenster, da kein Parsing mehr stattfindet.</p>
+</li>
+
+<li>
+<p>Ein "böser Junge" verschafft sich per FTP Zugriff auf die
+Daten: Auch hier hat der User die Möglichkeit, den Source-Code
+einzusehen, da der PHP-Parser nur Dateien parst, die über den
+Webserver abgefragt werden. Andere Schnittstellen wie zum Beispiel
+FTP berücksichtigt er nicht.</p>
+</li>
+
+<li>
+<p>Ein User verschafft sich Zugriff auf den Webserver mit
+Telnet oder SSH: Auch hier kann er den PHP-Code ohne weiteres
+einsehen, indem er zum Beispiel <tt>cat irgendwas.php</tt> eingibt
+und der Inhalt der Datei irgendwas.php auf dem Bildschirm
+ausgegeben wird.</p>
+</li>
+</ul>
+
+<p>
+Siehe auch: "<a class="faq" href="http://php-faq.de/q-php-kompilieren.html">Kann ich PHP-Dateien kompilieren und so vor Dritten schützen?</a>"
+</p>
+
+<p>
+In jedem Fall ist es sinnvoll, Code mit Datenbankpassworten in
+einem Verzeichnis abzulegen, das nicht durch eine URL erreichbar
+ist oder das mit einer .htaccess-Datei gegen Zugriff gesichert
+ist. Dieser Code kann dann mit Hilfe von <a href="http://www.php3.de/include">include()</a> oder <a href="http://www.php3.de/require">require()</a>
+eingebunden werden. Siehe dazu auch den Abschnitt
+"<a class="faq" href="http://php-faq.de/q-db-passwort.html">Wie kann ich mein Datenbankpasswort gegen Spionage sichern?</a>" dieser FAQ.
+</p>
+

@@ -1,0 +1,19 @@
+<Category alias="database_oracle" name="Datenbanken: Oracle" keywords="PHP, Usenet, FAQ, dclp">
+  <!--Die FAQs sind hier noch mal redundant aufgelistet um die Reihenfolge vorzugeben.-->
+  <Faqs>
+    <Faq alias="oracle-oci" />
+    <Faq alias="oracle-kompilierung" />
+    <Faq alias="oracle-speicherverbrauch" />
+    <Faq alias="oracle-umlaute" />
+    <Faq alias="oracle-inkrement" />
+    <Faq alias="oracle-insert-id" />
+    <Faq alias="oracle-limit" />
+    <Faq alias="oracle-langer-text" />
+    <Faq alias="oracle-lob" />
+    <Faq alias="oracle-umbenennen" />
+    <Faq alias="oracle-sql-scripts" />
+    <Faq alias="oracle-tools" />
+    <Faq alias="oracle-fehler" />
+    <Faq alias="oracle-literatur" />
+  </Faqs>
+</Category>

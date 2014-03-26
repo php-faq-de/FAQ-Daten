@@ -1,0 +1,4 @@
+<Faq alias="apache-php-passwort" author="Kristian Köhntopp">
+  <Question>Apache: Wie kann ich ein Verzeichnis mit PHP mit einem Passwort schützen?</Question>
+  <Keywords>Passwort, schuetzen, Authentifizierung, Apache, 401, Verzeichnis, Login</Keywords>
+</Faq>

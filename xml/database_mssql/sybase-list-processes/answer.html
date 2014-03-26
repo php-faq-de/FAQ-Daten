@@ -1,0 +1,14 @@
+<p>Eine Liste der aktiven Prozesse (wie <a href="http://www.php3.de/mysql_list_processes">mysql_list_processes()</a>) 
+kann wie folgt abgerufen werden:</p>
+
+<pre>select 
+  p.spid, 
+  p.hostname, 
+  p.cmd, 
+  d.name 
+from 
+  master..sysprocesses p, 
+  master..sysdatabases d 
+where 
+  d.dbid= p.dbid</pre>
+

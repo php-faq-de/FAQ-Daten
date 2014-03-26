@@ -1,0 +1,4 @@
+<Faq alias="fehler-session-cookie" author="Daniel T. Gorski">
+  <Question>Warning: Cannot send session cookie - headers already sent ...</Question>
+  <Keywords>Cookie, Header, Cache, Fehler, Session, HTTP</Keywords>
+</Faq>

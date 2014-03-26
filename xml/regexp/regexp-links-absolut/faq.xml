@@ -1,0 +1,4 @@
+<Faq alias="regexp-links-absolut" author="Kerry W. Lothrop">
+  <Question>Wie ersetze ich alle relativen Links in einer HTML-Datei durch absolute?</Question>
+  <Keywords>Hyperlink, relativ, absolut</Keywords>
+</Faq>

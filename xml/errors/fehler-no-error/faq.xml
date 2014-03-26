@@ -1,0 +1,4 @@
+<Faq alias="fehler-no-error" author="Johannes Frömter">
+  <Question>Warning: fopen() - No error</Question>
+  <Keywords>Fehler, fopen, Success, URL</Keywords>
+</Faq>

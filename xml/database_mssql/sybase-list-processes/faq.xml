@@ -1,0 +1,4 @@
+<Faq alias="sybase-list-processes" author="Timm Friebe">
+  <Question>MySQL-Kompatibilität: Prozesse auflisten</Question>
+  <Keywords>Sybase, Datenbank, Prozesse, sybase_list_processes</Keywords>
+</Faq>

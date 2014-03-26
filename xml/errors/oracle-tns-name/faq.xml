@@ -1,0 +1,7 @@
+<Faq alias="oracle-tns-name" author="Anton Bangratz">
+  <Question>Warning: ORA-12154: TNS:could not resolve service name</Question>
+  <Keywords>Oracle, Datenbank, Fehler, TNS, Aufloesung, tnsnames.ora, Server, Verbindung, OCILogon</Keywords>
+  <Editors>
+    <Editor name="Niels Braczek" lastedit="2008-08-12 00:00:00" />
+  </Editors>
+</Faq>

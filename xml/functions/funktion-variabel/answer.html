@@ -1,0 +1,78 @@
+<p>
+In PHP kann man Funktionsparameter mit Default-Werten versehen.
+Läßt man die Argumente der Funktion von hinten nach vorne weg,
+werden stattdessen die Defaults eingesetzt. Defaultwerte müssen
+skalare Konstanten sein. Variable Ausdrücke (Variablen,
+Funktionsaufrufe) oder nichtskalare Werte (Arrays, Objekte) sind
+nicht gestattet.
+</p>
+
+<pre><span style="color: #000000; font-weight: bold;">function</span> beispiel<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$p</span> = <span style="color: #ff0000;">&quot;default&quot;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+  <a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Der Parameter p hat den Wert %s<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>, <span style="color: #0000ff;">$p</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000;">&#125;</span>
+&nbsp;
+beispiel<span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;hallo&quot;</span><span style="color: #000000;">&#41;</span>;
+beispiel<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;</pre>
+
+<p>
+Auf diese Weise kann man jedoch keine echten variadischen
+Funktionen schreiben. So ist es zum Beispiel nicht möglich eine
+Funktion wie <a href="http://www.php3.de/printf">printf()</a> in PHP3 zu schreiben.
+Man kann variadische Funktionen jedoch durch die Übergabe eines
+Array- oder Hashparameters simulieren.
+</p>
+
+<pre><span style="color: #000000; font-weight: bold;">function</span> beispiel2<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$p</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+  <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span>!<a href="http://www.php3.de/isset"><span style="color: #000066;">isset</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$p</span><span style="color: #000000;">&#41;</span> or !<a href="http://www.php3.de/is_array"><span style="color: #000066;">is_array</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$p</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>
+    <span style="color: #808080; font-style: italic;"># Defaults setzen</span>
+    <span style="color: #0000ff;">$p</span> = <a href="http://www.php3.de/array"><span style="color: #000066;">array</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;para1&quot;</span> =&gt; <span style="color: #ff0000;">&quot;bla&quot;</span>, <span style="color: #ff0000;">&quot;para2&quot;</span> =&gt; <span style="color: #ff0000;">&quot;fasel&quot;</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+  <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$p</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;para1&quot;</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span>
+    machdies<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+  <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$p</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;para2&quot;</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span>
+    machdas<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000;">&#125;</span>
+&nbsp;
+beispiel2<span style="color: #000000;">&#40;</span><a href="http://www.php3.de/array"><span style="color: #000066;">array</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;para1&quot;</span> =&gt; <span style="color: #ff0000;">&quot;laber&quot;</span>, <span style="color: #ff0000;">&quot;para2&quot;</span> =&gt; <span style="color: #ff0000;">&quot;lall&quot;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>;</pre>
+
+<p>
+Seit PHP4 sind auch echte variadische Funktionen möglich. Dort
+gibt es die drei Funktionen
+</p>
+
+<h2><a href="http://www.php3.de/func_num_args">func_num_args()</a></h2>
+
+<p>
+Diese Funktion liefert die Anzahl der Funktionsargumente als
+Integer.
+</p>
+
+<h2><a href="http://www.php3.de/func_get_arg">func_get_arg()</a></h2>
+
+<p>
+Diese Funktion bekommt eine Argumentnummer als Parameter und
+liefert des Wert des Funktionsargumentes mit diesem Index zurück.
+</p>
+
+<h2><a href="http://www.php3.de/func_get_args">func_get_args()</a></h2>
+
+<p>
+Diese Funktion liefert alle Argumente einer Funktion als Array
+zurück.
+</p>
+
+<p>
+Eine echte variadische Funktion kann also in PHP4 folgendermaßen
+geschrieben werden:
+</p>
+
+<pre><span style="color: #000000; font-weight: bold;">function</span> beispiel3<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+    <span style="color: #0000ff;">$args</span> = <a href="http://www.php3.de/func_get_args"><span style="color: #000066;">func_get_args</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+    <span style="color: #b1b100;">for</span><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$i</span>=<span style="color: #cc66cc;">0</span>; <span style="color: #0000ff;">$i</span>&lt;count<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$args</span><span style="color: #000000;">&#41;</span>; <span style="color: #0000ff;">$i</span>++<span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+         <a href="http://www.php3.de/print"><span style="color: #000066;">print</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$args</span><span style="color: #000000;">&#91;</span><span style="color: #0000ff;">$i</span><span style="color: #000000;">&#93;</span>.<span style="color: #ff0000;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #000000;">&#41;</span>;
+    <span style="color: #000000;">&#125;</span>
+<span style="color: #000000;">&#125;</span>
+&nbsp;
+beispiel3<span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;das&quot;</span>, <span style="color: #ff0000;">&quot;ist&quot;</span>, <span style="color: #ff0000;">&quot;ein&quot;</span>, <span style="color: #ff0000;">&quot;test&quot;</span><span style="color: #000000;">&#41;</span>;</pre>
+

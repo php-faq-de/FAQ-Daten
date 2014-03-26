@@ -1,0 +1,4 @@
+<Faq alias="db-connect" author="Kristian Köhntopp">
+  <Question>Was ist der Unterschied zwischen connect und pconnect?</Question>
+  <Keywords>Persistenz, Datenbank, Verbindung, CGI, Modul</Keywords>
+</Faq>

@@ -1,0 +1,4 @@
+<Faq alias="sessions-methode" author="Kristian Köhntopp">
+  <Question>Soll die Session-ID in URL-Parametern oder Cookies gespeichert werden?</Question>
+  <Keywords>Cookie, GET, Session, SID, Propagation, Grundlage</Keywords>
+</Faq>

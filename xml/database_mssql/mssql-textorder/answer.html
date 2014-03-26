@@ -1,0 +1,13 @@
+<p>
+MSSQL kann kein sortorder auf Felder vom Typ Text. Um dennoch ein
+solches Feld als Sortierkriterium verwenden zu können, muss man
+dem MSSQL sagen das er nur eine bestimmte Anzahl an Zeichen
+berücksichtigen soll. Dies wird im Query mit dem SUBSTRING
+Kommando gemacht.
+</p>
+<p>
+Um die ersten 40 Zeichen für die Sortierung zu berücksichtigen
+muss man folgendes abschicken.
+</p>
+<pre class="sql"><span style="color: #993333; font-weight: bold;">SELECT</span> * <span style="color: #993333; font-weight: bold;">FROM</span> tabelle <span style="color: #993333; font-weight: bold;">ORDER</span> <span style="color: #993333; font-weight: bold;">BY</span> substring<span style="color: #66cc66;">&#40;</span>spaltenname,<span style="color: #cc66cc;">1</span>,<span style="color: #cc66cc;">40</span><span style="color: #66cc66;">&#41;</span></pre>
+

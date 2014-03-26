@@ -1,0 +1,32 @@
+<p>
+In der Umgebungs-Variablen <tt>REMOTE_ADDR</tt> steht die IP-Adresse
+des <em>Rechners</em>, der die Anfrage sendet. Dies ist nicht
+zwangsläufig der Rechner, an dem der <em>User</em> sitzt - es kann
+genausogut ein Proxy sein. Wenn der Benutzer in einer Firma mit
+mehr als 2-3 PCs sitzt, ist letzteres sogar sehr wahrscheinlich, aber
+es kann auch bei ganz normalen Provider-Endkunden so sein.
+</p>
+
+<p>
+Folgendes Skript verwendet die Umgebungs-Variable <tt>REMOTE_ADDR</tt>
+und versucht, den Hostnamen zur IP mit der Funktion
+<a href="http://www.php3.de/gethostbyaddr">gethostbyaddr()</a> zu ermitteln (sog. reverse lookup).
+</p>
+
+<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+<span style="color: #808080; font-style: italic;">// IP bestimmen</span>
+<span style="color: #0000ff;">$ip</span> = <a href="http://www.php3.de/getenv"><span style="color: #000066;">getenv</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'REMOTE_ADDR'</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+<span style="color: #808080; font-style: italic;">// IP auflösen und Host bestimmen</span>
+<span style="color: #0000ff;">$host</span> = <a href="http://www.php3.de/gethostbyaddr"><span style="color: #000066;">gethostbyaddr</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$ip</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+
+<p>
+Kommt die Verbindung über einen Proxy zustande, kann es sein, dass
+dieser die IP "seines" Clients im HTTP-Header weitergibt.
+Der verbreitete Proxy <em>squid</em> beispielsweise nennt diesen
+Header <tt>X-Forwarded-For</tt>, dessen Inhalt dann (wie andere
+HTTP-Header auch) in einer Umgebungsvariablen zur Verfügung gestellt
+wird (<tt>HTTP_X_FORWARDED_FOR</tt>).
+</p>
+

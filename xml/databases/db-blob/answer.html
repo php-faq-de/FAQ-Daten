@@ -1,0 +1,86 @@
+<p>
+Vor Jahren noch hörte man als Antwort auf die Frage, ob es sinnvoll sei, Bilder in einer Datenbank abzulegen, folgendes:
+</p>
+
+<blockquote>
+Eine Datenbank ist eine Datenbank, ist eine Datenbank, ist eine Datenbank. Und keine Bildbank.
+</blockquote>
+
+<p>
+Die Zeiten ändern sich jedoch und viele Datenbankmanagementsysteme beherrschen den Umgang mit BLOBs, den „Binary Large Objects“ (auf Deutsch: „große Binärobjekte“), mittlerweile sehr gut – und nichts anderes sind Bilder. Es gibt immer mehr Anwendungen, die Dateien direkt in der Datenbank verwalten und auch PHP hat die Unterstützung der (B)LOBs (http://www.php.net/pdo.lobs) bei der Einführung von PDO (http://www.php.net/pdo) bedacht. 
+</p>
+
+<p>
+Bilder spielten bei dieser Entwicklung zwar eine der zentralen Rollen, aber heute werden neben diesen auch Internetseiten, Dokumente, Musik, Filme und vieles mehr direkt in der Datenbank persistiert.
+</p>
+
+<h2>Vorteile</h2>
+
+<p>
+Die Entwicklung ist auch kaum verwunderlich, wenn man die Vorteile bedenkt. Eines der größten Vorteile ist die Wahrung referentieller – und damit auch struktureller – Integrität. Wenn Bilddateien in der Datenbank mit den dazugehörigen Informationen verwaltet werden, können Bilder nicht einfach verwaisen. Eine Diskrepanz zwischen den Metadaten in der Datenbank und den tatsächlichen Bildern im Dateisystem ist somit nur schwer möglich.
+</p>
+
+<p>
+Hinzu kommt die deutlich stärkere Bindung der Informationen über eine Datei zu der Datei selbst. Während alte Konzepte die Metadaten einer Datei in der Datenbank verwalteten und die Datei im Dateisystem, liegen so alle Informationen gebündelt vor. Dies ist der Verständlichkeit und Wartung stark zuträglich.
+</p>
+
+<p>
+Dieser Vorteil wird durch die leichtere Portierbarkeit weiter ausgeprägt. Für viele Anwender ist es eine starke Vereinfachung lediglich den Datenbankdump einspielen zu müssen und danach direkt auf alle Daten zugreifen zu können.
+</p>
+
+<p>
+Ebenfalls nicht zu vernachlässigen ist eine stärkere Vereinfachung der Rechteverwaltung. Denn fehlerhaft gesetzte Rechte im Dateisystem sind eine häufige Fehlerquelle, die somit entfällt.
+</p>
+
+<p>
+Zu guter Letzt werden auch gerne die vielfältigen Möglichkeiten von Datenbanken genutzt.  Die in der Datenbank verwalteten Nutzerrechte können direkt auf die Dateien übertragen werden, mit Triggern ist es möglich eine simple Versionierung von Dateien einzurichten und eine Reihe von Zustandsdaten lassen sich einfach mit der Datei in der Datenbank verknüpfen. Natürlich ist dies auch möglich, wenn die Bilder im Dateisystem liegen, aber bei der Entwicklung ist diese Brücke regelmäßig eine Hürde und manchmal auch eine Bürde.
+</p>
+
+<h2>Nachteile</h2>
+
+<p>
+Die Verwaltung von Bildern im Speziellen und Dateien im Allgemeinen hat natürlich nicht nur Vorteile. Sie werden mit einer Reihe von Nachteilen erkauft.
+</p>
+
+<h3>Performance</h3>
+
+<p>
+Gerade für Bilder gilt, dass diese bei jedem Aufruf aus der Datenbank geladen werden müssen. Dies bedeutet, dass für jedes zu ladende Bild ein PHP-Prozess durchlaufen werden muss, der Kontakt mit der Datenbank aufnimmt, die Bilder aus der Datenbank lädt und an den Benutzer zurück gibt. Ein enormer Overhead, der im Quelltext kaum zu sehen ist:
+</p>
+
+<pre>&lt;img src=<span style="color: #ff0000;">&quot;/get_image.php?name=logo.png&quot;</span> /&gt;</pre>
+
+<p>
+Das direkte Ausliefern des Bildes durch den Webserver hingegen ist etwa um den Faktor 10 schneller. Die Relevanz dieses Nachteils steigt mit der Anzahl der verwendeten Bilder.
+</p>
+
+<p>
+Hinzu kommt, dass moderne Browser aus Geschwindigkeitsgründen nicht jedes Bild beim Aufruf einer Seite neu laden wollen, sondern erst prüfen, ob sich dies geändert hat. Dazu schicken sie einen sogenannten "If-Modified-Since" Header an den Webserver. Der Header enthält den Timestamp des Bezuges des betreffendes Bildes. Der Webserver prüft daraufhin, ob sich das angeforderte Bild nach diesem Timestamp geändert hat. Falls dem so ist, übermittelt er das Bild, andernfalls sendet er einen "HTTP/1.x 304 Not Modified" Header, der dem Browser mitteilt, dass sich das Bild nicht geändert hat und er das alte Bild aus dem Browser-Cache verwenden kann. Dieses Vorgehen spart Bandbreite beim Nutzer und beim Server und gilt auch für andere Dateien wie z.B. CSS-Dateien. Allerdings ist dieses Verhalten lediglich im Webserver implementiert. Bei einer Verwaltung von Bildern in der Datenbank gibt es keinen solchen Automatismus und jedes Bild wird immer an den Browser versendet. Dies bindet Ressourcen des Webservers und verlangsamt den Aufbau der Internetseite beim Besucher.
+</p>
+
+<p>
+Diesem erheblichen Nachteil gegenüber einer Verwaltung von Bildern im Dateisystem lässt sich aber mit dem selben Mitteln des Webservers begegnen. Es reicht ein Änderungszeitpunkt oder ein E-Tag zusammen mit dem Bild in der Datenbank zu speichern. Erhält der PHP-Prozess, der die Bilder ausliefert, einen Request mit "If-Modified-Since" Header, muss nur noch geprüft werden, ob das Bild sich geändert hat. Falls nicht, wird der 304-Header versendet. Dieser ganze Ablauf läßt sich in wenigen Zeilen Code realisieren und mindert diesen großen Nachteil stark.
+</p>
+
+<h3>Datenbank spezifische Probleme</h3>
+
+<p>
+Jedes Datenbankmanagementsystem implementiert die Verarbeitung von <abbr title="Binary Large OBjects (engl.) große binäre Objekte">BLOB</abbr>s unterschiedlich. Somit ergeben sich zum Teil sehr spezifische Einschränkungen und Probleme. MySQL z.B. ist nicht in der Lage die BLOBs fragmentarisch – also nur teilweise – zu bearbeiten und hat desweiteren einen begrenzten Sendebuffer. Die Größe der Dateien, die hinterlegt werden können, ist somit beschränkt und abhängig von der Konfiguration des Datenbankservers. PostgreSQL hingegen hat keine Einschränkung durch einen Sendebuffer, unterstützt jedoch nur Dateien bis zu einer Größe von maximal 2GB. Dafür werden die Dateien jedoch direkt beim Speichern komprimiert.
+</p>
+
+<h3>Backup</h3>
+
+<p>
+Das Hinterlegen von Bildern oder anderen Dateien in der Datenbank ist eine Herausforderung für deren Backup-Strategie. Im einfachsten Fall werden regelmäßig Datenbankdumps angefertigt – dies sind die Inhalte der kompletten Datenbank in einer Datei. Normalerweise bestehen diese Dumps nur aus Text - sie sind somit sehr klein, leicht zu komprimieren und gut zu sichern. 
+Durch die Bilder in der Datenbank gehen diese Vorteile jedoch verloren. Die Dumps werden riesig, eine Kompression ist kaum noch möglich und die Sicherung benötigt enorm viel Platz, insbesondere da es nicht möglich ist, nur die Änderungen in einer Datenbank zu dumpen. Die Bilder werden also zusammen mit den gesamten Datenbankinhalten jedes mal gedumpt, obgleich sie sich nicht geändert haben müssen. Bei einer Speicherung der Bilder im Dateisystem lassen sich Änderungen hingegen feststellen, so dass nur die geänderten Dateien gesichert werden müssen. Gerade bei einer große Menge an Dateien ist ein solches inkrementelles Backup eine enorme Zeitersparnis.
+</p>
+
+<p>
+Diese Problematik lässt sich durch die Änderung der Backup-Strategie angehen. So sind z.B. <abbr title="Point In Time Recovery">PITR</abbr>-Verfahren in der Regel eine gute Lösung dieses Problemes – aber je nach Datenbank auch deutlich komplexer als ein simpler Datenbankdump.
+</p>
+
+<h2>Fazit</h2>
+
+<p>
+Ob Bilder in einer Datenbank persistiert werden oder nicht, sollte den Umständen nach entschieden werden. Bei kleinen oder schwach frequentierten Seiten spricht nichts gegen eine solche Lösung. Sind die Anforderungen hingegen höher, muss dies bereits bei der Konzeption bedacht und sorgfältig geprüft werden.
+</p>

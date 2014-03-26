@@ -1,0 +1,79 @@
+<p>
+Schritt 1: Man definiert ein Verzeichnis als CGI Verzeichnis:
+</p>
+
+<pre class="ini">&lt;Directory /home/www/servers/phplib.shonline.de/cgi/&gt;
+Options ExecCGI
+AllowOverride None
+&lt;/Directory&gt;</pre>
+
+<p>
+Hier wird das Verzeichnis <tt>/home/www/.../cgi</tt> als Verzeichnis zur Ausführung von CGI-Dateien
+gekennzeichnet, indem für das Verzeichnis das ExecCGI Attribut gesetzt wird.
+</p>
+
+<p>
+Schritt 2: Man definiert für dieses Verzeichnis eine URL
+</p>
+
+<pre class="ini">ScriptAlias  /cgi/      /home/www/servers/phplib.shonline.de/cgi/</pre>
+
+<p>
+Die URL <tt>/cgi/</tt> wird jetzt auf dieses Verzeichnis <tt>/home/www/.../cgi/</tt> abgebildet.
+</p>
+
+<p>
+Man kann jetzt in diesem Verzeichnis eine ausführbare Datei (etwa ein Shellscript) ablegen, die den
+folgenden Text ausgibt, wenn man sie startet.
+</p>
+
+<pre class="ini">Content-Type: text/plain
+&nbsp;
+Hallo, Welt.</pre>
+
+<p>
+Wenn man diese Datei unter der URL <tt>http://meinserver.de/cgi/name_des-scripts</tt> aufruft, muss
+man den Text "Hallo, Welt." angezeigt bekommen. Gelingt dies nicht, sollte man durch das Error Log
+toben und nachsehen, was dort schiefgeht.
+</p>
+
+<p>
+Schritt 3: Man installiert den PHP-Interpreter im CGI-Verzeichnis und prüft, ob man ihn als
+CGI-Programm aufrufen kann. Dazu ist der Interpreter nach <tt>/home/www/.../cgi</tt> zu kopieren
+und dann unter der URL <tt>http://.../cgi/php</tt> oder <tt>http://.../cgi/php.exe</tt> oder wie immer
+der Interpreter heißt aufzurufen.
+</p>
+
+<p>
+Dabei <em>muss</em> die folgende Fehlermeldung kommen:
+</p>
+
+<pre>
+Security Alert! PHP CGI cannot be accessed directly.
+
+This PHP CGI binary was compiled with force-cgi-redirect
+enabled. This means that a page will only be served up if the
+REDIRECT_STATUS CGI variable is set. This variable is set, for
+example, by Apache's Action directive redirect.
+</pre>
+
+<p>
+Kommt die Meldung nicht, ist das PHP-Binary unsicher und sollte durch ein korrekt kompiliertes Binary
+ersetzt werden.
+</p>
+
+<p>
+Schritt 4: Man definiert eine Scriptaktion, die das o.a. Binary startet und definiert eine Endung, die
+durch diese Aktion abgehandelt wird:
+</p>
+
+<ul>
+<li><pre class="ini">Action       php-script /cgi/php</pre>
+    <p>teilt dem Apache mit, dass der interne MIME-Typ <tt>php-script</tt> durch die URL <tt>/cgi/php</tt>
+       (oder wie immer die URL zum Aufruf des PHP-Interpreters aus Schritt 3 heißt) abgehandelt wird. Der
+       MIME-Typ <tt>php-script</tt> ist illegal und das ist gut so, denn er wird nur innerhalb von Apache
+       verwendet (er darf nur innerhalb von Apache verwendet werden!).</p> </li>
+<li><pre class="ini">AddHandler   php-script .php</pre>
+    <p>teilt Apache weiterhin mit, dass die Endung <tt>.php</tt> durch den MIME-Handler für den MIME-Type
+       <tt>php-script</tt> abgehandelt wird.</p> </li>
+</ul>

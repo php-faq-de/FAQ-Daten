@@ -1,0 +1,19 @@
+<p>
+Um PHP auf den aktuellen SuSE-Distributionen zu installieren braucht man flex. Wenn flex nicht
+installiert ist, dann bricht <tt>./configure</tt> mit Meldungen ab wie:
+</p>
+
+<pre>
+checking for flex... no
+checking for lex... no
+./configure: flex: command not found
+checking for flex... lex
+checking for yywrap in -ll... no
+checking lex output file root... ./configure: lex: command not found
+configure: error: cannot find output from lex; giving up
+</pre>
+
+<p>
+Flex findet man in der Serie d auf den SuSE-CDs und auch auf dem SuSE ftp-Server. Es kann
+einfach per YaST installiert werden.
+</p>

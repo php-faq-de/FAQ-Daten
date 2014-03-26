@@ -1,0 +1,48 @@
+<p>
+Der Begriff "Application Server" ist ein sehr schwammiger.
+</p>
+
+<p>
+Man könnte unter einem solchen beispielsweise einen Daemon (Server) verstehen, der die Ausgabe
+von Programmen (Application) über das Internet zur Verfügung stellt. Dieser Definition zufolge
+wäre bereits ein Webserver mit PHP Unterstützung ein "Application Server".
+</p>
+
+<p>
+In der Java Welt hingegen versteht man jedoch etwas anderes unter dem Begriff des "Application Servers":
+</p>
+
+<p>
+In einem "Application Server" laufen die Applikationen permanent ab. Kommt ein Request per HTTP,
+so wird eine entsprechende Methode einer bereits laufenden Anwendung aufgerufen. Diese liefert
+ein Ergebnis, das an den Client ausgeliefert wird.
+</p>
+
+<p>
+Dies bringt mehrere Vorteile mit sich: Die Umgebung der Sprache, in der die Applikation geschrieben
+wurde -- im Falle von PHP der PHP Interpreter, im Falle von Java die Java Virtual Machine (JVM)
+(naja, eigentlich ist auch der PHP Interpreter eine virtuelle Maschine, und die Java Virtual
+Machine ein Bytecode Interpreter -- aber das soll jetzt hier nicht diskutiert werden) -- muss nicht
+für jeden einzelnen HTTP Request neu initialisiert werden. Ferner können Ressourcen, wie zum
+Beispiel Datenbankverbindungen, gemeinsam genutzt und somit effizienter verwaltet werden.
+</p>
+
+<!-- Ulf: Proejkt existiert nicht mehr p>
+Noch schwerer fällt als Vorteil ins Gewicht, dass komplexe Datenstrukturen nur einmal zu Beginn der
+Applikation aufgebaut werden müssen -- man denke hierbei nur an die
+<a href="http://www.ulf-wendel.de/projekte/form/">OOHForms</a> von Ulf Wendel.
+</p-->
+
+<p>
+Auch erschließen sich dem Applikationsentwickler neue Möglichkeiten, da er mit einem Application
+Server Daten zwischen verschiedenen Requests an seine Applikation tauschen kann: denn eigentlich
+arbeitet ja nur eine Instanz der Applikation sämtliche Anfragen ab.
+</p>
+
+<!-- Ulf: Proejkt existiert nicht mehr p>
+Zur Zeit gibt es für PHP noch keinen Application Server, der dem Begriff aus der Java Welt gerecht
+wird. Unter dem Namen <a href="http://www.vl-srm.net/">Script Running Machine (SRM)</a>
+arbeiten einige PHP Developer an einem Daemon, der PHP Applikationen permanent ausführen,
+Datenbankverbindung poolen und Datenstrukturen im Speicher halten kann.
+</p-->
+

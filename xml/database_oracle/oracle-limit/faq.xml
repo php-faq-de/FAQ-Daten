@@ -1,0 +1,7 @@
+<Faq alias="oracle-limit" author="Thomas Fromm">
+  <Question>Wie selektiere ich nur bestimmte Zeilen (LIMIT unter MySQL)?</Question>
+  <Keywords>Oracle, Datenbank, Limit, MySQL, Ersatz, bestimmt, Anzahl, Zeilen</Keywords>
+  <Editors>
+    <Editor name="Niels Braczek" lastedit="2008-08-12 00:00:00" />
+  </Editors>
+</Faq>

@@ -1,0 +1,4 @@
+<Faq alias="sybase-changed-dbctx" author="Timm Friebe">
+  <Question>Sybase: Changed database context...</Question>
+  <Keywords>Sybase, Datenbank, Warning, sybase_select_db</Keywords>
+</Faq>

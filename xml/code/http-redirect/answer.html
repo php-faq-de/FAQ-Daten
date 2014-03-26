@@ -1,0 +1,27 @@
+<p>
+Um einen Redirect zu erzeugen, muss man den HTTP-Header
+<tt>Location</tt> senden und dort die neue URL angeben. Zum Senden
+von HTTP-Headerzeilen verwendet man die PHP-Funktion
+<a href="http://www.php3.de/header">header()</a>. Diese Funktion kann nur dann verwendet werden,
+wenn PHP noch keinen HTTP-Body ausgegeben hat, wenn also weder
+Fehlermeldungen, Leerzeilen, Leerzeichen noch HTML ausgegeben worden
+sind.
+</p>
+
+<pre><span style="color: #808080; font-style: italic;">// Redirect-Ziel</span>
+<a href="http://www.php3.de/header"><span style="color: #000066;">header</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Location: http://www.ziel.de/zielseite.html&quot;</span><span style="color: #000000;">&#41;</span>;</pre>
+
+<p>
+<em>Wichtig:</em>
+<a href="http://www.ietf.org/rfc/rfc2616.txt">RFC 2616</a>
+schreibt im Abschnitt <tt>14.30 Location</tt> eine sog.
+<tt>absoluteURI</tt> vor, d.h. die Adresse <em>muss</em> mit
+<tt>http://</tt> beginnen, relative Anweisungen &agrave; la
+<tt>"Location: index.html"</tt> sind <em>nicht standardkonform!</em>
+Manche Browser sind zwar so tolerant, relative Angaben zu verstehen
+und in der Lage, selbständig die absolute Adresse zu ermitteln, aber
+verlassen kann man sich darauf nicht; die PHP-Funktion
+<a href="http://www.php3.de/fopen">fopen()</a> z.B. scheitert an derart ungültigen
+Location-Angaben.
+</p>
+

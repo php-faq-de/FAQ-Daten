@@ -1,0 +1,18 @@
+<p>
+Der Funktionsname ist PHP zwar bekannt (im Gegensatz zu
+"<a class="faq" href="http://php-faq.de/q-fehler-modul-windows.html">Windows: Call to unsupported or undefined function: xy()</a>"), aber der Funktionsaufruf wird
+in <em>dieser Version</em> von PHP nicht unterstützt. Das kann z. B.
+bei neuen Funktionen der Fall sein, die noch nicht auf Windows
+portiert wurden oder die auf Windows-Systemen prinzipiell nicht
+anwendbar sind.
+</p>
+
+<p>
+Es kann sich auch schlicht um ein Versehen beim Kompilieren handeln,
+dann sollte ein Blick in das
+<a href="http://bugs.php.net/">Bug-System</a>
+Klärung verschaffen. So wurde z. B. in PHP 4.0.5 für Windows die
+Funktion <a href="http://www.php3.de/crypt">crypt()</a> im Build nicht berücksichtigt.
+In allen Versionen davor und danach ist sie aber enthalten.
+</p>
+

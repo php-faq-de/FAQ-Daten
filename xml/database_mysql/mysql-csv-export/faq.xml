@@ -1,0 +1,7 @@
+<Faq alias="mysql-csv-export" author="Kristian Köhntopp">
+  <Question>Wie kann ich eine CSV-Datei aus MySQL exportieren?</Question>
+  <Keywords>SQL, Datenbank, MySQL, CSV, Export, outfile</Keywords>
+  <Editors>
+    <Editor name="Niels Braczek" lastedit="2008-08-12 00:00:00" />
+  </Editors>
+</Faq>

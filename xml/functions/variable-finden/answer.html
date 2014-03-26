@@ -1,0 +1,29 @@
+<p>
+Die Antwort auf diese Frage lautet ausnahmsweise nicht
+<a href="http://www.md-d.org/42.php">42</a>, sondern
+<a href="http://www.php3.de/phpinfo">phpinfo()</a>. In der Ausgabe dieses Befehls
+finden sich neben Konfigurationsangaben sehr viele vordefinierte
+Variablen und deren Namen, einschließlich Umgebungsvariablen,
+übergebenen Parametern, Cookie-Werten etc. pp. (im unteren Drittel
+der Ausgabe).
+</p>
+
+<p>
+Da sich die Namen der vordefinierten Variablen im Laufe der
+Entwicklung von PHP mehrmals geändert haben, und ihr Vorhandensein
+teilweise auch von der Umgebung abhängen kann (Webserver, Aufruf
+per Kommandozeile usw.), ist es immer ratsam, einen Blick in die
+Ausgabe von phpinfo() zu werfen. Man lege also eine Datei mit
+folgendem Inhalt an und rufe sie per Browser auf:
+</p>
+
+<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+    <a href="http://www.php3.de/phpinfo"><span style="color: #000066;">phpinfo</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+
+<p>
+Gerade auch bei Problemen mit Formular-Variablen oder Cookies kann
+man in das Script den phpinfo()-Aufruf einbauen, um einen Einblick
+in die zur Verfügung stehenden Daten zu bekommen.
+</p>
+

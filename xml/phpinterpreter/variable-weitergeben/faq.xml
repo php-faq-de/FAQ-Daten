@@ -1,0 +1,4 @@
+<Faq alias="variable-weitergeben" author="Kristian Köhntopp">
+  <Question>Wie kann ich einen Parameter von einer PHP-Seite an eine andere weitergeben?</Question>
+  <Keywords>get, post, http, Parameter, urlencode, Sonderzeichen, Codierung</Keywords>
+</Faq>

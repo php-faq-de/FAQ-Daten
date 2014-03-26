@@ -1,0 +1,40 @@
+<p>
+Internet Explorer achtet in vielen Bereichen (fälschlicherweise) auf
+Dateienedungen statt auf den MIME-Typ. Bei Verwendung eines
+GET-Requests, insbesondere aber bei einem POST-Request kann es dazu
+kommen, dass nur eine leere Seite dargestellt wird. Folgende
+Möglichkeiten gibt es, diesen Bug zu umgehen:
+</p>
+
+<ul>
+
+<li><p>Umbenennen der Dateiendung in <tt>.pdf</tt> und Konfigurieren des
+Servers, dass .pdf-Dateien durch PHP geparsed werden, z.B. durch die
+Apache-direktiven <tt>AddType</tt> oder <tt>ForceType</tt>.</p></li>
+
+<li><p>Bei GET ohne Parameter: Anhängen der Zeichenkette
+<tt>/.pdf</tt> an die URL. Beispiel: <tt>/pdf.php/.pdf</tt>. Über diese
+Methode kann auch ein Dateiname spezifiziert werden, für den Fall, dass
+die Datei abgespeichert wird und der betreffende Browser die
+<tt>Content-Disposition</tt>-Direktive nicht kennt.</p></li>
+
+<li><p>Alternativ: Anhängen der Zeichenkette <tt>?.pdf</tt> an die URL.
+Beispiel: <tt>/pdf.php?.pdf</tt>.</p></li>
+
+<li><p>Bei GET mit Parametern: Anhängen der Zeichenkette <tt>&amp;.pdf</tt>
+an die URL. Beispiel: <tt>/pdf.php?file=termine&amp;.pdf</tt>.</p></li>
+
+<li><p>Bei POST: Schreiben des Ergebnisses in eine temporäre Datei mit
+der Endung <tt>.pdf</tt> und Weiterleitung per
+<a href="http://www.php3.de/header">header()</a> auf die Datei.</p></li>
+
+<li><p>Alternativ bei kleinen PDF-Dateien (siehe
+"<a class="faq" href="http://php-faq.de/q-sessions-datenmenge.html">Wie groß darf die Menge an Daten sein, die ich in einer Session speichern darf?</a>"): Die PDF-Datei in die Session
+schreiben und Weiterleitung auf eine PHP-Datei, die den Dateiinhalt
+aus der Session ausgibt, mit den oben beschriebenen GET-Methoden.</p></li>
+
+<li><p>Das Umschreiben der URL auf der Serverseite, z.B. durch das
+Apache-Modul <tt>mod_rewrite</tt>.</p></li>
+
+</ul>
+

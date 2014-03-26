@@ -1,0 +1,4 @@
+<Faq alias="sicherheit-parameter" author="Kristian Köhntopp">
+  <Question>Prüfe importierte Parameter. Traue niemandem</Question>
+  <Keywords>GET, POST, Cookie, Parameter, Formular, JavaScript, Referer, Plausibilitaet, Trust Boundary, Vertrauen</Keywords>
+</Faq>

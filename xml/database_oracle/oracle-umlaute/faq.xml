@@ -1,0 +1,7 @@
+<Faq alias="oracle-umlaute" author="Anton Bangratz">
+  <Question>Umlaute, die in die Datenbank eingetragen wurden, werden nicht korrekt dargestellt.</Question>
+  <Keywords>Oracle, Datenbank, Umlaut, Zeichen, Sonderzeichen, Darstellung, Text, Zeichensatz, Sprache, Client</Keywords>
+  <Editors>
+    <Editor name="Niels Braczek" lastedit="2008-08-12 00:00:00" />
+  </Editors>
+</Faq>

@@ -1,0 +1,4 @@
+<Faq alias="fehler-file-handle" author="Kristian Köhntopp">
+  <Question>Warning: Supplied argument is not a valid File-Handle resource</Question>
+  <Keywords>Fehler, Datei, Handle, ungueltig, fopen, oeffnen, lesen, schreiben, Recht</Keywords>
+</Faq>

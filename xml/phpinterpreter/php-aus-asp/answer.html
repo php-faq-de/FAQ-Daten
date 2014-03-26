@@ -1,0 +1,174 @@
+<p>
+Mit Hilfe des Konverters
+<a href="http://asp2php.naken.cc/">asp2php</a>
+kann man große Teile seiner ASP-Anwendung zunächst einmal in PHP
+übersetzen lassen. In vielen Fällen sind kleinere Nacharbeiten 
+oder wenigstens Nachkontrolle notwendig.
+</p>
+
+<!-- obsolet
+<p>
+Viele Eigenschaften des ASP-Framework lassen sich mehr oder
+weniger direkt in PHP abbilden:
+</p>
+
+<dl>
+<dt>ASP Application Object</dt>
+<dd><p>
+PHP hat kein Application Object, aber die Funktionalität lässt
+sich etwa mit Hilfe der Shared Memory und Semaphore-Funktionen
+leicht nachbilden.
+</p></dd>
+
+<dt>ASP Request Object</dt>
+<dd><p>
+Das ASP Request-Objekt gibt Zugriff auf Client-Zertifikate,
+Cookies, Formularvariablen, den Query-String und verschiedene
+Servervariablen.</p>
+
+<p>
+In PHP greift man auf Cookies über das Array <tt>$_COOKIE</tt>
+zu. Formularvariablen sind in den Arrays <tt>$_GET</tt> und
+<tt>$_POST</tt> abgreifbar. Der Query-String und die
+Servervariablen können über die Arrays <tt>$_SERVER</tt> und
+<tt>$_ENV</tt> angesprochen werden bzw. mit der Funktion
+<a href="http://www.php3.de/getallheaders">getallheaders()</a> erreicht werden. Die Ausgabe
+von <a href="http://www.php3.de/phpinfo">phpinfo()</a> gibt einen sehr schönen
+Überblick.
+</p>
+</dd>
+
+<dt>ASP Response Object</dt>
+
+<dd><p>
+Das ASP Response Object hat einen Slot für Cookies, die
+Eigenschaften Buffer, ContentType, Expires, ExpiresAbsolute und
+Status sowie die Methoden AddHeader, AppendToLog, BinaryWrite,
+Clear, End, Flush, Redirect und Write.</p>
+
+<p>
+In PHP gibt es den Output-Buffer, in den alle Ausgaben
+des Interpreters laufen, wenn dies durch die
+Konfigurationsvariable <a href="http://de3.php.net/manual/en/ini.php">output_buffering</a>
+eingeschaltet wird. Mit Hilfe der Funktionen <a href="http://www.php3.de/ob_start">ob_start()</a>, <a href="http://www.php3.de/ob_end_flush">ob_end_flush()</a>
+(entspricht Flush) und <a href="http://www.php3.de/ob_end_clean">ob_end_clean()</a>
+(entspricht Clear) kann man den Puffer kontrollieren, mit Hilfe
+von <a href="http://www.php3.de/ob_get_contents">ob_get_contents()</a> bekommt man eine Kopie
+des Puffers zurückgegeben und kann ihn im Programm weiter
+manipulieren.
+</p>
+
+<p>
+In PHP kann man Header und Cookies nur solange erzeugen wie noch
+kein Text ausgegeben wurde. Cookies werden mit der <a href="http://www.php3.de/setcookie">setcookie()</a>-Funktion erzeugt. HTTP-Headerzeilen erzeugt
+man stattdessen mit <a href="http://www.php3.de/header">header()</a>-Funktion.
+Diese kann eingesetzt werden, um den Content-Type, den Status,
+die Expires-Zeit oder beliebige andere Eigenschaften der Seite
+zu manipulieren und kann auch Redirects erzeugen.
+</p>
+
+<pre><span style="color: #808080; font-style: italic;"># Content Type setzen</span>
+  <a href="http://www.php3.de/header"><span style="color: #000066;">header</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Content-Type: image/gif&quot;</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+  <span style="color: #808080; font-style: italic;"># Expires bestimmen</span>
+  <span style="color: #0000ff;">$exp_gmt</span> = <a href="http://www.php3.de/gmdate"><span style="color: #000066;">gmdate</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;D, d M Y H:i:s&quot;</span>, <a href="http://www.php3.de/time"><span style="color: #000066;">time</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>+<span style="color: #0000ff;">$exp</span><span style="color: #000000;">&#41;</span> . <span style="color: #ff0000;">&quot; GMT&quot;</span>;
+  <a href="http://www.php3.de/header"><span style="color: #000066;">header</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Expires: &quot;</span> . <span style="color: #0000ff;">$exp_gmt</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+  <span style="color: #808080; font-style: italic;"># Status setzen</span>
+  <a href="http://www.php3.de/header"><span style="color: #000066;">header</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Status: 401 Unauthorized&quot;</span><span style="color: #000000;">&#41;</span>;
+&nbsp;
+  <span style="color: #808080; font-style: italic;"># Redirect erzeugen</span>
+  <a href="http://www.php3.de/header"><span style="color: #000066;">header</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Location: http://..../.../index.html&quot;</span><span style="color: #000000;">&#41;</span>;</pre>
+
+<p>
+Lognachrichten erzeugt in PHP die Funktion <a href="http://www.php3.de/error_log">error_log()</a>. BinaryWrite entfällt, weil PHP-Funktionen
+binärsicher sind - man kann eine gewöhnliche Ausgabefunktion
+verwenden (siehe auch die Parameter <tt>rb</tt> und <tt>wb</tt> bei
+<a href="http://www.php3.de/fopen">fopen()</a>. Das Äquivalent zu End ist
+<a href="http://www.php3.de/exit">exit()</a>.
+</p>
+</dd>
+
+<dt>ASP Server Object</dt>
+
+<dd><p>
+Das ASP Server Objekt hat die Eigenschaft ScriptTimeout und die
+Methoden CreateObject, HTMLEncode, MapPath und URLEncode.</p>
+
+<p>
+In PHP kann man die Laufzeit eines Scripts und den
+Speicherverbrauch mit Hilfe der Konfigurationsvariablen <a href="http://de3.php.net/manual/en/ini.php">max_execution_time</a> und <a href="http://de3.php.net/manual/en/ini.php">memory_limit</a>
+begrenzen.
+</p>
+
+<p>
+Zum Codieren und Decodieren bietet PHP eine reichhaltige Familie
+von Funktionen und anders als ASP auch die passenden
+Decode-Funktionen. Die wichtigsten sind:
+<a href="http://www.php3.de/rawurlencode">rawurlencode()</a>,
+<a href="http://www.php3.de/rawurldecode">rawurldecode()</a>,
+<a href="http://www.php3.de/urlencode">urlencode()</a>,
+<a href="http://www.php3.de/urldecode">urldecode()</a>,
+<a href="http://www.php3.de/base64_encode">base64_encode()</a>,
+<a href="http://www.php3.de/base64_decode">base64_decode()</a>,
+<a href="http://www.php3.de/quoted_printable_decode">quoted_printable_decode()</a>,
+<a href="http://www.php3.de/htmlspecialchars">htmlspecialchars()</a>,
+<a href="http://www.php3.de/htmlentities">htmlentities()</a>,
+<a href="http://www.php3.de/addslashes">addslashes()</a>,
+<a href="http://www.php3.de/stripslashes">stripslashes()</a>
+und
+<a href="http://www.php3.de/quotemeta">quotemeta()</a>.
+</p>
+
+<p>
+ASP verwendet CreateObject, um COM-Objekte zu erzeugen und zu
+steuern. In Unix gibt es kein COM (aber eine Reihe von
+PHP-Erweiterungen, die genau die Funktionalität der COM-Objekte
+haben). In Windows NT erlaubt PHP mit den Funktionen
+<a href="http://www.php3.de/com_load">com_load()</a>, <a href="http://www.php3.de/com_invoke">com_invoke()</a>, <a href="http://www.php3.de/com_propget">com_propget()</a> und
+<a href="http://www.php3.de/com_propput">com_propput()</a> den Zugriff auf COM-Objekte.
+Außerdem ist PHP in der Lage, Objektimplementationen
+zu überladen, sodass man COM-Objekte wie native PHP-Objekte
+verwenden kann.
+</p>
+
+<p>
+Verwendet man PHP als Apache-Modul, kann man die Funktion
+MapPath durch <a href="http://www.php3.de/apache_lookup_uri">apache_lookup_uri()</a>
+nachbilden, die jedoch noch sehr viel mehr Information
+zurück liefert als nur das Path-Mapping. In jedem Fall kann man
+sich für die eigene URL mit den Variablen <tt>$PATH_INFO</tt> und
+<tt>$PATH_TRANSLATED</tt> behelfen.
+</p>
+</dd>
+
+<dt>ASP Session Object</dt>
+<dd><p>
+
+Das ASP Session Objekt hat die Eigenschaften SessionID und
+Timeout und die Methode abandon.</p>
+
+<p>
+In PHP verwendet man <a href="http://www.php3.de/session_id">session_id()</a>
+für die Session-ID und <a href="http://de3.php.net/manual/en/ini.php">session.gc_maxlifetime</a> für den
+Timeout. <a href="http://www.php3.de/session_destroy">session_destroy()</a> entspricht abandon.
+</p>
+
+<p>
+In ASP speichert man Werte in seiner Session mit Hilfe von
+</p>
+
+<pre>Session<span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;memo&quot;</span><span style="color: #000000;">&#41;</span> = <span style="color: #ff0000;">&quot;remember me&quot;</span></pre>
+
+<p>In PHP schreibt man</p>
+
+<pre><span style="color: #0000ff;">$_SESSION</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;memo&quot;</span><span style="color: #000000;">&#93;</span> = <span style="color: #ff0000;">&quot;remember me&quot;</span>;</pre>
+
+<p>
+Die Funktionalität von Session_OnStart wird in PHP mit manuell
+nachgebildet mit Hilfe einer Abfrage in <a href="http://de3.php.net/manual/en/ini.php">auto_prepend_file</a>
+</p>
+</dd>
+</dl>
+-->
+

@@ -1,0 +1,4 @@
+<Faq alias="arrays-persistent" author="Martin Jansen">
+  <Question>Wie kann ich ein Array von einer Seite auf eine andere transportieren?</Question>
+  <Keywords>Session</Keywords>
+</Faq>

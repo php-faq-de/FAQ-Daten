@@ -1,0 +1,7 @@
+<Faq alias="sql-letzter-eintrag" author="Johannes Frömter">
+  <Question>Wie bekomme ich den letzten Datensatz aus der Tabelle?</Question>
+  <Keywords>SQL, Select, erster, letzter, Datensatz, Eintrag, Zeile</Keywords>
+  <Editors>
+    <Editor name="Niels Braczek" lastedit="2008-08-12 00:00:00" />
+  </Editors>
+</Faq>

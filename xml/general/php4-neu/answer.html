@@ -1,0 +1,109 @@
+<p>
+PHP4 besteht aus dem Sprachkern <em>Zend</em> und den Funktionsmodulen, die den eigentlichen
+Wert von PHP ausmachen.
+</p>
+
+<p>
+Änderungen am Sprachkern:
+</p>
+
+<dl>
+  <dt>PHP4 ist ein Interpiler</dt>
+  <dd><p>PHP3 war eine interpretierte Sprache. Code wurde nur minimal gecached. Das hatte zur Folge,
+         dass Code in Schleifen oder in oft aufgerufenen Funktionen wieder und wieder neu geparsed
+         werden musste, bevor er ausgeführt werden konnte.</p>
+      <p>PHP4/Zend ist ein Bytecode-Compiler, der beim Programmstart aufgerufen wird und das komplette
+         Programm in eine interne Darstellung einer virtuellen Maschine überführt. Danach beginnt die
+         Interpretation des Bytecodes der VM. Dies ist dasselbe Funktionsprinzip wie bei Perl, und ganz
+         ähnlich dem Funktionsprinzip von Java, nur dass dort der Compiler explizit aufgerufen werden muss.</p>
+      <p>PHP4/Zend ist bei einigen Sprachkonstrukten zehnmal schneller als PHP3. Es liegt in den meisten
+         Anwendungen gleichauf mit Perl oder mit Microsoft Visual Basic.</p> </dd>
+  <dt>PHP4 ist threadsafe</dt>
+  <dd><p>PHP4 kann endlich in Multithreaded-Umgebungen eingesetzt werden. Dadurch wird es möglich,
+         PHP4 als Modul im Roxen Webserver, im Internet Information Server, im AOL/Netscape-Server
+         und in einigen anderen Webservern einzusetzen.</p>
+      <p>PHP4 kann außerdem als CGI-Programm und als Coprozess zum Webserver eingesetzt werden,
+         der als Java Servlet Engine behandelt wird.</p> </dd>
+  <dt>Referenzen sind endlich Teil der Sprache</dt>
+  <dd><p>In PHP3 waren Referenzen nur beim Aufruf von Funktionen verwendbar, um Call-by-Reference
+         zu realisieren. In PHP4/Zend gibt es nun endlich vollständigen Support für Referenzen.
+         Das bedeutet:</p>
+      <pre class="php"><span style="color: #0000ff;">$foo</span> = &amp;<span style="color: #0000ff;">$a</span>;</pre>
+      <p>In diesem Beispiel wird <tt>$foo</tt> zu einem alternativen Namen für die Variable
+         <tt>$a</tt>. Dies funktioniert auch mit Arrays und Objekten.</p> </dd>
+  <dt>Referenzzähler und Ressourcenfreigabe</dt>
+  <dd><p>In PHP3 existierten keine Zähler für Datenobjekte außerhalb der Sprache, etwa Image-Handles
+         oder Datenbank-Resultathandles. Diese Ressourcen mussten manuell freigegeben werden.</p>
+      <p>PHP4/Zend hat für alle Variablen vom Typ Ressource Referenzzähler. Objekte, die nicht mehr
+         referenziert werden, werden automatisch freigegeben. Das bedeutet: Aufrufe zu Funktionen wie
+         <a class="php" href="http://www.php3.de/mysql_free_result">mysql_free_result()</a> innerhalb
+         von Schleifen sind nicht mehr zwingend notwendig.</p>
+      <p>Demnach tut <a href="http://www.php3.de/unset">unset()</a> jetzt auch endlich, was es soll.</p> </dd>
+  <dt>Session-Support</dt>
+  <dd><p>PHP4 enthält Sessions nach dem Vorbild von PHPLIB als eingebauter Bestandteil der Sprache.
+         Sessions werden standardmäßig als Dateien in einem Verzeichnis abgelegt, aber über
+         Sessionmodule kann auch eine Datenbank, ein Shared Memory Segment oder ein anderer
+         persistenter Speicher verwendet werden.</p>
+      <p>Anders als PHPLIB kann PHP4 die Session-ID automatisch an URLs anfügen.</p> </dd>
+  <dt>Output Buffering</dt>
+  <dd><p>Mit Hilfe der Funktion <a href="http://www.php3.de/ob_start" >ob_start()</a> kann
+         eine Ausgabepufferung aktiviert werden. Der Ausgabepuffer wird erst am Ende der PHP-Seite
+         oder mit Hilfe der Funktion <a href="http://www.php3.de/ob_end_flush">ob_end_flush()</a>
+         ausgegeben. Die Funktion <a href="http://www.php3.de/ob_end_clean">ob_end_clean()</a>
+         verwirft den Ausgabepuffer. <a href="http://www.php3.de/ob_get_contents">ob_get_contents()</a>
+         überträgt den Ausgabepuffer in eine Variable.</p>
+      <p>Headerinformation wie sie von <a href="http://www.php3.de/header">header()</a>
+         und <a href="http://www.php3.de/setcookie">setcookie()</a> erzeugt wird ist ungepuffert.
+         Indem man Ausgabepufferung aktiviert, kann man überall in der Datei Headerinformationen
+         senden, egal ob vorher schon Ausgabe erzeugt wurde oder nicht. Ausgabepufferung erhöht
+         die Latenzen bei der Ausgabe der Webseite je nach Anwendung erheblich und kann PHP sehr
+         viel langsamer erscheinen lassen.</p> </dd>
+  <dt>Verbesserter Objektsupport</dt>
+  <dd><p>In PHP4/Zend ist es möglich, die Objektnotation von PHP zu verwenden, um objektorientiert
+         aufgebaute Funktionsbibliotheken zu verwenden. Zum Beispiel verwenden die COM-Erweiterung
+         und die DOMXML-Erweiterung von PHP4 diese Funktionalität.</p>
+      <p>Außerdem enthält PHP4 nun endlich Funktionen, mit denen Objekte über sich selbst Auskunft
+         geben können: <a href="http://www.php3.de/get_class">get_class()</a>,
+         <a href="http://www.php3.de/get_parent_class">get_parent_class()</a>,
+         <a href="http://www.php3.de/method_exists">method_exists()</a>,
+         <a href="http://www.php3.de/is_subclass_of">is_subclass_of()</a></p> </dd>
+  <dt><a href="http://www.php3.de/include">include()</a> und
+      <a href="http://www.php3.de/eval">eval()</a> sind Funktionen</dt>
+  <dd><p>In PHP4 sind die früheren Anweisungen <a href="http://www.php3.de/include">include()</a> und
+         <a href="http://www.php3.de/eval">eval()</a> jetzt Funktionen, die einen Wert zurückgeben
+         können. Der Default-Returnwert ist <tt>1</tt>, damit Anweisungen wie
+         <tt>if (include(...))</tt> funktionieren.</p>
+      <p>Mit Hilfe der Anweisung <a href="http://www.php3.de/return">return()</a> kann man den
+         Returncode eines <a class="php" href="http://www.php3.de/include">include()</a> oder
+         <a href="http://www.php3.de/eval">eval()</a>-Aufrufes setzen.</p> </dd>
+  <dt>Verbesserter Parser</dt>
+  <dd><p>Der PHP3-Parser hatte Probleme mit Verschachtelungen von Objekten in Arrays. In PHP4/Zend ist
+         dieses Problem behoben.</p>
+      <p>Shell-Style Here-Documents werden unterstützt.</p>
+      <p>Es gibt ein <a href="http://www.php3.de/foreach">foreach()</a>-Schleifenkonstrukt. Syntax:</p>
+      <pre class="php"><span style="color: #b1b100;">foreach</span><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$my_array</span> <span style="color: #b1b100;">as</span> <span style="color: #0000ff;">$val</span><span style="color: #000000;">&#41;</span>
+    <a href="http://www.php3.de/print"><span style="color: #000066;">print</span></a> <span style="color: #ff0000;">&quot;$val<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
+&nbsp;
+<span style="color: #b1b100;">foreach</span><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$my_array</span> <span style="color: #b1b100;">as</span> <span style="color: #0000ff;">$key</span> =&gt; <span style="color: #0000ff;">$val</span><span style="color: #000000;">&#41;</span>
+    <a href="http://www.php3.de/print"><span style="color: #000066;">print</span></a> <span style="color: #ff0000;">&quot;$key =&gt; $val<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;</pre> </dd>
+  <dt>Boolean</dt>
+  <dd><p>Die Schlüsselworte <tt>true</tt> und <tt>false</tt> sind nun Teil der Sprache und es gibt
+         einen Datentyp <tt>boolean</tt>. Vergleiche werden nun durchgeführt, indem ein fremder Datentyp
+         in Boolean konvertiert wird und dann verglichen wird: In PHP4/Zend ist das Konstrukt
+         <tt>5 == true</tt> eine wahre Aussage, weil <tt>(boolean) 5</tt> in <tt>true</tt> konvertiert
+         wird, bevor verglichen wird.</p> </dd>
+  <dt>Laufzeitbindung von Funktionsnamen</dt>
+  <dd><p>Funktionen können nun aufgerufen werden, bevor sie deklariert werden.</p> </dd>
+  <dt>Namespace aufgeräumt, Konfiguration überarbeitet</dt>
+  <dd><p>Der Import von Variablen in den globalen Namespace war bisher nur schwierig mit der
+         Konfigurationsdirektive <a href="http://de3.php.net/manual/en/ini.php">gpc_order</a> steuerbar:
+         Zwar konnte man die Reihenfolge unterdrücken, aber es war nicht möglich, den Import von externen
+         Werten in globale Variablen zu verhindern, ohne diese Werte auch in den Track Vars
+         auszuschließen. Umgebungsvariablen und Sessionvariablen waren gar nicht kontrollierbar.</p>
+      <p>In PHP4 kann man nun den Import von Werten differenziert steuern, und zwar unabhängig
+         voneinander als globale Variablen und als Track Vars.</p>
+      <p>Ebenso wurde der Konfigurationsmechanismus überarbeitet: Es ist nun möglich, PHP mit denselben
+         Direktiven in der Apache-Konfiguration und in der php.ini zu steuern.</p> </dd>
+  <dt>Neue Funktionen und Module</dt>
+  <dd><p>Die Sprache ist außerdem um zahlreiche Funktionen und neue Module erweitert worden.</p> </dd>
+</dl>

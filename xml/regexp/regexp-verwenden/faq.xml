@@ -1,0 +1,4 @@
+<Faq alias="regexp-verwenden" author="Kristian Köhntopp">
+  <Question>Wie verwende ich die preg()-Funktionen?</Question>
+  <Keywords>PCRE</Keywords>
+</Faq>

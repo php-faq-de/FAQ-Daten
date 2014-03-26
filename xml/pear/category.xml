@@ -1,0 +1,10 @@
+<Category alias="pear" name="PEAR" keywords="PHP, Usenet, FAQ, dclp">
+  <!--Die FAQs sind hier noch mal redundant aufgelistet um die Reihenfolge vorzugeben.-->
+  <Faqs>
+    <Faq alias="pear-was" />
+    <Faq alias="pear-download" />
+    <Faq alias="pear-installation" />
+    <Faq alias="pear-installer" />
+    <Faq alias="pear-informationen" />
+  </Faqs>
+</Category>

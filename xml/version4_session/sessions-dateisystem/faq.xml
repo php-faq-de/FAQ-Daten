@@ -1,0 +1,7 @@
+<Faq alias="sessions-dateisystem" author="Daniel T. Gorski">
+  <Question>Was geschieht im Filesystem des Servers, wenn ich Sessions benutze?</Question>
+  <Keywords>Session, Datei, Verzeichnis, Server, speichern, save_path</Keywords>
+  <Editors>
+    <Editor name="Niels Braczek" lastedit="2008-08-12 00:00:00" />
+  </Editors>
+</Faq>

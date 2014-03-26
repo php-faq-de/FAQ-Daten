@@ -1,0 +1,63 @@
+<p>
+Es gibt keine zuverlässige Methode, dies herauszufinden, da HTTP ein
+zustandsloses Protokoll ist und daher keine Stati "eingeloggt,
+ausgeloggt" wie bei FTP, Telnet etc. vorhanden sind. Der Client
+(Browser) baut eine Verbindung zum Webserver auf, fordert eine
+Seite mit all ihren Elementen (Bildern, JavaScript etc.) an und
+beendet danach die Verbindung wieder. Es entsteht also immer nur
+eine punktuelle, temporär andauernde Verbindung zwischen dem
+Webserver und dem Client des Anwenders.
+</p>
+
+<p>
+Mit Hilfe von PHPlib und den sess_*-Funktionen von PHP4 kann man einen
+Besucher zwar wiedererkennbar machen, man kann damit jedoch nur
+feststellen, wann ein Besucher zuletzt eine Seite angefordert hat.
+</p>
+
+<p>
+Wie lange er diese liest und daher noch "auf der Seite online" ist,
+kann man nicht herausfinden. Er könnte 30 Minuten an dem Text einer
+Seite lesen oder aber auch das Browserfenster direkt nach Anforderung
+der Seite schließen; der Server weiss nur, wann er die Seite wem
+ausgeliefert hat.
+</p>
+
+<p>
+Es gibt einige Denkansätze, wie man diese fehlende Funktionalität
+nachbauen könnte, welche jedoch alle von der Zusammenarbeit mit dem
+Browser des Besuchers abhängig sind, um halbwegs zuverlässig zu
+arbeiten und/oder nur Näherungsweise an die reellen Gegebenheiten
+herankommen.
+</p>
+
+<p>
+Ein paar davon bauen auf Javascript auf, welches man von vornherein
+ausklammern sollte, da nicht jeder Browser Javascript beherrscht und
+auch angeschaltet hat. Diese Methode ist also unzuverlässig.
+</p>
+
+<p>
+Eine weitere Idee basiert darauf, einen kleinen "Blindframe" auf der
+Seite zu platzieren, welcher regelmäßig automatisch per META-Tag
+neugeladen wird. Auch wird darauf vertraut, dass der automatische
+Refresh wirklich bei jedem Besucher ausgeführt wird und man
+verpflichtet seine Besucher dazu, einen Browser zu benutzen, der
+Frames beherrscht. Darüberhinaus vergrault man sich auf Dauer einige
+Besucher, die die ständige Netzaktivität des Browsers irritiert oder
+nervt.
+</p>
+
+<p>
+Zuletzt könnte man noch auswerten, wieviele Benutzer innerhalb der
+letzten x Minuten eine Seite angefordert haben und daher Annahmen
+darüber treffen, ob diese Besucher noch da sind. Auch dies ist keine
+zuverlässige Aussage.
+</p>
+
+<p>
+Zusammenfassend lässt sich also sagen, dass die Aussage "x User
+online" (wie sie auf vielen Sites zu finden ist) reines Blendwerk
+sind. Es ist technisch nicht möglich, diese Aussagen zu treffen.
+</p>
+

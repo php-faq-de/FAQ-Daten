@@ -1,0 +1,7 @@
+<Faq alias="install-apache-cgi" author="Kristian Köhntopp">
+  <Question>Wie installiere ich CGI-PHP auf einem Apache-Server?</Question>
+  <Keywords>Installation, Apache, Server, CGI</Keywords>
+  <Editors>
+    <Editor name="Niels Braczek" lastedit="2008-08-12 00:00:00" />
+  </Editors>
+</Faq>

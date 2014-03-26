@@ -1,0 +1,35 @@
+<p>
+Es gibt verschiedene Möglichkeiten, in PHP zu unterscheiden,
+welcher Submit-Button in einem HTML-Formular betätigt wurde:
+</p>
+
+<ul>
+  <li>
+  <p>Haben die Buttons den gleichen Namen (<tt>name="submit"</tt>),
+  kann man den <tt>value</tt> (gleichzeitig Beschriftungstext des
+  Buttons) auswerten; die PHP-Variable heißt so wie der Button
+  (<tt>$_REQUEST['submit']</tt>).</p>
+  </li>
+
+  <li>
+  <p>Haben die Buttons unterschiedliche Namen, erhält man je nach
+  betätigtem Button eine Variable mit anderem Namen registriert;
+  mit <a href="http://www.php3.de/isset">isset()</a> kann man prüfen, ob eine
+  bestimmte Variable vorhanden ist, d.h. ob ein bestimmter Button
+  angeklickt wurde.</p>
+  </li>
+
+  <li>
+  <p>Benennt man die Buttons in der Array-Schreibweise
+  (<tt>name="submit[0]"</tt>, zwischen den eckigen Klammern müssen
+  eindeutige Werte stehen), erhält man in PHP ein Array mit genau
+  einem Element; der Schlüssel (Key) dieses Elementes ist der
+  aktivierte Button.</p>
+  </li>
+</ul>
+
+<p>
+Im Script kann man dann z.B. unterschiedliche Anweisungsblöcke
+mit <a href="http://www.php3.de/include">include()</a> einbinden und somit ausführen.
+</p>
+

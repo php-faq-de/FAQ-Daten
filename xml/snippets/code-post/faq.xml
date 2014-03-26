@@ -1,0 +1,4 @@
+<Faq alias="code-post" author="Kristian Köhntopp">
+  <Question>Wie kann ich einen HTTP POST-Request absenden?</Question>
+  <Keywords>POST, Request, Methode</Keywords>
+</Faq>

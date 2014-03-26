@@ -1,0 +1,25 @@
+<p>
+Die IDs einer AUTO_INCREMENT-Spalte haben den Sinn, jede Zeile
+in der Tabelle, d.h. jeden Datensatz, <em>eindeutig</em> zu
+kennzeichnen. Durch Löschen von Datensätzen entstehen zwar "Lücken"
+in der Nummerierung, da für neue Datensätze stets eine unverbrauchte
+ID vergeben wird. An dieser vermeintlichen "Unordnung" sollte man
+aber auf keinen Fall etwas ändern - dies würde dem Prinzip der
+Eindeutigkeit zuwiderlaufen.
+</p>
+
+<p>
+Der höchste Wert der ID hat auch nichts mit der Anzahl der Datensätze
+in der Tabelle zu tun. Diese ermittelt man mit einer SQL-Funktion:
+<tt>SELECT COUNT(*) AS anzahl FROM tabelle</tt>
+</p>
+
+<p>
+MySQL kennt (noch) keine referentielle Integrität, deshalb muss man
+selbst dafür sorgen, dass Verknüpfungen zwischen Tabellen
+(Primary/Foreign Keys) konsistent bleiben. Deshalb: Finger weg von
+den IDs! Bei geeigenter Wahl des Datentyps braucht man auch
+keine Sorge zu haben, dass Zahlenraum knapp werden könnte.
+Siehe auch: ""<a class="faq" href="http://php-faq.de/q-mysql-inkrement.html">Wie lege ich den Initialwert des auto_increment fest? Läuft dieser Wert über?</a>"".
+</p>
+

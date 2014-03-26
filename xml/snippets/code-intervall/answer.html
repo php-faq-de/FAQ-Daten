@@ -1,0 +1,26 @@
+<p>
+Normalerweise ist für die Umsetzung von Sekunden in ein "lesbares
+Format" der Befehl <a href="http://www.php3.de/date">date()</a> zuständig, der einen
+Unix-Timestamp (vergangene Sekunden seit dem 1.1.1970) verarbeitet.
+Möchte man jedoch eine Anzahl Sekunden nicht als absolutes Datum,
+sondern als Intervall in Tagen, Stunden, Minuten und Sekunden
+darstellen, hilft folgende Funktion:
+</p>
+
+<pre><span style="color: #000000; font-weight: bold;">function</span> intervall<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$sek</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+    <span style="color: #0000ff;">$i</span> = <a href="http://www.php3.de/sprintf"><span style="color: #000066;">sprintf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'%d Tag%s, %d Stunde%s,'</span>.
+            <span style="color: #ff0000;">' %d Minute%s und %d Sekunde%s'</span>,
+            <span style="color: #0000ff;">$sek</span> / <span style="color: #cc66cc;">86400</span>,
+            <a href="http://www.php3.de/floor"><span style="color: #000066;">floor</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$sek</span> / <span style="color: #cc66cc;">86400</span><span style="color: #000000;">&#41;</span> != <span style="color: #cc66cc;">1</span> ? <span style="color: #ff0000;">'e'</span>:<span style="color: #ff0000;">''</span>,
+            <span style="color: #0000ff;">$sek</span> / <span style="color: #cc66cc;">3600</span> % <span style="color: #cc66cc;">24</span>,
+            <a href="http://www.php3.de/floor"><span style="color: #000066;">floor</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$sek</span> / <span style="color: #cc66cc;">3600</span> % <span style="color: #cc66cc;">24</span><span style="color: #000000;">&#41;</span> != <span style="color: #cc66cc;">1</span> ? <span style="color: #ff0000;">'n'</span>:<span style="color: #ff0000;">''</span>,
+            <span style="color: #0000ff;">$sek</span> / <span style="color: #cc66cc;">60</span> % <span style="color: #cc66cc;">60</span>,
+            <a href="http://www.php3.de/floor"><span style="color: #000066;">floor</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$sek</span> / <span style="color: #cc66cc;">60</span> % <span style="color: #cc66cc;">60</span><span style="color: #000000;">&#41;</span> != <span style="color: #cc66cc;">1</span> ? <span style="color: #ff0000;">'n'</span>:<span style="color: #ff0000;">''</span>,
+            <span style="color: #0000ff;">$sek</span> % <span style="color: #cc66cc;">60</span>,
+            <a href="http://www.php3.de/floor"><span style="color: #000066;">floor</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$sek</span> % <span style="color: #cc66cc;">60</span><span style="color: #000000;">&#41;</span> != <span style="color: #cc66cc;">1</span> ? <span style="color: #ff0000;">'n'</span>:<span style="color: #ff0000;">''</span>
+         <span style="color: #000000;">&#41;</span>;
+    <span style="color: #b1b100;">return</span> <span style="color: #0000ff;">$i</span>;
+<span style="color: #000000;">&#125;</span>
+&nbsp;
+<a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> intervall<span style="color: #000000;">&#40;</span><span style="color: #cc66cc;">99114</span><span style="color: #000000;">&#41;</span>;</pre>
+

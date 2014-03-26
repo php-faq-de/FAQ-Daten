@@ -1,0 +1,4 @@
+<Faq alias="http-caching" author="Kristian Köhntopp">
+  <Question>Wie kann ich das Caching einer Seite verhindern?</Question>
+  <Keywords>Cache, Reload, Lebensdauer, Browser</Keywords>
+</Faq>
