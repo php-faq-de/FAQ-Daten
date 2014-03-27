@@ -3,8 +3,8 @@ Aus einer Datenbanktabelle mit einer List Of Values (LOV) soll eine
 Selectbox erzeugt werden:
 </p>
 
-<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
-<span style="color: #808080; font-style: italic;">/*
+<pre>&lt;?php
+/*
  * lovselection - wandle eine Liste von Werten aus einer Datenbank
  *                in eine option-Liste in HTML.
  *
@@ -12,88 +12,88 @@ Selectbox erzeugt werden:
  *
  * von Kristian Köhntopp und Frank Wiegand
  *
- */</span>
+ */
 &nbsp;
-<span style="color: #000000; font-weight: bold;">function</span> lovselection<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$dsn</span>, <span style="color: #0000ff;">$table</span>, <span style="color: #0000ff;">$field</span>, <span style="color: #0000ff;">$oldvalue</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+function lovselection&#40;$dsn, $table, $field, $oldvalue&#41; &#123;
 &nbsp;
-  <span style="color: #808080; font-style: italic;">// Rueckgabestring</span>
-  <span style="color: #0000ff;">$ret</span> = <span style="color: #ff0000;">&quot;&quot;</span>;
+  // Rueckgabestring
+  $ret = &quot;&quot;;
 &nbsp;
-  <span style="color: #808080; font-style: italic;">// Datenbankverbindung aufbauen, Fehlerbehandlung</span>
-  <span style="color: #808080; font-style: italic;">// ist hier nicht implementiert!</span>
-  <span style="color: #b1b100;">require_once</span> <span style="color: #ff0000;">'DB.php'</span>;
-  <span style="color: #0000ff;">$db</span> = DB::<span style="color: #006600;">connect</span><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$dsn</span><span style="color: #000000;">&#41;</span>;
+  // Datenbankverbindung aufbauen, Fehlerbehandlung
+  // ist hier nicht implementiert!
+  require_once 'DB.php';
+  $db = DB::connect&#40;$dsn&#41;;
 &nbsp;
-  <span style="color: #808080; font-style: italic;">// Daten auslesen</span>
-  <span style="color: #0000ff;">$query</span> = <a href="http://www.php3.de/sprintf"><span style="color: #000066;">sprintf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;SELECT %s FROM %s&quot;</span>,
-             <span style="color: #0000ff;">$field</span>,
-             <span style="color: #0000ff;">$table</span>
-           <span style="color: #000000;">&#41;</span>;
+  // Daten auslesen
+  $query = sprintf&#40;&quot;SELECT %s FROM %s&quot;,
+             $field,
+             $table
+           &#41;;
 &nbsp;
-  <span style="color: #0000ff;">$res</span> = <span style="color: #0000ff;">$db</span>-&gt;<span style="color: #006600;">query</span><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$query</span><span style="color: #000000;">&#41;</span>;
+  $res = $db-&gt;query&#40;$query&#41;;
 &nbsp;
-  <span style="color: #b1b100;">while</span><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$row</span> = <span style="color: #0000ff;">$db</span>-&gt;<span style="color: #006600;">fetchRow</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-    <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$row</span><span style="color: #000000;">&#91;</span><span style="color: #0000ff;">$field</span><span style="color: #000000;">&#93;</span> == <span style="color: #0000ff;">$oldvalue</span><span style="color: #000000;">&#41;</span>
-      <span style="color: #0000ff;">$selected</span> = <span style="color: #ff0000;">&quot; selected='selected'&quot;</span>;
-    <span style="color: #b1b100;">else</span>
-      <span style="color: #0000ff;">$selected</span> = <span style="color: #ff0000;">&quot;&quot;</span>;
+  while&#40;$row = $db-&gt;fetchRow&#40;&#41;&#41; &#123;
+    if &#40;$row&#91;$field&#93; == $oldvalue&#41;
+      $selected = &quot; selected='selected'&quot;;
+    else
+      $selected = &quot;&quot;;
 &nbsp;
-    <span style="color: #0000ff;">$ret</span> .= <a href="http://www.php3.de/sprintf"><span style="color: #000066;">sprintf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;&lt;option%s&gt;%s&lt;/option&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>,
-                    <a href="http://www.php3.de/htmlspecialchars"><span style="color: #000066;">htmlspecialchars</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$selected</span><span style="color: #000000;">&#41;</span>,
-                    <span style="color: #0000ff;">$row</span><span style="color: #000000;">&#91;</span><span style="color: #0000ff;">$field</span><span style="color: #000000;">&#93;</span>
-                   <span style="color: #000000;">&#41;</span>;
-  <span style="color: #000000;">&#125;</span>
+    $ret .= sprintf&#40;&quot;&lt;option%s&gt;%s&lt;/option&gt;\n&quot;,
+                    htmlspecialchars&#40;$selected&#41;,
+                    $row&#91;$field&#93;
+                   &#41;;
+  &#125;
 &nbsp;
-  <span style="color: #0000ff;">$db</span>-&gt;<span style="color: #006600;">disconnect</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
-  <span style="color: #b1b100;">return</span> <span style="color: #0000ff;">$ret</span>;
-<span style="color: #000000;">&#125;</span>
+  $db-&gt;disconnect&#40;&#41;;
+  return $ret;
+&#125;
 &nbsp;
-<span style="color: #808080; font-style: italic;">/*
+/*
  * is_validlov - überprüfe, ob ein gegebener Wert zu einer
  *               vorgegebenen Liste von Werten passt.
  *
  * von Kristian Köhntopp und Frank Wiegand
  *
- */</span>
-<span style="color: #000000; font-weight: bold;">function</span> is_validlov<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$dsn</span>, <span style="color: #0000ff;">$table</span>, <span style="color: #0000ff;">$field</span>, <span style="color: #0000ff;">$value</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+ */
+function is_validlov&#40;$dsn, $table, $field, $value&#41; &#123;
 &nbsp;
-  <span style="color: #b1b100;">require_once</span> <span style="color: #ff0000;">'DB.php'</span>;
-  <span style="color: #0000ff;">$db</span> = DB::<span style="color: #006600;">connect</span><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$dsn</span><span style="color: #000000;">&#41;</span>;
+  require_once 'DB.php';
+  $db = DB::connect&#40;$dsn&#41;;
 &nbsp;
-  <span style="color: #0000ff;">$query</span> = <a href="http://www.php3.de/sprintf"><span style="color: #000066;">sprintf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;SELECT %s FROM %s WHERE %s = %s&quot;</span>,
-             <span style="color: #0000ff;">$field</span>,
-             <span style="color: #0000ff;">$table</span>,
-             <span style="color: #0000ff;">$field</span>,
-             <span style="color: #0000ff;">$db</span>-&gt;<span style="color: #006600;">quote</span><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$value</span><span style="color: #000000;">&#41;</span> <span style="color: #808080; font-style: italic;">// Wert für die Abfrage maskieren</span>
-           <span style="color: #000000;">&#41;</span>;
+  $query = sprintf&#40;&quot;SELECT %s FROM %s WHERE %s = %s&quot;,
+             $field,
+             $table,
+             $field,
+             $db-&gt;quote&#40;$value&#41; // Wert für die Abfrage maskieren
+           &#41;;
 &nbsp;
-  <span style="color: #0000ff;">$res</span> = <span style="color: #0000ff;">$db</span>-&gt;<span style="color: #006600;">query</span><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$query</span><span style="color: #000000;">&#41;</span>;
-  <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$res</span>-&gt;<span style="color: #006600;">numRows</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> == <span style="color: #cc66cc;">1</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-    <span style="color: #0000ff;">$db</span>-&gt;<span style="color: #006600;">disconnect</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
-    <span style="color: #b1b100;">return</span> <span style="color: #000000; font-weight: bold;">true</span>;
-  <span style="color: #000000;">&#125;</span> <span style="color: #b1b100;">else</span> <span style="color: #000000;">&#123;</span>
-    <span style="color: #0000ff;">$db</span>-&gt;<span style="color: #006600;">disconnect</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
-    <span style="color: #b1b100;">return</span> <span style="color: #000000; font-weight: bold;">false</span>; <span style="color: #808080; font-style: italic;">// 0 or 2+ answers are a failure!</span>
-  <span style="color: #000000;">&#125;</span>
-<span style="color: #000000;">&#125;</span>
+  $res = $db-&gt;query&#40;$query&#41;;
+  if &#40;$res-&gt;numRows&#40;&#41; == 1&#41; &#123;
+    $db-&gt;disconnect&#40;&#41;;
+    return true;
+  &#125; else &#123;
+    $db-&gt;disconnect&#40;&#41;;
+    return false; // 0 or 2+ answers are a failure!
+  &#125;
+&#125;
 &nbsp;
-<span style="color: #000000; font-weight: bold;">?&gt;</span>
+?&gt;
 &nbsp;
 &lt;!-- Formularfragment --&gt;
-&lt;select name=<span style="color: #ff0000;">&quot;f_ortsnetz&quot;</span> size=<span style="color: #ff0000;">&quot;1&quot;</span>&gt;
-<span style="color: #000000; font-weight: bold;">&lt;?php</span> <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> lovselection<span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;mysql://$user:$pass@$host/$db_name&quot;</span>, <span style="color: #ff0000;">&quot;ortsnetze&quot;</span>, <span style="color: #ff0000;">&quot;vorwahl&quot;</span>, <span style="color: #0000ff;">$ortsnetz</span><span style="color: #000000;">&#41;</span> <span style="color: #000000; font-weight: bold;">?&gt;</span>
+&lt;select name=&quot;f_ortsnetz&quot; size=&quot;1&quot;&gt;
+&lt;?php echo lovselection&#40;&quot;mysql://$user:$pass@$host/$db_name&quot;, &quot;ortsnetze&quot;, &quot;vorwahl&quot;, $ortsnetz&#41; ?&gt;
 &lt;/select&gt;
 &nbsp;
 &nbsp;
 &lt;!-- Auswertefragment --&gt;
-<span style="color: #000000; font-weight: bold;">&lt;?php</span>
-<span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span>is_validlov<span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;mysql://$user:$pass@$host/$db_name&quot;</span>, <span style="color: #ff0000;">&quot;ortsnetze&quot;</span>, <span style="color: #ff0000;">&quot;vorwahl&quot;</span>, <span style="color: #0000ff;">$_REQUEST</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'f_ortsnetz'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>
-  <span style="color: #0000ff;">$ortsnetz</span> = <span style="color: #0000ff;">$_REQUEST</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'f_ortsnetz'</span><span style="color: #000000;">&#93;</span>; <span style="color: #808080; font-style: italic;">// value is valid</span>
-<span style="color: #b1b100;">else</span> <span style="color: #000000;">&#123;</span>
-  <span style="color: #0000ff;">$error</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;ortsnetz&quot;</span><span style="color: #000000;">&#93;</span> = <span style="color: #ff0000;">&quot;Das angegebene Ortsnetz ist ungültig.&quot;</span>;
-  <span style="color: #0000ff;">$ortsnetz</span> = <span style="color: #ff0000;">&quot;&quot;</span>; <span style="color: #808080; font-style: italic;">// clear session variable</span>
-<span style="color: #000000;">&#125;</span>
-<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+&lt;?php
+if &#40;is_validlov&#40;&quot;mysql://$user:$pass@$host/$db_name&quot;, &quot;ortsnetze&quot;, &quot;vorwahl&quot;, $_REQUEST&#91;'f_ortsnetz'&#93;&#41;&#41;
+  $ortsnetz = $_REQUEST&#91;'f_ortsnetz'&#93;; // value is valid
+else &#123;
+  $error&#91;&quot;ortsnetz&quot;&#93; = &quot;Das angegebene Ortsnetz ist ungültig.&quot;;
+  $ortsnetz = &quot;&quot;; // clear session variable
+&#125;
+?&gt;</pre>
 
 <p>
 Die Funktion <tt>lovselection()</tt> generiert aus einer Tabelle von

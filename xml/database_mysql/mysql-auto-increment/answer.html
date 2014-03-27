@@ -47,27 +47,27 @@ als Index definiert werden - z.B. als Primär-Schlüssel (PRIMARY KEY).</p>
 <p>Um den Wert des letzten Inkrements erfahren, stellt PHP die Funktion
 <tt>mysql_insert_id()</tt> zur Verfügung:</p>
 
-<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
-<span style="color: #808080; font-style: italic;">// Es wird davon ausgegangen, dass $host, $user und</span>
-<span style="color: #808080; font-style: italic;">// $passwort korrekt initialisiert sind</span>
+<pre>&lt;?php
+// Es wird davon ausgegangen, dass $host, $user und
+// $passwort korrekt initialisiert sind
 &nbsp;
-<span style="color: #808080; font-style: italic;">// Verbindung zu MySQL-Datenbank herstellen oder sterben.</span>
-<span style="color: #0000ff;">$linkID</span> = <a href="http://www.php3.de/mysql_connect"><span style="color: #000066;">mysql_connect</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$host</span>,<span style="color: #0000ff;">$user</span>,<span style="color: #0000ff;">$password</span><span style="color: #000000;">&#41;</span>
-   or <a href="http://www.php3.de/die"><span style="color: #000066;">die</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Abbruch: Verbindung zu Host '$host' konnte&quot;</span>
-         .<span style="color: #ff0000;">&quot; nicht hergestellt werden.&quot;</span><span style="color: #000000;">&#41;</span>;
+// Verbindung zu MySQL-Datenbank herstellen oder sterben.
+$linkID = mysql_connect&#40;$host,$user,$password&#41;
+   or die&#40;&quot;Abbruch: Verbindung zu Host '$host' konnte&quot;
+         .&quot; nicht hergestellt werden.&quot;&#41;;
 &nbsp;
-<span style="color: #808080; font-style: italic;">// Benötigte Datenbank auswählen oder sterben.</span>
-@<a href="http://www.php3.de/mysql_select_db"><span style="color: #000066;">mysql_select_db</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;foo&quot;</span><span style="color: #000000;">&#41;</span>
-   or <a href="http://www.php3.de/die"><span style="color: #000066;">die</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Abbruch: Datenbank '$database' konnte nicht&quot;</span>
-         .<span style="color: #ff0000;">&quot; selektiert werden.&lt;br&gt;&lt;br&gt;MySQL sagt: &quot;</span>.<a href="http://www.php3.de/mysql_error"><span style="color: #000066;">mysql_error</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>;
+// Benötigte Datenbank auswählen oder sterben.
+@mysql_select_db&#40;&quot;foo&quot;&#41;
+   or die&#40;&quot;Abbruch: Datenbank '$database' konnte nicht&quot;
+         .&quot; selektiert werden.&lt;br&gt;&lt;br&gt;MySQL sagt: &quot;.mysql_error&#40;&#41;&#41;;
 &nbsp;
-<span style="color: #808080; font-style: italic;">// INSERT ausführen</span>
-@<a href="http://www.php3.de/mysql_query"><span style="color: #000066;">mysql_query</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;INSERT bar SET INHALT='dritter Datensatz'&quot;</span><span style="color: #000000;">&#41;</span>;
+// INSERT ausführen
+@mysql_query&#40;&quot;INSERT bar SET INHALT='dritter Datensatz'&quot;&#41;;
 &nbsp;
-<span style="color: #808080; font-style: italic;">//  In unserem Beispiel ergibt das beim erstmaligen Aufruf &quot;3&quot;</span>
-<span style="color: #808080; font-style: italic;">//  dann &quot;4&quot;, dann &quot;5&quot; etc.</span>
-<a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <a href="http://www.php3.de/mysql_insert_id"><span style="color: #000066;">mysql_insert_id</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$linkID</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+//  In unserem Beispiel ergibt das beim erstmaligen Aufruf &quot;3&quot;
+//  dann &quot;4&quot;, dann &quot;5&quot; etc.
+echo mysql_insert_id&#40;$linkID&#41;;
+?&gt;</pre>
 
 <p>Die Funktion <tt>mysql_insert_id()</tt> liefert nichts zurück,
 wenn vorher keine INSERT-Query ausgeführt wurde; sie liefert einen

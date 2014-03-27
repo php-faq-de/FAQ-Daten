@@ -12,9 +12,9 @@ HTTP-Requests (durch den von PHP eine neue Seite generiert wird).
 Einen GET-Request mit JavaScript erreicht man prinzipiell durch
 </p>
 
-<pre>&lt;script type=<span style="color: #ff0000;">&quot;text/javascript&quot;</span> language=<span style="color: #ff0000;">&quot;JavaScript&quot;</span>&gt;
-window.location.href = <span style="color: #ff0000;">&quot;script.php?php_var=&quot;</span> + escape<span style="color: #000000;">&#40;</span>js_var<span style="color: #000000;">&#41;</span>;
-<span style="color: #000000; font-weight: bold;">&lt;/script&gt;</span></pre>
+<pre>&lt;script type=&quot;text/javascript&quot; language=&quot;JavaScript&quot;&gt;
+window.location.href = &quot;script.php?php_var=&quot; + escape&#40;js_var&#41;;
+&lt;/script&gt;</pre>
 
 <p>
 Im dadurch aufgerufenen PHP-Skript <tt>script.php</tt> ist dann
@@ -23,9 +23,9 @@ verfügbar. Einen POST- oder GET-Request mit einem Formular erreicht
 man durch
 </p>
 
-<pre>&lt;script type=<span style="color: #ff0000;">&quot;text/javascript&quot;</span> language=<span style="color: #ff0000;">&quot;JavaScript&quot;</span>&gt;
-document.formularname.submit<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #000000; font-weight: bold;">&lt;/script&gt;</span></pre>
+<pre>&lt;script type=&quot;text/javascript&quot; language=&quot;JavaScript&quot;&gt;
+document.formularname.submit&#40;&#41;;
+&lt;/script&gt;</pre>
 
 <p>
 Weitere Informationen zur Variablenübergabe: siehe

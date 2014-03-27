@@ -19,18 +19,18 @@ verwendet beispielweise einen Konstruktor, um eine Menüstruktur zu
 initialisieren.
 </p>
 
-<pre><span style="color: #000000; font-weight: bold;">class</span> Menu <span style="color: #000000;">&#123;</span>
-  <span style="color: #000000; font-weight: bold;">function</span> Menu<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>   <span style="color: #808080; font-style: italic;">// wird automatisch aufgerufen</span>
-    <span style="color: #0000ff;">$this</span>-&gt;<span style="color: #006600;">setup</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
-  <span style="color: #000000;">&#125;</span>
+<pre>class Menu &#123;
+  function Menu&#40;&#41; &#123;   // wird automatisch aufgerufen
+    $this-&gt;setup&#40;&#41;;
+  &#125;
 &nbsp;
-  <span style="color: #000000; font-weight: bold;">function</span> setup<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>  <span style="color: #808080; font-style: italic;">// Initialisierung...</span>
-    <a href="http://www.php3.de/reset"><span style="color: #000066;">reset</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$this</span>-&gt;<span style="color: #006600;">urlmap</span><span style="color: #000000;">&#41;</span>;
-    <span style="color: #b1b100;">while</span><span style="color: #000000;">&#40;</span>...<span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+  function setup&#40;&#41; &#123;  // Initialisierung...
+    reset&#40;$this-&gt;urlmap&#41;;
+    while&#40;...&#41; &#123;
       ...;
-    <span style="color: #000000;">&#125;</span>
-  <span style="color: #000000;">&#125;</span>
-<span style="color: #000000;">&#125;</span></pre>
+    &#125;
+  &#125;
+&#125;</pre>
 
 <p>
 In PHP3 wurde bei abgeleiteten Klassen der Konstruktor der Basisklasse
@@ -38,13 +38,13 @@ nicht automatisch aufgerufen. Man musste stattdessen Code wie diesen
 schreiben:
 </p>
 
-<pre><span style="color: #000000; font-weight: bold;">class</span> My_Menu <span style="color: #000000; font-weight: bold;">extends</span> Menu <span style="color: #000000;">&#123;</span>
-  <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #0000ff;">$urlmap</span> = <a href="http://www.php3.de/array"><span style="color: #000066;">array</span></a><span style="color: #000000;">&#40;</span>
-    <span style="color: #808080; font-style: italic;">// meine eigenen Menüpunkte hier</span>
-  <span style="color: #000000;">&#41;</span>;
+<pre>class My_Menu extends Menu &#123;
+  var $urlmap = array&#40;
+    // meine eigenen Menüpunkte hier
+  &#41;;
 &nbsp;
-  <span style="color: #000000; font-weight: bold;">function</span> My_Menu<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>   <span style="color: #808080; font-style: italic;">// wird automatisch aufgerufen</span>
-    <span style="color: #0000ff;">$this</span>-&gt;<span style="color: #006600;">setup</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;      <span style="color: #808080; font-style: italic;">// Aufruf der Initialisierung</span>
-  <span style="color: #000000;">&#125;</span>
-<span style="color: #000000;">&#125;</span></pre>
+  function My_Menu&#40;&#41; &#123;   // wird automatisch aufgerufen
+    $this-&gt;setup&#40;&#41;;      // Aufruf der Initialisierung
+  &#125;
+&#125;</pre>
 

@@ -19,18 +19,18 @@ hier beliebige Werte in einem Array zusammenfassen und so eine
 Rückgabe mehrerer Werte simulieren:
 </p>
 
-<pre><span style="color: #000000; font-weight: bold;">function</span> beispiel<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-    <span style="color: #0000ff;">$ret</span> = <a href="http://www.php3.de/array"><span style="color: #000066;">array</span></a><span style="color: #000000;">&#40;</span><span style="color: #cc66cc;">1</span>, <span style="color: #cc66cc;">2</span>, <span style="color: #cc66cc;">3</span><span style="color: #000000;">&#41;</span>;
+<pre>function beispiel&#40;&#41; &#123;
+    $ret = array&#40;1, 2, 3&#41;;
 &nbsp;
-    <span style="color: #b1b100;">return</span><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$ret</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #000000;">&#125;</span></pre>
+    return&#40;$ret&#41;;
+&#125;</pre>
 
 <p>
 Im Funktionsaufruf kann man <a href="http://www.php3.de/list">list()</a> verwenden,
 um Variablen die Elemente des zurückgelieferten Arrays zuzuweisen:
 </p>
 
-<pre><a href="http://www.php3.de/list"><span style="color: #000066;">list</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$var1</span>, <span style="color: #0000ff;">$var2</span>, <span style="color: #0000ff;">$var3</span><span style="color: #000000;">&#41;</span> = beispiel<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;</pre>
+<pre>list&#40;$var1, $var2, $var3&#41; = beispiel&#40;&#41;;</pre>
 
 <p>
 Wenn man nicht tatsächlich mehrere Werte zurückgeben möchte,

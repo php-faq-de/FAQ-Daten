@@ -15,29 +15,29 @@ eigenes Objekt, also <tt>$db1</tt> innerhalb von <tt>$db1</tt> und
 <tt>$db2</tt> innerhalb von <tt>$db2</tt>. Man schreibt daher code wie
 </p>
 
-<pre><span style="color: #000000; font-weight: bold;">class</span> DB_MiniSQL <span style="color: #000000;">&#123;</span>
-  <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #0000ff;">$Link_ID</span> = <span style="color: #cc66cc;">0</span>;
+<pre>class DB_MiniSQL &#123;
+  var $Link_ID = 0;
 &nbsp;
-  <span style="color: #000000; font-weight: bold;">function</span> connect<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-    <span style="color: #0000ff;">$this</span>-&gt;<span style="color: #006600;">Link_ID</span> = <a href="http://www.php3.de/mysql_connect"><span style="color: #000066;">mysql_connect</span></a><span style="color: #000000;">&#40;</span>...<span style="color: #000000;">&#41;</span>;
+  function connect&#40;&#41; &#123;
+    $this-&gt;Link_ID = mysql_connect&#40;...&#41;;
     ...
-  <span style="color: #000000;">&#125;</span>
+  &#125;
 &nbsp;
   ...
-<span style="color: #000000;">&#125;</span></pre>
+&#125;</pre>
 
 <p>oder</p>
 
-<pre><span style="color: #000000; font-weight: bold;">class</span> DB_MiniSQL <span style="color: #000000;">&#123;</span>
-  <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #0000ff;">$Link_ID</span> = <span style="color: #cc66cc;">0</span>;
+<pre>class DB_MiniSQL &#123;
+  var $Link_ID = 0;
 &nbsp;
-  <span style="color: #000000; font-weight: bold;">function</span> query<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$query</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-    <span style="color: #808080; font-style: italic;">// Wenn kein Datenbank-Link vorhanden ist, eines herstellen.</span>
-    <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span>!<span style="color: #0000ff;">$this</span>-&gt;<span style="color: #006600;">Link_ID</span><span style="color: #000000;">&#41;</span>
-      <span style="color: #0000ff;">$this</span>-&gt;<span style="color: #006600;">connect</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+  function query&#40;$query&#41; &#123;
+    // Wenn kein Datenbank-Link vorhanden ist, eines herstellen.
+    if &#40;!$this-&gt;Link_ID&#41;
+      $this-&gt;connect&#40;&#41;;
 &nbsp;
     ...
-   <span style="color: #000000;">&#125;</span>
+   &#125;
   ...
-<span style="color: #000000;">&#125;</span></pre>
+&#125;</pre>
 

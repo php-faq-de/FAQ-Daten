@@ -1,34 +1,34 @@
 <p><br /></p>
-<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
-  <span style="color: #000000; font-weight: bold;">function</span> start_timer<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$event</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-    <a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;timer: %s&lt;br&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>, <span style="color: #0000ff;">$event</span><span style="color: #000000;">&#41;</span>;
-    <a href="http://www.php3.de/list"><span style="color: #000066;">list</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$low</span>, <span style="color: #0000ff;">$high</span><span style="color: #000000;">&#41;</span> = <a href="http://www.php3.de/explode"><span style="color: #000066;">explode</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot; &quot;</span>, <a href="http://www.php3.de/microtime"><span style="color: #000066;">microtime</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>;
-    <span style="color: #0000ff;">$t</span> = <span style="color: #0000ff;">$high</span> + <span style="color: #0000ff;">$low</span>;
-    <a href="http://www.php3.de/flush"><span style="color: #000066;">flush</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+<pre>&lt;?php
+  function start_timer&#40;$event&#41; &#123;
+    printf&#40;&quot;timer: %s&lt;br&gt;\n&quot;, $event&#41;;
+    list&#40;$low, $high&#41; = explode&#40;&quot; &quot;, microtime&#40;&#41;&#41;;
+    $t = $high + $low;
+    flush&#40;&#41;;
 &nbsp;
-    <span style="color: #b1b100;">return</span> <span style="color: #0000ff;">$t</span>;
-  <span style="color: #000000;">&#125;</span>
+    return $t;
+  &#125;
 &nbsp;
-  <span style="color: #000000; font-weight: bold;">function</span> next_timer<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$start</span>, <span style="color: #0000ff;">$event</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-    <a href="http://www.php3.de/list"><span style="color: #000066;">list</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$low</span>, <span style="color: #0000ff;">$high</span><span style="color: #000000;">&#41;</span> = <a href="http://www.php3.de/explode"><span style="color: #000066;">explode</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot; &quot;</span>, <a href="http://www.php3.de/microtime"><span style="color: #000066;">microtime</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>;
-    <span style="color: #0000ff;">$t</span>    = <span style="color: #0000ff;">$high</span> + <span style="color: #0000ff;">$low</span>;
-    <span style="color: #0000ff;">$used</span> = <span style="color: #0000ff;">$t</span> - <span style="color: #0000ff;">$start</span>;
-    <a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;timer: %s (%8.4f)&lt;br&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>, <span style="color: #0000ff;">$event</span>, <span style="color: #0000ff;">$used</span><span style="color: #000000;">&#41;</span>;
-    <a href="http://www.php3.de/flush"><span style="color: #000066;">flush</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+  function next_timer&#40;$start, $event&#41; &#123;
+    list&#40;$low, $high&#41; = explode&#40;&quot; &quot;, microtime&#40;&#41;&#41;;
+    $t    = $high + $low;
+    $used = $t - $start;
+    printf&#40;&quot;timer: %s (%8.4f)&lt;br&gt;\n&quot;, $event, $used&#41;;
+    flush&#40;&#41;;
 &nbsp;
-    <span style="color: #b1b100;">return</span> <span style="color: #0000ff;">$t</span>;
-  <span style="color: #000000;">&#125;</span>
+    return $t;
+  &#125;
 &nbsp;
-  <span style="color: #0000ff;">$t</span> = start_timer<span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;start Befehl 1&quot;</span><span style="color: #000000;">&#41;</span>;
+  $t = start_timer&#40;&quot;start Befehl 1&quot;&#41;;
 &nbsp;
-  <span style="color: #808080; font-style: italic;">/* Hier den ersten Befehl einfuegen */</span>
+  /* Hier den ersten Befehl einfuegen */
 &nbsp;
-  <span style="color: #0000ff;">$t</span> = next_timer<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$t</span>, <span style="color: #ff0000;">&quot;start Befehl 2&quot;</span><span style="color: #000000;">&#41;</span>;
+  $t = next_timer&#40;$t, &quot;start Befehl 2&quot;&#41;;
 &nbsp;
-  <span style="color: #808080; font-style: italic;">/* Hier den zweiten Befehl einfuegen */</span>
+  /* Hier den zweiten Befehl einfuegen */
 &nbsp;
-  <span style="color: #0000ff;">$t</span> = next_timer<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$t</span>, <span style="color: #ff0000;">&quot;finish&quot;</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+  $t = next_timer&#40;$t, &quot;finish&quot;&#41;;
+?&gt;</pre>
 
 <p>
 Möchte man zum Beispiel den Performance-Unterschied

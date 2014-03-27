@@ -21,10 +21,10 @@ Konfigurationsvariable <a href="http://de3.php.net/manual/en/ini.php">sendmail_p
 Mailprogramm zu starten und mit den benötigten Daten zu füttern.
 </p>
 
-<pre><a href="http://www.php3.de/mail"><span style="color: #000066;">mail</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;em@pfaeng.er&quot;</span>,
-     <span style="color: #ff0000;">&quot;Testmail&quot;</span>,
-     <span style="color: #ff0000;">&quot;Dies ist nur eine Testnachricht.&quot;</span>,
-     <span style="color: #ff0000;">&quot;From: ab@send.er<span style="color: #000099; font-weight: bold;">\r</span><span style="color: #000099; font-weight: bold;">\n</span>Reply-To: devnull@send.er&quot;</span><span style="color: #000000;">&#41;</span>;</pre>
+<pre>mail&#40;&quot;em@pfaeng.er&quot;,
+     &quot;Testmail&quot;,
+     &quot;Dies ist nur eine Testnachricht.&quot;,
+     &quot;From: ab@send.er\r\nReply-To: devnull@send.er&quot;&#41;;</pre>
 
 <p class="hint">
 Hinweis: In vielen Versionen von PHP unter Windows
@@ -43,11 +43,11 @@ Ansätze sind funktional gleich (aber <a href="http://www.php3.de/mail">mail()</
 ist weniger Arbeit).
 </p>
 
-<pre><span style="color: #0000ff;">$fd</span> = <a href="http://www.php3.de/popen"><span style="color: #000066;">popen</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;/usr/sbin/sendmail -t &quot;</span>,<span style="color: #ff0000;">&quot;w&quot;</span><span style="color: #000000;">&#41;</span>;
-  <a href="http://www.php3.de/fputs"><span style="color: #000066;">fputs</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fd</span>, <span style="color: #ff0000;">&quot;To: em@pfaeng.er<span style="color: #000099; font-weight: bold;">\r</span><span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #000000;">&#41;</span>;
-  <a href="http://www.php3.de/fputs"><span style="color: #000066;">fputs</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fd</span>, <span style="color: #ff0000;">&quot;From: ab@send.er<span style="color: #000099; font-weight: bold;">\r</span><span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #000000;">&#41;</span>;
-  <a href="http://www.php3.de/fputs"><span style="color: #000066;">fputs</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fd</span>, <span style="color: #ff0000;">&quot;Reply-To: devnull@send.er<span style="color: #000099; font-weight: bold;">\r</span><span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #000000;">&#41;</span>;
-  <a href="http://www.php3.de/fputs"><span style="color: #000066;">fputs</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fd</span>, <span style="color: #ff0000;">&quot;Subject: Testmail<span style="color: #000099; font-weight: bold;">\r</span><span style="color: #000099; font-weight: bold;">\n</span><span style="color: #000099; font-weight: bold;">\r</span><span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #000000;">&#41;</span>;
-  <a href="http://www.php3.de/fputs"><span style="color: #000066;">fputs</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fd</span>, <span style="color: #ff0000;">&quot;Das ist nur eine Testnachricht.<span style="color: #000099; font-weight: bold;">\r</span><span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #000000;">&#41;</span>;
-  <a href="http://www.php3.de/pclose"><span style="color: #000066;">pclose</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fd</span><span style="color: #000000;">&#41;</span>;</pre>
+<pre>$fd = popen&#40;&quot;/usr/sbin/sendmail -t &quot;,&quot;w&quot;&#41;;
+  fputs&#40;$fd, &quot;To: em@pfaeng.er\r\n&quot;&#41;;
+  fputs&#40;$fd, &quot;From: ab@send.er\r\n&quot;&#41;;
+  fputs&#40;$fd, &quot;Reply-To: devnull@send.er\r\n&quot;&#41;;
+  fputs&#40;$fd, &quot;Subject: Testmail\r\n\r\n&quot;&#41;;
+  fputs&#40;$fd, &quot;Das ist nur eine Testnachricht.\r\n&quot;&#41;;
+  pclose&#40;$fd&#41;;</pre>
 

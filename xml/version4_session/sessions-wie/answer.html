@@ -75,9 +75,9 @@
 	Also:
 </p>
 
-<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
-    @<a href="http://www.php3.de/session_start"><span style="color: #000066;">session_start</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+<pre>&lt;?php
+    @session_start&#40;&#41;;
+?&gt;</pre>
 
 <h2>Das <tt>$_SESSION</tt>-Hash</h2>
 
@@ -110,39 +110,39 @@
 
 <h2>Beispiel 1: seite1.php</h2>
 
-<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
-    <span style="color: #808080; font-style: italic;">// Falls nicht vorhanden, generiert eine Session(datei)</span>
-    <span style="color: #808080; font-style: italic;">// auf dem Server.</span>
-    <span style="color: #808080; font-style: italic;">// Falls bereits vorhanden, liest Sessiondaten wieder ein und</span>
-    <span style="color: #808080; font-style: italic;">// (re-)initialisiert die gespeicherten Variablen.</span>
+<pre>&lt;?php
+    // Falls nicht vorhanden, generiert eine Session(datei)
+    // auf dem Server.
+    // Falls bereits vorhanden, liest Sessiondaten wieder ein und
+    // (re-)initialisiert die gespeicherten Variablen.
 &nbsp;
-    @<a href="http://www.php3.de/session_start"><span style="color: #000066;">session_start</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+    @session_start&#40;&#41;;
 &nbsp;
-    <span style="color: #808080; font-style: italic;">// Erst wenn das Script terminiert(!), merkt PHP den Inhalt</span>
-    <span style="color: #808080; font-style: italic;">// der Variablen $s_userName und $s_userPermissions in</span>
-    <span style="color: #808080; font-style: italic;">// den Sessiondaten.</span>
+    // Erst wenn das Script terminiert(!), merkt PHP den Inhalt
+    // der Variablen $s_userName und $s_userPermissions in
+    // den Sessiondaten.
 &nbsp;
-    <span style="color: #0000ff;">$_SESSION</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'userName'</span><span style="color: #000000;">&#93;</span>        =   <span style="color: #ff0000;">&quot;dtg&quot;</span>;
-    <span style="color: #0000ff;">$_SESSION</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'userPermissions'</span><span style="color: #000000;">&#93;</span> =   <span style="color: #ff0000;">&quot;keine :=(&quot;</span>;
-<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+    $_SESSION&#91;'userName'&#93;        =   &quot;dtg&quot;;
+    $_SESSION&#91;'userPermissions'&#93; =   &quot;keine :=(&quot;;
+?&gt;</pre>
 
 <h2>Beispiel 1: seite2.php</h2>
 
-<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
-    <span style="color: #808080; font-style: italic;">// Falls nicht vorhanden, generiert eine Session(datei)</span>
-    <span style="color: #808080; font-style: italic;">// auf dem Server.</span>
-    <span style="color: #808080; font-style: italic;">// Falls bereits vorhanden, liest Sessiondaten wieder ein und</span>
-    <span style="color: #808080; font-style: italic;">// (re-)initialisiert die gespeicherten Variablen.</span>
+<pre>&lt;?php
+    // Falls nicht vorhanden, generiert eine Session(datei)
+    // auf dem Server.
+    // Falls bereits vorhanden, liest Sessiondaten wieder ein und
+    // (re-)initialisiert die gespeicherten Variablen.
 &nbsp;
-    @<a href="http://www.php3.de/session_start"><span style="color: #000066;">session_start</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+    @session_start&#40;&#41;;
 &nbsp;
-    <span style="color: #808080; font-style: italic;">// Gibt den Inhalt der wiederhergestellten Variablen aus.</span>
-    <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;&lt;P&gt;Hallo &quot;</span> . <span style="color: #0000ff;">$_SESSION</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'userName'</span><span style="color: #000000;">&#93;</span> . <span style="color: #ff0000;">&quot;,&quot;</span>;
-    <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;&lt;P&gt;Du hast &quot;</span> . <span style="color: #0000ff;">$_SESSION</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'userPermissions'</span><span style="color: #000000;">&#93;</span> . <span style="color: #ff0000;">&quot; Zugriffsrechte.&quot;</span>;
+    // Gibt den Inhalt der wiederhergestellten Variablen aus.
+    echo &quot;&lt;P&gt;Hallo &quot; . $_SESSION&#91;'userName'&#93; . &quot;,&quot;;
+    echo &quot;&lt;P&gt;Du hast &quot; . $_SESSION&#91;'userPermissions'&#93; . &quot; Zugriffsrechte.&quot;;
 &nbsp;
-    <span style="color: #808080; font-style: italic;">// Wird in diesem Script kein unset() oder</span>
-    <span style="color: #808080; font-style: italic;">// session_destroy() ausgeführt, bleiben die Daten erhalten!</span>
-<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+    // Wird in diesem Script kein unset() oder
+    // session_destroy() ausgeführt, bleiben die Daten erhalten!
+?&gt;</pre>
 
 <p>
 	Damit das Folgescript (<tt>seite2.php</tt>) weiß, in welcher Datei
@@ -194,41 +194,41 @@
 
 <h2>Beispiel 2: seite3.php (Formularseite)</h2>
 
-<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
-    @<a href="http://www.php3.de/session_start"><span style="color: #000066;">session_start</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+<pre>&lt;?php
+    @session_start&#40;&#41;;
 &nbsp;
-    <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><a href="http://www.php3.de/isset"><span style="color: #000066;">isset</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$_POST</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'submit'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>
-        <span style="color: #000000;">&#123;</span>
-            <span style="color: #808080; font-style: italic;">// Hier prüfen, ob _alle_ benötigten Variablen,</span>
-            <span style="color: #808080; font-style: italic;">// die an dieses Script übermittelt wurden,</span>
-            <span style="color: #808080; font-style: italic;">// legal sind!</span>
-            <span style="color: #808080; font-style: italic;">// Hier nur fortfahren, wenn alles in Ordnung ist</span>
+    if &#40;isset&#40;$_POST&#91;'submit'&#93;&#41;&#41;
+        &#123;
+            // Hier prüfen, ob _alle_ benötigten Variablen,
+            // die an dieses Script übermittelt wurden,
+            // legal sind!
+            // Hier nur fortfahren, wenn alles in Ordnung ist
 &nbsp;
-            <span style="color: #808080; font-style: italic;">// Die Query wird anhand der Variablen,</span>
-            <span style="color: #808080; font-style: italic;">// die submitted wurden, erzeugt</span>
-            <span style="color: #0000ff;">$_SESSION</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'meineTolleQuery'</span><span style="color: #000000;">&#93;</span> = <span style="color: #ff0000;">&quot;SELECT ...&quot;</span>;
+            // Die Query wird anhand der Variablen,
+            // die submitted wurden, erzeugt
+            $_SESSION&#91;'meineTolleQuery'&#93; = &quot;SELECT ...&quot;;
 &nbsp;
-            <span style="color: #808080; font-style: italic;">// HTTP-Redirect zu der Ausgabeseite</span>
-            <a href="http://www.php3.de/header"><span style="color: #000066;">header</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Location: http://&quot;</span> . <span style="color: #0000ff;">$_SERVER</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'SERVER_NAME'</span><span style="color: #000000;">&#93;</span>
-                                       . <span style="color: #ff0000;">&quot;/seite4.php&quot;</span><span style="color: #000000;">&#41;</span>;
-            <a href="http://www.php3.de/exit"><span style="color: #000066;">exit</span></a>;
-        <span style="color: #000000;">&#125;</span>
-<span style="color: #000000; font-weight: bold;">?&gt;</span>
+            // HTTP-Redirect zu der Ausgabeseite
+            header&#40;&quot;Location: http://&quot; . $_SERVER&#91;'SERVER_NAME'&#93;
+                                       . &quot;/seite4.php&quot;&#41;;
+            exit;
+        &#125;
+?&gt;
 &nbsp;
-    &lt;FORM action=<span style="color: #ff0000;">&quot;&lt;?php=$_SERVER['PHP_SELF']?&gt;&quot;</span> method=<span style="color: #ff0000;">&quot;post&quot;</span>&gt;
+    &lt;FORM action=&quot;&lt;?php=$_SERVER['PHP_SELF']?&gt;&quot; method=&quot;post&quot;&gt;
         &lt;!--
             Hier ganz viele Radiobuttons, Checkboxen und Inputfelder
         --&gt;
-       &lt;INPUT type=<span style="color: #ff0000;">&quot;submit&quot;</span> name=<span style="color: #ff0000;">&quot;submit&quot;</span>&gt;
+       &lt;INPUT type=&quot;submit&quot; name=&quot;submit&quot;&gt;
     &lt;/FORM&gt;</pre>
 
 <h2>Beispiel 2: seite4.php (Ausgabeseite)</h2>
 
-<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
-    @<a href="http://www.php3.de/session_start"><span style="color: #000066;">session_start</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+<pre>&lt;?php
+    @session_start&#40;&#41;;
 &nbsp;
-    <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;&lt;P&gt;Diese Query wurde mir übermittelt: &quot;</span>
-             . <span style="color: #0000ff;">$_SESSION</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'meineTolleQuery'</span><span style="color: #000000;">&#93;</span>;
-    <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;&lt;P&gt;und jetzt mache ich was draus!&quot;</span>;
-<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+    echo &quot;&lt;P&gt;Diese Query wurde mir übermittelt: &quot;
+             . $_SESSION&#91;'meineTolleQuery'&#93;;
+    echo &quot;&lt;P&gt;und jetzt mache ich was draus!&quot;;
+?&gt;</pre>
 

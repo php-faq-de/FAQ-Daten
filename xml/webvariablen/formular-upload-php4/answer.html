@@ -9,10 +9,10 @@ Microsoft Internet Explorer ab Version 4 verarbeitet werden.
 </p>
 
 <pre>&lt;h1&gt;Hallo&lt;/h1&gt;
-&lt;form action=<span style="color: #ff0000;">&quot;/submit.php&quot;</span> method=<span style="color: #ff0000;">&quot;post&quot;</span>
-      enctype=<span style="color: #ff0000;">&quot;multipart/form-data&quot;</span>&gt;
-&lt;input type=<span style="color: #ff0000;">&quot;file&quot;</span> name=<span style="color: #ff0000;">&quot;probe&quot;</span> /&gt;
-&lt;input type=<span style="color: #ff0000;">&quot;submit&quot;</span> value=<span style="color: #ff0000;">&quot;los&quot;</span> /&gt;
+&lt;form action=&quot;/submit.php&quot; method=&quot;post&quot;
+      enctype=&quot;multipart/form-data&quot;&gt;
+&lt;input type=&quot;file&quot; name=&quot;probe&quot; /&gt;
+&lt;input type=&quot;submit&quot; value=&quot;los&quot; /&gt;
 &lt;/form&gt;</pre>
 
 <p>
@@ -103,24 +103,24 @@ vermieden werden.
 <pre>&lt;h1&gt;Upload&lt;/h1&gt;
 &nbsp;
 &lt;form
-  action=<span style="color: #ff0000;">&quot;&lt;?php echo $_SERVER['PHP_SELF']; ?&gt;&quot;</span>
-  method=<span style="color: #ff0000;">&quot;post&quot;</span>
-  enctype=<span style="color: #ff0000;">&quot;multipart/form-data&quot;</span>&gt;
-&lt;input type=<span style="color: #ff0000;">&quot;file&quot;</span> name=<span style="color: #ff0000;">&quot;probe&quot;</span> /&gt;
-&lt;input type=<span style="color: #ff0000;">&quot;submit&quot;</span> value=<span style="color: #ff0000;">&quot;Los!&quot;</span> /&gt;
+  action=&quot;&lt;?php echo $_SERVER['PHP_SELF']; ?&gt;&quot;
+  method=&quot;post&quot;
+  enctype=&quot;multipart/form-data&quot;&gt;
+&lt;input type=&quot;file&quot; name=&quot;probe&quot; /&gt;
+&lt;input type=&quot;submit&quot; value=&quot;Los!&quot; /&gt;
 &lt;/form&gt;
 &lt;hr /&gt;
-<span style="color: #000000; font-weight: bold;">&lt;?php</span>
-  <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><a href="http://www.php3.de/isset"><span style="color: #000066;">isset</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$_FILES</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'probe'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span> and ! <span style="color: #0000ff;">$_FILES</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'probe'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'error'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-    <span style="color: #808080; font-style: italic;">// Alternativ:            and   $_FILES['probe']['size']</span>
-    <a href="http://www.php3.de/move_uploaded_file"><span style="color: #000066;">move_uploaded_file</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$_FILES</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'probe'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'tmp_name'</span><span style="color: #000000;">&#93;</span>, <span style="color: #ff0000;">&quot;./newfile.txt&quot;</span><span style="color: #000000;">&#41;</span>;
-    <a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Die Datei %s steht jetzt als &quot;</span> .
-          <span style="color: #ff0000;">&quot;newfile.txt zur Verfügung.&lt;br /&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>,
-      <span style="color: #0000ff;">$_FILES</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'probe'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'name'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span>;
-    <a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Sie ist %u Bytes groß und vom Typ %s.&lt;br /&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>,
-      <span style="color: #0000ff;">$_FILES</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'probe'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'size'</span><span style="color: #000000;">&#93;</span>, <span style="color: #0000ff;">$_FILES</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'probe'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'type'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span>;
-  <span style="color: #000000;">&#125;</span>
- <span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+&lt;?php
+  if &#40;isset&#40;$_FILES&#91;'probe'&#93;&#41; and ! $_FILES&#91;'probe'&#93;&#91;'error'&#93;&#41; &#123;
+    // Alternativ:            and   $_FILES['probe']['size']
+    move_uploaded_file&#40;$_FILES&#91;'probe'&#93;&#91;'tmp_name'&#93;, &quot;./newfile.txt&quot;&#41;;
+    printf&#40;&quot;Die Datei %s steht jetzt als &quot; .
+          &quot;newfile.txt zur Verfügung.&lt;br /&gt;\n&quot;,
+      $_FILES&#91;'probe'&#93;&#91;'name'&#93;&#41;;
+    printf&#40;&quot;Sie ist %u Bytes groß und vom Typ %s.&lt;br /&gt;\n&quot;,
+      $_FILES&#91;'probe'&#93;&#91;'size'&#93;, $_FILES&#91;'probe'&#93;&#91;'type'&#93;&#41;;
+  &#125;
+ ?&gt;</pre>
 
 <p>
 Bei PHP3 muss über eine alternative Syntax auf die hochgelade Datei

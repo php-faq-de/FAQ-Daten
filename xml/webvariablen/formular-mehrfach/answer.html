@@ -10,64 +10,64 @@ Redirect per Location-Header nach der erfolgreichen Ausführung der gewünschten
 Aktionen (z.B. Speichern der Daten in einer Datenbank).
 </p>
 
-<pre><span style="color: #000000; font-weight: bold;">&lt;?PHP</span>
-<span style="color: #000000; font-weight: bold;">function</span> formular_ausgeben<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$error</span> = <span style="color: #ff0000;">''</span><span style="color: #000000;">&#41;</span>
-<span style="color: #000000;">&#123;</span>
-   <span style="color: #0000ff;">$error</span> = <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$error</span>==<span style="color: #ff0000;">''</span><span style="color: #000000;">&#41;</span>?<span style="color: #ff0000;">''</span>:<span style="color: #ff0000;">'&lt;font color=&quot;#DD0000&quot;&gt;'</span>.<span style="color: #0000ff;">$error</span>.<span style="color: #ff0000;">'&lt;/font&gt;'</span>;
-   <span style="color: #b1b100;">return</span> <span style="color: #ff0000;">'&lt;form action=&quot;script.php4&quot; method=&quot;POST&quot;&gt;
-           '</span>.<span style="color: #0000ff;">$error</span>.<span style="color: #ff0000;">'
-           Name: &lt;input type=&quot;text&quot; name=&quot;name&quot; value=&quot;'</span>.<span style="color: #0000ff;">$_REQUEST</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'name'</span><span style="color: #000000;">&#93;</span>.<span style="color: #ff0000;">'&quot; /&gt;
+<pre>&lt;?PHP
+function formular_ausgeben&#40;$error = ''&#41;
+&#123;
+   $error = &#40;$error==''&#41;?'':'&lt;font color=&quot;#DD0000&quot;&gt;'.$error.'&lt;/font&gt;';
+   return '&lt;form action=&quot;script.php4&quot; method=&quot;POST&quot;&gt;
+           '.$error.'
+           Name: &lt;input type=&quot;text&quot; name=&quot;name&quot; value=&quot;'.$_REQUEST&#91;'name'&#93;.'&quot; /&gt;
            &lt;br /&gt;
            &lt;input type=&quot;submit&quot; name=&quot;submit&quot; value=&quot;OK&quot; /&gt;
-           &lt;/form&gt;'</span>;
-<span style="color: #000000;">&#125;</span>
+           &lt;/form&gt;';
+&#125;
 &nbsp;
-<span style="color: #000000; font-weight: bold;">function</span> daten_speichern<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>
-<span style="color: #000000;">&#123;</span>
-   <a href="http://www.php3.de/global"><span style="color: #000066;">GLOBAL</span></a> <span style="color: #0000ff;">$db</span>;
-   <span style="color: #b1b100;">if</span><span style="color: #000000;">&#40;</span><a href="http://www.php3.de/strlen"><span style="color: #000066;">strlen</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$_REQUEST</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'name'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span> &lt; <span style="color: #cc66cc;">3</span><span style="color: #000000;">&#41;</span>
-   <span style="color: #000000;">&#123;</span>
-      <span style="color: #b1b100;">return</span> formular_ausgeben<span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'Bitte Namen eingeben!&lt;br&gt;'</span><span style="color: #000000;">&#41;</span>;
-   <span style="color: #000000;">&#125;</span>
-   <span style="color: #b1b100;">else</span>
-   <span style="color: #000000;">&#123;</span>
-      <span style="color: #808080; font-style: italic;">// Mit $db-&gt;escape_string() wird eine Funktion aufgerufen, die sicher stellt</span>
-      <span style="color: #808080; font-style: italic;">// das möglicherweise in $_REQUEST['name'] enthaltene SQL-Fragmente nicht</span>
-      <span style="color: #808080; font-style: italic;">// ausgeführt werden (siehe auch mysql_escape_string() ).</span>
-      <span style="color: #0000ff;">$db</span>-&gt;<span style="color: #006600;">query</span><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;INSERT INTO tabelle
-                  SET name = '&quot;</span>.<span style="color: #0000ff;">$db</span>-&gt;<span style="color: #006600;">escape_string</span><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$_REQUEST</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'name'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span>.<span style="color: #ff0000;">&quot;'&quot;</span><span style="color: #000000;">&#41;</span>;
+function daten_speichern&#40;&#41;
+&#123;
+   GLOBAL $db;
+   if&#40;strlen&#40;$_REQUEST&#91;'name'&#93;&#41; &lt; 3&#41;
+   &#123;
+      return formular_ausgeben&#40;'Bitte Namen eingeben!&lt;br&gt;'&#41;;
+   &#125;
+   else
+   &#123;
+      // Mit $db-&gt;escape_string() wird eine Funktion aufgerufen, die sicher stellt
+      // das möglicherweise in $_REQUEST['name'] enthaltene SQL-Fragmente nicht
+      // ausgeführt werden (siehe auch mysql_escape_string() ).
+      $db-&gt;query&#40;&quot;INSERT INTO tabelle
+                  SET name = '&quot;.$db-&gt;escape_string&#40;$_REQUEST&#91;'name'&#93;&#41;.&quot;'&quot;&#41;;
 &nbsp;
-      <span style="color: #b1b100;">if</span><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$db</span>-&gt;<span style="color: #006600;">affected_rows</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> == <span style="color: #cc66cc;">1</span><span style="color: #000000;">&#41;</span>
-      <span style="color: #000000;">&#123;</span>
-         <a href="http://www.php3.de/header"><span style="color: #000066;">header</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'Location: http://domain.de/script.php4?d=bestaetigen'</span><span style="color: #000000;">&#41;</span>;
-         <span style="color: #b1b100;">return</span> <span style="color: #ff0000;">'&lt;a href=&quot;http://domain.de/script.php4?d=bestaetigen&quot;&gt;weiter&lt;/a&gt;'</span>;
-      <span style="color: #000000;">&#125;</span>
-      <span style="color: #b1b100;">else</span>
-      <span style="color: #000000;">&#123;</span>
-         <span style="color: #b1b100;">return</span> formular_ausgeben<span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'MySQL: '</span>.<span style="color: #0000ff;">$db</span>-&gt;<span style="color: #006600;">Error</span>.<span style="color: #ff0000;">'&lt;br&gt;'</span><span style="color: #000000;">&#41;</span>;
-      <span style="color: #000000;">&#125;</span>
-   <span style="color: #000000;">&#125;</span>
-<span style="color: #000000;">&#125;</span>
+      if&#40;$db-&gt;affected_rows&#40;&#41; == 1&#41;
+      &#123;
+         header&#40;'Location: http://domain.de/script.php4?d=bestaetigen'&#41;;
+         return '&lt;a href=&quot;http://domain.de/script.php4?d=bestaetigen&quot;&gt;weiter&lt;/a&gt;';
+      &#125;
+      else
+      &#123;
+         return formular_ausgeben&#40;'MySQL: '.$db-&gt;Error.'&lt;br&gt;'&#41;;
+      &#125;
+   &#125;
+&#125;
 &nbsp;
-<span style="color: #000000; font-weight: bold;">function</span> bestaetigung<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>
-<span style="color: #000000;">&#123;</span>
-   <span style="color: #b1b100;">return</span> <span style="color: #ff0000;">'Der Name wurde gespeichert.'</span>;
-<span style="color: #000000;">&#125;</span>
+function bestaetigung&#40;&#41;
+&#123;
+   return 'Der Name wurde gespeichert.';
+&#125;
 &nbsp;
 &nbsp;
-<span style="color: #b1b100;">if</span><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$_REQUEST</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'submit'</span><span style="color: #000000;">&#93;</span> == <span style="color: #ff0000;">'OK'</span><span style="color: #000000;">&#41;</span>
-<span style="color: #000000;">&#123;</span>
-   <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> daten_speichern<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #000000;">&#125;</span>
-<span style="color: #b1b100;">elseif</span><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$_REQUEST</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'d'</span><span style="color: #000000;">&#93;</span> == <span style="color: #ff0000;">'bestaetigen'</span><span style="color: #000000;">&#41;</span>
-<span style="color: #000000;">&#123;</span>
-   <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> bestaetigung<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #000000;">&#125;</span>
-<span style="color: #b1b100;">else</span>
-<span style="color: #000000;">&#123;</span>
-   <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> formular_ausgeben<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #000000;">&#125;</span>
-<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+if&#40;$_REQUEST&#91;'submit'&#93; == 'OK'&#41;
+&#123;
+   echo daten_speichern&#40;&#41;;
+&#125;
+elseif&#40;$_REQUEST&#91;'d'&#93; == 'bestaetigen'&#41;
+&#123;
+   echo bestaetigung&#40;&#41;;
+&#125;
+else
+&#123;
+   echo formular_ausgeben&#40;&#41;;
+&#125;
+?&gt;</pre>
 
 <p>
 Ein Neuladen nach erfolgreichem Abspeichern der Daten führt hier nur zur erneuten

@@ -4,18 +4,18 @@ in HTML eingebettet. Der Code steht zwischen <tt>&lt;?php</tt> und
 <tt>?&gt;</tt> (empfohlene Schreibweise):
 </p>
 
-<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
-  <a href="http://www.php3.de/phpinfo"><span style="color: #000066;">phpinfo</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
- <span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+<pre>&lt;?php
+  phpinfo&#40;&#41;;
+ ?&gt;</pre>
 
 <p>
 Alternativ kann auch ein Script-Tag für Server-Side Scripting
 verwendet werden:
 </p>
 
-<pre><span style="color: #000000; font-weight: bold;">&lt;script language</span>=<span style="color: #ff0000;">&quot;php&quot;</span>&gt;
-  <a href="http://www.php3.de/phpinfo"><span style="color: #000066;">phpinfo</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #000000; font-weight: bold;">&lt;/script&gt;</span></pre>
+<pre>&lt;script language=&quot;php&quot;&gt;
+  phpinfo&#40;&#41;;
+&lt;/script&gt;</pre>
 
 <p>
 Falls die Konfigurationsvariable
@@ -23,17 +23,17 @@ Falls die Konfigurationsvariable
 Namen der Scriptsprache in den PIs weglassen:
 </p>
 
-<pre><span style="color: #000000; font-weight: bold;">&lt;?</span>
-  <a href="http://www.php3.de/phpinfo"><span style="color: #000066;">phpinfo</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
- <span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+<pre>&lt;?
+  phpinfo&#40;&#41;;
+ ?&gt;</pre>
 
 <p>
 Dies erlaubt auch schnelle Ausgabe des Wertes von Ausdrücken.
 </p>
 
-<pre><span style="color: #000000; font-weight: bold;">&lt;?</span>= <span style="color: #0000ff;">$_SERVER</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'PHP_SELF'</span><span style="color: #000000;">&#93;</span> <span style="color: #000000; font-weight: bold;">?&gt;</span>
+<pre>&lt;?= $_SERVER&#91;'PHP_SELF'&#93; ?&gt;
 &lt;!-- kann anstelle von --&gt;
-<span style="color: #000000; font-weight: bold;">&lt;?</span> <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #0000ff;">$_SERVER</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'PHP_SELF'</span><span style="color: #000000;">&#93;</span> <span style="color: #000000; font-weight: bold;">?&gt;</span>
+&lt;? echo $_SERVER&#91;'PHP_SELF'&#93; ?&gt;
 &lt;!-- geschrieben werden. --&gt;</pre>
 
 <p>
@@ -42,7 +42,7 @@ ist (nicht empfohlen!), kann man auch
 </p>
 
 <pre>&lt;%
-  <a href="http://www.php3.de/phpinfo"><span style="color: #000066;">phpinfo</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+  phpinfo&#40;&#41;;
  %&gt;</pre>
 
 <p>

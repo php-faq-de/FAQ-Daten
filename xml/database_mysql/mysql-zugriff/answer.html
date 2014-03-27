@@ -26,11 +26,11 @@ mysql.default_password  =
 
 <p>Kontaktaufnahme mit dem Server und Festlegen der Datenbank:</p>
 
-<pre><span style="color: #0000ff;">$link</span> = <a href="http://www.php3.de/mysql_connect"><span style="color: #000066;">mysql_connect</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;localhost&quot;</span>, <span style="color: #ff0000;">&quot;ich&quot;</span>, <span style="color: #ff0000;">&quot;geheim&quot;</span><span style="color: #000000;">&#41;</span>;
-  <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span>!<span style="color: #0000ff;">$link</span><span style="color: #000000;">&#41;</span>
-    <a href="http://www.php3.de/die"><span style="color: #000066;">die</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Kann den Server nicht erreichen.&quot;</span><span style="color: #000000;">&#41;</span>;
-  <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span>!<a href="http://www.php3.de/mysql_select_db"><span style="color: #000066;">mysql_select_db</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;meinedatenbank&quot;</span>, <span style="color: #0000ff;">$link</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>
-    <a href="http://www.php3.de/die"><span style="color: #000066;">die</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Kann die Datenbank nicht anwählen.&quot;</span><span style="color: #000000;">&#41;</span>;</pre>
+<pre>$link = mysql_connect&#40;&quot;localhost&quot;, &quot;ich&quot;, &quot;geheim&quot;&#41;;
+  if &#40;!$link&#41;
+    die&#40;&quot;Kann den Server nicht erreichen.&quot;&#41;;
+  if &#40;!mysql_select_db&#40;&quot;meinedatenbank&quot;, $link&#41;&#41;
+    die&#40;&quot;Kann die Datenbank nicht anwählen.&quot;&#41;;</pre>
 
 <p>Das Senden einer Anfrage an die Datenbank erfolgt mit Hilfe der
 Funktion <a href="http://www.php3.de/mysql_query">mysql_query()</a>. Diese Funktion liefert
@@ -40,20 +40,20 @@ bestimmt man die Anzahl der Zeilen des Ergebnisses und mit Hilfe der
 Funktion <a href="http://www.php3.de/mysql_fetch_array">mysql_fetch_array()</a>
 kann man die jeweils aktuelle Zeile des Ergebnisses einlesen.</p>
 
-<pre><span style="color: #0000ff;">$query</span> = <span style="color: #ff0000;">&quot;SELECT * FROM meinetabelle ORDER BY id&quot;</span>;
-<span style="color: #0000ff;">$result</span> = <a href="http://www.php3.de/mysql_query"><span style="color: #000066;">mysql_query</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$query</span>, <span style="color: #0000ff;">$link</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span>!<span style="color: #0000ff;">$result</span><span style="color: #000000;">&#41;</span>
-<span style="color: #000000;">&#123;</span>
-    <a href="http://www.php3.de/print"><span style="color: #000066;">print</span></a> <a href="http://www.php3.de/mysql_error"><span style="color: #000066;">mysql_error</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
-    <a href="http://www.php3.de/die"><span style="color: #000066;">die</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Query $query ist ungültiges SQL.&quot;</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #000000;">&#125;</span>
+<pre>$query = &quot;SELECT * FROM meinetabelle ORDER BY id&quot;;
+$result = mysql_query&#40;$query, $link&#41;;
+if &#40;!$result&#41;
+&#123;
+    print mysql_error&#40;&#41;;
+    die&#40;&quot;Query $query ist ungültiges SQL.&quot;&#41;;
+&#125;
 &nbsp;
-<span style="color: #0000ff;">$zeilen</span> = <a href="http://www.php3.de/mysql_num_rows"><span style="color: #000066;">mysql_num_rows</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$result</span><span style="color: #000000;">&#41;</span>;
-<a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Das Ergebnis hat %d Zeilen.<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>, <span style="color: #0000ff;">$zeilen</span><span style="color: #000000;">&#41;</span>;
+$zeilen = mysql_num_rows&#40;$result&#41;;
+printf&#40;&quot;Das Ergebnis hat %d Zeilen.\n&quot;, $zeilen&#41;;
 &nbsp;
-<span style="color: #b1b100;">while</span><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$avar</span> = <a href="http://www.php3.de/mysql_fetch_array"><span style="color: #000066;">mysql_fetch_array</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$result</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>
-    <a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Spalte bla hat den Wert %s<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>, <span style="color: #0000ff;">$avar</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;bla&quot;</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span>;
+while&#40;$avar = mysql_fetch_array&#40;$result&#41;&#41;
+    printf&#40;&quot;Spalte bla hat den Wert %s\n&quot;, $avar&#91;&quot;bla&quot;&#93;&#41;;
 &nbsp;
-<a href="http://www.php3.de/mysql_free_result"><span style="color: #000066;">mysql_free_result</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$result</span><span style="color: #000000;">&#41;</span>;
-<a href="http://www.php3.de/mysql_close"><span style="color: #000066;">mysql_close</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$link</span><span style="color: #000000;">&#41;</span>;</pre>
+mysql_free_result&#40;$result&#41;;
+mysql_close&#40;$link&#41;;</pre>
 

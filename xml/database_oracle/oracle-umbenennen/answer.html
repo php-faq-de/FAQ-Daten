@@ -1,6 +1,6 @@
 <p>Ab Version 9.2.0 bietet Oracle folgende einfache Möglichkeit, eine Spalte umzubenennen:</p>
 
-<pre class="sql"><span style="color: #993333; font-weight: bold;">ALTER</span> <span style="color: #993333; font-weight: bold;">TABLE</span> tabellenname <span style="color: #993333; font-weight: bold;">RENAME</span> <span style="color: #993333; font-weight: bold;">COLUMN</span> alter_name <span style="color: #993333; font-weight: bold;">TO</span> neuer_name;</pre>
+<pre class="sql">ALTER TABLE tabellenname RENAME COLUMN alter_name TO neuer_name;</pre>
 
 <p>Hierfür sind keine DBA Rechte notwendig.</p>
 
@@ -9,12 +9,12 @@ vorhanden und sofern man DBA Rechte hat kann man dies über einen Midnighthack l
 
 <p>(Ist mit Vorsicht zu geniessen und am besten nicht zu benutzen :-)</p>
 
-<pre class="sql"><span style="color: #993333; font-weight: bold;">UPDATE</span> SYS.COL$ col <span style="color: #993333; font-weight: bold;">SET</span> col.NAME = <span style="color: #ff0000;">'neuer_name'</span>
-<span style="color: #993333; font-weight: bold;">WHERE</span> col.NAME = <span style="color: #ff0000;">'alter_name'</span> <span style="color: #993333; font-weight: bold;">AND</span> col.OBJ<span style="color: #808080; font-style: italic;"># in (</span>
-    <span style="color: #993333; font-weight: bold;">SELECT</span> ob.OBJ<span style="color: #808080; font-style: italic;"># from SYS.OBJ$ ob, SYS.USER$ us</span>
-    <span style="color: #993333; font-weight: bold;">WHERE</span> ob.OWNER<span style="color: #808080; font-style: italic;"># = us.USER# and us.NAME = 'besitzername'</span>
-    <span style="color: #993333; font-weight: bold;">AND</span> ob.NAME = <span style="color: #ff0000;">'alter_name'</span>
-<span style="color: #66cc66;">&#41;</span>;</pre>
+<pre class="sql">UPDATE SYS.COL$ col SET col.NAME = 'neuer_name'
+WHERE col.NAME = 'alter_name' AND col.OBJ# in (
+    SELECT ob.OBJ# from SYS.OBJ$ ob, SYS.USER$ us
+    WHERE ob.OWNER# = us.USER# and us.NAME = 'besitzername'
+    AND ob.NAME = 'alter_name'
+&#41;;</pre>
 
 <p>Besitzername ist der Name des Besitzers der Tabelle.</p>
 

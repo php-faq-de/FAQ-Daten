@@ -29,23 +29,23 @@ sodass wir Fehlermeldungen mit den Informationen drucken können,
 die der Anwender benötigt.
 </p>
 
-<pre><span style="color: #000000; font-weight: bold;">class</span> Example_Sql <span style="color: #000000; font-weight: bold;">extends</span> DB_Sql <span style="color: #000000;">&#123;</span>
-  <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #0000ff;">$Host</span>     = <span style="color: #ff0000;">&quot;database.netuse.de&quot;</span>;
-  <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #0000ff;">$User</span>     = <span style="color: #ff0000;">&quot;kris&quot;</span>;
-  <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #0000ff;">$Password</span> = <span style="color: #ff0000;">&quot;xyzzy&quot;</span>;
-  <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #0000ff;">$Database</span> = <span style="color: #ff0000;">&quot;example_database&quot;</span>;
+<pre>class Example_Sql extends DB_Sql &#123;
+  var $Host     = &quot;database.netuse.de&quot;;
+  var $User     = &quot;kris&quot;;
+  var $Password = &quot;xyzzy&quot;;
+  var $Database = &quot;example_database&quot;;
 &nbsp;
-  <span style="color: #000000; font-weight: bold;">function</span> haltmsg<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$msg</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-<span style="color: #000000; font-weight: bold;">?&gt;</span>
-    Es ist ein Datenbankfehler aufgetreten. <a href="http://www.php3.de/die"><span style="color: #000066;">Die</span></a> Bearbeitung
+  function haltmsg&#40;$msg&#41; &#123;
+?&gt;
+    Es ist ein Datenbankfehler aufgetreten. Die Bearbeitung
     Ihrer Eingaben wurde abgebrochen. Bitte informieren Sie
-    &lt;a href=<span style="color: #ff0000;">&quot;mailto:webmaster@example.kunde.de&quot;</span>&gt;den Webmaster&lt;/a&gt;
+    &lt;a href=&quot;mailto:webmaster@example.kunde.de&quot;&gt;den Webmaster&lt;/a&gt;
     von diesem Problem.&lt;p&gt;
 &nbsp;
-<span style="color: #000000; font-weight: bold;">&lt;?php</span>
-    <a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Die Fehlermeldung der Datenbank war: %s<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>, <span style="color: #0000ff;">$msg</span><span style="color: #000000;">&#41;</span>;
-  <span style="color: #000000;">&#125;</span>
-<span style="color: #000000;">&#125;</span></pre>
+&lt;?php
+    printf&#40;&quot;Die Fehlermeldung der Datenbank war: %s\n&quot;, $msg&#41;;
+  &#125;
+&#125;</pre>
 
 <p>
 Man kann die Klasse <tt>Example_SQL</tt> nicht verstehen,

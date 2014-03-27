@@ -5,17 +5,17 @@ drei Queries löschen jeweils alle Datensätze, die älter als 30
 Tage sind, mit steigender Effizienz.</p>
 
 <ol>
-<li><pre class="sql"><span style="color: #993333; font-weight: bold;">DELETE</span>
-       <span style="color: #993333; font-weight: bold;">FROM</span> kalender <span style="color: #993333; font-weight: bold;">AS</span> k
-      <span style="color: #993333; font-weight: bold;">WHERE</span> <span style="color: #66cc66;">&#40;</span>to_days<span style="color: #66cc66;">&#40;</span>current_date<span style="color: #66cc66;">&#41;</span> - to_days<span style="color: #66cc66;">&#40;</span>k.datum<span style="color: #66cc66;">&#41;</span><span style="color: #66cc66;">&#41;</span> &gt; <span style="color: #cc66cc;">30</span></pre></li>
+<li><pre class="sql">DELETE
+       FROM kalender AS k
+      WHERE &#40;to_days&#40;current_date&#41; - to_days&#40;k.datum&#41;&#41; &gt; 30</pre></li>
 
-<li><pre class="sql"><span style="color: #993333; font-weight: bold;">DELETE</span>
-       <span style="color: #993333; font-weight: bold;">FROM</span> kalender <span style="color: #993333; font-weight: bold;">AS</span> k
-      <span style="color: #993333; font-weight: bold;">WHERE</span> to_days<span style="color: #66cc66;">&#40;</span>k.datum<span style="color: #66cc66;">&#41;</span> &lt; to_days<span style="color: #66cc66;">&#40;</span>current_date<span style="color: #66cc66;">&#41;</span><span style="color: #cc66cc;">-30</span>;</pre></li>
+<li><pre class="sql">DELETE
+       FROM kalender AS k
+      WHERE to_days&#40;k.datum&#41; &lt; to_days&#40;current_date&#41;-30;</pre></li>
 
-<li><pre class="sql"><span style="color: #993333; font-weight: bold;">DELETE</span>
-       <span style="color: #993333; font-weight: bold;">FROM</span> kalender <span style="color: #993333; font-weight: bold;">AS</span> k
-      <span style="color: #993333; font-weight: bold;">WHERE</span> k.datum &lt; date_add<span style="color: #66cc66;">&#40;</span>current_date, interval <span style="color: #cc66cc;">-30</span> day<span style="color: #66cc66;">&#41;</span></pre></li>
+<li><pre class="sql">DELETE
+       FROM kalender AS k
+      WHERE k.datum &lt; date_add&#40;current_date, interval -30 day&#41;</pre></li>
 </ol>
 <p>Die erste Query ist vergleichsweise langsam, denn hier ist die
 linke Seite der Query ein Ausdruck, der für jede Zeile berechnet

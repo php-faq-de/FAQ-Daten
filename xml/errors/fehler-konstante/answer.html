@@ -8,18 +8,18 @@ der Schlüssel direkt in eckigen Klammern steht, statt korrekt in
 Anführungszeichen eingefasst zu werden:
 </p>
 
-<pre><span style="color: #0000ff;">$array</span><span style="color: #000000;">&#91;</span><a href="http://www.php3.de/key"><span style="color: #000066;">key</span></a><span style="color: #000000;">&#93;</span>     <span style="color: #808080; font-style: italic;">// Falsch, wenn key keine Konstante ist</span>
-<span style="color: #0000ff;">$array</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;key&quot;</span><span style="color: #000000;">&#93;</span>   <span style="color: #808080; font-style: italic;">// So war es gemeint</span>
-<span style="color: #0000ff;">$array</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'key'</span><span style="color: #000000;">&#93;</span>   <span style="color: #808080; font-style: italic;">// Besser, da nichts ausgewertet werden muss</span>
-<span style="color: #0000ff;">$array</span><span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">12</span><span style="color: #000000;">&#93;</span>      <span style="color: #808080; font-style: italic;">// Richtig, Zahlen als Key ohne Anführungszeichen</span>
+<pre>$array&#91;key&#93;     // Falsch, wenn key keine Konstante ist
+$array&#91;&quot;key&quot;&#93;   // So war es gemeint
+$array&#91;'key'&#93;   // Besser, da nichts ausgewertet werden muss
+$array&#91;12&#93;      // Richtig, Zahlen als Key ohne Anführungszeichen
 &nbsp;
-<span style="color: #0000ff;">$array</span><span style="color: #000000;">&#91;</span><span style="color: #0000ff;">$key</span><span style="color: #000000;">&#93;</span>    <span style="color: #808080; font-style: italic;">// Ok: Zugriff per Variable</span>
-<span style="color: #0000ff;">$array</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;$key&quot;</span><span style="color: #000000;">&#93;</span>  <span style="color: #808080; font-style: italic;">// Hier sind die Anführungszeichen unnötig</span>
-<span style="color: #0000ff;">$array</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'$key'</span><span style="color: #000000;">&#93;</span>  <span style="color: #808080; font-style: italic;">// Falsch, Variable wird nicht ausgewertet</span>
+$array&#91;$key&#93;    // Ok: Zugriff per Variable
+$array&#91;&quot;$key&quot;&#93;  // Hier sind die Anführungszeichen unnötig
+$array&#91;'$key'&#93;  // Falsch, Variable wird nicht ausgewertet
 &nbsp;
-<span style="color: #ff0000;">&quot;$array[key]&quot;</span>   <span style="color: #808080; font-style: italic;">// Korrekt (!), da innerhalb eines Strings</span>
-<span style="color: #ff0000;">&quot;$array[$key]&quot;</span>  <span style="color: #808080; font-style: italic;">// Korrekt</span>
-<span style="color: #ff0000;">&quot;$array['key']&quot;</span> <span style="color: #808080; font-style: italic;">// Parse error!</span></pre>
+&quot;$array[key]&quot;   // Korrekt (!), da innerhalb eines Strings
+&quot;$array[$key]&quot;  // Korrekt
+&quot;$array['key']&quot; // Parse error!</pre>
 
 <p>
 In neueren PHP-Versionen ist der Error reporting level defaultmäßig

@@ -4,36 +4,36 @@ Man kann diese Elemente mit einer <tt>for</tt>-Schleife aufzählen,
 falls die Indizes numerisch-zusammenhängend sind:
 </p>
 
-<pre><span style="color: #0000ff;">$avar</span> = <a href="http://www.php3.de/array"><span style="color: #000066;">array</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'rot'</span>, <span style="color: #ff0000;">'gelb'</span>, <span style="color: #ff0000;">'blau'</span>, <span style="color: #ff0000;">'schwarz'</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #0000ff;">$anz</span> = <a href="http://www.php3.de/count"><span style="color: #000066;">count</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$avar</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #b1b100;">for</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$i</span>=<span style="color: #cc66cc;">0</span>; <span style="color: #0000ff;">$i</span>&lt;<span style="color: #0000ff;">$anz</span>; <span style="color: #0000ff;">$i</span>++<span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-    <a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;i: %d avar[%d] = %s
-<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>, <span style="color: #0000ff;">$i</span>, <span style="color: #0000ff;">$i</span>, <span style="color: #0000ff;">$avar</span><span style="color: #000000;">&#91;</span><span style="color: #0000ff;">$i</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #000000;">&#125;</span></pre>
+<pre>$avar = array&#40;'rot', 'gelb', 'blau', 'schwarz'&#41;;
+$anz = count&#40;$avar&#41;;
+for &#40;$i=0; $i&lt;$anz; $i++&#41; &#123;
+    printf&#40;&quot;i: %d avar[%d] = %s
+\n&quot;, $i, $i, $avar&#91;$i&#93;&#41;;
+&#125;</pre>
 
 <p>
 Für assoziative Arrays ist dieses Konstrukt besser geeignet:
 </p>
 
-<pre><span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><a href="http://www.php3.de/isset"><span style="color: #000066;">isset</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$avar</span><span style="color: #000000;">&#41;</span> &amp;&amp; <a href="http://www.php3.de/is_array"><span style="color: #000066;">is_array</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$avar</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-    <span style="color: #b1b100;">foreach</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$avar</span> <span style="color: #b1b100;">as</span> <span style="color: #0000ff;">$k</span> =&gt; <span style="color: #0000ff;">$v</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-        <a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;k=%s v=%s
-<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>, <span style="color: #0000ff;">$k</span>, <span style="color: #0000ff;">$v</span><span style="color: #000000;">&#41;</span>;
-    <span style="color: #000000;">&#125;</span>
-<span style="color: #000000;">&#125;</span></pre>
+<pre>if &#40;isset&#40;$avar&#41; &amp;&amp; is_array&#40;$avar&#41;&#41; &#123;
+    foreach &#40;$avar as $k =&gt; $v&#41; &#123;
+        printf&#40;&quot;k=%s v=%s
+\n&quot;, $k, $v&#41;;
+    &#125;
+&#125;</pre>
 
 <p>
 In PHP3 hat man oft die folgende Syntax verwendet, die inzwischen
 veraltet (aber noch funktionsfähig) ist:
 </p>
 
-<pre><span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><a href="http://www.php3.de/isset"><span style="color: #000066;">isset</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$avar</span><span style="color: #000000;">&#41;</span> &amp;&amp; <a href="http://www.php3.de/is_array"><span style="color: #000066;">is_array</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$avar</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-    <a href="http://www.php3.de/reset"><span style="color: #000066;">reset</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$avar</span><span style="color: #000000;">&#41;</span>;
-    <span style="color: #b1b100;">while</span> <span style="color: #000000;">&#40;</span><a href="http://www.php3.de/list"><span style="color: #000066;">list</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$k</span>, <span style="color: #0000ff;">$v</span><span style="color: #000000;">&#41;</span> = <a href="http://www.php3.de/each"><span style="color: #000066;">each</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$avar</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-        <a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;k=%s v=%s
-<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>, <span style="color: #0000ff;">$k</span>, <span style="color: #0000ff;">$v</span><span style="color: #000000;">&#41;</span>;
-    <span style="color: #000000;">&#125;</span>
-<span style="color: #000000;">&#125;</span></pre>
+<pre>if &#40;isset&#40;$avar&#41; &amp;&amp; is_array&#40;$avar&#41;&#41; &#123;
+    reset&#40;$avar&#41;;
+    while &#40;list&#40;$k, $v&#41; = each&#40;$avar&#41;&#41; &#123;
+        printf&#40;&quot;k=%s v=%s
+\n&quot;, $k, $v&#41;;
+    &#125;
+&#125;</pre>
 
 <p>
 Es macht Gebrauch von den Funktionen <a href="http://www.php3.de/reset">reset()</a>
@@ -55,9 +55,9 @@ liefern. Diese Schleife wird nur die Werte <tt>-2</tt> und
 Feldende unterschieden werden kann:
 </p>
 
-<pre><span style="color: #0000ff;">$avar</span> = <a href="http://www.php3.de/array"><span style="color: #000066;">array</span></a><span style="color: #000000;">&#40;</span><span style="color: #cc66cc;">-2</span>, <span style="color: #cc66cc;">-1</span>, <span style="color: #cc66cc;">0</span>, <span style="color: #cc66cc;">1</span>, <span style="color: #cc66cc;">2</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #b1b100;">for</span> <span style="color: #000000;">&#40;</span><a href="http://www.php3.de/reset"><span style="color: #000066;">reset</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$avar</span><span style="color: #000000;">&#41;</span>; <span style="color: #0000ff;">$v</span> = <a href="http://www.php3.de/current"><span style="color: #000066;">current</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$avar</span><span style="color: #000000;">&#41;</span>; <a href="http://www.php3.de/next"><span style="color: #000066;">next</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$avar</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-    <a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;v = %d
-<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>, <span style="color: #0000ff;">$v</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #000000;">&#125;</span></pre>
+<pre>$avar = array&#40;-2, -1, 0, 1, 2&#41;;
+for &#40;reset&#40;$avar&#41;; $v = current&#40;$avar&#41;; next&#40;$avar&#41;&#41; &#123;
+    printf&#40;&quot;v = %d
+\n&quot;, $v&#41;;
+&#125;</pre>
 

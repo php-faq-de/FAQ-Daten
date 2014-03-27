@@ -2,12 +2,12 @@
 Um diese Datenfelder abzuspeichern, muss zuerst Speicher angefordert
 werden, dies geschieht mit <a href="http://www.php3.de/OCIBindByName">OCIBindByName()</a>.</p>
 
-<pre><span style="color: #0000ff;">$req</span>=<span style="color: #ff0000;">&quot;INSERT INTO wurstbrote (name) VALUES (:name)&quot;</span>;
-<span style="color: #0000ff;">$stmt</span>=OCIParse<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$conn</span>, <span style="color: #0000ff;">$req</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #808080; font-style: italic;">// nun binde ich den Inhalt von $wurstbrotname</span>
-<span style="color: #808080; font-style: italic;">// an den Oracle Platzhalter :name</span>
-OCIBindByName<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$stmt</span>,<span style="color: #ff0000;">&quot;:name&quot;</span>,<span style="color: #0000ff;">$wurstbrotname</span>,<span style="color: #cc66cc;">-1</span><span style="color: #000000;">&#41;</span>;
-OCIExecute<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$stmt</span><span style="color: #000000;">&#41;</span>;</pre>
+<pre>$req=&quot;INSERT INTO wurstbrote (name) VALUES (:name)&quot;;
+$stmt=OCIParse&#40;$conn, $req&#41;;
+// nun binde ich den Inhalt von $wurstbrotname
+// an den Oracle Platzhalter :name
+OCIBindByName&#40;$stmt,&quot;:name&quot;,$wurstbrotname,-1&#41;;
+OCIExecute&#40;$stmt&#41;;</pre>
 
 <p>
 Trotz dieser Umständlichkeit gestaltet sich das Lesen/Schreiben

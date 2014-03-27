@@ -16,11 +16,11 @@ wie tolerant sich die einzelnen Browser verhalten, kann das Formular
 trotzdem funktionieren, oder es funktioniert eben nicht.
 </p>
 
-<pre><span style="color: #808080; font-style: italic;">// PHP-Script (Verwendung von $_server statt $_SERVER):</span>
-&lt;form action=<span style="color: #ff0000;">&quot;&lt;?php echo $_server['PHP_SELF']; ?&gt;&quot;</span> method=<span style="color: #ff0000;">&quot;post&quot;</span>&gt;
+<pre>// PHP-Script (Verwendung von $_server statt $_SERVER):
+&lt;form action=&quot;&lt;?php echo $_server['PHP_SELF']; ?&gt;&quot; method=&quot;post&quot;&gt;
 &nbsp;
-<span style="color: #808080; font-style: italic;">// HTML-Ergebnis:</span>
-&lt;form action=<span style="color: #ff0000;">&quot;&quot;</span> method=<span style="color: #ff0000;">&quot;post&quot;</span>&gt;  <span style="color: #808080; font-style: italic;">// action ist leer!</span></pre>
+// HTML-Ergebnis:
+&lt;form action=&quot;&quot; method=&quot;post&quot;&gt;  // action ist leer!</pre>
 
 <p>
 Am besten schickt man die Ausgabe des fraglichen Scriptes erst mal

@@ -86,21 +86,21 @@ Zugriff auf den Benutzernamen in der Variablen
 Authentisierungsmethode in <tt>$_SERVER["AUTH_TYPE"]</tt>.
 </p>
 
-<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
-<a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;AUTH_TYPE = &quot;</span>, <span style="color: #0000ff;">$_SERVER</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'AUTH_TYPE'</span><span style="color: #000000;">&#93;</span>, <span style="color: #ff0000;">&quot;&lt;br /&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
-<a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;REMOTE_USER = &quot;</span>, <span style="color: #0000ff;">$_SERVER</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'REMOTE_USER'</span><span style="color: #000000;">&#93;</span>, <span style="color: #ff0000;">&quot;&lt;br /&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
-<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+<pre>&lt;?php
+echo &quot;AUTH_TYPE = &quot;, $_SERVER&#91;'AUTH_TYPE'&#93;, &quot;&lt;br /&gt;\n&quot;;
+echo &quot;REMOTE_USER = &quot;, $_SERVER&#91;'REMOTE_USER'&#93;, &quot;&lt;br /&gt;\n&quot;;
+?&gt;</pre>
 
 <p>
 Im Apache-Modul hat man in einem geschützten Bereich außerdem
 Zugriff auf die vollen Authentisierungsdaten.
 </p>
 
-<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
-<a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;AUTH_TYPE = &quot;</span>, <span style="color: #0000ff;">$_SERVER</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'AUTH_TYPE'</span><span style="color: #000000;">&#93;</span>, <span style="color: #ff0000;">&quot;&lt;br /&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
-<a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;REMOTE_USER = &quot;</span>, <span style="color: #0000ff;">$_SERVER</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'REMOTE_USER'</span><span style="color: #000000;">&#93;</span>, <span style="color: #ff0000;">&quot;&lt;br /&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
-<span style="color: #0000ff;">$a</span> = <a href="http://www.php3.de/getallheaders"><span style="color: #000066;">getallheaders</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #0000ff;">$au</span> = <a href="http://www.php3.de/split"><span style="color: #000066;">split</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot; &quot;</span>, <span style="color: #0000ff;">$a</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;Authorization&quot;</span><span style="color: #000000;">&#93;</span>, <span style="color: #cc66cc;">2</span><span style="color: #000000;">&#41;</span>;
-<a href="http://www.php3.de/list"><span style="color: #000066;">list</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$u</span>, <span style="color: #0000ff;">$p</span><span style="color: #000000;">&#41;</span> = <a href="http://www.php3.de/split"><span style="color: #000066;">split</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;:&quot;</span>, <a href="http://www.php3.de/base64_decode"><span style="color: #000066;">base64_decode</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$au</span><span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">1</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>;
-<a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;Decodiert zu User $u, Password $p&lt;br /&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
-<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+<pre>&lt;?php
+echo &quot;AUTH_TYPE = &quot;, $_SERVER&#91;'AUTH_TYPE'&#93;, &quot;&lt;br /&gt;\n&quot;;
+echo &quot;REMOTE_USER = &quot;, $_SERVER&#91;'REMOTE_USER'&#93;, &quot;&lt;br /&gt;\n&quot;;
+$a = getallheaders&#40;&#41;;
+$au = split&#40;&quot; &quot;, $a&#91;&quot;Authorization&quot;&#93;, 2&#41;;
+list&#40;$u, $p&#41; = split&#40;&quot;:&quot;, base64_decode&#40;$au&#91;1&#93;&#41;&#41;;
+echo &quot;Decodiert zu User $u, Password $p&lt;br /&gt;\n&quot;;
+?&gt;</pre>

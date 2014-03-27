@@ -22,28 +22,28 @@ Greediness verschlingt - mal ist er mit dem erstbesten <tt>r</tt>
 zufrieden, mal nimmt er alles bis zum letztmöglichen <tt>r</tt> mit:
 </p>
 
-<pre><span style="color: #0000ff;">$string</span>  = <span style="color: #ff0000;">'Dieser Satz wird fast gefressen'</span>;
+<pre>$string  = 'Dieser Satz wird fast gefressen';
 &nbsp;
-<span style="color: #808080; font-style: italic;">// Normalzustand:</span>
-<a href="http://www.php3.de/preg_match"><span style="color: #000066;">preg_match</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'/D.*r/'</span>, <span style="color: #0000ff;">$string</span>, <span style="color: #0000ff;">$matches</span><span style="color: #000000;">&#41;</span>;
--&gt; <span style="color: #006600;">Dieser</span> Satz wird fast gefr
+// Normalzustand:
+preg_match&#40;'/D.*r/', $string, $matches&#41;;
+-&gt; Dieser Satz wird fast gefr
 &nbsp;
-<span style="color: #808080; font-style: italic;">// Einen Quantifier ungreedy gemacht:</span>
-<a href="http://www.php3.de/preg_match"><span style="color: #000066;">preg_match</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'/D.*?r/'</span>, <span style="color: #0000ff;">$string</span>, <span style="color: #0000ff;">$matches</span><span style="color: #000000;">&#41;</span>;
--&gt; <span style="color: #006600;">Dieser</span>
+// Einen Quantifier ungreedy gemacht:
+preg_match&#40;'/D.*?r/', $string, $matches&#41;;
+-&gt; Dieser
 &nbsp;
-<span style="color: #808080; font-style: italic;">// Greediness aller Quantifier umgeschaltet:</span>
-<a href="http://www.php3.de/preg_match"><span style="color: #000066;">preg_match</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'/D.*r/U'</span>, <span style="color: #0000ff;">$string</span>, <span style="color: #0000ff;">$matches</span><span style="color: #000000;">&#41;</span>;
--&gt; <span style="color: #006600;">Dieser</span>
+// Greediness aller Quantifier umgeschaltet:
+preg_match&#40;'/D.*r/U', $string, $matches&#41;;
+-&gt; Dieser
 &nbsp;
-<span style="color: #808080; font-style: italic;">// Doppelt gemoppelt: Greediness umgeschaltet,</span>
-<span style="color: #808080; font-style: italic;">// einen Quantifier wieder zurückgeschaltet:</span>
-<a href="http://www.php3.de/preg_match"><span style="color: #000066;">preg_match</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'/D.*?r/U'</span>, <span style="color: #0000ff;">$string</span>, <span style="color: #0000ff;">$matches</span><span style="color: #000000;">&#41;</span>;
--&gt; <span style="color: #006600;">Dieser</span> Satz wird fast gefr
+// Doppelt gemoppelt: Greediness umgeschaltet,
+// einen Quantifier wieder zurückgeschaltet:
+preg_match&#40;'/D.*?r/U', $string, $matches&#41;;
+-&gt; Dieser Satz wird fast gefr
 &nbsp;
-<span style="color: #808080; font-style: italic;">// Bei dieser Schreibweise spielt die Greediness keine Rolle:</span>
-<a href="http://www.php3.de/preg_match"><span style="color: #000066;">preg_match</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'/D[^r]*r/'</span>, <span style="color: #0000ff;">$string</span>, <span style="color: #0000ff;">$matches</span><span style="color: #000000;">&#41;</span>;
--&gt; <span style="color: #006600;">Dieser</span></pre>
+// Bei dieser Schreibweise spielt die Greediness keine Rolle:
+preg_match&#40;'/D[^r]*r/', $string, $matches&#41;;
+-&gt; Dieser</pre>
 
 <p>
 Die ereg()-Funktionen kennen übrigens keine umschaltbare Gierigkeit

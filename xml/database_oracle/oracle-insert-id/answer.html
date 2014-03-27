@@ -4,18 +4,18 @@ durch Verwendung von <tt>currval</tt> (abgeleitet von Current Value)
 ermittelt werden. Mit dem folgenden Codestück ist es möglich, den
 zuletzt eingefügten Wert abzufragen:</p>
 
-<pre><span style="color: #808080; font-style: italic;">// INSERT in die Tabelle</span>
+<pre>// INSERT in die Tabelle
 &nbsp;
-<span style="color: #0000ff;">$stmt</span> = OCIParse<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$conn</span>, <span style="color: #ff0000;">&quot;INSERT INTO xy (BLA_XY) VALUES 'BLA'&quot;</span><span style="color: #000000;">&#41;</span>;
-OCIExecute<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$stmt</span>, OCI_DEFAULT<span style="color: #000000;">&#41;</span>;
+$stmt = OCIParse&#40;$conn, &quot;INSERT INTO xy (BLA_XY) VALUES 'BLA'&quot;&#41;;
+OCIExecute&#40;$stmt, OCI_DEFAULT&#41;;
 &nbsp;
-<span style="color: #808080; font-style: italic;">//Abfrage der Sequence</span>
-<span style="color: #0000ff;">$stmt</span> = OCIParse<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$conn</span>,<span style="color: #ff0000;">&quot;SELECT zaehler_der_tabelle_xy.currval
-                 AS CV FROM DUAL&quot;</span><span style="color: #000000;">&#41;</span>;
-OCIExecute<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$stmt</span>, OCI_DEFAULT<span style="color: #000000;">&#41;</span>;
-OCIFetch<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$stmt</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #0000ff;">$last_id</span>=OCIResult<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$stmt</span>, <span style="color: #ff0000;">&quot;CV&quot;</span><span style="color: #000000;">&#41;</span>;
-OCICommit<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$conn</span><span style="color: #000000;">&#41;</span>;</pre>
+//Abfrage der Sequence
+$stmt = OCIParse&#40;$conn,&quot;SELECT zaehler_der_tabelle_xy.currval
+                 AS CV FROM DUAL&quot;&#41;;
+OCIExecute&#40;$stmt, OCI_DEFAULT&#41;;
+OCIFetch&#40;$stmt&#41;;
+$last_id=OCIResult&#40;$stmt, &quot;CV&quot;&#41;;
+OCICommit&#40;$conn&#41;;</pre>
 
 <p>
 <em>Achtung:</em> Das selektieren des currval funktioniert nur innerhalb

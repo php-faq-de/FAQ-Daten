@@ -10,16 +10,16 @@ auf das gewünschte Script erzeugt und die Parameter mit der
 Funktion <a href="http://www.php3.de/urlencode">urlencode()</a> codiert anhängt.
 </p>
 
-<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+<pre>&lt;?php
 &nbsp;
- <span style="color: #0000ff;">$para1</span> = <span style="color: #ff0000;">&quot;dies ist ein string&quot;</span>;
- <span style="color: #0000ff;">$para2</span> = <span style="color: #cc66cc;">42</span>;
+ $para1 = &quot;dies ist ein string&quot;;
+ $para2 = 42;
 &nbsp;
- <span style="color: #0000ff;">$pstring</span> = <a href="http://www.php3.de/sprintf"><span style="color: #000066;">sprintf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;para1=%s&amp;amp;para2=%s&quot;</span>,
-		<a href="http://www.php3.de/urlencode"><span style="color: #000066;">urlencode</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$para1</span><span style="color: #000000;">&#41;</span>,
-		<a href="http://www.php3.de/urlencode"><span style="color: #000066;">urlencode</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$para2</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #000000; font-weight: bold;">?&gt;</span>
-&lt;a href=<span style="color: #ff0000;">&quot;meinscript.php?&lt;?php print $pstring ?&gt;&quot;</span>&gt;go&lt;/a&gt;</pre>
+ $pstring = sprintf&#40;&quot;para1=%s&amp;amp;para2=%s&quot;,
+		urlencode&#40;$para1&#41;,
+		urlencode&#40;$para2&#41;&#41;;
+?&gt;
+&lt;a href=&quot;meinscript.php?&lt;?php print $pstring ?&gt;&quot;&gt;go&lt;/a&gt;</pre>
 
 <p>
 Das empfangende Script wird diese Parameter ganz normal

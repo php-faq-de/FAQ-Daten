@@ -19,20 +19,20 @@ von Hochkommata eine besondere Bedeutung haben, sind <tt>\\</tt>
 geschütztes Hochkomma). Beispiele:
 </p>
 
-<pre><a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">'Micro$oft'</span>;  <span style="color: #808080; font-style: italic;">// ergibt: Micro$oft</span>
-<a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;Micro$oft&quot;</span>;  <span style="color: #808080; font-style: italic;">// ergibt: Micro + Inhalt der Variable $oft</span>
-<a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;Micro<span style="color: #000099; font-weight: bold;">\$</span>oft&quot;</span>; <span style="color: #808080; font-style: italic;">// ergibt: Micro$oft</span>
+<pre>echo 'Micro$oft';  // ergibt: Micro$oft
+echo &quot;Micro$oft&quot;;  // ergibt: Micro + Inhalt der Variable $oft
+echo &quot;Micro\$oft&quot;; // ergibt: Micro$oft
 &nbsp;
-<a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">'c:<span style="color: #000099; font-weight: bold;">\t</span>emp'</span>;    <span style="color: #808080; font-style: italic;">// ergibt: c:\temp</span>
-<a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;c:<span style="color: #000099; font-weight: bold;">\t</span>emp&quot;</span>;    <span style="color: #808080; font-style: italic;">// ergibt: c: + Tabulator + emp</span>
-<a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;c:<span style="color: #000099; font-weight: bold;">\\</span>temp&quot;</span>;   <span style="color: #808080; font-style: italic;">// ergibt: c:\temp</span>
-<a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">'c:<span style="color: #000099; font-weight: bold;">\\</span>temp'</span>;   <span style="color: #808080; font-style: italic;">// ergibt: c:\temp</span>
+echo 'c:\temp';    // ergibt: c:\temp
+echo &quot;c:\temp&quot;;    // ergibt: c: + Tabulator + emp
+echo &quot;c:\\temp&quot;;   // ergibt: c:\temp
+echo 'c:\\temp';   // ergibt: c:\temp
 &nbsp;
-<a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">'Kein Hochkomma: <span style="color: #000099; font-weight: bold;">\x</span>27'</span>;  <span style="color: #808080; font-style: italic;">// ergibt: Kein Hochkomma: \x27</span>
-<a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;Ein Hochkomma:  <span style="color: #000099; font-weight: bold;">\x</span>27&quot;</span>;  <span style="color: #808080; font-style: italic;">// ergibt: Ein Hochkomma: '</span>
-<a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">'Ein Hochkomma: <span style="color: #000099; font-weight: bold;">\'</span>'</span>;     <span style="color: #808080; font-style: italic;">// ergibt: Ein Hochkomma: '</span>
+echo 'Kein Hochkomma: \x27';  // ergibt: Kein Hochkomma: \x27
+echo &quot;Ein Hochkomma:  \x27&quot;;  // ergibt: Ein Hochkomma: '
+echo 'Ein Hochkomma: \'';     // ergibt: Ein Hochkomma: '
 &nbsp;
-<a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;&lt;input name='foo' value='$bar'&gt;&quot;</span>;  <span style="color: #808080; font-style: italic;">// gültiges HTML</span></pre>
+echo &quot;&lt;input name='foo' value='$bar'&gt;&quot;;  // gültiges HTML</pre>
 
 <p>
 Die Benutzung von Hochkomma statt Anführungszeichen wie im letzten

@@ -10,37 +10,37 @@ ausgegeben und die Funktion ruft sich mit dem Unterverzeichnis
 als Parameter selbst wieder auf.
 </p>
 
-<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+<pre>&lt;?php
 &nbsp;
-<span style="color: #000000; font-weight: bold;">function</span> show_dir<span style="color: #000000;">&#40;</span> <span style="color: #0000ff;">$dir</span>, <span style="color: #0000ff;">$pos</span>=<span style="color: #cc66cc;">2</span> <span style="color: #000000;">&#41;</span>
-<span style="color: #000000;">&#123;</span>
-    <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span> <span style="color: #0000ff;">$pos</span> == <span style="color: #cc66cc;">2</span> <span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-        <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;&lt;hr /&gt;&lt;pre&gt;&quot;</span>;
-    <span style="color: #000000;">&#125;</span>
+function show_dir&#40; $dir, $pos=2 &#41;
+&#123;
+    if &#40; $pos == 2 &#41; &#123;
+        echo &quot;&lt;hr /&gt;&lt;pre&gt;&quot;;
+    &#125;
 &nbsp;
-    <span style="color: #0000ff;">$handle</span> = @<a href="http://www.php3.de/opendir"><span style="color: #000066;">opendir</span></a><span style="color: #000000;">&#40;</span> <span style="color: #0000ff;">$dir</span> <span style="color: #000000;">&#41;</span>;
-    <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span> <a href="http://www.php3.de/is_resource"><span style="color: #000066;">is_resource</span></a><span style="color: #000000;">&#40;</span> <span style="color: #0000ff;">$handle</span> <span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-        <span style="color: #b1b100;">while</span> <span style="color: #000000;">&#40;</span> <span style="color: #000000;">&#40;</span> <span style="color: #0000ff;">$file</span> = <a href="http://www.php3.de/readdir"><span style="color: #000066;">readdir</span></a><span style="color: #000000;">&#40;</span> <span style="color: #0000ff;">$handle</span> <span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#41;</span> !== <span style="color: #000000; font-weight: bold;">false</span> <span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-            <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span> <a href="http://www.php3.de/preg_match"><span style="color: #000066;">preg_match</span></a><span style="color: #000000;">&#40;</span> <span style="color: #ff0000;">'~^<span style="color: #000099; font-weight: bold;">\.</span>{1,2}$~'</span>, <span style="color: #0000ff;">$file</span> <span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-                <span style="color: #b1b100;">continue</span>;
-            <span style="color: #000000;">&#125;</span>
+    $handle = @opendir&#40; $dir &#41;;
+    if &#40; is_resource&#40; $handle &#41; &#41; &#123;
+        while &#40; &#40; $file = readdir&#40; $handle &#41; &#41; !== false &#41; &#123;
+            if &#40; preg_match&#40; '~^\.{1,2}$~', $file &#41; &#41; &#123;
+                continue;
+            &#125;
 &nbsp;
-            <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span> <a href="http://www.php3.de/is_dir"><span style="color: #000066;">is_dir</span></a><span style="color: #000000;">&#40;</span> <span style="color: #0000ff;">$dir</span>.<span style="color: #0000ff;">$file</span> <span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-                <a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span> <span style="color: #ff0000;">&quot;% &quot;</span>.<span style="color: #0000ff;">$pos</span>.<span style="color: #ff0000;">&quot;s &lt;b&gt;%s&lt;/b&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>, <span style="color: #ff0000;">'|-'</span>, <span style="color: #0000ff;">$file</span> <span style="color: #000000;">&#41;</span>;
-                show_dir<span style="color: #000000;">&#40;</span> <span style="color: #0000ff;">$dir</span>.<span style="color: #0000ff;">$file</span>.<span style="color: #ff0000;">'/'</span>, <span style="color: #0000ff;">$pos</span> + <span style="color: #cc66cc;">3</span> <span style="color: #000000;">&#41;</span>;
-            <span style="color: #000000;">&#125;</span> <span style="color: #b1b100;">else</span> <span style="color: #000000;">&#123;</span>
-                <a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span> <span style="color: #ff0000;">&quot;% &quot;</span>.<span style="color: #0000ff;">$pos</span>.<span style="color: #ff0000;">&quot;s %s<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>, <span style="color: #ff0000;">'|-'</span>, <span style="color: #0000ff;">$file</span> <span style="color: #000000;">&#41;</span>;
-            <span style="color: #000000;">&#125;</span>
-        <span style="color: #000000;">&#125;</span>
-        <a href="http://www.php3.de/closedir"><span style="color: #000066;">closedir</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$handle</span><span style="color: #000000;">&#41;</span>;
-    <span style="color: #000000;">&#125;</span>
+            if &#40; is_dir&#40; $dir.$file &#41; &#41; &#123;
+                printf&#40; &quot;% &quot;.$pos.&quot;s &lt;b&gt;%s&lt;/b&gt;\n&quot;, '|-', $file &#41;;
+                show_dir&#40; $dir.$file.'/', $pos + 3 &#41;;
+            &#125; else &#123;
+                printf&#40; &quot;% &quot;.$pos.&quot;s %s\n&quot;, '|-', $file &#41;;
+            &#125;
+        &#125;
+        closedir&#40;$handle&#41;;
+    &#125;
 &nbsp;
-    <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span> <span style="color: #0000ff;">$pos</span> == <span style="color: #cc66cc;">2</span> <span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-        <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;&lt;/pre&gt;&lt;hr /&gt;&quot;</span>;
-    <span style="color: #000000;">&#125;</span>
-<span style="color: #000000;">&#125;</span>
+    if &#40; $pos == 2 &#41; &#123;
+        echo &quot;&lt;/pre&gt;&lt;hr /&gt;&quot;;
+    &#125;
+&#125;
 &nbsp;
-show_dir<span style="color: #000000;">&#40;</span> <span style="color: #ff0000;">'special/'</span> <span style="color: #000000;">&#41;</span>;
+show_dir&#40; 'special/' &#41;;
 &nbsp;
-<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+?&gt;</pre>
 

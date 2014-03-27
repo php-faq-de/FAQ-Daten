@@ -29,34 +29,34 @@ Locking dafür Sorge tragen, dass sich diese Benutzer nicht in die
 Quere kommen.
 </p>
 
-<pre><span style="color: #808080; font-style: italic;">// Shared lock auf die Quelldatei</span>
-<span style="color: #0000ff;">$old</span> = <a href="http://www.php3.de/fopen"><span style="color: #000066;">fopen</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$oldfile</span>, <span style="color: #ff0000;">&quot;r&quot;</span><span style="color: #000000;">&#41;</span>;
-<a href="http://www.php3.de/flock"><span style="color: #000066;">flock</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$old</span>, <span style="color: #cc66cc;">1</span><span style="color: #000000;">&#41;</span> or <a href="http://www.php3.de/die"><span style="color: #000066;">die</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Kann die Quelldatei $oldfile nicht locken.&quot;</span><span style="color: #000000;">&#41;</span>;
+<pre>// Shared lock auf die Quelldatei
+$old = fopen&#40;$oldfile, &quot;r&quot;&#41;;
+flock&#40;$old, 1&#41; or die&#40;&quot;Kann die Quelldatei $oldfile nicht locken.&quot;&#41;;
 &nbsp;
-<span style="color: #808080; font-style: italic;">// Exclusive lock auf die Zieldatei</span>
-<span style="color: #0000ff;">$new</span> = <a href="http://www.php3.de/fopen"><span style="color: #000066;">fopen</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$oldfile</span>.<span style="color: #ff0000;">&quot;.new&quot;</span>, <span style="color: #ff0000;">&quot;w&quot;</span><span style="color: #000000;">&#41;</span>;
-<a href="http://www.php3.de/flock"><span style="color: #000066;">flock</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$new</span>, <span style="color: #cc66cc;">2</span><span style="color: #000000;">&#41;</span> or <a href="http://www.php3.de/die"><span style="color: #000066;">die</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Kann die Zieldatei $newfile nicht locken.&quot;</span><span style="color: #000000;">&#41;</span>;
+// Exclusive lock auf die Zieldatei
+$new = fopen&#40;$oldfile.&quot;.new&quot;, &quot;w&quot;&#41;;
+flock&#40;$new, 2&#41; or die&#40;&quot;Kann die Zieldatei $newfile nicht locken.&quot;&#41;;
 &nbsp;
-<span style="color: #0000ff;">$lineno</span> = <span style="color: #cc66cc;">0</span>;
+$lineno = 0;
 &nbsp;
-<span style="color: #b1b100;">while</span><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$line</span> = <a href="http://www.php3.de/fgets"><span style="color: #000066;">fgets</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$old</span>, <span style="color: #cc66cc;">1024</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-  <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$lineno</span>++ == <span style="color: #0000ff;">$zielzeile</span><span style="color: #000000;">&#41;</span>
-    <span style="color: #b1b100;">continue</span>;  <span style="color: #808080; font-style: italic;">// Zeile auslassen</span>
+while&#40;$line = fgets&#40;$old, 1024&#41;&#41; &#123;
+  if &#40;$lineno++ == $zielzeile&#41;
+    continue;  // Zeile auslassen
 &nbsp;
-  <a href="http://www.php3.de/fputs"><span style="color: #000066;">fputs</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$new</span>, <span style="color: #0000ff;">$line</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #000000;">&#125;</span>
+  fputs&#40;$new, $line&#41;;
+&#125;
 &nbsp;
-<a href="http://www.php3.de/fclose"><span style="color: #000066;">fclose</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$old</span><span style="color: #000000;">&#41;</span>; <span style="color: #808080; font-style: italic;">// Gibt das Lock automatisch auf</span>
+fclose&#40;$old&#41;; // Gibt das Lock automatisch auf
 &nbsp;
-<span style="color: #808080; font-style: italic;">// Alte Datei wegwerfen.</span>
-<a href="http://www.php3.de/unlink"><span style="color: #000066;">unlink</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$oldfile</span><span style="color: #000000;">&#41;</span>;
+// Alte Datei wegwerfen.
+unlink&#40;$oldfile&#41;;
 &nbsp;
-<span style="color: #808080; font-style: italic;">// Neue Datei umbenennen.</span>
-<span style="color: #808080; font-style: italic;">// (In Windows müssen das rename() und das fclose($new)</span>
-<span style="color: #808080; font-style: italic;">//  vertauscht werden, da es nicht möglich ist, in Windows</span>
-<span style="color: #808080; font-style: italic;">//  eine offene Datei umzubenennen.</span>
-<a href="http://www.php3.de/rename"><span style="color: #000066;">rename</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$oldfile</span>.<span style="color: #ff0000;">&quot;.new&quot;</span>, <span style="color: #0000ff;">$oldfile</span><span style="color: #000000;">&#41;</span>;
+// Neue Datei umbenennen.
+// (In Windows müssen das rename() und das fclose($new)
+//  vertauscht werden, da es nicht möglich ist, in Windows
+//  eine offene Datei umzubenennen.
+rename&#40;$oldfile.&quot;.new&quot;, $oldfile&#41;;
 &nbsp;
-<span style="color: #808080; font-style: italic;">// Neue Datei schließen und dabei Lock aufgeben.</span>
-<a href="http://www.php3.de/fclose"><span style="color: #000066;">fclose</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$new</span><span style="color: #000000;">&#41;</span>;</pre>
+// Neue Datei schließen und dabei Lock aufgeben.
+fclose&#40;$new&#41;;</pre>
 

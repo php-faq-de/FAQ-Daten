@@ -6,33 +6,33 @@ Returntyp und die Parametertypen einer Funktion. In einer Sprache mit
 Polymorphie würde Code wie der folgende funktionieren:
 </p>
 
-<pre><span style="color: #808080; font-style: italic;"># Funktion f mit Integer-Resultat und Integer-Parametern</span>
-<span style="color: #000000; font-weight: bold;">function</span> int f<span style="color: #000000;">&#40;</span>int <span style="color: #0000ff;">$a</span>, int <span style="color: #0000ff;">$b</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-  <span style="color: #b1b100;">return</span> <span style="color: #0000ff;">$a</span>*<span style="color: #0000ff;">$b</span>;
-<span style="color: #000000;">&#125;</span>
+<pre># Funktion f mit Integer-Resultat und Integer-Parametern
+function int f&#40;int $a, int $b&#41; &#123;
+  return $a*$b;
+&#125;
 &nbsp;
-<span style="color: #808080; font-style: italic;"># Funktion f mit Array-Resultat und Array-Parametern</span>
-<span style="color: #000000; font-weight: bold;">function</span> <a href="http://www.php3.de/array"><span style="color: #000066;">array</span></a> f<span style="color: #000000;">&#40;</span><a href="http://www.php3.de/array"><span style="color: #000066;">array</span></a> <span style="color: #0000ff;">$a</span>, <a href="http://www.php3.de/array"><span style="color: #000066;">array</span></a> <span style="color: #0000ff;">$b</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-  <span style="color: #0000ff;">$r</span> = <a href="http://www.php3.de/array"><span style="color: #000066;">array</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
-  <span style="color: #0000ff;">$l</span> = <a href="http://www.php3.de/count"><span style="color: #000066;">count</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$a</span><span style="color: #000000;">&#41;</span>;
-  <span style="color: #b1b100;">for</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$i</span>=<span style="color: #cc66cc;">0</span>; <span style="color: #0000ff;">$i</span>&lt;<span style="color: #0000ff;">$l</span>; <span style="color: #0000ff;">$i</span>++<span style="color: #000000;">&#41;</span>
-    <span style="color: #0000ff;">$r</span><span style="color: #000000;">&#91;</span><span style="color: #000000;">&#93;</span> = <span style="color: #0000ff;">$a</span><span style="color: #000000;">&#91;</span><span style="color: #0000ff;">$i</span><span style="color: #000000;">&#93;</span> * <span style="color: #0000ff;">$b</span><span style="color: #000000;">&#91;</span><span style="color: #0000ff;">$i</span><span style="color: #000000;">&#93;</span>;
-  <span style="color: #b1b100;">return</span> <span style="color: #0000ff;">$r</span>;
-<span style="color: #000000;">&#125;</span>
+# Funktion f mit Array-Resultat und Array-Parametern
+function array f&#40;array $a, array $b&#41; &#123;
+  $r = array&#40;&#41;;
+  $l = count&#40;$a&#41;;
+  for &#40;$i=0; $i&lt;$l; $i++&#41;
+    $r&#91;&#93; = $a&#91;$i&#93; * $b&#91;$i&#93;;
+  return $r;
+&#125;
 &nbsp;
-<span style="color: #808080; font-style: italic;"># Definition von Integer-Parametern</span>
-<span style="color: #0000ff;">$xi</span> = <span style="color: #cc66cc;">3</span>;
-<span style="color: #0000ff;">$yi</span> = <span style="color: #cc66cc;">4</span>;
+# Definition von Integer-Parametern
+$xi = 3;
+$yi = 4;
 &nbsp;
-<span style="color: #808080; font-style: italic;"># Aufruf der Integer-Funktion f.</span>
-<span style="color: #0000ff;">$zi</span> = f<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$xi</span>, <span style="color: #0000ff;">$yi</span><span style="color: #000000;">&#41;</span>;
+# Aufruf der Integer-Funktion f.
+$zi = f&#40;$xi, $yi&#41;;
 &nbsp;
-<span style="color: #808080; font-style: italic;"># Definition von Array-Parametern</span>
-<span style="color: #0000ff;">$xa</span> = <a href="http://www.php3.de/array"><span style="color: #000066;">array</span></a><span style="color: #000000;">&#40;</span><span style="color: #cc66cc;">2</span>, <span style="color: #cc66cc;">3</span>, <span style="color: #cc66cc;">4</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #0000ff;">$ya</span> = <a href="http://www.php3.de/array"><span style="color: #000066;">array</span></a><span style="color: #000000;">&#40;</span><span style="color: #cc66cc;">4</span>, <span style="color: #cc66cc;">3</span>, <span style="color: #cc66cc;">2</span><span style="color: #000000;">&#41;</span>;
+# Definition von Array-Parametern
+$xa = array&#40;2, 3, 4&#41;;
+$ya = array&#40;4, 3, 2&#41;;
 &nbsp;
-<span style="color: #808080; font-style: italic;"># Aufruf der Array-Funktion f.</span>
-<span style="color: #0000ff;">$za</span> = f<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$xa</span>, <span style="color: #0000ff;">$ya</span><span style="color: #000000;">&#41;</span>;</pre>
+# Aufruf der Array-Funktion f.
+$za = f&#40;$xa, $ya&#41;;</pre>
 
 <p>
 Dieser Code definiert zwei verschiedene Funktionen, die intern
@@ -54,26 +54,26 @@ nicht deklariert werden müssen. Stattdessen muss man manuell mit
 den Typfunktionen wie folgt codieren:
 </p>
 
-<pre><span style="color: #000000; font-weight: bold;">function</span> f<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$a</span>, <span style="color: #0000ff;">$b</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-  <span style="color: #808080; font-style: italic;"># Wandle $a in ein Array um, wenn es das nicht ist.</span>
-  <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span>!<a href="http://www.php3.de/is_array"><span style="color: #000066;">is_array</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$a</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>
-    <span style="color: #0000ff;">$a</span> = <a href="http://www.php3.de/array"><span style="color: #000066;">array</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$a</span><span style="color: #000000;">&#41;</span>;
+<pre>function f&#40;$a, $b&#41; &#123;
+  # Wandle $a in ein Array um, wenn es das nicht ist.
+  if &#40;!is_array&#40;$a&#41;&#41;
+    $a = array&#40;$a&#41;;
 &nbsp;
-  <span style="color: #808080; font-style: italic;"># Ebenso $b.</span>
-  <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span>!<a href="http://www.php3.de/is_array"><span style="color: #000066;">is_array</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$b</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>
-    <span style="color: #0000ff;">$b</span> = <a href="http://www.php3.de/array"><span style="color: #000066;">array</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$b</span><span style="color: #000000;">&#41;</span>;
+  # Ebenso $b.
+  if &#40;!is_array&#40;$b&#41;&#41;
+    $b = array&#40;$b&#41;;
 &nbsp;
-  <span style="color: #808080; font-style: italic;"># Normaler Code.</span>
-  <span style="color: #0000ff;">$r</span> = <a href="http://www.php3.de/array"><span style="color: #000066;">array</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
-  <span style="color: #0000ff;">$l</span> = <a href="http://www.php3.de/count"><span style="color: #000066;">count</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$a</span><span style="color: #000000;">&#41;</span>;
-  <span style="color: #b1b100;">for</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$i</span>=<span style="color: #cc66cc;">0</span>; <span style="color: #0000ff;">$i</span>&lt;<span style="color: #0000ff;">$l</span>; <span style="color: #0000ff;">$i</span>++<span style="color: #000000;">&#41;</span>
-    <span style="color: #0000ff;">$r</span><span style="color: #000000;">&#91;</span><span style="color: #000000;">&#93;</span> = <span style="color: #0000ff;">$a</span><span style="color: #000000;">&#91;</span><span style="color: #0000ff;">$i</span><span style="color: #000000;">&#93;</span> * <span style="color: #0000ff;">$b</span><span style="color: #000000;">&#91;</span><span style="color: #0000ff;">$i</span><span style="color: #000000;">&#93;</span>;
+  # Normaler Code.
+  $r = array&#40;&#41;;
+  $l = count&#40;$a&#41;;
+  for &#40;$i=0; $i&lt;$l; $i++&#41;
+    $r&#91;&#93; = $a&#91;$i&#93; * $b&#91;$i&#93;;
 &nbsp;
-  <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><a href="http://www.php3.de/count"><span style="color: #000066;">count</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$r</span><span style="color: #000000;">&#41;</span> == <span style="color: #cc66cc;">1</span><span style="color: #000000;">&#41;</span>
-    <span style="color: #808080; font-style: italic;"># Skalar zurückgeben</span>
-    <span style="color: #b1b100;">return</span> <span style="color: #0000ff;">$r</span><span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #000000;">&#93;</span>;
-  <span style="color: #b1b100;">else</span>
-    <span style="color: #808080; font-style: italic;"># Array zurückgeben</span>
-    <span style="color: #b1b100;">return</span> <span style="color: #0000ff;">$r</span>;
-<span style="color: #000000;">&#125;</span></pre>
+  if &#40;count&#40;$r&#41; == 1&#41;
+    # Skalar zurückgeben
+    return $r&#91;0&#93;;
+  else
+    # Array zurückgeben
+    return $r;
+&#125;</pre>
 

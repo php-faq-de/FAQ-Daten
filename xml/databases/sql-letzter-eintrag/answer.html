@@ -16,17 +16,17 @@ Mit <tt>LIMIT</tt> wird das Ergebnis dann auf den ersten (oder die
 ersten n) Datensätze beschränkt:
 </p>
 
-<pre class="sql"><span style="color: #993333; font-weight: bold;">SELECT</span> xy <span style="color: #993333; font-weight: bold;">FROM</span> tabelle
-<span style="color: #993333; font-weight: bold;">ORDER</span> <span style="color: #993333; font-weight: bold;">BY</span> datum <span style="color: #993333; font-weight: bold;">DESC</span>
-<span style="color: #993333; font-weight: bold;">LIMIT</span> <span style="color: #cc66cc;">1</span></pre>
+<pre class="sql">SELECT xy FROM tabelle
+ORDER BY datum DESC
+LIMIT 1</pre>
 
 <p>
 Wenn das DBMS Subselects zulässt (für MySQL ist dies ab Version 4.x
 geplant), kann man alternativ auch folgendes schreiben:
 </p>
 
-<pre class="sql"><span style="color: #993333; font-weight: bold;">SELECT</span> xy <span style="color: #993333; font-weight: bold;">FROM</span> tabelle
-<span style="color: #993333; font-weight: bold;">WHERE</span> datum = <span style="color: #66cc66;">&#40;</span><span style="color: #993333; font-weight: bold;">SELECT</span> MAX<span style="color: #66cc66;">&#40;</span>datum<span style="color: #66cc66;">&#41;</span> <span style="color: #993333; font-weight: bold;">FROM</span> tabelle<span style="color: #66cc66;">&#41;</span></pre>
+<pre class="sql">SELECT xy FROM tabelle
+WHERE datum = &#40;SELECT MAX&#40;datum&#41; FROM tabelle&#41;</pre>
 
 <p>
 Damit diese Selects effektiv vonstatten gehen, muss auf die

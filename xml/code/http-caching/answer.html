@@ -28,47 +28,47 @@ Um das Caching einer Seite zu erlauben, kann man den folgenden
 Code verwenden:
 </p>
 
-<pre><span style="color: #0000ff;">$expire</span> = <span style="color: #cc66cc;">15</span>;  <span style="color: #808080; font-style: italic;">// Lebensdauer der Seite im Cache in Minuten</span>
+<pre>$expire = 15;  // Lebensdauer der Seite im Cache in Minuten
 &nbsp;
-<span style="color: #0000ff;">$exp_gmt</span> = <a href="http://www.php3.de/gmdate"><span style="color: #000066;">gmdate</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;D, d M Y H:i:s&quot;</span>, <a href="http://www.php3.de/time"><span style="color: #000066;">time</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> + <span style="color: #0000ff;">$expire</span> * <span style="color: #cc66cc;">60</span><span style="color: #000000;">&#41;</span> .<span style="color: #ff0000;">&quot; GMT&quot;</span>;
-<span style="color: #0000ff;">$mod_gmt</span> = <a href="http://www.php3.de/gmdate"><span style="color: #000066;">gmdate</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;D, d M Y H:i:s&quot;</span>, <a href="http://www.php3.de/getlastmod"><span style="color: #000066;">getlastmod</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span> .<span style="color: #ff0000;">&quot; GMT&quot;</span>;
+$exp_gmt = gmdate&#40;&quot;D, d M Y H:i:s&quot;, time&#40;&#41; + $expire * 60&#41; .&quot; GMT&quot;;
+$mod_gmt = gmdate&#40;&quot;D, d M Y H:i:s&quot;, getlastmod&#40;&#41;&#41; .&quot; GMT&quot;;
 &nbsp;
-<span style="color: #808080; font-style: italic;">// HTTP 1.0</span>
-<a href="http://www.php3.de/header"><span style="color: #000066;">header</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Expires: &quot;</span> . <span style="color: #0000ff;">$exp_gmt</span><span style="color: #000000;">&#41;</span>;
-<a href="http://www.php3.de/header"><span style="color: #000066;">header</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Last-Modified: &quot;</span> . <span style="color: #0000ff;">$mod_gmt</span><span style="color: #000000;">&#41;</span>;
+// HTTP 1.0
+header&#40;&quot;Expires: &quot; . $exp_gmt&#41;;
+header&#40;&quot;Last-Modified: &quot; . $mod_gmt&#41;;
 &nbsp;
-<span style="color: #808080; font-style: italic;">// HTTP 1.1</span>
-<a href="http://www.php3.de/header"><span style="color: #000066;">header</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Cache-Control: public, max-age=&quot;</span> . <span style="color: #0000ff;">$expire</span> * <span style="color: #cc66cc;">60</span><span style="color: #000000;">&#41;</span>;</pre>
+// HTTP 1.1
+header&#40;&quot;Cache-Control: public, max-age=&quot; . $expire * 60&#41;;</pre>
 
 <p>
 Um das Caching einer Seite auf private Caches zu begrenzen muss
 man Code wie diesen nehmen:
 </p>
 
-<pre><span style="color: #0000ff;">$expire</span> = <span style="color: #cc66cc;">15</span>;  <span style="color: #808080; font-style: italic;">// Lebensdauer der Seite im Cache in Minuten</span>
+<pre>$expire = 15;  // Lebensdauer der Seite im Cache in Minuten
 &nbsp;
-<span style="color: #0000ff;">$mod_gmt</span> = <a href="http://www.php3.de/gmdate"><span style="color: #000066;">gmdate</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;D, d M Y H:i:s&quot;</span>, <a href="http://www.php3.de/getlastmod"><span style="color: #000066;">getlastmod</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span> .<span style="color: #ff0000;">&quot; GMT&quot;</span>;
+$mod_gmt = gmdate&#40;&quot;D, d M Y H:i:s&quot;, getlastmod&#40;&#41;&#41; .&quot; GMT&quot;;
 &nbsp;
-<span style="color: #808080; font-style: italic;">// HTTP 1.0 kennt keine privaten Caches, also nix cachen</span>
-<a href="http://www.php3.de/header"><span style="color: #000066;">header</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Expires: Mon, 26 Jul 1997 05:00:00 GMT&quot;</span><span style="color: #000000;">&#41;</span>;
-<a href="http://www.php3.de/header"><span style="color: #000066;">header</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Last-Modified: &quot;</span> . <span style="color: #0000ff;">$mod_gmt</span><span style="color: #000000;">&#41;</span>;
+// HTTP 1.0 kennt keine privaten Caches, also nix cachen
+header&#40;&quot;Expires: Mon, 26 Jul 1997 05:00:00 GMT&quot;&#41;;
+header&#40;&quot;Last-Modified: &quot; . $mod_gmt&#41;;
 &nbsp;
-<span style="color: #808080; font-style: italic;">// HTTP 1.1</span>
-<a href="http://www.php3.de/header"><span style="color: #000066;">header</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Cache-Control: private, max-age=&quot;</span> . <span style="color: #0000ff;">$expire</span> * <span style="color: #cc66cc;">60</span><span style="color: #000000;">&#41;</span>;
+// HTTP 1.1
+header&#40;&quot;Cache-Control: private, max-age=&quot; . $expire * 60&#41;;
 &nbsp;
-<span style="color: #808080; font-style: italic;">// MSIE 5.x special</span>
-<a href="http://www.php3.de/header"><span style="color: #000066;">header</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Cache-Control: pre-check=&quot;</span> . <span style="color: #0000ff;">$expire</span> * <span style="color: #cc66cc;">60</span>, <span style="color: #000000; font-weight: bold;">FALSE</span><span style="color: #000000;">&#41;</span>;</pre>
+// MSIE 5.x special
+header&#40;&quot;Cache-Control: pre-check=&quot; . $expire * 60, FALSE&#41;;</pre>
 
 <p>
 Um das Caching einer Seite zu verhindern, ist der folgende Code
 passend:
 </p>
 
-<pre><a href="http://www.php3.de/header"><span style="color: #000066;">header</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Expires: Mon, 26 Jul 1997 05:00:00 GMT&quot;</span><span style="color: #000000;">&#41;</span>;
-<a href="http://www.php3.de/header"><span style="color: #000066;">header</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Last-Modified: &quot;</span> . <a href="http://www.php3.de/gmdate"><span style="color: #000066;">gmdate</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;D, d M Y H:i:s&quot;</span><span style="color: #000000;">&#41;</span> .<span style="color: #ff0000;">&quot; GMT&quot;</span><span style="color: #000000;">&#41;</span>;
-<a href="http://www.php3.de/header"><span style="color: #000066;">header</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Cache-Control: no-cache&quot;</span><span style="color: #000000;">&#41;</span>;
-<a href="http://www.php3.de/header"><span style="color: #000066;">header</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Pragma: no-cache&quot;</span><span style="color: #000000;">&#41;</span>;
-<a href="http://www.php3.de/header"><span style="color: #000066;">header</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Cache-Control: post-check=0, pre-check=0&quot;</span>, <span style="color: #000000; font-weight: bold;">FALSE</span><span style="color: #000000;">&#41;</span>;</pre>
+<pre>header&#40;&quot;Expires: Mon, 26 Jul 1997 05:00:00 GMT&quot;&#41;;
+header&#40;&quot;Last-Modified: &quot; . gmdate&#40;&quot;D, d M Y H:i:s&quot;&#41; .&quot; GMT&quot;&#41;;
+header&#40;&quot;Cache-Control: no-cache&quot;&#41;;
+header&#40;&quot;Pragma: no-cache&quot;&#41;;
+header&#40;&quot;Cache-Control: post-check=0, pre-check=0&quot;, FALSE&#41;;</pre>
 
 <p>
 Ein anderer Trick, mit dem man das Caching einer Seite gut

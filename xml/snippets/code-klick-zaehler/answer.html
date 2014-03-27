@@ -17,52 +17,52 @@ Das Feld <tt>url</tt> enthält die URL, die aufgerufen wird. Das Feld
 <tt>count</tt> enthält die Anzahl der Klicks auf <tt>url</tt>.
 </p>
 
-<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+<pre>&lt;?php
 &nbsp;
-<span style="color: #808080; font-style: italic;">// Zugangsdaten fuer die Datenbank</span>
-<span style="color: #808080; font-style: italic;">// Diese sollten der Sicherheit halber</span>
-<span style="color: #808080; font-style: italic;">// in ein Verzeichnis außerhalb des</span>
-<span style="color: #808080; font-style: italic;">// Document-Root ausgelagert werden.</span>
+// Zugangsdaten fuer die Datenbank
+// Diese sollten der Sicherheit halber
+// in ein Verzeichnis außerhalb des
+// Document-Root ausgelagert werden.
 &nbsp;
-<span style="color: #0000ff;">$host</span>     = <span style="color: #ff0000;">&quot;localhost&quot;</span>;
-<span style="color: #0000ff;">$user</span>     = <span style="color: #ff0000;">&quot;user&quot;</span>;
-<span style="color: #0000ff;">$pass</span>     = <span style="color: #ff0000;">&quot;demo_password&quot;</span>;
+$host     = &quot;localhost&quot;;
+$user     = &quot;user&quot;;
+$pass     = &quot;demo_password&quot;;
 &nbsp;
-<span style="color: #0000ff;">$database</span> = <span style="color: #ff0000;">&quot;demo_db&quot;</span>;
-<span style="color: #0000ff;">$table</span>    = <span style="color: #ff0000;">&quot;counter&quot;</span>;
+$database = &quot;demo_db&quot;;
+$table    = &quot;counter&quot;;
 &nbsp;
-<span style="color: #808080; font-style: italic;">// Die per GET übergebene URL einlesen</span>
-<span style="color: #808080; font-style: italic;">// In der Praxis wird hier geprüft, ob die URL überhaupt ok ist.</span>
-<span style="color: #0000ff;">$url</span> = <span style="color: #0000ff;">$_GET</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'url'</span><span style="color: #000000;">&#93;</span>;
+// Die per GET übergebene URL einlesen
+// In der Praxis wird hier geprüft, ob die URL überhaupt ok ist.
+$url = $_GET&#91;'url'&#93;;
 &nbsp;
-<span style="color: #808080; font-style: italic;">// Verbindung zum MySQL-Server aufbauen</span>
-<span style="color: #0000ff;">$db</span> = <a href="http://www.php3.de/mysql_connect"><span style="color: #000066;">mysql_connect</span></a><span style="color: #000000;">&#40;</span> <span style="color: #0000ff;">$host</span>, <span style="color: #0000ff;">$user</span>, <span style="color: #0000ff;">$pass</span> <span style="color: #000000;">&#41;</span>;
-<span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span> !<a href="http://www.php3.de/is_resource"><span style="color: #000066;">is_resource</span></a><span style="color: #000000;">&#40;</span> <span style="color: #0000ff;">$db</span> <span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-    <span style="color: #808080; font-style: italic;">// handleSqlError() steht symbolisch für die Fehlerbehandlung.</span>
-    handleSqlError<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #000000;">&#125;</span>
+// Verbindung zum MySQL-Server aufbauen
+$db = mysql_connect&#40; $host, $user, $pass &#41;;
+if &#40; !is_resource&#40; $db &#41; &#41; &#123;
+    // handleSqlError() steht symbolisch für die Fehlerbehandlung.
+    handleSqlError&#40;&#41;;
+&#125;
 &nbsp;
-<span style="color: #808080; font-style: italic;">// Datenbank auswählen</span>
-<span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span> !<a href="http://www.php3.de/mysql_select_db"><span style="color: #000066;">mysql_select_db</span></a><span style="color: #000000;">&#40;</span> <span style="color: #0000ff;">$database</span>, <span style="color: #0000ff;">$db</span> <span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-    handleSqlError<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #000000;">&#125;</span>
+// Datenbank auswählen
+if &#40; !mysql_select_db&#40; $database, $db &#41; &#41; &#123;
+    handleSqlError&#40;&#41;;
+&#125;
 &nbsp;
-<span style="color: #808080; font-style: italic;">// URL für den Transport zur Datenbank maskieren</span>
-<span style="color: #0000ff;">$safe_url</span> = <span style="color: #ff0000;">&quot;'&quot;</span> . <a href="http://www.php3.de/mysql_real_escape_string"><span style="color: #000066;">mysql_real_escape_string</span></a><span style="color: #000000;">&#40;</span> <span style="color: #0000ff;">$url</span> <span style="color: #000000;">&#41;</span> . <span style="color: #ff0000;">&quot;'&quot;</span>;
+// URL für den Transport zur Datenbank maskieren
+$safe_url = &quot;'&quot; . mysql_real_escape_string&#40; $url &#41; . &quot;'&quot;;
 &nbsp;
-<span style="color: #808080; font-style: italic;">// Eintrag fuer die übergebene URL um 1 erhöhen.</span>
-<span style="color: #0000ff;">$query</span> = <span style="color: #ff0000;">&quot;UPDATE $table SET count=count+1 WHERE url=$safe_url&quot;</span> 
-<span style="color: #0000ff;">$result</span> = <a href="http://www.php3.de/mysql_query"><span style="color: #000066;">mysql_query</span></a><span style="color: #000000;">&#40;</span> <span style="color: #0000ff;">$query</span>, <span style="color: #0000ff;">$db</span> <span style="color: #000000;">&#41;</span> || handleSqlError<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+// Eintrag fuer die übergebene URL um 1 erhöhen.
+$query = &quot;UPDATE $table SET count=count+1 WHERE url=$safe_url&quot; 
+$result = mysql_query&#40; $query, $db &#41; || handleSqlError&#40;&#41;;
 &nbsp;
-<span style="color: #808080; font-style: italic;">// Noch kein Eintrag für die URL vorhanden?</span>
-<span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span> <a href="http://www.php3.de/mysql_affected_rows"><span style="color: #000066;">mysql_affected_rows</span></a><span style="color: #000000;">&#40;</span> <span style="color: #0000ff;">$db</span> <span style="color: #000000;">&#41;</span> == <span style="color: #cc66cc;">0</span> <span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-    <span style="color: #0000ff;">$query</span> = <span style="color: #ff0000;">&quot;INSERT INTO $table (url, count) VALUES ($safe_url, 1)&quot;</span>;
-    <a href="http://www.php3.de/mysql_query"><span style="color: #000066;">mysql_query</span></a><span style="color: #000000;">&#40;</span> <span style="color: #0000ff;">$query</span>, <span style="color: #0000ff;">$db</span> <span style="color: #000000;">&#41;</span> || handleSqlError<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #000000;">&#125;</span>
+// Noch kein Eintrag für die URL vorhanden?
+if &#40; mysql_affected_rows&#40; $db &#41; == 0 &#41; &#123;
+    $query = &quot;INSERT INTO $table (url, count) VALUES ($safe_url, 1)&quot;;
+    mysql_query&#40; $query, $db &#41; || handleSqlError&#40;&#41;;
+&#125;
 &nbsp;
-<span style="color: #808080; font-style: italic;">// Auf übergebene URL weiterleiten</span>
-<a href="http://www.php3.de/header"><span style="color: #000066;">header</span></a><span style="color: #000000;">&#40;</span> <span style="color: #ff0000;">&quot;Location: &quot;</span> . <span style="color: #0000ff;">$url</span> <span style="color: #000000;">&#41;</span>;
-<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+// Auf übergebene URL weiterleiten
+header&#40; &quot;Location: &quot; . $url &#41;;
+?&gt;</pre>
 
 <p>Anwendungsbeispiel:</p>
 

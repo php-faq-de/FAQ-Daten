@@ -15,17 +15,17 @@
 </p>
 
 
-<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
-    <span style="color: #808080; font-style: italic;">// Datei: list.dir.php</span>
-    <span style="color: #808080; font-style: italic;">// Liste das &quot;session.save_path&quot; Directory</span>
-    <span style="color: #808080; font-style: italic;">// &quot;safe_mode&quot; muss &quot;Off&quot; sein</span>
-    <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><a href="http://www.php3.de/strtolower"><span style="color: #000066;">strtolower</span></a><span style="color: #000000;">&#40;</span><a href="http://www.php3.de/session_module_name"><span style="color: #000066;">session_module_name</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span> == <span style="color: #ff0000;">&quot;files&quot;</span><span style="color: #000000;">&#41;</span>
-        <span style="color: #000000;">&#123;</span>
-            <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;&lt;pre&gt;&quot;</span>;
-            <a href="http://www.php3.de/system"><span style="color: #000066;">system</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;ls -l &quot;</span> . <a href="http://www.php3.de/session_save_path"><span style="color: #000066;">session_save_path</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>;
-            <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;&lt;/pre&gt;&quot;</span>;
-        <span style="color: #000000;">&#125;</span>
-<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+<pre>&lt;?php
+    // Datei: list.dir.php
+    // Liste das &quot;session.save_path&quot; Directory
+    // &quot;safe_mode&quot; muss &quot;Off&quot; sein
+    if &#40;strtolower&#40;session_module_name&#40;&#41;&#41; == &quot;files&quot;&#41;
+        &#123;
+            echo &quot;&lt;pre&gt;&quot;;
+            system&#40;&quot;ls -l &quot; . session_save_path&#40;&#41;&#41;;
+            echo &quot;&lt;/pre&gt;&quot;;
+        &#125;
+?&gt;</pre>
 
 <p>
 	Dieses Script wird unter dem Namen <tt>list.dir.php</tt> gespeichert.
@@ -61,10 +61,10 @@
 	Nach dem Start beobachten wir die Veränderungen:
 </p>
 
-<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
-    <span style="color: #808080; font-style: italic;">// Datei: session.php</span>
-    @<a href="http://www.php3.de/session_start"><span style="color: #000066;">session_start</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+<pre>&lt;?php
+    // Datei: session.php
+    @session_start&#40;&#41;;
+?&gt;</pre>
 
 <h2>Ausgabe (mit <tt>list.dir.php</tt>):</h2>
 
@@ -86,13 +86,13 @@
 	zugegriffen, wodurch diese automatisch erstellt werden.
 </p>
 
-<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
-<span style="color: #808080; font-style: italic;">//  Datei: session.php</span>
-    @<a href="http://www.php3.de/session_start"><span style="color: #000066;">session_start</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+<pre>&lt;?php
+//  Datei: session.php
+    @session_start&#40;&#41;;
 &nbsp;
-    <span style="color: #0000ff;">$_SESSION</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'userName'</span><span style="color: #000000;">&#93;</span>        = <span style="color: #ff0000;">&quot;dtg&quot;</span>;
-    <span style="color: #0000ff;">$_SESSION</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'userPermissions'</span><span style="color: #000000;">&#93;</span> = <span style="color: #ff0000;">&quot;keine :=(&quot;</span>;
-<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+    $_SESSION&#91;'userName'&#93;        = &quot;dtg&quot;;
+    $_SESSION&#91;'userPermissions'&#93; = &quot;keine :=(&quot;;
+?&gt;</pre>
 
 <h2>Ausgabe (mit <tt>list.dir.php</tt>):</h2>
 
@@ -125,12 +125,12 @@
 	davon abhalten, die	betreffende Variable zu speichern:
 </p>
 
-<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
-    <span style="color: #808080; font-style: italic;">// Datei: session.php</span>
-    @<a href="http://www.php3.de/session_start"><span style="color: #000066;">session_start</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
-    <a href="http://www.php3.de/unset"><span style="color: #000066;">unset</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$_SESSION</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'userPermissions'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span>;
+<pre>&lt;?php
+    // Datei: session.php
+    @session_start&#40;&#41;;
+    unset&#40;$_SESSION&#91;'userPermissions'&#93;&#41;;
 &nbsp;
-<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+?&gt;</pre>
 
 <h2>Ausgabe (mit <tt>list.dir.php</tt>):</h2>
 
@@ -157,11 +157,11 @@
 	muss aber ein <a href="http://www.php3.de/session_start">session_start()</a> ausgeführt werden:
 </p>
 
-<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
-    <span style="color: #808080; font-style: italic;">// Datei: session.php</span>
-    @<a href="http://www.php3.de/session_start"><span style="color: #000066;">session_start</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
-    <a href="http://www.php3.de/session_destroy"><span style="color: #000066;">session_destroy</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+<pre>&lt;?php
+    // Datei: session.php
+    @session_start&#40;&#41;;
+    session_destroy&#40;&#41;;
+?&gt;</pre>
 
 <h2>Ausgabe (mit <tt>list.dir.php</tt>):</h2>
 

@@ -11,14 +11,14 @@ Das Script ist fehlerhaft, weil es nach dem <tt>fopen()</tt> nicht
 prüft, ob das <tt>fopen()</tt> erfolgreich war:
 </p>
 
-<pre><span style="color: #0000ff;">$fp</span> = <a href="http://www.php3.de/fopen"><span style="color: #000066;">fopen</span></a><span style="color: #000000;">&#40;</span>..., <span style="color: #ff0000;">&quot;r&quot;</span><span style="color: #000000;">&#41;</span>;
+<pre>$fp = fopen&#40;..., &quot;r&quot;&#41;;
 &nbsp;
-        <span style="color: #808080; font-style: italic;">/* Das fehlt zum korrekten Code:  */</span>
-        <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span>!<span style="color: #0000ff;">$fp</span><span style="color: #000000;">&#41;</span>
-                <a href="http://www.php3.de/die"><span style="color: #000066;">die</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Kann Datei ... nicht oeffnen.<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #000000;">&#41;</span>;
+        /* Das fehlt zum korrekten Code:  */
+        if &#40;!$fp&#41;
+                die&#40;&quot;Kann Datei ... nicht oeffnen.\n&quot;&#41;;
 &nbsp;
-        <span style="color: #808080; font-style: italic;">/* Diese Anweisung macht dann Ärger */</span>
-        <span style="color: #b1b100;">while</span><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$line</span> = <a href="http://www.php3.de/fgets"><span style="color: #000066;">fgets</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span>, <span style="color: #cc66cc;">1000</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+        /* Diese Anweisung macht dann Ärger */
+        while&#40;$line = fgets&#40;$fp, 1000&#41;&#41; &#123;
         ...
-        <span style="color: #000000;">&#125;</span></pre>
+        &#125;</pre>
 

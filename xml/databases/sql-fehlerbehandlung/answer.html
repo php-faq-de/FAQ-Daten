@@ -11,37 +11,37 @@ eigene Funktionen. Dies sind zum Beispiel <a href="http://www.php3.de/mysql_erro
 Hier ein Beispiel für MySQL
 </p>
 <!-- Beispiel stammt von Guido Haeger, Frage "mysql-fehlerbehandlung" -->
-<pre><span style="color: #000000; font-weight: bold;">function</span> mysql_errorhandler<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$problem</span>, <span style="color: #0000ff;">$query</span> = <span style="color: #ff0000;">&quot;&quot;</span><span style="color: #000000;">&#41;</span>
-<span style="color: #000000;">&#123;</span>
-  <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;&lt;font color='#FF0000'&gt;&lt;b&gt;Datenbankfehler:&lt;/b&gt;&lt;/font&gt;&lt;br /&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
-  <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;Problem: $problem &lt;br /&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
-  <span style="color: #b1b100;">if</span><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$query</span> != <span style="color: #ff0000;">&quot;&quot;</span><span style="color: #000000;">&#41;</span>
-  <span style="color: #000000;">&#123;</span>
-    <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;Query: $query &lt;br /&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
-  <span style="color: #000000;">&#125;</span>
-  <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;MySQL: &quot;</span> . <a href="http://www.php3.de/mysql_errno"><span style="color: #000066;">mysql_errno</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> . <span style="color: #ff0000;">&quot; - &quot;</span> . <a href="http://www.php3.de/mysql_error"><span style="color: #000066;">mysql_error</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> . <span style="color: #ff0000;">&quot;&lt;br /&gt;&lt;br /&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
-<span style="color: #000000;">&#125;</span>
+<pre>function mysql_errorhandler&#40;$problem, $query = &quot;&quot;&#41;
+&#123;
+  echo &quot;&lt;font color='#FF0000'&gt;&lt;b&gt;Datenbankfehler:&lt;/b&gt;&lt;/font&gt;&lt;br /&gt;\n&quot;;
+  echo &quot;Problem: $problem &lt;br /&gt;\n&quot;;
+  if&#40;$query != &quot;&quot;&#41;
+  &#123;
+    echo &quot;Query: $query &lt;br /&gt;\n&quot;;
+  &#125;
+  echo &quot;MySQL: &quot; . mysql_errno&#40;&#41; . &quot; - &quot; . mysql_error&#40;&#41; . &quot;&lt;br /&gt;&lt;br /&gt;\n&quot;;
+&#125;
 &nbsp;
-<span style="color: #808080; font-style: italic;">// Verbindung zum Datenbankserver herstellen</span>
-<span style="color: #b1b100;">if</span><span style="color: #000000;">&#40;</span>!<span style="color: #0000ff;">$db</span> = @<a href="http://www.php3.de/mysql_connect"><span style="color: #000066;">mysql_connect</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;host&quot;</span>, <span style="color: #ff0000;">&quot;user&quot;</span>, <span style="color: #ff0000;">&quot;password&quot;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>
-<span style="color: #000000;">&#123;</span>
-  mysql_errorhandler<span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Verbindungsaufbau gescheitert.&quot;</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #000000;">&#125;</span>
+// Verbindung zum Datenbankserver herstellen
+if&#40;!$db = @mysql_connect&#40;&quot;host&quot;, &quot;user&quot;, &quot;password&quot;&#41;&#41;
+&#123;
+  mysql_errorhandler&#40;&quot;Verbindungsaufbau gescheitert.&quot;&#41;;
+&#125;
 &nbsp;
-<span style="color: #808080; font-style: italic;">// Datenbank auswählen</span>
-<span style="color: #b1b100;">if</span><span style="color: #000000;">&#40;</span>!@<a href="http://www.php3.de/mysql_select_db"><span style="color: #000066;">mysql_select_db</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;database&quot;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>
-<span style="color: #000000;">&#123;</span>
-  mysql_errorhandler<span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Auswahl der Datenbank gescheitert.&quot;</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #000000;">&#125;</span>
+// Datenbank auswählen
+if&#40;!@mysql_select_db&#40;&quot;database&quot;&#41;&#41;
+&#123;
+  mysql_errorhandler&#40;&quot;Auswahl der Datenbank gescheitert.&quot;&#41;;
+&#125;
 &nbsp;
-<span style="color: #808080; font-style: italic;">// Beispiel für ein SQL-Statement</span>
-<span style="color: #0000ff;">$query</span> = <span style="color: #ff0000;">&quot;SELECT * FROM table WHERE x = '$x'&quot;</span>;
-<span style="color: #0000ff;">$result</span> = @<a href="http://www.php3.de/mysql_query"><span style="color: #000066;">mysql_query</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$query</span><span style="color: #000000;">&#41;</span>;
+// Beispiel für ein SQL-Statement
+$query = &quot;SELECT * FROM table WHERE x = '$x'&quot;;
+$result = @mysql_query&#40;$query&#41;;
 &nbsp;
-<span style="color: #b1b100;">if</span><span style="color: #000000;">&#40;</span>!<span style="color: #0000ff;">$result</span><span style="color: #000000;">&#41;</span>
-<span style="color: #000000;">&#123;</span>
-  mysql_errorhandler<span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Datenbankabfrage gescheitert&quot;</span>, <span style="color: #0000ff;">$query</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #000000;">&#125;</span></pre>
+if&#40;!$result&#41;
+&#123;
+  mysql_errorhandler&#40;&quot;Datenbankabfrage gescheitert&quot;, $query&#41;;
+&#125;</pre>
 
 <p>
 Klassen zur Datenbankabstraktion (z.B. <a href="http://pear.php.net/">PEAR</a>::<a href="http://pear.php.net/manual/en/package.database.php#package.database.db">DB</a>) können das Fehler-Handling wesentlich vereinfachen.
@@ -60,7 +60,7 @@ Feldnamen in Anführungszeichen einschließt:
 <!-- Funktioniert dies bei allen Datenbanken? 
      Nein: Sybase tut nicht -->
 
-<pre>SELECT * FROM users WHERE <span style="color: #ff0000;">'group'</span> = <span style="color: #cc66cc;">2</span></pre>
+<pre>SELECT * FROM users WHERE 'group' = 2</pre>
 
 <h2>Zuständige Newsgroups</h2>
 <p>

@@ -7,11 +7,11 @@ $sess-&gt;purl('/relativerlink'); ?&gt;</tt> ersetzt.
 gefunden wurde.
 </p>
 
-<pre><span style="color: #0000ff;">$pattern</span>  = <span style="color: #ff0000;">',&lt;a([^&gt;]+)href=&quot;(?!https?://|ftp://|mailto:|news:)([^&gt;&quot;<span style="color: #000099; font-weight: bold;">\s</span>]+)&quot;,i'</span>;
-<span style="color: #0000ff;">$replacement</span> = <span style="color: #ff0000;">'&lt;a<span style="color: #000099; font-weight: bold;">\1</span>href=&quot;&lt;?php echo $sess-&gt;purl(&quot;<span style="color: #000099; font-weight: bold;">\2</span>&quot;); ?&gt;&quot;'</span>;
+<pre>$pattern  = ',&lt;a([^&gt;]+)href=&quot;(?!https?://|ftp://|mailto:|news:)([^&gt;&quot;\s]+)&quot;,i';
+$replacement = '&lt;a\1href=&quot;&lt;?php echo $sess-&gt;purl(&quot;\2&quot;); ?&gt;&quot;';
 &nbsp;
-<span style="color: #0000ff;">$newtext</span> = <a href="http://www.php3.de/preg_replace"><span style="color: #000066;">preg_replace</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$pattern</span>, <span style="color: #0000ff;">$replacement</span>, <span style="color: #0000ff;">$text</span><span style="color: #000000;">&#41;</span>;
+$newtext = preg_replace&#40;$pattern, $replacement, $text&#41;;
 &nbsp;
-<a href="http://www.php3.de/header"><span style="color: #000066;">header</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'Content-type: text/plain'</span><span style="color: #000000;">&#41;</span>;
-<a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #0000ff;">$newtext</span>;</pre>
+header&#40;'Content-type: text/plain'&#41;;
+echo $newtext;</pre>
 

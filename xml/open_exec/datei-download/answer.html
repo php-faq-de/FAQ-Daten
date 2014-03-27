@@ -20,38 +20,38 @@ man vorher noch einen Downloadzähler aktualisieren oder
 autorisiert ist.
 </p>
 
-<pre><span style="color: #808080; font-style: italic;">// $download sei der Bezeichner für die zu ladende Datei</span>
-<span style="color: #808080; font-style: italic;">// etwa: </span>
-<span style="color: #0000ff;">$download</span> = <span style="color: #0000ff;">$_GET</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'download'</span><span style="color: #000000;">&#93;</span>;
+<pre>// $download sei der Bezeichner für die zu ladende Datei
+// etwa: 
+$download = $_GET&#91;'download'&#93;;
 &nbsp;
-<span style="color: #808080; font-style: italic;">// Dieses Verzeichnis liegt außerhalb des Document Root und</span>
-<span style="color: #808080; font-style: italic;">// ist nicht per URL erreichbar.</span>
-<span style="color: #0000ff;">$basedir</span> = <span style="color: #ff0000;">&quot;/home/www/download&quot;</span>;
+// Dieses Verzeichnis liegt außerhalb des Document Root und
+// ist nicht per URL erreichbar.
+$basedir = &quot;/home/www/download&quot;;
 &nbsp;
-<span style="color: #808080; font-style: italic;">// Übersetzung von Download-Bezeichner in Dateinamen.</span>
-<span style="color: #0000ff;">$filelist</span> = <a href="http://www.php3.de/array"><span style="color: #000066;">array</span></a><span style="color: #000000;">&#40;</span>
-  <span style="color: #ff0000;">&quot;file1&quot;</span> =&gt; <span style="color: #ff0000;">&quot;area1/datei1.zip&quot;</span>,
-  <span style="color: #ff0000;">&quot;file2&quot;</span> =&gt; <span style="color: #ff0000;">&quot;area1/datei2.zip&quot;</span>,
-  <span style="color: #ff0000;">&quot;file3&quot;</span> =&gt; <span style="color: #ff0000;">&quot;area2/datei1.zip&quot;</span>
-<span style="color: #000000;">&#41;</span>;
+// Übersetzung von Download-Bezeichner in Dateinamen.
+$filelist = array&#40;
+  &quot;file1&quot; =&gt; &quot;area1/datei1.zip&quot;,
+  &quot;file2&quot; =&gt; &quot;area1/datei2.zip&quot;,
+  &quot;file3&quot; =&gt; &quot;area2/datei1.zip&quot;
+&#41;;
 &nbsp;
-<span style="color: #808080; font-style: italic;">// Einbruchsversuch abfangen.</span>
-<span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span>!<a href="http://www.php3.de/isset"><span style="color: #000066;">isset</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$filelist</span><span style="color: #000000;">&#91;</span><span style="color: #0000ff;">$download</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>
-  <a href="http://www.php3.de/die"><span style="color: #000066;">die</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Datei $download nicht vorhanden.&quot;</span><span style="color: #000000;">&#41;</span>;
+// Einbruchsversuch abfangen.
+if &#40;!isset&#40;$filelist&#91;$download&#93;&#41;&#41;
+  die&#40;&quot;Datei $download nicht vorhanden.&quot;&#41;;
 &nbsp;
-<span style="color: #808080; font-style: italic;">// Vertrauenswürdigen Dateinamen basteln.</span>
-<span style="color: #0000ff;">$filename</span> = <a href="http://www.php3.de/sprintf"><span style="color: #000066;">sprintf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;%s/%s&quot;</span>, <span style="color: #0000ff;">$basedir</span>, <span style="color: #0000ff;">$filelist</span><span style="color: #000000;">&#91;</span><span style="color: #0000ff;">$download</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span>;
+// Vertrauenswürdigen Dateinamen basteln.
+$filename = sprintf&#40;&quot;%s/%s&quot;, $basedir, $filelist&#91;$download&#93;&#41;;
 &nbsp;
-<span style="color: #808080; font-style: italic;">// Passenden Datentyp erzeugen.</span>
-<a href="http://www.php3.de/header"><span style="color: #000066;">header</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Content-Type: application/octet-stream&quot;</span><span style="color: #000000;">&#41;</span>;
+// Passenden Datentyp erzeugen.
+header&#40;&quot;Content-Type: application/octet-stream&quot;&#41;;
 &nbsp;
-<span style="color: #808080; font-style: italic;">// Passenden Dateinamen im Download-Requester vorgeben,</span>
-<span style="color: #808080; font-style: italic;">// z. B. den Original-Dateinamen</span>
-<span style="color: #0000ff;">$save_as_name</span> = <a href="http://www.php3.de/basename"><span style="color: #000066;">basename</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$filelist</span><span style="color: #000000;">&#91;</span><span style="color: #0000ff;">$download</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span>;
-<a href="http://www.php3.de/header"><span style="color: #000066;">header</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Content-Disposition: attachment; filename=<span style="color: #000099; font-weight: bold;">\&quot;</span>$save_as_name<span style="color: #000099; font-weight: bold;">\&quot;</span>&quot;</span><span style="color: #000000;">&#41;</span>;
+// Passenden Dateinamen im Download-Requester vorgeben,
+// z. B. den Original-Dateinamen
+$save_as_name = basename&#40;$filelist&#91;$download&#93;&#41;;
+header&#40;&quot;Content-Disposition: attachment; filename=\&quot;$save_as_name\&quot;&quot;&#41;;
 &nbsp;
-<span style="color: #808080; font-style: italic;">// Datei ausgeben.</span>
-<a href="http://www.php3.de/readfile"><span style="color: #000066;">readfile</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$filename</span><span style="color: #000000;">&#41;</span>;</pre>
+// Datei ausgeben.
+readfile&#40;$filename&#41;;</pre>
 
 <p>
 Dieses Script kann mit dem Parameter <tt>$download</tt> aufgerufen

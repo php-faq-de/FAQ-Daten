@@ -6,9 +6,9 @@ wird richtig in 01.01.1998 umgewandelt. So erhält man also auch
 das Datum des Vortages:
 </p>
 
-<pre><span style="color: #0000ff;">$tstamp</span>  = <a href="http://www.php3.de/mktime"><span style="color: #000066;">mktime</span></a><span style="color: #000000;">&#40;</span><span style="color: #cc66cc;">0</span>, <span style="color: #cc66cc;">0</span>, <span style="color: #cc66cc;">0</span>, <a href="http://www.php3.de/date"><span style="color: #000066;">date</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;m&quot;</span><span style="color: #000000;">&#41;</span>, <a href="http://www.php3.de/date"><span style="color: #000066;">date</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;d&quot;</span><span style="color: #000000;">&#41;</span><span style="color: #cc66cc;">-1</span>, <a href="http://www.php3.de/date"><span style="color: #000066;">date</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Y&quot;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #0000ff;">$gestern</span> = <a href="http://www.php3.de/date"><span style="color: #000066;">date</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Y-m-d&quot;</span>, <span style="color: #0000ff;">$tstamp</span><span style="color: #000000;">&#41;</span>;  <span style="color: #808080; font-style: italic;">// ISO-8601 Format</span>
-<a href="http://www.php3.de/print"><span style="color: #000066;">print</span></a> <span style="color: #0000ff;">$gestern</span>;</pre>
+<pre>$tstamp  = mktime&#40;0, 0, 0, date&#40;&quot;m&quot;&#41;, date&#40;&quot;d&quot;&#41;-1, date&#40;&quot;Y&quot;&#41;&#41;;
+$gestern = date&#40;&quot;Y-m-d&quot;, $tstamp&#41;;  // ISO-8601 Format
+print $gestern;</pre>
 
 <p>
 <em>Beachte:</em> Die Reihenfolge der Parameter in der PHP-Funktion

@@ -18,9 +18,9 @@ interessant, um Wörter unabhängig von ihrer Groß-/Kleinschreibung
 unter Beibehaltung der Schreibweise hervorzuheben:
 </p>
 
-<pre><span style="color: #808080; font-style: italic;">// $s in $t durch $r ersetzen:</span>
-<a href="http://www.php3.de/preg_replace"><span style="color: #000066;">preg_replace</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;/((&lt;[^&gt;]*)|$s)/e&quot;</span>, <span style="color: #ff0000;">'&quot;<span style="color: #000099; font-weight: bold;">\2</span>&quot;==&quot;<span style="color: #000099; font-weight: bold;">\1</span>&quot;? &quot;<span style="color: #000099; font-weight: bold;">\1</span>&quot;:&quot;$r&quot;'</span>, <span style="color: #0000ff;">$t</span><span style="color: #000000;">&#41;</span>;
+<pre>// $s in $t durch $r ersetzen:
+preg_replace&#40;&quot;/((&lt;[^&gt;]*)|$s)/e&quot;, '&quot;\2&quot;==&quot;\1&quot;? &quot;\1&quot;:&quot;$r&quot;', $t&#41;;
 &nbsp;
-<span style="color: #808080; font-style: italic;">// $s case-insensitive in $t hervorheben:</span>
-<a href="http://www.php3.de/preg_replace"><span style="color: #000066;">preg_replace</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;/((&lt;[^&gt;]*)|$s)/ie&quot;</span>, <span style="color: #ff0000;">'&quot;<span style="color: #000099; font-weight: bold;">\2</span>&quot;==&quot;<span style="color: #000099; font-weight: bold;">\1</span>&quot;? &quot;<span style="color: #000099; font-weight: bold;">\1</span>&quot;:&quot;&lt;b&gt;<span style="color: #000099; font-weight: bold;">\1</span>&lt;/b&gt;&quot;'</span>, <span style="color: #0000ff;">$t</span><span style="color: #000000;">&#41;</span>;</pre>
+// $s case-insensitive in $t hervorheben:
+preg_replace&#40;&quot;/((&lt;[^&gt;]*)|$s)/ie&quot;, '&quot;\2&quot;==&quot;\1&quot;? &quot;\1&quot;:&quot;&lt;b&gt;\1&lt;/b&gt;&quot;', $t&#41;;</pre>
 

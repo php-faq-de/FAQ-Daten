@@ -5,24 +5,24 @@ nicht übermittelt. Andernfalls haben sie den im Attribut
 folgenden beiden Arten erzeugen:
 </p>
 
-<pre><span style="color: #808080; font-style: italic;"># Fall 1: Verschiedene Namen, gleicher Wert</span>
-&lt;input type=<span style="color: #ff0000;">&quot;checkbox&quot;</span> name=<span style="color: #ff0000;">&quot;cbutton[1]&quot;</span> value=<span style="color: #ff0000;">&quot;yes&quot;</span> /&gt;
-&lt;input type=<span style="color: #ff0000;">&quot;checkbox&quot;</span> name=<span style="color: #ff0000;">&quot;cbutton[2]&quot;</span> value=<span style="color: #ff0000;">&quot;yes&quot;</span> /&gt;
+<pre># Fall 1: Verschiedene Namen, gleicher Wert
+&lt;input type=&quot;checkbox&quot; name=&quot;cbutton[1]&quot; value=&quot;yes&quot; /&gt;
+&lt;input type=&quot;checkbox&quot; name=&quot;cbutton[2]&quot; value=&quot;yes&quot; /&gt;
 &nbsp;
-<span style="color: #808080; font-style: italic;"># Fall 2: &quot;Gleiche&quot; Namen, verschiedene Werte</span>
-&lt;input type=<span style="color: #ff0000;">&quot;checkbox&quot;</span> name=<span style="color: #ff0000;">&quot;cbutton[]&quot;</span> value=<span style="color: #ff0000;">&quot;1&quot;</span> /&gt;
-&lt;input type=<span style="color: #ff0000;">&quot;checkbox&quot;</span> name=<span style="color: #ff0000;">&quot;cbutton[]&quot;</span> value=<span style="color: #ff0000;">&quot;2&quot;</span> /&gt;</pre>
+# Fall 2: &quot;Gleiche&quot; Namen, verschiedene Werte
+&lt;input type=&quot;checkbox&quot; name=&quot;cbutton[]&quot; value=&quot;1&quot; /&gt;
+&lt;input type=&quot;checkbox&quot; name=&quot;cbutton[]&quot; value=&quot;2&quot; /&gt;</pre>
 
 <p>Die Abfrage erfolgt in beiden Fällen mit</p>
 
-<pre><span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><a href="http://www.php3.de/isset"><span style="color: #000066;">isset</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$_REQUEST</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'cbutton'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-  <a href="http://www.php3.de/reset"><span style="color: #000066;">reset</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$_REQUEST</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'cbutton'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span>;
-  <span style="color: #b1b100;">foreach</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$_REQUEST</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'cbutton'</span><span style="color: #000000;">&#93;</span> <span style="color: #b1b100;">as</span> <span style="color: #0000ff;">$k</span> =&gt; <span style="color: #0000ff;">$v</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-    <a href="http://www.php3.de/print"><span style="color: #000066;">print</span></a> <span style="color: #ff0000;">&quot;$k $v<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
-  <span style="color: #000000;">&#125;</span>
-<span style="color: #000000;">&#125;</span> <span style="color: #b1b100;">else</span> <span style="color: #000000;">&#123;</span>
-  <a href="http://www.php3.de/print"><span style="color: #000066;">print</span></a> <span style="color: #ff0000;">&quot;alle cbutton schlafen schon.<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
-<span style="color: #000000;">&#125;</span></pre>
+<pre>if &#40;isset&#40;$_REQUEST&#91;'cbutton'&#93;&#41;&#41; &#123;
+  reset&#40;$_REQUEST&#91;'cbutton'&#93;&#41;;
+  foreach &#40;$_REQUEST&#91;'cbutton'&#93; as $k =&gt; $v&#41; &#123;
+    print &quot;$k $v\n&quot;;
+  &#125;
+&#125; else &#123;
+  print &quot;alle cbutton schlafen schon.\n&quot;;
+&#125;</pre>
 
 <p>Im Fall 1 wertet man die $k aus, im Fall 2 die $v. Entscheidend
 ist auch hier, dass der Variablennamen bei mehr als einer Checkbox

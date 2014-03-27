@@ -3,7 +3,7 @@ Durch Verwendung des leeren Arrayoperators wird an ein Array ein
 Element angehängt. In Code:
 </p>
 
-<pre><span style="color: #0000ff;">$avar</span><span style="color: #000000;">&#91;</span><span style="color: #000000;">&#93;</span> = <span style="color: #ff0000;">&quot;neues element&quot;</span>;</pre>
+<pre>$avar&#91;&#93; = &quot;neues element&quot;;</pre>
 
 <p>
 In PHP 4 kann man mit der Funktion <a href="http://www.php3.de/array_push">array_push()</a>
@@ -16,6 +16,6 @@ bestimmten Stelle in einem Array ansprechen. Der Index kann
 numerisch oder ein String sein:
 </p>
 
-<pre><span style="color: #0000ff;">$avar</span><span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">1</span><span style="color: #000000;">&#93;</span>     = <span style="color: #ff0000;">&quot;Element mit dem Index 1&quot;</span>;
-<span style="color: #0000ff;">$avar</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;bla&quot;</span><span style="color: #000000;">&#93;</span> = <span style="color: #ff0000;">&quot;Element mit dem Index 'bla'&quot;</span>;</pre>
+<pre>$avar&#91;1&#93;     = &quot;Element mit dem Index 1&quot;;
+$avar&#91;&quot;bla&quot;&#93; = &quot;Element mit dem Index 'bla'&quot;;</pre>
 

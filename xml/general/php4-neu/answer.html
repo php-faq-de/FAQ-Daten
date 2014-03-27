@@ -28,7 +28,7 @@ Wert von PHP ausmachen.
   <dd><p>In PHP3 waren Referenzen nur beim Aufruf von Funktionen verwendbar, um Call-by-Reference
          zu realisieren. In PHP4/Zend gibt es nun endlich vollständigen Support für Referenzen.
          Das bedeutet:</p>
-      <pre class="php"><span style="color: #0000ff;">$foo</span> = &amp;<span style="color: #0000ff;">$a</span>;</pre>
+      <pre class="php">$foo = &amp;$a;</pre>
       <p>In diesem Beispiel wird <tt>$foo</tt> zu einem alternativen Namen für die Variable
          <tt>$a</tt>. Dies funktioniert auch mit Arrays und Objekten.</p> </dd>
   <dt>Referenzzähler und Ressourcenfreigabe</dt>
@@ -81,11 +81,11 @@ Wert von PHP ausmachen.
          dieses Problem behoben.</p>
       <p>Shell-Style Here-Documents werden unterstützt.</p>
       <p>Es gibt ein <a href="http://www.php3.de/foreach">foreach()</a>-Schleifenkonstrukt. Syntax:</p>
-      <pre class="php"><span style="color: #b1b100;">foreach</span><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$my_array</span> <span style="color: #b1b100;">as</span> <span style="color: #0000ff;">$val</span><span style="color: #000000;">&#41;</span>
-    <a href="http://www.php3.de/print"><span style="color: #000066;">print</span></a> <span style="color: #ff0000;">&quot;$val<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
+      <pre class="php">foreach&#40;$my_array as $val&#41;
+    print &quot;$val\n&quot;;
 &nbsp;
-<span style="color: #b1b100;">foreach</span><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$my_array</span> <span style="color: #b1b100;">as</span> <span style="color: #0000ff;">$key</span> =&gt; <span style="color: #0000ff;">$val</span><span style="color: #000000;">&#41;</span>
-    <a href="http://www.php3.de/print"><span style="color: #000066;">print</span></a> <span style="color: #ff0000;">&quot;$key =&gt; $val<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;</pre> </dd>
+foreach&#40;$my_array as $key =&gt; $val&#41;
+    print &quot;$key =&gt; $val\n&quot;;</pre> </dd>
   <dt>Boolean</dt>
   <dd><p>Die Schlüsselworte <tt>true</tt> und <tt>false</tt> sind nun Teil der Sprache und es gibt
          einen Datentyp <tt>boolean</tt>. Vergleiche werden nun durchgeführt, indem ein fremder Datentyp

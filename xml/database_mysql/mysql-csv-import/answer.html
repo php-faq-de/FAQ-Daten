@@ -20,13 +20,13 @@ und durch Semikolons getrennt sind. Vorhandene Datensätze in der
 Tabelle, die ebenfalls im Import enthalten sind, werden durch
 den Import überschrieben.</p>
 
-<pre class="sql"><span style="color: #993333; font-weight: bold;">LOAD</span> <span style="color: #993333; font-weight: bold;">DATA</span> <span style="color: #993333; font-weight: bold;">LOCAL</span>
-        <span style="color: #993333; font-weight: bold;">INFILE</span> <span style="color: #ff0000;">'/home/www/servers/www.servername.de/tmp/import.csv'</span>
-        <span style="color: #993333; font-weight: bold;">REPLACE</span>
-        <span style="color: #993333; font-weight: bold;">INTO</span> <span style="color: #993333; font-weight: bold;">TABLE</span> tabellenname
-        <span style="color: #993333; font-weight: bold;">FIELDS</span>
-                TERMINATED <span style="color: #993333; font-weight: bold;">BY</span> <span style="color: #ff0000;">';'</span>
-                <span style="color: #993333; font-weight: bold;">OPTIONALLY</span> <span style="color: #993333; font-weight: bold;">ENCLOSED</span> <span style="color: #993333; font-weight: bold;">BY</span> <span style="color: #ff0000;">'&quot;'</span>;</pre>
+<pre class="sql">LOAD DATA LOCAL
+        INFILE '/home/www/servers/www.servername.de/tmp/import.csv'
+        REPLACE
+        INTO TABLE tabellenname
+        FIELDS
+                TERMINATED BY ';'
+                OPTIONALLY ENCLOSED BY '&quot;';</pre>
 
 <p>Eine vollständige Beschreibung des Kommandos in englischer
 Sprache ist Bestandteil des MySQL Manuals unter der URL

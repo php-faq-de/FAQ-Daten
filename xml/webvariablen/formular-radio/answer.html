@@ -10,15 +10,15 @@ Mit dem folgenden Code lassen sich Radio-Buttons analog
 zu "<a class="faq" href="${stil-normalform}">Von HTML zu PHP: Schreibe Formularverarbeitungen in Normalform</a>" erstellen:
 </p>
 
-<pre><span style="color: #0000ff;">$elements</span> = <a href="http://www.php3.de/array"><span style="color: #000066;">array</span></a><span style="color: #000000;">&#40;</span>
-    <a href="http://www.php3.de/array"><span style="color: #000066;">array</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'name'</span> =&gt; <span style="color: #ff0000;">'grün'</span>, <span style="color: #ff0000;">'value'</span> =&gt; <span style="color: #ff0000;">'gr'</span><span style="color: #000000;">&#41;</span>,
-    <a href="http://www.php3.de/array"><span style="color: #000066;">array</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'name'</span> =&gt; <span style="color: #ff0000;">'blau'</span>, <span style="color: #ff0000;">'value'</span> =&gt; <span style="color: #ff0000;">'bl'</span><span style="color: #000000;">&#41;</span>,
-    <a href="http://www.php3.de/array"><span style="color: #000066;">array</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'name'</span> =&gt; <span style="color: #ff0000;">'rot'</span>,  <span style="color: #ff0000;">'value'</span> =&gt; <span style="color: #ff0000;">'ro'</span><span style="color: #000000;">&#41;</span>
-<span style="color: #000000;">&#41;</span>;
-<span style="color: #b1b100;">foreach</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$elements</span> <span style="color: #b1b100;">as</span> <span style="color: #0000ff;">$element</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-    <a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'&lt;input type=&quot;radio&quot; name=&quot;farbe&quot; value=&quot;%s&quot; %s/&gt; %s&lt;br /&gt;'</span>,
-        <span style="color: #0000ff;">$element</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'value'</span><span style="color: #000000;">&#93;</span>,
-        <span style="color: #000000;">&#40;</span><a href="http://www.php3.de/isset"><span style="color: #000066;">isset</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$_REQUEST</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'farbe'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span> and <span style="color: #0000ff;">$_REQUEST</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'farbe'</span><span style="color: #000000;">&#93;</span> == <span style="color: #0000ff;">$element</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'value'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span> ? <span style="color: #ff0000;">'checked=&quot;checked&quot; '</span> : <span style="color: #ff0000;">''</span>,
-        <span style="color: #0000ff;">$element</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'name'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #000000;">&#125;</span></pre>
+<pre>$elements = array&#40;
+    array&#40;'name' =&gt; 'grün', 'value' =&gt; 'gr'&#41;,
+    array&#40;'name' =&gt; 'blau', 'value' =&gt; 'bl'&#41;,
+    array&#40;'name' =&gt; 'rot',  'value' =&gt; 'ro'&#41;
+&#41;;
+foreach &#40;$elements as $element&#41; &#123;
+    printf&#40;'&lt;input type=&quot;radio&quot; name=&quot;farbe&quot; value=&quot;%s&quot; %s/&gt; %s&lt;br /&gt;',
+        $element&#91;'value'&#93;,
+        &#40;isset&#40;$_REQUEST&#91;'farbe'&#93;&#41; and $_REQUEST&#91;'farbe'&#93; == $element&#91;'value'&#93;&#41; ? 'checked=&quot;checked&quot; ' : '',
+        $element&#91;'name'&#93;&#41;;
+&#125;</pre>
 

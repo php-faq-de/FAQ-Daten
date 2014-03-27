@@ -3,5 +3,5 @@ Bei MySQL gibt es die Funktion <a href="http://www.php3.de/mysql_list_tables">my
 innerhalb der aktuellen Datenbank aufzulisten. Bei Sybase gibt es die Funktion nicht,
 hier muss auf den folgenden Select zurückgegriffen werden:</p>
 
-<pre class="sql"><span style="color: #993333; font-weight: bold;">SELECT</span> name <span style="color: #993333; font-weight: bold;">FROM</span> sysobjects <span style="color: #993333; font-weight: bold;">WHERE</span> type= <span style="color: #ff0000;">'U'</span></pre>
+<pre class="sql">SELECT name FROM sysobjects WHERE type= 'U'</pre>
 

@@ -54,57 +54,57 @@ Datensatz mit der Nummer 2 künstlich zurückgestellt.</p>
 <p>Das folgende Beispielscript listet nun alle Datensätze, die in
 den letzten 2 Wochen geändert worden sind.</p>
 
-<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+<pre>&lt;?php
 &nbsp;
-<span style="color: #808080; font-style: italic;">// Eigene Daten eintragen:</span>
-<span style="color: #0000ff;">$dbhost</span> = <span style="color: #ff0000;">&quot;localhost&quot;</span>; <span style="color: #808080; font-style: italic;">// DB-Server</span>
-<span style="color: #0000ff;">$dbuser</span> = <span style="color: #ff0000;">&quot;root&quot;</span>;      <span style="color: #808080; font-style: italic;">// DB-Server Username</span>
-<span style="color: #0000ff;">$dbpass</span> = <span style="color: #ff0000;">&quot;...&quot;</span>;       <span style="color: #808080; font-style: italic;">// DB-Server Passwort</span>
-<span style="color: #0000ff;">$dbname</span> = <span style="color: #ff0000;">&quot;...&quot;</span>;       <span style="color: #808080; font-style: italic;">// Datenbank Name</span>
+// Eigene Daten eintragen:
+$dbhost = &quot;localhost&quot;; // DB-Server
+$dbuser = &quot;root&quot;;      // DB-Server Username
+$dbpass = &quot;...&quot;;       // DB-Server Passwort
+$dbname = &quot;...&quot;;       // Datenbank Name
 &nbsp;
-<span style="color: #808080; font-style: italic;">// Mit DB-Server und Datenbank verbinden, bei Fehler Script beenden.</span>
-<span style="color: #0000ff;">$db_link</span> = @<a href="http://www.php3.de/mysql_connect"><span style="color: #000066;">mysql_connect</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$dbhost</span>, <span style="color: #0000ff;">$dbuser</span>, <span style="color: #0000ff;">$dbpass</span><span style="color: #000000;">&#41;</span>;
+// Mit DB-Server und Datenbank verbinden, bei Fehler Script beenden.
+$db_link = @mysql_connect&#40;$dbhost, $dbuser, $dbpass&#41;;
 &nbsp;
-<span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span>! <span style="color: #0000ff;">$db_link</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-    <a href="http://www.php3.de/die"><span style="color: #000066;">die</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Fehler beim Verbinden mit Server '$dbhost' als '$dbuser' mit Passwort '$dbpass'.&quot;</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #000000;">&#125;</span>
+if &#40;! $db_link&#41; &#123;
+    die&#40;&quot;Fehler beim Verbinden mit Server '$dbhost' als '$dbuser' mit Passwort '$dbpass'.&quot;&#41;;
+&#125;
 &nbsp;
-<span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span>! <a href="http://www.php3.de/mysql_select_db"><span style="color: #000066;">mysql_select_db</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$dbname</span>, <span style="color: #0000ff;">$db_link</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-    <a href="http://www.php3.de/die"><span style="color: #000066;">die</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Fehler beim Verbinden mit der Datenbank $dbname&quot;</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #000000;">&#125;</span>
+if &#40;! mysql_select_db&#40;$dbname, $db_link&#41;&#41; &#123;
+    die&#40;&quot;Fehler beim Verbinden mit der Datenbank $dbname&quot;&#41;;
+&#125;
 &nbsp;
-<span style="color: #808080; font-style: italic;">// Zeitgrenze bestimmen (86400 Sekunden = 1 Tag).</span>
-<span style="color: #0000ff;">$twoweeks</span> = <a href="http://www.php3.de/date"><span style="color: #000066;">date</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;YmdHis&quot;</span>, <a href="http://www.php3.de/time"><span style="color: #000066;">time</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> - <span style="color: #cc66cc;">14</span>*<span style="color: #cc66cc;">86400</span><span style="color: #000000;">&#41;</span>;
+// Zeitgrenze bestimmen (86400 Sekunden = 1 Tag).
+$twoweeks = date&#40;&quot;YmdHis&quot;, time&#40;&#41; - 14*86400&#41;;
 &nbsp;
-<span style="color: #808080; font-style: italic;">// Query generieren.</span>
-<span style="color: #0000ff;">$query</span> = <span style="color: #ff0000;">&quot;SELECT id,
+// Query generieren.
+$query = &quot;SELECT id,
                  nutzlast,
                  date_format(changed, '%Y-%m-%d %H:%i:%s') as changed
           FROM   beispiel
-          WHERE  changed &gt; $twoweeks&quot;</span>;
+          WHERE  changed &gt; $twoweeks&quot;;
 &nbsp;
-<span style="color: #0000ff;">$result</span> = <a href="http://www.php3.de/mysql_query"><span style="color: #000066;">mysql_query</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$query</span>, <span style="color: #0000ff;">$db_link</span><span style="color: #000000;">&#41;</span>;
+$result = mysql_query&#40;$query, $db_link&#41;;
 &nbsp;
-<span style="color: #808080; font-style: italic;">// Falls Query fehlerhaft, Script beenden.</span>
-<span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span>! <span style="color: #0000ff;">$result</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-    <a href="http://www.php3.de/die"><span style="color: #000066;">die</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Fehler bei der Query: $query&quot;</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #000000;">&#125;</span>
+// Falls Query fehlerhaft, Script beenden.
+if &#40;! $result&#41; &#123;
+    die&#40;&quot;Fehler bei der Query: $query&quot;&#41;;
+&#125;
 &nbsp;
-<span style="color: #808080; font-style: italic;">// Query senden, Resultat ausgeben.</span>
-<span style="color: #b1b100;">while</span><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$avar</span> = <a href="http://www.php3.de/mysql_fetch_array"><span style="color: #000066;">mysql_fetch_array</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$result</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span> 
-<span style="color: #000000;">&#123;</span>
-    <a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;%s - %s - %s<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>,
-            <span style="color: #0000ff;">$avar</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'id'</span><span style="color: #000000;">&#93;</span>, <span style="color: #0000ff;">$avar</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'nutzlast'</span><span style="color: #000000;">&#93;</span>, <span style="color: #0000ff;">$avar</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'changed'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #000000;">&#125;</span>
+// Query senden, Resultat ausgeben.
+while&#40;$avar = mysql_fetch_array&#40;$result&#41;&#41; 
+&#123;
+    printf&#40;&quot;%s - %s - %s\n&quot;,
+            $avar&#91;'id'&#93;, $avar&#91;'nutzlast'&#93;, $avar&#91;'changed'&#93;&#41;;
+&#125;
 &nbsp;
-<span style="color: #808080; font-style: italic;">// Speicher wieder freigeben und Verbindung zur DB schließen.</span>
-<a href="http://www.php3.de/mysql_free_result"><span style="color: #000066;">mysql_free_result</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$result</span><span style="color: #000000;">&#41;</span>;
-<a href="http://www.php3.de/mysql_close"><span style="color: #000066;">mysql_close</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$db_link</span><span style="color: #000000;">&#41;</span>;
+// Speicher wieder freigeben und Verbindung zur DB schließen.
+mysql_free_result&#40;$result&#41;;
+mysql_close&#40;$db_link&#41;;
 &nbsp;
-<span style="color: #000000; font-weight: bold;">?&gt;</span>
+?&gt;
 &nbsp;
 Der Output des Scripts ist:
 &nbsp;
-<span style="color: #cc66cc;">1</span> - eins - <span style="color: #cc66cc;">2000</span><span style="color: #cc66cc;">-01</span><span style="color: #cc66cc;">-26</span> <span style="color: #cc66cc;">20</span>:<span style="color: #cc66cc;">45</span>:<span style="color: #cc66cc;">14</span>
-<span style="color: #cc66cc;">3</span> - drei - <span style="color: #cc66cc;">2000</span><span style="color: #cc66cc;">-01</span><span style="color: #cc66cc;">-26</span> <span style="color: #cc66cc;">20</span>:<span style="color: #cc66cc;">45</span>:<span style="color: #cc66cc;">20</span></pre>
+1 - eins - 2000-01-26 20:45:14
+3 - drei - 2000-01-26 20:45:20</pre>
 

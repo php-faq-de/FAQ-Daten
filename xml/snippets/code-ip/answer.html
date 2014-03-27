@@ -13,13 +13,13 @@ und versucht, den Hostnamen zur IP mit der Funktion
 <a href="http://www.php3.de/gethostbyaddr">gethostbyaddr()</a> zu ermitteln (sog. reverse lookup).
 </p>
 
-<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
-<span style="color: #808080; font-style: italic;">// IP bestimmen</span>
-<span style="color: #0000ff;">$ip</span> = <a href="http://www.php3.de/getenv"><span style="color: #000066;">getenv</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'REMOTE_ADDR'</span><span style="color: #000000;">&#41;</span>;
+<pre>&lt;?php
+// IP bestimmen
+$ip = getenv&#40;'REMOTE_ADDR'&#41;;
 &nbsp;
-<span style="color: #808080; font-style: italic;">// IP auflösen und Host bestimmen</span>
-<span style="color: #0000ff;">$host</span> = <a href="http://www.php3.de/gethostbyaddr"><span style="color: #000066;">gethostbyaddr</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$ip</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+// IP auflösen und Host bestimmen
+$host = gethostbyaddr&#40;$ip&#41;;
+?&gt;</pre>
 
 <p>
 Kommt die Verbindung über einen Proxy zustande, kann es sein, dass

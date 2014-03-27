@@ -51,37 +51,37 @@ Funktionen <a href="http://www.php3.de/explode">explode()</a> oder
 <a href="http://www.php3.de/substr">substr()</a> arbeiten.
 </p>
 
-<pre><span style="color: #808080; font-style: italic;">/**
+<pre>/**
  * date_mysql2german
  * wandelt ein MySQL-DATE (ISO-Date)
  * in ein traditionelles deutsches Datum um.
- */</span>
-<span style="color: #000000; font-weight: bold;">function</span> date_mysql2german<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$datum</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-    <a href="http://www.php3.de/list"><span style="color: #000066;">list</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$jahr</span>, <span style="color: #0000ff;">$monat</span>, <span style="color: #0000ff;">$tag</span><span style="color: #000000;">&#41;</span> = <a href="http://www.php3.de/explode"><span style="color: #000066;">explode</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;-&quot;</span>, <span style="color: #0000ff;">$datum</span><span style="color: #000000;">&#41;</span>;
+ */
+function date_mysql2german&#40;$datum&#41; &#123;
+    list&#40;$jahr, $monat, $tag&#41; = explode&#40;&quot;-&quot;, $datum&#41;;
 &nbsp;
-    <span style="color: #b1b100;">return</span> <a href="http://www.php3.de/sprintf"><span style="color: #000066;">sprintf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;%02d.%02d.%04d&quot;</span>, <span style="color: #0000ff;">$tag</span>, <span style="color: #0000ff;">$monat</span>, <span style="color: #0000ff;">$jahr</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #000000;">&#125;</span>
+    return sprintf&#40;&quot;%02d.%02d.%04d&quot;, $tag, $monat, $jahr&#41;;
+&#125;
 &nbsp;
-<span style="color: #808080; font-style: italic;">/**
+/**
  * date_german2mysql
  * wandelt ein traditionelles deutsches Datum
  * nach MySQL (ISO-Date).
- */</span>
-<span style="color: #000000; font-weight: bold;">function</span> date_german2mysql<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$datum</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-    <a href="http://www.php3.de/list"><span style="color: #000066;">list</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$tag</span>, <span style="color: #0000ff;">$monat</span>, <span style="color: #0000ff;">$jahr</span><span style="color: #000000;">&#41;</span> = <a href="http://www.php3.de/explode"><span style="color: #000066;">explode</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;.&quot;</span>, <span style="color: #0000ff;">$datum</span><span style="color: #000000;">&#41;</span>;
+ */
+function date_german2mysql&#40;$datum&#41; &#123;
+    list&#40;$tag, $monat, $jahr&#41; = explode&#40;&quot;.&quot;, $datum&#41;;
 &nbsp;
-    <span style="color: #b1b100;">return</span> <a href="http://www.php3.de/sprintf"><span style="color: #000066;">sprintf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;%04d-%02d-%02d&quot;</span>, <span style="color: #0000ff;">$jahr</span>, <span style="color: #0000ff;">$monat</span>, <span style="color: #0000ff;">$tag</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #000000;">&#125;</span>
+    return sprintf&#40;&quot;%04d-%02d-%02d&quot;, $jahr, $monat, $tag&#41;;
+&#125;
 &nbsp;
-<span style="color: #808080; font-style: italic;">/**
+/**
  * timestamp_mysql2german
  * wandelt ein MySQL-Timestamp
  * in ein traditionelles deutsches Datum um.
-*/</span>
-<span style="color: #000000; font-weight: bold;">function</span> timestamp_mysql2german<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$t</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-    <span style="color: #b1b100;">return</span> <a href="http://www.php3.de/sprintf"><span style="color: #000066;">sprintf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;%02d.%02d.%04d&quot;</span>,
-                    <a href="http://www.php3.de/substr"><span style="color: #000066;">substr</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$t</span>, <span style="color: #cc66cc;">6</span>, <span style="color: #cc66cc;">2</span><span style="color: #000000;">&#41;</span>,
-                    <a href="http://www.php3.de/substr"><span style="color: #000066;">substr</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$t</span>, <span style="color: #cc66cc;">4</span>, <span style="color: #cc66cc;">2</span><span style="color: #000000;">&#41;</span>,
-                    <a href="http://www.php3.de/substr"><span style="color: #000066;">substr</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$t</span>, <span style="color: #cc66cc;">0</span>, <span style="color: #cc66cc;">4</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #000000;">&#125;</span></pre>
+*/
+function timestamp_mysql2german&#40;$t&#41; &#123;
+    return sprintf&#40;&quot;%02d.%02d.%04d&quot;,
+                    substr&#40;$t, 6, 2&#41;,
+                    substr&#40;$t, 4, 2&#41;,
+                    substr&#40;$t, 0, 4&#41;&#41;;
+&#125;</pre>
 

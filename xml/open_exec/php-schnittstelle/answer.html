@@ -15,10 +15,10 @@ darauf zugreifen. Um Daten an die serielle Schnittstelle zu senden,
 genügt schon ein sehr kleines Script:
 </p>
 
-<pre><span style="color: #0000ff;">$string</span> = <span style="color: #ff0000;">&quot;Hallo Schnittstelle!<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
-<span style="color: #0000ff;">$pointer</span> = <a href="http://www.php3.de/fopen"><span style="color: #000066;">fopen</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;/dev/ttyS0&quot;</span>,<span style="color: #ff0000;">&quot;w&quot;</span><span style="color: #000000;">&#41;</span>;
-<a href="http://www.php3.de/fwrite"><span style="color: #000066;">fwrite</span></a> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$pointer</span>, <span style="color: #0000ff;">$string</span><span style="color: #000000;">&#41;</span>;
-<a href="http://www.php3.de/fclose"><span style="color: #000066;">fclose</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$pointer</span><span style="color: #000000;">&#41;</span>;</pre>
+<pre>$string = &quot;Hallo Schnittstelle!\n&quot;;
+$pointer = fopen&#40;&quot;/dev/ttyS0&quot;,&quot;w&quot;&#41;;
+fwrite &#40;$pointer, $string&#41;;
+fclose&#40;$pointer&#41;;</pre>
 
 <p>
 In diesem Beispiel wird die serielle Schnittstelle

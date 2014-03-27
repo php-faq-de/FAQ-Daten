@@ -10,27 +10,27 @@ bei Oracle erstellen:
 </p>
 
 <pre class="sql">rem Wir brauchen zum einen einen Zähler,
-rem der hochzählt <span style="color: #66cc66;">&#40;</span>dazu die Sequence<span style="color: #66cc66;">&#41;</span>
+rem der hochzählt &#40;dazu die Sequence&#41;
 &nbsp;
-<span style="color: #993333; font-weight: bold;">CREATE</span> sequence zaehler_der_tabelle_xy
-       increment <span style="color: #993333; font-weight: bold;">BY</span> <span style="color: #cc66cc;">1</span> start <span style="color: #993333; font-weight: bold;">WITH</span> <span style="color: #cc66cc;">1</span> cache <span style="color: #cc66cc;">2</span>;
+CREATE sequence zaehler_der_tabelle_xy
+       increment BY 1 start WITH 1 cache 2;
 &nbsp;
 rem Jetzt die eigentliche Tabelle
 &nbsp;
-<span style="color: #993333; font-weight: bold;">CREATE</span> <span style="color: #993333; font-weight: bold;">TABLE</span> xy <span style="color: #66cc66;">&#40;</span>
-        id_xy NUMBER<span style="color: #66cc66;">&#40;</span><span style="color: #cc66cc;">20</span>,<span style="color: #cc66cc;">0</span><span style="color: #66cc66;">&#41;</span> <span style="color: #993333; font-weight: bold;">PRIMARY</span> <span style="color: #993333; font-weight: bold;">KEY</span>,
-        bla_xy VARCHAR2<span style="color: #66cc66;">&#40;</span><span style="color: #cc66cc;">4000</span><span style="color: #66cc66;">&#41;</span>
-<span style="color: #66cc66;">&#41;</span>;
+CREATE TABLE xy &#40;
+        id_xy NUMBER&#40;20,0&#41; PRIMARY KEY,
+        bla_xy VARCHAR2&#40;4000&#41;
+&#41;;
 &nbsp;
-rem Nun ist noch ein <span style="color: #993333; font-weight: bold;">TRIGGER</span> vonnöten, der
+rem Nun ist noch ein TRIGGER vonnöten, der
 rem die neue Id von der Sequence übergeben
-rem bekommt und vor dem <span style="color: #993333; font-weight: bold;">INSERT</span> diesen Wert
+rem bekommt und vor dem INSERT diesen Wert
 rem auf die entsprechende Spalte überträgt:
 &nbsp;
-<span style="color: #993333; font-weight: bold;">CREATE</span> <span style="color: #993333; font-weight: bold;">TRIGGER</span> trigger_primary_key BEFORE <span style="color: #993333; font-weight: bold;">INSERT</span> <span style="color: #993333; font-weight: bold;">ON</span> xy
-       REFERENCING NEW <span style="color: #993333; font-weight: bold;">AS</span> NEW OLD <span style="color: #993333; font-weight: bold;">AS</span> OLD <span style="color: #993333; font-weight: bold;">FOR</span> EACH ROW
+CREATE TRIGGER trigger_primary_key BEFORE INSERT ON xy
+       REFERENCING NEW AS NEW OLD AS OLD FOR EACH ROW
 Begin
-<span style="color: #993333; font-weight: bold;">SELECT</span> zaehler_der_tabelle_xy.<span style="color: #993333; font-weight: bold;">NEXTVAL</span> <span style="color: #993333; font-weight: bold;">INTO</span> :NEW.id_xy <span style="color: #993333; font-weight: bold;">FROM</span> DUAL;
+SELECT zaehler_der_tabelle_xy.NEXTVAL INTO :NEW.id_xy FROM DUAL;
 End;
 /</pre>
 
@@ -44,8 +44,8 @@ müssen sich alle Tabellen die fortlaufenden Zahlen teilen.</p>
 Alternativ kann auch ohne Trigger gearbeitet werden und die
 nächste Zahl per Hand selektiert werden:</p>
 
-<pre><span style="color: #0000ff;">$stmt</span>=OCIParse<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$conn</span>, <span style="color: #ff0000;">&quot;SELECT zaehler_der_tabelle_xy.nextval FROM DUAL&quot;</span><span style="color: #000000;">&#41;</span>;
-OCIExecute<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$stmt</span><span style="color: #000000;">&#41;</span>;
-OCIFetch<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$stmt</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #0000ff;">$nextid</span>=OCIResult<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$stmt</span>, <span style="color: #ff0000;">&quot;NEXTVAL&quot;</span><span style="color: #000000;">&#41;</span>;</pre>
+<pre>$stmt=OCIParse&#40;$conn, &quot;SELECT zaehler_der_tabelle_xy.nextval FROM DUAL&quot;&#41;;
+OCIExecute&#40;$stmt&#41;;
+OCIFetch&#40;$stmt&#41;;
+$nextid=OCIResult&#40;$stmt, &quot;NEXTVAL&quot;&#41;;</pre>
 

@@ -26,7 +26,7 @@ Will man ein externes Kommando einfach nur ausführen, kann man
 das betreffende Kommando einfach in Backticks setzen:
 </p>
 
-<pre>`<a href="http://www.php3.de/touch"><span style="color: #000066;">touch</span></a> yyy`;</pre>
+<pre>`touch yyy`;</pre>
 
 <p>
 Dies wird im selben Verzeichnis wie das PHP-Script die Datei
@@ -39,13 +39,13 @@ Alternativ kann man ein Kommando durch die Funktion
 nicht sichtbar, kann aber in einem Array abgelegt werden:
 </p>
 
-<pre><a href="http://www.php3.de/exec"><span style="color: #000066;">exec</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;cat /etc/group&quot;</span>, <span style="color: #0000ff;">$lines</span>, <span style="color: #0000ff;">$result</span><span style="color: #000000;">&#41;</span>;
-  <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;result = $result&lt;br&gt;&quot;</span>;
+<pre>exec&#40;&quot;cat /etc/group&quot;, $lines, $result&#41;;
+  echo &quot;result = $result&lt;br&gt;&quot;;
 &nbsp;
-  <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;Lines&lt;br&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
-  <span style="color: #b1b100;">foreach</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$lines</span> <span style="color: #b1b100;">as</span> <span style="color: #0000ff;">$k</span> =&gt; <span style="color: #0000ff;">$v</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-    <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;k=$k v=$v&lt;br&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
-  <span style="color: #000000;">&#125;</span></pre>
+  echo &quot;Lines&lt;br&gt;\n&quot;;
+  foreach &#40;$lines as $k =&gt; $v&#41; &#123;
+    echo &quot;k=$k v=$v&lt;br&gt;\n&quot;;
+  &#125;</pre>
 
 <p>
 Die Ausgabe des Befehls wird im Feld <tt>$lines</tt> zur Verfügung
@@ -58,21 +58,21 @@ Unix-Kommandos dagegen an den Webserver weiter. Ebenso
 <a href="http://www.php3.de/passthru">passthru()</a>:
 </p>
 
-<pre><a href="http://www.php3.de/system"><span style="color: #000066;">system</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;ls -l&quot;</span>, <span style="color: #0000ff;">$result</span><span style="color: #000000;">&#41;</span>;
-  <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;Result: $result&lt;br&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
+<pre>system&#40;&quot;ls -l&quot;, $result&#41;;
+  echo &quot;Result: $result&lt;br&gt;\n&quot;;
 &nbsp;
-  <a href="http://www.php3.de/passthru"><span style="color: #000066;">passthru</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;ls -l&quot;</span>, <span style="color: #0000ff;">$result</span><span style="color: #000000;">&#41;</span>;
-  <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;Result: $result&lt;br&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;</pre>
+  passthru&#40;&quot;ls -l&quot;, $result&#41;;
+  echo &quot;Result: $result&lt;br&gt;\n&quot;;</pre>
 
 <p>
 Schließlich kann man externe Kommandos noch mit Hilfe der
 Funktion <a href="http://www.php3.de/popen">popen()</a> starten:
 </p>
 
-<pre><span style="color: #0000ff;">$fp</span> = <a href="http://www.php3.de/popen"><span style="color: #000066;">popen</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;ls -l&quot;</span>, <span style="color: #ff0000;">&quot;r&quot;</span><span style="color: #000000;">&#41;</span>;
-  <span style="color: #b1b100;">while</span><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$line</span> = <a href="http://www.php3.de/fgets"><span style="color: #000066;">fgets</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span>, <span style="color: #cc66cc;">1024</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-    <a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;%s&lt;br&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>, <span style="color: #0000ff;">$line</span><span style="color: #000000;">&#41;</span>;
-  <span style="color: #000000;">&#125;</span></pre>
+<pre>$fp = popen&#40;&quot;ls -l&quot;, &quot;r&quot;&#41;;
+  while&#40;$line = fgets&#40;$fp, 1024&#41;&#41; &#123;
+    printf&#40;&quot;%s&lt;br&gt;\n&quot;, $line&#41;;
+  &#125;</pre>
 
 <p>
 Im <a href="http://de3.php.net/manual/en/ini.php">safe_mode</a> unterliegt die Programmausführung

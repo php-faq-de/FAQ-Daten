@@ -27,11 +27,11 @@ So würde zum Beispiel folgendes Skript eine SMS an die
 Nummer 0177-1234567 senden:
 </p>
 
-<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
-<span style="color: #0000ff;">$subject</span> = <span style="color: #ff0000;">&quot;Hello World&quot;</span>;
-<span style="color: #0000ff;">$text</span> = <span style="color: #ff0000;">&quot;Just another PHP hacker&quot;</span>;
-<a href="http://www.php3.de/mail"><span style="color: #000066;">mail</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;491771234567@smsmail.eplus.de&quot;</span>,<span style="color: #0000ff;">$subject</span>,<span style="color: #0000ff;">$text</span>,<span style="color: #ff0000;">&quot;From: sms-service@send.er&quot;</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+<pre>&lt;?php
+$subject = &quot;Hello World&quot;;
+$text = &quot;Just another PHP hacker&quot;;
+mail&#40;&quot;491771234567@smsmail.eplus.de&quot;,$subject,$text,&quot;From: sms-service@send.er&quot;&#41;;
+?&gt;</pre>
 
 <p>
 Mit dieser Variante lässt sich auf einfache Weise der Versand

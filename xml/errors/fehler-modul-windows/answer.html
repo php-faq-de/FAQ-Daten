@@ -11,15 +11,15 @@ Einträge im Abschnitt "Dynamic Extensions" in der
 <tt>php.ini</tt> (siehe auch: ""<a class="faq" href="${php-ini}">Wo finde ich die php.ini?</a>""):
 </p>
 
-<pre class="ini"><span style="color: #666666; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #666666; font-style: italic;">; Dynamic Extensions ;</span>
-<span style="color: #666666; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #666666; font-style: italic;">; directory in which the loadable extensions (modules) reside</span>
-<span style="color: #000099;">extension_dir   </span>=<span style="color: #660066;">  d:\php4\extensions\</span>
+<pre class="ini">;;;;;;;;;;;;;;;;;;;;;;
+; Dynamic Extensions ;
+;;;;;;;;;;;;;;;;;;;;;;
+; directory in which the loadable extensions (modules) reside
+extension_dir   =  d:\php4\extensions\
 &nbsp;
-<span style="color: #666666; font-style: italic;">; if you wish to have an extension loaded automatically, use the</span>
-<span style="color: #666666; font-style: italic;">; following syntax:  extension=modulename.extension</span>
-<span style="color: #000099;">extension</span>=<span style="color: #660066;">php_imap.dll</span></pre>
+; if you wish to have an extension loaded automatically, use the
+; following syntax:  extension=modulename.extension
+extension=php_imap.dll</pre>
 
 <p>
 Wird PHP als Webserver-Modul eingesetzt, muss der Webserver neu

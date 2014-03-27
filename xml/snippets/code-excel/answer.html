@@ -14,10 +14,10 @@ funktioniert es damit, vermutlich mangels definiertem Content-Type, nicht
 wie gewünscht.
 </p>
 
-<pre><a href="http://www.php3.de/header"><span style="color: #000066;">header</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Content-Type: application/vnd.ms-excel&quot;</span><span style="color: #000000;">&#41;</span>;
-<a href="http://www.php3.de/header"><span style="color: #000066;">header</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Content-Disposition: inline; filename=<span style="color: #000099; font-weight: bold;">\&quot;</span>excel.xls<span style="color: #000099; font-weight: bold;">\&quot;</span>&quot;</span><span style="color: #000000;">&#41;</span>;
-<a href="http://www.php3.de/readfile"><span style="color: #000066;">readfile</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$filename</span><span style="color: #000000;">&#41;</span>;                       <span style="color: #808080; font-style: italic;">// Datei 1:1 durchreichen</span>
-<span style="color: #808080; font-style: italic;">// echo &quot;Titel (A1)\r\nA2\tB2\r\nA3\tB3&quot;;  // ODER mit PHP erzeugen</span></pre>
+<pre>header&#40;&quot;Content-Type: application/vnd.ms-excel&quot;&#41;;
+header&#40;&quot;Content-Disposition: inline; filename=\&quot;excel.xls\&quot;&quot;&#41;;
+readfile&#40;$filename&#41;;                       // Datei 1:1 durchreichen
+// echo &quot;Titel (A1)\r\nA2\tB2\r\nA3\tB3&quot;;  // ODER mit PHP erzeugen</pre>
 
 <p>
 <em>Anmerkung:</em> Trotz der Angabe <tt>inline</tt> bietet der Browser i.d.R.

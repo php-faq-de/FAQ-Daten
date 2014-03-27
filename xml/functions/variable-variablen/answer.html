@@ -7,19 +7,19 @@ Namen <tt>$myvar1</tt>, <tt>$myvar2</tt>, <tt>$myvar3</tt>,
 
 <p>Am günstigsten wäre es, in so einem Fall ein Array zu nehmen.</p>
 
-<pre><span style="color: #b1b100;">for</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$i</span>=<span style="color: #cc66cc;">0</span>; <span style="color: #0000ff;">$i</span>&lt;<span style="color: #cc66cc;">10</span>; <span style="color: #0000ff;">$i</span>++<span style="color: #000000;">&#41;</span>
-	<a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #0000ff;">$myvar</span><span style="color: #000000;">&#91;</span><span style="color: #0000ff;">$i</span><span style="color: #000000;">&#93;</span>;</pre>
+<pre>for &#40;$i=0; $i&lt;10; $i++&#41;
+	echo $myvar&#91;$i&#93;;</pre>
 
 <p>
 Wenn es unbedingt skalare Variablen sein müssen, kann man
 stattdessen über das <tt>$GLOBALS[]</tt>-Array zugreifen:
 </p>
 
-<pre><span style="color: #b1b100;">for</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$i</span>=<span style="color: #cc66cc;">0</span>; <span style="color: #0000ff;">$i</span>&lt;<span style="color: #cc66cc;">10</span>; <span style="color: #0000ff;">$i</span>++<span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-  <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><a href="http://www.php3.de/isset"><span style="color: #000066;">isset</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$GLOBALS</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;myvar$i&quot;</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>
-    <a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Variable var%d existiert und ihr Wert ist %s&lt;br /&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>,
-      <span style="color: #0000ff;">$i</span>, <span style="color: #0000ff;">$GLOBALS</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;myvar$i&quot;</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #000000;">&#125;</span></pre>
+<pre>for &#40;$i=0; $i&lt;10; $i++&#41; &#123;
+  if &#40;isset&#40;$GLOBALS&#91;&quot;myvar$i&quot;&#93;&#41;&#41;
+    printf&#40;&quot;Variable var%d existiert und ihr Wert ist %s&lt;br /&gt;\n&quot;,
+      $i, $GLOBALS&#91;&quot;myvar$i&quot;&#93;&#41;;
+&#125;</pre>
 
 <p>
 Statt <tt>echo $GLOBALS[$lall];</tt> kann man auch die zwei Befehle

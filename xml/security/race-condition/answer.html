@@ -8,29 +8,29 @@ austragen, welches nur einer gewinnen kann.
 
 <p>Ein typisches Beispiel für eine Race Condition:</p>
 
-<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+<pre>&lt;?php
 &nbsp;
-  <span style="color: #0000ff;">$datei</span> = <span style="color: #ff0000;">'/home/frank/datei'</span>;
+  $datei = '/home/frank/datei';
 &nbsp;
-  <span style="color: #808080; font-style: italic;">// wenn $datei nicht existiert ...</span>
-  <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span>!<a href="http://www.php3.de/file_exists"><span style="color: #000066;">file_exists</span></a> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$datei</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-    <span style="color: #808080; font-style: italic;">// ... dann $datei zum Schreiben öffnen</span>
-    <span style="color: #0000ff;">$fp</span> = <a href="http://www.php3.de/fopen"><span style="color: #000066;">fopen</span></a> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$datei</span>, <span style="color: #ff0000;">'w'</span><span style="color: #000000;">&#41;</span>;
+  // wenn $datei nicht existiert ...
+  if &#40;!file_exists &#40;$datei&#41;&#41; &#123;
+    // ... dann $datei zum Schreiben öffnen
+    $fp = fopen &#40;$datei, 'w'&#41;;
 &nbsp;
-    <span style="color: #808080; font-style: italic;">// andere Zugriffe abblocken</span>
-    <a href="http://www.php3.de/flock"><span style="color: #000066;">flock</span></a> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span>, LOCK_EX<span style="color: #000000;">&#41;</span>;
+    // andere Zugriffe abblocken
+    flock &#40;$fp, LOCK_EX&#41;;
 &nbsp;
-    <span style="color: #808080; font-style: italic;">// Daten in die Datei schreiben</span>
-    <a href="http://www.php3.de/fputs"><span style="color: #000066;">fputs</span></a> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span>, <span style="color: #0000ff;">$data</span><span style="color: #000000;">&#41;</span>;
+    // Daten in die Datei schreiben
+    fputs &#40;$fp, $data&#41;;
 &nbsp;
-    <span style="color: #808080; font-style: italic;">// Datei freigeben</span>
-    <a href="http://www.php3.de/flock"><span style="color: #000066;">flock</span></a> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span>, LOCK_UN<span style="color: #000000;">&#41;</span>;
-  <span style="color: #000000;">&#125;</span>
-  <span style="color: #b1b100;">else</span> <span style="color: #000000;">&#123;</span>
-    <span style="color: #808080; font-style: italic;">// Datei existiert bereits</span>
-  <span style="color: #000000;">&#125;</span>
+    // Datei freigeben
+    flock &#40;$fp, LOCK_UN&#41;;
+  &#125;
+  else &#123;
+    // Datei existiert bereits
+  &#125;
 &nbsp;
-<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+?&gt;</pre>
 
 <p>
 Nachdem der Test mit <a href="http://www.php3.de/file_exists">file_exists()</a> von dem Script
@@ -64,40 +64,40 @@ Dateisystem (auf derselben Partition) angelegt werden.</p>
 Hier nun das Beispiel ohne Race Condition:
 </p>
 
-<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+<pre>&lt;?php
 &nbsp;
-  <span style="color: #0000ff;">$datei</span> = <span style="color: #ff0000;">'/home/frank/datei'</span>;
+  $datei = '/home/frank/datei';
 &nbsp;
-  <span style="color: #808080; font-style: italic;">// temporäre Datei anlegen</span>
-  <span style="color: #0000ff;">$tempnam</span> = <a href="http://www.php3.de/tempnam"><span style="color: #000066;">tempnam</span></a> <span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'/home/frank/tmp'</span>, <span style="color: #ff0000;">'foo'</span><span style="color: #000000;">&#41;</span>;
+  // temporäre Datei anlegen
+  $tempnam = tempnam &#40;'/home/frank/tmp', 'foo'&#41;;
 &nbsp;
-  <span style="color: #808080; font-style: italic;">// Fehler: Datei konnte nicht angelegt werden</span>
-  <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$tempnam</span> === <span style="color: #000000; font-weight: bold;">false</span><span style="color: #000000;">&#41;</span>
-    <a href="http://www.php3.de/die"><span style="color: #000066;">die</span></a> <span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Could not create $tempnam!&quot;</span><span style="color: #000000;">&#41;</span>;
+  // Fehler: Datei konnte nicht angelegt werden
+  if &#40;$tempnam === false&#41;
+    die &#40;&quot;Could not create $tempnam!&quot;&#41;;
 &nbsp;
-  <span style="color: #808080; font-style: italic;">// temporäre Datei zum Schreiben öffnen</span>
-  <span style="color: #0000ff;">$fp</span> = <a href="http://www.php3.de/fopen"><span style="color: #000066;">fopen</span></a> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$tempnam</span>, <span style="color: #ff0000;">'w'</span><span style="color: #000000;">&#41;</span> or <a href="http://www.php3.de/die"><span style="color: #000066;">die</span></a> <span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Could not open $tempnam!&quot;</span><span style="color: #000000;">&#41;</span>;
+  // temporäre Datei zum Schreiben öffnen
+  $fp = fopen &#40;$tempnam, 'w'&#41; or die &#40;&quot;Could not open $tempnam!&quot;&#41;;
 &nbsp;
-  <span style="color: #808080; font-style: italic;">// andere Zugriffe abblocken</span>
-  <a href="http://www.php3.de/flock"><span style="color: #000066;">flock</span></a> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span>, LOCK_EX<span style="color: #000000;">&#41;</span>;
+  // andere Zugriffe abblocken
+  flock &#40;$fp, LOCK_EX&#41;;
 &nbsp;
-  <span style="color: #808080; font-style: italic;">// Daten in die Datei schreiben</span>
-  <a href="http://www.php3.de/fputs"><span style="color: #000066;">fputs</span></a> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span>, <span style="color: #0000ff;">$data</span><span style="color: #000000;">&#41;</span>;
+  // Daten in die Datei schreiben
+  fputs &#40;$fp, $data&#41;;
 &nbsp;
-  <span style="color: #808080; font-style: italic;">// Datei freigeben</span>
-  <a href="http://www.php3.de/flock"><span style="color: #000066;">flock</span></a> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span>, LOCK_UN<span style="color: #000000;">&#41;</span>;
-  <a href="http://www.php3.de/fclose"><span style="color: #000066;">fclose</span></a> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span><span style="color: #000000;">&#41;</span>;
+  // Datei freigeben
+  flock &#40;$fp, LOCK_UN&#41;;
+  fclose &#40;$fp&#41;;
 &nbsp;
-  <span style="color: #808080; font-style: italic;">// $datei zu temporärer Datei hardlinken:</span>
-  <span style="color: #808080; font-style: italic;">// schlägt fehl, wenn $datei schon vorhanden ist</span>
-  <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span>!<a href="http://www.php3.de/link"><span style="color: #000066;">link</span></a> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$tempnam</span>, <span style="color: #0000ff;">$datei</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-    <span style="color: #808080; font-style: italic;">// Fehlschlag: Datei bereits vorhanden</span>
-  <span style="color: #000000;">&#125;</span>
+  // $datei zu temporärer Datei hardlinken:
+  // schlägt fehl, wenn $datei schon vorhanden ist
+  if &#40;!link &#40;$tempnam, $datei&#41;&#41; &#123;
+    // Fehlschlag: Datei bereits vorhanden
+  &#125;
 &nbsp;
-  <span style="color: #808080; font-style: italic;">// temporäre Datei löschen</span>
-  <a href="http://www.php3.de/unlink"><span style="color: #000066;">unlink</span></a> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$tempnam</span><span style="color: #000000;">&#41;</span>;
+  // temporäre Datei löschen
+  unlink &#40;$tempnam&#41;;
 &nbsp;
-<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+?&gt;</pre>
 
 <p>
 Unter Windows existiert die Funktion <a href="http://www.php3.de/link">link()</a> nicht.

@@ -3,13 +3,13 @@ Mit <a href="http://www.php3.de/unset">unset()</a> kann man sowohl Variablen (St
 ganze Arrays etc.) als auch einzelne Elemente eines Arrays löschen:
 </p>
 
-<pre><span style="color: #0000ff;">$array</span> = <a href="http://www.php3.de/array"><span style="color: #000066;">array</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'P'</span>, <span style="color: #ff0000;">'H'</span>, <span style="color: #ff0000;">'P'</span><span style="color: #000000;">&#41;</span>;
+<pre>$array = array&#40;'P', 'H', 'P'&#41;;
 &nbsp;
-<span style="color: #808080; font-style: italic;">// Löscht das 'H'</span>
-<a href="http://www.php3.de/unset"><span style="color: #000066;">unset</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$array</span><span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">1</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span>;
+// Löscht das 'H'
+unset&#40;$array&#91;1&#93;&#41;;
 &nbsp;
-<span style="color: #808080; font-style: italic;">// Löscht das ganze Array</span>
-<a href="http://www.php3.de/unset"><span style="color: #000066;">unset</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$array</span><span style="color: #000000;">&#41;</span>;</pre>
+// Löscht das ganze Array
+unset&#40;$array&#41;;</pre>
 
 <p>
 Durch das Löschen einzelner Einträge entstehen Lücken im Index des
@@ -20,8 +20,8 @@ dennoch ein Array mit fortlaufendem Index für direkten Zugriff, muss man
 es aus den verbleibenden Elementen neu erstellen:
 </p>
 
-<pre><span style="color: #808080; font-style: italic;">// Array mit fortlaufendem Index erzeugen</span>
-<span style="color: #0000ff;">$array</span> = <a href="http://www.php3.de/array_values"><span style="color: #000066;">array_values</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$array</span><span style="color: #000000;">&#41;</span>;</pre>
+<pre>// Array mit fortlaufendem Index erzeugen
+$array = array_values&#40;$array&#41;;</pre>
 
 <p>
 Weiterhin kann man auch mit <a href="http://www.php3.de/array_splice">array_splice()</a> Teile
@@ -29,6 +29,6 @@ eines Arrays entfernen, und dabei automatisch einen zusammenhängenden
 numerischen Index erzeugen lassen (falls das benötigt wird):
 </p>
 
-<pre><span style="color: #808080; font-style: italic;">// In $array ab Index 1 ein Element durch nichts ersetzen</span>
-<a href="http://www.php3.de/array_splice"><span style="color: #000066;">array_splice</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$array</span>, <span style="color: #cc66cc;">1</span>, <span style="color: #cc66cc;">1</span><span style="color: #000000;">&#41;</span>;</pre>
+<pre>// In $array ab Index 1 ein Element durch nichts ersetzen
+array_splice&#40;$array, 1, 1&#41;;</pre>
 

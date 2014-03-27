@@ -19,21 +19,21 @@ beginnen.
 <p>
 Quellcode-Beispiele:
 </p>
-<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
-<span style="color: #808080; font-style: italic;">/*
+<pre>&lt;?php
+/*
 Die externe URL http://www.example.com/verzeichnis/datei.ext soll gelesen werden.
-*/</span>
+*/
 &nbsp;
-<span style="color: #808080; font-style: italic;">/*
+/*
 in diesem Fall falsch, da eine URL absolut angegeben werden muss
 dieses Beispiel würde versuchen, die Datei datei.ext in
 /verzeichnis auf dem eigenen Server zu öffnen.
-*/</span>
-<span style="color: #0000ff;">$fp</span> = <a href="http://www.php3.de/fopen"><span style="color: #000066;">fopen</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;/verzeichnis/datei.ext&quot;</span>, <span style="color: #ff0000;">&quot;r&quot;</span><span style="color: #000000;">&#41;</span>;
+*/
+$fp = fopen&#40;&quot;/verzeichnis/datei.ext&quot;, &quot;r&quot;&#41;;
 &nbsp;
-<span style="color: #808080; font-style: italic;">/* richtig */</span>
-<span style="color: #0000ff;">$fp</span> = <a href="http://www.php3.de/fopen"><span style="color: #000066;">fopen</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;http://www.example.com/verzeichnis/datei.ext&quot;</span>, <span style="color: #ff0000;">&quot;r&quot;</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+/* richtig */
+$fp = fopen&#40;&quot;http://www.example.com/verzeichnis/datei.ext&quot;, &quot;r&quot;&#41;;
+?&gt;</pre>
 </li>
 <li>
 <p>
@@ -54,18 +54,18 @@ Verwendung von <a href="http://www.php3.de/phpinfo">phpinfo()</a>.
 <p>
 Quellcode-Beispiele:
 </p>
-<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
-<span style="color: #808080; font-style: italic;">/*
+<pre>&lt;?php
+/*
 die DocumentRoot sei /home/user und die zu öffnende Datei file.ext
 im Verzeichnis mydir
-*/</span>
+*/
 &nbsp;
-<span style="color: #808080; font-style: italic;">/* falsch */</span>
-<span style="color: #0000ff;">$fp</span> = <a href="http://www.php3.de/fopen"><span style="color: #000066;">fopen</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;/mydir/datei.ext&quot;</span>, <span style="color: #ff0000;">&quot;r&quot;</span><span style="color: #000000;">&#41;</span>;
+/* falsch */
+$fp = fopen&#40;&quot;/mydir/datei.ext&quot;, &quot;r&quot;&#41;;
 &nbsp;
-<span style="color: #808080; font-style: italic;">/* richtig */</span>
-<span style="color: #0000ff;">$fp</span> = <a href="http://www.php3.de/fopen"><span style="color: #000066;">fopen</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;/home/user/mydir/file.ext&quot;</span>, <span style="color: #ff0000;">&quot;r&quot;</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+/* richtig */
+$fp = fopen&#40;&quot;/home/user/mydir/file.ext&quot;, &quot;r&quot;&#41;;
+?&gt;</pre>
 <p>
 Desweiteren kann es vorkommen, dass sich Tippfehler im Pfad befinden.
 Ein häufig übersehener Fehler sind Leerzeichen am Anfang, im Pfad
@@ -74,19 +74,19 @@ oder an dessen Ende.
 <p>
 Code-Beispiele:
 </p>
-<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
-<span style="color: #808080; font-style: italic;">/* falsch, Leerzeichen am Anfang */</span>
-<span style="color: #0000ff;">$fp</span> = <a href="http://www.php3.de/fopen"><span style="color: #000066;">fopen</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot; /verzeichnis/datei.ext&quot;</span>, <span style="color: #ff0000;">&quot;w&quot;</span><span style="color: #000000;">&#41;</span>;
+<pre>&lt;?php
+/* falsch, Leerzeichen am Anfang */
+$fp = fopen&#40;&quot; /verzeichnis/datei.ext&quot;, &quot;w&quot;&#41;;
 &nbsp;
-<span style="color: #808080; font-style: italic;">/* falsch, Leerzeichen im Pfad */</span>
-<span style="color: #0000ff;">$fp</span> = <a href="http://www.php3.de/fopen"><span style="color: #000066;">fopen</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;/verzeichnis/ datei.ext&quot;</span>, <span style="color: #ff0000;">&quot;a+&quot;</span><span style="color: #000000;">&#41;</span>;
+/* falsch, Leerzeichen im Pfad */
+$fp = fopen&#40;&quot;/verzeichnis/ datei.ext&quot;, &quot;a+&quot;&#41;;
 &nbsp;
-<span style="color: #808080; font-style: italic;">/* falsch, Leerzeichen am Ende */</span>
-<span style="color: #0000ff;">$fp</span> = <a href="http://www.php3.de/fopen"><span style="color: #000066;">fopen</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;/verzeichnis/datei.ext &quot;</span>, <span style="color: #ff0000;">&quot;r+&quot;</span><span style="color: #000000;">&#41;</span>;
+/* falsch, Leerzeichen am Ende */
+$fp = fopen&#40;&quot;/verzeichnis/datei.ext &quot;, &quot;r+&quot;&#41;;
 &nbsp;
-<span style="color: #808080; font-style: italic;">/* richtig */</span>
-<span style="color: #0000ff;">$fp</span> = <a href="http://www.php3.de/fopen"><span style="color: #000066;">fopen</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;/verzeichnis/datei.ext&quot;</span>, <span style="color: #ff0000;">&quot;w&quot;</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+/* richtig */
+$fp = fopen&#40;&quot;/verzeichnis/datei.ext&quot;, &quot;w&quot;&#41;;
+?&gt;</pre>
 </li>
 </ol>
 

@@ -11,14 +11,14 @@ in PHP vorhandene Variable in JavaScript verwenden zu können, muss man
 sie innerhalb eines <tt>&lt;script&gt;</tt>-Bereiches ausgeben:
 </p>
 
-<pre>&lt;script type=<span style="color: #ff0000;">&quot;text/javascript&quot;</span> language=<span style="color: #ff0000;">&quot;JavaScript&quot;</span>&gt;
-<span style="color: #000000; font-weight: bold;">&lt;?php</span>
-<a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;js_var = '%s';<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>,
-        <a href="http://www.php3.de/strtr"><span style="color: #000066;">strtr</span></a><span style="color: #000000;">&#40;</span><a href="http://www.php3.de/addslashes"><span style="color: #000066;">addslashes</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$php_var</span><span style="color: #000000;">&#41;</span>,
-        <a href="http://www.php3.de/array"><span style="color: #000066;">array</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;<span style="color: #000099; font-weight: bold;">\r</span>&quot;</span> =&gt; <span style="color: #ff0000;">'<span style="color: #000099; font-weight: bold;">\r</span>'</span>, <span style="color: #ff0000;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span> =&gt; <span style="color: #ff0000;">'<span style="color: #000099; font-weight: bold;">\n</span>'</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>
-      <span style="color: #000000;">&#41;</span>;
-<span style="color: #000000; font-weight: bold;">?&gt;</span>
-<span style="color: #000000; font-weight: bold;">&lt;/script&gt;</span></pre>
+<pre>&lt;script type=&quot;text/javascript&quot; language=&quot;JavaScript&quot;&gt;
+&lt;?php
+printf&#40;&quot;js_var = '%s';\n&quot;,
+        strtr&#40;addslashes&#40;$php_var&#41;,
+        array&#40;&quot;\r&quot; =&gt; '\r', &quot;\n&quot; =&gt; '\n'&#41;&#41;
+      &#41;;
+?&gt;
+&lt;/script&gt;</pre>
 
 <p>
 Auf diese Weise wird die JavaScript-Variable <tt>js_var</tt> mit

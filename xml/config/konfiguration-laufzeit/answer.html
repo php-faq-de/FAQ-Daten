@@ -12,10 +12,10 @@
   <tt>.htaccess</tt>-Datei setzen. So kann man zum Beispiel innerhalb eines Scriptes 
   und unabhängig vom Server-Betriebssystem den Include-Path anpassen:</p>
   
-<pre><span style="color: #0000ff;">$include_path</span><span style="color: #000000;">&#91;</span><span style="color: #000000;">&#93;</span> = <span style="color: #ff0000;">'.'</span>;
-<span style="color: #0000ff;">$include_path</span><span style="color: #000000;">&#91;</span><span style="color: #000000;">&#93;</span> = <span style="color: #ff0000;">'pear/'</span>;
+<pre>$include_path&#91;&#93; = '.';
+$include_path&#91;&#93; = 'pear/';
 &nbsp;
-<a href="http://www.php3.de/ini_set"><span style="color: #000066;">ini_set</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'include_path'</span>, <a href="http://www.php3.de/implode"><span style="color: #000066;">implode</span></a><span style="color: #000000;">&#40;</span>PATH_SEPARATOR, <span style="color: #0000ff;">$include_path</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>;</pre>
+ini_set&#40;'include_path', implode&#40;PATH_SEPARATOR, $include_path&#41;&#41;;</pre>
   
   <p>
     Mit <tt>PHP_INI_PERDIR</tt> gekennzeichnete Variablen lassen sich 
@@ -25,7 +25,7 @@
   </p>
   
 <pre class="ini">&lt;IfModule mod_php4.c&gt;
-  php_value session.use_trans_sid <span style="">1</span>
+  php_value session.use_trans_sid 1
 &lt;/IfModule&gt;</pre>
   
   <p>Um mit <tt>PHP_INI_SYSTEM</tt> gekennzeichnete Variablen zu 

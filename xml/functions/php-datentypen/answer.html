@@ -12,23 +12,23 @@ ihn entwertet: \\ (Backslash Backslash).
 
 <h2>Skalare Werte: boolean, integer, float, string</h2>
 
-<pre><span style="color: #808080; font-style: italic;"># Zuweisung</span>
-<span style="color: #0000ff;">$mybool</span>  = <span style="color: #000000; font-weight: bold;">true</span>;
-<span style="color: #0000ff;">$myint</span>   = <span style="color: #cc66cc;">1</span>;
-<span style="color: #0000ff;">$myfloat</span> = <span style="color: #cc66cc;">3.14</span>;
-<span style="color: #0000ff;">$mystring</span>= <span style="color: #ff0000;">&quot;hallo&quot;</span>;
+<pre># Zuweisung
+$mybool  = true;
+$myint   = 1;
+$myfloat = 3.14;
+$mystring= &quot;hallo&quot;;
 &nbsp;
-<span style="color: #808080; font-style: italic;"># Verwendung</span>
-<span style="color: #0000ff;">$yourbool</span>  = not <span style="color: #0000ff;">$mybool</span>;
-<span style="color: #0000ff;">$yourint</span>   = <span style="color: #0000ff;">$myint</span> * <span style="color: #cc66cc;">2</span>;
-<span style="color: #0000ff;">$yourfloat</span> = <span style="color: #0000ff;">$myfloat</span> * <span style="color: #cc66cc;">2.71828</span>;
-<span style="color: #0000ff;">$yourstring</span>= <span style="color: #0000ff;">$mystring</span> . <span style="color: #ff0000;">&quot; du da!&quot;</span>;
+# Verwendung
+$yourbool  = not $mybool;
+$yourint   = $myint * 2;
+$yourfloat = $myfloat * 2.71828;
+$yourstring= $mystring . &quot; du da!&quot;;
 &nbsp;
-<span style="color: #808080; font-style: italic;"># Ausgabe</span>
-<a href="http://www.php3.de/print"><span style="color: #000066;">print</span></a> <span style="color: #ff0000;">&quot;$yourbool<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
-<a href="http://www.php3.de/print"><span style="color: #000066;">print</span></a> <span style="color: #ff0000;">&quot;$yourint<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
-<a href="http://www.php3.de/print"><span style="color: #000066;">print</span></a> <span style="color: #ff0000;">&quot;$yourfloat<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
-<a href="http://www.php3.de/print"><span style="color: #000066;">print</span></a> <span style="color: #ff0000;">&quot;$yourstring<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;</pre>
+# Ausgabe
+print &quot;$yourbool\n&quot;;
+print &quot;$yourint\n&quot;;
+print &quot;$yourfloat\n&quot;;
+print &quot;$yourstring\n&quot;;</pre>
 
 <h2>Felder (Arrays)</h2>
 
@@ -42,44 +42,44 @@ Integer-Index und Hashes (Assoziativen Arrays) mit beliebigen
 Indices.
 </p>
 
-<pre><span style="color: #808080; font-style: italic;"># Arrays</span>
+<pre># Arrays
 &nbsp;
-<span style="color: #808080; font-style: italic;"># Zuweisung</span>
-<span style="color: #0000ff;">$a1</span>    = <a href="http://www.php3.de/array"><span style="color: #000066;">array</span></a><span style="color: #000000;">&#40;</span> <span style="color: #cc66cc;">10</span>, <span style="color: #cc66cc;">20</span>, <span style="color: #cc66cc;">30</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #0000ff;">$a2</span><span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #000000;">&#93;</span> = <span style="color: #cc66cc;">10</span>;
-<span style="color: #0000ff;">$a2</span><span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">2</span><span style="color: #000000;">&#93;</span> = <span style="color: #cc66cc;">30</span>;
-<span style="color: #0000ff;">$a2</span><span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">1</span><span style="color: #000000;">&#93;</span> = <span style="color: #cc66cc;">20</span>;
+# Zuweisung
+$a1    = array&#40; 10, 20, 30&#41;;
+$a2&#91;0&#93; = 10;
+$a2&#91;2&#93; = 30;
+$a2&#91;1&#93; = 20;
 &nbsp;
-<span style="color: #808080; font-style: italic;"># Verwendung</span>
-<span style="color: #0000ff;">$a3</span><span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #000000;">&#93;</span> = <span style="color: #0000ff;">$a1</span><span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #000000;">&#93;</span> + <span style="color: #0000ff;">$a2</span><span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">2</span><span style="color: #000000;">&#93;</span>; <span style="color: #808080; font-style: italic;">// $a3[0] ist 40</span>
-<span style="color: #0000ff;">$a3</span><span style="color: #000000;">&#91;</span><span style="color: #000000;">&#93;</span>  = <span style="color: #0000ff;">$a1</span><span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">1</span><span style="color: #000000;">&#93;</span> + <span style="color: #0000ff;">$a1</span><span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #000000;">&#93;</span>; <span style="color: #808080; font-style: italic;">// $a3[1] ist 30, Index autom. vergeben</span>
+# Verwendung
+$a3&#91;0&#93; = $a1&#91;0&#93; + $a2&#91;2&#93;; // $a3[0] ist 40
+$a3&#91;&#93;  = $a1&#91;1&#93; + $a1&#91;0&#93;; // $a3[1] ist 30, Index autom. vergeben
 &nbsp;
-<span style="color: #808080; font-style: italic;"># Ausgabe</span>
-<a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;A1: %s %s %s<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>, <span style="color: #0000ff;">$a1</span><span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #000000;">&#93;</span>, <span style="color: #0000ff;">$a1</span><span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">1</span><span style="color: #000000;">&#93;</span>, <span style="color: #0000ff;">$a1</span><span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">2</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span>;
+# Ausgabe
+printf&#40;&quot;A1: %s %s %s\n&quot;, $a1&#91;0&#93;, $a1&#91;1&#93;, $a1&#91;2&#93;&#41;;
 &nbsp;
-<span style="color: #808080; font-style: italic;"># Aufzählung</span>
-<span style="color: #b1b100;">for</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$i</span>=<span style="color: #cc66cc;">0</span>; <span style="color: #0000ff;">$i</span>&lt;=<span style="color: #cc66cc;">2</span>; <span style="color: #0000ff;">$i</span>++<span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-  <a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;%s: %s<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>, <span style="color: #0000ff;">$i</span>, <span style="color: #0000ff;">$a1</span><span style="color: #000000;">&#91;</span><span style="color: #0000ff;">$i</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #000000;">&#125;</span></pre>
+# Aufzählung
+for &#40;$i=0; $i&lt;=2; $i++&#41; &#123;
+  printf&#40;&quot;%s: %s\n&quot;, $i, $a1&#91;$i&#93;&#41;;
+&#125;</pre>
 
-<pre><span style="color: #808080; font-style: italic;"># Hashes</span>
+<pre># Hashes
 &nbsp;
-<span style="color: #808080; font-style: italic;"># Zuweisung</span>
-<span style="color: #0000ff;">$a1</span>    = <a href="http://www.php3.de/array"><span style="color: #000066;">array</span></a><span style="color: #000000;">&#40;</span> <span style="color: #ff0000;">&quot;peter&quot;</span> =&gt; <span style="color: #cc66cc;">10</span>, <span style="color: #ff0000;">&quot;paul&quot;</span> =&gt; <span style="color: #cc66cc;">20</span>, <span style="color: #ff0000;">&quot;mary&quot;</span> =&gt; <span style="color: #cc66cc;">30</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #0000ff;">$a2</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;peter&quot;</span><span style="color: #000000;">&#93;</span> = <span style="color: #cc66cc;">10</span>;
-<span style="color: #0000ff;">$a2</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;mary&quot;</span><span style="color: #000000;">&#93;</span>  = <span style="color: #cc66cc;">30</span>;
-<span style="color: #0000ff;">$a2</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;paul&quot;</span><span style="color: #000000;">&#93;</span>  = <span style="color: #cc66cc;">20</span>;
+# Zuweisung
+$a1    = array&#40; &quot;peter&quot; =&gt; 10, &quot;paul&quot; =&gt; 20, &quot;mary&quot; =&gt; 30&#41;;
+$a2&#91;&quot;peter&quot;&#93; = 10;
+$a2&#91;&quot;mary&quot;&#93;  = 30;
+$a2&#91;&quot;paul&quot;&#93;  = 20;
 &nbsp;
-<span style="color: #808080; font-style: italic;"># Verwendung</span>
-<span style="color: #0000ff;">$a3</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;peter&quot;</span><span style="color: #000000;">&#93;</span> = <span style="color: #0000ff;">$a1</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;peter&quot;</span><span style="color: #000000;">&#93;</span> + <span style="color: #0000ff;">$a2</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;mary&quot;</span><span style="color: #000000;">&#93;</span>; <span style="color: #808080; font-style: italic;">// $a3[&quot;peter&quot;] ist 40</span>
+# Verwendung
+$a3&#91;&quot;peter&quot;&#93; = $a1&#91;&quot;peter&quot;&#93; + $a2&#91;&quot;mary&quot;&#93;; // $a3[&quot;peter&quot;] ist 40
 &nbsp;
-<span style="color: #808080; font-style: italic;"># Ausgabe</span>
-<a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;A1: %s %s %s<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>, <span style="color: #0000ff;">$a1</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;peter&quot;</span><span style="color: #000000;">&#93;</span>, <span style="color: #0000ff;">$a1</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;paul&quot;</span><span style="color: #000000;">&#93;</span>, <span style="color: #0000ff;">$a1</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;mary&quot;</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span>;
+# Ausgabe
+printf&#40;&quot;A1: %s %s %s\n&quot;, $a1&#91;&quot;peter&quot;&#93;, $a1&#91;&quot;paul&quot;&#93;, $a1&#91;&quot;mary&quot;&#93;&#41;;
 &nbsp;
-<span style="color: #808080; font-style: italic;"># Aufzählung</span>
-<span style="color: #b1b100;">foreach</span><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$a1</span> <span style="color: #b1b100;">as</span> <span style="color: #0000ff;">$k</span> =&gt; <span style="color: #0000ff;">$v</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-  <a href="http://www.php3.de/print"><span style="color: #000066;">print</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;%s: %s<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>, <span style="color: #0000ff;">$k</span>, <span style="color: #0000ff;">$v</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #000000;">&#125;</span></pre>
+# Aufzählung
+foreach&#40;$a1 as $k =&gt; $v&#41; &#123;
+  print&#40;&quot;%s: %s\n&quot;, $k, $v&#41;;
+&#125;</pre>
 
 <h2>Objekte</h2>
 

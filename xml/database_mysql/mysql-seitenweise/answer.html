@@ -4,8 +4,8 @@ geordneten Tabelle anzeigt. In anderen Datenbanken muss man sich
 eine Zeilennummer definieren und kann dann einen Teil der
 Tabelle mittels einer <tt>BETWEEN</tt>-Clause auswählen.</p>
 
-<pre class="sql"><span style="color: #808080; font-style: italic;"># MySQL</span>
-mysql&gt; <span style="color: #993333; font-weight: bold;">SELECT</span> * <span style="color: #993333; font-weight: bold;">FROM</span> tabelle <span style="color: #993333; font-weight: bold;">LIMIT</span> s,m;</pre>
+<pre class="sql"># MySQL
+mysql&gt; SELECT * FROM tabelle LIMIT s,m;</pre>
 
 <p>Es ist nicht effizient, alle <tt>n</tt> Datensätze der Tabelle zu
 selektieren und dann alle Datensätze vor Position <tt>s</tt> zu

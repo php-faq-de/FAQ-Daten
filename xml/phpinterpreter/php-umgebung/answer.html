@@ -13,18 +13,18 @@ Umgebungsvariable <tt>HOME</tt> steht also als Element im Array
 <tt>$_ENV["HOME"]</tt> zur Verfügung.
 </p>
 
-<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
-  <span style="color: #000000; font-weight: bold;">function</span> somefunc<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-    <span style="color: #808080; font-style: italic;">// Empfohlen</span>
-    <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <a href="http://www.php3.de/getenv"><span style="color: #000066;">getenv</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;HOME&quot;</span><span style="color: #000000;">&#41;</span>. <span style="color: #ff0000;">&quot;&lt;br /&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
+<pre>&lt;?php
+  function somefunc&#40;&#41; &#123;
+    // Empfohlen
+    echo getenv&#40;&quot;HOME&quot;&#41;. &quot;&lt;br /&gt;\n&quot;;
 &nbsp;
-    <span style="color: #808080; font-style: italic;">// $_ENV ist superglobal und automatisch in</span>
-    <span style="color: #808080; font-style: italic;">// Funktionen verfügbar.</span>
-    <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #0000ff;">$_ENV</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;HOME&quot;</span><span style="color: #000000;">&#93;</span>&lt;br /&gt;\n<span style="color: #ff0000;">&quot;;
+    // $_ENV ist superglobal und automatisch in
+    // Funktionen verfügbar.
+    echo $_ENV&#91;&quot;HOME&quot;&#93;&lt;br /&gt;\n&quot;;
   }
 &nbsp;
   somefunc();
- ?&gt;</span></pre>
+ ?&gt;</pre>
 
 <p>
 Mit Hilfe der Funktion <a href="http://www.php3.de/phpinfo">phpinfo()</a> bekommt man

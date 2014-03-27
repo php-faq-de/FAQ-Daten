@@ -9,17 +9,17 @@ include() der einzubindende Scriptteil quasi an die Stelle des
 Befehls kopiert wird.
 </p>
 
-<pre><span style="color: #808080; font-style: italic;">// $var soll an script.php übergeben werden</span>
+<pre>// $var soll an script.php übergeben werden
 &nbsp;
-<span style="color: #808080; font-style: italic;">// Funktioniert nicht</span>
-<span style="color: #b1b100;">include</span><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'script.php?var=test'</span><span style="color: #000000;">&#41;</span>;
+// Funktioniert nicht
+include&#40;'script.php?var=test'&#41;;
 &nbsp;
-<span style="color: #808080; font-style: italic;">// So geht das</span>
-<span style="color: #0000ff;">$_GET</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'var'</span><span style="color: #000000;">&#93;</span> = <span style="color: #ff0000;">'test'</span>; <span style="color: #808080; font-style: italic;">// oder bei altem script.php $var = 'test';</span>
-<span style="color: #b1b100;">include</span><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'script.php'</span><span style="color: #000000;">&#41;</span>;
+// So geht das
+$_GET&#91;'var'&#93; = 'test'; // oder bei altem script.php $var = 'test';
+include&#40;'script.php'&#41;;
 &nbsp;
-<span style="color: #808080; font-style: italic;">// So geht's bei externen Dateien</span>
-<span style="color: #b1b100;">include</span><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'http://example.com/script.php?var=test'</span><span style="color: #000000;">&#41;</span>;</pre>
+// So geht's bei externen Dateien
+include&#40;'http://example.com/script.php?var=test'&#41;;</pre>
 
 <p>
 Versucht man bei <em>lokalen</em> Dateien eine Variablenübergabe

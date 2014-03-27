@@ -1,6 +1,6 @@
 <h2>Konstanten</h2>
 
-<pre><a href="http://www.php3.de/define"><span style="color: #000066;">define</span></a><span style="color: #000000;">&#40;</span>NAME, Wert<span style="color: #000000;">&#41;</span>;</pre>
+<pre>define&#40;NAME, Wert&#41;;</pre>
 
 <p>
 definiert eine Konstante. Diese Konstante ist überall gültig,
@@ -16,7 +16,7 @@ Benutzung innerhalb des globalen Namensraumes, also einfach
 durch
 </p>
 
-<pre><span style="color: #0000ff;">$a</span> = <span style="color: #cc66cc;">10</span>;</pre>
+<pre>$a = 10;</pre>
 
 <p>außerhalb jeder Klasse oder Funktion.</p>
 
@@ -59,14 +59,14 @@ Anweisung <tt>global</tt>.
 
 <p>Beispiel:</p>
 
-<pre><span style="color: #000000; font-weight: bold;">function</span> testfunc<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$para1</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-  <a href="http://www.php3.de/global"><span style="color: #000066;">global</span></a> <span style="color: #0000ff;">$glob1</span>;
+<pre>function testfunc&#40;$para1&#41; &#123;
+  global $glob1;
 &nbsp;
-  <span style="color: #0000ff;">$loc1</span> = <span style="color: #cc66cc;">10</span>;
-  <span style="color: #0000ff;">$glob1</span> = <span style="color: #0000ff;">$glob1</span> + <span style="color: #cc66cc;">1</span>;
+  $loc1 = 10;
+  $glob1 = $glob1 + 1;
 &nbsp;
-  <span style="color: #b1b100;">return</span>;
-<span style="color: #000000;">&#125;</span></pre>
+  return;
+&#125;</pre>
 
 <p>
 Diese Funktion hat zunächst einmal die Variablen <tt>$para1</tt> und
@@ -86,17 +86,17 @@ bleibt und bei einem erneuten Funktionsaufruf erneut sichtbar
 wird. Dies erfolgt mit Hilfe der Anweisung <tt>static</tt>.
 </p>
 
-<pre><span style="color: #000000; font-weight: bold;">function</span> testfunc2<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$para1</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-  <a href="http://www.php3.de/global"><span style="color: #000066;">global</span></a> <span style="color: #0000ff;">$glob1</span>;
-  <a href="http://www.php3.de/static"><span style="color: #000066;">static</span></a> <span style="color: #0000ff;">$stat1</span> = <span style="color: #cc66cc;">0</span>;
+<pre>function testfunc2&#40;$para1&#41; &#123;
+  global $glob1;
+  static $stat1 = 0;
 &nbsp;
-  <span style="color: #0000ff;">$loc1</span> = <span style="color: #cc66cc;">10</span>;
-  <span style="color: #0000ff;">$glob1</span> = <span style="color: #0000ff;">$glob1</span> + <span style="color: #cc66cc;">1</span>;
-  <span style="color: #0000ff;">$stat1</span> = <span style="color: #0000ff;">$stat1</span> + <span style="color: #cc66cc;">1</span>;
+  $loc1 = 10;
+  $glob1 = $glob1 + 1;
+  $stat1 = $stat1 + 1;
 &nbsp;
-  <a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Die Funktion testfunc2() wurde %s mal aufgerufen.<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>,
-    <span style="color: #0000ff;">$stat1</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #000000;">&#125;</span></pre>
+  printf&#40;&quot;Die Funktion testfunc2() wurde %s mal aufgerufen.\n&quot;,
+    $stat1&#41;;
+&#125;</pre>
 
 <p>
 In diesem Beispiel ist die Anweisung <tt>static $stat1</tt> dazu
@@ -114,21 +114,21 @@ Symboltabelle des Interpreters. Der Name ist in allen
 Namensräumen sichtbar. Entsprechend ist das Konstrukt
 </p>
 
-<pre><span style="color: #000000; font-weight: bold;">function</span> testfunc3<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-  <a href="http://www.php3.de/global"><span style="color: #000066;">global</span></a> <span style="color: #0000ff;">$glob1</span>;
+<pre>function testfunc3&#40;&#41; &#123;
+  global $glob1;
 &nbsp;
-  <span style="color: #0000ff;">$glob1</span> = <span style="color: #0000ff;">$glob1</span> + <span style="color: #cc66cc;">1</span>;
+  $glob1 = $glob1 + 1;
 &nbsp;
-  <span style="color: #b1b100;">return</span>;
-<span style="color: #000000;">&#125;</span></pre>
+  return;
+&#125;</pre>
 
 <p>gleichbedeutend mit</p>
 
-<pre><span style="color: #000000; font-weight: bold;">function</span> testfunc3b<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-  <span style="color: #0000ff;">$GLOBALS</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;glob1&quot;</span><span style="color: #000000;">&#93;</span> = <span style="color: #0000ff;">$GLOBALS</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;glob1&quot;</span><span style="color: #000000;">&#93;</span> + <span style="color: #cc66cc;">1</span>;
+<pre>function testfunc3b&#40;&#41; &#123;
+  $GLOBALS&#91;&quot;glob1&quot;&#93; = $GLOBALS&#91;&quot;glob1&quot;&#93; + 1;
 &nbsp;
-  <span style="color: #b1b100;">return</span>;
-<span style="color: #000000;">&#125;</span></pre>
+  return;
+&#125;</pre>
 
 <h2>Variablen in Klassen</h2>
 
@@ -138,21 +138,21 @@ Die dritte Sorte Namensräume, die in PHP existiert, sind
 Anweisung
 </p>
 
-<pre><span style="color: #000000; font-weight: bold;">class</span> MyClass <span style="color: #000000;">&#123;</span>
-  <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #0000ff;">$a</span>;
-  <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #0000ff;">$b</span>;
+<pre>class MyClass &#123;
+  var $a;
+  var $b;
 &nbsp;
-  <span style="color: #000000; font-weight: bold;">function</span> c<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-    <a href="http://www.php3.de/print"><span style="color: #000066;">print</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Der Wert von a ist %s<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>, <span style="color: #0000ff;">$this</span>-&gt;<span style="color: #006600;">a</span><span style="color: #000000;">&#41;</span>
-    <span style="color: #0000ff;">$this</span>-&gt;<span style="color: #006600;">b</span> = <span style="color: #0000ff;">$this</span>-&gt;<span style="color: #006600;">b</span> + <span style="color: #cc66cc;">1</span>;
-    <a href="http://www.php3.de/print"><span style="color: #000066;">print</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Der Wert von b ist %s<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>, <span style="color: #0000ff;">$this</span>-&gt;<span style="color: #006600;">b</span><span style="color: #000000;">&#41;</span>;
-  <span style="color: #000000;">&#125;</span>
+  function c&#40;&#41; &#123;
+    print&#40;&quot;Der Wert von a ist %s\n&quot;, $this-&gt;a&#41;
+    $this-&gt;b = $this-&gt;b + 1;
+    print&#40;&quot;Der Wert von b ist %s\n&quot;, $this-&gt;b&#41;;
+  &#125;
 &nbsp;
-  <span style="color: #000000; font-weight: bold;">function</span> MyClass<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-    <span style="color: #0000ff;">$this</span>-&gt;<span style="color: #006600;">a</span> = <span style="color: #cc66cc;">10</span>;
-    <span style="color: #0000ff;">$this</span>-&gt;<span style="color: #006600;">b</span> = <span style="color: #cc66cc;">0</span>;
-  <span style="color: #000000;">&#125;</span>
-<span style="color: #000000;">&#125;</span></pre>
+  function MyClass&#40;&#41; &#123;
+    $this-&gt;a = 10;
+    $this-&gt;b = 0;
+  &#125;
+&#125;</pre>
 
 <p>
 Nach dieser Definition ist KEINE Variable belegt, aber es
@@ -164,7 +164,7 @@ einen Bauplan mitgibt und die nach diesem Plan Variablen
 herstellt.
 </p>
 
-<pre><span style="color: #0000ff;">$o</span> = <span style="color: #000000; font-weight: bold;">new</span> MyClass;</pre>
+<pre>$o = new MyClass;</pre>
 
 <p>
 Den Bauplan einer Variablen bezeichnet man als Klasse, hier der
@@ -179,7 +179,7 @@ Nach einem Bauplan können mehrere Objekte gebaut werden, d.h.
 eine Klasse kann mehrere Instanzen haben.
 </p>
 
-<pre><span style="color: #0000ff;">$p</span> = <span style="color: #000000; font-weight: bold;">new</span> MyClass;</pre>
+<pre>$p = new MyClass;</pre>
 
 <p>
 Die Variablen mit den Namen "a" und "b" in einem Objekt der
@@ -187,8 +187,8 @@ Klasse MyClass werden in PHP als Slots oder Instanzvariablen
 bezeichnet. Man spricht sie immer über den Namen des Objektes an:
 </p>
 
-<pre><span style="color: #0000ff;">$o</span>-&gt;<span style="color: #006600;">a</span> = <span style="color: #cc66cc;">17</span>;
-<span style="color: #0000ff;">$p</span>-&gt;<span style="color: #006600;">a</span> = <span style="color: #cc66cc;">31</span>;</pre>
+<pre>$o-&gt;a = 17;
+$p-&gt;a = 31;</pre>
 
 <p>
 Dadurch werden sie unterscheidbar, d.h. es ist erkennbar, ob man
@@ -206,10 +206,10 @@ und "MyClass". Sie werden genauso angesprochen wie die
 Instanzvariablen:
 </p>
 
-<pre><span style="color: #0000ff;">$o</span>-&gt;<span style="color: #006600;">c</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #0000ff;">$p</span>-&gt;<span style="color: #006600;">c</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #0000ff;">$o</span>-&gt;<span style="color: #006600;">MyClass</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #0000ff;">$p</span>-&gt;<span style="color: #006600;">MyClass</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;</pre>
+<pre>$o-&gt;c&#40;&#41;;
+$p-&gt;c&#40;&#41;;
+$o-&gt;MyClass&#40;&#41;;
+$p-&gt;MyClass&#40;&#41;;</pre>
 
 <p>
 Manche Leute nennen die Funktionen eines Objektes auch
@@ -226,7 +226,7 @@ von <tt>new</tt> gebaut wird. Diese Funktion kann also verwendet werden,
 um die Slots des Objektes mit Defaultwerten zu initialisieren:
 </p>
 
-<pre><span style="color: #0000ff;">$c</span> = <span style="color: #000000; font-weight: bold;">new</span> MyClass;</pre>
+<pre>$c = new MyClass;</pre>
 
 <p>
 Hier wird also die Funktion <tt>$c-&gt;MyClass()</tt> automatisch
@@ -237,19 +237,19 @@ Parameter erwarten und man könnte der Funktion dann beim
 Zusammenbau diese Parameter mitgeben:
 </p>
 
-<pre><span style="color: #000000; font-weight: bold;">class</span> MyClass2 <span style="color: #000000;">&#123;</span>
+<pre>class MyClass2 &#123;
 &nbsp;
   ...
 &nbsp;
-  <span style="color: #000000; font-weight: bold;">function</span> MyClass2<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$p1</span> = <span style="color: #ff0000;">&quot;&quot;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-    <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$p1</span> != <span style="color: #ff0000;">&quot;&quot;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-      <span style="color: #0000ff;">$this</span>-&gt;...
-    <span style="color: #000000;">&#125;</span>
-  <span style="color: #000000;">&#125;</span>
-<span style="color: #000000;">&#125;</span>
+  function MyClass2&#40;$p1 = &quot;&quot;&#41; &#123;
+    if &#40;$p1 != &quot;&quot;&#41; &#123;
+      $this-&gt;...
+    &#125;
+  &#125;
+&#125;
 &nbsp;
-<span style="color: #0000ff;">$mc1</span> = <span style="color: #000000; font-weight: bold;">new</span> MyClass2<span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;beispielwert&quot;</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #0000ff;">$mc2</span> = <span style="color: #000000; font-weight: bold;">new</span> MyClass2<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;</pre>
+$mc1 = new MyClass2&#40;&quot;beispielwert&quot;&#41;;
+$mc2 = new MyClass2&#40;&#41;;</pre>
 
 <p>
 Wenn der Bauplan einer Variablen erstellt wird, wenn wir also
@@ -278,24 +278,24 @@ In PHP ist es so, dass jede Zuweisung eine Kopie der
 angesprochenen Variablen erzeugt:
 </p>
 
-<pre><span style="color: #0000ff;">$a</span> = <span style="color: #cc66cc;">10</span>;
-<span style="color: #0000ff;">$b</span> = <span style="color: #cc66cc;">20</span>;
-<span style="color: #0000ff;">$c</span> = <span style="color: #cc66cc;">30</span>;
+<pre>$a = 10;
+$b = 20;
+$c = 30;
 &nbsp;
-<span style="color: #0000ff;">$arr</span> = <a href="http://www.php3.de/array"><span style="color: #000066;">array</span></a><span style="color: #000000;">&#40;</span> <span style="color: #0000ff;">$a</span>, <span style="color: #0000ff;">$b</span>, <span style="color: #0000ff;">$c</span> <span style="color: #000000;">&#41;</span>;
+$arr = array&#40; $a, $b, $c &#41;;
 &nbsp;
-<span style="color: #0000ff;">$arr</span><span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">1</span><span style="color: #000000;">&#93;</span> = <span style="color: #cc66cc;">22</span>;</pre>
+$arr&#91;1&#93; = 22;</pre>
 
 <p>
 Dies verändert den Wert von <tt>$arr[1]</tt> auf 22, aber der Wert von
 <tt>$b</tt> ändert sich nicht. Dies gilt auch bei Funktionsaufrufen:
 </p>
 
-<pre><span style="color: #000000; font-weight: bold;">function</span> m<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$p1</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-  <span style="color: #0000ff;">$p1</span> = <span style="color: #cc66cc;">22</span>;
-<span style="color: #000000;">&#125;</span>
+<pre>function m&#40;$p1&#41; &#123;
+  $p1 = 22;
+&#125;
 &nbsp;
-m<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$b</span><span style="color: #000000;">&#41;</span>;</pre>
+m&#40;$b&#41;;</pre>
 
 <p>
 Dies setzt den Wert von <tt>$p1</tt> auf 22, aber <tt>$p1</tt> ist eine
@@ -311,11 +311,11 @@ Variablen übergeben bekommt und dann mit Hilfe dieses Namens auf
 die globale Variable dieses Namens zugreift:
 </p>
 
-<pre><span style="color: #000000; font-weight: bold;">function</span> m2<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$p1</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-  <span style="color: #0000ff;">$GLOBALS</span><span style="color: #000000;">&#91;</span><span style="color: #0000ff;">$p1</span><span style="color: #000000;">&#93;</span> = <span style="color: #cc66cc;">22</span>;
-<span style="color: #000000;">&#125;</span>
+<pre>function m2&#40;$p1&#41; &#123;
+  $GLOBALS&#91;$p1&#93; = 22;
+&#125;
 &nbsp;
-m2<span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;b&quot;</span><span style="color: #000000;">&#41;</span>;</pre>
+m2&#40;&quot;b&quot;&#41;;</pre>
 
 <p>
 Da in diesem Fall der Name der Variablen übergeben wird und mit
@@ -333,11 +333,11 @@ zu einem alternativen Namen für den übergebenen Wert. Wieder
 wird der Wert der originalen globalen Variablen verändert:
 </p>
 
-<pre><span style="color: #000000; font-weight: bold;">function</span> m3<span style="color: #000000;">&#40;</span>&amp;<span style="color: #0000ff;">$p1</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-  <span style="color: #0000ff;">$p1</span> = <span style="color: #cc66cc;">22</span>;
-<span style="color: #000000;">&#125;</span>
+<pre>function m3&#40;&amp;$p1&#41; &#123;
+  $p1 = 22;
+&#125;
 &nbsp;
-m3<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$b</span><span style="color: #000000;">&#41;</span>;</pre>
+m3&#40;$b&#41;;</pre>
 
 <p>
 Hier ist <tt>$p1</tt> in <tt>m3()</tt> ein alternativer Name fuer die
@@ -353,15 +353,15 @@ anderer Stelle verwenden kann, zum Beispiel in der o.a.
 Arraydefinition:
 </p>
 
-<pre><span style="color: #0000ff;">$a</span> = <span style="color: #cc66cc;">10</span>;
-<span style="color: #0000ff;">$b</span> = <span style="color: #cc66cc;">20</span>;
-<span style="color: #0000ff;">$c</span> = <span style="color: #cc66cc;">30</span>;
+<pre>$a = 10;
+$b = 20;
+$c = 30;
 &nbsp;
-<span style="color: #0000ff;">$arr</span> = <a href="http://www.php3.de/array"><span style="color: #000066;">array</span></a><span style="color: #000000;">&#40;</span> &amp;<span style="color: #0000ff;">$a</span>, &amp;<span style="color: #0000ff;">$b</span>, &amp;<span style="color: #0000ff;">$c</span> <span style="color: #000000;">&#41;</span>;
+$arr = array&#40; &amp;$a, &amp;$b, &amp;$c &#41;;
 &nbsp;
-<span style="color: #0000ff;">$arr</span><span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">1</span><span style="color: #000000;">&#93;</span> = <span style="color: #cc66cc;">22</span>;
+$arr&#91;1&#93; = 22;
 &nbsp;
-<a href="http://www.php3.de/print"><span style="color: #000066;">print</span></a> <span style="color: #0000ff;">$b</span>;</pre>
+print $b;</pre>
 
 <p>
 Dieses Beispiel druckt den Wert 22. In diesem Beispiel sind
@@ -392,24 +392,24 @@ also nichts anderes als gewöhnliche Funktionsaufrufe, nur dass
 die Funktionsnamen sehr seltsam aussehen:
 </p>
 
-<pre><span style="color: #000000; font-weight: bold;">class</span> MyClass3 <span style="color: #000000;">&#123;</span>
-  <span style="color: #000000; font-weight: bold;">function</span> c<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-    <a href="http://www.php3.de/print"><span style="color: #000066;">print</span></a> <span style="color: #ff0000;">&quot;Ich bin Funktion c() in der Klasse MyClass<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
-  <span style="color: #000000;">&#125;</span>
-<span style="color: #000000;">&#125;</span>
+<pre>class MyClass3 &#123;
+  function c&#40;&#41; &#123;
+    print &quot;Ich bin Funktion c() in der Klasse MyClass\n&quot;;
+  &#125;
+&#125;
 &nbsp;
-MyClass3::<span style="color: #006600;">c</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;</pre>
+MyClass3::c&#40;&#41;;</pre>
 
 <p>
 Dieses Stück Code haette man so auch schreiben koennen und es
 wäre leichter zu verstehen gewesen:
 </p>
 
-<pre><span style="color: #000000; font-weight: bold;">function</span> c<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-  <a href="http://www.php3.de/print"><span style="color: #000066;">print</span></a> <span style="color: #ff0000;">&quot;Ich bin die stinknormale Funktion c()<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
-<span style="color: #000000;">&#125;</span>
+<pre>function c&#40;&#41; &#123;
+  print &quot;Ich bin die stinknormale Funktion c()\n&quot;;
+&#125;
 &nbsp;
-c<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;</pre>
+c&#40;&#41;;</pre>
 
 <p>
 Man kann dies verwenden, um in abgeleiteten Klassen Funktionen

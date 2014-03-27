@@ -6,25 +6,25 @@ Parameter in eine Mail verpackt und diese dann versendet.
 
 <p>Vollständiges Beispiel:</p>
 
-<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
-  <span style="color: #0000ff;">$msg</span> = <span style="color: #ff0000;">&quot;&quot;</span>;
+<pre>&lt;?php
+  $msg = &quot;&quot;;
 &nbsp;
-  <span style="color: #0000ff;">$msg</span> .= <span style="color: #ff0000;">&quot;Alle GET-Parameter<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
-  <span style="color: #0000ff;">$msg</span> .= <span style="color: #ff0000;">&quot;==================<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
-  <span style="color: #0000ff;">$msg</span> .= <span style="color: #ff0000;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
-  <span style="color: #b1b100;">foreach</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$_GET</span> <span style="color: #b1b100;">as</span> <span style="color: #0000ff;">$k</span> =&gt; <span style="color: #0000ff;">$v</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-    <span style="color: #0000ff;">$msg</span> .= <a href="http://www.php3.de/sprintf"><span style="color: #000066;">sprintf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;%s<span style="color: #000099; font-weight: bold;">\n</span>  %s<span style="color: #000099; font-weight: bold;">\n</span><span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>, <span style="color: #0000ff;">$k</span>, <span style="color: #0000ff;">$v</span><span style="color: #000000;">&#41;</span>;
-  <span style="color: #000000;">&#125;</span>
+  $msg .= &quot;Alle GET-Parameter\n&quot;;
+  $msg .= &quot;==================\n&quot;;
+  $msg .= &quot;\n&quot;;
+  foreach &#40;$_GET as $k =&gt; $v&#41; &#123;
+    $msg .= sprintf&#40;&quot;%s\n  %s\n\n&quot;, $k, $v&#41;;
+  &#125;
 &nbsp;
-  <span style="color: #0000ff;">$msg</span> .= <span style="color: #ff0000;">&quot;Alle POST-Parameter<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
-  <span style="color: #0000ff;">$msg</span> .= <span style="color: #ff0000;">&quot;===================<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
-  <span style="color: #0000ff;">$msg</span> .= <span style="color: #ff0000;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
-  <span style="color: #b1b100;">foreach</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$_POST</span> <span style="color: #b1b100;">as</span> <span style="color: #0000ff;">$k</span> =&gt; <span style="color: #0000ff;">$v</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-    <span style="color: #0000ff;">$msg</span> .= <a href="http://www.php3.de/sprintf"><span style="color: #000066;">sprintf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;%s<span style="color: #000099; font-weight: bold;">\n</span>  %s<span style="color: #000099; font-weight: bold;">\n</span><span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>, <span style="color: #0000ff;">$k</span>, <span style="color: #0000ff;">$v</span><span style="color: #000000;">&#41;</span>;
-  <span style="color: #000000;">&#125;</span>
+  $msg .= &quot;Alle POST-Parameter\n&quot;;
+  $msg .= &quot;===================\n&quot;;
+  $msg .= &quot;\n&quot;;
+  foreach &#40;$_POST as $k =&gt; $v&#41; &#123;
+    $msg .= sprintf&#40;&quot;%s\n  %s\n\n&quot;, $k, $v&#41;;
+  &#125;
 &nbsp;
-  <span style="color: #808080; font-style: italic;">// Hier kann $msg per Mail versendet werden.</span>
-<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+  // Hier kann $msg per Mail versendet werden.
+?&gt;</pre>
 
 <p>Will man einfach nur alle Parameter haben, kann man 
 statt <tt>$_GET</tt> und <tt>$_POST</tt> auch einfach

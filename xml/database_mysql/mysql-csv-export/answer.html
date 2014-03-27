@@ -1,12 +1,12 @@
 <p>Die Umkehrung von <tt>LOAD DATA INFILE</tt> ist das <tt>SELECT INTO
 OUTFILE</tt>, eine Variante des regulären SELECT.</p>
 
-<pre class="sql"><span style="color: #993333; font-weight: bold;">SELECT</span> ...
-    <span style="color: #993333; font-weight: bold;">INTO</span> <span style="color: #993333; font-weight: bold;">OUTFILE</span> <span style="color: #ff0000;">'/home/www/servers/www.servername.de/tmp/export.csv'</span>
-    <span style="color: #993333; font-weight: bold;">FIELDS</span>
-            TERMINATED <span style="color: #993333; font-weight: bold;">BY</span> <span style="color: #ff0000;">';'</span>
-            <span style="color: #993333; font-weight: bold;">OPTIONALLY</span> <span style="color: #993333; font-weight: bold;">ENCLOSED</span> <span style="color: #993333; font-weight: bold;">BY</span> <span style="color: #ff0000;">'&quot;'</span>
-    <span style="color: #993333; font-weight: bold;">FROM</span> ...;</pre>
+<pre class="sql">SELECT ...
+    INTO OUTFILE '/home/www/servers/www.servername.de/tmp/export.csv'
+    FIELDS
+            TERMINATED BY ';'
+            OPTIONALLY ENCLOSED BY '&quot;'
+    FROM ...;</pre>
 
 <p>Das Kommando wird die Datei auf dem Rechner anlegen, auf dem der
 Datenbankserver läuft und die Datei wird dem Benutzer gehören,

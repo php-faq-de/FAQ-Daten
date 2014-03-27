@@ -3,73 +3,73 @@ Bei Sybase müssen Anführungsstriche Strings innerhalb von Queries nicht mit
 einem Backslash (\), sondern mit dem jeweils gleichen Zeichen escaped werden.
 Folgendes Beispiel sollte das anschaulich machen:</p>
 
-<pre class="sql"><span style="color: #993333; font-weight: bold;">SELECT</span> <span style="color: #ff0000;">&quot;Er sagte: &quot;</span><span style="color: #ff0000;">&quot;Hallo Welt&quot;</span><span style="color: #ff0000;">&quot;&quot;</span>
-<span style="color: #993333; font-weight: bold;">SELECT</span> <span style="color: #ff0000;">'Das gibt'</span><span style="color: #ff0000;">'s doch nicht'</span></pre>
+<pre class="sql">SELECT &quot;Er sagte: &quot;&quot;Hallo Welt&quot;&quot;&quot;
+SELECT 'Das gibt''s doch nicht'</pre>
 
 <p>
 Eine Komfort-Funktion, die sich darum kümmert, dass in SQL-Statements immer
 richtig gequotet wird, soll hier gezeigt werden:</p>
 
-<pre><span style="color: #000000; font-weight: bold;">function</span> sybase_prepare<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-  <span style="color: #0000ff;">$args</span>= <a href="http://www.php3.de/func_get_args"><span style="color: #000066;">func_get_args</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
-  <span style="color: #0000ff;">$sql</span>= <span style="color: #0000ff;">$args</span><span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #000000;">&#93;</span>;
-  <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><a href="http://www.php3.de/sizeof"><span style="color: #000066;">sizeof</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$args</span><span style="color: #000000;">&#41;</span>&lt;= <span style="color: #cc66cc;">1</span><span style="color: #000000;">&#41;</span> <span style="color: #b1b100;">return</span> <span style="color: #0000ff;">$sql</span>;
-  <span style="color: #0000ff;">$j</span>= <span style="color: #cc66cc;">0</span>;    
-  <span style="color: #0000ff;">$sql</span>= <span style="color: #0000ff;">$tok</span>= <a href="http://www.php3.de/strtok"><span style="color: #000066;">strtok</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$sql</span>, <span style="color: #ff0000;">'%'</span><span style="color: #000000;">&#41;</span>;
-  <span style="color: #b1b100;">while</span> <span style="color: #000000;">&#40;</span>++<span style="color: #0000ff;">$j</span> &amp;&amp; <span style="color: #0000ff;">$tok</span>= <a href="http://www.php3.de/strtok"><span style="color: #000066;">strtok</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'%'</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-    <span style="color: #0000ff;">$arg</span>= <span style="color: #000000;">&#40;</span><a href="http://www.php3.de/is_object"><span style="color: #000066;">is_object</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$args</span><span style="color: #000000;">&#91;</span><span style="color: #0000ff;">$j</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span> &amp;&amp; <a href="http://www.php3.de/method_exists"><span style="color: #000066;">method_exists</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$args</span><span style="color: #000000;">&#91;</span><span style="color: #0000ff;">$j</span><span style="color: #000000;">&#93;</span>, <span style="color: #ff0000;">'toString'</span><span style="color: #000000;">&#41;</span> 
-      ? <span style="color: #0000ff;">$args</span><span style="color: #000000;">&#91;</span><span style="color: #0000ff;">$j</span><span style="color: #000000;">&#93;</span>-&gt;<span style="color: #006600;">toString</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>
-      : <span style="color: #0000ff;">$args</span><span style="color: #000000;">&#91;</span><span style="color: #0000ff;">$j</span><span style="color: #000000;">&#93;</span>
-    <span style="color: #000000;">&#41;</span>;
-    <span style="color: #b1b100;">switch</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$tok</span><span style="color: #000000;">&#123;</span><span style="color: #cc66cc;">0</span><span style="color: #000000;">&#125;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-      <span style="color: #b1b100;">case</span> <span style="color: #ff0000;">'d'</span>: 
-        <span style="color: #0000ff;">$sql</span>.= <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$arg</span> === <span style="color: #000000; font-weight: bold;">NULL</span> ? <span style="color: #ff0000;">'NULL'</span> : <a href="http://www.php3.de/intval"><span style="color: #000066;">intval</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$arg</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>.<a href="http://www.php3.de/substr"><span style="color: #000066;">substr</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$tok</span>, <span style="color: #cc66cc;">1</span><span style="color: #000000;">&#41;</span>; 
-        <span style="color: #b1b100;">break</span>;
+<pre>function sybase_prepare&#40;&#41; &#123;
+  $args= func_get_args&#40;&#41;;
+  $sql= $args&#91;0&#93;;
+  if &#40;sizeof&#40;$args&#41;&lt;= 1&#41; return $sql;
+  $j= 0;    
+  $sql= $tok= strtok&#40;$sql, '%'&#41;;
+  while &#40;++$j &amp;&amp; $tok= strtok&#40;'%'&#41;&#41; &#123;
+    $arg= &#40;is_object&#40;$args&#91;$j&#93;&#41; &amp;&amp; method_exists&#40;$args&#91;$j&#93;, 'toString'&#41; 
+      ? $args&#91;$j&#93;-&gt;toString&#40;&#41;
+      : $args&#91;$j&#93;
+    &#41;;
+    switch &#40;$tok&#123;0&#125;&#41; &#123;
+      case 'd': 
+        $sql.= &#40;$arg === NULL ? 'NULL' : intval&#40;$arg&#41;&#41;.substr&#40;$tok, 1&#41;; 
+        break;
 &nbsp;
-      <span style="color: #b1b100;">case</span> <span style="color: #ff0000;">'c'</span>: 
-        <span style="color: #0000ff;">$sql</span>.= <a href="http://www.php3.de/substr"><span style="color: #000066;">substr</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$tok</span>, <span style="color: #cc66cc;">1</span><span style="color: #000000;">&#41;</span>; 
-        <span style="color: #b1b100;">break</span>;
+      case 'c': 
+        $sql.= substr&#40;$tok, 1&#41;; 
+        break;
 &nbsp;
-      <span style="color: #b1b100;">case</span> <span style="color: #ff0000;">'s'</span>: 
-        <span style="color: #0000ff;">$sql</span>.= <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$arg</span> === <span style="color: #000000; font-weight: bold;">NULL</span> ? <span style="color: #ff0000;">'NULL'</span> : <span style="color: #ff0000;">&quot;'&quot;</span>.<a href="http://www.php3.de/str_replace"><span style="color: #000066;">str_replace</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;'&quot;</span>, <span style="color: #ff0000;">&quot;''&quot;</span>, <span style="color: #0000ff;">$arg</span><span style="color: #000000;">&#41;</span>.<span style="color: #ff0000;">&quot;'&quot;</span><span style="color: #000000;">&#41;</span>.<a href="http://www.php3.de/substr"><span style="color: #000066;">substr</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$tok</span>, <span style="color: #cc66cc;">1</span><span style="color: #000000;">&#41;</span>; 
-        <span style="color: #b1b100;">break</span>;
+      case 's': 
+        $sql.= &#40;$arg === NULL ? 'NULL' : &quot;'&quot;.str_replace&#40;&quot;'&quot;, &quot;''&quot;, $arg&#41;.&quot;'&quot;&#41;.substr&#40;$tok, 1&#41;; 
+        break;
 &nbsp;
-      <span style="color: #000000; font-weight: bold;">default</span>: 
-        <span style="color: #0000ff;">$sql</span>.= <span style="color: #ff0000;">'%'</span>.<span style="color: #0000ff;">$tok</span>; <span style="color: #0000ff;">$j</span>--;
-    <span style="color: #000000;">&#125;</span>
-  <span style="color: #000000;">&#125;</span>
-  <span style="color: #b1b100;">return</span> <span style="color: #0000ff;">$sql</span>;
-<span style="color: #000000;">&#125;</span>
+      default: 
+        $sql.= '%'.$tok; $j--;
+    &#125;
+  &#125;
+  return $sql;
+&#125;
 &nbsp;
-<span style="color: #808080; font-style: italic;">// Beispiel 1</span>
-<span style="color: #0000ff;">$sql</span>= sybase_prepare<span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'
+// Beispiel 1
+$sql= sybase_prepare&#40;'
   insert into person (
     person_id, name, company
   ) values (
     %d, %s, %s
-  )'</span>,
-  <span style="color: #cc66cc;">1</span>,
-  <span style="color: #ff0000;">'Dau Jones'</span>,
-  <span style="color: #000000; font-weight: bold;">NULL</span>
-<span style="color: #000000;">&#41;</span>;
+  )',
+  1,
+  'Dau Jones',
+  NULL
+&#41;;
 &nbsp;
-<span style="color: #808080; font-style: italic;">// Beispiel 2</span>
-<span style="color: #000000; font-weight: bold;">class</span> <a href="http://www.php3.de/date"><span style="color: #000066;">Date</span></a> <span style="color: #000000;">&#123;</span>
-  <span style="color: #000000; font-weight: bold;">var</span> <span style="color: #0000ff;">$utime</span>;
+// Beispiel 2
+class Date &#123;
+  var $utime;
 &nbsp;
-  <span style="color: #000000; font-weight: bold;">function</span> <a href="http://www.php3.de/date"><span style="color: #000066;">Date</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$utime</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-    <span style="color: #0000ff;">$this</span>-&gt;<span style="color: #006600;">utime</span>= <span style="color: #0000ff;">$utime</span>;
-  <span style="color: #000000;">&#125;</span>
+  function Date&#40;$utime&#41; &#123;
+    $this-&gt;utime= $utime;
+  &#125;
 &nbsp;
-  <span style="color: #000000; font-weight: bold;">function</span> toString<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fmt</span>= <span style="color: #ff0000;">'Y-m-d H:i:s'</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-    <span style="color: #b1b100;">return</span> <a href="http://www.php3.de/date"><span style="color: #000066;">date</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fmt</span>, <span style="color: #0000ff;">$this</span>-&gt;<span style="color: #006600;">utime</span><span style="color: #000000;">&#41;</span>;
-  <span style="color: #000000;">&#125;</span>
-<span style="color: #000000;">&#125;</span>
+  function toString&#40;$fmt= 'Y-m-d H:i:s'&#41; &#123;
+    return date&#40;$fmt, $this-&gt;utime&#41;;
+  &#125;
+&#125;
 &nbsp;
-<span style="color: #0000ff;">$date</span>= &amp;new <a href="http://www.php3.de/date"><span style="color: #000066;">Date</span></a><span style="color: #000000;">&#40;</span><a href="http://www.php3.de/time"><span style="color: #000066;">time</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #0000ff;">$sql</span>= sybase_prepare<span style="color: #000000;">&#40;</span>
-  <span style="color: #ff0000;">'select count(*) from %c where lastchange= %s'</span>,
-  <span style="color: #ff0000;">'account'</span>,
-  <span style="color: #0000ff;">$date</span>
-<span style="color: #000000;">&#41;</span>;</pre>
+$date= &amp;new Date&#40;time&#40;&#41;&#41;;
+$sql= sybase_prepare&#40;
+  'select count(*) from %c where lastchange= %s',
+  'account',
+  $date
+&#41;;</pre>
 

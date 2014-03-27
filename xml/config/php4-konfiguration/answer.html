@@ -4,7 +4,7 @@ Findet PHP keine <tt>php.ini</tt>, arbeitet es mit Default-Werten,
 die sich kaum von denen aus der <tt>php.ini-dist</tt> unterscheiden.
 Ob bzw. welche Konfigurationsdatei verwendet wird, läßt sich mittels</p>
 
-<pre><a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <a href="http://www.php3.de/get_cfg_var"><span style="color: #000066;">get_cfg_var</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;cfg_file_path&quot;</span><span style="color: #000000;">&#41;</span>;</pre>
+<pre>echo get_cfg_var&#40;&quot;cfg_file_path&quot;&#41;;</pre>
 
 <p>herausfinden. Neben der <tt>php.ini</tt> gibt es aber noch andere
 Möglichkeiten, die PHP-Konfiguration zu beeinflussen:</p>
@@ -18,7 +18,7 @@ Hosts oder sog. Container) aus (nur bei PHP als Apache-Modul):</p>
 
 <pre class="ini"># String- und Integerwerte
 # php_value variable wert
-php_value max_execution_time <span style="">60</span>
+php_value max_execution_time 60
 &nbsp;
 # Booleanwerte
 # php_flag variable on|off
@@ -45,8 +45,8 @@ Apache-Modul).</p>
 <p>Mit <a href="http://www.php3.de/ini_set">ini_set()</a> kann man <em>zur Laufzeit des
 Scripts</em> die PHP-Konfiguration manipulieren:</p>
 
-<pre><a href="http://www.php3.de/ini_set"><span style="color: #000066;">ini_set</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;max_execution_time&quot;</span>, <span style="color: #ff0000;">&quot;60&quot;</span><span style="color: #000000;">&#41;</span>;
-<a href="http://www.php3.de/phpinfo"><span style="color: #000066;">phpinfo</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;</pre>
+<pre>ini_set&#40;&quot;max_execution_time&quot;, &quot;60&quot;&#41;;
+phpinfo&#40;&#41;;</pre>
 
 <p>Wie man sehen kann, wurde die maximale Ausführungszeit für
 dieses eine Script verdoppelt (gegenüber der Default-Einstellung).</p>

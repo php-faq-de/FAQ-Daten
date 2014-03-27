@@ -8,7 +8,7 @@ Anmerkung:<tt>array_unique()</tt> behält die Indizes des Original-
 Arrays bei. Um auf die Elemente des Arrays mit fortlaufenden numerischen
 Indizes von <tt>0</tt> bis <tt>count()-1</tt> zugreifen zu können, verwende
 man
-<pre><span style="color: #0000ff;">$a</span> = <a href="http://www.php3.de/array_values"><span style="color: #000066;">array_values</span></a><span style="color: #000000;">&#40;</span><a href="http://www.php3.de/array_unique"><span style="color: #000066;">array_unique</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$a</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>;</pre>
+<pre>$a = array_values&#40;array_unique&#40;$a&#41;&#41;;</pre>
 </p>
 
 <p>

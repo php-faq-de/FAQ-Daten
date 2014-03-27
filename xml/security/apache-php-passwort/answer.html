@@ -5,23 +5,23 @@ beschrieben. Das Feature steht nur dann zur
 Verfügung, wenn PHP als Apache-Modul betrieben wird.
 </p>
 
-<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
-<span style="color: #000000; font-weight: bold;">function</span> check_pw<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$u</span>, <span style="color: #0000ff;">$p</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+<pre>&lt;?php
+function check_pw&#40;$u, $p&#41; &#123;
   ...
-<span style="color: #000000;">&#125;</span>
+&#125;
 &nbsp;
-<span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span>!<a href="http://www.php3.de/isset"><span style="color: #000066;">isset</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$_SERVER</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'PHP_AUTH_USER'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span> 
- or !check_pw<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$_SERVER</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'PHP_AUTH_USER'</span><span style="color: #000000;">&#93;</span>,<span style="color: #0000ff;">$_SERVER</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'PHP_AUTH_PW'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>
-<span style="color: #000000;">&#123;</span>
-    <a href="http://www.php3.de/header"><span style="color: #000066;">Header</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;WWW-Authenticate: Basic realm=<span style="color: #000099; font-weight: bold;">\&quot;</span>My Realm<span style="color: #000099; font-weight: bold;">\&quot;</span>&quot;</span><span style="color: #000000;">&#41;</span>;
-    <a href="http://www.php3.de/header"><span style="color: #000066;">Header</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;HTTP/1.0 401 Unauthorized&quot;</span><span style="color: #000000;">&#41;</span>;
-    <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;Text to send if user hits Cancel button<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
-    <a href="http://www.php3.de/exit"><span style="color: #000066;">exit</span></a>;
-<span style="color: #000000;">&#125;</span> <span style="color: #b1b100;">else</span> <span style="color: #000000;">&#123;</span>
-    <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;Hello $PHP_AUTH_USER.&lt;P&gt;&quot;</span>;
-    <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #ff0000;">&quot;You entered $PHP_AUTH_PW as your password.&lt;P&gt;&quot;</span>;
-<span style="color: #000000;">&#125;</span>
-<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+if &#40;!isset&#40;$_SERVER&#91;'PHP_AUTH_USER'&#93;&#41; 
+ or !check_pw&#40;$_SERVER&#91;'PHP_AUTH_USER'&#93;,$_SERVER&#91;'PHP_AUTH_PW'&#93;&#41;&#41;
+&#123;
+    Header&#40;&quot;WWW-Authenticate: Basic realm=\&quot;My Realm\&quot;&quot;&#41;;
+    Header&#40;&quot;HTTP/1.0 401 Unauthorized&quot;&#41;;
+    echo &quot;Text to send if user hits Cancel button\n&quot;;
+    exit;
+&#125; else &#123;
+    echo &quot;Hello $PHP_AUTH_USER.&lt;P&gt;&quot;;
+    echo &quot;You entered $PHP_AUTH_PW as your password.&lt;P&gt;&quot;;
+&#125;
+?&gt;</pre>
 
 <p>
 <em>Nur</em> wenn PHP selbst die Authentisierung vornimmt, stehen

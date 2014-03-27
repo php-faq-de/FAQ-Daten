@@ -16,11 +16,11 @@ einen korrekten Content-Type zu setzen. Ein Charset <em>muss</em>
 dabei angegeben werden! So könnte ein typisches WAP-PHP-Script
 beginnen:
 </p>
-<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
-  <a href="http://www.php3.de/header"><span style="color: #000066;">header</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Content-Type: text/vnd.wap.wml;charset=iso-8859-1&quot;</span><span style="color: #000000;">&#41;</span>;
-  <a href="http://www.php3.de/print"><span style="color: #000066;">print</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;<span style="color: #000099; font-weight: bold;">\n</span><span style="color: #000099; font-weight: bold;">\n</span>&lt;?xml version=<span style="color: #000099; font-weight: bold;">\&quot;</span>1.0<span style="color: #000099; font-weight: bold;">\&quot;</span>?&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #000000; font-weight: bold;">?&gt;</span>
-&lt;!DOCTYPE wml <span style="color: #000000; font-weight: bold;">PUBLIC</span> <span style="color: #ff0000;">&quot;-//WAPFORUM//DTD WML 1.1//EN&quot;</span> <span style="color: #ff0000;">&quot;http://www.wapforum.org/DTD/wml_1.1.xml&quot;</span>&gt;</pre>
+<pre>&lt;?php
+  header&#40;&quot;Content-Type: text/vnd.wap.wml;charset=iso-8859-1&quot;&#41;;
+  print&#40;&quot;\n\n&lt;?xml version=\&quot;1.0\&quot;?&gt;\n&quot;&#41;;
+?&gt;
+&lt;!DOCTYPE wml PUBLIC &quot;-//WAPFORUM//DTD WML 1.1//EN&quot; &quot;http://www.wapforum.org/DTD/wml_1.1.xml&quot;&gt;</pre>
 <p>
 Darauf folgt der eigentliche WML-Content, in den man wie gewohnt
 PHP einbetten kann. Drei Dinge sind dabei wichtig:

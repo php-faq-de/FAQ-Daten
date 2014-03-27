@@ -6,15 +6,15 @@ den Absender der Mail festlegen oder auch beliebige Nicht-Standard-Header
 (<tt>X-Mailer:</tt> etc.) enthalten.
 </p>
 
-<pre><span style="color: #0000ff;">$message</span> = <span style="color: #ff0000;">&quot;&lt;h1&gt;Hello world!&lt;h1&gt;&quot;</span>;
-<span style="color: #0000ff;">$to</span>      = <span style="color: #ff0000;">&quot;empfaenger@system.de&quot;</span>;
-<span style="color: #0000ff;">$subject</span> = <span style="color: #ff0000;">&quot;Betrefftext&quot;</span>;
-<span style="color: #0000ff;">$xtra</span>    = <span style="color: #ff0000;">&quot;From: ab@sender.de (Ab Sender)<span style="color: #000099; font-weight: bold;">\r</span><span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
-<span style="color: #0000ff;">$xtra</span>   .= <span style="color: #ff0000;">&quot;Content-Type: text/html<span style="color: #000099; font-weight: bold;">\r</span><span style="color: #000099; font-weight: bold;">\n</span>Content-Transfer-Encoding: 8bit<span style="color: #000099; font-weight: bold;">\r</span><span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
-<span style="color: #0000ff;">$xtra</span>   .= <span style="color: #ff0000;">&quot;X-Mailer: PHP &quot;</span>. <a href="http://www.php3.de/phpversion"><span style="color: #000066;">phpversion</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+<pre>$message = &quot;&lt;h1&gt;Hello world!&lt;h1&gt;&quot;;
+$to      = &quot;empfaenger@system.de&quot;;
+$subject = &quot;Betrefftext&quot;;
+$xtra    = &quot;From: ab@sender.de (Ab Sender)\r\n&quot;;
+$xtra   .= &quot;Content-Type: text/html\r\nContent-Transfer-Encoding: 8bit\r\n&quot;;
+$xtra   .= &quot;X-Mailer: PHP &quot;. phpversion&#40;&#41;;
 &nbsp;
-<a href="http://www.php3.de/mail"><span style="color: #000066;">mail</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$to</span>,
-     <span style="color: #0000ff;">$subject</span>,
-     <span style="color: #0000ff;">$message</span>,
-     <span style="color: #0000ff;">$xtra</span><span style="color: #000000;">&#41;</span>;</pre>
+mail&#40;$to,
+     $subject,
+     $message,
+     $xtra&#41;;</pre>
 

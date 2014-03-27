@@ -3,10 +3,10 @@
 	auf den Inhalt eines Cookies zugreifen.
 </p>
 
-<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
-    @<a href="http://www.php3.de/session_start"><span style="color: #000066;">session_start</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
-    <span style="color: #b1b100;">foreach</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$_COOKIE</span> <span style="color: #b1b100;">as</span> <span style="color: #0000ff;">$key</span> =&gt; <span style="color: #0000ff;">$value</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-       <a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> <span style="color: #0000ff;">$key</span>.<span style="color: #ff0000;">&quot; = &quot;</span>.<span style="color: #0000ff;">$value</span>.<span style="color: #ff0000;">&quot;&lt;br&gt;&quot;</span>;
-    <span style="color: #000000;">&#125;</span>
-<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+<pre>&lt;?php
+    @session_start&#40;&#41;;
+    foreach &#40;$_COOKIE as $key =&gt; $value&#41; &#123;
+       echo $key.&quot; = &quot;.$value.&quot;&lt;br&gt;&quot;;
+    &#125;
+?&gt;</pre>
 

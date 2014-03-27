@@ -10,33 +10,33 @@ die Bildchen, allerdings hat sich die URL geändert.
 Das folgende Script wertet die Redirects aus:
 </p>
 
-<pre><span style="color: #000000; font-weight: bold;">function</span> GetICQ<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$uin</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-    <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span>!<a href="http://www.php3.de/is_numeric"><span style="color: #000066;">is_numeric</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$uin</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span> <span style="color: #b1b100;">return</span> <span style="color: #000000; font-weight: bold;">FALSE</span>;
+<pre>function GetICQ&#40;$uin&#41; &#123;
+    if &#40;!is_numeric&#40;$uin&#41;&#41; return FALSE;
 &nbsp;
-    <span style="color: #0000ff;">$fp</span> = <a href="http://www.php3.de/fsockopen"><span style="color: #000066;">fsockopen</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'status.icq.com'</span>, <span style="color: #cc66cc;">80</span>, &amp;<span style="color: #0000ff;">$errno</span>, &amp;<span style="color: #0000ff;">$errstr</span>, <span style="color: #cc66cc;">8</span><span style="color: #000000;">&#41;</span>;
-    <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span>!<span style="color: #0000ff;">$fp</span><span style="color: #000000;">&#41;</span> <span style="color: #b1b100;">return</span> <span style="color: #000000; font-weight: bold;">FALSE</span>;
+    $fp = fsockopen&#40;'status.icq.com', 80, &amp;$errno, &amp;$errstr, 8&#41;;
+    if &#40;!$fp&#41; return FALSE;
 &nbsp;
-    <span style="color: #0000ff;">$request</span> = <span style="color: #ff0000;">&quot;HEAD /online.gif?icq=$uin HTTP/1.0<span style="color: #000099; font-weight: bold;">\r</span><span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>
-              .<span style="color: #ff0000;">&quot;Host: web.icq.com<span style="color: #000099; font-weight: bold;">\r</span><span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>
-              .<span style="color: #ff0000;">&quot;Connection: close<span style="color: #000099; font-weight: bold;">\r</span><span style="color: #000099; font-weight: bold;">\n</span><span style="color: #000099; font-weight: bold;">\r</span><span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
-    <a href="http://www.php3.de/fputs"><span style="color: #000066;">fputs</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span>, <span style="color: #0000ff;">$request</span><span style="color: #000000;">&#41;</span>;
+    $request = &quot;HEAD /online.gif?icq=$uin HTTP/1.0\r\n&quot;
+              .&quot;Host: web.icq.com\r\n&quot;
+              .&quot;Connection: close\r\n\r\n&quot;;
+    fputs&#40;$fp, $request&#41;;
 &nbsp;
-    <span style="color: #b1b100;">do</span> <span style="color: #000000;">&#123;</span>
-        <span style="color: #0000ff;">$response</span> = <a href="http://www.php3.de/fgets"><span style="color: #000066;">fgets</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span>, <span style="color: #cc66cc;">1024</span><span style="color: #000000;">&#41;</span>;
-    <span style="color: #000000;">&#125;</span>
-    <span style="color: #b1b100;">while</span> <span style="color: #000000;">&#40;</span>!<a href="http://www.php3.de/feof"><span style="color: #000066;">feof</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span><span style="color: #000000;">&#41;</span> &amp;&amp; !<a href="http://www.php3.de/stristr"><span style="color: #000066;">stristr</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$response</span>, <span style="color: #ff0000;">'Location'</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>;
+    do &#123;
+        $response = fgets&#40;$fp, 1024&#41;;
+    &#125;
+    while &#40;!feof&#40;$fp&#41; &amp;&amp; !stristr&#40;$response, 'Location'&#41;&#41;;
 &nbsp;
-    <a href="http://www.php3.de/fclose"><span style="color: #000066;">fclose</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span><span style="color: #000000;">&#41;</span>;
+    fclose&#40;$fp&#41;;
 &nbsp;
-    <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><a href="http://www.php3.de/strstr"><span style="color: #000066;">strstr</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$response</span>, <span style="color: #ff0000;">'online1'</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span> <span style="color: #b1b100;">return</span> <span style="color: #ff0000;">'online'</span>;
-    <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><a href="http://www.php3.de/strstr"><span style="color: #000066;">strstr</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$response</span>, <span style="color: #ff0000;">'online0'</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span> <span style="color: #b1b100;">return</span> <span style="color: #ff0000;">'offline'</span>;
-    <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><a href="http://www.php3.de/strstr"><span style="color: #000066;">strstr</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$response</span>, <span style="color: #ff0000;">'online2'</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span> <span style="color: #b1b100;">return</span> <span style="color: #ff0000;">'disabled'</span>;
-    <span style="color: #808080; font-style: italic;">// disabled meint, dass der Benutzer eingestellt hat, dass sein </span>
-    <span style="color: #808080; font-style: italic;">// Status im Web nicht angezeigt wird.</span>
+    if &#40;strstr&#40;$response, 'online1'&#41;&#41; return 'online';
+    if &#40;strstr&#40;$response, 'online0'&#41;&#41; return 'offline';
+    if &#40;strstr&#40;$response, 'online2'&#41;&#41; return 'disabled';
+    // disabled meint, dass der Benutzer eingestellt hat, dass sein 
+    // Status im Web nicht angezeigt wird.
 &nbsp;
-    <span style="color: #b1b100;">return</span> <span style="color: #000000; font-weight: bold;">FALSE</span>;
-<span style="color: #000000;">&#125;</span>
+    return FALSE;
+&#125;
 &nbsp;
-<span style="color: #808080; font-style: italic;">// Aufruf:</span>
-<a href="http://www.php3.de/echo"><span style="color: #000066;">echo</span></a> GetICQ<span style="color: #000000;">&#40;</span><span style="color: #cc66cc;">12423456</span><span style="color: #000000;">&#41;</span>;</pre>
+// Aufruf:
+echo GetICQ&#40;12423456&#41;;</pre>
 

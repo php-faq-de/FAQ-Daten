@@ -12,28 +12,28 @@ alphabetisch nach dem 2. Element.
 </p>
 
 <pre>kris@valiant:~ &gt; ./php
-<span style="color: #000000; font-weight: bold;">&lt;?php</span>
-  <span style="color: #0000ff;">$a</span> = <a href="http://www.php3.de/array"><span style="color: #000066;">array</span></a><span style="color: #000000;">&#40;</span>
-         <a href="http://www.php3.de/array"><span style="color: #000066;">array</span></a><span style="color: #000000;">&#40;</span><span style="color: #cc66cc;">0</span>, <span style="color: #ff0000;">&quot;Schmidt&quot;</span><span style="color: #000000;">&#41;</span>,
-         <a href="http://www.php3.de/array"><span style="color: #000066;">array</span></a><span style="color: #000000;">&#40;</span><span style="color: #cc66cc;">2</span>, <span style="color: #ff0000;">&quot;Albert&quot;</span><span style="color: #000000;">&#41;</span>
-       <span style="color: #000000;">&#41;</span>;
+&lt;?php
+  $a = array&#40;
+         array&#40;0, &quot;Schmidt&quot;&#41;,
+         array&#40;2, &quot;Albert&quot;&#41;
+       &#41;;
 &nbsp;
-  <span style="color: #000000; font-weight: bold;">function</span> cmp<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$a</span>, <span style="color: #0000ff;">$b</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-    <a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;type a = %s type b = %s<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>, <a href="http://www.php3.de/gettype"><span style="color: #000066;">gettype</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$a</span><span style="color: #000000;">&#41;</span>, <a href="http://www.php3.de/gettype"><span style="color: #000066;">gettype</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$b</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>;
-    <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$a</span><span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">1</span><span style="color: #000000;">&#93;</span> == <span style="color: #0000ff;">$b</span><span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">1</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span> <span style="color: #b1b100;">return</span> <span style="color: #cc66cc;">0</span>;
-    <span style="color: #b1b100;">return</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$a</span><span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">1</span><span style="color: #000000;">&#93;</span> &gt; <span style="color: #0000ff;">$b</span><span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">1</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span>?<span style="color: #cc66cc;">1</span>:<span style="color: #cc66cc;">-1</span>;
-  <span style="color: #000000;">&#125;</span>
+  function cmp&#40;$a, $b&#41; &#123;
+    printf&#40;&quot;type a = %s type b = %s\n&quot;, gettype&#40;$a&#41;, gettype&#40;$b&#41;&#41;;
+    if &#40;$a&#91;1&#93; == $b&#91;1&#93;&#41; return 0;
+    return &#40;$a&#91;1&#93; &gt; $b&#91;1&#93;&#41;?1:-1;
+  &#125;
 &nbsp;
-  <a href="http://www.php3.de/usort"><span style="color: #000066;">usort</span></a> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$a</span>, <span style="color: #ff0000;">&quot;cmp&quot;</span><span style="color: #000000;">&#41;</span>;
+  usort &#40;$a, &quot;cmp&quot;&#41;;
 &nbsp;
-  <span style="color: #b1b100;">foreach</span><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$a</span> <span style="color: #b1b100;">as</span> <span style="color: #0000ff;">$k</span> =&gt; <span style="color: #0000ff;">$v</span><span style="color: #000000;">&#41;</span>
-      <a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;k = %s  v[0] = %s  v[1] = %s<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>, <span style="color: #0000ff;">$k</span>, <span style="color: #0000ff;">$v</span><span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #000000;">&#93;</span>, <span style="color: #0000ff;">$v</span><span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">1</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #000000; font-weight: bold;">?&gt;</span>
-X-Powered-By: PHP/<span style="color: #cc66cc;">4</span>.0b5-dev
-Content-type: text/html; charset=iso<span style="color: #cc66cc;">-8859</span><span style="color: #cc66cc;">-1</span>
+  foreach&#40;$a as $k =&gt; $v&#41;
+      printf&#40;&quot;k = %s  v[0] = %s  v[1] = %s\n&quot;, $k, $v&#91;0&#93;, $v&#91;1&#93;&#41;;
+?&gt;
+X-Powered-By: PHP/4.0b5-dev
+Content-type: text/html; charset=iso-8859-1
 &nbsp;
-type a = <a href="http://www.php3.de/array"><span style="color: #000066;">array</span></a> type b = <a href="http://www.php3.de/array"><span style="color: #000066;">array</span></a>
-k = <span style="color: #cc66cc;">0</span>  v<span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #000000;">&#93;</span> = <span style="color: #cc66cc;">2</span>  v<span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">1</span><span style="color: #000000;">&#93;</span> = Albert
-k = <span style="color: #cc66cc;">1</span>  v<span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">0</span><span style="color: #000000;">&#93;</span> = <span style="color: #cc66cc;">0</span>  v<span style="color: #000000;">&#91;</span><span style="color: #cc66cc;">1</span><span style="color: #000000;">&#93;</span> = Schmidt
+type a = array type b = array
+k = 0  v&#91;0&#93; = 2  v&#91;1&#93; = Albert
+k = 1  v&#91;0&#93; = 0  v&#91;1&#93; = Schmidt
 kris@valiant:~ &gt;</pre>
 

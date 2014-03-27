@@ -39,8 +39,8 @@ sortiert automatisch nach Relevanz, wenn im
 <tt>WHERE</tt>-Teil der Volltextindex abgefragt wird.
 </p>
 
-<pre class="sql"><span style="color: #993333; font-weight: bold;">SELECT</span>   * <span style="color: #993333; font-weight: bold;">FROM</span> tabellenname
-<span style="color: #993333; font-weight: bold;">WHERE</span>    MATCH textspalte AGAINST <span style="color: #66cc66;">&#40;</span><span style="color: #ff0000;">'wort1 wort2'</span><span style="color: #66cc66;">&#41;</span></pre>
+<pre class="sql">SELECT   * FROM tabellenname
+WHERE    MATCH textspalte AGAINST &#40;'wort1 wort2'&#41;</pre>
 
 <p>
 ...gibt alle Datensätze aus, in denen eines der Suchworte
@@ -56,9 +56,9 @@ Datenbankserver unverhältnismäßig stark, da MySQL hier
 nicht den Index benutzen kann.
 </p>
 
-<pre class="sql"><span style="color: #993333; font-weight: bold;">SELECT</span>   * <span style="color: #993333; font-weight: bold;">FROM</span> tabellenname
-<span style="color: #993333; font-weight: bold;">WHERE</span>    textspalte <span style="color: #993333; font-weight: bold;">LIKE</span> <span style="color: #ff0000;">'%wort1%'</span>
-<span style="color: #993333; font-weight: bold;">OR</span>       textspalte <span style="color: #993333; font-weight: bold;">LIKE</span> <span style="color: #ff0000;">'%wort2%'</span></pre>
+<pre class="sql">SELECT   * FROM tabellenname
+WHERE    textspalte LIKE '%wort1%'
+OR       textspalte LIKE '%wort2%'</pre>
 
 <p>
 Das Prozentzeichen hat im LIKE-Statement von SQL die

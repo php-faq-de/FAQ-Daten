@@ -9,10 +9,10 @@ Microsoft Internet Explorer ab Version 4 verarbeitet werden.
 </p>
 
 <pre>&lt;h1&gt;Hallo&lt;/h1&gt;
-&lt;form action=<span style="color: #ff0000;">&quot;/submit.php3&quot;</span> method=<span style="color: #ff0000;">&quot;post&quot;</span>
-      enctype=<span style="color: #ff0000;">&quot;multipart/form-data&quot;</span>&gt;
-&lt;input type=<span style="color: #ff0000;">&quot;file&quot;</span> name=<span style="color: #ff0000;">&quot;probe&quot;</span>&gt;
-&lt;input type=<span style="color: #ff0000;">&quot;submit&quot;</span> value=<span style="color: #ff0000;">&quot;los&quot;</span>&gt;
+&lt;form action=&quot;/submit.php3&quot; method=&quot;post&quot;
+      enctype=&quot;multipart/form-data&quot;&gt;
+&lt;input type=&quot;file&quot; name=&quot;probe&quot;&gt;
+&lt;input type=&quot;submit&quot; value=&quot;los&quot;&gt;
 &lt;/form&gt;</pre>
 
 <p>
@@ -105,30 +105,30 @@ auf
 <pre>&lt;h1&gt;Upload&lt;/h1&gt;
 &nbsp;
 &lt;form
-  action=<span style="color: #ff0000;">&quot;&lt;?php print $PHP_SELF ?&gt;&quot;</span>
-  method=<span style="color: #ff0000;">&quot;post&quot;</span>
-  enctype=<span style="color: #ff0000;">&quot;multipart/form-data&quot;</span>&gt;
-&lt;input type=<span style="color: #ff0000;">&quot;file&quot;</span> name=<span style="color: #ff0000;">&quot;probe&quot;</span>&gt;
-&lt;input type=<span style="color: #ff0000;">&quot;submit&quot;</span> value=<span style="color: #ff0000;">&quot;Los!&quot;</span>&gt;
+  action=&quot;&lt;?php print $PHP_SELF ?&gt;&quot;
+  method=&quot;post&quot;
+  enctype=&quot;multipart/form-data&quot;&gt;
+&lt;input type=&quot;file&quot; name=&quot;probe&quot;&gt;
+&lt;input type=&quot;submit&quot; value=&quot;Los!&quot;&gt;
 &lt;/form&gt;
 &lt;hr&gt;
-<span style="color: #000000; font-weight: bold;">&lt;?php</span>
-  <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><a href="http://www.php3.de/isset"><span style="color: #000066;">isset</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$probe</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
+&lt;?php
+  if &#40;isset&#40;$probe&#41;&#41; &#123;
 &nbsp;
-    <span style="color: #808080; font-style: italic;">// Bugfix für: http://www.securityfocus.com/archive/1/80106</span>
-    <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span> <a href="http://www.php3.de/isset"><span style="color: #000066;">isset</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$HTTP_COOKIE_VARS</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;probe&quot;</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span> ||
-         <a href="http://www.php3.de/isset"><span style="color: #000066;">isset</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$HTTP_POST_VARS</span>  <span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;probe&quot;</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span> ||
-         <a href="http://www.php3.de/isset"><span style="color: #000066;">isset</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$HTTP_GET_VARS</span>   <span style="color: #000000;">&#91;</span><span style="color: #ff0000;">&quot;probe&quot;</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span>
-       <span style="color: #000000;">&#41;</span> <a href="http://www.php3.de/die"><span style="color: #000066;">die</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Aus Sicherheitsgründen stirbt das Script jetzt.&quot;</span><span style="color: #000000;">&#41;</span>;
+    // Bugfix für: http://www.securityfocus.com/archive/1/80106
+    if &#40; isset&#40;$HTTP_COOKIE_VARS&#91;&quot;probe&quot;&#93;&#41; ||
+         isset&#40;$HTTP_POST_VARS  &#91;&quot;probe&quot;&#93;&#41; ||
+         isset&#40;$HTTP_GET_VARS   &#91;&quot;probe&quot;&#93;&#41;
+       &#41; die&#40;&quot;Aus Sicherheitsgründen stirbt das Script jetzt.&quot;&#41;;
 &nbsp;
-    <a href="http://www.php3.de/copy"><span style="color: #000066;">copy</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$probe</span>, <span style="color: #ff0000;">&quot;./newfile.txt&quot;</span><span style="color: #000000;">&#41;</span>;
-    <a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Die Datei %s steht jetzt als&quot;</span>
-          .<span style="color: #ff0000;">&quot; newfile.txt zur Verfügung.
-<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>,
-      <span style="color: #0000ff;">$probe_name</span><span style="color: #000000;">&#41;</span>;
-    <a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Sie ist %s Bytes groß und vom Typ %s.
-<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>,
-      <span style="color: #0000ff;">$probe_size</span>, <span style="color: #0000ff;">$probe_type</span><span style="color: #000000;">&#41;</span>;
-  <span style="color: #000000;">&#125;</span>
- <span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+    copy&#40;$probe, &quot;./newfile.txt&quot;&#41;;
+    printf&#40;&quot;Die Datei %s steht jetzt als&quot;
+          .&quot; newfile.txt zur Verfügung.
+\n&quot;,
+      $probe_name&#41;;
+    printf&#40;&quot;Sie ist %s Bytes groß und vom Typ %s.
+\n&quot;,
+      $probe_size, $probe_type&#41;;
+  &#125;
+ ?&gt;</pre>
 

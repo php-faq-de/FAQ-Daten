@@ -15,15 +15,15 @@ nicht. Dann kann man einfach mittels <a href="http://www.php3.de/if">if()</a>
 oder <a href="http://www.php3.de/strcmp">strcmp()</a> vergleichen:
 </p>
 
-<pre><span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span>ip2str<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$start</span><span style="color: #000000;">&#41;</span> &lt;= ip2str<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$ip</span><span style="color: #000000;">&#41;</span>
+<pre>if &#40;ip2str&#40;$start&#41; &lt;= ip2str&#40;$ip&#41;
     AND
-    ip2str<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$ip</span><span style="color: #000000;">&#41;</span> &lt;= ip2str<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$ende</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>
+    ip2str&#40;$ip&#41; &lt;= ip2str&#40;$ende&#41;&#41;
 ...
 &nbsp;
-<span style="color: #000000; font-weight: bold;">function</span> ip2str<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$ip</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-    <span style="color: #0000ff;">$ip</span> = <a href="http://www.php3.de/preg_replace"><span style="color: #000066;">preg_replace</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;/(<span style="color: #000099; font-weight: bold;">\d</span>{1,3})<span style="color: #000099; font-weight: bold;">\.</span>?/e&quot;</span>,
-                       <span style="color: #ff0000;">'sprintf(&quot;%03d&quot;, <span style="color: #000099; font-weight: bold;">\1</span>)'</span>,
-                        <span style="color: #0000ff;">$ip</span><span style="color: #000000;">&#41;</span>;
-    <span style="color: #b1b100;">return</span> <span style="color: #000000;">&#40;</span>string<span style="color: #000000;">&#41;</span><span style="color: #0000ff;">$ip</span>;
-<span style="color: #000000;">&#125;</span></pre>
+function ip2str&#40;$ip&#41; &#123;
+    $ip = preg_replace&#40;&quot;/(\d{1,3})\.?/e&quot;,
+                       'sprintf(&quot;%03d&quot;, \1)',
+                        $ip&#41;;
+    return &#40;string&#41;$ip;
+&#125;</pre>
 

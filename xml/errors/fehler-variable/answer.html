@@ -53,13 +53,13 @@ abprüfen, sollte man <a href="http://www.php3.de/isset">isset()</a> verwenden, 
 die Existenz der Variablen zu testen:
 </p>
 
-<pre><span style="color: #808080; font-style: italic;">// Nicht empfohlene Schreibweisen</span>
-<span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$checkbox</span><span style="color: #000000;">&#41;</span>
-<span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$var</span> == <span style="color: #ff0000;">'wert'</span><span style="color: #000000;">&#41;</span>
+<pre>// Nicht empfohlene Schreibweisen
+if &#40;$checkbox&#41;
+if &#40;$var == 'wert'&#41;
 &nbsp;
-<span style="color: #808080; font-style: italic;">// Empfohlene Schreibweisen</span>
-<span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><a href="http://www.php3.de/isset"><span style="color: #000066;">isset</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$_POST</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'checkbox'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>
-<span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><a href="http://www.php3.de/isset"><span style="color: #000066;">isset</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$_POST</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'var'</span><span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span> &amp;&amp; <span style="color: #0000ff;">$_POST</span><span style="color: #000000;">&#91;</span><span style="color: #ff0000;">'var'</span><span style="color: #000000;">&#93;</span> == <span style="color: #ff0000;">'wert'</span><span style="color: #000000;">&#41;</span></pre>
+// Empfohlene Schreibweisen
+if &#40;isset&#40;$_POST&#91;'checkbox'&#93;&#41;&#41;
+if &#40;isset&#40;$_POST&#91;'var'&#93;&#41; &amp;&amp; $_POST&#91;'var'&#93; == 'wert'&#41;</pre>
 
 <p>
 Es ist zwar auch möglich, PHP auf einen niedrigeren Error reporting

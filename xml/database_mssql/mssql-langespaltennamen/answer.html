@@ -9,7 +9,7 @@ an die Daten zu kommen haben Sie zwei Möglichkeiten.
 Sie geben den betroffenen Spalten in ihrem Query mit as einen
 anderen Namen.
 </p>
-<pre class="sql"><span style="color: #993333; font-weight: bold;">SELECT</span> SpaltenNameMitMehrAls32Zeichen <span style="color: #993333; font-weight: bold;">AS</span> KurzerName <span style="color: #993333; font-weight: bold;">FROM</span> Tabelle;</pre>
+<pre class="sql">SELECT SpaltenNameMitMehrAls32Zeichen AS KurzerName FROM Tabelle;</pre>
 </li>
 
 <li>
@@ -18,9 +18,9 @@ Wenn das nicht so ohne weiteres möglich ist, z.b. weil die
 Spaltennamen erst zusammengebaut werden, dann können Sie beim
 Zugriff auf das Array den Namen bei 32 Zeichen abschneiden.
 </p>
-<pre><span style="color: #0000ff;">$name</span> = <span style="color: #ff0000;">&quot;SpaltenNameMitMehrAls32Zeichen&quot;</span>;
-<span style="color: #0000ff;">$rs</span> = <a href="http://www.php3.de/mysql_fetch_array"><span style="color: #000066;">mysql_fetch_array</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #0000ff;">$wert</span> = <span style="color: #0000ff;">$rs</span><span style="color: #000000;">&#91;</span> <a href="http://www.php3.de/substr"><span style="color: #000066;">substr</span></a><span style="color: #000000;">&#40;</span> <span style="color: #0000ff;">$name</span>, <span style="color: #cc66cc;">0</span>, <span style="color: #cc66cc;">31</span> <span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#93;</span>;</pre>
+<pre>$name = &quot;SpaltenNameMitMehrAls32Zeichen&quot;;
+$rs = mysql_fetch_array&#40;&#41;;
+$wert = $rs&#91; substr&#40; $name, 0, 31 &#41; &#93;;</pre>
 </li>
 </ol>
 

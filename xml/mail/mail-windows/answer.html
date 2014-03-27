@@ -35,62 +35,62 @@ durchläßt, wie man sie ihm vorwirft! Der hier gezeigte Code ist
 sehr unzuverlässig, denn er hat keine richtige Fehlerprüfung.
 </p>
 
-<pre><span style="color: #0000ff;">$hdr</span>  = <span style="color: #ff0000;">&quot;From: ab@send.er<span style="color: #000099; font-weight: bold;">\r</span><span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
-<span style="color: #0000ff;">$hdr</span> .= <span style="color: #ff0000;">&quot;To: em@pfaeng.er<span style="color: #000099; font-weight: bold;">\r</span><span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
-<span style="color: #0000ff;">$hdr</span> .= <span style="color: #ff0000;">&quot;Reply-To: devnull@send.er<span style="color: #000099; font-weight: bold;">\r</span><span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
-<span style="color: #0000ff;">$hdr</span> .= <span style="color: #ff0000;">&quot;Subject: Testmail<span style="color: #000099; font-weight: bold;">\r</span><span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
-<span style="color: #0000ff;">$hdr</span> .= <span style="color: #ff0000;">&quot;<span style="color: #000099; font-weight: bold;">\r</span><span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>;
+<pre>$hdr  = &quot;From: ab@send.er\r\n&quot;;
+$hdr .= &quot;To: em@pfaeng.er\r\n&quot;;
+$hdr .= &quot;Reply-To: devnull@send.er\r\n&quot;;
+$hdr .= &quot;Subject: Testmail\r\n&quot;;
+$hdr .= &quot;\r\n&quot;;
 &nbsp;
-<span style="color: #808080; font-style: italic;"># Socket oeffnen.</span>
-<span style="color: #0000ff;">$fp</span> = <a href="http://www.php3.de/fsockopen"><span style="color: #000066;">fsockopen</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;mail.server.de&quot;</span>, <span style="color: #cc66cc;">25</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #0000ff;">$result</span> = <a href="http://www.php3.de/fgets"><span style="color: #000066;">fgets</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span>, <span style="color: #cc66cc;">1024</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$result</span><span style="color: #cc66cc;">+0</span> != <span style="color: #cc66cc;">220</span><span style="color: #000000;">&#41;</span>
-	<a href="http://www.php3.de/die"><span style="color: #000066;">die</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;Statuscode falsch (service not ready?): $result&quot;</span><span style="color: #000000;">&#41;</span>;
+# Socket oeffnen.
+$fp = fsockopen&#40;&quot;mail.server.de&quot;, 25&#41;;
+$result = fgets&#40;$fp, 1024&#41;;
+if &#40;$result+0 != 220&#41;
+	die&#40;&quot;Statuscode falsch (service not ready?): $result&quot;&#41;;
 &nbsp;
-<span style="color: #808080; font-style: italic;"># HELO</span>
-<a href="http://www.php3.de/fputs"><span style="color: #000066;">fputs</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span>, <span style="color: #ff0000;">&quot;HELO mein.eigener.servername.de<span style="color: #000099; font-weight: bold;">\r</span><span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #0000ff;">$result</span> = <a href="http://www.php3.de/fgets"><span style="color: #000066;">fgets</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span>, <span style="color: #cc66cc;">1024</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$result</span><span style="color: #cc66cc;">+0</span> != <span style="color: #cc66cc;">250</span><span style="color: #000000;">&#41;</span>
-	<a href="http://www.php3.de/die"><span style="color: #000066;">die</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;HELO Statuscode falsch: $result&quot;</span><span style="color: #000000;">&#41;</span>;
+# HELO
+fputs&#40;$fp, &quot;HELO mein.eigener.servername.de\r\n&quot;&#41;;
+$result = fgets&#40;$fp, 1024&#41;;
+if &#40;$result+0 != 250&#41;
+	die&#40;&quot;HELO Statuscode falsch: $result&quot;&#41;;
 &nbsp;
-<span style="color: #808080; font-style: italic;"># MAIL FROM</span>
-<a href="http://www.php3.de/fputs"><span style="color: #000066;">fputs</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span>, <span style="color: #ff0000;">&quot;MAIL FROM: ab@send.er<span style="color: #000099; font-weight: bold;">\r</span><span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #0000ff;">$result</span> = <a href="http://www.php3.de/fgets"><span style="color: #000066;">fgets</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span>, <span style="color: #cc66cc;">1024</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$result</span><span style="color: #cc66cc;">+0</span> != <span style="color: #cc66cc;">250</span><span style="color: #000000;">&#41;</span>
-	<a href="http://www.php3.de/die"><span style="color: #000066;">die</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;MAIL FROM Statuscode falsch: $result&quot;</span><span style="color: #000000;">&#41;</span>;
+# MAIL FROM
+fputs&#40;$fp, &quot;MAIL FROM: ab@send.er\r\n&quot;&#41;;
+$result = fgets&#40;$fp, 1024&#41;;
+if &#40;$result+0 != 250&#41;
+	die&#40;&quot;MAIL FROM Statuscode falsch: $result&quot;&#41;;
 &nbsp;
-<span style="color: #808080; font-style: italic;"># RCPT TO</span>
-<a href="http://www.php3.de/fputs"><span style="color: #000066;">fputs</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span>, <span style="color: #ff0000;">&quot;RCPT TO: em@pfaeng.er<span style="color: #000099; font-weight: bold;">\r</span><span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #0000ff;">$result</span> = <a href="http://www.php3.de/fgets"><span style="color: #000066;">fgets</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span>, <span style="color: #cc66cc;">1024</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$result</span><span style="color: #cc66cc;">+0</span> != <span style="color: #cc66cc;">250</span><span style="color: #000000;">&#41;</span>
-	<a href="http://www.php3.de/die"><span style="color: #000066;">die</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;RCPT TO: Statuscode falsch: $result&quot;</span><span style="color: #000000;">&#41;</span>;
+# RCPT TO
+fputs&#40;$fp, &quot;RCPT TO: em@pfaeng.er\r\n&quot;&#41;;
+$result = fgets&#40;$fp, 1024&#41;;
+if &#40;$result+0 != 250&#41;
+	die&#40;&quot;RCPT TO: Statuscode falsch: $result&quot;&#41;;
 &nbsp;
-<span style="color: #808080; font-style: italic;"># DATA</span>
-<a href="http://www.php3.de/fputs"><span style="color: #000066;">fputs</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span>, <span style="color: #ff0000;">&quot;DATA<span style="color: #000099; font-weight: bold;">\r</span><span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #0000ff;">$result</span> = <a href="http://www.php3.de/fgets"><span style="color: #000066;">fgets</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span>, <span style="color: #cc66cc;">1024</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$result</span><span style="color: #cc66cc;">+0</span> != <span style="color: #cc66cc;">354</span><span style="color: #000000;">&#41;</span>
-	<a href="http://www.php3.de/die"><span style="color: #000066;">die</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;DATA: Statuscode falsch: $result&quot;</span><span style="color: #000000;">&#41;</span>;
+# DATA
+fputs&#40;$fp, &quot;DATA\r\n&quot;&#41;;
+$result = fgets&#40;$fp, 1024&#41;;
+if &#40;$result+0 != 354&#41;
+	die&#40;&quot;DATA: Statuscode falsch: $result&quot;&#41;;
 &nbsp;
-<span style="color: #808080; font-style: italic;"># Header senden</span>
-<a href="http://www.php3.de/fputs"><span style="color: #000066;">fputs</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span>, <span style="color: #0000ff;">$hdr</span><span style="color: #000000;">&#41;</span>;
+# Header senden
+fputs&#40;$fp, $hdr&#41;;
 &nbsp;
-<span style="color: #808080; font-style: italic;"># Text senden</span>
-<a href="http://www.php3.de/fputs"><span style="color: #000066;">fputs</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span>, <span style="color: #ff0000;">&quot;Das ist nur eine Testnachricht.&quot;</span><span style="color: #000000;">&#41;</span>;
+# Text senden
+fputs&#40;$fp, &quot;Das ist nur eine Testnachricht.&quot;&#41;;
 &nbsp;
-<span style="color: #808080; font-style: italic;"># Ende von DATA: CRLF . CRLF</span>
-<a href="http://www.php3.de/fputs"><span style="color: #000066;">fputs</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span>, <span style="color: #ff0000;">&quot;<span style="color: #000099; font-weight: bold;">\r</span><span style="color: #000099; font-weight: bold;">\n</span>.<span style="color: #000099; font-weight: bold;">\r</span><span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #0000ff;">$result</span> = <a href="http://www.php3.de/fgets"><span style="color: #000066;">fgets</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span>, <span style="color: #cc66cc;">1024</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$result</span><span style="color: #cc66cc;">+0</span> != <span style="color: #cc66cc;">250</span><span style="color: #000000;">&#41;</span>
-	<a href="http://www.php3.de/die"><span style="color: #000066;">die</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;DATA(end): Statuscode falsch: $result&quot;</span><span style="color: #000000;">&#41;</span>;
+# Ende von DATA: CRLF . CRLF
+fputs&#40;$fp, &quot;\r\n.\r\n&quot;&#41;;
+$result = fgets&#40;$fp, 1024&#41;;
+if &#40;$result+0 != 250&#41;
+	die&#40;&quot;DATA(end): Statuscode falsch: $result&quot;&#41;;
 &nbsp;
-<span style="color: #808080; font-style: italic;"># QUIT</span>
-<a href="http://www.php3.de/fputs"><span style="color: #000066;">fputs</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span>, <span style="color: #ff0000;">&quot;QUIT<span style="color: #000099; font-weight: bold;">\r</span><span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #0000ff;">$result</span> = <a href="http://www.php3.de/fgets"><span style="color: #000066;">fgets</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span>, <span style="color: #cc66cc;">1024</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$result</span><span style="color: #cc66cc;">+0</span> != <span style="color: #cc66cc;">221</span><span style="color: #000000;">&#41;</span>
-	<a href="http://www.php3.de/die"><span style="color: #000066;">die</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;QUIT: Statuscode falsch: $result&quot;</span><span style="color: #000000;">&#41;</span>;
+# QUIT
+fputs&#40;$fp, &quot;QUIT\r\n&quot;&#41;;
+$result = fgets&#40;$fp, 1024&#41;;
+if &#40;$result+0 != 221&#41;
+	die&#40;&quot;QUIT: Statuscode falsch: $result&quot;&#41;;
 &nbsp;
-<span style="color: #808080; font-style: italic;"># Verbindung schließen</span>
-<a href="http://www.php3.de/fclose"><span style="color: #000066;">fclose</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$fp</span><span style="color: #000000;">&#41;</span>;</pre>
+# Verbindung schließen
+fclose&#40;$fp&#41;;</pre>
 
 <p>
 Wer sich diesen Code nicht zutraut, kann auch die
@@ -100,27 +100,27 @@ gegenüber dem Programmierer und erzeugt auch Fehlermeldungen, wenn
 mal etwas nicht klappte. Beispiel:
 </p>
 
-<pre><span style="color: #000000; font-weight: bold;">&lt;?php</span>
+<pre>&lt;?php
 &nbsp;
-  <span style="color: #808080; font-style: italic;">/* Funktionsklasse inkludieren. */</span>
-  <span style="color: #b1b100;">include</span> <span style="color: #ff0000;">&quot;smtp.php&quot;</span>;
+  /* Funktionsklasse inkludieren. */
+  include &quot;smtp.php&quot;;
 &nbsp;
-  <span style="color: #0000ff;">$smtp</span> = <span style="color: #000000; font-weight: bold;">new</span> smtp_class;
-  <span style="color: #0000ff;">$smtp</span>-&gt;<span style="color: #006600;">host_name</span>=<a href="http://www.php3.de/getenv"><span style="color: #000066;">getenv</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;HOSTNAME&quot;</span><span style="color: #000000;">&#41;</span>;
-  <span style="color: #0000ff;">$smtp</span>-&gt;<span style="color: #006600;">localhost</span>=<span style="color: #ff0000;">&quot;localhost&quot;</span>;
-  <span style="color: #0000ff;">$from</span> = <span style="color: #ff0000;">&quot;name@&quot;</span>.<span style="color: #0000ff;">$smtp</span>-&gt;<span style="color: #006600;">host_name</span>;
-  <span style="color: #0000ff;">$to</span> = <span style="color: #ff0000;">&quot;da@irgendwo.de&quot;</span>;
+  $smtp = new smtp_class;
+  $smtp-&gt;host_name=getenv&#40;&quot;HOSTNAME&quot;&#41;;
+  $smtp-&gt;localhost=&quot;localhost&quot;;
+  $from = &quot;name@&quot;.$smtp-&gt;host_name;
+  $to = &quot;da@irgendwo.de&quot;;
 &nbsp;
-  <span style="color: #0000ff;">$inhalt</span> = <span style="color: #ff0000;">&quot;Inhalt der Mail&quot;</span>;
+  $inhalt = &quot;Inhalt der Mail&quot;;
 &nbsp;
-  <span style="color: #b1b100;">if</span> <span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$smtp</span>-&gt;<span style="color: #006600;">SendMessage</span><span style="color: #000000;">&#40;</span>
-      <span style="color: #0000ff;">$from</span>,
-      <a href="http://www.php3.de/array"><span style="color: #000066;">array</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$to</span><span style="color: #000000;">&#41;</span>,
-      <a href="http://www.php3.de/array"><span style="color: #000066;">array</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;From: $from&quot;</span>,<span style="color: #ff0000;">&quot;To: $to&quot;</span>,<span style="color: #ff0000;">&quot;Subject: test&quot;</span><span style="color: #000000;">&#41;</span>,
-      <span style="color: #0000ff;">$inhalt</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>
-  <span style="color: #000000;">&#123;</span>
-     <a href="http://www.php3.de/print"><span style="color: #000066;">print</span></a> <span style="color: #ff0000;">&quot;Mail wurde erfolgreich versandt.&quot;</span>;
-  <span style="color: #000000;">&#125;</span>
+  if &#40;$smtp-&gt;SendMessage&#40;
+      $from,
+      array&#40;$to&#41;,
+      array&#40;&quot;From: $from&quot;,&quot;To: $to&quot;,&quot;Subject: test&quot;&#41;,
+      $inhalt&#41;&#41;
+  &#123;
+     print &quot;Mail wurde erfolgreich versandt.&quot;;
+  &#125;
 &nbsp;
-<span style="color: #000000; font-weight: bold;">?&gt;</span></pre>
+?&gt;</pre>
 

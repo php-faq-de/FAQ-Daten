@@ -11,17 +11,17 @@ erkannt werden und deshalb nicht in <tt>&lt;br /&gt;</tt> umgewandelt
 werden.
 </p>
 
-<pre><span style="color: #808080; font-style: italic;">// Einlesen der Datei &quot;datei&quot; in den String $str</span>
-  <span style="color: #0000ff;">$str</span> = <a href="http://www.php3.de/implode"><span style="color: #000066;">implode</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;&quot;</span>, @<a href="http://www.php3.de/file"><span style="color: #000066;">file</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;datei&quot;</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>;
-  <span style="color: #808080; font-style: italic;">// Ausgeben der Datei mit Umbrüchen</span>
-  <a href="http://www.php3.de/print"><span style="color: #000066;">print</span></a> <a href="http://www.php3.de/nl2br"><span style="color: #000066;">nl2br</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$str</span><span style="color: #000000;">&#41;</span>;</pre>
+<pre>// Einlesen der Datei &quot;datei&quot; in den String $str
+  $str = implode&#40;&quot;&quot;, @file&#40;&quot;datei&quot;&#41;&#41;;
+  // Ausgeben der Datei mit Umbrüchen
+  print nl2br&#40;$str&#41;;</pre>
 
 <p>
 Sollen Zeilenumbrüche komplett <em>ersetzt</em> werden, benutzt
 man z. B. <a href="http://www.php3.de/str_replace">str_replace()</a>:
 </p>
 
-<pre><span style="color: #0000ff;">$string</span> = <a href="http://www.php3.de/str_replace"><span style="color: #000066;">str_replace</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>, <span style="color: #ff0000;">&quot;&lt;br&gt;&quot;</span>, <span style="color: #0000ff;">$string</span><span style="color: #000000;">&#41;</span>;</pre>
+<pre>$string = str_replace&#40;&quot;\n&quot;, &quot;&lt;br&gt;&quot;, $string&#41;;</pre>
 
 <p>
 Zum Thema "Zeilenumbruch" siehe auch:

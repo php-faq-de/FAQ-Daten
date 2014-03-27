@@ -3,11 +3,11 @@ Mit Hilfe der Funktion <a href="http://www.php3.de/parse_url">parse_url()</a>
 kann eine URL in ihre Bestandteile zerlegt werden.
 </p>
 
-<pre><span style="color: #0000ff;">$str</span> = <span style="color: #ff0000;">&quot;http://user:password@www.koehntopp.de:80/kris/artikel#php&quot;</span>;
-  <span style="color: #0000ff;">$avar</span> = <a href="http://www.php3.de/parse_url"><span style="color: #000066;">parse_url</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$str</span><span style="color: #000000;">&#41;</span>;
-  <a href="http://www.php3.de/reset"><span style="color: #000066;">reset</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$avar</span><span style="color: #000000;">&#41;</span>;
-  <span style="color: #b1b100;">while</span><span style="color: #000000;">&#40;</span><a href="http://www.php3.de/list"><span style="color: #000066;">list</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$k</span>, <span style="color: #0000ff;">$v</span><span style="color: #000000;">&#41;</span> = <a href="http://www.php3.de/each"><span style="color: #000066;">each</span></a><span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$avar</span><span style="color: #000000;">&#41;</span><span style="color: #000000;">&#41;</span>
-    <a href="http://www.php3.de/printf"><span style="color: #000066;">printf</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">&quot;k=%s, v=%s&lt;br&gt;<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span>, <span style="color: #0000ff;">$k</span>, <span style="color: #0000ff;">$v</span><span style="color: #000000;">&#41;</span>;</pre>
+<pre>$str = &quot;http://user:password@www.koehntopp.de:80/kris/artikel#php&quot;;
+  $avar = parse_url&#40;$str&#41;;
+  reset&#40;$avar&#41;;
+  while&#40;list&#40;$k, $v&#41; = each&#40;$avar&#41;&#41;
+    printf&#40;&quot;k=%s, v=%s&lt;br&gt;\n&quot;, $k, $v&#41;;</pre>
 
 <p>
 Ein <tt>QUERY_STRING</tt> kann mit Hilfe der Funktion

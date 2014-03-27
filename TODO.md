@@ -8,9 +8,10 @@ Version 0.1
 
 - **Externe Links** : Alle in den Beiträgen enthaltenen externen Links müssen bzgl. ihrer Aktualität
   überprüft werden.
-- **Code-Highlighting** : Der meiste PHP-Code in vorformatierten HTML-Abschnitten (pre-Elemente)
+- **Code-Highlighting** : <del>Der meiste PHP-Code in vorformatierten HTML-Abschnitten (pre-Elemente)
   liegt in einer Form vor, der den Code highlightet. Das ist zwar am Ende eine hübsche Sache, aber
-  innerhalb des Datensatzes vollkommen unnötiger, und schwer zu wartender Overhead. Das muss raus! 
+  innerhalb des Datensatzes vollkommen unnötiger, und schwer zu wartender Overhead. Das muss raus!</del>
+  __[Erledigt]__ Es wurden 190 Beiträge (answer.html) von Highlighting-Code befreit.
 - **Fehlende Dokumente** : <del>Beim Parsen der Daten aus dem Webcache konnten
   2 Dokumente der alten FAQ nicht eingelesen werden. Zuerst mal müssen diese beiden Dokumente
   lokalisiert werden und dann müssen sie noch manuell zu den XML-Daten hinzugefügt werden.</del>
@@ -27,5 +28,5 @@ Version 0.1
   Momentan sehen die Links so aus (Kategorielinks: http://php-faq.de/ch_kategoriealias.html und
   Beitragslinks http://php-faq.de/q-beitragalias.html). Diese werden umgeschrieben zu
   @{kategoriealias} für Kategorielinks und ${beitragsalias} für Beitragslinks.</del>
-  __[Erledigt]__Es wurden FAQ-interne Links in insgesamt 32 answer.html Dateien umgeschrieben.
+  __[Erledigt]__ Es wurden FAQ-interne Links in insgesamt 32 answer.html Dateien umgeschrieben.
   

@@ -23,35 +23,35 @@ Ihr Gegenstück ist die Funktion <a href="http://www.php3.de/language.oop.magic-
 Wiederherstellen des Objektes aufgerufen.
 </p>
 
-<pre><span style="color: #000000; font-weight: bold;">class</span> myClass <span style="color: #000000;">&#123;</span>
+<pre>class myClass &#123;
 &nbsp;
-<span style="color: #000000; font-weight: bold;">var</span> <span style="color: #0000ff;">$id</span>;
-<span style="color: #000000; font-weight: bold;">var</span> <span style="color: #0000ff;">$text</span>;
-<span style="color: #000000; font-weight: bold;">var</span> <span style="color: #0000ff;">$db</span>;
+var $id;
+var $text;
+var $db;
 &nbsp;
-<span style="color: #000000; font-weight: bold;">function</span> <a href="http://www.php3.de/gettext"><span style="color: #000066;">getText</span></a><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-	<span style="color: #b1b100;">return</span> <span style="color: #0000ff;">$this</span>-&gt;<span style="color: #006600;">text</span>;
-<span style="color: #000000;">&#125;</span>
+function getText&#40;&#41; &#123;
+	return $this-&gt;text;
+&#125;
 &nbsp;
-<span style="color: #000000; font-weight: bold;">function</span> setText<span style="color: #000000;">&#40;</span><span style="color: #0000ff;">$text</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-	<span style="color: #0000ff;">$this</span>-&gt;<span style="color: #006600;">text</span> = <span style="color: #0000ff;">$text</span>;
-	<span style="color: #808080; font-style: italic;">// schreibe Text in die Datenbank</span>
-	<span style="color: #000000;">&#91;</span>...<span style="color: #000000;">&#93;</span>
-<span style="color: #000000;">&#125;</span>
+function setText&#40;$text&#41; &#123;
+	$this-&gt;text = $text;
+	// schreibe Text in die Datenbank
+	&#91;...&#93;
+&#125;
 &nbsp;
-<span style="color: #000000; font-weight: bold;">function</span> __sleep<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-	<span style="color: #808080; font-style: italic;">// schließe die Datenbankverbindung</span>
-	<span style="color: #0000ff;">$this</span>-&gt;<span style="color: #006600;">db</span>-&gt;<span style="color: #006600;">disconnect</span><span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span>;
+function __sleep&#40;&#41; &#123;
+	// schließe die Datenbankverbindung
+	$this-&gt;db-&gt;disconnect&#40;&#41;;
 &nbsp;
-	<span style="color: #b1b100;">return</span> <a href="http://www.php3.de/array"><span style="color: #000066;">array</span></a><span style="color: #000000;">&#40;</span><span style="color: #ff0000;">'id'</span>, <span style="color: #ff0000;">'text'</span><span style="color: #000000;">&#41;</span>;
-<span style="color: #000000;">&#125;</span>
+	return array&#40;'id', 'text'&#41;;
+&#125;
 &nbsp;
-<span style="color: #000000; font-weight: bold;">function</span> __wakeup<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#41;</span> <span style="color: #000000;">&#123;</span>
-	<span style="color: #808080; font-style: italic;">// stelle die Datenbankverbindung wieder her</span>
-	<span style="color: #0000ff;">$this</span>-&gt;<span style="color: #006600;">db</span> = <span style="color: #000000; font-weight: bold;">new</span> DB<span style="color: #000000;">&#40;</span><span style="color: #000000;">&#91;</span>...<span style="color: #000000;">&#93;</span><span style="color: #000000;">&#41;</span>;
+function __wakeup&#40;&#41; &#123;
+	// stelle die Datenbankverbindung wieder her
+	$this-&gt;db = new DB&#40;&#91;...&#93;&#41;;
 &nbsp;
-	<span style="color: #808080; font-style: italic;">// hole den Text aus der Datenbank</span>
-	<span style="color: #000000;">&#91;</span>...<span style="color: #000000;">&#93;</span>
-<span style="color: #000000;">&#125;</span>
-<span style="color: #000000;">&#125;</span></pre>
+	// hole den Text aus der Datenbank
+	&#91;...&#93;
+&#125;
+&#125;</pre>
 
