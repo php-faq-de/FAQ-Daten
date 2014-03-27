@@ -29,13 +29,13 @@ vieler Abfragen verwendet. Ein typisches, falsches Konstrukt ist
 </p>
 
 <pre>// Liste der Treffer bestimmen
-$result=do_database_query&#40;&quot;select id from tabelle where $bedingung&quot;&#41;;
-&nbsp;
+$result=do_database_query("select id from tabelle where $bedingung");
+ 
 // Treffer anzeigen
-foreach &#40;$result as $k =&gt; $v&#41; &#123;
-  $detail = do_detail_query&#40;&quot;select * from tabelle2 where id =$v&quot;&#41;;
-  show_detail&#40;$detail&#41;;
-&#125;</pre>
+foreach ($result as $k =&gt; $v) {
+  $detail = do_detail_query("select * from tabelle2 where id =$v");
+  show_detail($detail);
+}</pre>
 
 <p>
 Dieser Code generiert eine Masse von Queries nacheinander. Für
@@ -46,11 +46,11 @@ ist stattdessen
 </p>
 
 <pre>// Treffer bestimmen
-$detail = do_database_query&#40;&quot;select * from tabelle, tabelle2
- where ( $bedingung ) and tabelle.id = tabelle2.id&quot;&#41;;
-foreach &#40;$detail as $k =&gt; $v&#41; &#123;
-  show_detail&#40;$v&#41;;
-&#125;</pre>
+$detail = do_database_query("select * from tabelle, tabelle2
+ where ( $bedingung ) and tabelle.id = tabelle2.id");
+foreach ($detail as $k =&gt; $v) {
+  show_detail($v);
+}</pre>
 
 <p>Dies liefert die gewünschten Daten mit einer einzigen Query.</p>
 

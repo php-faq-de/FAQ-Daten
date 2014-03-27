@@ -3,43 +3,43 @@ Diese Codebeispiele beschreiben <tt>insert</tt>, <tt>update</tt> und
 <tt>select</tt>:</p>
 
 <pre>// INSERT:
-$req = &quot;INSERT INTO bdata (description, data) VALUES
-        (:description, EMPTY_BLOB()) returning data into :data&quot;;
-$stmt = OCIParse&#40;$conn, $req&#41;;
-$lob = OCINewDescriptor&#40;$conn, OCI_D_LOB&#41;;
-OCIBindByName&#40;$stmt, &quot;:description&quot;, $description, -1&#41;;
-OCIBindByName&#40;$stmt, &quot;:data&quot;, $lob, -1, OCI_B_BLOB&#41;;
-OCIExecute&#40;$stmt, OCI_DEFAULT&#41;;
-if&#40;$lob-&gt;save&#40;$bdata&#41;&#41; &#123;
- OCICommit&#40;$conn&#41;;
-&#125; else &#123;
- echo &quot;Problems: Couldn't upload Lob\n&quot;;
-&#125;
-OCIFreeDesc&#40;$lob&#41;;
-OCIFreeStatement&#40;$stmt&#41;;
-&nbsp;
+$req = "INSERT INTO bdata (description, data) VALUES
+        (:description, EMPTY_BLOB()) returning data into :data";
+$stmt = OCIParse($conn, $req);
+$lob = OCINewDescriptor($conn, OCI_D_LOB);
+OCIBindByName($stmt, ":description", $description, -1);
+OCIBindByName($stmt, ":data", $lob, -1, OCI_B_BLOB);
+OCIExecute($stmt, OCI_DEFAULT);
+if($lob-&gt;save($bdata)) {
+ OCICommit($conn);
+} else {
+ echo "Problems: Couldn't upload Lob\n";
+}
+OCIFreeDesc($lob);
+OCIFreeStatement($stmt);
+ 
 // Für die verwendeten Typen beim OCIBindByName auf jeden Fall mal
 // ins PHP Handbuch schauen.
-&nbsp;
+ 
 // UPDATE:
 // Das SELECT FOR UPDATE sperrt den Eintrag für
 // andere Schreibzugriffe
 // Diese Sperre wird erst beim nächsten Commit aufgehoben
-$req=&quot;SELECT data FROM bdata WHERE id='5' FOR UPDATE&quot;;
-$stmt=OCIParse&#40;$conn, $req&#41;;
-OCIExecute&#40;$stmt, OCI_DEFAULT&#41;;
-&nbsp;
-$req=&quot;UPDATE bdata SET data=:data WHERE id='5'&quot;;
-$stmt=OCIParse&#40;$conn, $req&#41;;
-OCIBindByName&#40;$stmt, &quot;:data&quot;, $data, -1&#41;;
-OCIExecute&#40;$stmt, OCI_DEFAULT&#41;;
-OCICommit&#40;$conn&#41;;
-&nbsp;
+$req="SELECT data FROM bdata WHERE id='5' FOR UPDATE";
+$stmt=OCIParse($conn, $req);
+OCIExecute($stmt, OCI_DEFAULT);
+ 
+$req="UPDATE bdata SET data=:data WHERE id='5'";
+$stmt=OCIParse($conn, $req);
+OCIBindByName($stmt, ":data", $data, -1);
+OCIExecute($stmt, OCI_DEFAULT);
+OCICommit($conn);
+ 
 // SELECT
-$req=&quot;SELECT data FROM bdata WHERE id='5'&quot;;
-$stmt=OCIParse&#40;$conn, $req&#41;;
-OCIExecute&#40;$stmt&#41;;
-OCIFetch&#40;$stmt&#41;;
-$bdatalob=OCIResult&#40;$stmt, &quot;DATA&quot;&#41;;
-$bdata=$bdatalob-&gt;load&#40;&#41;;</pre>
+$req="SELECT data FROM bdata WHERE id='5'";
+$stmt=OCIParse($conn, $req);
+OCIExecute($stmt);
+OCIFetch($stmt);
+$bdatalob=OCIResult($stmt, "DATA");
+$bdata=$bdatalob-&gt;load();</pre>
 

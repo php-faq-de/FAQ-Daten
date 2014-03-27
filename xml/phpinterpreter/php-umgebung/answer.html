@@ -14,15 +14,15 @@ Umgebungsvariable <tt>HOME</tt> steht also als Element im Array
 </p>
 
 <pre>&lt;?php
-  function somefunc&#40;&#41; &#123;
+  function somefunc() {
     // Empfohlen
-    echo getenv&#40;&quot;HOME&quot;&#41;. &quot;&lt;br /&gt;\n&quot;;
-&nbsp;
+    echo getenv("HOME"). "&lt;br /&gt;\n";
+ 
     // $_ENV ist superglobal und automatisch in
     // Funktionen verfügbar.
-    echo $_ENV&#91;&quot;HOME&quot;&#93;&lt;br /&gt;\n&quot;;
+    echo $_ENV["HOME"]&lt;br /&gt;\n";
   }
-&nbsp;
+ 
   somefunc();
  ?&gt;</pre>
 

@@ -11,36 +11,36 @@ als Parameter selbst wieder auf.
 </p>
 
 <pre>&lt;?php
-&nbsp;
-function show_dir&#40; $dir, $pos=2 &#41;
-&#123;
-    if &#40; $pos == 2 &#41; &#123;
-        echo &quot;&lt;hr /&gt;&lt;pre&gt;&quot;;
-    &#125;
-&nbsp;
-    $handle = @opendir&#40; $dir &#41;;
-    if &#40; is_resource&#40; $handle &#41; &#41; &#123;
-        while &#40; &#40; $file = readdir&#40; $handle &#41; &#41; !== false &#41; &#123;
-            if &#40; preg_match&#40; '~^\.{1,2}$~', $file &#41; &#41; &#123;
+ 
+function show_dir( $dir, $pos=2 )
+{
+    if ( $pos == 2 ) {
+        echo "&lt;hr /&gt;&lt;pre&gt;";
+    }
+ 
+    $handle = @opendir( $dir );
+    if ( is_resource( $handle ) ) {
+        while ( ( $file = readdir( $handle ) ) !== false ) {
+            if ( preg_match( '~^\.{1,2}$~', $file ) ) {
                 continue;
-            &#125;
-&nbsp;
-            if &#40; is_dir&#40; $dir.$file &#41; &#41; &#123;
-                printf&#40; &quot;% &quot;.$pos.&quot;s &lt;b&gt;%s&lt;/b&gt;\n&quot;, '|-', $file &#41;;
-                show_dir&#40; $dir.$file.'/', $pos + 3 &#41;;
-            &#125; else &#123;
-                printf&#40; &quot;% &quot;.$pos.&quot;s %s\n&quot;, '|-', $file &#41;;
-            &#125;
-        &#125;
-        closedir&#40;$handle&#41;;
-    &#125;
-&nbsp;
-    if &#40; $pos == 2 &#41; &#123;
-        echo &quot;&lt;/pre&gt;&lt;hr /&gt;&quot;;
-    &#125;
-&#125;
-&nbsp;
-show_dir&#40; 'special/' &#41;;
-&nbsp;
+            }
+ 
+            if ( is_dir( $dir.$file ) ) {
+                printf( "% ".$pos."s &lt;b&gt;%s&lt;/b&gt;\n", '|-', $file );
+                show_dir( $dir.$file.'/', $pos + 3 );
+            } else {
+                printf( "% ".$pos."s %s\n", '|-', $file );
+            }
+        }
+        closedir($handle);
+    }
+ 
+    if ( $pos == 2 ) {
+        echo "&lt;/pre&gt;&lt;hr /&gt;";
+    }
+}
+ 
+show_dir( 'special/' );
+ 
 ?&gt;</pre>
 

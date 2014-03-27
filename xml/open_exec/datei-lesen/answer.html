@@ -1,10 +1,10 @@
 <p>Man kann eine Datei manuell öffnen und Zeile für Zeile lesen:</p>
 
-<pre>$fp = @fopen&#40;&quot;datei&quot;, &quot;r&quot;&#41; or die &#40;&quot;Kann Datei nicht lesen.&quot;&#41;;
-while &#40;$line = fgets&#40;$fp, 1024&#41;&#41; &#123;
-  machwas&#40;$line&#41;;
-&#125;
-fclose&#40;$fp&#41;;</pre>
+<pre>$fp = @fopen("datei", "r") or die ("Kann Datei nicht lesen.");
+while ($line = fgets($fp, 1024)) {
+  machwas($line);
+}
+fclose($fp);</pre>
 
 <p>
 Dies verwendet die Funktionen <a href="http://www.php3.de/fopen">fopen()</a> und
@@ -14,12 +14,12 @@ ausgegeben werden sollen, dann kann man dies kürzer mit
 <a href="http://www.php3.de/readfile">readfile()</a> schreiben:
 </p>
 
-<pre>$fp = @fopen&#40;&quot;datei&quot;, &quot;r&quot;&#41; or die &#40;&quot;Kann Datei nicht lesen.&quot;&#41;;
-fpassthru&#40;$fp&#41;;
+<pre>$fp = @fopen("datei", "r") or die ("Kann Datei nicht lesen.");
+fpassthru($fp);
 // fclose($fp); entfällt.
-&nbsp;
+ 
 // Noch einfacher ist es mit readfile():
-readfile&#40;&quot;datei&quot;&#41;;</pre>
+readfile("datei");</pre>
 
 <p>
 Will man stattdessen die Daten in der Datei in einem Array zur
@@ -30,13 +30,13 @@ kombinieren:
 </p>
 
 <pre>// Einlesen in Array
-$avar = file&#40;&quot;datei&quot;&#41;;
-&nbsp;
+$avar = file("datei");
+ 
 // Einlesen in String
-$str = implode&#40;&quot;&quot;, file&#40;&quot;datei&quot;&#41;&#41;;
-&nbsp;
+$str = implode("", file("datei"));
+ 
 // Mit unterdrückten Meldungen
-$str = implode&#40;&quot;&quot;, @file&#40;&quot;datei&quot;&#41;&#41;;</pre>
+$str = implode("", @file("datei"));</pre>
 
 <p>
 Ab PHP 4.3.0 kann man zum Einlesen in einen String auch die Funktion

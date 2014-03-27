@@ -10,18 +10,18 @@ testen, die für den erfolgreichen Einsatz der Nutzlast
 sichergestellt sein müssen. Der generierte Code sieht dann wie
 folgt aus:</p>
 
-<pre>if &#40;vorbedingung&#41; &#123;
-  if &#40;vorbedingung2&#41; &#123;
-    if &#40;vorbedingung3&#41; &#123;
-      doit&#40;&#41;; // Nutzlast
-    &#125; else &#123;
-      handle_error3&#40;&#41;;
-  &#125; else &#123;
-    handle_error2&#40;&#41;;
-  &#125;
-&#125; else &#123;
-  handle_error&#40;&#41;;
-&#125;</pre>
+<pre>if (vorbedingung) {
+  if (vorbedingung2) {
+    if (vorbedingung3) {
+      doit(); // Nutzlast
+    } else {
+      handle_error3();
+  } else {
+    handle_error2();
+  }
+} else {
+  handle_error();
+}</pre>
 
 <p>Dies ist sehr schwer zu lesen und zu verstehen, weil der
 eigentliche Zweck der Funktion tief geschachtelt und sehr
@@ -30,15 +30,15 @@ stattdessen absichtlich die in der strukturierten Programmierung verpönten
 Schleifenkurzschlüsse und frühzeitigen Funktionsausstiege in
 einer bestimmten Form, um besser lesbaren Code zu schreiben:</p>
 
-<pre>if &#40;!vorbedingung&#41;
-  handle_error&#40;&#41;;
-&nbsp;
-if &#40;!vorbedingung2&#41;
-  handle_error2&#40;&#41;;
-&nbsp;
-if &#40;!vorbedingung3&#41;
-  handle_error3&#40;&#41;;
-&nbsp;
+<pre>if (!vorbedingung)
+  handle_error();
+ 
+if (!vorbedingung2)
+  handle_error2();
+ 
+if (!vorbedingung3)
+  handle_error3();
+ 
 doit; // Nutzlast</pre>
 
 <p>Dieser Code skaliert sich besser: Egal wieviele
@@ -50,23 +50,23 @@ gedrängt.</p>
 <p>Ein praktisches Beispiel: Der folgende Code zum Durchlesen
 eines Verzeichnisses</p>
 
-<pre>$d = dir&#40;&quot;d:/logfiles&quot;&#41;;
-while&#40;$entry=$d-&gt;read&#40;&#41;&#41; &#123;
-  if &#40;&#40;$entry != &quot;.&quot;&#41; &amp;&amp; &#40;$entry != &quot;..&quot;&#41;&#41; &#123;
-    doit&#40;&#41;;
-  &#125;
-&#125;
-$d-&gt;close&#40;&#41;;</pre>
+<pre>$d = dir("d:/logfiles");
+while($entry=$d-&gt;read()) {
+  if (($entry != ".") &amp;&amp; ($entry != "..")) {
+    doit();
+  }
+}
+$d-&gt;close();</pre>
 
 <p>wird durch die Umstellung zu</p>
 
-<pre>$d = dir&#40;&quot;d:/logfiles&quot;&#41;;
-while &#40;$entry = $d-&gt;read&#40;&#41;&#41; &#123;
-&nbsp;
-  if &#40;$entry == &quot;.&quot; or $entry == &quot;..&quot;&#41;
+<pre>$d = dir("d:/logfiles");
+while ($entry = $d-&gt;read()) {
+ 
+  if ($entry == "." or $entry == "..")
         continue;
-&nbsp;
-  doit&#40;&#41;;
-&#125;
-$d-&gt;close&#40;&#41;;</pre>
+ 
+  doit();
+}
+$d-&gt;close();</pre>
 

@@ -7,12 +7,12 @@ Funktionsaufrufe) oder nichtskalare Werte (Arrays, Objekte) sind
 nicht gestattet.
 </p>
 
-<pre>function beispiel&#40;$p = &quot;default&quot;&#41; &#123;
-  printf&#40;&quot;Der Parameter p hat den Wert %s\n&quot;, $p&#41;;
-&#125;
-&nbsp;
-beispiel&#40;&quot;hallo&quot;&#41;;
-beispiel&#40;&#41;;</pre>
+<pre>function beispiel($p = "default") {
+  printf("Der Parameter p hat den Wert %s\n", $p);
+}
+ 
+beispiel("hallo");
+beispiel();</pre>
 
 <p>
 Auf diese Weise kann man jedoch keine echten variadischen
@@ -22,19 +22,19 @@ Man kann variadische Funktionen jedoch durch die Übergabe eines
 Array- oder Hashparameters simulieren.
 </p>
 
-<pre>function beispiel2&#40;$p&#41; &#123;
-  if &#40;!isset&#40;$p&#41; or !is_array&#40;$p&#41;&#41;
+<pre>function beispiel2($p) {
+  if (!isset($p) or !is_array($p))
     # Defaults setzen
-    $p = array&#40;&quot;para1&quot; =&gt; &quot;bla&quot;, &quot;para2&quot; =&gt; &quot;fasel&quot;&#41;;
-&nbsp;
-  if &#40;$p&#91;&quot;para1&quot;&#93;&#41;
-    machdies&#40;&#41;;
-&nbsp;
-  if &#40;$p&#91;&quot;para2&quot;&#93;&#41;
-    machdas&#40;&#41;;
-&#125;
-&nbsp;
-beispiel2&#40;array&#40;&quot;para1&quot; =&gt; &quot;laber&quot;, &quot;para2&quot; =&gt; &quot;lall&quot;&#41;&#41;;</pre>
+    $p = array("para1" =&gt; "bla", "para2" =&gt; "fasel");
+ 
+  if ($p["para1"])
+    machdies();
+ 
+  if ($p["para2"])
+    machdas();
+}
+ 
+beispiel2(array("para1" =&gt; "laber", "para2" =&gt; "lall"));</pre>
 
 <p>
 Seit PHP4 sind auch echte variadische Funktionen möglich. Dort
@@ -67,12 +67,12 @@ Eine echte variadische Funktion kann also in PHP4 folgendermaßen
 geschrieben werden:
 </p>
 
-<pre>function beispiel3&#40;&#41; &#123;
-    $args = func_get_args&#40;&#41;;
-    for&#40;$i=0; $i&lt;count&#40;$args&#41;; $i++&#41; &#123;
-         print&#40;$args&#91;$i&#93;.&quot;\n&quot;&#41;;
-    &#125;
-&#125;
-&nbsp;
-beispiel3&#40;&quot;das&quot;, &quot;ist&quot;, &quot;ein&quot;, &quot;test&quot;&#41;;</pre>
+<pre>function beispiel3() {
+    $args = func_get_args();
+    for($i=0; $i&lt;count($args); $i++) {
+         print($args[$i]."\n");
+    }
+}
+ 
+beispiel3("das", "ist", "ein", "test");</pre>
 

@@ -15,29 +15,29 @@ eigenes Objekt, also <tt>$db1</tt> innerhalb von <tt>$db1</tt> und
 <tt>$db2</tt> innerhalb von <tt>$db2</tt>. Man schreibt daher code wie
 </p>
 
-<pre>class DB_MiniSQL &#123;
+<pre>class DB_MiniSQL {
   var $Link_ID = 0;
-&nbsp;
-  function connect&#40;&#41; &#123;
-    $this-&gt;Link_ID = mysql_connect&#40;...&#41;;
+ 
+  function connect() {
+    $this-&gt;Link_ID = mysql_connect(...);
     ...
-  &#125;
-&nbsp;
+  }
+ 
   ...
-&#125;</pre>
+}</pre>
 
 <p>oder</p>
 
-<pre>class DB_MiniSQL &#123;
+<pre>class DB_MiniSQL {
   var $Link_ID = 0;
-&nbsp;
-  function query&#40;$query&#41; &#123;
+ 
+  function query($query) {
     // Wenn kein Datenbank-Link vorhanden ist, eines herstellen.
-    if &#40;!$this-&gt;Link_ID&#41;
-      $this-&gt;connect&#40;&#41;;
-&nbsp;
+    if (!$this-&gt;Link_ID)
+      $this-&gt;connect();
+ 
     ...
-   &#125;
+   }
   ...
-&#125;</pre>
+}</pre>
 

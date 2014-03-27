@@ -6,8 +6,8 @@ wird richtig in 01.01.1998 umgewandelt. So erhält man also auch
 das Datum des Vortages:
 </p>
 
-<pre>$tstamp  = mktime&#40;0, 0, 0, date&#40;&quot;m&quot;&#41;, date&#40;&quot;d&quot;&#41;-1, date&#40;&quot;Y&quot;&#41;&#41;;
-$gestern = date&#40;&quot;Y-m-d&quot;, $tstamp&#41;;  // ISO-8601 Format
+<pre>$tstamp  = mktime(0, 0, 0, date("m"), date("d")-1, date("Y"));
+$gestern = date("Y-m-d", $tstamp);  // ISO-8601 Format
 print $gestern;</pre>
 
 <p>

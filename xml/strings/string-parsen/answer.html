@@ -3,11 +3,11 @@ Mit Hilfe der Funktion <a href="http://www.php3.de/parse_url">parse_url()</a>
 kann eine URL in ihre Bestandteile zerlegt werden.
 </p>
 
-<pre>$str = &quot;http://user:password@www.koehntopp.de:80/kris/artikel#php&quot;;
-  $avar = parse_url&#40;$str&#41;;
-  reset&#40;$avar&#41;;
-  while&#40;list&#40;$k, $v&#41; = each&#40;$avar&#41;&#41;
-    printf&#40;&quot;k=%s, v=%s&lt;br&gt;\n&quot;, $k, $v&#41;;</pre>
+<pre>$str = "http://user:password@www.koehntopp.de:80/kris/artikel#php";
+  $avar = parse_url($str);
+  reset($avar);
+  while(list($k, $v) = each($avar))
+    printf("k=%s, v=%s&lt;br&gt;\n", $k, $v);</pre>
 
 <p>
 Ein <tt>QUERY_STRING</tt> kann mit Hilfe der Funktion

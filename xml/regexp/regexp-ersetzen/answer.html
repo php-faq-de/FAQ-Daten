@@ -19,8 +19,8 @@ unter Beibehaltung der Schreibweise hervorzuheben:
 </p>
 
 <pre>// $s in $t durch $r ersetzen:
-preg_replace&#40;&quot;/((&lt;[^&gt;]*)|$s)/e&quot;, '&quot;\2&quot;==&quot;\1&quot;? &quot;\1&quot;:&quot;$r&quot;', $t&#41;;
-&nbsp;
+preg_replace("/((&lt;[^&gt;]*)|$s)/e", '"\2"=="\1"? "\1":"$r"', $t);
+ 
 // $s case-insensitive in $t hervorheben:
-preg_replace&#40;&quot;/((&lt;[^&gt;]*)|$s)/ie&quot;, '&quot;\2&quot;==&quot;\1&quot;? &quot;\1&quot;:&quot;&lt;b&gt;\1&lt;/b&gt;&quot;', $t&#41;;</pre>
+preg_replace("/((&lt;[^&gt;]*)|$s)/ie", '"\2"=="\1"? "\1":"&lt;b&gt;\1&lt;/b&gt;"', $t);</pre>
 

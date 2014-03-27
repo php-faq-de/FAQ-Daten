@@ -19,18 +19,18 @@ verwendet beispielweise einen Konstruktor, um eine Menüstruktur zu
 initialisieren.
 </p>
 
-<pre>class Menu &#123;
-  function Menu&#40;&#41; &#123;   // wird automatisch aufgerufen
-    $this-&gt;setup&#40;&#41;;
-  &#125;
-&nbsp;
-  function setup&#40;&#41; &#123;  // Initialisierung...
-    reset&#40;$this-&gt;urlmap&#41;;
-    while&#40;...&#41; &#123;
+<pre>class Menu {
+  function Menu() {   // wird automatisch aufgerufen
+    $this-&gt;setup();
+  }
+ 
+  function setup() {  // Initialisierung...
+    reset($this-&gt;urlmap);
+    while(...) {
       ...;
-    &#125;
-  &#125;
-&#125;</pre>
+    }
+  }
+}</pre>
 
 <p>
 In PHP3 wurde bei abgeleiteten Klassen der Konstruktor der Basisklasse
@@ -38,13 +38,13 @@ nicht automatisch aufgerufen. Man musste stattdessen Code wie diesen
 schreiben:
 </p>
 
-<pre>class My_Menu extends Menu &#123;
-  var $urlmap = array&#40;
+<pre>class My_Menu extends Menu {
+  var $urlmap = array(
     // meine eigenen Menüpunkte hier
-  &#41;;
-&nbsp;
-  function My_Menu&#40;&#41; &#123;   // wird automatisch aufgerufen
-    $this-&gt;setup&#40;&#41;;      // Aufruf der Initialisierung
-  &#125;
-&#125;</pre>
+  );
+ 
+  function My_Menu() {   // wird automatisch aufgerufen
+    $this-&gt;setup();      // Aufruf der Initialisierung
+  }
+}</pre>
 

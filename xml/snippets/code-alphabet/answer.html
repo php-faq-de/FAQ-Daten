@@ -3,9 +3,9 @@ Immer wieder kommt es vor, dass man die Buchstaben des Alphabets in
 einem Array benötigt. Natürlich muss man das nicht von Hand machen:
 </p>
 
-<pre>for &#40;$i = 65; $i &lt;= 90; $i++&#41; &#123;
-    $alphabet&#91;&#93; = chr&#40;$i&#41;;
-&#125;</pre>
+<pre>for ($i = 65; $i &lt;= 90; $i++) {
+    $alphabet[] = chr($i);
+}</pre>
 
 <p>
 Für Großbuchstaben lässt man die for-Schleife von 65 bis 90 laufen,
@@ -20,5 +20,5 @@ die Funktion <a href="http://www.php3.de/range">range()</a> auch Buchstaben als
 Bereichsangabe:
 </p>
 
-<pre>$alphabet = range&#40;'A', 'Z'&#41;;</pre>
+<pre>$alphabet = range('A', 'Z');</pre>
 

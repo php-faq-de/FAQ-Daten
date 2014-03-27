@@ -17,10 +17,10 @@ dabei angegeben werden! So könnte ein typisches WAP-PHP-Script
 beginnen:
 </p>
 <pre>&lt;?php
-  header&#40;&quot;Content-Type: text/vnd.wap.wml;charset=iso-8859-1&quot;&#41;;
-  print&#40;&quot;\n\n&lt;?xml version=\&quot;1.0\&quot;?&gt;\n&quot;&#41;;
+  header("Content-Type: text/vnd.wap.wml;charset=iso-8859-1");
+  print("\n\n&lt;?xml version=\"1.0\"?&gt;\n");
 ?&gt;
-&lt;!DOCTYPE wml PUBLIC &quot;-//WAPFORUM//DTD WML 1.1//EN&quot; &quot;http://www.wapforum.org/DTD/wml_1.1.xml&quot;&gt;</pre>
+&lt;!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml"&gt;</pre>
 <p>
 Darauf folgt der eigentliche WML-Content, in den man wie gewohnt
 PHP einbetten kann. Drei Dinge sind dabei wichtig:

@@ -7,32 +7,32 @@ Polymorphie würde Code wie der folgende funktionieren:
 </p>
 
 <pre># Funktion f mit Integer-Resultat und Integer-Parametern
-function int f&#40;int $a, int $b&#41; &#123;
+function int f(int $a, int $b) {
   return $a*$b;
-&#125;
-&nbsp;
+}
+ 
 # Funktion f mit Array-Resultat und Array-Parametern
-function array f&#40;array $a, array $b&#41; &#123;
-  $r = array&#40;&#41;;
-  $l = count&#40;$a&#41;;
-  for &#40;$i=0; $i&lt;$l; $i++&#41;
-    $r&#91;&#93; = $a&#91;$i&#93; * $b&#91;$i&#93;;
+function array f(array $a, array $b) {
+  $r = array();
+  $l = count($a);
+  for ($i=0; $i&lt;$l; $i++)
+    $r[] = $a[$i] * $b[$i];
   return $r;
-&#125;
-&nbsp;
+}
+ 
 # Definition von Integer-Parametern
 $xi = 3;
 $yi = 4;
-&nbsp;
+ 
 # Aufruf der Integer-Funktion f.
-$zi = f&#40;$xi, $yi&#41;;
-&nbsp;
+$zi = f($xi, $yi);
+ 
 # Definition von Array-Parametern
-$xa = array&#40;2, 3, 4&#41;;
-$ya = array&#40;4, 3, 2&#41;;
-&nbsp;
+$xa = array(2, 3, 4);
+$ya = array(4, 3, 2);
+ 
 # Aufruf der Array-Funktion f.
-$za = f&#40;$xa, $ya&#41;;</pre>
+$za = f($xa, $ya);</pre>
 
 <p>
 Dieser Code definiert zwei verschiedene Funktionen, die intern
@@ -54,26 +54,26 @@ nicht deklariert werden müssen. Stattdessen muss man manuell mit
 den Typfunktionen wie folgt codieren:
 </p>
 
-<pre>function f&#40;$a, $b&#41; &#123;
+<pre>function f($a, $b) {
   # Wandle $a in ein Array um, wenn es das nicht ist.
-  if &#40;!is_array&#40;$a&#41;&#41;
-    $a = array&#40;$a&#41;;
-&nbsp;
+  if (!is_array($a))
+    $a = array($a);
+ 
   # Ebenso $b.
-  if &#40;!is_array&#40;$b&#41;&#41;
-    $b = array&#40;$b&#41;;
-&nbsp;
+  if (!is_array($b))
+    $b = array($b);
+ 
   # Normaler Code.
-  $r = array&#40;&#41;;
-  $l = count&#40;$a&#41;;
-  for &#40;$i=0; $i&lt;$l; $i++&#41;
-    $r&#91;&#93; = $a&#91;$i&#93; * $b&#91;$i&#93;;
-&nbsp;
-  if &#40;count&#40;$r&#41; == 1&#41;
+  $r = array();
+  $l = count($a);
+  for ($i=0; $i&lt;$l; $i++)
+    $r[] = $a[$i] * $b[$i];
+ 
+  if (count($r) == 1)
     # Skalar zurückgeben
-    return $r&#91;0&#93;;
+    return $r[0];
   else
     # Array zurückgeben
     return $r;
-&#125;</pre>
+}</pre>
 

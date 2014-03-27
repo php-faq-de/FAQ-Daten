@@ -3,9 +3,9 @@ Da es die Funktion <a href="http://www.php3.de/array-unique">array-unique()</a> 
 gibt, muss man sich in PHP3 wie folgt behelfen:
 </p>
 
-<pre>function array_unique&#40;$a&#41; &#123;
-    while &#40;list&#40;$k, $v&#41; = each&#40;$a&#41;&#41; $b&#91;$v&#93; = &quot;&quot;;
-    while &#40;list&#40;$k, $v&#41; = each&#40;$b&#41;&#41; $c&#91;&#93; = $k;
+<pre>function array_unique($a) {
+    while (list($k, $v) = each($a)) $b[$v] = "";
+    while (list($k, $v) = each($b)) $c[] = $k;
     return $c;
-&#125;</pre>
+}</pre>
 

@@ -19,18 +19,18 @@ hier beliebige Werte in einem Array zusammenfassen und so eine
 Rückgabe mehrerer Werte simulieren:
 </p>
 
-<pre>function beispiel&#40;&#41; &#123;
-    $ret = array&#40;1, 2, 3&#41;;
-&nbsp;
-    return&#40;$ret&#41;;
-&#125;</pre>
+<pre>function beispiel() {
+    $ret = array(1, 2, 3);
+ 
+    return($ret);
+}</pre>
 
 <p>
 Im Funktionsaufruf kann man <a href="http://www.php3.de/list">list()</a> verwenden,
 um Variablen die Elemente des zurückgelieferten Arrays zuzuweisen:
 </p>
 
-<pre>list&#40;$var1, $var2, $var3&#41; = beispiel&#40;&#41;;</pre>
+<pre>list($var1, $var2, $var3) = beispiel();</pre>
 
 <p>
 Wenn man nicht tatsächlich mehrere Werte zurückgeben möchte,

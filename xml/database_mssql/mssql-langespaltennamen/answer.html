@@ -18,9 +18,9 @@ Wenn das nicht so ohne weiteres möglich ist, z.b. weil die
 Spaltennamen erst zusammengebaut werden, dann können Sie beim
 Zugriff auf das Array den Namen bei 32 Zeichen abschneiden.
 </p>
-<pre>$name = &quot;SpaltenNameMitMehrAls32Zeichen&quot;;
-$rs = mysql_fetch_array&#40;&#41;;
-$wert = $rs&#91; substr&#40; $name, 0, 31 &#41; &#93;;</pre>
+<pre>$name = "SpaltenNameMitMehrAls32Zeichen";
+$rs = mysql_fetch_array();
+$wert = $rs[ substr( $name, 0, 31 ) ];</pre>
 </li>
 </ol>
 

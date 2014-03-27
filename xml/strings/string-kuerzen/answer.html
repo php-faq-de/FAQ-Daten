@@ -4,7 +4,7 @@ Im einfachsten Fall erreicht man dies mit der "Allround-Funktion"
 </p>
 
 <pre>// Die ersten 20 Zeichen von $string ausgeben:
-echo substr&#40;$string, 0, 20&#41;;</pre>
+echo substr($string, 0, 20);</pre>
 
 <p>
 Soll die Ausgabe nicht mitten in einem Wort unterbrochen werden,
@@ -13,8 +13,8 @@ bietet es sich an, die Funktion <a href="http://www.php3.de/wordwrap">wordwrap()
 </p>
 
 <pre>// Nur ganze Wörter, max. 20 Zeichen von $string ausgeben:
-$parts= explode&#40;&quot;\n&quot;, wordwrap&#40;$string, 20, &quot;\n&quot;&#41;&#41;;
-echo $parts&#91;0&#93;;</pre>
+$parts= explode("\n", wordwrap($string, 20, "\n"));
+echo $parts[0];</pre>
 
 <p>
 Hier wird an der gewünschten Stelle ein Zeilenumbruch durch <tt>wordwrap()</tt>

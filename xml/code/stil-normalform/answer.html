@@ -15,14 +15,14 @@ einsetzt. Es heißt Affenformular, weil eine Million Affen dieses
 Formular eine Million mal aufrufen können, ohne etwas zu
 bewirken.</p>
 
-<pre>&lt;form action=&quot;&lt;?php echo $_SERVER['PHP_SELF']; ?&gt;&quot;&gt;
-&lt;input type=&quot;text&quot;
-       name=&quot;textfeld&quot;
-       value=&quot;&lt;?php if (isset($_REQUEST['textfeld'])) echo htmlspecialchars($_REQUEST['textfeld']); ?&gt;&quot;&gt;
+<pre>&lt;form action="&lt;?php echo $_SERVER['PHP_SELF']; ?&gt;"&gt;
+&lt;input type="text"
+       name="textfeld"
+       value="&lt;?php if (isset($_REQUEST['textfeld'])) echo htmlspecialchars($_REQUEST['textfeld']); ?&gt;"&gt;
 &lt;br&gt;
-&lt;input type=&quot;submit&quot;
-       name=&quot;do_form_x&quot;
-       value=&quot;Ausführen&quot;&gt;
+&lt;input type="submit"
+       name="do_form_x"
+       value="Ausführen"&gt;
 &lt;/form&gt;</pre>
 
 <p>Das Affenformular enthält an zwei Stellen PHP-Code: Bei 'action'
@@ -47,55 +47,55 @@ entscheidbar ist, ob der Formularinhalt gültig ist oder
 nicht.</p>
 
 <pre>&lt;?php
-&nbsp;
+ 
 // Funktion zum Drucken von Fehlermeldungen
-function errmsg&#40;$msg&#41; &#123;
+function errmsg($msg) {
    ?&gt;
-   &lt;font color=&quot;#ff0000&quot;&gt;&lt;b&gt;&lt;?php print nl2br&#40;$msg&#41; ?&gt;&lt;/b&gt;&lt;/font&gt;
+   &lt;font color="#ff0000"&gt;&lt;b&gt;&lt;?php print nl2br($msg) ?&gt;&lt;/b&gt;&lt;/font&gt;
    &lt;?php
-&#125;
-&nbsp;
+}
+ 
 // Überprüft Eingabewerte für $textfeld auf Korrektheit.
-function validate_textfeld&#40;$val&#41; &#123;
-   $msg = &quot;&quot;;
-   if &#40;strlen&#40;$val&#41; &lt; 3&#41;
-      $msg .= &quot;Die Eingabe muss mindestens 3 Zeichen lang sein.\n&quot;;
-&nbsp;
-   if &#40;preg_match&#40;&quot;/\s/&quot;, $val&#41;&#41;
-      $msg .= &quot;Die Eingabe darf keine Leerzeichen &quot;
-             .&quot;oder Tabulatoren enthalten.\n&quot;;
-&nbsp;
+function validate_textfeld($val) {
+   $msg = "";
+   if (strlen($val) &lt; 3)
+      $msg .= "Die Eingabe muss mindestens 3 Zeichen lang sein.\n";
+ 
+   if (preg_match("/\s/", $val))
+      $msg .= "Die Eingabe darf keine Leerzeichen "
+             ."oder Tabulatoren enthalten.\n";
+ 
    return $msg;
-&#125;
-&nbsp;
+}
+ 
 // Für jedes Formularfeld werden nun ein oder mehrere
 // Validatoren aufgerufen und das Ergebnis der Überprüfung
 // gemerkt.
 $valid = true;
-if &#40;isset&#40;$_REQUEST&#91;&quot;textfeld&quot;&#93;&#41;&#41; &#123;
-   $error&#91;&quot;textfeld&quot;&#93; = validate_textfeld&#40;$_REQUEST&#91;&quot;textfeld&quot;&#93;&#41;;
-   if &#40;$error&#91;&quot;textfeld&quot;&#93; != &quot;&quot;&#41;
+if (isset($_REQUEST["textfeld"])) {
+   $error["textfeld"] = validate_textfeld($_REQUEST["textfeld"]);
+   if ($error["textfeld"] != "")
       $valid = false;
-&#125;
-&nbsp;
+}
+ 
 ?&gt;
-&lt;form action=&quot;&lt;?php print $_SERVER[&quot;PHP_SELF&quot;]; ?&gt;&quot;&gt;
-&lt;input type=&quot;text&quot;
-       name=&quot;textfeld&quot;
-       value=&quot;&lt;?php print htmlspecialchars($_REQUEST[&quot;textfeld&quot;]); ?&gt;&quot;&gt;&lt;br&gt;
+&lt;form action="&lt;?php print $_SERVER["PHP_SELF"]; ?&gt;"&gt;
+&lt;input type="text"
+       name="textfeld"
+       value="&lt;?php print htmlspecialchars($_REQUEST["textfeld"]); ?&gt;"&gt;&lt;br&gt;
 &lt;?php
 // Ggf. Fehlermeldung ausdrucken.
-if &#40;$error&#91;&quot;textfeld&quot;&#93; != &quot;&quot;&#41;
-   print errmsg&#40;$error&#91;&quot;textfeld&quot;&#93;&#41;;
+if ($error["textfeld"] != "")
+   print errmsg($error["textfeld"]);
 ?&gt;
-&lt;input type=&quot;submit&quot;
-       name=&quot;do_form_x&quot;
-       value=&quot;Ausführen&quot;&gt;
+&lt;input type="submit"
+       name="do_form_x"
+       value="Ausführen"&gt;
 &lt;/form&gt;
 &lt;hr&gt;
-&lt;?php if &#40;$valid and isset&#40;$_REQUEST&#91;&quot;do_form_x&quot;&#93;&#41;&#41; &#123; ?&gt;
+&lt;?php if ($valid and isset($_REQUEST["do_form_x"])) { ?&gt;
 &lt;!-- Nutzlast --&gt;
-&lt;?php &#125; ?&gt;</pre>
+&lt;?php } ?&gt;</pre>
 
 <p>Schließlich kann man im vierten Schritt daran gehen, die
 validierten Formulardaten einer Bearbeitungsfunktion zu

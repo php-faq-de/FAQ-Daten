@@ -15,10 +15,10 @@ darauf zugreifen. Um Daten an die serielle Schnittstelle zu senden,
 genügt schon ein sehr kleines Script:
 </p>
 
-<pre>$string = &quot;Hallo Schnittstelle!\n&quot;;
-$pointer = fopen&#40;&quot;/dev/ttyS0&quot;,&quot;w&quot;&#41;;
-fwrite &#40;$pointer, $string&#41;;
-fclose&#40;$pointer&#41;;</pre>
+<pre>$string = "Hallo Schnittstelle!\n";
+$pointer = fopen("/dev/ttyS0","w");
+fwrite ($pointer, $string);
+fclose($pointer);</pre>
 
 <p>
 In diesem Beispiel wird die serielle Schnittstelle

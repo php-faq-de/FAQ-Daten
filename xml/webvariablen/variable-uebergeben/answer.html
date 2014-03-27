@@ -9,30 +9,30 @@ Werte - übergeben als array(Variable =&gt; Wert) - bequem codieren:
 </p>
 
 <pre>&lt;?php
-function req_url&#40;$url, $para&#41; &#123;
-  $sep = &quot;?&quot;;
-&nbsp;
-  if &#40;! is_array&#40;$para&#41;&#41;
+function req_url($url, $para) {
+  $sep = "?";
+ 
+  if (! is_array($para))
     return $url;
-&nbsp;
-  foreach &#40;$para as $k =&gt; $v&#41; &#123;
-    $url .= sprintf&#40;&quot;%s%s=%s&quot;,
+ 
+  foreach ($para as $k =&gt; $v) {
+    $url .= sprintf("%s%s=%s",
       $sep,
       $k,
-      urlencode&#40;$v&#41;
-    &#41;;
-    $sep = &quot;&amp;amp;&quot;;
-  &#125;
-&nbsp;
+      urlencode($v)
+    );
+    $sep = "&amp;amp;";
+  }
+ 
   return $url;
-&#125;
-&nbsp;
-$p = array&#40;
-  &quot;a&quot; =&gt; &quot;b&quot;,
-  &quot;c&quot; =&gt; &quot;d&quot;
-&#41;;
-&nbsp;
-$url = req_url&#40;&quot;beispiel.php&quot;, $p&#41;;
+}
+ 
+$p = array(
+  "a" =&gt; "b",
+  "c" =&gt; "d"
+);
+ 
+$url = req_url("beispiel.php", $p);
 ?&gt;
-Klicke auf das &lt;a href=&quot;&lt;?php print $url ?&gt;&quot;&gt;Beispiel&lt;/a&gt;.</pre>
+Klicke auf das &lt;a href="&lt;?php print $url ?&gt;"&gt;Beispiel&lt;/a&gt;.</pre>
 

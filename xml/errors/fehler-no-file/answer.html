@@ -23,16 +23,16 @@ Quellcode-Beispiele:
 /*
 Die externe URL http://www.example.com/verzeichnis/datei.ext soll gelesen werden.
 */
-&nbsp;
+ 
 /*
 in diesem Fall falsch, da eine URL absolut angegeben werden muss
 dieses Beispiel würde versuchen, die Datei datei.ext in
 /verzeichnis auf dem eigenen Server zu öffnen.
 */
-$fp = fopen&#40;&quot;/verzeichnis/datei.ext&quot;, &quot;r&quot;&#41;;
-&nbsp;
+$fp = fopen("/verzeichnis/datei.ext", "r");
+ 
 /* richtig */
-$fp = fopen&#40;&quot;http://www.example.com/verzeichnis/datei.ext&quot;, &quot;r&quot;&#41;;
+$fp = fopen("http://www.example.com/verzeichnis/datei.ext", "r");
 ?&gt;</pre>
 </li>
 <li>
@@ -59,12 +59,12 @@ Quellcode-Beispiele:
 die DocumentRoot sei /home/user und die zu öffnende Datei file.ext
 im Verzeichnis mydir
 */
-&nbsp;
+ 
 /* falsch */
-$fp = fopen&#40;&quot;/mydir/datei.ext&quot;, &quot;r&quot;&#41;;
-&nbsp;
+$fp = fopen("/mydir/datei.ext", "r");
+ 
 /* richtig */
-$fp = fopen&#40;&quot;/home/user/mydir/file.ext&quot;, &quot;r&quot;&#41;;
+$fp = fopen("/home/user/mydir/file.ext", "r");
 ?&gt;</pre>
 <p>
 Desweiteren kann es vorkommen, dass sich Tippfehler im Pfad befinden.
@@ -76,16 +76,16 @@ Code-Beispiele:
 </p>
 <pre>&lt;?php
 /* falsch, Leerzeichen am Anfang */
-$fp = fopen&#40;&quot; /verzeichnis/datei.ext&quot;, &quot;w&quot;&#41;;
-&nbsp;
+$fp = fopen(" /verzeichnis/datei.ext", "w");
+ 
 /* falsch, Leerzeichen im Pfad */
-$fp = fopen&#40;&quot;/verzeichnis/ datei.ext&quot;, &quot;a+&quot;&#41;;
-&nbsp;
+$fp = fopen("/verzeichnis/ datei.ext", "a+");
+ 
 /* falsch, Leerzeichen am Ende */
-$fp = fopen&#40;&quot;/verzeichnis/datei.ext &quot;, &quot;r+&quot;&#41;;
-&nbsp;
+$fp = fopen("/verzeichnis/datei.ext ", "r+");
+ 
 /* richtig */
-$fp = fopen&#40;&quot;/verzeichnis/datei.ext&quot;, &quot;w&quot;&#41;;
+$fp = fopen("/verzeichnis/datei.ext", "w");
 ?&gt;</pre>
 </li>
 </ol>

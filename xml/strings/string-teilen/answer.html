@@ -5,22 +5,22 @@ Klammern <tt>[</tt> und <tt>]</tt> geschweifte Klammern:
 <tt>{</tt> und <tt>}</tt>.
 </p>
 
-<pre>$str = &quot;teststring&quot;;
-$len = strlen&#40;$str&#41;;
-for&#40;$i=0; $i&lt;$len; $i++&#41;
-  printf&#40;&quot;Zeichen %d ist %s&lt;br&gt;\n&quot;, $i, $str&#123;$i&#125;&#41;;</pre>
+<pre>$str = "teststring";
+$len = strlen($str);
+for($i=0; $i&lt;$len; $i++)
+  printf("Zeichen %d ist %s&lt;br&gt;\n", $i, $str{$i});</pre>
 
 <p>
 Diese Methode ist auch geeignet, um einen String in ein Array
 umzuwandeln:
 </p>
 
-<pre>function stringToArray&#40;$string&#41; &#123;
-  $array = array&#40;&#41;;
-  for&#40;$i=0; $i&lt;strlen&#40;$string&#41;; $i++&#41;
-    $array&#91;$i&#93; = $string&#123;$i&#125;;
+<pre>function stringToArray($string) {
+  $array = array();
+  for($i=0; $i&lt;strlen($string); $i++)
+    $array[$i] = $string{$i};
   return $array;
-&#125;</pre>
+}</pre>
 
 <div class="amend insert"><div class="article-tools"><span class="createdate">13. August 2008</span>
 <span class="createby">Geschrieben von Niels Braczek</span>
@@ -29,8 +29,8 @@ umzuwandeln:
 <p>Das oben Stehende ist so nicht (mehr) korrekt. Es wurde inzwischen festgelegt, dass einzelne Zeichen eines Strings wie Array-Elemente mittels der eckigen Klammern <tt>[</tt> und <tt>]</tt> angesprochen werden. Die beschriebene Umwandlung in ein Array erübrigt sich dadurch vollständig.</p>
 <p>In der Version PHP6 soll die Schreibweise mit den geschweiften Klammern nicht mehr zulässig sein.</p>
 <p>Um einen String in Teile fester Länge zu zerlegen, verwendet man die Funktion <a href="http://www.php3.de/str_split">str_split()</a>:
-<pre>$arr = str_split&#40; &quot;Hallo Welt!&quot;, 3 &#41;;
-print_r&#40; $arr &#41;;</pre>
+<pre>$arr = str_split( "Hallo Welt!", 3 );
+print_r( $arr );</pre>
 <p>ergibt</p>
 <pre>
 Array
@@ -54,11 +54,11 @@ kann man einen String an einem Trennzeichen in ein Array
 zerlegen.
 </p>
 
-<pre>$str = &quot;dies ist ein teststring.&quot;;
-  $avar = explode&#40;&quot; &quot;, $str&#41;;
-  $len = count&#40;$avar&#41;;
-  for &#40;$i=0; $i&lt;$len; $i++&#41;
-    printf&#40;&quot;%d: %s&lt;br&gt;\n&quot;, $i, $avar&#91;$i&#93;&#41;;</pre>
+<pre>$str = "dies ist ein teststring.";
+  $avar = explode(" ", $str);
+  $len = count($avar);
+  for ($i=0; $i&lt;$len; $i++)
+    printf("%d: %s&lt;br&gt;\n", $i, $avar[$i]);</pre>
 
 <p>
 Dieses Beispiel zerlegt den gegebenen Teststring an den
@@ -73,11 +73,11 @@ weniger leistungsfähigere und langsamere <a href="http://www.php3.de/split">spl
 könnte man auch verwenden.
 </p>
 
-<pre>$str = &quot;ich bin  ein    sehr komplizierter test, nicht wahr?&quot;;
-  $avar = preg_split&#40;&quot;/[ \t.!?]+/&quot;, $str&#41;;
-  $len = count&#40;$avar&#41;;
-  for &#40;$i=0; $i&lt;$len; $i++&#41;
-    printf&#40;&quot;%d: %s&lt;br&gt;\n&quot;, $i, $avar&#91;$i&#93;&#41;;</pre>
+<pre>$str = "ich bin  ein    sehr komplizierter test, nicht wahr?";
+  $avar = preg_split("/[ \t.!?]+/", $str);
+  $len = count($avar);
+  for ($i=0; $i&lt;$len; $i++)
+    printf("%d: %s&lt;br&gt;\n", $i, $avar[$i]);</pre>
 
 <p>
 Im Gegensatz zum vorhergehenden Beispiel werden hier mehrfache

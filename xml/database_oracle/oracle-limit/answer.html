@@ -5,13 +5,13 @@ komplizierter (das Beispiel funktioniert erst ab Version
 
 <pre class="sql">SELECT *
   FROM
-   &#40;SELECT ROWNUM rownum2, inline_view1.*
+   (SELECT ROWNUM rownum2, inline_view1.*
       FROM
-       &#40;SELECT ROWNUM rownum1, ename, hiredate
+       (SELECT ROWNUM rownum1, ename, hiredate
           FROM emp
           ORDER BY hiredate
-       &#41; inline_view1  -- zum Sortieren (ROWNUM hier noch ungeordnet)
-   &#41; inline_view2      -- ROWNUM spiegelt jetzt die Sortierung wider
+       ) inline_view1  -- zum Sortieren (ROWNUM hier noch ungeordnet)
+   ) inline_view2      -- ROWNUM spiegelt jetzt die Sortierung wider
 WHERE rownum2 BETWEEN 5 AND 7</pre>
 
 <p>
@@ -20,16 +20,16 @@ Zeilen auswählt. Für Versionen ab 8.1.6 geht auch folgendes:</p>
 
 <pre class="sql">SELECT *
   FROM
-   &#40;SELECT ROW_NUMBER&#40;&#41;
-    OVER&#40;ORDER BY hiredate&#41; rownum1, ename, hiredate
+   (SELECT ROW_NUMBER()
+    OVER(ORDER BY hiredate) rownum1, ename, hiredate
       FROM emp
-   &#41; inline_view1
+   ) inline_view1
 WHERE rownum1 BETWEEN 5 AND 7
 /</pre>
 
 <p>Will man lediglich n Zeilen ausgeben tuts auch dies:</p>
 
 <pre class="sql">SELECT * FROM
-  &#40;SELECT ename, hiredate FROM emp ORDER BY hiredate&#41;
+  (SELECT ename, hiredate FROM emp ORDER BY hiredate)
 WHERE ROWNUM &lt; 6</pre>
 

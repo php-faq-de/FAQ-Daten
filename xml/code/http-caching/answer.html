@@ -29,16 +29,16 @@ Code verwenden:
 </p>
 
 <pre>$expire = 15;  // Lebensdauer der Seite im Cache in Minuten
-&nbsp;
-$exp_gmt = gmdate&#40;&quot;D, d M Y H:i:s&quot;, time&#40;&#41; + $expire * 60&#41; .&quot; GMT&quot;;
-$mod_gmt = gmdate&#40;&quot;D, d M Y H:i:s&quot;, getlastmod&#40;&#41;&#41; .&quot; GMT&quot;;
-&nbsp;
+ 
+$exp_gmt = gmdate("D, d M Y H:i:s", time() + $expire * 60) ." GMT";
+$mod_gmt = gmdate("D, d M Y H:i:s", getlastmod()) ." GMT";
+ 
 // HTTP 1.0
-header&#40;&quot;Expires: &quot; . $exp_gmt&#41;;
-header&#40;&quot;Last-Modified: &quot; . $mod_gmt&#41;;
-&nbsp;
+header("Expires: " . $exp_gmt);
+header("Last-Modified: " . $mod_gmt);
+ 
 // HTTP 1.1
-header&#40;&quot;Cache-Control: public, max-age=&quot; . $expire * 60&#41;;</pre>
+header("Cache-Control: public, max-age=" . $expire * 60);</pre>
 
 <p>
 Um das Caching einer Seite auf private Caches zu begrenzen muss
@@ -46,29 +46,29 @@ man Code wie diesen nehmen:
 </p>
 
 <pre>$expire = 15;  // Lebensdauer der Seite im Cache in Minuten
-&nbsp;
-$mod_gmt = gmdate&#40;&quot;D, d M Y H:i:s&quot;, getlastmod&#40;&#41;&#41; .&quot; GMT&quot;;
-&nbsp;
+ 
+$mod_gmt = gmdate("D, d M Y H:i:s", getlastmod()) ." GMT";
+ 
 // HTTP 1.0 kennt keine privaten Caches, also nix cachen
-header&#40;&quot;Expires: Mon, 26 Jul 1997 05:00:00 GMT&quot;&#41;;
-header&#40;&quot;Last-Modified: &quot; . $mod_gmt&#41;;
-&nbsp;
+header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+header("Last-Modified: " . $mod_gmt);
+ 
 // HTTP 1.1
-header&#40;&quot;Cache-Control: private, max-age=&quot; . $expire * 60&#41;;
-&nbsp;
+header("Cache-Control: private, max-age=" . $expire * 60);
+ 
 // MSIE 5.x special
-header&#40;&quot;Cache-Control: pre-check=&quot; . $expire * 60, FALSE&#41;;</pre>
+header("Cache-Control: pre-check=" . $expire * 60, FALSE);</pre>
 
 <p>
 Um das Caching einer Seite zu verhindern, ist der folgende Code
 passend:
 </p>
 
-<pre>header&#40;&quot;Expires: Mon, 26 Jul 1997 05:00:00 GMT&quot;&#41;;
-header&#40;&quot;Last-Modified: &quot; . gmdate&#40;&quot;D, d M Y H:i:s&quot;&#41; .&quot; GMT&quot;&#41;;
-header&#40;&quot;Cache-Control: no-cache&quot;&#41;;
-header&#40;&quot;Pragma: no-cache&quot;&#41;;
-header&#40;&quot;Cache-Control: post-check=0, pre-check=0&quot;, FALSE&#41;;</pre>
+<pre>header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+header("Last-Modified: " . gmdate("D, d M Y H:i:s") ." GMT");
+header("Cache-Control: no-cache");
+header("Pragma: no-cache");
+header("Cache-Control: post-check=0, pre-check=0", FALSE);</pre>
 
 <p>
 Ein anderer Trick, mit dem man das Caching einer Seite gut

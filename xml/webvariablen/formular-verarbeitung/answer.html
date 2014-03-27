@@ -19,8 +19,8 @@ oft am einfachsten zu überprüfen, ob der übermittelte String
 Zeichen enthält, die nicht erlaubt sind (siehe auch
 "<a class="faq" href="http://www.php-faq.de/q-regexp-bauelemente.html">Welche Bauelemente kommen in Regulären Ausdrücken vor?</a>"):
 </p>
-<pre>if &#40;preg_match&#40;'/[^0-9a-z_.-]/i', $_REQUEST&#91;'textfeldname'&#93;&#41;&#41;
-    errmsg&#40;'Ungültige Zeichen im Textfeld.'&#41;;</pre>
+<pre>if (preg_match('/[^0-9a-z_.-]/i', $_REQUEST['textfeldname']))
+    errmsg('Ungültige Zeichen im Textfeld.');</pre>
 <h2>Zahlenfelder</h2>
 <p>
 Um zu überprüfen, ob ein Textfeld eine Zahl enthält, eignet
@@ -29,15 +29,15 @@ Funktion akzeptiert allerdings auch Zeichen, die nicht Ziffern
 sind (z.B. <tt>-1.6e-12</tt>). Sollen nur Ziffern akzeptiert
 werden, helfen wieder Reguläre Ausdrücke:
 </p>
-<pre>if &#40;preg_match&#40;'/\D/', $_REQUEST&#91;'textfeldname'&#93;&#41;&#41;
-    errmsg&#40;'Ungültige Zeichen im Zahlenfeld.'&#41;;</pre>
+<pre>if (preg_match('/\D/', $_REQUEST['textfeldname']))
+    errmsg('Ungültige Zeichen im Zahlenfeld.');</pre>
 <h2>URLs</h2>
 <p>
 Zum Überprüfen einer URL reicht es meist aus, deren Anfang zu
 analysieren:
 </p>
-<pre>if &#40;! preg_match&#40;'=(https?|ftp)://[a-z0-9]([a-z0-9-]*[a-z0-9])?\.[a-z0-9]=i', $_REQUEST&#91;'textfeldname'&#93;&#41;&#41;
-    errmsg&#40;'Ungültige URL im Adressfeld.'&#41;;</pre>
+<pre>if (! preg_match('=(https?|ftp)://[a-z0-9]([a-z0-9-]*[a-z0-9])?\.[a-z0-9]=i', $_REQUEST['textfeldname']))
+    errmsg('Ungültige URL im Adressfeld.');</pre>
 <p>
 Diese Überprüfung soll nur ein Ansatz sein und lässt sich
 beliebig erweitern/verfeinern. Die tatsächliche Erreichbarkeit

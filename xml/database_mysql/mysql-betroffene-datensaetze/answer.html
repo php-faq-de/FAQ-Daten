@@ -10,28 +10,28 @@ UPDATE-/INSERT-Statement überprüfen.
 </p>
 
 <pre>// Beispiel für ein Select-Statement
-$query = &quot;SELECT * FROM table WHERE x = '$x'&quot;;
-$result = @mysql_query&#40;$query&#41;;
-&nbsp;
-if&#40;!$result&#41;
-&#123;
-    echo &quot;Fehler: &quot; . mysql_error&#40;&#41;;
-&#125;
+$query = "SELECT * FROM table WHERE x = '$x'";
+$result = @mysql_query($query);
+ 
+if(!$result)
+{
+    echo "Fehler: " . mysql_error();
+}
 else
-&#123;
-    echo mysql_num_rows&#40;&#41; . &quot; Datensätze gefunden.&lt;br /&gt;\n&quot;;
-&#125;
-&nbsp;
+{
+    echo mysql_num_rows() . " Datensätze gefunden.&lt;br /&gt;\n";
+}
+ 
 // Beispiel für ein UPDATE-Statement
-$query = &quot;UPDATE table SET a = '$a' WHERE x = '$x'&quot;;
-$result = @mysql_query&#40;$query&#41;;
-&nbsp;
-if&#40;!$result&#41;
-&#123;
-    echo &quot;Fehler: &quot; . mysql_error&#40;&#41;;
-&#125;
+$query = "UPDATE table SET a = '$a' WHERE x = '$x'";
+$result = @mysql_query($query);
+ 
+if(!$result)
+{
+    echo "Fehler: " . mysql_error();
+}
 else
-&#123;
-    echo mysql_affected_rows&#40;&#41; . &quot; Datensätze geändert.&lt;br /&gt;\n&quot;;
-&#125;</pre>
+{
+    echo mysql_affected_rows() . " Datensätze geändert.&lt;br /&gt;\n";
+}</pre>
 

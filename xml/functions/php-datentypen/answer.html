@@ -16,19 +16,19 @@ ihn entwertet: \\ (Backslash Backslash).
 $mybool  = true;
 $myint   = 1;
 $myfloat = 3.14;
-$mystring= &quot;hallo&quot;;
-&nbsp;
+$mystring= "hallo";
+ 
 # Verwendung
 $yourbool  = not $mybool;
 $yourint   = $myint * 2;
 $yourfloat = $myfloat * 2.71828;
-$yourstring= $mystring . &quot; du da!&quot;;
-&nbsp;
+$yourstring= $mystring . " du da!";
+ 
 # Ausgabe
-print &quot;$yourbool\n&quot;;
-print &quot;$yourint\n&quot;;
-print &quot;$yourfloat\n&quot;;
-print &quot;$yourstring\n&quot;;</pre>
+print "$yourbool\n";
+print "$yourint\n";
+print "$yourfloat\n";
+print "$yourstring\n";</pre>
 
 <h2>Felder (Arrays)</h2>
 
@@ -43,43 +43,43 @@ Indices.
 </p>
 
 <pre># Arrays
-&nbsp;
+ 
 # Zuweisung
-$a1    = array&#40; 10, 20, 30&#41;;
-$a2&#91;0&#93; = 10;
-$a2&#91;2&#93; = 30;
-$a2&#91;1&#93; = 20;
-&nbsp;
+$a1    = array( 10, 20, 30);
+$a2[0] = 10;
+$a2[2] = 30;
+$a2[1] = 20;
+ 
 # Verwendung
-$a3&#91;0&#93; = $a1&#91;0&#93; + $a2&#91;2&#93;; // $a3[0] ist 40
-$a3&#91;&#93;  = $a1&#91;1&#93; + $a1&#91;0&#93;; // $a3[1] ist 30, Index autom. vergeben
-&nbsp;
+$a3[0] = $a1[0] + $a2[2]; // $a3[0] ist 40
+$a3[]  = $a1[1] + $a1[0]; // $a3[1] ist 30, Index autom. vergeben
+ 
 # Ausgabe
-printf&#40;&quot;A1: %s %s %s\n&quot;, $a1&#91;0&#93;, $a1&#91;1&#93;, $a1&#91;2&#93;&#41;;
-&nbsp;
+printf("A1: %s %s %s\n", $a1[0], $a1[1], $a1[2]);
+ 
 # Aufzählung
-for &#40;$i=0; $i&lt;=2; $i++&#41; &#123;
-  printf&#40;&quot;%s: %s\n&quot;, $i, $a1&#91;$i&#93;&#41;;
-&#125;</pre>
+for ($i=0; $i&lt;=2; $i++) {
+  printf("%s: %s\n", $i, $a1[$i]);
+}</pre>
 
 <pre># Hashes
-&nbsp;
+ 
 # Zuweisung
-$a1    = array&#40; &quot;peter&quot; =&gt; 10, &quot;paul&quot; =&gt; 20, &quot;mary&quot; =&gt; 30&#41;;
-$a2&#91;&quot;peter&quot;&#93; = 10;
-$a2&#91;&quot;mary&quot;&#93;  = 30;
-$a2&#91;&quot;paul&quot;&#93;  = 20;
-&nbsp;
+$a1    = array( "peter" =&gt; 10, "paul" =&gt; 20, "mary" =&gt; 30);
+$a2["peter"] = 10;
+$a2["mary"]  = 30;
+$a2["paul"]  = 20;
+ 
 # Verwendung
-$a3&#91;&quot;peter&quot;&#93; = $a1&#91;&quot;peter&quot;&#93; + $a2&#91;&quot;mary&quot;&#93;; // $a3[&quot;peter&quot;] ist 40
-&nbsp;
+$a3["peter"] = $a1["peter"] + $a2["mary"]; // $a3["peter"] ist 40
+ 
 # Ausgabe
-printf&#40;&quot;A1: %s %s %s\n&quot;, $a1&#91;&quot;peter&quot;&#93;, $a1&#91;&quot;paul&quot;&#93;, $a1&#91;&quot;mary&quot;&#93;&#41;;
-&nbsp;
+printf("A1: %s %s %s\n", $a1["peter"], $a1["paul"], $a1["mary"]);
+ 
 # Aufzählung
-foreach&#40;$a1 as $k =&gt; $v&#41; &#123;
-  print&#40;&quot;%s: %s\n&quot;, $k, $v&#41;;
-&#125;</pre>
+foreach($a1 as $k =&gt; $v) {
+  print("%s: %s\n", $k, $v);
+}</pre>
 
 <h2>Objekte</h2>
 

@@ -12,10 +12,10 @@
   <tt>.htaccess</tt>-Datei setzen. So kann man zum Beispiel innerhalb eines Scriptes 
   und unabhängig vom Server-Betriebssystem den Include-Path anpassen:</p>
   
-<pre>$include_path&#91;&#93; = '.';
-$include_path&#91;&#93; = 'pear/';
-&nbsp;
-ini_set&#40;'include_path', implode&#40;PATH_SEPARATOR, $include_path&#41;&#41;;</pre>
+<pre>$include_path[] = '.';
+$include_path[] = 'pear/';
+ 
+ini_set('include_path', implode(PATH_SEPARATOR, $include_path));</pre>
   
   <p>
     Mit <tt>PHP_INI_PERDIR</tt> gekennzeichnete Variablen lassen sich 

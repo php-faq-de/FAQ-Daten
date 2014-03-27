@@ -3,13 +3,13 @@ Mit <a href="http://www.php3.de/unset">unset()</a> kann man sowohl Variablen (St
 ganze Arrays etc.) als auch einzelne Elemente eines Arrays löschen:
 </p>
 
-<pre>$array = array&#40;'P', 'H', 'P'&#41;;
-&nbsp;
+<pre>$array = array('P', 'H', 'P');
+ 
 // Löscht das 'H'
-unset&#40;$array&#91;1&#93;&#41;;
-&nbsp;
+unset($array[1]);
+ 
 // Löscht das ganze Array
-unset&#40;$array&#41;;</pre>
+unset($array);</pre>
 
 <p>
 Durch das Löschen einzelner Einträge entstehen Lücken im Index des
@@ -21,7 +21,7 @@ es aus den verbleibenden Elementen neu erstellen:
 </p>
 
 <pre>// Array mit fortlaufendem Index erzeugen
-$array = array_values&#40;$array&#41;;</pre>
+$array = array_values($array);</pre>
 
 <p>
 Weiterhin kann man auch mit <a href="http://www.php3.de/array_splice">array_splice()</a> Teile
@@ -30,5 +30,5 @@ numerischen Index erzeugen lassen (falls das benötigt wird):
 </p>
 
 <pre>// In $array ab Index 1 ein Element durch nichts ersetzen
-array_splice&#40;$array, 1, 1&#41;;</pre>
+array_splice($array, 1, 1);</pre>
 

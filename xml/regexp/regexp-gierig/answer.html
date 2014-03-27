@@ -23,26 +23,26 @@ zufrieden, mal nimmt er alles bis zum letztmöglichen <tt>r</tt> mit:
 </p>
 
 <pre>$string  = 'Dieser Satz wird fast gefressen';
-&nbsp;
+ 
 // Normalzustand:
-preg_match&#40;'/D.*r/', $string, $matches&#41;;
+preg_match('/D.*r/', $string, $matches);
 -&gt; Dieser Satz wird fast gefr
-&nbsp;
+ 
 // Einen Quantifier ungreedy gemacht:
-preg_match&#40;'/D.*?r/', $string, $matches&#41;;
+preg_match('/D.*?r/', $string, $matches);
 -&gt; Dieser
-&nbsp;
+ 
 // Greediness aller Quantifier umgeschaltet:
-preg_match&#40;'/D.*r/U', $string, $matches&#41;;
+preg_match('/D.*r/U', $string, $matches);
 -&gt; Dieser
-&nbsp;
+ 
 // Doppelt gemoppelt: Greediness umgeschaltet,
 // einen Quantifier wieder zurückgeschaltet:
-preg_match&#40;'/D.*?r/U', $string, $matches&#41;;
+preg_match('/D.*?r/U', $string, $matches);
 -&gt; Dieser Satz wird fast gefr
-&nbsp;
+ 
 // Bei dieser Schreibweise spielt die Greediness keine Rolle:
-preg_match&#40;'/D[^r]*r/', $string, $matches&#41;;
+preg_match('/D[^r]*r/', $string, $matches);
 -&gt; Dieser</pre>
 
 <p>

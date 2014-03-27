@@ -26,7 +26,7 @@ geplant), kann man alternativ auch folgendes schreiben:
 </p>
 
 <pre class="sql">SELECT xy FROM tabelle
-WHERE datum = &#40;SELECT MAX&#40;datum&#41; FROM tabelle&#41;</pre>
+WHERE datum = (SELECT MAX(datum) FROM tabelle)</pre>
 
 <p>
 Damit diese Selects effektiv vonstatten gehen, muss auf die

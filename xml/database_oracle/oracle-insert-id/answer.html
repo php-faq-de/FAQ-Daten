@@ -5,17 +5,17 @@ ermittelt werden. Mit dem folgenden Codestück ist es möglich, den
 zuletzt eingefügten Wert abzufragen:</p>
 
 <pre>// INSERT in die Tabelle
-&nbsp;
-$stmt = OCIParse&#40;$conn, &quot;INSERT INTO xy (BLA_XY) VALUES 'BLA'&quot;&#41;;
-OCIExecute&#40;$stmt, OCI_DEFAULT&#41;;
-&nbsp;
+ 
+$stmt = OCIParse($conn, "INSERT INTO xy (BLA_XY) VALUES 'BLA'");
+OCIExecute($stmt, OCI_DEFAULT);
+ 
 //Abfrage der Sequence
-$stmt = OCIParse&#40;$conn,&quot;SELECT zaehler_der_tabelle_xy.currval
-                 AS CV FROM DUAL&quot;&#41;;
-OCIExecute&#40;$stmt, OCI_DEFAULT&#41;;
-OCIFetch&#40;$stmt&#41;;
-$last_id=OCIResult&#40;$stmt, &quot;CV&quot;&#41;;
-OCICommit&#40;$conn&#41;;</pre>
+$stmt = OCIParse($conn,"SELECT zaehler_der_tabelle_xy.currval
+                 AS CV FROM DUAL");
+OCIExecute($stmt, OCI_DEFAULT);
+OCIFetch($stmt);
+$last_id=OCIResult($stmt, "CV");
+OCICommit($conn);</pre>
 
 <p>
 <em>Achtung:</em> Das selektieren des currval funktioniert nur innerhalb

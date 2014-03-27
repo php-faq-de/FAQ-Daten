@@ -18,11 +18,11 @@ Admins enthält. Der Benutzer sendet das Passwort-Ändern-Formular
 in seinem Browser ab und serverseitig wird das neue Passwort in
 die Datenbank geschrieben:
 </p>
-<pre>$result= $db-&gt;update &#40;'
+<pre>$result= $db-&gt;update ('
     update account
-    set password= &quot;'.$_REQUEST&#91;'newpassword'&#93;.'&quot;
-    where username= &quot;'.$_REQUEST&#91;'username'&#93;.'&quot;'
-  &#41;;</pre>
+    set password= "'.$_REQUEST['newpassword'].'"
+    where username= "'.$_REQUEST['username'].'"'
+  );</pre>
 <p>
 Hier wird die Variable $_REQUEST['newpassword'] nicht geprüft -
 der Benutzer kann eintragen, was er möchte. Mit etwas
@@ -33,8 +33,8 @@ Username <tt>userxy" or username="admin</tt>. Somit ergibt sich
 nach der Textersetzung folgendes SQL:
 </p>
 <pre>update account
-  set password= &quot;adminsuxx&quot;
-  where username=&quot;userxy&quot; or username=&quot;admin&quot;</pre>
+  set password= "adminsuxx"
+  where username="userxy" or username="admin"</pre>
 <p>
 Es kommt hier also hochgradig darauf an, niemals fremden
 Parametern zu trauen. Auf was muss also getestet werden?
@@ -45,32 +45,32 @@ dürfen nur Ziffern enthalten. Die beiden Funktionen sichern
 genau dies, und sorgen zudem dafür, dass NULL-Values korrekt
 wiedergegeben werden:
 </p>
-<pre>function sqlSafeString&#40;$param&#41; &#123;
+<pre>function sqlSafeString($param) {
     // Hier wird wg. der grossen Verbreitung auf MySQL eingegangen
-    return &#40;NULL === $param ? &quot;NULL&quot; : '&quot;'.mysql_escape_string &#40;$param&#41;.'&quot;'&#41;;
-  &#125;
-&nbsp;
-  function sqlSafeInt&#40;$param&#41; &#123;
-    return &#40;NULL === $param ? &quot;NULL&quot; : intVal &#40;$param&#41;&#41;;
-  &#125;</pre>
+    return (NULL === $param ? "NULL" : '"'.mysql_escape_string ($param).'"');
+  }
+ 
+  function sqlSafeInt($param) {
+    return (NULL === $param ? "NULL" : intVal ($param));
+  }</pre>
 <p>
 (Die genauen Vorgaben zum Schützen von Sonderzeichen hängen vom
 SQL-Dialekt des RDBMS ab und müssen gegebenenfalls angepasst
 werden.) Man hätte so oben beschriebenes SQL so umschreiben
 können:
 </p>
-<pre>$result= $db-&gt;update &#40;'
+<pre>$result= $db-&gt;update ('
     update account
-    set password= '.sqlSafeString &#40;$_REQUEST&#91;'newpassword'&#93;&#41;.'
-    where username= '.sqlSafeString &#40;$_REQUEST&#91;'username'&#93;&#41;
-  &#41;;</pre>
+    set password= '.sqlSafeString ($_REQUEST['newpassword']).'
+    where username= '.sqlSafeString ($_REQUEST['username'])
+  );</pre>
 <p>
 Obiger SQL-Injection-Versuch wäre dann gescheitert (weil keine
 Zeile auf diesen Usernamen matcht):
 </p>
 <pre>update account
-  set password= &quot;adminsuxx&quot;
-  where username=&quot;userxy\&quot; or username=\&quot;admin\&quot;&quot;</pre>
+  set password= "adminsuxx"
+  where username="userxy\" or username=\"admin\""</pre>
 <p>
 Eine Funktion, die komfortable SQL-Manipulation mit
 automatischem Escaping bietet, wird in "<a class="faq" href="http://www.php-faq.de/q-sybase-quoting.html">String-Quoting bei Sybase</a>" vorgestellt; sie ist zwar für Sybase

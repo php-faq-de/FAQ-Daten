@@ -9,10 +9,10 @@ Microsoft Internet Explorer ab Version 4 verarbeitet werden.
 </p>
 
 <pre>&lt;h1&gt;Hallo&lt;/h1&gt;
-&lt;form action=&quot;/submit.php&quot; method=&quot;post&quot;
-      enctype=&quot;multipart/form-data&quot;&gt;
-&lt;input type=&quot;file&quot; name=&quot;probe&quot; /&gt;
-&lt;input type=&quot;submit&quot; value=&quot;los&quot; /&gt;
+&lt;form action="/submit.php" method="post"
+      enctype="multipart/form-data"&gt;
+&lt;input type="file" name="probe" /&gt;
+&lt;input type="submit" value="los" /&gt;
 &lt;/form&gt;</pre>
 
 <p>
@@ -101,25 +101,25 @@ vermieden werden.
 <p>Vollständiges Beispiel:</p>
 
 <pre>&lt;h1&gt;Upload&lt;/h1&gt;
-&nbsp;
+ 
 &lt;form
-  action=&quot;&lt;?php echo $_SERVER['PHP_SELF']; ?&gt;&quot;
-  method=&quot;post&quot;
-  enctype=&quot;multipart/form-data&quot;&gt;
-&lt;input type=&quot;file&quot; name=&quot;probe&quot; /&gt;
-&lt;input type=&quot;submit&quot; value=&quot;Los!&quot; /&gt;
+  action="&lt;?php echo $_SERVER['PHP_SELF']; ?&gt;"
+  method="post"
+  enctype="multipart/form-data"&gt;
+&lt;input type="file" name="probe" /&gt;
+&lt;input type="submit" value="Los!" /&gt;
 &lt;/form&gt;
 &lt;hr /&gt;
 &lt;?php
-  if &#40;isset&#40;$_FILES&#91;'probe'&#93;&#41; and ! $_FILES&#91;'probe'&#93;&#91;'error'&#93;&#41; &#123;
+  if (isset($_FILES['probe']) and ! $_FILES['probe']['error']) {
     // Alternativ:            and   $_FILES['probe']['size']
-    move_uploaded_file&#40;$_FILES&#91;'probe'&#93;&#91;'tmp_name'&#93;, &quot;./newfile.txt&quot;&#41;;
-    printf&#40;&quot;Die Datei %s steht jetzt als &quot; .
-          &quot;newfile.txt zur Verfügung.&lt;br /&gt;\n&quot;,
-      $_FILES&#91;'probe'&#93;&#91;'name'&#93;&#41;;
-    printf&#40;&quot;Sie ist %u Bytes groß und vom Typ %s.&lt;br /&gt;\n&quot;,
-      $_FILES&#91;'probe'&#93;&#91;'size'&#93;, $_FILES&#91;'probe'&#93;&#91;'type'&#93;&#41;;
-  &#125;
+    move_uploaded_file($_FILES['probe']['tmp_name'], "./newfile.txt");
+    printf("Die Datei %s steht jetzt als " .
+          "newfile.txt zur Verfügung.&lt;br /&gt;\n",
+      $_FILES['probe']['name']);
+    printf("Sie ist %u Bytes groß und vom Typ %s.&lt;br /&gt;\n",
+      $_FILES['probe']['size'], $_FILES['probe']['type']);
+  }
  ?&gt;</pre>
 
 <p>

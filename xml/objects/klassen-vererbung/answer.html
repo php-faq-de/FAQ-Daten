@@ -29,23 +29,23 @@ sodass wir Fehlermeldungen mit den Informationen drucken können,
 die der Anwender benötigt.
 </p>
 
-<pre>class Example_Sql extends DB_Sql &#123;
-  var $Host     = &quot;database.netuse.de&quot;;
-  var $User     = &quot;kris&quot;;
-  var $Password = &quot;xyzzy&quot;;
-  var $Database = &quot;example_database&quot;;
-&nbsp;
-  function haltmsg&#40;$msg&#41; &#123;
+<pre>class Example_Sql extends DB_Sql {
+  var $Host     = "database.netuse.de";
+  var $User     = "kris";
+  var $Password = "xyzzy";
+  var $Database = "example_database";
+ 
+  function haltmsg($msg) {
 ?&gt;
     Es ist ein Datenbankfehler aufgetreten. Die Bearbeitung
     Ihrer Eingaben wurde abgebrochen. Bitte informieren Sie
-    &lt;a href=&quot;mailto:webmaster@example.kunde.de&quot;&gt;den Webmaster&lt;/a&gt;
+    &lt;a href="mailto:webmaster@example.kunde.de"&gt;den Webmaster&lt;/a&gt;
     von diesem Problem.&lt;p&gt;
-&nbsp;
+ 
 &lt;?php
-    printf&#40;&quot;Die Fehlermeldung der Datenbank war: %s\n&quot;, $msg&#41;;
-  &#125;
-&#125;</pre>
+    printf("Die Fehlermeldung der Datenbank war: %s\n", $msg);
+  }
+}</pre>
 
 <p>
 Man kann die Klasse <tt>Example_SQL</tt> nicht verstehen,

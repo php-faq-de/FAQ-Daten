@@ -76,7 +76,7 @@
 </p>
 
 <pre>&lt;?php
-    @session_start&#40;&#41;;
+    @session_start();
 ?&gt;</pre>
 
 <h2>Das <tt>$_SESSION</tt>-Hash</h2>
@@ -115,15 +115,15 @@
     // auf dem Server.
     // Falls bereits vorhanden, liest Sessiondaten wieder ein und
     // (re-)initialisiert die gespeicherten Variablen.
-&nbsp;
-    @session_start&#40;&#41;;
-&nbsp;
+ 
+    @session_start();
+ 
     // Erst wenn das Script terminiert(!), merkt PHP den Inhalt
     // der Variablen $s_userName und $s_userPermissions in
     // den Sessiondaten.
-&nbsp;
-    $_SESSION&#91;'userName'&#93;        =   &quot;dtg&quot;;
-    $_SESSION&#91;'userPermissions'&#93; =   &quot;keine :=(&quot;;
+ 
+    $_SESSION['userName']        =   "dtg";
+    $_SESSION['userPermissions'] =   "keine :=(";
 ?&gt;</pre>
 
 <h2>Beispiel 1: seite2.php</h2>
@@ -133,13 +133,13 @@
     // auf dem Server.
     // Falls bereits vorhanden, liest Sessiondaten wieder ein und
     // (re-)initialisiert die gespeicherten Variablen.
-&nbsp;
-    @session_start&#40;&#41;;
-&nbsp;
+ 
+    @session_start();
+ 
     // Gibt den Inhalt der wiederhergestellten Variablen aus.
-    echo &quot;&lt;P&gt;Hallo &quot; . $_SESSION&#91;'userName'&#93; . &quot;,&quot;;
-    echo &quot;&lt;P&gt;Du hast &quot; . $_SESSION&#91;'userPermissions'&#93; . &quot; Zugriffsrechte.&quot;;
-&nbsp;
+    echo "&lt;P&gt;Hallo " . $_SESSION['userName'] . ",";
+    echo "&lt;P&gt;Du hast " . $_SESSION['userPermissions'] . " Zugriffsrechte.";
+ 
     // Wird in diesem Script kein unset() oder
     // session_destroy() ausgeführt, bleiben die Daten erhalten!
 ?&gt;</pre>
@@ -195,40 +195,40 @@
 <h2>Beispiel 2: seite3.php (Formularseite)</h2>
 
 <pre>&lt;?php
-    @session_start&#40;&#41;;
-&nbsp;
-    if &#40;isset&#40;$_POST&#91;'submit'&#93;&#41;&#41;
-        &#123;
+    @session_start();
+ 
+    if (isset($_POST['submit']))
+        {
             // Hier prüfen, ob _alle_ benötigten Variablen,
             // die an dieses Script übermittelt wurden,
             // legal sind!
             // Hier nur fortfahren, wenn alles in Ordnung ist
-&nbsp;
+ 
             // Die Query wird anhand der Variablen,
             // die submitted wurden, erzeugt
-            $_SESSION&#91;'meineTolleQuery'&#93; = &quot;SELECT ...&quot;;
-&nbsp;
+            $_SESSION['meineTolleQuery'] = "SELECT ...";
+ 
             // HTTP-Redirect zu der Ausgabeseite
-            header&#40;&quot;Location: http://&quot; . $_SERVER&#91;'SERVER_NAME'&#93;
-                                       . &quot;/seite4.php&quot;&#41;;
+            header("Location: http://" . $_SERVER['SERVER_NAME']
+                                       . "/seite4.php");
             exit;
-        &#125;
+        }
 ?&gt;
-&nbsp;
-    &lt;FORM action=&quot;&lt;?php=$_SERVER['PHP_SELF']?&gt;&quot; method=&quot;post&quot;&gt;
+ 
+    &lt;FORM action="&lt;?php=$_SERVER['PHP_SELF']?&gt;" method="post"&gt;
         &lt;!--
             Hier ganz viele Radiobuttons, Checkboxen und Inputfelder
         --&gt;
-       &lt;INPUT type=&quot;submit&quot; name=&quot;submit&quot;&gt;
+       &lt;INPUT type="submit" name="submit"&gt;
     &lt;/FORM&gt;</pre>
 
 <h2>Beispiel 2: seite4.php (Ausgabeseite)</h2>
 
 <pre>&lt;?php
-    @session_start&#40;&#41;;
-&nbsp;
-    echo &quot;&lt;P&gt;Diese Query wurde mir übermittelt: &quot;
-             . $_SESSION&#91;'meineTolleQuery'&#93;;
-    echo &quot;&lt;P&gt;und jetzt mache ich was draus!&quot;;
+    @session_start();
+ 
+    echo "&lt;P&gt;Diese Query wurde mir übermittelt: "
+             . $_SESSION['meineTolleQuery'];
+    echo "&lt;P&gt;und jetzt mache ich was draus!";
 ?&gt;</pre>
 

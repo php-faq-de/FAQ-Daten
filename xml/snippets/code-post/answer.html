@@ -14,34 +14,34 @@ wo es für PHP als beste Scriptsprache stimmt.
 
 <pre>#! ./php -q
 &lt;?php
-&nbsp;
-function PostToHost&#40;$host, $path, $referer, $data_to_send&#41; &#123;
-  $fp = fsockopen&#40;$host, 80&#41;;
-  printf&#40;&quot;Open!\n&quot;&#41;;
-  fputs&#40;$fp, &quot;POST $path HTTP/1.1\r\n&quot;&#41;;
-  fputs&#40;$fp, &quot;Host: $host\r\n&quot;&#41;;
-  fputs&#40;$fp, &quot;Referer: $referer\r\n&quot;&#41;;
-  fputs&#40;$fp, &quot;Content-type: application/x-www-form-urlencoded\r\n&quot;&#41;;
-  fputs&#40;$fp, &quot;Content-length: &quot;. strlen&#40;$data_to_send&#41; .&quot;\r\n&quot;&#41;;
-  fputs&#40;$fp, &quot;Connection: close\r\n\r\n&quot;&#41;;
-  fputs&#40;$fp, $data_to_send&#41;;
-  printf&#40;&quot;Sent!\n&quot;&#41;;
-  while&#40;!feof&#40;$fp&#41;&#41; &#123;
-      $res .= fgets&#40;$fp, 128&#41;;
-  &#125;
-  printf&#40;&quot;Done!\n&quot;&#41;;
-  fclose&#40;$fp&#41;;
-&nbsp;
+ 
+function PostToHost($host, $path, $referer, $data_to_send) {
+  $fp = fsockopen($host, 80);
+  printf("Open!\n");
+  fputs($fp, "POST $path HTTP/1.1\r\n");
+  fputs($fp, "Host: $host\r\n");
+  fputs($fp, "Referer: $referer\r\n");
+  fputs($fp, "Content-type: application/x-www-form-urlencoded\r\n");
+  fputs($fp, "Content-length: ". strlen($data_to_send) ."\r\n");
+  fputs($fp, "Connection: close\r\n\r\n");
+  fputs($fp, $data_to_send);
+  printf("Sent!\n");
+  while(!feof($fp)) {
+      $res .= fgets($fp, 128);
+  }
+  printf("Done!\n");
+  fclose($fp);
+ 
   return $res;
-&#125;
-&nbsp;
-$data = &quot;pid=14&amp;poll_vote_number=2&quot;;
-&nbsp;
-printf&#40;&quot;Go!\n&quot;&#41;;
-$x = PostToHost&#40;
-              &quot;www.linux.com&quot;,
-              &quot;/polls/index.phtml&quot;,
-              &quot;http://www.linux.com/polls/index.phtml?pid=14&quot;,
+}
+ 
+$data = "pid=14&amp;poll_vote_number=2";
+ 
+printf("Go!\n");
+$x = PostToHost(
+              "www.linux.com",
+              "/polls/index.phtml",
+              "http://www.linux.com/polls/index.phtml?pid=14",
               $data
-&#41;;</pre>
+);</pre>
 

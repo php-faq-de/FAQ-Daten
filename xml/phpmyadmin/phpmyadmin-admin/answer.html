@@ -11,19 +11,19 @@ werden. Um dem Benutzer <tt>foo</tt> Zugriff auf die Datenbank
 benutzen:
 </p>
 
-<pre class="sql">INSERT INTO user &#40;Host, User, Password, Select_priv, Insert_priv,
+<pre class="sql">INSERT INTO user (Host, User, Password, Select_priv, Insert_priv,
                  Update_priv, Delete_priv, Create_priv, Drop_priv,
                  Reload_priv, Shutdown_priv, Process_priv,
                  File_priv, Grant_priv, References_priv, Index_priv,
-                 Alter_priv&#41;
-          VALUES &#40;'localhost', 'foo', PASSWORD&#40;'bar'&#41;, 'N', 'N',
+                 Alter_priv)
+          VALUES ('localhost', 'foo', PASSWORD('bar'), 'N', 'N',
                  'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N',
-                 'N', 'N'&#41;
-INSERT INTO db   &#40;Host, Db, User, Select_priv, Insert_priv,
+                 'N', 'N')
+INSERT INTO db   (Host, Db, User, Select_priv, Insert_priv,
                  Update_priv, Delete_priv, Create_priv, Drop_priv,
-                 Grant_priv, References_priv, Index_priv, Alter_priv&#41;
-          VALUES &#40;'localhost', 'foo_db', 'foo', 'Y', 'Y', 'Y', 'Y',
-                 'Y', 'Y', '', '', '', ''&#41;</pre>
+                 Grant_priv, References_priv, Index_priv, Alter_priv)
+          VALUES ('localhost', 'foo_db', 'foo', 'Y', 'Y', 'Y', 'Y',
+                 'Y', 'Y', '', '', '', '')</pre>
 
 <p>
 Bitte beachten Sie, dass Sie nach dieser Änderung ein <tt>FLUSH

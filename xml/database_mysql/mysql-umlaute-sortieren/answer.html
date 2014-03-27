@@ -35,7 +35,7 @@ Diese Tabelle wird nun um eine Spalte erweitert, in der später die Namen stehen
 denen sortiert werden kann. Ich nenne die Spalte einfach <tt>sortiert</tt>.
 Diese Spalte sollte die gleichen Eigenschaften haben, wie die Spalte <tt>Name</tt>.
 </p>
-<pre class="sql">ALTER TABLE tabelle ADD sortiert VARCHAR&#40;255&#41; NOT NULL</pre>
+<pre class="sql">ALTER TABLE tabelle ADD sortiert VARCHAR(255) NOT NULL</pre>
 
 <p>
 Nun sieht unsere Tabelle so aus:
@@ -53,10 +53,10 @@ Nun sieht unsere Tabelle so aus:
 <p>
 Die Umwandlung der Umlaute kann nun mit einer einzigen MySQL-Anweisung erfolgen:
 </p>
-<pre>mysql_query&#40;&quot;UPDATE tabelle
+<pre>mysql_query("UPDATE tabelle
               SET sortiert = REPLACE( REPLACE( REPLACE( REPLACE( REPLACE( REPLACE(
                              REPLACE(Name, 'Ä', 'A'), 'Ö', 'O'), 'Ü', 'U'),
-                             'ä', 'a'), 'ö', 'o'), 'ü','u'), 'ß', 's')&quot;&#41;;</pre>
+                             'ä', 'a'), 'ö', 'o'), 'ü','u'), 'ß', 's')");</pre>
 <p>
 ... Hierbei ist <tt>Name</tt> die entsprechende Tabellenspalte, aus der die umzuwandelnden Namen genommen werden.
 Es dürfen für den Spaltennamen keine Hochkommas verwendet werden!
@@ -78,7 +78,7 @@ Die fertige Tabelle sollte jetzt so aussehen:
 <p>
 Richtig sortiert lässt sich das Ganze nun so auslesen:
 </p>
-<pre>$result = mysql_query&#40;&quot;SELECT * FROM tabelle ORDER BY sortiert&quot;&#41;;</pre>
+<pre>$result = mysql_query("SELECT * FROM tabelle ORDER BY sortiert");</pre>
 
 <p>
 <em>Anwendung in laufenden Scripten</em>
@@ -86,28 +86,28 @@ Richtig sortiert lässt sich das Ganze nun so auslesen:
 <p>
 mit MySQL:
 </p>
-<pre>$name = &quot;irgend ein Name&quot;;
-mysql_query&#40;&quot;INSERT INTO tabelle (Name, sortiert)
+<pre>$name = "irgend ein Name";
+mysql_query("INSERT INTO tabelle (Name, sortiert)
              VALUES('$name', REPLACE( REPLACE( REPLACE( REPLACE( REPLACE( REPLACE(
                              REPLACE(Name, 'Ä', 'A'), 'Ö', 'O'), 'Ü', 'U'),
-                             'ä', 'a'), 'ö', 'o'), 'ü','u'), 'ß', 's'))&quot;&#41;;</pre>
+                             'ä', 'a'), 'ö', 'o'), 'ü','u'), 'ß', 's'))");</pre>
 
 <p>
 oder mit PHP:
 </p>
-<pre>$name = &quot;irgend ein Name&quot;;
-$sortiert = strtr&#40;$name, &quot;ÄÖÜäöüß&quot;, &quot;AOUaous&quot;&#41;;
-mysql_query&#40;&quot;INSERT INTO tabelle (Name, sortiert) VALUES('$name','$sortiert')&quot;&#41;;</pre>
+<pre>$name = "irgend ein Name";
+$sortiert = strtr($name, "ÄÖÜäöüß", "AOUaous");
+mysql_query("INSERT INTO tabelle (Name, sortiert) VALUES('$name','$sortiert')");</pre>
 
 
 <h2>Umlautsortierung während des Auslesens</h2>
 <p>
 Das Sortieren nach einer bestimmten Spalte kann auch während einer Abfrage stattfinden:
 </p>
-<pre>mysql_query&#40;&quot;SELECT *, REPLACE( REPLACE( REPLACE( REPLACE( REPLACE( REPLACE(
+<pre>mysql_query("SELECT *, REPLACE( REPLACE( REPLACE( REPLACE( REPLACE( REPLACE(
                        REPLACE(Name, 'Ä', 'A'), 'Ö', 'O'), 'Ü', 'U'),
                        'ä', 'a'), 'ö', 'o'), 'ü','u'), 'ß', 's') AS sortiert
-             FROM tabelle ORDER BY sortiert&quot;&#41;;</pre>
+             FROM tabelle ORDER BY sortiert");</pre>
 <p>
 Zu bedenken ist dabei allerdings, dass die Serverlast eine nicht zu unterschätzende Rolle spielen kann.
 Wenn es zuviele gleichzeitige Zugriffe auf den Server gibt bzw. wenn es zuviele zu bearbeitende Datensätze gibt, 

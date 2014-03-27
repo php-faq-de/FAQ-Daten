@@ -7,14 +7,14 @@ eine Klasse umgewandelt werden:
 <pre>$Link_ID  = 0;  // ID der aktuellen DB-Verbindung
  $Query_ID = 0; // ID des aktuellen Abfrageresultates
  $Error    = 0;    // Letzte Datenbank-Fehlermeldung
-&nbsp;
- function connect&#40;&#41; &#123; ... &#125;
-&nbsp;
- function query&#40;&#41;   &#123; ... &#125;
-&nbsp;
- function next_record&#40;&#41; &#123; ... &#125;
-&nbsp;
- function num_rows&#40;&#41; &#123; ... &#125;</pre>
+ 
+ function connect() { ... }
+ 
+ function query()   { ... }
+ 
+ function next_record() { ... }
+ 
+ function num_rows() { ... }</pre>
 
 <p>
 Aus diesen Variablen und Funktionen wird eine Klasse, indem man
@@ -23,19 +23,19 @@ schreibt und indem man alle Variablen und Funktionen mit einem
 <tt>class</tt>-Konstrukt umschließt.
 </p>
 
-<pre>class DB_MiniSQL &#123;
+<pre>class DB_MiniSQL {
  var $Link_ID  = 0; // ID der aktuellen DB-Verbindung
  var $Query_ID = 0; // ID des aktuellen Abfrageresultates
  var $Error    = 0; // Letzte Datenbank-Fehlermeldung
-&nbsp;
- function connect&#40;&#41; &#123; ... &#125;
-&nbsp;
- function query&#40;&#41;   &#123; ... &#125;
-&nbsp;
- function next_record&#40;&#41; &#123; ... &#125;
-&nbsp;
- function num_rows&#40;&#41; &#123; ... &#125;
-&#125;</pre>
+ 
+ function connect() { ... }
+ 
+ function query()   { ... }
+ 
+ function next_record() { ... }
+ 
+ function num_rows() { ... }
+}</pre>
 
 <p>
 Klassen selbst sind nur Baupläne, sie erzeugen keine Variablen

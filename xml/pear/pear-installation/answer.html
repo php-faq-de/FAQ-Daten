@@ -8,11 +8,11 @@ angegeben wurde, der Kern des PEAR automatisch nach
 <p>Danach muss lediglich die Direktive include_path
 von</p>
 
-<pre class="ini">include_path	= &quot;&quot;</pre>
+<pre class="ini">include_path	= ""</pre>
 
 <p>in</p>
 
-<pre class="ini">include_path	= &quot;.:/usr/local/lib/php/&quot;</pre>
+<pre class="ini">include_path	= ".:/usr/local/lib/php/"</pre>
 
 <p>geändert werden. Man kann dann durch Aufrufen von
 <tt>pear</tt> in einer Shell den PEAR Installer starten.</p>
@@ -39,9 +39,9 @@ gefragt:</p>
   <p>In der Datei PEAR.php müssen nun die Pfadangaben in
   den drei Zeilen</p>
 
-  <pre>define&#40;'PHP_BINDIR', '@prefix@/bin'&#41;;
-  define&#40;'PEAR_INSTALL_DIR', '@PEAR_INSTALLDIR@'&#41;;
-  define&#40;'PEAR_EXTENSION_DIR', '@EXTENSION_DIR@'&#41;;</pre>
+  <pre>define('PHP_BINDIR', '@prefix@/bin');
+  define('PEAR_INSTALL_DIR', '@PEAR_INSTALLDIR@');
+  define('PEAR_EXTENSION_DIR', '@EXTENSION_DIR@');</pre>
 
   <p>an die Gegebenheiten der Installation angepasst werden.</p>
 </li>

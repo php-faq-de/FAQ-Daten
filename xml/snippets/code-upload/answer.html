@@ -29,122 +29,122 @@ off
 <p>Dieses Stück Beispielcode sendet einen solchen Request ab:</p>
 
 <pre>#!/usr/local/bin/php -q
-&nbsp;
+ 
 &lt;?php
-&nbsp;
+ 
 // Andreas Bohne-Lang / a.bohne@dkfz.de / 22.10.2001 / GPL
 // Ergaenzt: 19.9.2003
-&nbsp;
-function PostToHost&#40;$host, $port, $path, $referer, $data_to_send&#41;
-&#123;
+ 
+function PostToHost($host, $port, $path, $referer, $data_to_send)
+{
     $dc = 0;
-    bo=&quot;-----------------------------305242850528394&quot;;
-&nbsp;
-    $fp = fsockopen&#40;$host, $port, $errno, $errstr&#41;;
-    if &#40;!$fp&#41; &#123;
-        echo &quot;errno: $errno \n&quot;;
-        echo &quot;errstr: $errstr\n&quot;;
+    bo="-----------------------------305242850528394";
+ 
+    $fp = fsockopen($host, $port, $errno, $errstr);
+    if (!$fp) {
+        echo "errno: $errno \n";
+        echo "errstr: $errstr\n";
         return $result;
-    &#125;
-&nbsp;
-    fputs&#40;$fp, &quot;POST $path HTTP/1.0\n&quot;&#41;;
-    fputs&#40;$fp, &quot;Host: $host\n&quot;&#41;;
-    fputs&#40;$fp, &quot;Referer: $referer\n&quot;&#41;;
-    fputs&#40;$fp, &quot;User-Agent: Mozilla/4.05C-SGI [en] (X11; I; IRIX 6.5 IP22)\n&quot;&#41;;
-    fputs&#40;$fp, &quot;Accept: image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, image/png, */*\n&quot;&#41;;
-    fputs&#40;$fp, &quot;Accept-Charset: iso-8859-1,*,utf-8\n&quot;&#41;;
-    fputs&#40;$fp, &quot;Content-type: multipart/form-data; boundary=$bo\n&quot;&#41;;
-&nbsp;
-    foreach&#40;$data_to_send as $key=&gt;$val&#41; &#123;
-        $ds =sprintf&#40;&quot;--%s\nContent-Disposition: form-data; name=\&quot;%s\&quot;\n\n%s\n&quot;, $bo, $key, $val&#41;;
-        $dc += strlen&#40;$ds&#41;;
-    &#125;
-    $dc += strlen&#40;$bo&#41;+3;
-    fputs&#40;$fp, &quot;Content-length: $dc \n&quot;&#41;;
-    fputs&#40;$fp, &quot;\n&quot;&#41;;
-&nbsp;
-    foreach&#40;$data_to_send as $key=&gt;$val&#41; &#123;
-        $ds =sprintf&#40;&quot;--%s\nContent-Disposition: form-data; name=\&quot;%s\&quot;\n\n%s\n&quot;, $bo, $key, $val&#41;;
-        fputs&#40;$fp, $ds &#41;;
-    &#125;
-    $ds = &quot;--&quot;.$bo.&quot;--\n&quot;;
-    fputs&#40;$fp, $ds&#41;;
-&nbsp;
-    while&#40;!feof&#40;$fp&#41;&#41; &#123;
-        $res .= fread&#40;$fp, 1&#41;;
-    &#125;
-    fclose&#40;$fp&#41;;
-&nbsp;
+    }
+ 
+    fputs($fp, "POST $path HTTP/1.0\n");
+    fputs($fp, "Host: $host\n");
+    fputs($fp, "Referer: $referer\n");
+    fputs($fp, "User-Agent: Mozilla/4.05C-SGI [en] (X11; I; IRIX 6.5 IP22)\n");
+    fputs($fp, "Accept: image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, image/png, */*\n");
+    fputs($fp, "Accept-Charset: iso-8859-1,*,utf-8\n");
+    fputs($fp, "Content-type: multipart/form-data; boundary=$bo\n");
+ 
+    foreach($data_to_send as $key=&gt;$val) {
+        $ds =sprintf("--%s\nContent-Disposition: form-data; name=\"%s\"\n\n%s\n", $bo, $key, $val);
+        $dc += strlen($ds);
+    }
+    $dc += strlen($bo)+3;
+    fputs($fp, "Content-length: $dc \n");
+    fputs($fp, "\n");
+ 
+    foreach($data_to_send as $key=&gt;$val) {
+        $ds =sprintf("--%s\nContent-Disposition: form-data; name=\"%s\"\n\n%s\n", $bo, $key, $val);
+        fputs($fp, $ds );
+    }
+    $ds = "--".$bo."--\n";
+    fputs($fp, $ds);
+ 
+    while(!feof($fp)) {
+        $res .= fread($fp, 1);
+    }
+    fclose($fp);
+ 
     return $res;
-&#125;
-&nbsp;
+}
+ 
 // Für eine ASCII-Datei kann man es so machen
 // bei bin-Daten über fread gehen
-&nbsp;
-$fa = @file&#40;&quot;http://www.dkfz.de/spec/fix/file.pdb&quot;&#41;;
-&nbsp;
+ 
+$fa = @file("http://www.dkfz.de/spec/fix/file.pdb");
+ 
 // Konkretes Beispiel - Eine Chemie-Datei
-$xf=&quot;Content-Type: chemical/x-pdb\n\n&quot;. implode&#40;&quot;&quot;, $fa&#41;;
-&nbsp;
-$data&#91;&quot;disk&quot;&#93;            = &quot;on&quot;;
-$data&#91;&quot;file\&quot;; filename=\&quot;irgendwas.pdb&quot;&#93;        = $xf;
-$data&#91;&quot;smiles&quot;&#93;          = &quot;&quot;;
-$data&#91;&quot;hadd&quot;&#93;            = &quot;add&quot;;
-$data&#91;&quot;aroresolver&quot;&#93;     = &quot;on&quot;;
-$data&#91;&quot;format&quot;&#93;          = &quot;gif&quot;;
-$data&#91;&quot;interlace&quot;&#93;       = &quot;1&quot;;
-$data&#91;&quot;width&quot;&#93;           = &quot;600&quot;;
-$data&#91;&quot;height&quot;&#93;          = &quot;400&quot;;
-$data&#91;&quot;atomcolor&quot;&#93;       = &quot;Black&quot;;
-$data&#91;&quot;asymbol&quot;&#93;         = &quot;xsymbol&quot;;
-$data&#91;&quot;hcolor&quot;&#93;          = &quot;&quot;;
-$data&#91;&quot;csymbol&quot;&#93;         = &quot;special&quot;;
-$data&#91;&quot;hsymbol&quot;&#93;         = &quot;special&quot;;
-$data&#91;&quot;bondcolor&quot;&#93;       = &quot;Black&quot;;
-$data&#91;&quot;bgcolor&quot;&#93;         = &quot;White&quot;;
-$data&#91;&quot;border&quot;&#93;          = &quot;12&quot;;
-$data&#91;&quot;bonds&quot;&#93;           = &quot;8&quot;;
-$data&#91;&quot;wedges&quot;&#93;          = &quot;1&quot;;
-$data&#91;&quot;dashes&quot;&#93;          = &quot;1&quot;;
-$data&#91;&quot;crop&quot;&#93;            = &quot;2&quot;;
-$data&#91;&quot;align&quot;&#93;           = &quot;none&quot;;
-$data&#91;&quot;coord&quot;&#93;           = &quot;0&quot;;
-$data&#91;&quot;imagemap&quot;&#93;        = &quot;none&quot;;
-$data&#91;&quot;headercolor&quot;&#93;     = &quot;Black&quot;;
-$data&#91;&quot;header&quot;&#93;          = &quot;&quot;;
-$data&#91;&quot;footercolor&quot;&#93;     = &quot;Black&quot;;
-$data&#91;&quot;footer&quot;&#93;          = &quot;&quot;;
-$data&#91;&quot;commenttype&quot;&#93;     = &quot;none&quot;;
-$data&#91;&quot;comment&quot;&#93;         = &quot;&quot;;
-$data&#91;&quot;structure&quot;&#93;       = &quot;none&quot;;
-&nbsp;
-$x = PostToHost &#40;
-    &quot;www2.chemie.uni-erlangen.de&quot;,
+$xf="Content-Type: chemical/x-pdb\n\n". implode("", $fa);
+ 
+$data["disk"]            = "on";
+$data["file\"; filename=\"irgendwas.pdb"]        = $xf;
+$data["smiles"]          = "";
+$data["hadd"]            = "add";
+$data["aroresolver"]     = "on";
+$data["format"]          = "gif";
+$data["interlace"]       = "1";
+$data["width"]           = "600";
+$data["height"]          = "400";
+$data["atomcolor"]       = "Black";
+$data["asymbol"]         = "xsymbol";
+$data["hcolor"]          = "";
+$data["csymbol"]         = "special";
+$data["hsymbol"]         = "special";
+$data["bondcolor"]       = "Black";
+$data["bgcolor"]         = "White";
+$data["border"]          = "12";
+$data["bonds"]           = "8";
+$data["wedges"]          = "1";
+$data["dashes"]          = "1";
+$data["crop"]            = "2";
+$data["align"]           = "none";
+$data["coord"]           = "0";
+$data["imagemap"]        = "none";
+$data["headercolor"]     = "Black";
+$data["header"]          = "";
+$data["footercolor"]     = "Black";
+$data["footer"]          = "";
+$data["commenttype"]     = "none";
+$data["comment"]         = "";
+$data["structure"]       = "none";
+ 
+$x = PostToHost (
+    "www2.chemie.uni-erlangen.de",
     80,
-    &quot;/cgi-bin/services/gifcreator.tcl&quot;,
-    &quot;http://www2.chemie.uni-erlangen.de/services/gifcreator/index.html&quot;,
+    "/cgi-bin/services/gifcreator.tcl",
+    "http://www2.chemie.uni-erlangen.de/services/gifcreator/index.html",
     $data
-&#41;;
-&nbsp;
+);
+ 
 // Diesen Teil kann man bestimmt noch optimieren ;-)
-$fp = fopen&#40;&quot;struktur.gif&quot;, &quot;wb&quot;&#41;;
+$fp = fopen("struktur.gif", "wb");
 $tok = 0;
-for &#40;$i=20; $i&lt;strlen&#40;$x&#41;; $i++&#41;&#123;
-    if &#40;&#40;substr&#40;$x,$i,1&#41;==&quot;\n&quot;&#41; || &#40;substr&#40;$x,$i,1&#41;==&quot;\r&quot;&#41;&#41; &#123;
+for ($i=20; $i&lt;strlen($x); $i++){
+    if ((substr($x,$i,1)=="\n") || (substr($x,$i,1)=="\r")) {
         $tok++;
-        if&#40;$tok&gt;=3&#41; break;
-    &#125; else &#123;
+        if($tok&gt;=3) break;
+    } else {
         $tok=0;
-    &#125;
-&#125;
+    }
+}
 $i++; $i++;
-printf&#40;&quot; %d %d %d \n&quot;, $i, strlen&#40;$x&#41;, strlen&#40;$x&#41;-$i&#41;;
-fwrite&#40;$fp, substr&#40;$x,$i,strlen&#40;$x&#41;-$i&#41;&#41;;
-fclose&#40;$fp&#41;;
-&nbsp;
-$fp = fopen&#40;&quot;struktur.xxx&quot;, &quot;wb&quot;&#41;;
-fwrite&#40;$fp, $x, strlen&#40;$x&#41;&#41;;
-fclose&#40;$fp&#41;;
-&nbsp;
+printf(" %d %d %d \n", $i, strlen($x), strlen($x)-$i);
+fwrite($fp, substr($x,$i,strlen($x)-$i));
+fclose($fp);
+ 
+$fp = fopen("struktur.xxx", "wb");
+fwrite($fp, $x, strlen($x));
+fclose($fp);
+ 
 ?&gt;</pre>
 

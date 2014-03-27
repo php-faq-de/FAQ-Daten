@@ -13,8 +13,8 @@ damit diese URIs für den Benutzer klickbar werden.
 <pre>/**
 * replace URIs with appropriate HTML code to be clickable.
 */
-function replace_uri&#40;$str&#41; &#123;
+function replace_uri($str) {
   $pattern = '#(^|[^\"=]{1})(http://|ftp://|mailto:|news:)([^\s&lt;&gt;]+)([\s\n&lt;&gt;]|$)#sm';
-  return preg_replace&#40;$pattern,&quot;\\1&lt;a href=\&quot;\\2\\3\&quot;&gt;&lt;u&gt;\\2\\3&lt;/u&gt;&lt;/a&gt;\\4&quot;,$str&#41;;
-&#125;</pre>
+  return preg_replace($pattern,"\\1&lt;a href=\"\\2\\3\"&gt;&lt;u&gt;\\2\\3&lt;/u&gt;&lt;/a&gt;\\4",$str);
+}</pre>
 

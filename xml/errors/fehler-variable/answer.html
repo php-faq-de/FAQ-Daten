@@ -54,12 +54,12 @@ die Existenz der Variablen zu testen:
 </p>
 
 <pre>// Nicht empfohlene Schreibweisen
-if &#40;$checkbox&#41;
-if &#40;$var == 'wert'&#41;
-&nbsp;
+if ($checkbox)
+if ($var == 'wert')
+ 
 // Empfohlene Schreibweisen
-if &#40;isset&#40;$_POST&#91;'checkbox'&#93;&#41;&#41;
-if &#40;isset&#40;$_POST&#91;'var'&#93;&#41; &amp;&amp; $_POST&#91;'var'&#93; == 'wert'&#41;</pre>
+if (isset($_POST['checkbox']))
+if (isset($_POST['var']) &amp;&amp; $_POST['var'] == 'wert')</pre>
 
 <p>
 Es ist zwar auch möglich, PHP auf einen niedrigeren Error reporting

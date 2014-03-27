@@ -21,11 +21,11 @@ empfangen kann. Die einzige Methode, zuverlässig zu testen, ob
 eine Mail zustellbar ist, ist sie zuzustellen.
 </p>
 
-<pre>$addr = &quot;user@host.doma.in&quot;;
-  list&#40;$user, $host&#41; = explode&#40;&quot;@&quot;, $addr&#41;;
-  if &#40;checkdnsrr&#40;$host, &quot;MX&quot;&#41; or checkdnsrr&#40;$host, &quot;A&quot;&#41;&#41; &#123;
-    print &quot;Mail ist vielleicht zustellbar.&lt;BR&gt;\n&quot;;
-  &#125; else &#123;
-    print &quot;Mail ist sicher nicht zustellbar.&lt;BR&gt;\n&quot;;
-  &#125;</pre>
+<pre>$addr = "user@host.doma.in";
+  list($user, $host) = explode("@", $addr);
+  if (checkdnsrr($host, "MX") or checkdnsrr($host, "A")) {
+    print "Mail ist vielleicht zustellbar.&lt;BR&gt;\n";
+  } else {
+    print "Mail ist sicher nicht zustellbar.&lt;BR&gt;\n";
+  }</pre>
 

@@ -14,10 +14,10 @@ funktioniert es damit, vermutlich mangels definiertem Content-Type, nicht
 wie gewünscht.
 </p>
 
-<pre>header&#40;&quot;Content-Type: application/vnd.ms-excel&quot;&#41;;
-header&#40;&quot;Content-Disposition: inline; filename=\&quot;excel.xls\&quot;&quot;&#41;;
-readfile&#40;$filename&#41;;                       // Datei 1:1 durchreichen
-// echo &quot;Titel (A1)\r\nA2\tB2\r\nA3\tB3&quot;;  // ODER mit PHP erzeugen</pre>
+<pre>header("Content-Type: application/vnd.ms-excel");
+header("Content-Disposition: inline; filename=\"excel.xls\"");
+readfile($filename);                       // Datei 1:1 durchreichen
+// echo "Titel (A1)\r\nA2\tB2\r\nA3\tB3";  // ODER mit PHP erzeugen</pre>
 
 <p>
 <em>Anmerkung:</em> Trotz der Angabe <tt>inline</tt> bietet der Browser i.d.R.

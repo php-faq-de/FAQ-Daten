@@ -12,51 +12,51 @@ können, wurde aus Performance-Gründen bewusst darauf verzichtet.
 <pre>&lt;?php
 // Datei über HTTP aufrufen
 $url = 'http://www.server.de/test.html';
-$old = implode&#40;'', file&#40;$url&#41;&#41;;
-&nbsp;
+$old = implode('', file($url));
+ 
 // Links suchen und an absolute() weiterleiten
-$new = preg_replace&#40;',&lt;a([^&gt;]+)href=&quot;([^&gt;&quot;\s]+)&quot;,ie',
-    '&quot;&lt;a\1href=\"&quot; . absolute(&quot;\2&quot;, $url) . &quot;\"&quot;',
-    $old&#41;;
-&nbsp;
+$new = preg_replace(',&lt;a([^&gt;]+)href="([^&gt;"\s]+)",ie',
+    '"&lt;a\1href=\"" . absolute("\2", $url) . "\""',
+    $old);
+ 
 // HTML-Code ausgeben
-header&#40;'Content-type: text/plain'&#41;;
+header('Content-type: text/plain');
 echo $new;
-&nbsp;
+ 
 // Funktion, die relative in absolute Links umschreibt
-function absolute &#40;$relative, $absolute&#41; &#123;
-&nbsp;
+function absolute ($relative, $absolute) {
+ 
     // Link ist schon absolut
-    if &#40;preg_match&#40;',^(https?://|ftp://|mailto:|news:),i', $relative&#41;&#41;
+    if (preg_match(',^(https?://|ftp://|mailto:|news:),i', $relative))
         return $relative;
-&nbsp;
+ 
     // parse_url() nimmt die URL auseinander
-    $url = parse_url&#40;$absolute&#41;;
-&nbsp;
+    $url = parse_url($absolute);
+ 
     // dirname() erkennt auf / endende URLs nicht
-    if &#40;$url&#91;'path'&#93;&#123;strlen&#40;$url&#91;'path'&#93;&#41; - 1&#125; == '/'&#41;
-        $dir = substr&#40;$url&#91;'path'&#93;, 0, strlen&#40;$url&#91;'path'&#93;&#41; - 1&#41;;
+    if ($url['path']{strlen($url['path']) - 1} == '/')
+        $dir = substr($url['path'], 0, strlen($url['path']) - 1);
     else
-        $dir = dirname&#40;$url&#91;'path'&#93;&#41;;
-&nbsp;
+        $dir = dirname($url['path']);
+ 
     // absoluter Link auf dem gleichen Server
-    if &#40;$relative&#123;0&#125; == '/'&#41; &#123;
-        $relative = substr&#40;$relative, 1&#41;;
+    if ($relative{0} == '/') {
+        $relative = substr($relative, 1);
         $dir = '';
-    &#125;
-&nbsp;
+    }
+ 
     // Link fängt mit ./ an
-    elseif &#40;substr&#40;$relative, 0, 2&#41; == './'&#41;
-        $relative = substr&#40;$relative, 2&#41;;
-&nbsp;
+    elseif (substr($relative, 0, 2) == './')
+        $relative = substr($relative, 2);
+ 
     // Referenzen auf höher liegende Verzeichnisse auflösen
-    else while &#40;substr&#40;$relative, 0, 3&#41; == '../'&#41; &#123;
-        $relative = substr&#40;$relative, 3&#41;;
-        $dir = substr&#40;$dir, 0, strrpos&#40;$dir, '/'&#41;&#41;;
-    &#125;
-&nbsp;
+    else while (substr($relative, 0, 3) == '../') {
+        $relative = substr($relative, 3);
+        $dir = substr($dir, 0, strrpos($dir, '/'));
+    }
+ 
     // volle URL zurückgeben
-    return sprintf&#40;'%s://%s%s/%s', $url&#91;'scheme'&#93;, $url&#91;'host'&#93;, $dir, $relative&#41;;
-&#125;
+    return sprintf('%s://%s%s/%s', $url['scheme'], $url['host'], $dir, $relative);
+}
 ?&gt;</pre>
 

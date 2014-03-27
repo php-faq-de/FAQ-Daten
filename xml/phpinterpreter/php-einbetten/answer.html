@@ -5,7 +5,7 @@ in HTML eingebettet. Der Code steht zwischen <tt>&lt;?php</tt> und
 </p>
 
 <pre>&lt;?php
-  phpinfo&#40;&#41;;
+  phpinfo();
  ?&gt;</pre>
 
 <p>
@@ -13,8 +13,8 @@ Alternativ kann auch ein Script-Tag für Server-Side Scripting
 verwendet werden:
 </p>
 
-<pre>&lt;script language=&quot;php&quot;&gt;
-  phpinfo&#40;&#41;;
+<pre>&lt;script language="php"&gt;
+  phpinfo();
 &lt;/script&gt;</pre>
 
 <p>
@@ -24,16 +24,16 @@ Namen der Scriptsprache in den PIs weglassen:
 </p>
 
 <pre>&lt;?
-  phpinfo&#40;&#41;;
+  phpinfo();
  ?&gt;</pre>
 
 <p>
 Dies erlaubt auch schnelle Ausgabe des Wertes von Ausdrücken.
 </p>
 
-<pre>&lt;?= $_SERVER&#91;'PHP_SELF'&#93; ?&gt;
+<pre>&lt;?= $_SERVER['PHP_SELF'] ?&gt;
 &lt;!-- kann anstelle von --&gt;
-&lt;? echo $_SERVER&#91;'PHP_SELF'&#93; ?&gt;
+&lt;? echo $_SERVER['PHP_SELF'] ?&gt;
 &lt;!-- geschrieben werden. --&gt;</pre>
 
 <p>
@@ -42,7 +42,7 @@ ist (nicht empfohlen!), kann man auch
 </p>
 
 <pre>&lt;%
-  phpinfo&#40;&#41;;
+  phpinfo();
  %&gt;</pre>
 
 <p>

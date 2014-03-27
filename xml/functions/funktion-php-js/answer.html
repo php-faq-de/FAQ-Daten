@@ -11,12 +11,12 @@ in PHP vorhandene Variable in JavaScript verwenden zu können, muss man
 sie innerhalb eines <tt>&lt;script&gt;</tt>-Bereiches ausgeben:
 </p>
 
-<pre>&lt;script type=&quot;text/javascript&quot; language=&quot;JavaScript&quot;&gt;
+<pre>&lt;script type="text/javascript" language="JavaScript"&gt;
 &lt;?php
-printf&#40;&quot;js_var = '%s';\n&quot;,
-        strtr&#40;addslashes&#40;$php_var&#41;,
-        array&#40;&quot;\r&quot; =&gt; '\r', &quot;\n&quot; =&gt; '\n'&#41;&#41;
-      &#41;;
+printf("js_var = '%s';\n",
+        strtr(addslashes($php_var),
+        array("\r" =&gt; '\r', "\n" =&gt; '\n'))
+      );
 ?&gt;
 &lt;/script&gt;</pre>
 

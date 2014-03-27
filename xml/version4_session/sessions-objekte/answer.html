@@ -23,35 +23,35 @@ Ihr Gegenstück ist die Funktion <a href="http://www.php3.de/language.oop.magic-
 Wiederherstellen des Objektes aufgerufen.
 </p>
 
-<pre>class myClass &#123;
-&nbsp;
+<pre>class myClass {
+ 
 var $id;
 var $text;
 var $db;
-&nbsp;
-function getText&#40;&#41; &#123;
+ 
+function getText() {
 	return $this-&gt;text;
-&#125;
-&nbsp;
-function setText&#40;$text&#41; &#123;
+}
+ 
+function setText($text) {
 	$this-&gt;text = $text;
 	// schreibe Text in die Datenbank
-	&#91;...&#93;
-&#125;
-&nbsp;
-function __sleep&#40;&#41; &#123;
+	[...]
+}
+ 
+function __sleep() {
 	// schließe die Datenbankverbindung
-	$this-&gt;db-&gt;disconnect&#40;&#41;;
-&nbsp;
-	return array&#40;'id', 'text'&#41;;
-&#125;
-&nbsp;
-function __wakeup&#40;&#41; &#123;
+	$this-&gt;db-&gt;disconnect();
+ 
+	return array('id', 'text');
+}
+ 
+function __wakeup() {
 	// stelle die Datenbankverbindung wieder her
-	$this-&gt;db = new DB&#40;&#91;...&#93;&#41;;
-&nbsp;
+	$this-&gt;db = new DB([...]);
+ 
 	// hole den Text aus der Datenbank
-	&#91;...&#93;
-&#125;
-&#125;</pre>
+	[...]
+}
+}</pre>
 

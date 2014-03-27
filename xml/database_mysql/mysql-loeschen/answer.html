@@ -7,15 +7,15 @@ Tage sind, mit steigender Effizienz.</p>
 <ol>
 <li><pre class="sql">DELETE
        FROM kalender AS k
-      WHERE &#40;to_days&#40;current_date&#41; - to_days&#40;k.datum&#41;&#41; &gt; 30</pre></li>
+      WHERE (to_days(current_date) - to_days(k.datum)) &gt; 30</pre></li>
 
 <li><pre class="sql">DELETE
        FROM kalender AS k
-      WHERE to_days&#40;k.datum&#41; &lt; to_days&#40;current_date&#41;-30;</pre></li>
+      WHERE to_days(k.datum) &lt; to_days(current_date)-30;</pre></li>
 
 <li><pre class="sql">DELETE
        FROM kalender AS k
-      WHERE k.datum &lt; date_add&#40;current_date, interval -30 day&#41;</pre></li>
+      WHERE k.datum &lt; date_add(current_date, interval -30 day)</pre></li>
 </ol>
 <p>Die erste Query ist vergleichsweise langsam, denn hier ist die
 linke Seite der Query ein Ausdruck, der für jede Zeile berechnet

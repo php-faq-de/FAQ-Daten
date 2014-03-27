@@ -1,33 +1,33 @@
 <p><br /></p>
 <pre>&lt;?php
-  function start_timer&#40;$event&#41; &#123;
-    printf&#40;&quot;timer: %s&lt;br&gt;\n&quot;, $event&#41;;
-    list&#40;$low, $high&#41; = explode&#40;&quot; &quot;, microtime&#40;&#41;&#41;;
+  function start_timer($event) {
+    printf("timer: %s&lt;br&gt;\n", $event);
+    list($low, $high) = explode(" ", microtime());
     $t = $high + $low;
-    flush&#40;&#41;;
-&nbsp;
+    flush();
+ 
     return $t;
-  &#125;
-&nbsp;
-  function next_timer&#40;$start, $event&#41; &#123;
-    list&#40;$low, $high&#41; = explode&#40;&quot; &quot;, microtime&#40;&#41;&#41;;
+  }
+ 
+  function next_timer($start, $event) {
+    list($low, $high) = explode(" ", microtime());
     $t    = $high + $low;
     $used = $t - $start;
-    printf&#40;&quot;timer: %s (%8.4f)&lt;br&gt;\n&quot;, $event, $used&#41;;
-    flush&#40;&#41;;
-&nbsp;
+    printf("timer: %s (%8.4f)&lt;br&gt;\n", $event, $used);
+    flush();
+ 
     return $t;
-  &#125;
-&nbsp;
-  $t = start_timer&#40;&quot;start Befehl 1&quot;&#41;;
-&nbsp;
+  }
+ 
+  $t = start_timer("start Befehl 1");
+ 
   /* Hier den ersten Befehl einfuegen */
-&nbsp;
-  $t = next_timer&#40;$t, &quot;start Befehl 2&quot;&#41;;
-&nbsp;
+ 
+  $t = next_timer($t, "start Befehl 2");
+ 
   /* Hier den zweiten Befehl einfuegen */
-&nbsp;
-  $t = next_timer&#40;$t, &quot;finish&quot;&#41;;
+ 
+  $t = next_timer($t, "finish");
 ?&gt;</pre>
 
 <p>

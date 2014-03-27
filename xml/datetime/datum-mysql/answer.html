@@ -56,32 +56,32 @@ Funktionen <a href="http://www.php3.de/explode">explode()</a> oder
  * wandelt ein MySQL-DATE (ISO-Date)
  * in ein traditionelles deutsches Datum um.
  */
-function date_mysql2german&#40;$datum&#41; &#123;
-    list&#40;$jahr, $monat, $tag&#41; = explode&#40;&quot;-&quot;, $datum&#41;;
-&nbsp;
-    return sprintf&#40;&quot;%02d.%02d.%04d&quot;, $tag, $monat, $jahr&#41;;
-&#125;
-&nbsp;
+function date_mysql2german($datum) {
+    list($jahr, $monat, $tag) = explode("-", $datum);
+ 
+    return sprintf("%02d.%02d.%04d", $tag, $monat, $jahr);
+}
+ 
 /**
  * date_german2mysql
  * wandelt ein traditionelles deutsches Datum
  * nach MySQL (ISO-Date).
  */
-function date_german2mysql&#40;$datum&#41; &#123;
-    list&#40;$tag, $monat, $jahr&#41; = explode&#40;&quot;.&quot;, $datum&#41;;
-&nbsp;
-    return sprintf&#40;&quot;%04d-%02d-%02d&quot;, $jahr, $monat, $tag&#41;;
-&#125;
-&nbsp;
+function date_german2mysql($datum) {
+    list($tag, $monat, $jahr) = explode(".", $datum);
+ 
+    return sprintf("%04d-%02d-%02d", $jahr, $monat, $tag);
+}
+ 
 /**
  * timestamp_mysql2german
  * wandelt ein MySQL-Timestamp
  * in ein traditionelles deutsches Datum um.
 */
-function timestamp_mysql2german&#40;$t&#41; &#123;
-    return sprintf&#40;&quot;%02d.%02d.%04d&quot;,
-                    substr&#40;$t, 6, 2&#41;,
-                    substr&#40;$t, 4, 2&#41;,
-                    substr&#40;$t, 0, 4&#41;&#41;;
-&#125;</pre>
+function timestamp_mysql2german($t) {
+    return sprintf("%02d.%02d.%04d",
+                    substr($t, 6, 2),
+                    substr($t, 4, 2),
+                    substr($t, 0, 4));
+}</pre>
 

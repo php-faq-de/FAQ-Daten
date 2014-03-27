@@ -23,26 +23,26 @@ werden; hierzu wird die Datei im Append-(Anhängen)-Modus geöffnet:
 
 <pre>&lt;?php
   // In Datei schreiben (anhängen)
-  $fp = fopen&#40;$filename, 'a+'&#41;;
-  flock&#40;$fp, 2&#41; or die&#40;'Kann die Datei nicht locken'&#41;;
-  fwrite&#40;$fp, &quot;$zeile\n&quot;&#41;;
-  fclose&#40;$fp&#41;;
+  $fp = fopen($filename, 'a+');
+  flock($fp, 2) or die('Kann die Datei nicht locken');
+  fwrite($fp, "$zeile\n");
+  fclose($fp);
 ?&gt;
-&nbsp;
+ 
 &lt;?php
-  // Datei &quot;zeilenweise&quot; in ein Array einlesen
-  $array = file&#40;$filename&#41;;
-&nbsp;
+  // Datei "zeilenweise" in ein Array einlesen
+  $array = file($filename);
+ 
   // $array von vorne nach hinten durchlaufen
-  foreach&#40;$array as $zeile&#41; &#123;
-      echo trim&#40;$zeile&#41; . &quot;&lt;br&gt;\n&quot;;
-  &#125;
-&nbsp;
+  foreach($array as $zeile) {
+      echo trim($zeile) . "&lt;br&gt;\n";
+  }
+ 
   // $array von hinten nach vorne durchlaufen
-  $i = sizeof&#40;$array&#41;;
-  while &#40;$i--&#41; &#123;
-      echo trim&#40;$array&#91;$i&#93;&#41; . &quot;&lt;br&gt;\n&quot;;
-  &#125;
+  $i = sizeof($array);
+  while ($i--) {
+      echo trim($array[$i]) . "&lt;br&gt;\n";
+  }
 ?&gt;</pre>
 
 <p>

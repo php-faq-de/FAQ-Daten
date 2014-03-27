@@ -13,20 +13,20 @@ $PHP_SELF und $_REQUEST["TA"] durch $TA oder $HTTP_POST_VARS["TA"] zu
 ersetzen.
 </p>
 <pre>&lt;?php
-echo '&lt;form action=&quot;'.$_SERVER&#91;&quot;PHP_SELF&quot;&#93;.'&quot; method=&quot;post&quot;&gt;';
-echo '&lt;textarea name=&quot;TA&quot; cols=&quot;50&quot; rows=&quot;10&quot;&gt;';
-if &#40;isset&#40;$_REQUEST&#91;&quot;TA&quot;&#93;&#41;&#41; &#123;
-    echo $_REQUEST&#91;&quot;TA&quot;&#93;;
-&#125;
+echo '&lt;form action="'.$_SERVER["PHP_SELF"].'" method="post"&gt;';
+echo '&lt;textarea name="TA" cols="50" rows="10"&gt;';
+if (isset($_REQUEST["TA"])) {
+    echo $_REQUEST["TA"];
+}
 echo '&lt;/textarea&gt;';
-echo '&lt;input type=&quot;submit&quot; value=&quot;Prüfen...&quot;&gt;';
+echo '&lt;input type="submit" value="Prüfen..."&gt;';
 echo '&lt;/form&gt;';
-&nbsp;
-if &#40;isset&#40;$_REQUEST&#91;&quot;TA&quot;&#93;&#41;&#41; &#123;
-    $lines = preg_split&#40;&quot;/\r\n/&quot;, $_REQUEST&#91;&quot;TA&quot;&#93;&#41;;
-    foreach &#40;$lines as $key =&gt; $value&#41;&#123;
-      echo 'Der Inhalt von Zeile '.$key.' ist: &quot;'.$value.'&quot;&lt;br&gt;';
-    &#125;
-&#125;
+ 
+if (isset($_REQUEST["TA"])) {
+    $lines = preg_split("/\r\n/", $_REQUEST["TA"]);
+    foreach ($lines as $key =&gt; $value){
+      echo 'Der Inhalt von Zeile '.$key.' ist: "'.$value.'"&lt;br&gt;';
+    }
+}
 ?&gt;</pre>
 

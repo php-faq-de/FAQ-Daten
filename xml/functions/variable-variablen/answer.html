@@ -7,19 +7,19 @@ Namen <tt>$myvar1</tt>, <tt>$myvar2</tt>, <tt>$myvar3</tt>,
 
 <p>Am günstigsten wäre es, in so einem Fall ein Array zu nehmen.</p>
 
-<pre>for &#40;$i=0; $i&lt;10; $i++&#41;
-	echo $myvar&#91;$i&#93;;</pre>
+<pre>for ($i=0; $i&lt;10; $i++)
+	echo $myvar[$i];</pre>
 
 <p>
 Wenn es unbedingt skalare Variablen sein müssen, kann man
 stattdessen über das <tt>$GLOBALS[]</tt>-Array zugreifen:
 </p>
 
-<pre>for &#40;$i=0; $i&lt;10; $i++&#41; &#123;
-  if &#40;isset&#40;$GLOBALS&#91;&quot;myvar$i&quot;&#93;&#41;&#41;
-    printf&#40;&quot;Variable var%d existiert und ihr Wert ist %s&lt;br /&gt;\n&quot;,
-      $i, $GLOBALS&#91;&quot;myvar$i&quot;&#93;&#41;;
-&#125;</pre>
+<pre>for ($i=0; $i&lt;10; $i++) {
+  if (isset($GLOBALS["myvar$i"]))
+    printf("Variable var%d existiert und ihr Wert ist %s&lt;br /&gt;\n",
+      $i, $GLOBALS["myvar$i"]);
+}</pre>
 
 <p>
 Statt <tt>echo $GLOBALS[$lall];</tt> kann man auch die zwei Befehle

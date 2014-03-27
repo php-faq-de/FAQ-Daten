@@ -8,6 +8,10 @@ Version 0.1
 
 - **Externe Links** : Alle in den Beiträgen enthaltenen externen Links müssen bzgl. ihrer Aktualität
   überprüft werden.
+- **Entities entfernen** : <del>In vielen vorformatierten HTML-Abschnitten (pre-Elemente) sind verschiedene
+  Zeichen, maskiert als Entities enthalten, deren Existenz nur eins bewirkt. Der Code wird schlechter lesbar.
+  z,B; sind da Zeichen wie `(` oder `)` als Entities definiert (u.a.m.) Die müssen da weg, die stören nur.</del>
+  __[Erledigt]__ In 159 Beitragsdateien (`answer.html`) wurden unnötige Entities entfernt.
 - **Code-Highlighting** : <del>Der meiste PHP-Code in vorformatierten HTML-Abschnitten (pre-Elemente)
   liegt in einer Form vor, der den Code highlightet. Das ist zwar am Ende eine hübsche Sache, aber
   innerhalb des Datensatzes vollkommen unnötiger, und schwer zu wartender Overhead. Das muss raus!</del>

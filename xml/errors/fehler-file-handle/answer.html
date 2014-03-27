@@ -11,14 +11,14 @@ Das Script ist fehlerhaft, weil es nach dem <tt>fopen()</tt> nicht
 prüft, ob das <tt>fopen()</tt> erfolgreich war:
 </p>
 
-<pre>$fp = fopen&#40;..., &quot;r&quot;&#41;;
-&nbsp;
+<pre>$fp = fopen(..., "r");
+ 
         /* Das fehlt zum korrekten Code:  */
-        if &#40;!$fp&#41;
-                die&#40;&quot;Kann Datei ... nicht oeffnen.\n&quot;&#41;;
-&nbsp;
+        if (!$fp)
+                die("Kann Datei ... nicht oeffnen.\n");
+ 
         /* Diese Anweisung macht dann Ärger */
-        while&#40;$line = fgets&#40;$fp, 1000&#41;&#41; &#123;
+        while($line = fgets($fp, 1000)) {
         ...
-        &#125;</pre>
+        }</pre>
 

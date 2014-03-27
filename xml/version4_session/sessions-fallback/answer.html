@@ -12,15 +12,15 @@
 	die Session-ID quasi "manuell" bei jedem GET
 </p>
 
-<pre>&lt;a href=&quot;test.session.php?&lt;?php echo SID; ?&gt;&quot;&gt;</pre>
+<pre>&lt;a href="test.session.php?&lt;?php echo SID; ?&gt;"&gt;</pre>
 
 <p>
 	oder POST - bei Formularen - mittels
 </p>
 
-<pre>&lt;input type  = &quot;hidden&quot;
-       name  = &quot;&lt;?php echo session_name(); ?&gt;&quot;
-       value = &quot;&lt;?php echo session_id(); ?&gt;&quot;&gt;</pre>
+<pre>&lt;input type  = "hidden"
+       name  = "&lt;?php echo session_name(); ?&gt;"
+       value = "&lt;?php echo session_id(); ?&gt;"&gt;</pre>
 
 <p>
 	übergibt. <em>ACHTUNG:</em> Das bedeutet, dass <em>jeder</em> Link und

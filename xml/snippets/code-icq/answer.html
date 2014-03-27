@@ -10,33 +10,33 @@ die Bildchen, allerdings hat sich die URL geändert.
 Das folgende Script wertet die Redirects aus:
 </p>
 
-<pre>function GetICQ&#40;$uin&#41; &#123;
-    if &#40;!is_numeric&#40;$uin&#41;&#41; return FALSE;
-&nbsp;
-    $fp = fsockopen&#40;'status.icq.com', 80, &amp;$errno, &amp;$errstr, 8&#41;;
-    if &#40;!$fp&#41; return FALSE;
-&nbsp;
-    $request = &quot;HEAD /online.gif?icq=$uin HTTP/1.0\r\n&quot;
-              .&quot;Host: web.icq.com\r\n&quot;
-              .&quot;Connection: close\r\n\r\n&quot;;
-    fputs&#40;$fp, $request&#41;;
-&nbsp;
-    do &#123;
-        $response = fgets&#40;$fp, 1024&#41;;
-    &#125;
-    while &#40;!feof&#40;$fp&#41; &amp;&amp; !stristr&#40;$response, 'Location'&#41;&#41;;
-&nbsp;
-    fclose&#40;$fp&#41;;
-&nbsp;
-    if &#40;strstr&#40;$response, 'online1'&#41;&#41; return 'online';
-    if &#40;strstr&#40;$response, 'online0'&#41;&#41; return 'offline';
-    if &#40;strstr&#40;$response, 'online2'&#41;&#41; return 'disabled';
+<pre>function GetICQ($uin) {
+    if (!is_numeric($uin)) return FALSE;
+ 
+    $fp = fsockopen('status.icq.com', 80, &amp;$errno, &amp;$errstr, 8);
+    if (!$fp) return FALSE;
+ 
+    $request = "HEAD /online.gif?icq=$uin HTTP/1.0\r\n"
+              ."Host: web.icq.com\r\n"
+              ."Connection: close\r\n\r\n";
+    fputs($fp, $request);
+ 
+    do {
+        $response = fgets($fp, 1024);
+    }
+    while (!feof($fp) &amp;&amp; !stristr($response, 'Location'));
+ 
+    fclose($fp);
+ 
+    if (strstr($response, 'online1')) return 'online';
+    if (strstr($response, 'online0')) return 'offline';
+    if (strstr($response, 'online2')) return 'disabled';
     // disabled meint, dass der Benutzer eingestellt hat, dass sein 
     // Status im Web nicht angezeigt wird.
-&nbsp;
+ 
     return FALSE;
-&#125;
-&nbsp;
+}
+ 
 // Aufruf:
-echo GetICQ&#40;12423456&#41;;</pre>
+echo GetICQ(12423456);</pre>
 

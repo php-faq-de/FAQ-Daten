@@ -4,24 +4,24 @@ zu dem Check auf ICQ UINs.
 </p>
 
 <pre>// Contributed by Maik Große, http://about-php.de/
-function GetYahoo&#40;$_yahoo = ''&#41; &#123;
-  if &#40;empty&#40;$_yahoo&#41;&#41; return true;
-&nbsp;
-  $response = &quot;&quot;;
-  if &#40;$fp = fsockopen&#40;'opi.yahoo.com', 80, &amp;$errno, &amp;$errstr, 8&#41;&#41; &#123;
-    $request = &quot;HEAD /online?u=&quot;.$_yahoo.&quot;&amp;m=t&amp;t=0 HTTP/1.0\r\nHost: opi.yahoo.com\r\nConnection: close\r\n\r\n&quot;;
-    fputs&#40;$fp, $request&#41;;
-    do &#123;
-      $response = fgets&#40;$fp, 1024&#41;;
-    &#125;
-    while &#40;!feof&#40;$fp&#41; &amp;&amp; !stristr&#40;$response, 'Location'&#41;&#41;;
-    fclose&#40;$fp&#41;;
-  &#125;
-  if &#40;strstr&#40;strtoupper&#40;$response&#41;, 'NOT ONLINE'&#41;&#41; return false;
-  if &#40;strstr&#40;strtoupper&#40;$response&#41;, 'ONLINE'&#41;&#41; return true;
+function GetYahoo($_yahoo = '') {
+  if (empty($_yahoo)) return true;
+ 
+  $response = "";
+  if ($fp = fsockopen('opi.yahoo.com', 80, &amp;$errno, &amp;$errstr, 8)) {
+    $request = "HEAD /online?u=".$_yahoo."&amp;m=t&amp;t=0 HTTP/1.0\r\nHost: opi.yahoo.com\r\nConnection: close\r\n\r\n";
+    fputs($fp, $request);
+    do {
+      $response = fgets($fp, 1024);
+    }
+    while (!feof($fp) &amp;&amp; !stristr($response, 'Location'));
+    fclose($fp);
+  }
+  if (strstr(strtoupper($response), 'NOT ONLINE')) return false;
+  if (strstr(strtoupper($response), 'ONLINE')) return true;
   return false;
-&#125;
-&nbsp;
+}
+ 
 // Aufruf:
-echo &quot;Yahoo User: 12423456 is &quot;.&#40;&#40;GetYahoo&#40;'12423456'&#41;&#41; ? &quot;online&quot; : &quot;not online&quot;&#41;.&quot; ...&quot;;</pre>
+echo "Yahoo User: 12423456 is ".((GetYahoo('12423456')) ? "online" : "not online")." ...";</pre>
 

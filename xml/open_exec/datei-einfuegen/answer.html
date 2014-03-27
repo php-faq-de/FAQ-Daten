@@ -30,33 +30,33 @@ Quere kommen.
 </p>
 
 <pre>// Shared lock auf die Quelldatei
-$old = fopen&#40;$oldfile, &quot;r&quot;&#41;;
-flock&#40;$old, 1&#41; or die&#40;&quot;Kann die Quelldatei $oldfile nicht locken.&quot;&#41;;
-&nbsp;
+$old = fopen($oldfile, "r");
+flock($old, 1) or die("Kann die Quelldatei $oldfile nicht locken.");
+ 
 // Exclusive lock auf die Zieldatei
-$new = fopen&#40;$oldfile.&quot;.new&quot;, &quot;w&quot;&#41;;
-flock&#40;$new, 2&#41; or die&#40;&quot;Kann die Zieldatei $newfile nicht locken.&quot;&#41;;
-&nbsp;
+$new = fopen($oldfile.".new", "w");
+flock($new, 2) or die("Kann die Zieldatei $newfile nicht locken.");
+ 
 $lineno = 0;
-&nbsp;
-while&#40;$line = fgets&#40;$old, 1024&#41;&#41; &#123;
-  if &#40;$lineno++ == $zielzeile&#41;
+ 
+while($line = fgets($old, 1024)) {
+  if ($lineno++ == $zielzeile)
     continue;  // Zeile auslassen
-&nbsp;
-  fputs&#40;$new, $line&#41;;
-&#125;
-&nbsp;
-fclose&#40;$old&#41;; // Gibt das Lock automatisch auf
-&nbsp;
+ 
+  fputs($new, $line);
+}
+ 
+fclose($old); // Gibt das Lock automatisch auf
+ 
 // Alte Datei wegwerfen.
-unlink&#40;$oldfile&#41;;
-&nbsp;
+unlink($oldfile);
+ 
 // Neue Datei umbenennen.
 // (In Windows müssen das rename() und das fclose($new)
 //  vertauscht werden, da es nicht möglich ist, in Windows
 //  eine offene Datei umzubenennen.
-rename&#40;$oldfile.&quot;.new&quot;, $oldfile&#41;;
-&nbsp;
+rename($oldfile.".new", $oldfile);
+ 
 // Neue Datei schließen und dabei Lock aufgeben.
-fclose&#40;$new&#41;;</pre>
+fclose($new);</pre>
 

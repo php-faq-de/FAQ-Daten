@@ -87,8 +87,8 @@ Authentisierungsmethode in <tt>$_SERVER["AUTH_TYPE"]</tt>.
 </p>
 
 <pre>&lt;?php
-echo &quot;AUTH_TYPE = &quot;, $_SERVER&#91;'AUTH_TYPE'&#93;, &quot;&lt;br /&gt;\n&quot;;
-echo &quot;REMOTE_USER = &quot;, $_SERVER&#91;'REMOTE_USER'&#93;, &quot;&lt;br /&gt;\n&quot;;
+echo "AUTH_TYPE = ", $_SERVER['AUTH_TYPE'], "&lt;br /&gt;\n";
+echo "REMOTE_USER = ", $_SERVER['REMOTE_USER'], "&lt;br /&gt;\n";
 ?&gt;</pre>
 
 <p>
@@ -97,10 +97,10 @@ Zugriff auf die vollen Authentisierungsdaten.
 </p>
 
 <pre>&lt;?php
-echo &quot;AUTH_TYPE = &quot;, $_SERVER&#91;'AUTH_TYPE'&#93;, &quot;&lt;br /&gt;\n&quot;;
-echo &quot;REMOTE_USER = &quot;, $_SERVER&#91;'REMOTE_USER'&#93;, &quot;&lt;br /&gt;\n&quot;;
-$a = getallheaders&#40;&#41;;
-$au = split&#40;&quot; &quot;, $a&#91;&quot;Authorization&quot;&#93;, 2&#41;;
-list&#40;$u, $p&#41; = split&#40;&quot;:&quot;, base64_decode&#40;$au&#91;1&#93;&#41;&#41;;
-echo &quot;Decodiert zu User $u, Password $p&lt;br /&gt;\n&quot;;
+echo "AUTH_TYPE = ", $_SERVER['AUTH_TYPE'], "&lt;br /&gt;\n";
+echo "REMOTE_USER = ", $_SERVER['REMOTE_USER'], "&lt;br /&gt;\n";
+$a = getallheaders();
+$au = split(" ", $a["Authorization"], 2);
+list($u, $p) = split(":", base64_decode($au[1]));
+echo "Decodiert zu User $u, Password $p&lt;br /&gt;\n";
 ?&gt;</pre>

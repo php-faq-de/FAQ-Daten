@@ -3,14 +3,14 @@ Das folgende vollständige Beispiel zeigt, wie man den Inhalt des
 Body-Tags aus einer HTML-Datei isolieren kann.
 </p>
 
-<pre>$str = &quot;lalalala
+<pre>$str = "lalalala
 &lt;body bgcolor=#cccccc&gt;lang und weilig
 noch eine zeile
 &lt;h1&gt;Bla&lt;/h1&gt;
 &lt;/body&gt;
-tralalal&quot;;
-  preg_match_all&#40;&quot;=&lt;body[^&gt;]*&gt;(.*)&lt;/body&gt;=siU&quot;, $str, $a&#41;;
-  print $a&#91;1&#93;&#91;0&#93;;</pre>
+tralalal";
+  preg_match_all("=&lt;body[^&gt;]*&gt;(.*)&lt;/body&gt;=siU", $str, $a);
+  print $a[1][0];</pre>
 
 <p>
 Das Beispiel macht von den Optionen <tt>i</tt>, <tt>s</tt> und

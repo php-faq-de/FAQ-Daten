@@ -26,11 +26,11 @@ mysql.default_password  =
 
 <p>Kontaktaufnahme mit dem Server und Festlegen der Datenbank:</p>
 
-<pre>$link = mysql_connect&#40;&quot;localhost&quot;, &quot;ich&quot;, &quot;geheim&quot;&#41;;
-  if &#40;!$link&#41;
-    die&#40;&quot;Kann den Server nicht erreichen.&quot;&#41;;
-  if &#40;!mysql_select_db&#40;&quot;meinedatenbank&quot;, $link&#41;&#41;
-    die&#40;&quot;Kann die Datenbank nicht anwählen.&quot;&#41;;</pre>
+<pre>$link = mysql_connect("localhost", "ich", "geheim");
+  if (!$link)
+    die("Kann den Server nicht erreichen.");
+  if (!mysql_select_db("meinedatenbank", $link))
+    die("Kann die Datenbank nicht anwählen.");</pre>
 
 <p>Das Senden einer Anfrage an die Datenbank erfolgt mit Hilfe der
 Funktion <a href="http://www.php3.de/mysql_query">mysql_query()</a>. Diese Funktion liefert
@@ -40,20 +40,20 @@ bestimmt man die Anzahl der Zeilen des Ergebnisses und mit Hilfe der
 Funktion <a href="http://www.php3.de/mysql_fetch_array">mysql_fetch_array()</a>
 kann man die jeweils aktuelle Zeile des Ergebnisses einlesen.</p>
 
-<pre>$query = &quot;SELECT * FROM meinetabelle ORDER BY id&quot;;
-$result = mysql_query&#40;$query, $link&#41;;
-if &#40;!$result&#41;
-&#123;
-    print mysql_error&#40;&#41;;
-    die&#40;&quot;Query $query ist ungültiges SQL.&quot;&#41;;
-&#125;
-&nbsp;
-$zeilen = mysql_num_rows&#40;$result&#41;;
-printf&#40;&quot;Das Ergebnis hat %d Zeilen.\n&quot;, $zeilen&#41;;
-&nbsp;
-while&#40;$avar = mysql_fetch_array&#40;$result&#41;&#41;
-    printf&#40;&quot;Spalte bla hat den Wert %s\n&quot;, $avar&#91;&quot;bla&quot;&#93;&#41;;
-&nbsp;
-mysql_free_result&#40;$result&#41;;
-mysql_close&#40;$link&#41;;</pre>
+<pre>$query = "SELECT * FROM meinetabelle ORDER BY id";
+$result = mysql_query($query, $link);
+if (!$result)
+{
+    print mysql_error();
+    die("Query $query ist ungültiges SQL.");
+}
+ 
+$zeilen = mysql_num_rows($result);
+printf("Das Ergebnis hat %d Zeilen.\n", $zeilen);
+ 
+while($avar = mysql_fetch_array($result))
+    printf("Spalte bla hat den Wert %s\n", $avar["bla"]);
+ 
+mysql_free_result($result);
+mysql_close($link);</pre>
 

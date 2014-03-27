@@ -11,15 +11,15 @@ Funktion <a href="http://www.php3.de/urlencode">urlencode()</a> codiert anhängt
 </p>
 
 <pre>&lt;?php
-&nbsp;
- $para1 = &quot;dies ist ein string&quot;;
+ 
+ $para1 = "dies ist ein string";
  $para2 = 42;
-&nbsp;
- $pstring = sprintf&#40;&quot;para1=%s&amp;amp;para2=%s&quot;,
-		urlencode&#40;$para1&#41;,
-		urlencode&#40;$para2&#41;&#41;;
+ 
+ $pstring = sprintf("para1=%s&amp;amp;para2=%s",
+		urlencode($para1),
+		urlencode($para2));
 ?&gt;
-&lt;a href=&quot;meinscript.php?&lt;?php print $pstring ?&gt;&quot;&gt;go&lt;/a&gt;</pre>
+&lt;a href="meinscript.php?&lt;?php print $pstring ?&gt;"&gt;go&lt;/a&gt;</pre>
 
 <p>
 Das empfangende Script wird diese Parameter ganz normal

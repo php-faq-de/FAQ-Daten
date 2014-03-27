@@ -3,27 +3,27 @@ Der einfachste Anwendungsfall von <a href="http://www.php3.de/preg_match">preg_m
 gegebenen String paßt. Beispiele:
 </p>
 
-<pre># Kommt &quot;Wort&quot; in $eingabe vor?
-preg_match&#40;&quot;/Wort/&quot;, $eingabe&#41;;
-&nbsp;
-# Kommt &quot;Wort&quot;, &quot;wort&quot; oder &quot;wOrT&quot; etc. in $eingabe vor?
-preg_match&#40;&quot;/wort/i&quot;, $eingabe&#41;;
-&nbsp;
-# Kommt &quot;Wort&quot; am Anfang oder am Ende von $eingabe vor?
-preg_match&#40;&quot;/^Wort|Wort$/&quot;, $eingabe&#41;;
-&nbsp;
-# Kommt &quot;Wort&quot;, &quot;Wart&quot;, &quot;Wirt&quot; oder &quot;Wert&quot; in $eingabe vor?
-preg_match&#40;&quot;/W[aeio]rt/&quot;, $eingabe&#41;;
-&nbsp;
-# Kommt &quot;Wort&quot; oder &quot;Word&quot; in $eingabe vor?
-preg_match&#40;&quot;/Wor(t|d)/&quot;, $eingabe&#41;;
-&nbsp;
-# Kommt &quot;DM &quot; oder &quot;TDM &quot; mit einer zwei- bis
+<pre># Kommt "Wort" in $eingabe vor?
+preg_match("/Wort/", $eingabe);
+ 
+# Kommt "Wort", "wort" oder "wOrT" etc. in $eingabe vor?
+preg_match("/wort/i", $eingabe);
+ 
+# Kommt "Wort" am Anfang oder am Ende von $eingabe vor?
+preg_match("/^Wort|Wort$/", $eingabe);
+ 
+# Kommt "Wort", "Wart", "Wirt" oder "Wert" in $eingabe vor?
+preg_match("/W[aeio]rt/", $eingabe);
+ 
+# Kommt "Wort" oder "Word" in $eingabe vor?
+preg_match("/Wor(t|d)/", $eingabe);
+ 
+# Kommt "DM " oder "TDM " mit einer zwei- bis
 # dreistelligen Zahl in $eingabe vor?
-preg_match&#40;&quot;/T?DM \d{2,3}/&quot;, $eingabe&#41;;
-&nbsp;
-# Kommt &quot;Word &quot; mit einer Versionsnummer (z.B. 7.0 oder 97)
-# in $eingabe vor? (\d+ paßt auf &quot;eine oder mehr&quot; Ziffern,
-# \.? KANN ein Punkt sein, \d* sind &quot;Null oder mehr&quot; Ziffern)
-preg_match&#40;&quot;/Word \d+\.?\d*/&quot;, $eingabe&#41;;</pre>
+preg_match("/T?DM \d{2,3}/", $eingabe);
+ 
+# Kommt "Word " mit einer Versionsnummer (z.B. 7.0 oder 97)
+# in $eingabe vor? (\d+ paßt auf "eine oder mehr" Ziffern,
+# \.? KANN ein Punkt sein, \d* sind "Null oder mehr" Ziffern)
+preg_match("/Word \d+\.?\d*/", $eingabe);</pre>
 

@@ -48,7 +48,7 @@ Die Verwaltung von Bildern im Speziellen und Dateien im Allgemeinen hat natürli
 Gerade für Bilder gilt, dass diese bei jedem Aufruf aus der Datenbank geladen werden müssen. Dies bedeutet, dass für jedes zu ladende Bild ein PHP-Prozess durchlaufen werden muss, der Kontakt mit der Datenbank aufnimmt, die Bilder aus der Datenbank lädt und an den Benutzer zurück gibt. Ein enormer Overhead, der im Quelltext kaum zu sehen ist:
 </p>
 
-<pre>&lt;img src=&quot;/get_image.php?name=logo.png&quot; /&gt;</pre>
+<pre>&lt;img src="/get_image.php?name=logo.png" /&gt;</pre>
 
 <p>
 Das direkte Ausliefern des Bildes durch den Webserver hingegen ist etwa um den Faktor 10 schneller. Die Relevanz dieses Nachteils steigt mit der Anzahl der verwendeten Bilder.

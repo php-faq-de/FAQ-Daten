@@ -11,17 +11,17 @@ erkannt werden und deshalb nicht in <tt>&lt;br /&gt;</tt> umgewandelt
 werden.
 </p>
 
-<pre>// Einlesen der Datei &quot;datei&quot; in den String $str
-  $str = implode&#40;&quot;&quot;, @file&#40;&quot;datei&quot;&#41;&#41;;
+<pre>// Einlesen der Datei "datei" in den String $str
+  $str = implode("", @file("datei"));
   // Ausgeben der Datei mit Umbrüchen
-  print nl2br&#40;$str&#41;;</pre>
+  print nl2br($str);</pre>
 
 <p>
 Sollen Zeilenumbrüche komplett <em>ersetzt</em> werden, benutzt
 man z. B. <a href="http://www.php3.de/str_replace">str_replace()</a>:
 </p>
 
-<pre>$string = str_replace&#40;&quot;\n&quot;, &quot;&lt;br&gt;&quot;, $string&#41;;</pre>
+<pre>$string = str_replace("\n", "&lt;br&gt;", $string);</pre>
 
 <p>
 Zum Thema "Zeilenumbruch" siehe auch:

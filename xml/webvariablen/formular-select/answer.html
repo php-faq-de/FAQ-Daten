@@ -13,41 +13,41 @@ Selectbox erzeugt werden:
  * von Kristian Köhntopp und Frank Wiegand
  *
  */
-&nbsp;
-function lovselection&#40;$dsn, $table, $field, $oldvalue&#41; &#123;
-&nbsp;
+ 
+function lovselection($dsn, $table, $field, $oldvalue) {
+ 
   // Rueckgabestring
-  $ret = &quot;&quot;;
-&nbsp;
+  $ret = "";
+ 
   // Datenbankverbindung aufbauen, Fehlerbehandlung
   // ist hier nicht implementiert!
   require_once 'DB.php';
-  $db = DB::connect&#40;$dsn&#41;;
-&nbsp;
+  $db = DB::connect($dsn);
+ 
   // Daten auslesen
-  $query = sprintf&#40;&quot;SELECT %s FROM %s&quot;,
+  $query = sprintf("SELECT %s FROM %s",
              $field,
              $table
-           &#41;;
-&nbsp;
-  $res = $db-&gt;query&#40;$query&#41;;
-&nbsp;
-  while&#40;$row = $db-&gt;fetchRow&#40;&#41;&#41; &#123;
-    if &#40;$row&#91;$field&#93; == $oldvalue&#41;
-      $selected = &quot; selected='selected'&quot;;
+           );
+ 
+  $res = $db-&gt;query($query);
+ 
+  while($row = $db-&gt;fetchRow()) {
+    if ($row[$field] == $oldvalue)
+      $selected = " selected='selected'";
     else
-      $selected = &quot;&quot;;
-&nbsp;
-    $ret .= sprintf&#40;&quot;&lt;option%s&gt;%s&lt;/option&gt;\n&quot;,
-                    htmlspecialchars&#40;$selected&#41;,
-                    $row&#91;$field&#93;
-                   &#41;;
-  &#125;
-&nbsp;
-  $db-&gt;disconnect&#40;&#41;;
+      $selected = "";
+ 
+    $ret .= sprintf("&lt;option%s&gt;%s&lt;/option&gt;\n",
+                    htmlspecialchars($selected),
+                    $row[$field]
+                   );
+  }
+ 
+  $db-&gt;disconnect();
   return $ret;
-&#125;
-&nbsp;
+}
+ 
 /*
  * is_validlov - überprüfe, ob ein gegebener Wert zu einer
  *               vorgegebenen Liste von Werten passt.
@@ -55,44 +55,44 @@ function lovselection&#40;$dsn, $table, $field, $oldvalue&#41; &#123;
  * von Kristian Köhntopp und Frank Wiegand
  *
  */
-function is_validlov&#40;$dsn, $table, $field, $value&#41; &#123;
-&nbsp;
+function is_validlov($dsn, $table, $field, $value) {
+ 
   require_once 'DB.php';
-  $db = DB::connect&#40;$dsn&#41;;
-&nbsp;
-  $query = sprintf&#40;&quot;SELECT %s FROM %s WHERE %s = %s&quot;,
+  $db = DB::connect($dsn);
+ 
+  $query = sprintf("SELECT %s FROM %s WHERE %s = %s",
              $field,
              $table,
              $field,
-             $db-&gt;quote&#40;$value&#41; // Wert für die Abfrage maskieren
-           &#41;;
-&nbsp;
-  $res = $db-&gt;query&#40;$query&#41;;
-  if &#40;$res-&gt;numRows&#40;&#41; == 1&#41; &#123;
-    $db-&gt;disconnect&#40;&#41;;
+             $db-&gt;quote($value) // Wert für die Abfrage maskieren
+           );
+ 
+  $res = $db-&gt;query($query);
+  if ($res-&gt;numRows() == 1) {
+    $db-&gt;disconnect();
     return true;
-  &#125; else &#123;
-    $db-&gt;disconnect&#40;&#41;;
+  } else {
+    $db-&gt;disconnect();
     return false; // 0 or 2+ answers are a failure!
-  &#125;
-&#125;
-&nbsp;
+  }
+}
+ 
 ?&gt;
-&nbsp;
+ 
 &lt;!-- Formularfragment --&gt;
-&lt;select name=&quot;f_ortsnetz&quot; size=&quot;1&quot;&gt;
-&lt;?php echo lovselection&#40;&quot;mysql://$user:$pass@$host/$db_name&quot;, &quot;ortsnetze&quot;, &quot;vorwahl&quot;, $ortsnetz&#41; ?&gt;
+&lt;select name="f_ortsnetz" size="1"&gt;
+&lt;?php echo lovselection("mysql://$user:$pass@$host/$db_name", "ortsnetze", "vorwahl", $ortsnetz) ?&gt;
 &lt;/select&gt;
-&nbsp;
-&nbsp;
+ 
+ 
 &lt;!-- Auswertefragment --&gt;
 &lt;?php
-if &#40;is_validlov&#40;&quot;mysql://$user:$pass@$host/$db_name&quot;, &quot;ortsnetze&quot;, &quot;vorwahl&quot;, $_REQUEST&#91;'f_ortsnetz'&#93;&#41;&#41;
-  $ortsnetz = $_REQUEST&#91;'f_ortsnetz'&#93;; // value is valid
-else &#123;
-  $error&#91;&quot;ortsnetz&quot;&#93; = &quot;Das angegebene Ortsnetz ist ungültig.&quot;;
-  $ortsnetz = &quot;&quot;; // clear session variable
-&#125;
+if (is_validlov("mysql://$user:$pass@$host/$db_name", "ortsnetze", "vorwahl", $_REQUEST['f_ortsnetz']))
+  $ortsnetz = $_REQUEST['f_ortsnetz']; // value is valid
+else {
+  $error["ortsnetz"] = "Das angegebene Ortsnetz ist ungültig.";
+  $ortsnetz = ""; // clear session variable
+}
 ?&gt;</pre>
 
 <p>

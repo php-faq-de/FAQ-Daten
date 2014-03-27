@@ -18,55 +18,55 @@ Das Feld <tt>url</tt> enthält die URL, die aufgerufen wird. Das Feld
 </p>
 
 <pre>&lt;?php
-&nbsp;
+ 
 // Zugangsdaten fuer die Datenbank
 // Diese sollten der Sicherheit halber
 // in ein Verzeichnis außerhalb des
 // Document-Root ausgelagert werden.
-&nbsp;
-$host     = &quot;localhost&quot;;
-$user     = &quot;user&quot;;
-$pass     = &quot;demo_password&quot;;
-&nbsp;
-$database = &quot;demo_db&quot;;
-$table    = &quot;counter&quot;;
-&nbsp;
+ 
+$host     = "localhost";
+$user     = "user";
+$pass     = "demo_password";
+ 
+$database = "demo_db";
+$table    = "counter";
+ 
 // Die per GET übergebene URL einlesen
 // In der Praxis wird hier geprüft, ob die URL überhaupt ok ist.
-$url = $_GET&#91;'url'&#93;;
-&nbsp;
+$url = $_GET['url'];
+ 
 // Verbindung zum MySQL-Server aufbauen
-$db = mysql_connect&#40; $host, $user, $pass &#41;;
-if &#40; !is_resource&#40; $db &#41; &#41; &#123;
+$db = mysql_connect( $host, $user, $pass );
+if ( !is_resource( $db ) ) {
     // handleSqlError() steht symbolisch für die Fehlerbehandlung.
-    handleSqlError&#40;&#41;;
-&#125;
-&nbsp;
+    handleSqlError();
+}
+ 
 // Datenbank auswählen
-if &#40; !mysql_select_db&#40; $database, $db &#41; &#41; &#123;
-    handleSqlError&#40;&#41;;
-&#125;
-&nbsp;
+if ( !mysql_select_db( $database, $db ) ) {
+    handleSqlError();
+}
+ 
 // URL für den Transport zur Datenbank maskieren
-$safe_url = &quot;'&quot; . mysql_real_escape_string&#40; $url &#41; . &quot;'&quot;;
-&nbsp;
+$safe_url = "'" . mysql_real_escape_string( $url ) . "'";
+ 
 // Eintrag fuer die übergebene URL um 1 erhöhen.
-$query = &quot;UPDATE $table SET count=count+1 WHERE url=$safe_url&quot; 
-$result = mysql_query&#40; $query, $db &#41; || handleSqlError&#40;&#41;;
-&nbsp;
+$query = "UPDATE $table SET count=count+1 WHERE url=$safe_url" 
+$result = mysql_query( $query, $db ) || handleSqlError();
+ 
 // Noch kein Eintrag für die URL vorhanden?
-if &#40; mysql_affected_rows&#40; $db &#41; == 0 &#41; &#123;
-    $query = &quot;INSERT INTO $table (url, count) VALUES ($safe_url, 1)&quot;;
-    mysql_query&#40; $query, $db &#41; || handleSqlError&#40;&#41;;
-&#125;
-&nbsp;
+if ( mysql_affected_rows( $db ) == 0 ) {
+    $query = "INSERT INTO $table (url, count) VALUES ($safe_url, 1)";
+    mysql_query( $query, $db ) || handleSqlError();
+}
+ 
 // Auf übergebene URL weiterleiten
-header&#40; &quot;Location: &quot; . $url &#41;;
+header( "Location: " . $url );
 ?&gt;</pre>
 
 <p>Anwendungsbeispiel:</p>
 
-<pre>&lt;a href=&quot;count.php?url=http://www.martin-jansen.de&quot;&gt;Link&lt;/a&gt;</pre>
+<pre>&lt;a href="count.php?url=http://www.martin-jansen.de"&gt;Link&lt;/a&gt;</pre>
 
 <p>
 Als Parameter für die Datei count.php wird die URL übergeben, auf

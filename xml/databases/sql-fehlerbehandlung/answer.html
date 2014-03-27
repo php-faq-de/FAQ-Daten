@@ -11,37 +11,37 @@ eigene Funktionen. Dies sind zum Beispiel <a href="http://www.php3.de/mysql_erro
 Hier ein Beispiel für MySQL
 </p>
 <!-- Beispiel stammt von Guido Haeger, Frage "mysql-fehlerbehandlung" -->
-<pre>function mysql_errorhandler&#40;$problem, $query = &quot;&quot;&#41;
-&#123;
-  echo &quot;&lt;font color='#FF0000'&gt;&lt;b&gt;Datenbankfehler:&lt;/b&gt;&lt;/font&gt;&lt;br /&gt;\n&quot;;
-  echo &quot;Problem: $problem &lt;br /&gt;\n&quot;;
-  if&#40;$query != &quot;&quot;&#41;
-  &#123;
-    echo &quot;Query: $query &lt;br /&gt;\n&quot;;
-  &#125;
-  echo &quot;MySQL: &quot; . mysql_errno&#40;&#41; . &quot; - &quot; . mysql_error&#40;&#41; . &quot;&lt;br /&gt;&lt;br /&gt;\n&quot;;
-&#125;
-&nbsp;
+<pre>function mysql_errorhandler($problem, $query = "")
+{
+  echo "&lt;font color='#FF0000'&gt;&lt;b&gt;Datenbankfehler:&lt;/b&gt;&lt;/font&gt;&lt;br /&gt;\n";
+  echo "Problem: $problem &lt;br /&gt;\n";
+  if($query != "")
+  {
+    echo "Query: $query &lt;br /&gt;\n";
+  }
+  echo "MySQL: " . mysql_errno() . " - " . mysql_error() . "&lt;br /&gt;&lt;br /&gt;\n";
+}
+ 
 // Verbindung zum Datenbankserver herstellen
-if&#40;!$db = @mysql_connect&#40;&quot;host&quot;, &quot;user&quot;, &quot;password&quot;&#41;&#41;
-&#123;
-  mysql_errorhandler&#40;&quot;Verbindungsaufbau gescheitert.&quot;&#41;;
-&#125;
-&nbsp;
+if(!$db = @mysql_connect("host", "user", "password"))
+{
+  mysql_errorhandler("Verbindungsaufbau gescheitert.");
+}
+ 
 // Datenbank auswählen
-if&#40;!@mysql_select_db&#40;&quot;database&quot;&#41;&#41;
-&#123;
-  mysql_errorhandler&#40;&quot;Auswahl der Datenbank gescheitert.&quot;&#41;;
-&#125;
-&nbsp;
+if(!@mysql_select_db("database"))
+{
+  mysql_errorhandler("Auswahl der Datenbank gescheitert.");
+}
+ 
 // Beispiel für ein SQL-Statement
-$query = &quot;SELECT * FROM table WHERE x = '$x'&quot;;
-$result = @mysql_query&#40;$query&#41;;
-&nbsp;
-if&#40;!$result&#41;
-&#123;
-  mysql_errorhandler&#40;&quot;Datenbankabfrage gescheitert&quot;, $query&#41;;
-&#125;</pre>
+$query = "SELECT * FROM table WHERE x = '$x'";
+$result = @mysql_query($query);
+ 
+if(!$result)
+{
+  mysql_errorhandler("Datenbankabfrage gescheitert", $query);
+}</pre>
 
 <p>
 Klassen zur Datenbankabstraktion (z.B. <a href="http://pear.php.net/">PEAR</a>::<a href="http://pear.php.net/manual/en/package.database.php#package.database.db">DB</a>) können das Fehler-Handling wesentlich vereinfachen.

@@ -7,11 +7,11 @@ $sess-&gt;purl('/relativerlink'); ?&gt;</tt> ersetzt.
 gefunden wurde.
 </p>
 
-<pre>$pattern  = ',&lt;a([^&gt;]+)href=&quot;(?!https?://|ftp://|mailto:|news:)([^&gt;&quot;\s]+)&quot;,i';
-$replacement = '&lt;a\1href=&quot;&lt;?php echo $sess-&gt;purl(&quot;\2&quot;); ?&gt;&quot;';
-&nbsp;
-$newtext = preg_replace&#40;$pattern, $replacement, $text&#41;;
-&nbsp;
-header&#40;'Content-type: text/plain'&#41;;
+<pre>$pattern  = ',&lt;a([^&gt;]+)href="(?!https?://|ftp://|mailto:|news:)([^&gt;"\s]+)",i';
+$replacement = '&lt;a\1href="&lt;?php echo $sess-&gt;purl("\2"); ?&gt;"';
+ 
+$newtext = preg_replace($pattern, $replacement, $text);
+ 
+header('Content-type: text/plain');
 echo $newtext;</pre>
 

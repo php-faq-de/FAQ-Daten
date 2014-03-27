@@ -5,10 +5,10 @@ gesetzt sein. Die Funktion <a href="http://www.php3.de/mail">mail()</a> nimmt im
 vierten Parameter solche Header-Angaben entgegen:
 </p>
 
-<pre>mail&#40;&quot;empfaenger@example.org&quot;,
-     &quot;Betrefftext&quot;,
-     &quot;Hello world!&quot;,
-     &quot;From: Absender &lt;absender@example.com&gt;&quot;&#41;;</pre>
+<pre>mail("empfaenger@example.org",
+     "Betrefftext",
+     "Hello world!",
+     "From: Absender &lt;absender@example.com&gt;");</pre>
 
 <p>
 Eine Mailadresse mit Namen gibt man am besten in der Form
@@ -31,11 +31,11 @@ Im Falle des üblichen sendmail übergibt man den Absender für das
 <tt>Envelope-From:</tt> folgendermaßen:
 </p>
 
-<pre>mail&#40;&quot;empfaenger@example.org&quot;,
-     &quot;Betrefftext&quot;,
-     &quot;Hello world!&quot;,
-     &quot;From: Absender &lt;absender@example.com&gt;&quot;,
-     &quot;-f absender@example.com&quot;&#41;;</pre>
+<pre>mail("empfaenger@example.org",
+     "Betrefftext",
+     "Hello world!",
+     "From: Absender &lt;absender@example.com&gt;",
+     "-f absender@example.com");</pre>
 
 <p>
 Normalerweise fügt sendmail dann auch ein <tt>X-Authentication-Warning</tt> in den

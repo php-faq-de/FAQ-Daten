@@ -19,15 +19,15 @@ Das bedeutet:
 Das Programm sollte ein lokales Array haben, das die möglichen
 Werte als Index eines Hash enthält:
 </p>
-<pre>$val = array&#40;
-        &quot;wert1&quot; =&gt; 1,
-        &quot;wert2&quot; =&gt; 1,
-        &quot;wert3&quot; =&gt; 1
-       &#41;;</pre>
+<pre>$val = array(
+        "wert1" =&gt; 1,
+        "wert2" =&gt; 1,
+        "wert3" =&gt; 1
+       );</pre>
 <p>
 Die Prüfung von $_GET["selectvar"] kann nun so aussehen:
 </p>
-<pre>$checkedvar = isset&#40;$val&#91;$_GET&#91;&quot;selectvar&quot;&#93;&#93;&#41; ? $_GET&#91;&quot;selectvar&quot;&#93; : &quot;default&quot;;</pre>
+<pre>$checkedvar = isset($val[$_GET["selectvar"]]) ? $_GET["selectvar"] : "default";</pre>
 <p>
 Wenn $_GET["selectvar"] einen in $val definierten Wert hat, dann
 wird dieser Wert nach $checkedvar übernommen. Hat man versucht,
@@ -46,22 +46,22 @@ $_GET["selectvar"] untergeschoben werden.
 <p>Das Programm sollte eine oder mehrere Regex in einem Feld
 vorliegen haben:
 </p>
-<pre>$val = array&#40;
+<pre>$val = array(
              '/^[a-zA-Z ]+$/',
              '/^[0-9-]+$/'
-            &#41;;</pre>
+            );</pre>
 
 <p>Die Prüfung kann nun so aussehen:</p>
 
-<pre>$checkedvar = &quot;default&quot;;
-if &#40;isset&#40;$_GET&#91;&quot;inputvar&quot;&#93;&#41;&#41; &#123;
-  foreach &#40;$val as $k =&gt; $v&#41; &#123;
-    if &#40;preg_match&#40;$v, $_GET&#91;&quot;inputvar&quot;&#93;&#41;&#41; &#123;
-      $checkedvar = $_GET&#91;&quot;inputvar&quot;&#93;;
+<pre>$checkedvar = "default";
+if (isset($_GET["inputvar"])) {
+  foreach ($val as $k =&gt; $v) {
+    if (preg_match($v, $_GET["inputvar"])) {
+      $checkedvar = $_GET["inputvar"];
       break;
-    &#125;
-  &#125;
-&#125;</pre>
+    }
+  }
+}</pre>
 <p>
 Wenn $_GET["inputvar"] einen Wert hat, der auf eines der Muster
 in $val passt, wird dieser Wert in $checkedvar übernommen. Dazu
@@ -83,7 +83,7 @@ Numerische Variablen können durch eine einfache Konvertierung
 erzwungen werden. Danach muss eine Überpruefung des
 Wertebereiches erfolgen:
 </p>
-<pre>$checkedvar = isset&#40;$_GET&#91;&quot;numericvar&quot;&#93;&#41; ? $_GET&#91;&quot;numericvar&quot;&#93;+0 : 0;</pre>
+<pre>$checkedvar = isset($_GET["numericvar"]) ? $_GET["numericvar"]+0 : 0;</pre>
 <p>
 Durch die Addition von 0 wird eine Konvertierung in eine Zahl
 erzwungen. Der Wert ist hinterher entweder Wert des numerischen
@@ -102,11 +102,11 @@ Sicherheitsprüfung aus. Zwingt man außerdem noch die Endung
 hinten dran, erschwert man die Ausnutzung von Sicherheitslücken
 zusätzlich, sollten dennoch welche vorhanden sein.
 </p>
-<pre>$checkedvar = &quot;default&quot;;
-if &#40;isset&#40;$_GET&#91;&quot;filenamevar&quot;&#93;&#41; 
-   &amp;&amp; !preg_match&#40;'=/=', $_GET&#91;&quot;filenamevar&quot;&#93;&#41;&#41; &#123;
-   $checkedvar = $_GET&#91;&quot;filenamevar&quot;&#93; . &quot;.ext&quot;;
-&#125;</pre>
+<pre>$checkedvar = "default";
+if (isset($_GET["filenamevar"]) 
+   &amp;&amp; !preg_match('=/=', $_GET["filenamevar"])) {
+   $checkedvar = $_GET["filenamevar"] . ".ext";
+}</pre>
 </li>
 
 <li>

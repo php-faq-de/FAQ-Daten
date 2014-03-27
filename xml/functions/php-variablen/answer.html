@@ -1,6 +1,6 @@
 <h2>Konstanten</h2>
 
-<pre>define&#40;NAME, Wert&#41;;</pre>
+<pre>define(NAME, Wert);</pre>
 
 <p>
 definiert eine Konstante. Diese Konstante ist überall gültig,
@@ -59,14 +59,14 @@ Anweisung <tt>global</tt>.
 
 <p>Beispiel:</p>
 
-<pre>function testfunc&#40;$para1&#41; &#123;
+<pre>function testfunc($para1) {
   global $glob1;
-&nbsp;
+ 
   $loc1 = 10;
   $glob1 = $glob1 + 1;
-&nbsp;
+ 
   return;
-&#125;</pre>
+}</pre>
 
 <p>
 Diese Funktion hat zunächst einmal die Variablen <tt>$para1</tt> und
@@ -86,17 +86,17 @@ bleibt und bei einem erneuten Funktionsaufruf erneut sichtbar
 wird. Dies erfolgt mit Hilfe der Anweisung <tt>static</tt>.
 </p>
 
-<pre>function testfunc2&#40;$para1&#41; &#123;
+<pre>function testfunc2($para1) {
   global $glob1;
   static $stat1 = 0;
-&nbsp;
+ 
   $loc1 = 10;
   $glob1 = $glob1 + 1;
   $stat1 = $stat1 + 1;
-&nbsp;
-  printf&#40;&quot;Die Funktion testfunc2() wurde %s mal aufgerufen.\n&quot;,
-    $stat1&#41;;
-&#125;</pre>
+ 
+  printf("Die Funktion testfunc2() wurde %s mal aufgerufen.\n",
+    $stat1);
+}</pre>
 
 <p>
 In diesem Beispiel ist die Anweisung <tt>static $stat1</tt> dazu
@@ -114,21 +114,21 @@ Symboltabelle des Interpreters. Der Name ist in allen
 Namensräumen sichtbar. Entsprechend ist das Konstrukt
 </p>
 
-<pre>function testfunc3&#40;&#41; &#123;
+<pre>function testfunc3() {
   global $glob1;
-&nbsp;
+ 
   $glob1 = $glob1 + 1;
-&nbsp;
+ 
   return;
-&#125;</pre>
+}</pre>
 
 <p>gleichbedeutend mit</p>
 
-<pre>function testfunc3b&#40;&#41; &#123;
-  $GLOBALS&#91;&quot;glob1&quot;&#93; = $GLOBALS&#91;&quot;glob1&quot;&#93; + 1;
-&nbsp;
+<pre>function testfunc3b() {
+  $GLOBALS["glob1"] = $GLOBALS["glob1"] + 1;
+ 
   return;
-&#125;</pre>
+}</pre>
 
 <h2>Variablen in Klassen</h2>
 
@@ -138,21 +138,21 @@ Die dritte Sorte Namensräume, die in PHP existiert, sind
 Anweisung
 </p>
 
-<pre>class MyClass &#123;
+<pre>class MyClass {
   var $a;
   var $b;
-&nbsp;
-  function c&#40;&#41; &#123;
-    print&#40;&quot;Der Wert von a ist %s\n&quot;, $this-&gt;a&#41;
+ 
+  function c() {
+    print("Der Wert von a ist %s\n", $this-&gt;a)
     $this-&gt;b = $this-&gt;b + 1;
-    print&#40;&quot;Der Wert von b ist %s\n&quot;, $this-&gt;b&#41;;
-  &#125;
-&nbsp;
-  function MyClass&#40;&#41; &#123;
+    print("Der Wert von b ist %s\n", $this-&gt;b);
+  }
+ 
+  function MyClass() {
     $this-&gt;a = 10;
     $this-&gt;b = 0;
-  &#125;
-&#125;</pre>
+  }
+}</pre>
 
 <p>
 Nach dieser Definition ist KEINE Variable belegt, aber es
@@ -206,10 +206,10 @@ und "MyClass". Sie werden genauso angesprochen wie die
 Instanzvariablen:
 </p>
 
-<pre>$o-&gt;c&#40;&#41;;
-$p-&gt;c&#40;&#41;;
-$o-&gt;MyClass&#40;&#41;;
-$p-&gt;MyClass&#40;&#41;;</pre>
+<pre>$o-&gt;c();
+$p-&gt;c();
+$o-&gt;MyClass();
+$p-&gt;MyClass();</pre>
 
 <p>
 Manche Leute nennen die Funktionen eines Objektes auch
@@ -237,19 +237,19 @@ Parameter erwarten und man könnte der Funktion dann beim
 Zusammenbau diese Parameter mitgeben:
 </p>
 
-<pre>class MyClass2 &#123;
-&nbsp;
+<pre>class MyClass2 {
+ 
   ...
-&nbsp;
-  function MyClass2&#40;$p1 = &quot;&quot;&#41; &#123;
-    if &#40;$p1 != &quot;&quot;&#41; &#123;
+ 
+  function MyClass2($p1 = "") {
+    if ($p1 != "") {
       $this-&gt;...
-    &#125;
-  &#125;
-&#125;
-&nbsp;
-$mc1 = new MyClass2&#40;&quot;beispielwert&quot;&#41;;
-$mc2 = new MyClass2&#40;&#41;;</pre>
+    }
+  }
+}
+ 
+$mc1 = new MyClass2("beispielwert");
+$mc2 = new MyClass2();</pre>
 
 <p>
 Wenn der Bauplan einer Variablen erstellt wird, wenn wir also
@@ -281,21 +281,21 @@ angesprochenen Variablen erzeugt:
 <pre>$a = 10;
 $b = 20;
 $c = 30;
-&nbsp;
-$arr = array&#40; $a, $b, $c &#41;;
-&nbsp;
-$arr&#91;1&#93; = 22;</pre>
+ 
+$arr = array( $a, $b, $c );
+ 
+$arr[1] = 22;</pre>
 
 <p>
 Dies verändert den Wert von <tt>$arr[1]</tt> auf 22, aber der Wert von
 <tt>$b</tt> ändert sich nicht. Dies gilt auch bei Funktionsaufrufen:
 </p>
 
-<pre>function m&#40;$p1&#41; &#123;
+<pre>function m($p1) {
   $p1 = 22;
-&#125;
-&nbsp;
-m&#40;$b&#41;;</pre>
+}
+ 
+m($b);</pre>
 
 <p>
 Dies setzt den Wert von <tt>$p1</tt> auf 22, aber <tt>$p1</tt> ist eine
@@ -311,11 +311,11 @@ Variablen übergeben bekommt und dann mit Hilfe dieses Namens auf
 die globale Variable dieses Namens zugreift:
 </p>
 
-<pre>function m2&#40;$p1&#41; &#123;
-  $GLOBALS&#91;$p1&#93; = 22;
-&#125;
-&nbsp;
-m2&#40;&quot;b&quot;&#41;;</pre>
+<pre>function m2($p1) {
+  $GLOBALS[$p1] = 22;
+}
+ 
+m2("b");</pre>
 
 <p>
 Da in diesem Fall der Name der Variablen übergeben wird und mit
@@ -333,11 +333,11 @@ zu einem alternativen Namen für den übergebenen Wert. Wieder
 wird der Wert der originalen globalen Variablen verändert:
 </p>
 
-<pre>function m3&#40;&amp;$p1&#41; &#123;
+<pre>function m3(&amp;$p1) {
   $p1 = 22;
-&#125;
-&nbsp;
-m3&#40;$b&#41;;</pre>
+}
+ 
+m3($b);</pre>
 
 <p>
 Hier ist <tt>$p1</tt> in <tt>m3()</tt> ein alternativer Name fuer die
@@ -356,11 +356,11 @@ Arraydefinition:
 <pre>$a = 10;
 $b = 20;
 $c = 30;
-&nbsp;
-$arr = array&#40; &amp;$a, &amp;$b, &amp;$c &#41;;
-&nbsp;
-$arr&#91;1&#93; = 22;
-&nbsp;
+ 
+$arr = array( &amp;$a, &amp;$b, &amp;$c );
+ 
+$arr[1] = 22;
+ 
 print $b;</pre>
 
 <p>
@@ -392,24 +392,24 @@ also nichts anderes als gewöhnliche Funktionsaufrufe, nur dass
 die Funktionsnamen sehr seltsam aussehen:
 </p>
 
-<pre>class MyClass3 &#123;
-  function c&#40;&#41; &#123;
-    print &quot;Ich bin Funktion c() in der Klasse MyClass\n&quot;;
-  &#125;
-&#125;
-&nbsp;
-MyClass3::c&#40;&#41;;</pre>
+<pre>class MyClass3 {
+  function c() {
+    print "Ich bin Funktion c() in der Klasse MyClass\n";
+  }
+}
+ 
+MyClass3::c();</pre>
 
 <p>
 Dieses Stück Code haette man so auch schreiben koennen und es
 wäre leichter zu verstehen gewesen:
 </p>
 
-<pre>function c&#40;&#41; &#123;
-  print &quot;Ich bin die stinknormale Funktion c()\n&quot;;
-&#125;
-&nbsp;
-c&#40;&#41;;</pre>
+<pre>function c() {
+  print "Ich bin die stinknormale Funktion c()\n";
+}
+ 
+c();</pre>
 
 <p>
 Man kann dies verwenden, um in abgeleiteten Klassen Funktionen

@@ -10,15 +10,15 @@ Mit dem folgenden Code lassen sich Radio-Buttons analog
 zu "<a class="faq" href="${stil-normalform}">Von HTML zu PHP: Schreibe Formularverarbeitungen in Normalform</a>" erstellen:
 </p>
 
-<pre>$elements = array&#40;
-    array&#40;'name' =&gt; 'grün', 'value' =&gt; 'gr'&#41;,
-    array&#40;'name' =&gt; 'blau', 'value' =&gt; 'bl'&#41;,
-    array&#40;'name' =&gt; 'rot',  'value' =&gt; 'ro'&#41;
-&#41;;
-foreach &#40;$elements as $element&#41; &#123;
-    printf&#40;'&lt;input type=&quot;radio&quot; name=&quot;farbe&quot; value=&quot;%s&quot; %s/&gt; %s&lt;br /&gt;',
-        $element&#91;'value'&#93;,
-        &#40;isset&#40;$_REQUEST&#91;'farbe'&#93;&#41; and $_REQUEST&#91;'farbe'&#93; == $element&#91;'value'&#93;&#41; ? 'checked=&quot;checked&quot; ' : '',
-        $element&#91;'name'&#93;&#41;;
-&#125;</pre>
+<pre>$elements = array(
+    array('name' =&gt; 'grün', 'value' =&gt; 'gr'),
+    array('name' =&gt; 'blau', 'value' =&gt; 'bl'),
+    array('name' =&gt; 'rot',  'value' =&gt; 'ro')
+);
+foreach ($elements as $element) {
+    printf('&lt;input type="radio" name="farbe" value="%s" %s/&gt; %s&lt;br /&gt;',
+        $element['value'],
+        (isset($_REQUEST['farbe']) and $_REQUEST['farbe'] == $element['value']) ? 'checked="checked" ' : '',
+        $element['name']);
+}</pre>
 

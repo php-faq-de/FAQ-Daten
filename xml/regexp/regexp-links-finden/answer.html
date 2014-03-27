@@ -4,18 +4,18 @@ Diese Variable muss innerhalb der While-Schleife neu zusammengebaut
 werden, sonst läuft man hier in eine Endlosschleife.
 </p>
 
-<pre>$pattern = '=^(.*)&lt;a(.*)href\=&quot;?(\S+)&quot;([^&gt;]*)&gt;(.*)&lt;/a&gt;(.*)$=msi';
-while &#40;preg_match&#40;$pattern, $zeile, $txt&#41;&#41;
-&#123;
+<pre>$pattern = '=^(.*)&lt;a(.*)href\="?(\S+)"([^&gt;]*)&gt;(.*)&lt;/a&gt;(.*)$=msi';
+while (preg_match($pattern, $zeile, $txt))
+{
   /* $txt[3] enthält die gewünschte URL. */
-  echo $txt&#91;3&#93;.&quot;\n&quot;;
-&nbsp;
+  echo $txt[3]."\n";
+ 
   /* $zeile neu bauen */
-  $zeile = $txt&#91;1&#93;.&quot; hier war mal ein Link &quot;.$txt&#91;6&#93;;
-&#125;
-&nbsp;
+  $zeile = $txt[1]." hier war mal ein Link ".$txt[6];
+}
+ 
 /* $zeile zur Kontrolle ausgeben */
-print &quot;&lt;br&gt;&quot;.nl2br&#40;$zeile&#41;;</pre>
+print "&lt;br&gt;".nl2br($zeile);</pre>
 
 <p>
 <tt>$txt</tt> enthält als Array alle Tokens, die in der Regexp

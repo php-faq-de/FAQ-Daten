@@ -9,27 +9,27 @@ austragen, welches nur einer gewinnen kann.
 <p>Ein typisches Beispiel für eine Race Condition:</p>
 
 <pre>&lt;?php
-&nbsp;
+ 
   $datei = '/home/frank/datei';
-&nbsp;
+ 
   // wenn $datei nicht existiert ...
-  if &#40;!file_exists &#40;$datei&#41;&#41; &#123;
+  if (!file_exists ($datei)) {
     // ... dann $datei zum Schreiben öffnen
-    $fp = fopen &#40;$datei, 'w'&#41;;
-&nbsp;
+    $fp = fopen ($datei, 'w');
+ 
     // andere Zugriffe abblocken
-    flock &#40;$fp, LOCK_EX&#41;;
-&nbsp;
+    flock ($fp, LOCK_EX);
+ 
     // Daten in die Datei schreiben
-    fputs &#40;$fp, $data&#41;;
-&nbsp;
+    fputs ($fp, $data);
+ 
     // Datei freigeben
-    flock &#40;$fp, LOCK_UN&#41;;
-  &#125;
-  else &#123;
+    flock ($fp, LOCK_UN);
+  }
+  else {
     // Datei existiert bereits
-  &#125;
-&nbsp;
+  }
+ 
 ?&gt;</pre>
 
 <p>
@@ -65,38 +65,38 @@ Hier nun das Beispiel ohne Race Condition:
 </p>
 
 <pre>&lt;?php
-&nbsp;
+ 
   $datei = '/home/frank/datei';
-&nbsp;
+ 
   // temporäre Datei anlegen
-  $tempnam = tempnam &#40;'/home/frank/tmp', 'foo'&#41;;
-&nbsp;
+  $tempnam = tempnam ('/home/frank/tmp', 'foo');
+ 
   // Fehler: Datei konnte nicht angelegt werden
-  if &#40;$tempnam === false&#41;
-    die &#40;&quot;Could not create $tempnam!&quot;&#41;;
-&nbsp;
+  if ($tempnam === false)
+    die ("Could not create $tempnam!");
+ 
   // temporäre Datei zum Schreiben öffnen
-  $fp = fopen &#40;$tempnam, 'w'&#41; or die &#40;&quot;Could not open $tempnam!&quot;&#41;;
-&nbsp;
+  $fp = fopen ($tempnam, 'w') or die ("Could not open $tempnam!");
+ 
   // andere Zugriffe abblocken
-  flock &#40;$fp, LOCK_EX&#41;;
-&nbsp;
+  flock ($fp, LOCK_EX);
+ 
   // Daten in die Datei schreiben
-  fputs &#40;$fp, $data&#41;;
-&nbsp;
+  fputs ($fp, $data);
+ 
   // Datei freigeben
-  flock &#40;$fp, LOCK_UN&#41;;
-  fclose &#40;$fp&#41;;
-&nbsp;
+  flock ($fp, LOCK_UN);
+  fclose ($fp);
+ 
   // $datei zu temporärer Datei hardlinken:
   // schlägt fehl, wenn $datei schon vorhanden ist
-  if &#40;!link &#40;$tempnam, $datei&#41;&#41; &#123;
+  if (!link ($tempnam, $datei)) {
     // Fehlschlag: Datei bereits vorhanden
-  &#125;
-&nbsp;
+  }
+ 
   // temporäre Datei löschen
-  unlink &#40;$tempnam&#41;;
-&nbsp;
+  unlink ($tempnam);
+ 
 ?&gt;</pre>
 
 <p>

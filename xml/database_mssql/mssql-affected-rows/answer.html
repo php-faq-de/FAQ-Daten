@@ -9,5 +9,5 @@ In PHP vor Version 4.0.4 können Sie sich dadurch behelfen das Sie diesen Wert
 aus den Systemvariablen des SQL-Servers ermitteln Lesen Sie nach einer
 Datenbankoperation die Variable <tt>@@rowcount</tt> aus.
 </p>
-<pre>list&#40;$rows&#41; = mssql_fetch_row&#40;mssql_query&#40;'select @@rowcount', $dbh&#41;&#41;;</pre>
+<pre>list($rows) = mssql_fetch_row(mssql_query('select @@rowcount', $dbh));</pre>
 

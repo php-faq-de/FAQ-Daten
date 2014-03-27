@@ -68,17 +68,17 @@ zu manipulieren und kann auch Redirects erzeugen.
 </p>
 
 <pre># Content Type setzen
-  header&#40;&quot;Content-Type: image/gif&quot;&#41;;
-&nbsp;
+  header("Content-Type: image/gif");
+ 
   # Expires bestimmen
-  $exp_gmt = gmdate&#40;&quot;D, d M Y H:i:s&quot;, time&#40;&#41;+$exp&#41; . &quot; GMT&quot;;
-  header&#40;&quot;Expires: &quot; . $exp_gmt&#41;;
-&nbsp;
+  $exp_gmt = gmdate("D, d M Y H:i:s", time()+$exp) . " GMT";
+  header("Expires: " . $exp_gmt);
+ 
   # Status setzen
-  header&#40;&quot;Status: 401 Unauthorized&quot;&#41;;
-&nbsp;
+  header("Status: 401 Unauthorized");
+ 
   # Redirect erzeugen
-  header&#40;&quot;Location: http://..../.../index.html&quot;&#41;;</pre>
+  header("Location: http://..../.../index.html");</pre>
 
 <p>
 Lognachrichten erzeugt in PHP die Funktion <a href="http://www.php3.de/error_log">error_log()</a>. BinaryWrite entfällt, weil PHP-Funktionen
@@ -158,11 +158,11 @@ Timeout. <a href="http://www.php3.de/session_destroy">session_destroy()</a> ents
 In ASP speichert man Werte in seiner Session mit Hilfe von
 </p>
 
-<pre>Session&#40;&quot;memo&quot;&#41; = &quot;remember me&quot;</pre>
+<pre>Session("memo") = "remember me"</pre>
 
 <p>In PHP schreibt man</p>
 
-<pre>$_SESSION&#91;&quot;memo&quot;&#93; = &quot;remember me&quot;;</pre>
+<pre>$_SESSION["memo"] = "remember me";</pre>
 
 <p>
 Die Funktionalität von Session_OnStart wird in PHP mit manuell

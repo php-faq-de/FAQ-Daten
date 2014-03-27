@@ -2,14 +2,14 @@
 Der Button muss einem Namen haben:
 </p>
 
-<pre>&lt;input type=&quot;submit&quot; name=&quot;submit&quot; value=&quot;OK&quot;/&gt;</pre>
+<pre>&lt;input type="submit" name="submit" value="OK"/&gt;</pre>
 
 <p>
 Dann ist bei einem Mausklick oder einem Tastendruck auf den
 Submit-Button eine Variable mit dem Namen des Buttons vorhanden:
 </p>
 
-<pre>if &#40;isset&#40;$_REQUEST&#91;'submit'&#93;&#41;&#41; &#123; ... &#125;
+<pre>if (isset($_REQUEST['submit'])) { ... }
 // vor PHP 4.1.0 $HTTP_GET_VARS['submit'] oder $HTTP_POST_VARS['submit']</pre>
 
 <p>

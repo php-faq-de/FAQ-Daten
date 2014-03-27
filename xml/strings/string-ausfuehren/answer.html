@@ -9,8 +9,8 @@ beginnt der String mit HTML, so ist zuerst ein schließender PI-Tag
 nötig:
 </p>
 
-<pre>$html_php_mix = '&lt;h1&gt; &lt;?php echo &quot;GROSS&quot;; ?&gt; &lt;/h1&gt;';
-eval&#40;&quot;?&gt; $html_php_mix &lt;?php &quot;&#41;;</pre>
+<pre>$html_php_mix = '&lt;h1&gt; &lt;?php echo "GROSS"; ?&gt; &lt;/h1&gt;';
+eval("?&gt; $html_php_mix &lt;?php ");</pre>
 
 <p>
 Der öffnende PI-Tag zum Schluss ist nicht unbedingt notwendig - wenn

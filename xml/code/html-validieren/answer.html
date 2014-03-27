@@ -17,10 +17,10 @@ trotzdem funktionieren, oder es funktioniert eben nicht.
 </p>
 
 <pre>// PHP-Script (Verwendung von $_server statt $_SERVER):
-&lt;form action=&quot;&lt;?php echo $_server['PHP_SELF']; ?&gt;&quot; method=&quot;post&quot;&gt;
-&nbsp;
+&lt;form action="&lt;?php echo $_server['PHP_SELF']; ?&gt;" method="post"&gt;
+ 
 // HTML-Ergebnis:
-&lt;form action=&quot;&quot; method=&quot;post&quot;&gt;  // action ist leer!</pre>
+&lt;form action="" method="post"&gt;  // action ist leer!</pre>
 
 <p>
 Am besten schickt man die Ausgabe des fraglichen Scriptes erst mal

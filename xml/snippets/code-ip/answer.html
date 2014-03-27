@@ -15,10 +15,10 @@ und versucht, den Hostnamen zur IP mit der Funktion
 
 <pre>&lt;?php
 // IP bestimmen
-$ip = getenv&#40;'REMOTE_ADDR'&#41;;
-&nbsp;
+$ip = getenv('REMOTE_ADDR');
+ 
 // IP auflösen und Host bestimmen
-$host = gethostbyaddr&#40;$ip&#41;;
+$host = gethostbyaddr($ip);
 ?&gt;</pre>
 
 <p>

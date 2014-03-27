@@ -35,62 +35,62 @@ durchläßt, wie man sie ihm vorwirft! Der hier gezeigte Code ist
 sehr unzuverlässig, denn er hat keine richtige Fehlerprüfung.
 </p>
 
-<pre>$hdr  = &quot;From: ab@send.er\r\n&quot;;
-$hdr .= &quot;To: em@pfaeng.er\r\n&quot;;
-$hdr .= &quot;Reply-To: devnull@send.er\r\n&quot;;
-$hdr .= &quot;Subject: Testmail\r\n&quot;;
-$hdr .= &quot;\r\n&quot;;
-&nbsp;
+<pre>$hdr  = "From: ab@send.er\r\n";
+$hdr .= "To: em@pfaeng.er\r\n";
+$hdr .= "Reply-To: devnull@send.er\r\n";
+$hdr .= "Subject: Testmail\r\n";
+$hdr .= "\r\n";
+ 
 # Socket oeffnen.
-$fp = fsockopen&#40;&quot;mail.server.de&quot;, 25&#41;;
-$result = fgets&#40;$fp, 1024&#41;;
-if &#40;$result+0 != 220&#41;
-	die&#40;&quot;Statuscode falsch (service not ready?): $result&quot;&#41;;
-&nbsp;
+$fp = fsockopen("mail.server.de", 25);
+$result = fgets($fp, 1024);
+if ($result+0 != 220)
+	die("Statuscode falsch (service not ready?): $result");
+ 
 # HELO
-fputs&#40;$fp, &quot;HELO mein.eigener.servername.de\r\n&quot;&#41;;
-$result = fgets&#40;$fp, 1024&#41;;
-if &#40;$result+0 != 250&#41;
-	die&#40;&quot;HELO Statuscode falsch: $result&quot;&#41;;
-&nbsp;
+fputs($fp, "HELO mein.eigener.servername.de\r\n");
+$result = fgets($fp, 1024);
+if ($result+0 != 250)
+	die("HELO Statuscode falsch: $result");
+ 
 # MAIL FROM
-fputs&#40;$fp, &quot;MAIL FROM: ab@send.er\r\n&quot;&#41;;
-$result = fgets&#40;$fp, 1024&#41;;
-if &#40;$result+0 != 250&#41;
-	die&#40;&quot;MAIL FROM Statuscode falsch: $result&quot;&#41;;
-&nbsp;
+fputs($fp, "MAIL FROM: ab@send.er\r\n");
+$result = fgets($fp, 1024);
+if ($result+0 != 250)
+	die("MAIL FROM Statuscode falsch: $result");
+ 
 # RCPT TO
-fputs&#40;$fp, &quot;RCPT TO: em@pfaeng.er\r\n&quot;&#41;;
-$result = fgets&#40;$fp, 1024&#41;;
-if &#40;$result+0 != 250&#41;
-	die&#40;&quot;RCPT TO: Statuscode falsch: $result&quot;&#41;;
-&nbsp;
+fputs($fp, "RCPT TO: em@pfaeng.er\r\n");
+$result = fgets($fp, 1024);
+if ($result+0 != 250)
+	die("RCPT TO: Statuscode falsch: $result");
+ 
 # DATA
-fputs&#40;$fp, &quot;DATA\r\n&quot;&#41;;
-$result = fgets&#40;$fp, 1024&#41;;
-if &#40;$result+0 != 354&#41;
-	die&#40;&quot;DATA: Statuscode falsch: $result&quot;&#41;;
-&nbsp;
+fputs($fp, "DATA\r\n");
+$result = fgets($fp, 1024);
+if ($result+0 != 354)
+	die("DATA: Statuscode falsch: $result");
+ 
 # Header senden
-fputs&#40;$fp, $hdr&#41;;
-&nbsp;
+fputs($fp, $hdr);
+ 
 # Text senden
-fputs&#40;$fp, &quot;Das ist nur eine Testnachricht.&quot;&#41;;
-&nbsp;
+fputs($fp, "Das ist nur eine Testnachricht.");
+ 
 # Ende von DATA: CRLF . CRLF
-fputs&#40;$fp, &quot;\r\n.\r\n&quot;&#41;;
-$result = fgets&#40;$fp, 1024&#41;;
-if &#40;$result+0 != 250&#41;
-	die&#40;&quot;DATA(end): Statuscode falsch: $result&quot;&#41;;
-&nbsp;
+fputs($fp, "\r\n.\r\n");
+$result = fgets($fp, 1024);
+if ($result+0 != 250)
+	die("DATA(end): Statuscode falsch: $result");
+ 
 # QUIT
-fputs&#40;$fp, &quot;QUIT\r\n&quot;&#41;;
-$result = fgets&#40;$fp, 1024&#41;;
-if &#40;$result+0 != 221&#41;
-	die&#40;&quot;QUIT: Statuscode falsch: $result&quot;&#41;;
-&nbsp;
+fputs($fp, "QUIT\r\n");
+$result = fgets($fp, 1024);
+if ($result+0 != 221)
+	die("QUIT: Statuscode falsch: $result");
+ 
 # Verbindung schließen
-fclose&#40;$fp&#41;;</pre>
+fclose($fp);</pre>
 
 <p>
 Wer sich diesen Code nicht zutraut, kann auch die
@@ -101,26 +101,26 @@ mal etwas nicht klappte. Beispiel:
 </p>
 
 <pre>&lt;?php
-&nbsp;
+ 
   /* Funktionsklasse inkludieren. */
-  include &quot;smtp.php&quot;;
-&nbsp;
+  include "smtp.php";
+ 
   $smtp = new smtp_class;
-  $smtp-&gt;host_name=getenv&#40;&quot;HOSTNAME&quot;&#41;;
-  $smtp-&gt;localhost=&quot;localhost&quot;;
-  $from = &quot;name@&quot;.$smtp-&gt;host_name;
-  $to = &quot;da@irgendwo.de&quot;;
-&nbsp;
-  $inhalt = &quot;Inhalt der Mail&quot;;
-&nbsp;
-  if &#40;$smtp-&gt;SendMessage&#40;
+  $smtp-&gt;host_name=getenv("HOSTNAME");
+  $smtp-&gt;localhost="localhost";
+  $from = "name@".$smtp-&gt;host_name;
+  $to = "da@irgendwo.de";
+ 
+  $inhalt = "Inhalt der Mail";
+ 
+  if ($smtp-&gt;SendMessage(
       $from,
-      array&#40;$to&#41;,
-      array&#40;&quot;From: $from&quot;,&quot;To: $to&quot;,&quot;Subject: test&quot;&#41;,
-      $inhalt&#41;&#41;
-  &#123;
-     print &quot;Mail wurde erfolgreich versandt.&quot;;
-  &#125;
-&nbsp;
+      array($to),
+      array("From: $from","To: $to","Subject: test"),
+      $inhalt))
+  {
+     print "Mail wurde erfolgreich versandt.";
+  }
+ 
 ?&gt;</pre>
 

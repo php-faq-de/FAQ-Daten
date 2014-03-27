@@ -1,12 +1,12 @@
 <pre>&lt;?php
 // Modifikationszeit von (Wie heiße ich?)
-$unixTime = filemtime&#40;$HTTP_SERVER_VARS&#91;&quot;PATH_TRANSLATED&quot;&#93;&#41;;
-&nbsp;
-if &#40;$unixTime&#41; &#123;
-    echo &quot;Letzte Änderung: &quot;. date&#40;&quot;d M Y, H:i:s&quot;, $unixTime&#41;;
-&#125; else &#123;
-    echo &quot;Datei existiert nicht! Falscher Pfad?&quot;;
-&#125;
+$unixTime = filemtime($HTTP_SERVER_VARS["PATH_TRANSLATED"]);
+ 
+if ($unixTime) {
+    echo "Letzte Änderung: ". date("d M Y, H:i:s", $unixTime);
+} else {
+    echo "Datei existiert nicht! Falscher Pfad?";
+}
 ?&gt;</pre>
 
 <p>

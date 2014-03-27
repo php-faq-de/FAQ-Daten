@@ -11,62 +11,62 @@ Aktionen (z.B. Speichern der Daten in einer Datenbank).
 </p>
 
 <pre>&lt;?PHP
-function formular_ausgeben&#40;$error = ''&#41;
-&#123;
-   $error = &#40;$error==''&#41;?'':'&lt;font color=&quot;#DD0000&quot;&gt;'.$error.'&lt;/font&gt;';
-   return '&lt;form action=&quot;script.php4&quot; method=&quot;POST&quot;&gt;
+function formular_ausgeben($error = '')
+{
+   $error = ($error=='')?'':'&lt;font color="#DD0000"&gt;'.$error.'&lt;/font&gt;';
+   return '&lt;form action="script.php4" method="POST"&gt;
            '.$error.'
-           Name: &lt;input type=&quot;text&quot; name=&quot;name&quot; value=&quot;'.$_REQUEST&#91;'name'&#93;.'&quot; /&gt;
+           Name: &lt;input type="text" name="name" value="'.$_REQUEST['name'].'" /&gt;
            &lt;br /&gt;
-           &lt;input type=&quot;submit&quot; name=&quot;submit&quot; value=&quot;OK&quot; /&gt;
+           &lt;input type="submit" name="submit" value="OK" /&gt;
            &lt;/form&gt;';
-&#125;
-&nbsp;
-function daten_speichern&#40;&#41;
-&#123;
+}
+ 
+function daten_speichern()
+{
    GLOBAL $db;
-   if&#40;strlen&#40;$_REQUEST&#91;'name'&#93;&#41; &lt; 3&#41;
-   &#123;
-      return formular_ausgeben&#40;'Bitte Namen eingeben!&lt;br&gt;'&#41;;
-   &#125;
+   if(strlen($_REQUEST['name']) &lt; 3)
+   {
+      return formular_ausgeben('Bitte Namen eingeben!&lt;br&gt;');
+   }
    else
-   &#123;
+   {
       // Mit $db-&gt;escape_string() wird eine Funktion aufgerufen, die sicher stellt
       // das möglicherweise in $_REQUEST['name'] enthaltene SQL-Fragmente nicht
       // ausgeführt werden (siehe auch mysql_escape_string() ).
-      $db-&gt;query&#40;&quot;INSERT INTO tabelle
-                  SET name = '&quot;.$db-&gt;escape_string&#40;$_REQUEST&#91;'name'&#93;&#41;.&quot;'&quot;&#41;;
-&nbsp;
-      if&#40;$db-&gt;affected_rows&#40;&#41; == 1&#41;
-      &#123;
-         header&#40;'Location: http://domain.de/script.php4?d=bestaetigen'&#41;;
-         return '&lt;a href=&quot;http://domain.de/script.php4?d=bestaetigen&quot;&gt;weiter&lt;/a&gt;';
-      &#125;
+      $db-&gt;query("INSERT INTO tabelle
+                  SET name = '".$db-&gt;escape_string($_REQUEST['name'])."'");
+ 
+      if($db-&gt;affected_rows() == 1)
+      {
+         header('Location: http://domain.de/script.php4?d=bestaetigen');
+         return '&lt;a href="http://domain.de/script.php4?d=bestaetigen"&gt;weiter&lt;/a&gt;';
+      }
       else
-      &#123;
-         return formular_ausgeben&#40;'MySQL: '.$db-&gt;Error.'&lt;br&gt;'&#41;;
-      &#125;
-   &#125;
-&#125;
-&nbsp;
-function bestaetigung&#40;&#41;
-&#123;
+      {
+         return formular_ausgeben('MySQL: '.$db-&gt;Error.'&lt;br&gt;');
+      }
+   }
+}
+ 
+function bestaetigung()
+{
    return 'Der Name wurde gespeichert.';
-&#125;
-&nbsp;
-&nbsp;
-if&#40;$_REQUEST&#91;'submit'&#93; == 'OK'&#41;
-&#123;
-   echo daten_speichern&#40;&#41;;
-&#125;
-elseif&#40;$_REQUEST&#91;'d'&#93; == 'bestaetigen'&#41;
-&#123;
-   echo bestaetigung&#40;&#41;;
-&#125;
+}
+ 
+ 
+if($_REQUEST['submit'] == 'OK')
+{
+   echo daten_speichern();
+}
+elseif($_REQUEST['d'] == 'bestaetigen')
+{
+   echo bestaetigung();
+}
 else
-&#123;
-   echo formular_ausgeben&#40;&#41;;
-&#125;
+{
+   echo formular_ausgeben();
+}
 ?&gt;</pre>
 
 <p>

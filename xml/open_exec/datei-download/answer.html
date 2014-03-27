@@ -22,36 +22,36 @@ autorisiert ist.
 
 <pre>// $download sei der Bezeichner für die zu ladende Datei
 // etwa: 
-$download = $_GET&#91;'download'&#93;;
-&nbsp;
+$download = $_GET['download'];
+ 
 // Dieses Verzeichnis liegt außerhalb des Document Root und
 // ist nicht per URL erreichbar.
-$basedir = &quot;/home/www/download&quot;;
-&nbsp;
+$basedir = "/home/www/download";
+ 
 // Übersetzung von Download-Bezeichner in Dateinamen.
-$filelist = array&#40;
-  &quot;file1&quot; =&gt; &quot;area1/datei1.zip&quot;,
-  &quot;file2&quot; =&gt; &quot;area1/datei2.zip&quot;,
-  &quot;file3&quot; =&gt; &quot;area2/datei1.zip&quot;
-&#41;;
-&nbsp;
+$filelist = array(
+  "file1" =&gt; "area1/datei1.zip",
+  "file2" =&gt; "area1/datei2.zip",
+  "file3" =&gt; "area2/datei1.zip"
+);
+ 
 // Einbruchsversuch abfangen.
-if &#40;!isset&#40;$filelist&#91;$download&#93;&#41;&#41;
-  die&#40;&quot;Datei $download nicht vorhanden.&quot;&#41;;
-&nbsp;
+if (!isset($filelist[$download]))
+  die("Datei $download nicht vorhanden.");
+ 
 // Vertrauenswürdigen Dateinamen basteln.
-$filename = sprintf&#40;&quot;%s/%s&quot;, $basedir, $filelist&#91;$download&#93;&#41;;
-&nbsp;
+$filename = sprintf("%s/%s", $basedir, $filelist[$download]);
+ 
 // Passenden Datentyp erzeugen.
-header&#40;&quot;Content-Type: application/octet-stream&quot;&#41;;
-&nbsp;
+header("Content-Type: application/octet-stream");
+ 
 // Passenden Dateinamen im Download-Requester vorgeben,
 // z. B. den Original-Dateinamen
-$save_as_name = basename&#40;$filelist&#91;$download&#93;&#41;;
-header&#40;&quot;Content-Disposition: attachment; filename=\&quot;$save_as_name\&quot;&quot;&#41;;
-&nbsp;
+$save_as_name = basename($filelist[$download]);
+header("Content-Disposition: attachment; filename=\"$save_as_name\"");
+ 
 // Datei ausgeben.
-readfile&#40;$filename&#41;;</pre>
+readfile($filename);</pre>
 
 <p>
 Dieses Script kann mit dem Parameter <tt>$download</tt> aufgerufen

@@ -13,27 +13,27 @@ alphabetisch nach dem 2. Element.
 
 <pre>kris@valiant:~ &gt; ./php
 &lt;?php
-  $a = array&#40;
-         array&#40;0, &quot;Schmidt&quot;&#41;,
-         array&#40;2, &quot;Albert&quot;&#41;
-       &#41;;
-&nbsp;
-  function cmp&#40;$a, $b&#41; &#123;
-    printf&#40;&quot;type a = %s type b = %s\n&quot;, gettype&#40;$a&#41;, gettype&#40;$b&#41;&#41;;
-    if &#40;$a&#91;1&#93; == $b&#91;1&#93;&#41; return 0;
-    return &#40;$a&#91;1&#93; &gt; $b&#91;1&#93;&#41;?1:-1;
-  &#125;
-&nbsp;
-  usort &#40;$a, &quot;cmp&quot;&#41;;
-&nbsp;
-  foreach&#40;$a as $k =&gt; $v&#41;
-      printf&#40;&quot;k = %s  v[0] = %s  v[1] = %s\n&quot;, $k, $v&#91;0&#93;, $v&#91;1&#93;&#41;;
+  $a = array(
+         array(0, "Schmidt"),
+         array(2, "Albert")
+       );
+ 
+  function cmp($a, $b) {
+    printf("type a = %s type b = %s\n", gettype($a), gettype($b));
+    if ($a[1] == $b[1]) return 0;
+    return ($a[1] &gt; $b[1])?1:-1;
+  }
+ 
+  usort ($a, "cmp");
+ 
+  foreach($a as $k =&gt; $v)
+      printf("k = %s  v[0] = %s  v[1] = %s\n", $k, $v[0], $v[1]);
 ?&gt;
 X-Powered-By: PHP/4.0b5-dev
 Content-type: text/html; charset=iso-8859-1
-&nbsp;
+ 
 type a = array type b = array
-k = 0  v&#91;0&#93; = 2  v&#91;1&#93; = Albert
-k = 1  v&#91;0&#93; = 0  v&#91;1&#93; = Schmidt
+k = 0  v[0] = 2  v[1] = Albert
+k = 1  v[0] = 0  v[1] = Schmidt
 kris@valiant:~ &gt;</pre>
 

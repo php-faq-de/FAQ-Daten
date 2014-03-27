@@ -8,18 +8,18 @@ der Schlüssel direkt in eckigen Klammern steht, statt korrekt in
 Anführungszeichen eingefasst zu werden:
 </p>
 
-<pre>$array&#91;key&#93;     // Falsch, wenn key keine Konstante ist
-$array&#91;&quot;key&quot;&#93;   // So war es gemeint
-$array&#91;'key'&#93;   // Besser, da nichts ausgewertet werden muss
-$array&#91;12&#93;      // Richtig, Zahlen als Key ohne Anführungszeichen
-&nbsp;
-$array&#91;$key&#93;    // Ok: Zugriff per Variable
-$array&#91;&quot;$key&quot;&#93;  // Hier sind die Anführungszeichen unnötig
-$array&#91;'$key'&#93;  // Falsch, Variable wird nicht ausgewertet
-&nbsp;
-&quot;$array[key]&quot;   // Korrekt (!), da innerhalb eines Strings
-&quot;$array[$key]&quot;  // Korrekt
-&quot;$array['key']&quot; // Parse error!</pre>
+<pre>$array[key]     // Falsch, wenn key keine Konstante ist
+$array["key"]   // So war es gemeint
+$array['key']   // Besser, da nichts ausgewertet werden muss
+$array[12]      // Richtig, Zahlen als Key ohne Anführungszeichen
+ 
+$array[$key]    // Ok: Zugriff per Variable
+$array["$key"]  // Hier sind die Anführungszeichen unnötig
+$array['$key']  // Falsch, Variable wird nicht ausgewertet
+ 
+"$array[key]"   // Korrekt (!), da innerhalb eines Strings
+"$array[$key]"  // Korrekt
+"$array['key']" // Parse error!</pre>
 
 <p>
 In neueren PHP-Versionen ist der Error reporting level defaultmäßig

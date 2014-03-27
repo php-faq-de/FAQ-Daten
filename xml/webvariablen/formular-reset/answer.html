@@ -15,16 +15,16 @@ Submit-Button nehmen:
 </p>
 
 <pre>&lt;?php
-  if &#40;isset&#40;$_REQUEST&#91;'loeschen'&#93;&#41;&#41; &#123;
-      unset&#40;$_REQUEST&#91;'eingabe'&#93;&#41;;
-  &#125;
+  if (isset($_REQUEST['loeschen'])) {
+      unset($_REQUEST['eingabe']);
+  }
 ?&gt;
-&nbsp;
-&lt;form action=&quot;&lt;?php echo $SERVER['PHP_SELF']; ?&gt;&quot; method=&quot;post&quot;&gt;
-&lt;input type=&quot;text&quot; name=&quot;eingabe&quot;
-       value=&quot;&lt;?php @print $_REQUEST['eingabe']; ?&gt;&quot;/&gt;
-&lt;input type=&quot;submit&quot; name=&quot;submit&quot; value=&quot;Absenden&quot;/&gt;
-&lt;input type=&quot;reset&quot; value=&quot;Reset&quot;/&gt;
-&lt;input type=&quot;submit&quot; name=&quot;loeschen&quot; value=&quot;Löschen&quot;/&gt;
+ 
+&lt;form action="&lt;?php echo $SERVER['PHP_SELF']; ?&gt;" method="post"&gt;
+&lt;input type="text" name="eingabe"
+       value="&lt;?php @print $_REQUEST['eingabe']; ?&gt;"/&gt;
+&lt;input type="submit" name="submit" value="Absenden"/&gt;
+&lt;input type="reset" value="Reset"/&gt;
+&lt;input type="submit" name="loeschen" value="Löschen"/&gt;
 &lt;/form&gt;</pre>
 

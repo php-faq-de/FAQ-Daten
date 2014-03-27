@@ -2,12 +2,12 @@
 Um diese Datenfelder abzuspeichern, muss zuerst Speicher angefordert
 werden, dies geschieht mit <a href="http://www.php3.de/OCIBindByName">OCIBindByName()</a>.</p>
 
-<pre>$req=&quot;INSERT INTO wurstbrote (name) VALUES (:name)&quot;;
-$stmt=OCIParse&#40;$conn, $req&#41;;
+<pre>$req="INSERT INTO wurstbrote (name) VALUES (:name)";
+$stmt=OCIParse($conn, $req);
 // nun binde ich den Inhalt von $wurstbrotname
 // an den Oracle Platzhalter :name
-OCIBindByName&#40;$stmt,&quot;:name&quot;,$wurstbrotname,-1&#41;;
-OCIExecute&#40;$stmt&#41;;</pre>
+OCIBindByName($stmt,":name",$wurstbrotname,-1);
+OCIExecute($stmt);</pre>
 
 <p>
 Trotz dieser Umständlichkeit gestaltet sich das Lesen/Schreiben

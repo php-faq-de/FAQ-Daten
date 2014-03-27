@@ -10,16 +10,16 @@ Befehls kopiert wird.
 </p>
 
 <pre>// $var soll an script.php übergeben werden
-&nbsp;
+ 
 // Funktioniert nicht
-include&#40;'script.php?var=test'&#41;;
-&nbsp;
+include('script.php?var=test');
+ 
 // So geht das
-$_GET&#91;'var'&#93; = 'test'; // oder bei altem script.php $var = 'test';
-include&#40;'script.php'&#41;;
-&nbsp;
+$_GET['var'] = 'test'; // oder bei altem script.php $var = 'test';
+include('script.php');
+ 
 // So geht's bei externen Dateien
-include&#40;'http://example.com/script.php?var=test'&#41;;</pre>
+include('http://example.com/script.php?var=test');</pre>
 
 <p>
 Versucht man bei <em>lokalen</em> Dateien eine Variablenübergabe

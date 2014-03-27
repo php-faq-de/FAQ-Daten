@@ -6,20 +6,20 @@ und dann die n Zahlen zu verwenden.
 </p>
 
 <pre>&lt;?php
-function generate_numbers&#40; $min, $max, $anz &#41;
-&#123;
-    $array = range&#40; $min, $max &#41;;
-    srand&#40; &#40;double&#41;microtime&#40;&#41; * 1000000 &#41;;
-    for &#40; $x=0; $x&lt;$anz; $x++ &#41; &#123;
-        $i = rand&#40; 1, count&#40; $array&#41; &#41; - 1;
-        $erg&#91;&#93; = $array&#91;$i&#93;;
-        array_splice&#40; $array, $i, 1 &#41;;
-    &#125;
+function generate_numbers( $min, $max, $anz )
+{
+    $array = range( $min, $max );
+    srand( (double)microtime() * 1000000 );
+    for ( $x=0; $x&lt;$anz; $x++ ) {
+        $i = rand( 1, count( $array) ) - 1;
+        $erg[] = $array[$i];
+        array_splice( $array, $i, 1 );
+    }
     return $erg;
-&#125;
-&nbsp;
+}
+ 
 // 5 eindeutige Zahlen im Bereich von 1 bis 100 ermitteln
-$zufalls_array = generate_numbers&#40; 1, 100, 5 &#41;;
-echo join&#40; '; ', $zufalls_array &#41;;
+$zufalls_array = generate_numbers( 1, 100, 5 );
+echo join( '; ', $zufalls_array );
 ?&gt;</pre>
 

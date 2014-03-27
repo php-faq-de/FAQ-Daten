@@ -3,46 +3,46 @@ Bei Sybase müssen Anführungsstriche Strings innerhalb von Queries nicht mit
 einem Backslash (\), sondern mit dem jeweils gleichen Zeichen escaped werden.
 Folgendes Beispiel sollte das anschaulich machen:</p>
 
-<pre class="sql">SELECT &quot;Er sagte: &quot;&quot;Hallo Welt&quot;&quot;&quot;
+<pre class="sql">SELECT "Er sagte: ""Hallo Welt"""
 SELECT 'Das gibt''s doch nicht'</pre>
 
 <p>
 Eine Komfort-Funktion, die sich darum kümmert, dass in SQL-Statements immer
 richtig gequotet wird, soll hier gezeigt werden:</p>
 
-<pre>function sybase_prepare&#40;&#41; &#123;
-  $args= func_get_args&#40;&#41;;
-  $sql= $args&#91;0&#93;;
-  if &#40;sizeof&#40;$args&#41;&lt;= 1&#41; return $sql;
+<pre>function sybase_prepare() {
+  $args= func_get_args();
+  $sql= $args[0];
+  if (sizeof($args)&lt;= 1) return $sql;
   $j= 0;    
-  $sql= $tok= strtok&#40;$sql, '%'&#41;;
-  while &#40;++$j &amp;&amp; $tok= strtok&#40;'%'&#41;&#41; &#123;
-    $arg= &#40;is_object&#40;$args&#91;$j&#93;&#41; &amp;&amp; method_exists&#40;$args&#91;$j&#93;, 'toString'&#41; 
-      ? $args&#91;$j&#93;-&gt;toString&#40;&#41;
-      : $args&#91;$j&#93;
-    &#41;;
-    switch &#40;$tok&#123;0&#125;&#41; &#123;
+  $sql= $tok= strtok($sql, '%');
+  while (++$j &amp;&amp; $tok= strtok('%')) {
+    $arg= (is_object($args[$j]) &amp;&amp; method_exists($args[$j], 'toString') 
+      ? $args[$j]-&gt;toString()
+      : $args[$j]
+    );
+    switch ($tok{0}) {
       case 'd': 
-        $sql.= &#40;$arg === NULL ? 'NULL' : intval&#40;$arg&#41;&#41;.substr&#40;$tok, 1&#41;; 
+        $sql.= ($arg === NULL ? 'NULL' : intval($arg)).substr($tok, 1); 
         break;
-&nbsp;
+ 
       case 'c': 
-        $sql.= substr&#40;$tok, 1&#41;; 
+        $sql.= substr($tok, 1); 
         break;
-&nbsp;
+ 
       case 's': 
-        $sql.= &#40;$arg === NULL ? 'NULL' : &quot;'&quot;.str_replace&#40;&quot;'&quot;, &quot;''&quot;, $arg&#41;.&quot;'&quot;&#41;.substr&#40;$tok, 1&#41;; 
+        $sql.= ($arg === NULL ? 'NULL' : "'".str_replace("'", "''", $arg)."'").substr($tok, 1); 
         break;
-&nbsp;
+ 
       default: 
         $sql.= '%'.$tok; $j--;
-    &#125;
-  &#125;
+    }
+  }
   return $sql;
-&#125;
-&nbsp;
+}
+ 
 // Beispiel 1
-$sql= sybase_prepare&#40;'
+$sql= sybase_prepare('
   insert into person (
     person_id, name, company
   ) values (
@@ -51,25 +51,25 @@ $sql= sybase_prepare&#40;'
   1,
   'Dau Jones',
   NULL
-&#41;;
-&nbsp;
+);
+ 
 // Beispiel 2
-class Date &#123;
+class Date {
   var $utime;
-&nbsp;
-  function Date&#40;$utime&#41; &#123;
+ 
+  function Date($utime) {
     $this-&gt;utime= $utime;
-  &#125;
-&nbsp;
-  function toString&#40;$fmt= 'Y-m-d H:i:s'&#41; &#123;
-    return date&#40;$fmt, $this-&gt;utime&#41;;
-  &#125;
-&#125;
-&nbsp;
-$date= &amp;new Date&#40;time&#40;&#41;&#41;;
-$sql= sybase_prepare&#40;
+  }
+ 
+  function toString($fmt= 'Y-m-d H:i:s') {
+    return date($fmt, $this-&gt;utime);
+  }
+}
+ 
+$date= &amp;new Date(time());
+$sql= sybase_prepare(
   'select count(*) from %c where lastchange= %s',
   'account',
   $date
-&#41;;</pre>
+);</pre>
 

@@ -7,20 +7,20 @@ sondern als Intervall in Tagen, Stunden, Minuten und Sekunden
 darstellen, hilft folgende Funktion:
 </p>
 
-<pre>function intervall&#40;$sek&#41; &#123;
-    $i = sprintf&#40;'%d Tag%s, %d Stunde%s,'.
+<pre>function intervall($sek) {
+    $i = sprintf('%d Tag%s, %d Stunde%s,'.
             ' %d Minute%s und %d Sekunde%s',
             $sek / 86400,
-            floor&#40;$sek / 86400&#41; != 1 ? 'e':'',
+            floor($sek / 86400) != 1 ? 'e':'',
             $sek / 3600 % 24,
-            floor&#40;$sek / 3600 % 24&#41; != 1 ? 'n':'',
+            floor($sek / 3600 % 24) != 1 ? 'n':'',
             $sek / 60 % 60,
-            floor&#40;$sek / 60 % 60&#41; != 1 ? 'n':'',
+            floor($sek / 60 % 60) != 1 ? 'n':'',
             $sek % 60,
-            floor&#40;$sek % 60&#41; != 1 ? 'n':''
-         &#41;;
+            floor($sek % 60) != 1 ? 'n':''
+         );
     return $i;
-&#125;
-&nbsp;
-echo intervall&#40;99114&#41;;</pre>
+}
+ 
+echo intervall(99114);</pre>
 
