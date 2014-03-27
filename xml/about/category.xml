@@ -2,6 +2,7 @@
   <!--Die FAQs sind hier noch mal redundant aufgelistet um die Reihenfolge vorzugeben.-->
   <Faqs>
     <Faq alias="faq-ueberblick" />
+    <Faq alias="newsgroup-charta" />
     <Faq alias="faq-download" />
     <Faq alias="faq-by-mail" />
     <Faq alias="private-anfragen" />
@@ -17,5 +18,6 @@
     <Faq alias="newsgroup-tofu" />
     <Faq alias="newsgroup-faqreferenz" />
     <Faq alias="newsgroup-fragen" />
+    <Faq alias="newsgroup-old" />
   </Faqs>
 </Category>
